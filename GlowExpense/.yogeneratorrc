@@ -1,0 +1,28 @@
+{
+  "feature": [
+    {
+      "name": "Login",
+      "value": "login"
+    }
+  ],
+  "controller": [
+    {
+      "name": "Login",
+      "value": "login"
+    }
+  ],
+  "filter": [],
+  "directive": [],
+  "service": [],
+  "factory": [],
+  "provider": [],
+  "value": [],
+  "constant": [],
+  "view": [
+    {
+      "name": "Login",
+      "value": "login"
+    }
+  ],
+  "sass": []
+}
