@@ -90,7 +90,7 @@ input{
   transition-property: border-color, box-shadow;
   transition-timing-function: ease-in-out, ease-in-out;
   word-spacing: 0;
-  width:100%;
+  width:90%;
   height:2.5em;
   margin:auto;
   margin-top: 1.2em;
@@ -99,7 +99,7 @@ input{
 }
 
 .btn.btn-default{
-  width:100%;
+  width:92%;
   height:2.5em;
   margin-top: 1em;
   background: rgb(102,102,102);
@@ -166,15 +166,21 @@ input{
   border-top-width: 1px;
   display: block;
   line-height: 20px;
-  margin-bottom: 0;
   padding: 15px;
   border-radius: 13px;
   font-size:24px;
+  width:90%;
+  margin:auto;
 }
 .loader{
   width:20;
   height:20;
 }
+
+.disabled{
+  opacity:0.6
+}
+
 /*
 -----------------------------------------------------------------------------------------------
 Responsive: Portrait tablets and up

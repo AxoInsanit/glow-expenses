@@ -8,8 +8,8 @@
         <div class="form-group">
             <input type="password" id="password" placeholder="Password*" class="form-control" ng-model="user.password" required>
         </div>
-        <button class="btn btn-default" type="submit" ng-click="login(user)" ng-disabled="loginForm.$invalid">LOG IN</button>
-        <!--<loading></loading>-->
+        <button class="btn btn-default" ng-class="{ disabled: loginForm.$invalid }" type="submit" ng-click="login(user)" ng-disabled="loginForm.$invalid">LOG IN</button>
+        <loading></loading>
         <div ng-show="showErrorMessage">
             <div class="msg errorMsg">{{errorMessage}}</div>
         </div>
