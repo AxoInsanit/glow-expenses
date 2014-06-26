@@ -4,8 +4,8 @@ Instructions after clone/fetch the project.
 2. Type those 4 command :
      
       <dl><p>npm install time-grunt </p>
-      npm install '
-      bower install
-      grunt serve </dl>
+      <p> npm install </p>
+      <p> bower install </p>
+      <p> grunt serve </p></dl>
       
 3. After that you will see the project into the localhost:9000
