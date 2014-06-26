@@ -39,7 +39,6 @@ h2.text-muted{
 
 .container {
     text-align: center;
-    width:90%;
     margin: auto;
 }
 .container-narrow > hr {
@@ -90,7 +89,6 @@ input{
   transition-property: border-color, box-shadow;
   transition-timing-function: ease-in-out, ease-in-out;
   word-spacing: 0;
-  width:90%;
   height:2.5em;
   margin:auto;
   margin-top: 1.2em;
@@ -99,7 +97,6 @@ input{
 }
 
 .btn.btn-default{
-  width:92%;
   height:2.5em;
   margin-top: 1em;
   background: rgb(102,102,102);
@@ -169,7 +166,6 @@ input{
   padding: 15px;
   border-radius: 13px;
   font-size:24px;
-  width:90%;
   margin:auto;
 }
 .loader{
@@ -187,20 +183,182 @@ Responsive: Portrait tablets and up
 -----------------------------------------------------------------------------------------------
 */
 
-@media screen and (min-width: 768px) {
-  /* Remove the padding we set earlier */
-  .header,
-  .marketing,
-  .footer {
-    padding-left: 0;
-    padding-right: 0;
+@media screen and (min-width: 101px) and (max-width: 200px) {
+  .msg{
+    width:90%;
   }
-  /* Space out the masthead */
-  .header {
-    margin-bottom: 30px;
+  .btn.btn-default{
+    width:99%;
   }
-  /* Remove the bottom border on the jumbotron for visual effect */
-  .jumbotron {
-    border-bottom: 0;
+  input{
+    width:90.5%;
+  }
+  .container {
+    width:90%;
+  }
+}
+
+@media screen and (min-width: 201px) and (max-width: 300px) {
+  .msg{
+    width:90%;
+  }
+  .btn.btn-default{
+    width:99%;
+  }
+  input{
+    width:90.5%;
+  }
+  .container {
+    width:90%;
+  }
+}
+/* nexus7 emulation display*/
+@media screen and (min-width: 301px) and (max-width: 400px) {
+  .msg{
+    width:90%;
+  }
+  .btn.btn-default{
+    width:100%;
+  }
+  input{
+    width:90.5%;
+  }
+  .container {
+    width:90%;
+  }
+}
+
+@media screen and (min-width: 401px) and (max-width: 512px) {
+  .msg{
+    width:90%;
+  }
+  .btn.btn-default{
+    width:99%;
+  }
+  input{
+    width:90.5%;
+  }
+  .container {
+    width:90%;
+  }
+}
+
+@media screen and (min-width: 513px) and (max-width: 768px) {
+  .msg{
+    width:90%;
+  }
+  .btn.btn-default{
+    width:95%;
+  }
+  input{
+    width:90.5%;
+  }
+  .container {
+    width:90%;
+  }
+}
+
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+  .msg{
+    width:90%;
+  }
+  .btn.btn-default{
+    width:94%;
+  }
+  input{
+    width:90.5%;
+  }
+  .container {
+    width:90%;
+  }
+}
+
+@media screen and (min-width: 1025px) and (max-width: 1280px) {
+  .msg{
+    width:90%;
+  }
+  .btn.btn-default{
+    width:93%;
+  }
+  input{
+    width:90.5%;
+  }
+  .container {
+    width:90%;
+  }
+}
+
+@media screen and (min-width: 1281px) and (max-width: 1440px) {
+  .msg{
+    width:90%;
+  }
+  .btn.btn-default{
+    width:93%;
+  }
+  input{
+    width:90.5%;
+  }
+  .container {
+    width:90%;
+  }
+}
+
+@media screen and (min-width: 1441px) and (max-width: 1600px) {
+  .msg{
+    width:90%;
+  }
+  .btn.btn-default{
+    width:93%;
+  }
+  input{
+    width:90.5%;
+  }
+  .container {
+    width:90%;
+  }
+}
+
+@media screen and (min-width: 1601px) and (max-width: 1920px) {
+  .msg{
+    width:90%;
+  }
+  .btn.btn-default{
+    width:92%;
+  }
+  input{
+    width:90.5%;
+  }
+  .container {
+    width:90%;
+  }
+}
+
+@media screen and (min-width: 1681px) and (max-width: 1920px) {
+  .msg{
+    width:90%;
+  }
+  .btn.btn-default{
+    width:92%;
+  }
+  input{
+    width:90%;
+  }
+  .container {
+    width:90%;
+  }
+}
+
+@media screen and (min-width: 1921px)  {
+  .msg{
+    width:91%;
+  }
+  .btn.btn-default{
+    width:93%;
+  }
+  input{
+    width:90%;
+  }
+  .container {
+    width:90%;
   }
 }

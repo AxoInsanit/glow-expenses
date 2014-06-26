@@ -22,6 +22,9 @@ module.exports = function(grunt) {
                 }
             }
         },
+        'emulate-android': {
+            command: 'cordova build && cordova emulate android'
+        },
         options: {
             stdout: true,
             stderr: true,

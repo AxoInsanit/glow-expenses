@@ -13,11 +13,12 @@ var _mainModules = [
   //  ,'ngMock'
   //  ,'ngLocale'
     ,'Login'
+    ,'Expenses'
     // yo:ngMainModules
 ];
 
 
-angular.module('app1t', _mainModules )
+angular.module('app', _mainModules )
 //angular.module('app1t', ['Login', 'ngRoute'] )
     .config( function($routeProvider){
         //redirect any invalid hash to /home
@@ -35,7 +36,15 @@ angular.module('app1t', _mainModules )
                 controller: 'LoginCtrl'
             }
         });
-        
+        /*
+        routes.push({
+            name: '/expenses',
+            params: {
+                templateUrl: 'scripts/expenses/views/expenses.html',
+                controller: 'ExpensesCtrl'
+            }
+        });
+        */
 // yo:ngRoutes
 
         routes.forEach(function(route){

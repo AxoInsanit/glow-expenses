@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = function(grunt) {
-	grunt.registerTask('serve', function (target) {
+    grunt.registerTask('serve', function (target) {
         if (target === 'dist') {
             return grunt.task.run(['build', 'open:dist', 'connect:dist:keepalive']);
         }
@@ -89,4 +89,8 @@ module.exports = function(grunt) {
 
     // commit task for git
     grunt.registerTask('git-commit', ['jshint','test']);
+
+    grunt.registerTask('emulate-android', [
+        'shell:emulate-android'
+    ]);
 };
