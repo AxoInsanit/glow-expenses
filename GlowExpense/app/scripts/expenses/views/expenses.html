@@ -1,0 +1,35 @@
+<div class="expenses">
+    <div class="header"><span class="icon left">=</span><span class="expensesHeader">Expenses</span><span class="icon right">+</span></div>
+	<div class="nav">
+		<div class="third alignLeft">loop</div>
+		<div class="third">loop</div>
+		<div class="third alignRight">loop</div>
+	</div>
+    <div class="expenseItem ready">
+        <div class="itemName half left alignLeft">
+        	<div> test </div>
+        	<div> 01.01.1980 </div>
+        </div>
+        <div class="itemName half right alignRight">
+        	<div>
+                <span class="money"> $123 </span> 
+                <span class="icon">test</span>
+            </div>
+        </div>
+    </div>
+    <div class="expenseItem picture">
+        <div class="itemName half left alignLeft">
+            <div> test </div>
+            <div> 01.01.1980 </div>
+        </div>
+        <div class="itemName half right alignRight">
+            <div>
+                <span class="money"> $123 </span> 
+                <span class="icon">test</span>
+            </div>
+        </div>
+    </div>
+    <div ng-show="showErrorMessage">
+        <div class="msg errorMsg">{{errorMessage}}</div>
+    </div>
+</div>

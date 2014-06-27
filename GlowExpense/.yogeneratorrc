@@ -1,0 +1,52 @@
+{
+  "feature": [
+    {
+      "name": "Login",
+      "value": "login"
+    },
+    {
+      "name": "Expenses",
+      "value": "expenses"
+    },
+    {
+      "name": "Add expenses",
+      "value": "add-expenses"
+    }
+  ],
+  "controller": [
+    {
+      "name": "Login",
+      "value": "login"
+    },
+    {
+      "name": "Expenses",
+      "value": "expenses"
+    },
+    {
+      "name": "Add expenses",
+      "value": "add-expenses"
+    }
+  ],
+  "filter": [],
+  "directive": [],
+  "service": [],
+  "factory": [],
+  "provider": [],
+  "value": [],
+  "constant": [],
+  "view": [
+    {
+      "name": "Login",
+      "value": "login"
+    },
+    {
+      "name": "Expenses",
+      "value": "expenses"
+    },
+    {
+      "name": "Add expenses",
+      "value": "add-expenses"
+    }
+  ],
+  "sass": []
+}

@@ -1,0 +1,197 @@
+/*
+-----------------------------------------------------------------------------------------------
+Responsive: Portrait tablets and up
+-----------------------------------------------------------------------------------------------
+*/
+
+@media screen and (min-width: 101px) and (max-width: 200px) {
+  .msg{
+    width:90%;
+  }
+  .btn.btn-default{
+    width:99%;
+  }
+  input{
+    width:90.5%;
+  }
+  .login {
+    width:90%;
+    margin: auto;
+  }
+}
+
+@media screen and (min-width: 201px) and (max-width: 300px) {
+  .msg{
+    width:90%;
+  }
+  .btn.btn-default{
+    width:99%;
+  }
+  input{
+    width:90.5%;
+  }
+  .login {
+    width:90%;
+    margin: auto;
+  }
+}
+/* nexus7 emulation display*/
+@media screen and (min-width: 301px) and (max-width: 400px) {
+  .msg{
+    width:90%;
+  }
+  .btn.btn-default{
+    width:100%;
+  }
+  input{
+    width:90.5%;
+  }
+  .login {
+    width:90%;
+    margin: auto;
+  }
+}
+
+@media screen and (min-width: 401px) and (max-width: 512px) {
+  .msg{
+    width:90%;
+  }
+  .btn.btn-default{
+    width:99%;
+  }
+  input{
+    width:90.5%;
+  }
+  .login {
+    width:90%;
+    margin: auto;
+  }
+}
+
+@media screen and (min-width: 513px) and (max-width: 768px) {
+  .msg{
+    width:90%;
+  }
+  .btn.btn-default{
+    width:95%;
+  }
+  input{
+    width:90.5%;
+  }
+  .login {
+    width:90%;
+    margin: auto;
+  }
+}
+
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+  .msg{
+    width:90%;
+  }
+  .btn.btn-default{
+    width:94%;
+  }
+  input{
+    width:90.5%;
+  }
+  .login {
+    width:90%;
+    margin: auto;
+  }
+}
+
+@media screen and (min-width: 1025px) and (max-width: 1280px) {
+  .msg{
+    width:90%;
+  }
+  .btn.btn-default{
+    width:93%;
+  }
+  input{
+    width:90.5%;
+  }
+  .login {
+    width:90%;
+    margin: auto;
+  }
+}
+
+@media screen and (min-width: 1281px) and (max-width: 1440px) {
+  .msg{
+    width:90%;
+  }
+  .btn.btn-default{
+    width:93%;
+  }
+  input{
+    width:90.5%;
+  }
+  .login {
+    width:90%;
+    margin: auto;
+  }
+}
+
+@media screen and (min-width: 1441px) and (max-width: 1600px) {
+  .msg{
+    width:90%;
+  }
+  .btn.btn-default{
+    width:93%;
+  }
+  input{
+    width:90.5%;
+  }
+  .login {
+    width:90%;
+    margin: auto;
+  }
+}
+
+@media screen and (min-width: 1601px) and (max-width: 1920px) {
+  .msg{
+    width:90%;
+  }
+  .btn.btn-default{
+    width:92%;
+  }
+  input{
+    width:90.5%;
+  }
+  .login {
+    width:90%;
+    margin: auto;
+  }
+}
+
+@media screen and (min-width: 1681px) and (max-width: 1920px) {
+  .msg{
+    width:90%;
+  }
+  .btn.btn-default{
+    width:92%;
+  }
+  input{
+    width:90%;
+  }
+  .login {
+    width:90%;
+    margin: auto;
+  }
+}
+
+@media screen and (min-width: 1921px)  {
+  .msg{
+    width:91%;
+  }
+  .btn.btn-default{
+    width:93%;
+  }
+  input{
+    width:90%;
+  }
+  .login {
+    width:90%;
+    margin: auto;
+  }
+}
