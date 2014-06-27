@@ -21,12 +21,10 @@ h1,h2,h3,h4,h5{
 h1.text-muted{
   color:rgb(153,153,153);
   font-weight: 900;
-  font-size: 3em;
 }
 h2.text-muted{
   color:rgb(102,102,102);
   font-weight: 700;
-  font-size: 2em;
 }
 /* Custom page footer */
 .footer {
@@ -97,7 +95,6 @@ input{
   margin:auto;
   margin-top: 1.2em;
   border-radius: 8px;
-  font-size:24px;
 }
 
 .btn.btn-default{
@@ -106,7 +103,6 @@ input{
   background: rgb(102,102,102);
   color:white;
   border-radius: 13px;
-  font-size: 24px;
 }
 
 /* Main marketing message and sign up button */
@@ -169,7 +165,6 @@ input{
   line-height: 20px;
   padding: 15px;
   border-radius: 13px;
-  font-size:24px;
   margin:auto;
 }
 .loader{

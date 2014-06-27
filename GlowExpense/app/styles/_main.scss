@@ -1,10 +1,29 @@
 /*
 -----------------------------------------------------------------------------------------------
+Fonts
+-----------------------------------------------------------------------------------------------
+*/
+
+@font-face {
+  font-family: 'Fat';
+  src: url('../resources/fonts/bebas.eot?#iefix') format('embedded-opentype'), 
+       url('../resources/fonts/bebas.woff') format('woff'), 
+       url('../resources/fonts/bebas.ttf')  format('truetype'),
+       url('../resources/fonts/bebas.svg#svgFontName') format('svg');
+  }
+
+h1,h2,h3,h4,h5,div,span,p{
+  font-family: 'Fat';
+}
+
+/*
+-----------------------------------------------------------------------------------------------
 Responsive: Portrait tablets and up
 -----------------------------------------------------------------------------------------------
 */
 
 @media screen and (min-width: 101px) and (max-width: 200px) {
+  /* login */
   .msg{
     width:90%;
   }
@@ -17,10 +36,15 @@ Responsive: Portrait tablets and up
   .login {
     width:90%;
     margin: auto;
+  }
+  /* no-expenses */
+  .expenses .header {
+    width: 116%;
   }
 }
 
 @media screen and (min-width: 201px) and (max-width: 300px) {
+  /* login */
   .msg{
     width:90%;
   }
@@ -34,9 +58,14 @@ Responsive: Portrait tablets and up
     width:90%;
     margin: auto;
   }
+  /* no-expenses */
+  .expenses .header {
+    width: 114%;
+  }
 }
 /* nexus7 emulation display*/
 @media screen and (min-width: 301px) and (max-width: 400px) {
+  /* login */
   .msg{
     width:90%;
   }
@@ -50,9 +79,14 @@ Responsive: Portrait tablets and up
     width:90%;
     margin: auto;
   }
+  /* no-expenses */
+  .expenses .header {
+    width: 112%;
+  }
 }
 
 @media screen and (min-width: 401px) and (max-width: 512px) {
+  /* login */
   .msg{
     width:90%;
   }
@@ -66,9 +100,14 @@ Responsive: Portrait tablets and up
     width:90%;
     margin: auto;
   }
+  /* no-expenses */
+  .expenses .header {
+    width: 110%;
+  }
 }
 
 @media screen and (min-width: 513px) and (max-width: 768px) {
+  /* login */
   .msg{
     width:90%;
   }
@@ -82,9 +121,14 @@ Responsive: Portrait tablets and up
     width:90%;
     margin: auto;
   }
+  /* no-expenses */
+  .expenses .header {
+    width: 107%;
+  }
 }
 
 @media screen and (min-width: 769px) and (max-width: 1024px) {
+  /* login */
   .msg{
     width:90%;
   }
@@ -98,9 +142,14 @@ Responsive: Portrait tablets and up
     width:90%;
     margin: auto;
   }
+  /* no-expenses */
+  .expenses .header {
+    width: 105%;
+  }
 }
 
 @media screen and (min-width: 1025px) and (max-width: 1280px) {
+  /* login */
   .msg{
     width:90%;
   }
@@ -113,10 +162,15 @@ Responsive: Portrait tablets and up
   .login {
     width:90%;
     margin: auto;
+  }
+  /* no-expenses */
+  .expenses .header {
+    width: 104%;
   }
 }
 
 @media screen and (min-width: 1281px) and (max-width: 1440px) {
+  /* login */
   .msg{
     width:90%;
   }
@@ -129,10 +183,15 @@ Responsive: Portrait tablets and up
   .login {
     width:90%;
     margin: auto;
+  }
+  /* no-expenses */
+  .expenses .header {
+    width: 103%;
   }
 }
 
 @media screen and (min-width: 1441px) and (max-width: 1600px) {
+  /* login */
   .msg{
     width:90%;
   }
@@ -146,9 +205,14 @@ Responsive: Portrait tablets and up
     width:90%;
     margin: auto;
   }
+  /* no-expenses */
+  .expenses .header {
+    width: 103%;
+  }
 }
 
 @media screen and (min-width: 1601px) and (max-width: 1920px) {
+  /* login */
   .msg{
     width:90%;
   }
@@ -162,9 +226,14 @@ Responsive: Portrait tablets and up
     width:90%;
     margin: auto;
   }
+  /* no-expenses */
+  .expenses .header {
+    width: 102%;
+  }
 }
 
 @media screen and (min-width: 1681px) and (max-width: 1920px) {
+  /* login */
   .msg{
     width:90%;
   }
@@ -178,9 +247,14 @@ Responsive: Portrait tablets and up
     width:90%;
     margin: auto;
   }
+  /* no-expenses */
+  .expenses .header {
+    width: 102%;
+  }
 }
 
 @media screen and (min-width: 1921px)  {
+  /* login */
   .msg{
     width:91%;
   }
@@ -194,4 +268,21 @@ Responsive: Portrait tablets and up
     width:90%;
     margin: auto;
   }
+  /* no-expenses */
+  .expenses .header {
+    width: 102%;
+  }
+}
+
+.font1{
+  font-size: 1em;
+}
+.font15{
+  font-size: 1.5em;
+}
+.font2{
+  font-size: 2em;
+}
+.font3{
+  font-size: 3em;
 }

@@ -5,7 +5,7 @@ var _mainModules = [
   //  ,'Filters'
     ,'Directives'
     ,'ngRoute'
-  //  ,'ngResource'
+    ,'ngResource'
   //  ,'ngSanitize'
   //  ,'ngCookies'
   //  ,'ngAnimate'
@@ -14,20 +14,17 @@ var _mainModules = [
   //  ,'ngLocale'
     ,'Login'
     ,'Expenses'
-    ,'AddExpenses'
+
     // yo:ngMainModules
 ];
 
-
 angular.module('app', _mainModules )
-//angular.module('app1t', ['Login', 'ngRoute'] )
     .config( function($routeProvider){
-        //redirect any invalid hash to /home
         $routeProvider
-           
             .otherwise({
-                redirectTo: '/login'
+                redirectTo: '/expenses'
             });
+        
         var routes = [];
 
         routes.push({
@@ -37,23 +34,16 @@ angular.module('app', _mainModules )
                 controller: 'LoginCtrl'
             }
         });
-        
+
         routes.push({
             name: '/expenses',
             params: {
-                templateUrl: 'scripts/expenses/views/expenses.html',
+                templateUrl: 'scripts/expenses/views/no-expenses.html',
                 controller: 'ExpensesCtrl'
             }
         });
         
-        routes.push({
-            name: '/addexpenses',
-            params: {
-                templateUrl: 'scripts/add-expenses/views/add-expenses.html',
-                controller: 'AddExpensesCtrl'
-            }
-        });
-        
+
 // yo:ngRoutes
 
         routes.forEach(function(route){
