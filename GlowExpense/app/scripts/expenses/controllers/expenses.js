@@ -1,5 +1,5 @@
 'use strict';
 
-angular.module('Expenses').controller('ExpensesCtrl', function () {
-
+angular.module('Expenses').controller('ExpensesCtrl', function ($scope) {
+    $scope.name = 'Desi';
 });

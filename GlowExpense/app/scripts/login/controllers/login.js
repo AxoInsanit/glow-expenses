@@ -2,18 +2,14 @@
 
 angular.module('Login').controller('LoginCtrl', ['$scope', '$location', function ($scope, $location) {
 
-    $scope.loading = false;
-
     $scope.errorMessage = 'Please try again! Username or password is wrong!';
     $scope.showErrorMessage = false;
 
-    // TODO uncomment when the real services are ready
+    // TODO remove when the real services are ready
     $scope.login = function(user){
 
-        $scope.loading = true;
-
         if (user.username === 'rodrigo.rivas' && user.password === 'lambda'){
-            $scope.loading = false;
+
             $scope.showErrorMessage = false;
 
             if( window.localStorage ){
@@ -24,7 +20,6 @@ angular.module('Login').controller('LoginCtrl', ['$scope', '$location', function
         }
         else {
             $scope.showErrorMessage = true;
-            $scope.loading = false;
         }
 
     };
@@ -32,7 +27,6 @@ angular.module('Login').controller('LoginCtrl', ['$scope', '$location', function
     // TODO uncomment when the real services are ready
 //    $scope.login=function(user){
 //
-//        $scope.loading = true;
 //
 //        var User = new UserSvc();
 //        User.username = user.username;
@@ -41,7 +35,6 @@ angular.module('Login').controller('LoginCtrl', ['$scope', '$location', function
 //        User.$save()
 //            .then(function(response) {
 //
-//                $scope.loading = false;
 //                $scope.showErrorMessage = false;
 //
 //                if( window.localStorage ){
@@ -54,7 +47,6 @@ angular.module('Login').controller('LoginCtrl', ['$scope', '$location', function
 //            function(){
 //
 //                $scope.showErrorMessage = true;
-//                $scope.loading = false;
 //            });
 //    };
 }]);

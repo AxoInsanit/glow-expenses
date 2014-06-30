@@ -18,7 +18,7 @@ module.exports = function(config) {
         files: [
             // bower:js
             'app/bower_components/es5-shim/es5-shim.js',
-            'app/bower_components/jquery/dist/jquery.js',
+            'app/bower_components/jquery/jquery.js',
             'app/bower_components/angular/angular.js',
             'app/bower_components/json3/lib/json3.min.js',
             'app/bower_components/angular-route/angular-route.js',
