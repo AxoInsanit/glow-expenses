@@ -30,8 +30,13 @@ Responsive: Portrait tablets and up
   .btn.btn-default{
     width:99%;
   }
-  input{
+  input,.selectWrapper{
     width:90.5%;
+  }
+  .searchCOntain input{
+    width: 66.5%;
+    display: inline-block!important;
+    margin-bottom: 10px!important;
   }
   .login {
     width:90%;
@@ -40,6 +45,60 @@ Responsive: Portrait tablets and up
   /* no-expenses */
   .expenses .header {
     width: 116%;
+  }
+  .expenses .nav{
+    width: 102.8%;
+  }
+  /* expenses */
+  .expenses .nav .half {
+    width: 43%;
+  }
+  .expenses .nav .alignLeft {
+    padding-left: 6%;
+  }
+  .expenses .nav .alignRight.half div{
+    margin-top: -1.8em;
+    margin-left: 45%;
+  }
+  .expenses .nav .alignLeft div{
+    margin-top: -2%;
+    margin-left: 0;
+  }
+  .expenses .nav .arrow div{
+    margin-top: -7%;
+    margin-left: 10%;
+  }
+  .expenses .nav {
+    margin-left: -50px;
+  }
+  .third.alignRight {
+    width: 25%!important;
+  }
+  .expenseItem .itemName .icon {
+    width: 25%!important;
+  }
+  .sortingControlls{
+    width: 84%;
+  }
+  .checkSign{
+    margin-left: 63%;
+  }
+  .closeSearch{
+    margin-left: -1em;
+  }
+  .search {
+    width: 63%;
+  }
+  .searchBox {
+    width: 106%;
+  }
+  /* add-expenses */
+  .pullDown{
+    margin-top: -2.35em;
+    margin-left: 84%;
+  }
+  .btn-green{
+    width: 94%!important;
   }
 }
 
@@ -51,8 +110,13 @@ Responsive: Portrait tablets and up
   .btn.btn-default{
     width:99%;
   }
-  input{
+  input,.selectWrapper{
     width:90.5%;
+  }
+  .searchCOntain input{
+    width: 66.5%;
+    display: inline-block!important;
+    margin-bottom: 10px!important;
   }
   .login {
     width:90%;
@@ -61,6 +125,59 @@ Responsive: Portrait tablets and up
   /* no-expenses */
   .expenses .header {
     width: 114%;
+  }
+  .expenses .nav{
+    width: 102.8%;
+  }
+  .expenses .nav .half {
+    width: 43%;
+  }
+  .expenses .nav .alignLeft {
+    padding-left: 6%;
+  }
+   .expenses .nav .alignRight.half div{
+    margin-top: -1.8em;
+    margin-left: 34%;
+  }
+  .expenses .nav .alignLeft div{
+    margin-top: -2%;
+    margin-left: 0;
+  }
+  .expenses .nav .arrow div{
+    margin-top: -7%;
+    margin-left: 10%;
+  }
+  .expenses .nav {
+    margin-left: -50px;
+  }
+  .third.alignRight {
+    width: 25%!important;
+  }
+  .expenseItem .itemName .icon {
+    width: 25%!important;
+  }
+  .sortingControlls{
+    width: 87%;
+  }
+  .checkSign{
+    margin-left: 66%;
+  }
+  .closeSearch{
+    margin-left: -1em;
+  }
+  .search {
+    width: 65%;
+  }
+  .searchBox {
+    width: 106%;
+  }
+  /* add-expenses */
+  .pullDown{
+    margin-top: -2.35em;
+    margin-left: 85%;
+  }
+  .btn-green{
+    width: 94%!important;
   }
 }
 /* nexus7 emulation display*/
@@ -72,16 +189,81 @@ Responsive: Portrait tablets and up
   .btn.btn-default{
     width:100%;
   }
-  input{
+  input,.selectWrapper{
     width:90.5%;
+  }
+  .searchCOntain input{
+    width: 66.5%;
+    display: inline-block!important;
+    margin-bottom: 10px!important;
   }
   .login {
     width:90%;
     margin: auto;
   }
+  .absolute{
+    width:247px;
+  }
   /* no-expenses */
   .expenses .header {
-    width: 112%;
+    width: 112.5%;
+  }
+  .expenses .nav{
+    width: 112.4%;
+  }
+  .expenses .nav .half {
+    width: 43%;
+  }
+  .expenses .nav .alignLeft {
+    padding-left: 6%;
+  }
+   .expenses .nav .alignLeft div{
+    margin-top: -5%;
+    margin-left: 0;
+  }
+   .expenses .nav .alignRight.half div{
+    margin-top: -1.8em;
+    margin-left: 34%;
+  }
+  .expenses .nav .arrow div{
+    margin-top: -10%;
+    margin-left: 5%;
+  }
+  .expenses .nav {
+    margin-left: -50px;
+  }
+  .third.alignRight {
+    width: 25%!important;
+  }
+  .expenseItem .itemName .icon {
+    width: 48%!important;
+  }
+  .sortingControlls{
+    width: 83%;
+  }
+  .checkSign{
+    margin-left: 59%;
+  }
+  .closeSearch{
+    margin-left: -1em;
+  }
+  .search {
+    width: 67%;
+  }
+  .searchBox {
+    width: 106%;
+  }
+  /* add-expenses */
+  .pullDown{
+    margin-top: -2.35em;
+    margin-left: 85%;
+  }
+  .btn-green{
+    width: 94%!important;
+  }
+  .expenses .nav .alignRight div{
+    margin-top: -0.7em;
+    margin-left: 17%;
   }
 }
 
@@ -93,8 +275,13 @@ Responsive: Portrait tablets and up
   .btn.btn-default{
     width:99%;
   }
-  input{
+  input,.selectWrapper{
     width:90.5%;
+  }
+  .searchCOntain input{
+    width: 66.5%;
+    display: inline-block!important;
+    margin-bottom: 10px!important;
   }
   .login {
     width:90%;
@@ -103,6 +290,63 @@ Responsive: Portrait tablets and up
   /* no-expenses */
   .expenses .header {
     width: 110%;
+  }
+  .expenses .nav{
+    width: 109.8%;
+  }
+  .expenses .nav .half {
+    width: 43.5%;
+  }
+  .expenses .nav .alignLeft {
+    padding-left: 6%;
+  }
+   .expenses .nav .alignLeft div{
+    margin-top: -4%;
+    margin-left: 0;
+  }
+   .expenses .nav .alignRight.half div{
+    margin-top: -1.2em;
+    margin-left: 38%;
+  }
+  .expenses .nav .arrow div{
+    margin-top: -6%;
+    margin-left: 10%;
+  }
+  .expenses .nav {
+    margin-left: -50px;
+  }
+  .third.alignRight {
+    width: 25%!important;
+  }
+  .expenseItem .itemName .icon {
+    width: 25%!important;
+  }
+  .sortingControlls{
+    width: 90%;
+  }
+  .checkSign{
+    margin-left: 73%;
+  }
+  .closeSearch{
+    margin-left: -1em;
+  }
+  .search {
+    width: 71%!important;
+  }
+  .searchBox {
+    width: 106%!important;
+  }
+  /* add-expenses */
+  .pullDown{
+    margin-top: -2.35em;
+    margin-left: 85%;
+  }
+  .btn-green{
+    width: 94%!important;
+  }
+  .expenses .nav .alignRight div{
+    margin-top: -0.7em;
+    margin-left: 22%;
   }
 }
 
@@ -114,8 +358,13 @@ Responsive: Portrait tablets and up
   .btn.btn-default{
     width:95%;
   }
-  input{
+  input,.selectWrapper{
     width:90.5%;
+  }
+  .searchCOntain input{
+    width: 66.5%;
+    display: inline-block!important;
+    margin-bottom: 10px!important;
   }
   .login {
     width:90%;
@@ -124,6 +373,60 @@ Responsive: Portrait tablets and up
   /* no-expenses */
   .expenses .header {
     width: 107%;
+  }
+  .expenses .nav{
+    width: 107.8%;
+  }
+  .expenses .nav .half {
+    width: 44%;
+  }
+  .expenses .nav .alignLeft {
+    padding-left: 6%;
+  }
+   .expenses .nav .alignLeft div{
+    margin-top: -2%;
+    margin-left: 0;
+  }
+   .expenses .nav .alignRight.half div{
+    margin-top: -1.1em;
+    margin-left: 40%;
+  }
+  .expenses .nav .arrow div{
+    margin-top: -5%;
+    margin-left: 9%;
+  }
+  .expenses .nav {
+    margin-left: -50px;
+  }
+  .third.alignRight {
+    width: 25%!important;
+  }
+  .sortingControlls{
+    width: 93%;
+  }
+  .checkSign{
+    margin-left: 81%;
+  }
+  .closeSearch{
+    margin-left: -1em;
+  }
+  .search {
+    width: 72%;
+  }
+  .searchBox {
+    width: 106%;
+  }
+  /* add-expenses */
+  .pullDown{
+    margin-top: -2.35em;
+    margin-left: 89.2%;
+  }
+  .btn-green{
+    width: 93%!important;
+  }
+  .expenses .nav .alignRight div{
+    margin-top: -0.7em;
+    margin-left: 22%;
   }
 }
 
@@ -135,8 +438,13 @@ Responsive: Portrait tablets and up
   .btn.btn-default{
     width:94%;
   }
-  input{
+  input,.selectWrapper{
     width:90.5%;
+  }
+  .searchCOntain input{
+    width: 66.5%;
+    display: inline-block!important;
+    margin-bottom: 10px!important;
   }
   .login {
     width:90%;
@@ -145,6 +453,60 @@ Responsive: Portrait tablets and up
   /* no-expenses */
   .expenses .header {
     width: 105%;
+  }
+  .expenses .nav{
+    width: 106.8%;
+  }
+  .expenses .nav .half {
+    width: 44.5%;
+  }
+  .expenses .nav .alignLeft {
+    padding-left: 6%;
+  }
+   .expenses .nav .alignLeft div{
+    margin-top: -2%;
+    margin-left: 0;
+  }
+   .expenses .nav .alignRight.half div{
+    margin-top: -0.9em;
+    margin-left: 41%;
+  }
+  .expenses .nav .arrow div{
+    margin-top: -5%;
+    margin-left: 9%;
+  }
+  .expenses .nav {
+    margin-left: -50px;
+  }
+  .third.alignRight {
+    width: 25%!important;
+  }
+  .sortingControlls{
+    width: 95%;
+  }
+  .checkSign{
+    margin-left: 86%;
+  }
+  .closeSearch{
+    margin-left: -2em;
+  }
+  .search {
+    width: 72%;
+  }
+  .searchBox {
+    width: 106%;
+  }
+  /* add-expenses */
+  .pullDown{
+    margin-top: -2.35em;
+    margin-left: 90.7%;
+  }
+  .btn-green{
+    width: 92%!important;
+  }
+  .expenses .nav .alignRight div{
+    margin-top: -0.7em;
+    margin-left: 22%;
   }
 }
 
@@ -156,7 +518,7 @@ Responsive: Portrait tablets and up
   .btn.btn-default{
     width:93%;
   }
-  input{
+  input,.selectWrapper{
     width:90.5%;
   }
   .login {
@@ -166,6 +528,51 @@ Responsive: Portrait tablets and up
   /* no-expenses */
   .expenses .header {
     width: 104%;
+  }
+  .expenses .nav{
+    width: 104.8%;
+  }
+  .expenses .nav .half {
+    width: 45%;
+  }
+   .expenses .nav .alignLeft div{
+    margin-top: -2%;
+    margin-left: 0;
+  }
+   .expenses .nav .alignRight.half div{
+    margin-top: -1em;
+    margin-left: 43%;
+  }
+  .expenses .nav .arrow div{
+    margin-top: -3.5%;
+    margin-left: 15%;
+  }
+  .sortingControlls{
+    width: 96%;
+  }
+  .checkSign{
+    margin-left: 89%;
+  }
+  .search {
+    width: 77%;
+  }
+  .closeSearch{
+    margin-left: -2em;
+  }
+  .searchBox{
+    width: 103%;
+  }
+  /* add-expenses */
+  .pullDown{
+    margin-top: -2.35em;
+    margin-left: 91.5%;
+  }
+  .btn-green{
+    width: 92%!important;
+  }
+  .expenses .nav .alignRight div{
+    margin-top: -0.7em;
+    margin-left: 31%;;
   }
 }
 
@@ -177,7 +584,7 @@ Responsive: Portrait tablets and up
   .btn.btn-default{
     width:93%;
   }
-  input{
+  input,.selectWrapper{
     width:90.5%;
   }
   .login {
@@ -187,6 +594,51 @@ Responsive: Portrait tablets and up
   /* no-expenses */
   .expenses .header {
     width: 103%;
+  }
+  .expenses .nav{
+    width: 102.8%;
+  }
+  .expenses .nav .half {
+    width: 45.5%;
+  }
+   .expenses .nav .alignLeft div{
+    margin-top: -2%;
+    margin-left: 0;
+  }
+   .expenses .nav .alignRight.half div{
+    margin-top: -1.2em;
+    margin-left: 46%;
+  }
+  .expenses .nav .arrow div{
+    margin-top: -3%;
+    margin-left: 16%;
+  }
+  .sortingControlls{
+    width: 96%;
+  }
+  .checkSign{
+    margin-left: 86%;
+  }
+  .searchBox{
+    width: 103%;
+  }
+  .search {
+    width: 84%;
+  }
+  .closeSearch{
+    margin-left: -2em;
+  }
+  /* add-expenses */
+  .pullDown{
+    margin-top: -2.35em;
+    margin-left: 92%;
+  }
+  .btn-green{
+    width: 92%!important;
+  }
+  .expenses .nav .alignRight div{
+    margin-top: -0.7em;
+    margin-left: 33%;
   }
 }
 
@@ -198,7 +650,7 @@ Responsive: Portrait tablets and up
   .btn.btn-default{
     width:93%;
   }
-  input{
+  input,.selectWrapper{
     width:90.5%;
   }
   .login {
@@ -208,6 +660,48 @@ Responsive: Portrait tablets and up
   /* no-expenses */
   .expenses .header {
     width: 103%;
+  }
+  .expenses .nav{
+    width: 102.8%;
+  }
+  .expenses .nav .half {
+    width: 46%;
+  }
+   .expenses .nav .alignLeft div{
+    margin-top: -1.5%;
+    margin-left: 0;
+  }
+   .expenses .nav .alignRight.half div{
+    margin-top: -1.2em;
+    margin-left: 45%;
+  }
+  .expenses .nav .arrow div{
+    margin-top: -2.5%;
+    margin-left: 17%;
+  }
+  .sortingControlls{
+    width: 97%;
+  }
+  .checkSign{
+    margin-left: 92%;
+  }
+  .search {
+    width: 85%;
+  }
+  .closeSearch{
+    margin-left: -3em;
+  }
+  /* add-expenses */
+  .pullDown{
+    margin-top: -2.35em;
+    margin-left: 92.2%;
+  }
+  .btn-green{
+    width: 92%!important;
+  }
+  .expenses .nav .alignRight div{
+    margin-top: -0.7em;
+    margin-left: 32%;
   }
 }
 
@@ -219,7 +713,7 @@ Responsive: Portrait tablets and up
   .btn.btn-default{
     width:92%;
   }
-  input{
+  input,.selectWrapper{
     width:90.5%;
   }
   .login {
@@ -229,6 +723,48 @@ Responsive: Portrait tablets and up
   /* no-expenses */
   .expenses .header {
     width: 102%;
+  }
+  .expenses .nav{
+    width: 101.8%;
+  }
+  .expenses .nav .half {
+    width: 46.5%;
+  }
+   .expenses .nav .alignLeft div{
+    margin-top: -1%;
+    margin-left: 0;
+  }
+   .expenses .nav .alignRight.half div{
+   margin-top: -1.2em;
+    margin-left: 46%;
+  }
+  .expenses .nav .arrow div{
+    margin-top: -2%;
+    margin-left: 16%;
+  }
+  .sortingControlls{
+    width: 97%;
+  }
+  .checkSign{
+    margin-left: 91%;
+  }
+  .search {
+    width: 86%;
+  }
+  .closeSearch{
+    margin-left: -4em;
+  }
+  /* add-expenses */
+  .pullDown{
+    margin-top: -2.35em;
+    margin-left: 92.5%;
+  }
+  .btn-green{
+    width: 92%!important;
+  }
+  .expenses .nav .alignRight div{
+    margin-top: -0.7em;
+    margin-left: 31%;
   }
 }
 
@@ -240,7 +776,7 @@ Responsive: Portrait tablets and up
   .btn.btn-default{
     width:92%;
   }
-  input{
+  input,.selectWrapper{
     width:90%;
   }
   .login {
@@ -250,6 +786,48 @@ Responsive: Portrait tablets and up
   /* no-expenses */
   .expenses .header {
     width: 102%;
+  }
+  .expenses .nav{
+    width: 102.8%;
+  }
+  .expenses .nav .half {
+    width: 47%;
+  }
+   .expenses .nav .alignLeft div{
+    margin-top: -0.5%;
+    margin-left: 0;
+  }
+   .expenses .nav .alignRight.half div{
+    margin-top: -1.2em;
+    margin-left: 47%;
+  }
+  .expenses .nav .arrow div{
+    margin-top: -1.5%;
+    margin-left: 15%;
+  }
+  .sortingControlls{
+    width: 97%;
+  }
+  .checkSign{
+    margin-left: 92%;
+  }
+  .search {
+    width: 87%;
+  }
+  .closeSearch{
+    margin-left: -6em;
+  }
+  /* add-expenses */
+  .pullDown{
+    margin-top: -2.35em;
+    margin-left: 92.5%;
+  }
+  .btn-green{
+    width: 91%!important;
+  }
+  .expenses .nav .alignRight div{
+    margin-top: -0.7em;
+    margin-left: 30%;
   }
 }
 
@@ -261,7 +839,7 @@ Responsive: Portrait tablets and up
   .btn.btn-default{
     width:93%;
   }
-  input{
+  input,.selectWrapper{
     width:90%;
   }
   .login {
@@ -272,8 +850,559 @@ Responsive: Portrait tablets and up
   .expenses .header {
     width: 102%;
   }
+  .expenses .nav{
+    width: 102.8%;
+  }
+  .expenses .nav .half {
+    width: 47.5%;
+  }
+   .expenses .nav .alignLeft div{
+    margin-top: 0;
+    margin-left: 0;
+  }
+   .expenses .nav .alignRight.half div{
+    margin-top: -1.2em;
+    margin-left: 47%;
+  }
+  .expenses .nav .arrow div{
+    margin-top: -1%;
+    margin-left: 14%;
+  }
+  .sortingControlls{
+    width: 97%;
+  }
+  .checkSign{
+    margin-left: 92%;
+  }
+  .search {
+    width: 72%;
+  }
+  /* add-expenses */
+  .pullDown{
+    margin-top: -2.35em;
+    margin-left: 92.8%;
+  }
+  .btn-green{
+    width: 91%!important;
+  }
+  .expenses .nav .alignRight div{
+    margin-top: -0.7em;
+    margin-left: 28%;
+  }
 }
-
+@media screen and (min-height: 1px) and (max-height: 100px) {
+  .sortingControlls {
+    margin-top: -2em;
+  }
+  .addImage{
+    height:100px;
+    width: 101.2%;
+    margin-left: -0.5em;
+  }
+}
+@media screen and (min-height: 101px) and (max-height: 200px) {
+  .sortingControlls {
+    margin-top: 1em;
+  }
+  .addImage{
+    height:200px;
+    width: 101.2%;
+    margin-left: -0.5em;
+  }
+}
+@media screen and (min-height: 201px) and (max-height: 300px) {
+  .sortingControlls {
+    margin-top: 7em;
+  }
+  .addImage{
+    height:300px;
+    width: 101.2%;
+    margin-left: -0.5em;
+  }
+}
+/* emulator used by cordova emulate android */
+@media screen and (min-height: 301px) and (max-height: 400px) {
+  .sortingControlls {
+    margin-top: 13em;
+  }
+  .addImage{
+    height:500px;
+    width: 101.2%;
+    margin-left: -0.5em;
+  }
+  .xLineL{
+    width: 1100px;
+    height: 47px;
+    border-bottom: 1px solid black;
+    -webkit-transform: translateY(80px) translateX(-299px) rotate(135.2deg);
+    position: absolute;
+  }
+  .xLineR{
+    width: 1000px;
+    height: 47px;
+    border-bottom: 1px solid black;
+    -webkit-transform: translateY(245px) translateX(-197px) rotate(44.8deg);
+    position: absolute;
+  }
+  .xLineHolder{
+    height: 320px;
+    position: absolute;
+    overflow: hidden;
+  }
+  .footDiv{
+    margin-top: 84.5%;
+    width: 87.6%;
+  }
+  .upDiv{
+    margin-top: 0.5em;
+    margin-left: 14em;
+  }
+}
+@media screen and (min-height: 401px) and (max-height: 450px) {
+  .sortingControlls {
+    margin-top: 20em;
+    width: 101.2%;
+    margin-left: -0.5em;
+  }
+  .addImage{
+    height:500px;
+    width: 101.2%;
+    margin-left: -0.5em;
+  }
+  .xLineL{
+    width: 1100px;
+    height: 47px;
+    border-bottom: 1px solid black;
+    -webkit-transform: translateY(80px) translateX(-267px) rotate(122.2deg);
+    position: absolute;
+  }
+  .xLineR{
+    width: 670px;
+    height: 47px;
+    border-bottom: 1px solid black;
+    -webkit-transform: translateY(245px) translateX(-137px) rotate(57.8deg);
+    position: absolute
+  }
+  .xLineHolder{
+    height: 568px;
+    position: absolute;
+    overflow: hidden;
+  }
+  .footDiv{
+    margin-top: 158.7%;;
+    width: 89.6%;
+  }
+  .upDiv{
+    margin-top: 0.5em;
+    margin-left: 14em;
+  }
+}
+/* iphone 4,3gs */
+@media screen and (min-height: 451px) and (max-height: 500px) {
+  .sortingControlls {
+    margin-top: 20em;
+    width: 101.2%;
+    margin-left: -0.5em;
+  }
+  .addImage{
+    height:470px;
+    width: 101.2%;
+    margin-left: -0.5em;
+  }
+  .xLineL{
+    width: 1100px;
+    height: 47px;
+    border-bottom: 1px solid black;
+    -webkit-transform: translateY(80px) translateX(-279px) rotate(127.3deg);
+    position: absolute;
+  }
+  .xLineR{
+    width: 670px;
+    height: 47px;
+    border-bottom: 1px solid black;
+    -webkit-transform: translateY(218px) translateX(-121px) rotate(52.8deg);
+    position: absolute
+  }
+  .xLineHolder{
+    height: 420px;
+    position: absolute;
+    overflow: hidden;
+  }
+  .footDiv{
+    margin-top: 131.4%;
+    width: 87.6%;
+  }
+  .upDiv{
+    margin-top: 0.5em;
+    margin-left: 14em;
+  }
+}
+/* nexus S */
+@media screen and (min-height: 501px) and (max-height: 550px) {
+  .sortingControlls {
+    margin-top: 22%;
+  }
+  .addImage{
+    width: 105.2%;
+    margin-left: -0.5em;
+  }
+  .xLineL{
+    width: 1100px;
+    height: 47px;
+    border-bottom: 1px solid black;
+    -webkit-transform: translateY(80px) translateX(-271px) rotate(124.2deg);
+    position: absolute;
+  }
+  .xLineR{
+    width: 670px;
+    height: 47px;
+    border-bottom: 1px solid black;
+    -webkit-transform: translateY(245px) translateX(-133px) rotate(56deg);
+    position: absolute
+  }
+  .xLineHolder{
+    height: 473px;
+    position: absolute;
+    overflow: hidden;
+  }
+  .footDiv{
+    margin-top: 147.7%;
+    width: 87.6%;
+  }
+  .upDiv{
+    margin-top: 0.5em;
+    margin-left: 14em;
+  }
+}
+/* Iphone 5 */
+@media screen and (min-height: 551px) and (max-height: 600px) {
+  .sortingControlls {
+    margin-top: 22%;
+  }
+  .addImage{
+    width: 105.2%;
+    margin-left: -0.5em;
+  }
+  .xLineL{
+    width: 1100px;
+    height: 47px;
+    border-bottom: 1px solid black;
+    -webkit-transform: translateY(80px) translateX(-267px) rotate(122.2deg);
+    position: absolute;
+  }
+  .xLineR{
+    width: 670px;
+    height: 47px;
+    border-bottom: 1px solid black;
+    -webkit-transform: translateY(245px) translateX(-137px) rotate(57.8deg);
+    position: absolute
+  }
+  .xLineHolder{
+    height: 568px;
+    position: absolute;
+    overflow: hidden;
+  }
+  .footDiv{
+    margin-top: 158.7%;;
+    width: 87.6%;
+  }
+  .upDiv{
+    margin-top: 0.5em;
+    margin-left: 14em;
+  }
+}
+/* nexus 5 */
+@media screen and (min-height: 601px) and (max-height: 650px) and (min-width: 330px) and (max-width: 370px){
+  .sortingControlls {
+    margin-top: 22%;
+  }
+  .addImage{
+    width: 101.2%;
+    margin-left: -0.5em;
+  }
+  .xLineL{
+    width: 1158px;
+    height: 47px;
+    border-bottom: 1px solid black;
+    -webkit-transform: translateY(80px) translateX(-256px) rotate(121.8deg);
+    position: absolute;
+  }
+  .xLineR{
+    width: 702px;
+    height: 45px;
+    border-bottom: 1px solid black;
+    -webkit-transform: translateY(246px) translateX(-157px) rotate(58.2deg);
+    position: absolute;
+  }
+  .xLineHolder{
+    height: 590px;
+    position: absolute;
+    overflow: hidden;
+  }
+  .footDiv{
+    margin-top: 161%;
+    width: 89%;
+  }
+  .upDiv{
+    margin-top: 0.5em;
+    margin-left: 14em;
+  }
+}
+/* nexus 4 */
+@media screen and (min-height: 601px) and (max-height: 650px) and (min-width: 371px) {
+  .sortingControlls {
+    margin-top: 22%;
+  }
+  .addImage{
+    width: 101.2%;
+    margin-left: -0.5em;
+  }
+  .xLineL{
+    width: 1158px;
+    height: 47px;
+    border-bottom: 1px solid black;
+    -webkit-transform: translateY(80px) translateX(-256px) rotate(121.8deg);
+    position: absolute;
+  }
+  .xLineR{
+    width: 724px;
+    height: 45px;
+    border-bottom: 1px solid black;
+    -webkit-transform: translateY(246px) translateX(-157px) rotate(56.5deg);
+    position: absolute;
+  }
+  .xLineHolder{
+    height: 590px;
+    position: absolute;
+    overflow: hidden;
+  }
+  .footDiv{
+    margin-top: 151%;
+    width: 89.5%;
+  }
+  .upDiv{
+    margin-top: 0.5em;
+    margin-left: 14em;
+  }
+}
+@media screen and (min-height: 651px) and (max-height: 700px) {
+  .sortingControlls {
+    margin-top: 22%;
+  }
+  .addImage{
+    width: 101.2%;
+    margin-left: -0.5em;
+  }
+  .xLineL{
+    width: 1100px;
+    height: 47px;
+    border-bottom: 1px solid black;
+    -webkit-transform: translateY(80px) translateX(-267px) rotate(122.2deg);
+    position: absolute;
+  }
+  .xLineR{
+    width: 670px;
+    height: 47px;
+    border-bottom: 1px solid black;
+    -webkit-transform: translateY(245px) translateX(-137px) rotate(57.8deg);
+    position: absolute
+  }
+  .xLineHolder{
+    height: 568px;
+    width: 320px;
+    position: absolute;
+    overflow: hidden;
+  }
+  .footDiv{
+    margin-top: 158.7%;;
+    width: 89.6%;
+  }
+  .upDiv{
+    margin-top: 0.5em;
+    margin-left: 14em;
+  }
+}
+@media screen and (min-height: 701px) and (max-height: 750px) {
+  .sortingControlls {
+    margin-top: 32em;
+  }
+  .addImage{
+    height:800px;
+    width: 101.2%;
+    margin-left: -0.5em;
+  }
+  .xLineL{
+    width: 1100px;
+    height: 47px;
+    border-bottom: 1px solid black;
+    -webkit-transform: translateY(80px) translateX(-267px) rotate(122.2deg);
+    position: absolute;
+  }
+  .xLineR{
+    width: 670px;
+    height: 47px;
+    border-bottom: 1px solid black;
+    -webkit-transform: translateY(245px) translateX(-137px) rotate(57.8deg);
+    position: absolute
+  }
+  .xLineHolder{
+    height: 568px;
+    width: 320px;
+    position: absolute;
+    overflow: hidden;
+  }
+  .footDiv{
+    margin-top: 158.7%;;
+    width: 89.6%;
+  }
+  .upDiv{
+    margin-top: 0.5em;
+    margin-left: 14em;
+  }
+}
+@media screen and (min-height: 751px) and (max-height: 800px) {
+  .sortingControlls {
+    margin-top: 32em;
+  }
+  .addImage{
+    height:800px;
+    width: 101.2%;
+    margin-left: -0.5em;
+  }
+  .xLineL{
+    width: 1100px;
+    height: 47px;
+    border-bottom: 1px solid black;
+    -webkit-transform: translateY(80px) translateX(-267px) rotate(122.2deg);
+    position: absolute;
+  }
+  .xLineR{
+    width: 670px;
+    height: 47px;
+    border-bottom: 1px solid black;
+    -webkit-transform: translateY(245px) translateX(-137px) rotate(57.8deg);
+    position: absolute
+  }
+  .xLineHolder{
+    height: 568px;
+    width: 320px;
+    position: absolute;
+    overflow: hidden;
+  }
+  .footDiv{
+    margin-top: 158.7%;;
+    width: 280px;
+  }
+  .upDiv{
+    margin-top: 0.5em;
+    margin-left: 14em;
+  }
+}
+@media screen and (min-height: 801px) and (max-height: 900px) {
+  .sortingControlls {
+    margin-top: 38em;
+  }
+  .addImage{
+    height:900px;
+    width: 101.2%;
+    margin-left: -0.5em;
+  }
+}
+@media screen and (min-height: 901px) and (max-height: 1000px) {
+  .sortingControlls {
+    margin-top: 46em;
+  }
+  .addImage{
+    height:1000px;
+    width: 101.2%;
+    margin-left: -0.5em;
+  }
+}
+@media screen and (min-height: 1001px) and (max-height: 1100px) {
+  .sortingControlls {
+    margin-top: 52em;
+  }
+  .addImage{
+    height:1100px;
+    width: 101.2%;
+    margin-left: -0.5em;
+  }
+}
+@media screen and (min-height: 1101px) and (max-height: 1200px) {
+  .sortingControlls {
+    margin-top: 58em;
+  }
+  .addImage{
+    height:1200px;
+    width: 101.2%;
+    margin-left: -0.5em;
+  }
+}
+@media screen and (min-height: 1201px) and (max-height: 1300px) {
+  .sortingControlls {
+    margin-top: 64em;
+  }
+  .addImage{
+    height:1300px;
+    width: 101.2%;
+    margin-left: -0.5em;
+  }
+  .xLine{
+    height: 1300px;
+  }
+}
+@media screen and (min-height: 1301px) and (max-height: 1400px) {
+  .sortingControlls {
+    margin-top: 70em;
+  }
+  .addImage{
+    height:1400px;
+    width: 101.2%;
+    margin-left: -0.5em;
+  }
+  .xLine{
+    height: 1400px;
+  }
+}
+@media screen and (min-height: 1401px) and (max-height: 1500px) {
+  .sortingControlls {
+    margin-top: 76em;
+  }
+  .addImage{
+    height:1500px;
+    width: 101.2%;
+    margin-left: -0.5em;
+  }
+  .xLine{
+    height: 1500px;
+  }
+}
+@media screen and (min-height: 1501px) and (max-height: 1600px) {
+  .sortingControlls {
+    margin-top: 82em;
+  }
+  .addImage{
+    height:1600px;
+    width: 101.2%;
+    margin-left: -0.5em;
+  }
+  .xLine{
+    height: 1600px;
+  }
+}
+@media screen and (min-height: 1601px) {
+  .sortingControlls {
+    margin-top: 1em;
+  }
+  .addImage{
+    height:1800px;
+    width: 101.2%;
+    margin-left: -0.5em;
+  }
+  .xLine{
+    height: 1800px;
+  }
+}
 .font1{
   font-size: 1em;
 }
@@ -285,4 +1414,62 @@ Responsive: Portrait tablets and up
 }
 .font3{
   font-size: 3em;
+}
+
+.overlay{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  background-color: rgba(0,0,0,0.5); /*dim the background*/
+}
+
+.hide{
+  display: none;
+}
+.absolute{
+  width: 247px;
+  position: absolute;
+  z-index: 12;
+}
+/* MOVE TO ADD IMAGES */
+.addImage{
+  margin-top: -0.5em;
+}
+
+.footDiv,.upDiv{
+  position: absolute;
+}
+
+.footDiv{
+  background-color: rgb(176,176,176);  
+  padding: 20px;
+}
+.grayC{
+  color:rgb(102,102,102);
+}
+.addImage .cam{
+  height: 1em;
+  width: 1.5em!important;
+  background-size: 100% 100%;
+  margin-left: 2em;
+}
+.addImage .picture{
+  background-image: url("../resources/images/picture.png");
+  height: 1em;
+  width: 1.5em!important;
+  background-size: 100% 100%;
+  margin-left: 2em;
+}
+.xLineHolder{
+  width: 100%;
+}
+.left30{
+  margin-left: -30px!important;
+}
+.width110{
+  width:95.7%!important;
+  margin-top: 81.8%;
 }
