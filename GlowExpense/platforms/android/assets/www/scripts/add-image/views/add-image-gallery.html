@@ -1,0 +1,9 @@
+<div ng-show="showGallery">
+    <div ng-repeat="img in images" class="inBl left">
+        <img width="100px" height="100px" ng-src="{{img.src}}">
+    </div>
+    <span ng-show="images.length == 0">No images available</span>
+    <div class="footDiv alignRight left30 width110">
+        <div class="grayC" ng-click="toggleImageGallery()">Cancel</div>
+    </div>
+</div>

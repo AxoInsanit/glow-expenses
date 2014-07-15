@@ -17,6 +17,10 @@
 
     <!-- Add your site or application content here -->
     <div class="container" ng-view></div>
+    <!-- used for dark background -->
+    <div class="overlay hide"></div>
+    <!-- Include Cordova -->
+    <!--<script type="text/javascript" charset="utf-8" src="bower_components/cordova.js"></script>-->
 
     <!-- build:js scripts/modules.js -->
     
@@ -33,42 +37,59 @@
     <script src="bower_components/angular-touch/angular-touch.js"></script>
     <script src="bower_components/angular-mocks/angular-mocks.js"></script>
     <script src="bower_components/underscore/underscore.js"></script>
+    <script src="bower_components/ngInfiniteScroll/build/ng-infinite-scroll.js"></script>
     <!-- endbower -->
 
     <!-- endbuild -->
 
     <!-- build:js(app) scripts/scripts.js -->
+
     <script src="scripts/app.js"></script>
 
     <script src="scripts/login/login.js"></script>
     <script src="scripts/login/services/UserSvc.js"></script>
 
-
-    <script src="scripts/expenses/expenses.js"></script>
     <!-- yo:features -->
 
-  <script src="scripts/expenses/expenses.js"></script>
+    <script src="scripts/expenses/expenses.js"></script>
+    <script src="scripts/add-expenses/add-expenses.js"></script>
 
-  <!-- yo:features -->
+    <!-- yo:features -->
 
 
-  <script src="scripts/login/controllers/login.js"></script>
-  <script src="scripts/expenses/controllers/expenses.js"></script>
-  <!-- yo:controllers -->
+    <script src="scripts/login/controllers/login.js"></script>
+    <script src="scripts/expenses/controllers/ExpensesListCtrl.js"></script>
+    <script src="scripts/expenses/controllers/ExpensesListDefaultCtrl.js"></script>
+    <script src="scripts/expenses/controllers/ExpensesListSelectCtrl.js"></script>
+    <script src="scripts/add-expenses/controllers/add-expenses.js"></script>
+    <!-- yo:controllers -->
 
     <script src="scripts/config.js"></script>
 
     <script src="scripts/services/services.js"></script>
+    <script src="scripts/services/cordovaSvc.js"></script>
     <script src="scripts/services/requestNotificationChannelSvc.js"></script>
+    <script src="scripts/expenses/services/expenseSvc.js"></script>
+    <script src="scripts/expenses/services/expensesBufferingSvc.js"></script>
+    <script src="scripts/expenses/services/expensesRepositorySvc.js"></script>
+    <script src="scripts/expenses/services/expensesRequestNotificationChannelSvc.js"></script>
     <!-- yo:services -->
 
     <script src="scripts/filters/filters.js"></script>
     <!-- yo:filters -->
 
     <script src="scripts/directives/directives.js"></script>
-     <script src="scripts/directives/loading.js"></script>
+    <script src="scripts/directives/loading.js"></script>
+    <!--<script src="scripts/directives/when-scrolled.js"></script>-->
+
     <!-- yo:directives -->
     <!-- endbuild -->
-
+    <script type="text/javascript">
+        var onDeviceReady = function() {
+            angular.bootstrap( document, ['app']);
+        }
+        document.addEventListener('deviceready',
+                onDeviceReady);
+    </script>
 </body>
 </html>

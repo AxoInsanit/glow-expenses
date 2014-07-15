@@ -1,2 +1,2 @@
-C:\Users\Djilanov\Documents\GitHub\glow-expenses\GlowExpense\platforms\android\CordovaLib\ant-build\AndroidManifest.xml : \
-C:\Users\Djilanov\Documents\GitHub\glow-expenses\GlowExpense\platforms\android\CordovaLib\AndroidManifest.xml \
+D:\Glow3\platforms\android\CordovaLib\ant-build\AndroidManifest.xml : \
+D:\Glow3\platforms\android\CordovaLib\AndroidManifest.xml \

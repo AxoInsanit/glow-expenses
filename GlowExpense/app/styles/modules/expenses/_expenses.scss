@@ -1,6 +1,6 @@
 /* expenses */
 .expenses .header {
-  margin-top: -30px;
+  margin-top: -10px;
   padding-left: 0;
   padding-right: 0;
   margin-left: -30px;
@@ -28,7 +28,9 @@
   background-image: url('../resources/images/list.png');
   background-size: 100% 100%;
 }
-
+.left{
+  float:left;
+}
 .expenses .icon.right{
   padding: 0.25em;
   padding-right: 0.5em;
@@ -44,27 +46,27 @@
 .expenses .nav{
   background-color: rgb(204,204,204);
   padding-left: 0;
-  padding-right: 0;
-  width: 102.8%;
   margin-left: -30px;
-  height: 1.5em;
-  padding-top: 0.5em;
+  height: 1.6em;
   color:white;
+  padding-top: 1%;
+  padding-bottom: 1%;
 }
 .expenseItem .itemName {
   display: inline-block;
+  width:31%;
 }
 .expenseItem .itemName div{
   display: block;
 }
 .expenseItem .itemName .icon{
-  width:10%;
+  width:15%;
 }
 .inBl{
   display: inline-block!important;
 }
 .half{
-  width: 40%;
+  width: 46%;
 }
 .alignLeft{
   text-align: left;
@@ -73,23 +75,23 @@
   text-align: right;
 }
 .expenseItem.ready{
-	background-color:white;
+  background-color:white;
 }
 .expenseItem.picture{
-	background-color:rgb(243,243,243);
+  background-color:rgb(243,243,243);
 }
 .expenseItem{
-	height: 6em;
-  	border-bottom: 1px solid rgb(102,102,102);
-  	padding-top: 2em;
+  height: 4em;
+    border-bottom: 1px solid rgb(102,102,102);
+    padding-top: 2em;
 }
 .itemName.right{
-	margin-top:1em;
+  margin-top:1em;
 }
 .expensesImage{
-  height: 20em;
-  width: 20em;
-  margin:auto;
+  height: 10em;
+  width: 10em;
+  margin-left: -1em;
   margin-top: 5em; 
   background-image: url('../resources/images/emptyPage.png');
   background-size: 80% 100%;
@@ -97,10 +99,145 @@
   background-repeat: no-repeat;
 }
 .imageLabel{
-	font-weight: 400;
-	margin-left: 1.5em;
-	color:rgb(157,157,157);
+  font-weight: 400;
+  color:rgb(157,157,157);
 }
 .imageHolder{
-	margin-left: 7em;
+  margin-left: 7em;
+}
+
+.expenses .nav .alignRight.half div{
+  height: 1.3em;
+  width: 1em;
+  background-image: url('../resources/images/bin.png');
+  background-size: 100% 100%;
+  float:right;
+  position: absolute;
+}
+.expenses .nav .alignRight div{
+  background-image: url('../resources/images/loop.png');
+  height: 1.2em;
+  width: 1.2em;
+  background-size: 100% 100%;
+  float: left;
+  position: absolute;
+}
+.expenses .nav .arrow div{
+  height: 2.3em;
+  width: 2em;
+  background-image: url('../resources/images/arrows.png');
+  background-size: 100% 100%;
+  float:right;
+  position: absolute;
+}
+.third.alignRight{
+  width: 32%;
+}
+.sortingControlls{
+  height: 5em;
+  border: 1px solid gray;
+  border-radius: 0.5em;
+  padding: 1em;
+  position: fixed;
+  background-color: white;
+}
+.row{
+  height: 2em;
+  color:rgb(102,102,102);
+}
+.top1{
+  margin-top: 1em;
+}
+.downArrow{
+  height: 2.3em;
+  width: 2em;
+  background-image: url('../resources/images/downArrow.png');
+  background-size: 100% 100%;
+  float:right;
+  margin-left: 2em;
+  position: absolute;
+}
+.upArrow{
+  height: 2.3em;
+  width: 2em;
+  background-image: url('../resources/images/up.png');
+  background-size: 100% 100%;
+  float:right;
+  margin-left: 2em;
+  margin-top: -0.8em;
+  position: absolute;
+}
+.checkSign{
+  height: 1.3em;
+  width: 1em;
+  background-size: 100% 100%;
+  position: absolute;
+}
+.search{
+  margin-top: 1.5em;
+  float:left;
+  margin-left: 2em;
+}
+.searchBox{
+  height: 5em;
+  margin-top: -2em;
+  margin-left: -1em;
+  background-color: rgb(176,178,183);
+}
+.closeSearch{
+   width:10%;
+   display: inline-block;
+   margin-top: 1.5em;
+   font-size: 20px;
+}
+
+.Infinity{
+  height: 600px;
+  overflow: visible;
+}
+
+.icon.photo,.icon.thick{
+  height: 1em;
+  width: 1.5em!important;
+  background-size: 100% 100%;
+  float: right!important;
+  margin-top: 1em;
+  margin-right: 0.7em;
+}
+.icon.thick{
+  background-image: url("../resources/images/checkGray.png");
+}
+.cameraFoot{
+  background-image: url("../resources/images/camera.png");
+}
+.greenThick{
+  background-image: url("../resources/images/check.png")!important;
+}
+
+.cameraBorder{
+  border: 1px solid #67ba39;
+  border-radius: 70px;
+  height: 3em;
+  width: 3em;;
+  margin-top: -2em;
+  margin-right: -0.3em;
+}
+.thickBorder{
+  border: 1px solid rgb(176,176,176);
+  border-radius: 70px;
+  height: 3em;
+  width: 3em;
+  margin-top: -2em;
+  margin-right: -0.3em;
+}
+
+.half .money{
+  margin-left: -2em;
+}
+
+.backGreen{
+  background-color: green;
+}
+.alRight{
+  text-align: right;
 }

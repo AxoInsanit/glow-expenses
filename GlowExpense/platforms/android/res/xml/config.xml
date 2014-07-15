@@ -5,9 +5,12 @@
     <feature name="App">
         <param name="android-package" value="org.apache.cordova.App" />
     </feature>
-    <name>HelloWorld</name>
+    <feature name="Camera">
+        <param name="android-package" value="org.apache.cordova.camera.CameraLauncher" />
+    </feature>
+    <name>Glow Expense</name>
     <description>
-        Hello World sample application that responds to the deviceready event.
+        The glow expense app
     </description>
     <author email="support@phonegap.com" href="http://phonegap.com">
         PhoneGap Team

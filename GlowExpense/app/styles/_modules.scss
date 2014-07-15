@@ -1,7 +1,5 @@
 // Auto imported modules (feature generator) DON'T DELETE "yo:" lines
-@import "modules/login/login";
-@import "modules/expenses/expenses";
-@import "modules/add-expenses/add-expenses";
-@import "modules/send-expenses/send-expenses";
-@import "modules/send-expenses-report/send-expenses-report";
+@import "modules/login/_login";
+@import "modules/expenses/_expenses";
+@import "modules/add-expenses/_add-expenses";
 // yo:includeSass
