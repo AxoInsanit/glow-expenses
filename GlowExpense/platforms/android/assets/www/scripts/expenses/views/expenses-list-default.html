@@ -1,0 +1,96 @@
+<div class="expenses">
+    <div ng-controller="ExpensesListDefaultCtrl">
+        <div ng-show="showSearch" class="searchBox">
+            <input class="search" placeholder="Search" ng-model="searchedExpense.description">
+            <div ng-click="toggleSearching(false); searchedExpense.description=''" class="closeSearch">Cancel</div>
+        </div>
+
+        <div class="header font15" ng-show="!showSearch">
+            <span class="icon left"></span>
+            <span class="expensesHeader">Expenses</span>
+            <span class="icon right"></span>
+        </div>
+        <div ng-show="showSorting" class="sortingControlls alignLeft">
+            <div class="row">
+                <div ng-click="sort(true)"> 
+                    <span class="">Create Day</span><span class="upArrow"></span>
+                    <span ng-show="reverseSorting" class="checkSign"></span>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div ng-click="sort(false)" class="top1"> 
+                    <span class="">Create Day</span><span class="downArrow"></span>
+                    <span ng-show="!reverseSorting" class="checkSign"></span>
+                </div>   
+            </div>
+        </div>
+        <div class="nav font15">
+            <div class="third alignLeft">
+                <div ng-click="toggleSearching(true)"></div>
+            </div>
+            <div class="third arrow">
+                <div ng-click="enableSorting()"></div>
+            </div>
+            <div ng-click="enableSelectMode()" class="third alignRight">Select</div>
+        </div>
+
+        <div class="expenseItem ready" ng-repeat="expense in expenses | filter:searchedExpense">
+            <div class="itemName half left alignLeft">
+                <div class="icon inBl">
+                    <span>{{ expense.description }}</span>
+                </div>
+                <div class="inBl">
+                    <div>{{ expense.date }}</div>
+                </div>
+            </div>
+            <div class="itemName half right alignRight">
+                <div>
+                    <span class="money">{{ expense.originalAmount | currency }}</span>
+
+                    <span ng-show="expense.imageType == 'void' " class="icon">thick</span>
+                    <span ng-show="expense.imageType != 'void' " class="icon">photo</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--<div class="nav font15">-->
+        <!--<div ng-click="toggleDeleteMode(false)" class="half alignLeft inBl">Cancel</div>-->
+        <!--<div class="half alignRight inBl">-->
+            <!--<div></div>-->
+        <!--</div>-->
+    <!--</div>-->
+
+
+    <!--<div class="expenseItem ready">-->
+        <!--<div class="itemName half left alignLeft">-->
+            <!--<div>-->
+                <!--<div class="icon inBl">-->
+                    <!--<span> icon here </span>-->
+                <!--</div>-->
+                <!--<div class="inBl">-->
+                    <!--<div> with icon in front </div>-->
+                    <!--<div> 01.01.1980 </div>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+        <!--<div class="itemName half right alignRight">-->
+            <!--<div>-->
+                <!--<span class="money"> $123 </span>-->
+                <!--<span class="icon">test</span>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
+    <!--<div class="expenseItem picture">-->
+        <!--<div class="itemName half left alignLeft">-->
+            <!--<div> whitout icon in front </div>-->
+            <!--<div> 01.01.1980 </div>-->
+        <!--</div>-->
+        <!--<div class="itemName half right alignRight">-->
+            <!--<div>-->
+                <!--<span class="money"> $123 </span> -->
+                <!--<span class="icon">test</span>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
+</div>

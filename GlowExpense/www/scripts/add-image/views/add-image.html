@@ -1,0 +1,8 @@
+<div ng-switch="showGallery">
+    <div ng-switch-when="true">
+        <div ng-include="'./scripts/add-image/views/add-image-gallery.html'"></div>
+    </div>
+    <div ng-switch-when="false">
+        <div ng-include="'./scripts/add-image/views/add-image-default.html'"></div>
+    </div>
+</div>

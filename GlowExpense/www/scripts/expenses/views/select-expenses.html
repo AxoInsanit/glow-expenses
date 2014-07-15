@@ -1,0 +1,37 @@
+<div class="expenses">
+
+    <div class="nav font15">
+        <div class="third alignLeft">
+            <div ng-click="toggleSearching(true)"></div>
+        </div>
+        <div class="third arrow">
+            <div ng-click="enableSorting()"></div>
+        </div>
+        <div ng-click="enableSelectMode()" class="third alignRight">Select</div>
+    </div>
+
+    <!--<div class="nav font15">-->
+    <!--<div ng-click="toggleDeleteMode(false)" class="half alignLeft inBl">Cancel</div>-->
+    <!--<div class="half alignRight inBl">-->
+    <!--<div></div>-->
+    <!--</div>-->
+    <!--</div>-->
+    <div class="expenseItem ready" ng-repeat="expense in expenses | filter:searchedExpense">
+        <div class="itemName half left alignLeft">
+            <div class="icon inBl">
+                <span>{{ expense.description }}</span>
+            </div>
+            <div class="inBl">
+                <div>{{ expense.date }}</div>
+            </div>
+        </div>
+        <div class="itemName half right alignRight">
+            <div>
+                <span class="money">{{ expense.originalAmount | currency }}</span>
+
+                <span ng-show="expense.imageType == 'void' " class="icon">thick</span>
+                <span ng-show="expense.imageType != 'void' " class="icon">photo</span>
+            </div>
+        </div>
+    </div>
+</div>

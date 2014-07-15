@@ -2,9 +2,9 @@
 
 angular.module('Expenses')
     .controller('ExpensesListCtrl', ['$scope', '$filter', '$location', 'expenseSvc', 'expensesBufferingSvc',
-        'defaultMode', 'selectMode', 'expensesRequestNotificationChannelSvc',
+        'defaultMode', 'selectMode', 'expensesRequestNotificationChannelSvc', '$timeout',
         function ($scope, $filter, $location, expenseSvc, expensesBufferingSvc, defaultMode, selectMode,
-                  expensesRequestNotificationChannelSvc) {
+                  expensesRequestNotificationChannelSvc, $timeout) {
 
 
                 var mode = defaultMode;
@@ -88,10 +88,18 @@ angular.module('Expenses')
                     $scope.expenses = orderBy($scope.expenses, predicate, reverse);
                 }
 
+            $timeout(function(){
                 expensesBufferingSvc.getExpenses($scope).then(function (result) {
                     result.forEach(function (item) {
                         $scope.expenses.push(item);
                     });
                 });
+            }, 5000);
+
+//                expensesBufferingSvc.getExpenses($scope).then(function (result) {
+//                    result.forEach(function (item) {
+//                        $scope.expenses.push(item);
+//                    });
+//                });
 
             }]);
