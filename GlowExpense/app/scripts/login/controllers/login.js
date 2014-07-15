@@ -1,31 +1,52 @@
 'use strict';
 
-angular.module('Login').controller('LoginCtrl', ['$scope', '$location', 'UserSvc', 'errorMsg', '$timeout',
-    function ($scope, $location, UserSvc, errorMsg, $timeout) {
+angular.module('Login').controller('LoginCtrl', ['$scope', '$location', function ($scope, $location) {
 
-    $scope.errorMessage = errorMsg;
+    $scope.errorMessage = 'Please try again! Username or password is wrong!';
     $scope.showErrorMessage = false;
 
-    $scope.login=function(user){
+    // TODO remove when the real services are ready
+    $scope.login = function(user){
 
-        var User = new UserSvc();
-        User.username = user.username;
-        User.password = user.password;
+        if (user.username === 'rodrigo.rivas' && user.password === 'lambda'){
 
-        User.$save()
-            .then(function(response) {
-                $scope.showErrorMessage = false;
+            $scope.showErrorMessage = false;
 
-                if( window.localStorage ){
-                    localStorage.setItem('session-token', response.session_token);
-                }
-                $location.path('/expenses');
+            if( window.localStorage ){
+                localStorage.setItem('session-token', 'some-complex-token-string');
+            }
 
-            },
-            function(){
-                $scope.showErrorMessage = true;
-                $scope.user.username = '';
-                $scope.user.password = '';
-            });
+            $location.path('/expenses');
+        }
+        else {
+            $scope.showErrorMessage = true;
+        }
+
     };
+
+    // TODO uncomment when the real services are ready
+//    $scope.login=function(user){
+//
+//
+//        var User = new UserSvc();
+//        User.username = user.username;
+//        User.password = user.password;
+//
+//        User.$save()
+//            .then(function(response) {
+//
+//                $scope.showErrorMessage = false;
+//
+//                if( window.localStorage ){
+//                    localStorage.setItem('session-token', response.session_token);
+//                }
+//
+//                $location.path('/expenses');
+//
+//            },
+//            function(){
+//
+//                $scope.showErrorMessage = true;
+//            });
+//    };
 }]);

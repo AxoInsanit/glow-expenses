@@ -1,11 +1,7 @@
 'use strict';
 
-angular.module('Login').factory('UserSvc', ['$resource', 'loginUrlMockWeb', '$timeout',
-    function($resource, loginUrlMockWeb, $timeout) {
+angular.module('Login').factory('UserSvc', ['$resource', function($resource) {
 
-
-    return $resource( loginUrlMockWeb, {}, {} );
-
-  //  return $resource( loginUrlMockWeb, {}, {} );
+    return $resource( 'https://esb.dev.corp.globant.com/system/login', {}, {} );
 
 }]);

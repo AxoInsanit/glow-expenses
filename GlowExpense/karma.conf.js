@@ -29,7 +29,6 @@ module.exports = function(config) {
             'app/bower_components/angular-touch/angular-touch.js',
             'app/bower_components/angular-mocks/angular-mocks.js',
             'app/bower_components/underscore/underscore.js',
-            'app/bower_components/ngInfiniteScroll/build/ng-infinite-scroll.js',
             // endbower
             'node_modules/jasmine-expect/dist/jasmine-matchers.js',
             'app/scripts/{,*/}/*.js',

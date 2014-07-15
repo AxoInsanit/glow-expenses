@@ -14,9 +14,7 @@ var _mainModules = [
   //  ,'ngLocale'
     ,'Login'
     ,'Expenses'
-
-   // ,'AddExpenses'
-    ,'infinite-scroll'
+    ,'AddExpenses'
 
     // yo:ngMainModules
 ];
@@ -41,24 +39,15 @@ angular.module('app', _mainModules )
         routes.push({
             name: '/expenses',
             params: {
-                templateUrl: 'scripts/expenses/views/expenses.html',
-                controller: 'ExpensesListCtrl'
+                templateUrl: 'scripts/expenses/views/no-expenses.html',
+                controller: 'ExpensesCtrl'
             }
         });
-
-        routes.push({
-            name: '/add-image',
-            params: {
-                templateUrl: 'scripts/add-image/views/add-image.html',
-                controller: 'AddImageCtrl'
-            }
-        });
-        
         routes.push({
             name: '/addexpenses',
             params: {
                 templateUrl: 'scripts/add-expenses/views/add-expenses.html',
-                controller: 'AddExpenses'
+                controller: 'AddExpensesCtrl'
             }
         });
 
@@ -69,8 +58,8 @@ angular.module('app', _mainModules )
                 controller: 'ExpensesCtrl'
             }
         });
-
         
+
 // yo:ngRoutes
 
         routes.forEach(function(route){
