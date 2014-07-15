@@ -1,33 +1,39 @@
 'use strict';
 
-angular.module('AddExpenses')
-    .controller('AddExpensesCtrl', ['$scope', '$location', function ($scope, $location) {
+angular.module('AddExpenses').controller('AddExpensesCtrl', ['$scope', '$location', 'expensesObj', function ($scope, $location, expensesObj) {
+	$scope.errorMessage = 'Please try again! Something get wrong!';
+    $scope.showErrorMessage = false;
 
-    	$scope.errorMessage = 'Please try again! Something get wrong!';
-        $scope.showErrorMessage = false;
-        
-        $scope.takePhoto = function() {
-            function onSuccess(imageURI) {
+    $scope.add=function(expense){
 
-                var image = {};
-                image.src = imageURI;
+        var Expenses = new expensesObj();
+        Expenses.title = expense.title;
+        Expenses.description = expense.description;
+        Expenses.date = expense.date;
+        Expenses.amount = expense.amount;
+        Expenses.currency = expense.currency;
+        Expenses.rate = expense.rate;
 
-                $scope.images.push(image);
-            }
+        Expenses.$save()
+            .then(function(response) {
+                $scope.showErrorMessage = false;
 
-            function onFail(message) {
-                //not defined into the jslint ;( have to find other way to say that there is error
-                alert('Failed because: ' + message);
-            }
-
-            //main function for photo
-            navigator.camera.getPicture(onSuccess, onFail,
-                {
-                    quality: 50,
-                    destinationType: Camera.DestinationType.FILE_URI,
-                    targetWidth: 50,
-                    targetHeight: 50
+                if( window.localStorage ){
+                    localStorage.setItem('session-token', response.session_token);
                 }
-            );
-        };
+
+                $location.path('/expenses');
+
+            },
+            function(){
+                $scope.showErrorMessage = true;
+                $scope.expense.title = '';
+                $scope.expense.description = '';
+                $scope.expense.date = '';
+                $scope.expense.amount = '';
+                $scope.expense.currency = '';
+                $scope.expense.rate = '';
+            });
+    };
+
 }]);

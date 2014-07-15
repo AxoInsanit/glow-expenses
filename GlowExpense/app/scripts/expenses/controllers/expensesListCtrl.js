@@ -2,9 +2,9 @@
 
 angular.module('Expenses')
     .controller('ExpensesListCtrl', ['$scope', '$filter', '$location', 'expenseSvc', 'expensesBufferingSvc',
-        'defaultMode', 'selectMode', 'expensesRequestNotificationChannelSvc', '$timeout',
+        'defaultMode', 'selectMode', 'expensesRequestNotificationChannelSvc',
         function ($scope, $filter, $location, expenseSvc, expensesBufferingSvc, defaultMode, selectMode,
-                  expensesRequestNotificationChannelSvc, $timeout) {
+                  expensesRequestNotificationChannelSvc) {
 
 
                 var mode = defaultMode;
@@ -78,28 +78,17 @@ angular.module('Expenses')
                     obj.selected = !obj.selected;
                 };
 
-                $scope.addphoto = function () {
-                    $location.path('/add-image');
-                };
-
                 var orderBy = $filter('orderBy');
 
                 function order(predicate, reverse) {
                     $scope.expenses = orderBy($scope.expenses, predicate, reverse);
                 }
 
-            $timeout(function(){
                 expensesBufferingSvc.getExpenses($scope).then(function (result) {
                     result.forEach(function (item) {
                         $scope.expenses.push(item);
                     });
                 });
-            }, 5000);
 
-//                expensesBufferingSvc.getExpenses($scope).then(function (result) {
-//                    result.forEach(function (item) {
-//                        $scope.expenses.push(item);
-//                    });
-//                });
-
-            }]);
+            }
+    ]);
