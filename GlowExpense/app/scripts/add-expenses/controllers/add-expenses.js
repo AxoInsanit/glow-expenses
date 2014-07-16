@@ -1,18 +1,68 @@
 'use strict';
 
 angular.module('AddExpenses')
-    .controller('AddExpensesCtrl', ['$scope', '$location', function ($scope, $location) {
+    .controller('AddExpensesCtrl', ['$scope', '$location', 'AddExpensesSvc', 'errorMsg', function ($scope, $location, AddExpensesSvc, errorMsg) {
 
-    	$scope.errorMessage = 'Please try again! Something get wrong!';
+    	$scope.errorMessage = errorMsg;
         $scope.showErrorMessage = false;
-        
+
+        $scope.goBack = function(){
+            $location.path('/expenses');
+        }
+
+        $scope.todayDate = function(){
+            var today = new Date();
+            var dd = today.getDate();
+            var mm = today.getMonth()+1; //January is 0!
+            var yyyy = today.getFullYear();
+
+            if(dd<10) {
+                dd='0'+dd
+            } 
+
+            if(mm<10) {
+                mm='0'+mm
+            } 
+            today = "";
+            today = mm+'/'+dd+'/'+yyyy;
+            return today;
+        }
+
+        $scope.add=function(expense){
+
+            var Expense = new AddExpensesSvc();
+            Expense.title = expense.title;
+            Expense.description = expense.description;
+            Expense.date = expense.date;
+            Expense.amount = expense.amount;
+            Expense.currency = expense.currency;
+            Expense.rate = expense.rate;
+
+
+            Expense.$save()
+                .then(function(response) {
+                    $scope.showErrorMessage = false;
+
+
+                    $location.path('/expenses');
+
+                },
+                function(){
+                    $scope.showErrorMessage = true;
+                    $scope.expense.title = '';
+                    $scope.expense.description = '';
+                    $scope.expense.date = '';
+                    $scope.expense.amount = '';
+                    $scope.expense.currency = '';
+                    $scope.expense.rate = '';
+                });
+        };
+
         $scope.takePhoto = function() {
             function onSuccess(imageURI) {
-
                 var image = {};
                 image.src = imageURI;
-
-                $scope.images.push(image);
+                alert(imageURI);
             }
 
             function onFail(message) {

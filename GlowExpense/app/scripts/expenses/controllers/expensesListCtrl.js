@@ -23,6 +23,10 @@ angular.module('Expenses')
 
                 $scope.showDeleteMode = false;
 
+                $scope.addExpense= function() {
+                    $location.path('/addexpenses');
+                };
+
                 $scope.selectMode = function () {
                     return mode === selectMode;
                 };
