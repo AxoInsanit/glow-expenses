@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<mockservice version="1.0" xml:lang="en-US">
+<proxy_settings proxy_enabled="true" proxy_url=""/>
+<serviceref file="./mockey_def_depot/Login/Login.xml"/>
+<serviceref file="./mockey_def_depot/Expense/Expense.xml"/>
+<service_plan description="" id="1" name="test" tag="test"/>
+</mockservice>
