@@ -16,8 +16,8 @@
 }
 .pullDown{
 	position: absolute;
-	height: 2.3em;
-	width: 2.4em;
+	height: 3.3em;
+	width: 3.4em;
 	background-image: url('../resources/images/down.png');
 	background-size: 100% 100%;
 }
@@ -39,4 +39,10 @@
 	background-size: 100% 100%;
 	margin-left: 20%;
 	margin-top: 1.8em;
+}
+.expenses input {
+	height:4.5em;
+}
+.expenses .btn-green{
+	height:4.5em;
 }

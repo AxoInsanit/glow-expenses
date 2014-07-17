@@ -14,7 +14,6 @@ var _mainModules = [
   //  ,'ngLocale'
     ,'Login'
     ,'Expenses'
-    ,'AddExpenses'
     ,'infinite-scroll'
 
     // yo:ngMainModules
@@ -54,10 +53,18 @@ angular.module('app', _mainModules )
         });
         
         routes.push({
-            name: '/addexpenses',
+            name: '/add-expense',
             params: {
-                templateUrl: 'scripts/add-expenses/views/add-expenses.html',
-                controller: 'AddExpensesCtrl'
+                templateUrl: 'scripts/expenses/views/add-expense.html',
+                controller: 'AddExpenseCtrl'
+            }
+        });
+
+        routes.push({
+            name: '/editexpenses',
+            params: {
+                templateUrl: 'scripts/expenses/views/editExpenses.html',
+                controller: 'EditExpensesCtrl'
             }
         });
 

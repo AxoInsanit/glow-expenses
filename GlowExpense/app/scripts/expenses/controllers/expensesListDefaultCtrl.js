@@ -10,6 +10,10 @@ angular.module('Expenses')
             $scope.showSearch = false;
 
             $scope.showDeleteMode = false;
+            
+            $scope.addExpense= function() {
+                $location.path('/addexpenses');
+            };
 
             $scope.enableSorting = function() {
                 $scope.showSorting = true;

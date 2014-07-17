@@ -23,7 +23,7 @@ angular.module('Login').controller('LoginCtrl', ['$scope', '$location', 'UserSvc
                 $location.path('/expenses');
 
             },
-            function(){
+            function(result){
                 $scope.showErrorMessage = true;
                 $scope.user.username = '';
                 $scope.user.password = '';
