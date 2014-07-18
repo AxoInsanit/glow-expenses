@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('Expenses')
-    .factory('expensesBufferingSvc', ['expensesRepositorySvc','$q',
-        function(expensesRepositorySvc, $q) {
+    .factory('expensesBufferingSvc', ['expensesRepositorySvc','$q', 'expenseSvc',
+        function(expensesRepositorySvc, $q, expenseSvc) {
 
     var expensesBuffer = [];
     var resultExpenses = [];
@@ -10,9 +10,12 @@ angular.module('Expenses')
     function getExpenses(scope) {
         var deferred = $q.defer();
 
-        expensesRepositorySvc.resource(scope).query().$promise.then(function (result) {
+        expensesRepositorySvc.query().$promise.then(function (result) {
 
-            expensesBuffer = result;
+            expensesBuffer = result.map(function(item){
+                return expenseSvc.getExpense(scope, item);
+            });
+
             expensesBuffer = expensesBuffer.splice(0, 3);
 
             deferred.resolve(expensesBuffer);
