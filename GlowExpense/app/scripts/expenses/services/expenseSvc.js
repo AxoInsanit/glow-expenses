@@ -30,11 +30,15 @@ angular.module('Expenses')
     }
 
     Expense.prototype.toggleDetails = function() {
+        this.selected = false;
         this.showDetails = !this.showDetails;
     };
 
     Expense.prototype.toggleSelect = function() {
-        this.selected = !this.selected;
+        if (!this.showDetails){
+            this.selected = !this.selected;
+        }
+
     };
 
     function getExpense(scope, initData){

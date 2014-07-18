@@ -71,11 +71,10 @@
 
                                 <div ng-switch="expense.imageType === 'void'" stop-event="click">
                                     <div ng-switch-when="true" ng-click="expense.toggleSelect()"
-                                         class="thickBorder right" ng-class="expense.selected ? ' backGreen' : ' '"
-                                         >
+                                         class="thickBorder right" ng-class="expense.selected ? ' backGreen' : ' '">
                                         <span class="icon thick "></span>
                                     </div>
-                                    <div ng-switch-when="false" ng-click="addphoto()" class="cameraBorder right">
+                                    <div ng-switch-when="false" ng-click="addphoto()" class="cameraBorder right"  >
                                         <div class="icon photo cameraFoot"></div>
                                     </div>
                                 </div>
