@@ -4,5 +4,6 @@ angular.module('Expenses').factory('expensesRepositorySvc', ['$resource', 'expen
     function($resource, expensesUrlMockWeb) {
 
             return $resource( expensesUrlMockWeb, {}, {} );
-    }]);
+        }
+]);
 

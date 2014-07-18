@@ -20,9 +20,9 @@ angular.module('Expenses')
     // publish
     var activateDetailsMode = function(expenseId, isAnotherExpenseOpened) {
         $rootScope.$broadcast(detailsModeActivated, {
-                                                        expenseId: expenseId,
-                                                        isAnotherExpenseOpened: isAnotherExpenseOpened
-                                                    }
+                expenseId: expenseId,
+                isAnotherExpenseOpened: isAnotherExpenseOpened
+            }
         );
     };
 

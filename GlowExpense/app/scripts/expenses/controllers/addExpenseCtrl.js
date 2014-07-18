@@ -1,5 +1,8 @@
 'use strict';
 
+/* global Camera: false */
+/* global alert: false */
+
 angular.module('Expenses')
     .controller('AddExpenseCtrl', ['$scope', '$location', 'addExpenseErrorMsg',
 
@@ -11,12 +14,12 @@ angular.module('Expenses')
 
         $scope.goBack = function(){
             $location.path('/expenses');
-        }
+        };
 
         $scope.date = new Date();
 
-        $scope.add = function(expense) {
-
+//        $scope.add = function(expense) {
+//
 //            var Expense = new AddExpensesSvc();
 //            Expense.title = expense.title;
 //            Expense.description = expense.description;
@@ -41,7 +44,7 @@ angular.module('Expenses')
 //                    $scope.expense.currency = '';
 //                    $scope.expense.rate = '';
 //                });
-        };
+//        };
 
         // TODO Mitko move this to a service
         $scope.takePhoto = function() {
@@ -50,7 +53,6 @@ angular.module('Expenses')
             }
 
             function onFail(message) {
-                //not defined into the jslint ;( have to find other way to say that there is error
                 alert('Failed because: ' + message);
             }
 
