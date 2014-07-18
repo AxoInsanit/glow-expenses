@@ -1,7 +1,7 @@
-﻿"use strict";
+﻿'use strict';
 
 
-angular.module('Directives').directive("stopEvent", function() {
+angular.module('Directives').directive('stopEvent', function() {
         return {
             restrict: 'A',
             link: function(scope, element, attr) {

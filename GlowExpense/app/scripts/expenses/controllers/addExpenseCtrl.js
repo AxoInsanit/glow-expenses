@@ -7,7 +7,7 @@ angular.module('Expenses')
 
         $scope.errorMessage = addExpenseErrorMsg;
         $scope.showErrorMessage = false;
-        $scope.imageSelectedPath = "";
+        $scope.imageSelectedPath = '';
 
         $scope.goBack = function(){
             $location.path('/expenses');
