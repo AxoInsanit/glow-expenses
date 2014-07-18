@@ -8,6 +8,7 @@ angular.module('Expenses')
     function Expense(scope, initData){
         var self = this;
 
+        self.expenseId = initData.expenseId;
         self.title = initData.title;
         self.expenseId =  initData.expenseId;
         self.submiter = initData.submiter;
@@ -22,17 +23,33 @@ angular.module('Expenses')
 
         self.showDetails = false;
         self.selected = false;
+        self.enabled = true;
 
         function initialize(){
             expensesRequestNotificationChannelSvc.onSelectModeActivated(scope, function() {self.showDetails = false;});
+            expensesRequestNotificationChannelSvc.onDetailsModeActivated(scope,
+                function(expenseId, isAnotherExpenseOpened) {
+                    if (self.expenseId !== expenseId){
+                        if (isAnotherExpenseOpened){
+                            self.showDetails = false;
+                            self.enabled = false;
+                        } else {
+                            self.enabled = true;
+                        }
+                    }
+                });
         }
 
         initialize();
     }
 
     Expense.prototype.toggleDetails = function() {
-        this.selected = false;
-        this.showDetails = !this.showDetails;
+
+        if (this.enabled) {
+            this.selected = false;
+            this.showDetails = !this.showDetails;
+            expensesRequestNotificationChannelSvc.activateDetailsMode(this.expenseId, this.showDetails);
+        }
     };
 
     Expense.prototype.toggleSelect = function() {

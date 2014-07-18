@@ -2,8 +2,8 @@
 
 angular.module('Expenses')
     .factory('expensesRequestNotificationChannelSvc',
-        ['$rootScope', 'selectModeActivated',
-            function($rootScope, selectModeActivated){
+        ['$rootScope', 'selectModeActivated', 'detailsModeActivated',
+            function($rootScope, selectModeActivated, detailsModeActivated){
 
     // publish
     var activateSelectMode = function() {
@@ -17,8 +17,26 @@ angular.module('Expenses')
         });
     };
 
+    // publish
+    var activateDetailsMode = function(expenseId, isAnotherExpenseOpened) {
+        $rootScope.$broadcast(detailsModeActivated, {
+                                                        expenseId: expenseId,
+                                                        isAnotherExpenseOpened: isAnotherExpenseOpened
+                                                    }
+        );
+    };
+
+    // subscribe
+    var onDetailsModeActivated = function($scope, handler){
+        $scope.$on(detailsModeActivated, function(event, args){
+            handler(args.expenseId, args.isAnotherExpenseOpened);
+        });
+    };
+
     return {
         activateSelectMode:  activateSelectMode,
-        onSelectModeActivated: onSelectModeActivated
+        onSelectModeActivated: onSelectModeActivated,
+        activateDetailsMode: activateDetailsMode,
+        onDetailsModeActivated: onDetailsModeActivated
     };
 }]);
