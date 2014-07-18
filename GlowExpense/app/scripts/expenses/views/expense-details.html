@@ -4,8 +4,13 @@
 <div>
     <span>Rate </span> {{expense.exchangeRate}}
 </div>
-<div>
+<div ng-click="showInvoiceImage()">
     <span>Invoice image </span> image
 </div>
 ----------------------------------
-delete | edit
+ <div>
+     delete
+ </div>
+ <div ng-click="editExpense()">
+     edit
+ </div>

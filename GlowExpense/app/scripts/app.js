@@ -61,9 +61,9 @@ angular.module('app', _mainModules )
         });
 
         routes.push({
-            name: '/editexpenses',
+            name: '/edit-expense',
             params: {
-                templateUrl: 'scripts/expenses/views/editExpenses.html',
+                templateUrl: 'scripts/expenses/views/editExpense.html',
                 controller: 'EditExpensesCtrl'
             }
         });

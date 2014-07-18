@@ -27,6 +27,15 @@ angular.module('Expenses')
                     $location.path('/add-expense');
                 };
 
+                $scope.showInvoiceImage = function() {
+                    // TODO uncomment when this functionality is ready
+                   // $location.path('/invoice-expense');
+                };
+
+                $scope.editExpense = function() {
+                    $location.path('/edit-expense');
+                };
+
                 $scope.selectMode = function () {
                     return mode === selectMode;
                 };

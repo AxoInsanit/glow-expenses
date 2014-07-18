@@ -8,6 +8,7 @@ angular.module('Expenses')
     function Expense(scope, initData){
         var self = this;
 
+        self.title = initData.title;
         self.expenseId =  initData.expenseId;
         self.submiter = initData.submiter;
         self.owner = initData.owner;
