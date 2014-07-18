@@ -69,10 +69,10 @@
                             <div>
                                 <span class="money">{{ expense.originalAmount | currency }}</span>
 
-                                <div ng-switch="expense.imageType === 'void'">
-                                    <div ng-switch-when="true" ng-click="triggerThick(expense)"
+                                <div ng-switch="expense.imageType === 'void'" stop-event="click">
+                                    <div ng-switch-when="true" ng-click="expense.toggleSelect()"
                                          class="thickBorder right" ng-class="expense.selected ? ' backGreen' : ' '"
-                                         stop-event="click">
+                                         >
                                         <span class="icon thick "></span>
                                     </div>
                                     <div ng-switch-when="false" ng-click="addphoto()" class="cameraBorder right">

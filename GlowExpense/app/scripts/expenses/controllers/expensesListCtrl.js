@@ -35,10 +35,6 @@ angular.module('Expenses')
 
                 };
 
-                $scope.toggleExpenseDetails = function (showDetails) {
-                    $scope.showDetails = showDetails;
-                };
-
                 $scope.getMoreExpenses = function () {
 
                     // TODO remove this when real services are implemented
@@ -76,10 +72,6 @@ angular.module('Expenses')
                     } else {
                         mode = defaultMode;
                     }
-                };
-
-                $scope.triggerThick = function (obj) {
-                    obj.selected = !obj.selected;
                 };
 
                 var orderBy = $filter('orderBy');
