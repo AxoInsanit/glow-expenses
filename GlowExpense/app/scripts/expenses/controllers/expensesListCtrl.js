@@ -2,10 +2,12 @@
 
 angular.module('Expenses')
     .controller('ExpensesListCtrl', ['$scope', '$filter', '$location', 'expenseSvc', 'expensesBufferingSvc',
-        'defaultMode', 'selectMode', 'expensesRequestNotificationChannelSvc',
+        'defaultMode', 'selectMode', 'expensesRequestNotificationChannelSvc', 'currenciesSvc',
         function ($scope, $filter, $location, expenseSvc, expensesBufferingSvc, defaultMode, selectMode,
-                  expensesRequestNotificationChannelSvc) {
+                  expensesRequestNotificationChannelSvc, currenciesSvc) {
 
+                var currencies = currenciesSvc.get();
+                debugger;
 
                 var mode = defaultMode;
 

@@ -124,4 +124,13 @@ angular.module('app', _mainModules )
 
         $httpProvider.responseInterceptors.push(interceptor);
 
+    }])
+
+    .run(['currenciesRepositorySvc', 'currenciesSvc', function(currenciesRepositorySvc, currenciesSvc) {
+        currenciesRepositorySvc.getCurrencies().$promise.then(function (result) {
+            currenciesSvc.set(result.currencies);
+        });
     }]);
+
+
+
