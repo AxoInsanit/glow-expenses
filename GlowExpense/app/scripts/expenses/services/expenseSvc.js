@@ -53,10 +53,9 @@ angular.module('Expenses')
     };
 
     Expense.prototype.toggleSelect = function() {
-        if (!this.showDetails){
+        if (this.enabled && !this.showDetails){
             this.selected = !this.selected;
         }
-
     };
 
     function getExpense(scope, initData){

@@ -11,7 +11,7 @@ angular.module('Expenses')
         var deferred = $q.defer();
 
         expensesRepositorySvc.getExpenses().$promise.then(function (result) {
-           
+
             expensesBuffer = result.expenses.map(function(item){
                 return expenseSvc.getExpense(scope, item);
             });
