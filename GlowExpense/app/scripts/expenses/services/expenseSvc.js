@@ -21,6 +21,7 @@ angular.module('Expenses')
         self.exchangeRate = initData.exchangeRate;
         self.imageType = initData.imageType;
 
+        self.invoiceImage = '';
         self.showDetails = false;
         self.selected = false;
         self.enabled = true;
@@ -56,6 +57,10 @@ angular.module('Expenses')
         if (this.enabled && !this.showDetails){
             this.selected = !this.selected;
         }
+    };
+
+    Expense.prototype.takeInvoiceImage = function() {
+        // TODO get image with camera functionality; set invoiceImage
     };
 
     function getExpense(scope, initData){

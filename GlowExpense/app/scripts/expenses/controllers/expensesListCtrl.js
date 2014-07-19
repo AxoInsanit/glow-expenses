@@ -29,8 +29,7 @@ angular.module('Expenses')
                 };
 
                 $scope.showInvoiceImage = function() {
-                    // TODO uncomment when this functionality is ready
-                   // $location.path('/invoice-expense');
+                    $location.path('/invoice-expense-image');
                 };
 
                 $scope.editExpense = function() {

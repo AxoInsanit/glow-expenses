@@ -14,6 +14,7 @@ var _mainModules = [
   //  ,'ngLocale'
     ,'Login'
     ,'Expenses'
+    ,'InvoiceExpenseImage',
     ,'infinite-scroll'
 
     // yo:ngMainModules
@@ -45,10 +46,10 @@ angular.module('app', _mainModules )
         });
 
         routes.push({
-            name: '/add-image',
+            name: '/invoice-expense-image',
             params: {
-                templateUrl: 'scripts/add-image/views/add-image.html',
-                controller: 'AddImageCtrl'
+                templateUrl: 'scripts/invoice_expense_image/views/invoice-image-details.html',
+                controller: 'InvoiceImageCtrl'
             }
         });
         
