@@ -7,7 +7,6 @@ angular.module('Expenses')
                   expensesRequestNotificationChannelSvc, currenciesSvc) {
 
                 var currencies = currenciesSvc.get();
-                debugger;
 
                 var mode = defaultMode;
 
