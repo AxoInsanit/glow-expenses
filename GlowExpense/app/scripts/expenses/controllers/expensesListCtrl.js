@@ -2,9 +2,9 @@
 
 angular.module('Expenses')
     .controller('ExpensesListCtrl', ['$scope', '$filter', '$location', 'expenseSvc', 'expensesBufferingSvc',
-        'defaultMode', 'selectMode', 'expensesRequestNotificationChannelSvc', 'currenciesSvc',
+        'defaultMode', 'selectMode', 'expensesRequestNotificationChannelSvc', 'currenciesSvc', 'invoiceImageSvc',
         function ($scope, $filter, $location, expenseSvc, expensesBufferingSvc, defaultMode, selectMode,
-                  expensesRequestNotificationChannelSvc, currenciesSvc) {
+                  expensesRequestNotificationChannelSvc, currenciesSvc, invoiceImageSvc) {
 
                 var currencies = currenciesSvc.get();
 
@@ -28,7 +28,8 @@ angular.module('Expenses')
                     $location.path('/add-expense');
                 };
 
-                $scope.showInvoiceImage = function() {
+                $scope.showInvoiceImage = function(invoiceImage) {
+                    invoiceImageSvc.set(invoiceImage);
                     $location.path('/invoice-expense-image');
                 };
 

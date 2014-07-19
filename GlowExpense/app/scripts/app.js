@@ -14,9 +14,8 @@ var _mainModules = [
   //  ,'ngLocale'
     ,'Login'
     ,'Expenses'
-    ,'InvoiceExpenseImage',
     ,'infinite-scroll'
-
+    ,'InvoiceExpenseImage'
     // yo:ngMainModules
 ];
 

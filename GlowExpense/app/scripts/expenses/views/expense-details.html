@@ -1,13 +1,13 @@
 <div>
-    <span>Currency</span>{{expense.currency.code}} - {{expense.currency.name}}
+    <span>Currency   </span>{{expense.currency.code}} - {{expense.currency.name}}
 </div>
 <div>
     <span>Rate </span> {{expense.exchangeRate}}
 </div>
 
-<div ng-switch="expense.imageType === 'void'">
-    <div ng-switch-when="true" ng-click="showInvoiceImage()">
-        image
+<div ng-switch="expense.imageType !== 'void'">
+    <div ng-switch-when="true" ng-click="showInvoiceImage(expense.invoiceImage)">
+       <img ng-src="{{expense.invoiceImage}}" height="50" width="50">
     </div>
     <div ng-switch-when="false">
        no image

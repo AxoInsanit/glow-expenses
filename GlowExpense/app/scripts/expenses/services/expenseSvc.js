@@ -22,7 +22,7 @@ angular.module('Expenses')
         self.imageType = initData.imageType;
 
         self.currency = null;
-        self.invoiceImage = '';
+        self.invoiceImage = './scripts/expenses/views/img.jpg';
         self.showDetails = false;
         self.selected = false;
         self.enabled = true;
