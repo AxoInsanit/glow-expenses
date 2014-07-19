@@ -2,8 +2,8 @@
 
 angular.module('Expenses')
     .factory('expenseSvc',
-        ['expensesRequestNotificationChannelSvc',
-            function(expensesRequestNotificationChannelSvc) {
+        ['expensesRequestNotificationChannelSvc', 'currenciesSvc',
+            function(expensesRequestNotificationChannelSvc, currenciesSvc) {
 
     function Expense(scope, initData){
         var self = this;
@@ -21,24 +21,42 @@ angular.module('Expenses')
         self.exchangeRate = initData.exchangeRate;
         self.imageType = initData.imageType;
 
+        self.currency = null;
         self.invoiceImage = '';
         self.showDetails = false;
         self.selected = false;
         self.enabled = true;
 
+        function setCurrency(){
+            var currencies = currenciesSvc.get();
+            currencies.some(function(currency){
+                if (currency.id === self.originalCurrencyId){
+                    self.currency = currency;
+                    return true;
+                }
+            });
+            if (!self.currency){
+                // TODO how we handle errors in the app
+                // throw exception
+            }
+        }
+
+        function detailsModeActivatedHandler(expenseId, isAnotherExpenseOpened) {
+            if (self.expenseId !== expenseId){
+                if (isAnotherExpenseOpened){
+                    self.showDetails = false;
+                    self.enabled = false;
+                } else {
+                    self.enabled = true;
+                }
+            }
+        }
+
         function initialize(){
+            setCurrency();
+
             expensesRequestNotificationChannelSvc.onSelectModeActivated(scope, function() {self.showDetails = false;});
-            expensesRequestNotificationChannelSvc.onDetailsModeActivated(scope,
-                function(expenseId, isAnotherExpenseOpened) {
-                    if (self.expenseId !== expenseId){
-                        if (isAnotherExpenseOpened){
-                            self.showDetails = false;
-                            self.enabled = false;
-                        } else {
-                            self.enabled = true;
-                        }
-                    }
-                });
+            expensesRequestNotificationChannelSvc.onDetailsModeActivated(scope, detailsModeActivatedHandler);
         }
 
         initialize();

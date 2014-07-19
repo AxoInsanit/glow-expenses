@@ -1,12 +1,19 @@
 <div>
-    <span>Currency</span> USD - United States Dollar
+    <span>Currency</span>{{expense.currency.code}} - {{expense.currency.name}}
 </div>
 <div>
     <span>Rate </span> {{expense.exchangeRate}}
 </div>
-<div ng-click="showInvoiceImage()">
-    <span>Invoice image </span> image
+
+<div ng-switch="expense.imageType === 'void'">
+    <div ng-switch-when="true" ng-click="showInvoiceImage()">
+        image
+    </div>
+    <div ng-switch-when="false">
+       no image
+    </div>
 </div>
+
 ----------------------------------
  <div>
      delete
