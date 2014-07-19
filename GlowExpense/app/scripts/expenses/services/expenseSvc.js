@@ -41,6 +41,10 @@ angular.module('Expenses')
             }
         }
 
+        function selectModeActivatedHandler() {
+            self.showDetails = false;
+        }
+
         function detailsModeActivatedHandler(expenseId, isAnotherExpenseOpened) {
             if (self.expenseId !== expenseId){
                 if (isAnotherExpenseOpened){
@@ -55,7 +59,7 @@ angular.module('Expenses')
         function initialize(){
             setCurrency();
 
-            expensesRequestNotificationChannelSvc.onSelectModeActivated(scope, function() {self.showDetails = false;});
+            expensesRequestNotificationChannelSvc.onSelectModeActivated(scope, selectModeActivatedHandler);
             expensesRequestNotificationChannelSvc.onDetailsModeActivated(scope, detailsModeActivatedHandler);
         }
 
