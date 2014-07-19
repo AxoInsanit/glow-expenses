@@ -4,6 +4,5 @@ angular.module('InvoiceExpenseImage').controller('InvoiceImageCtrl',['$scope', '
     function($scope, invoiceImageSvc){
 
         $scope.invoiceImage = invoiceImageSvc.get();
-        debugger;
     }
 ]);

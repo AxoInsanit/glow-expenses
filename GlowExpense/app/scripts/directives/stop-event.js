@@ -1,6 +1,5 @@
 ﻿'use strict';
 
-
 angular.module('Directives').directive('stopEvent', function() {
         return {
             restrict: 'A',
