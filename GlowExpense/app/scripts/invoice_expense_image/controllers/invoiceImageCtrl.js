@@ -1,8 +1,7 @@
 'use strict';
 
-angular.module('InvoiceExpenseImage').controller('InvoiceImageCtrl',['$scope', 'invoiceImageSvc',
-    function($scope, invoiceImageSvc){
+angular.module('InvoiceExpenseImage').controller('InvoiceImageCtrl',['$scope',
+    function($scope){
 
-        $scope.invoiceImage = invoiceImageSvc.get();
     }
 ]);

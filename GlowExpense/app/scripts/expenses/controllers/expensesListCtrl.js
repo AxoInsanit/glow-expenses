@@ -6,7 +6,7 @@ angular.module('Expenses')
         function ($scope, $filter, $location, expenseSvc, expensesBufferingSvc, defaultMode, selectMode,
                   expensesRequestNotificationChannelSvc, currenciesSvc, invoiceImageSvc) {
 
-                var currencies = currenciesSvc.get();
+             //   var currencies = currenciesSvc.get();
 
                 var mode = defaultMode;
 
@@ -28,8 +28,7 @@ angular.module('Expenses')
                     $location.path('/add-expense');
                 };
 
-                $scope.showInvoiceImage = function(invoiceImage) {
-                    invoiceImageSvc.set(invoiceImage);
+                $scope.showInvoiceImage = function() {
                     $location.path('/invoice-expense-image');
                 };
 

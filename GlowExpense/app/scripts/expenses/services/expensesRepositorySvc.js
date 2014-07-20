@@ -5,7 +5,7 @@ angular.module('Expenses').factory('expensesRepositorySvc', ['$resource', 'expen
 
         return $resource(expensesUrlMockWeb, {}, {
                 getExpenses: {
-                    method: "GET",
+                    method: 'GET',
                     isArray: false
                 }
             }

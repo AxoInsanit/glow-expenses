@@ -5,7 +5,6 @@ angular.module('Directives').directive('backButton', function() {
         restrict: 'A',
         link: function(scope, element) {
             element.on('click', function() {
-                debugger;
                 history.back();
             });
         }

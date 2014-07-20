@@ -6,8 +6,8 @@
 </div>
 
 <div ng-switch="expense.imageType !== 'void'">
-    <div ng-switch-when="true" ng-click="showInvoiceImage(expense.invoiceImage)">
-       <img ng-src="{{expense.invoiceImage}}" height="50" width="50">
+    <div ng-switch-when="true" ng-click="showInvoiceImage()">
+      image
     </div>
     <div ng-switch-when="false">
        no image
