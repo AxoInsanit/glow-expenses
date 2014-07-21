@@ -8,9 +8,9 @@ angular.module('Expenses', [])
     .constant('detailsModeActivated','_DETAILS_MODE_ACTIVATED')
     .constant('addExpenseErrorMsg','Please complete all fields!')
 
-    .constant('expensesUrl', 'https://esb.dev.corp.globant.com/expense')
-    .constant('expensesUrlMockWeb', 'http://127.0.0.1:8080/service/expense')
-    .constant('expensesUrlMockEmulate', 'http://10.0.2.2:8080/service/expense')
+    .constant('expensesUrl', 'https://esb.dev.corp.globant.com/expense/:image')
+    .constant('expensesUrlMockWeb', 'http://127.0.0.1:8080/service/expense/:image')
+    .constant('expensesUrlMockEmulate', 'http://10.0.2.2:8080/service/expense/:image')
     .constant('expensesUrlMockEmulateWebMocky', 'http://www.mocky.io/v2/53bfa698ea38eada070472b5')
     .constant('editExpensesUrlMockEmulateWebMocky', 'http://www.mocky.io/v2/53bfa698ea38eada070472b5');
 

@@ -1,0 +1,14 @@
+{
+    "currencies": [
+        {
+	    "id": 1234 ,
+            "code": "ARS" ,
+            "name": "Argentine peso"
+        },
+        {
+		 "id": 1235 ,
+            "code": "USD",
+            "name": "United States dollar"
+        }
+    ]
+}
