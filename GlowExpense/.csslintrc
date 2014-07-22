@@ -17,5 +17,7 @@
     "outline-none": false,
     "unique-headings": false,
     "adjoining-classes": false,
-    "compatible-vendor-prefixes": false
+    "compatible-vendor-prefixes": false,
+    "fallback-colors": false,
+    "floats": false
 }
