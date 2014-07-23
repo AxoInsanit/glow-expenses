@@ -64,7 +64,7 @@ angular.module('app', _mainModules )
             name: '/edit-expense',
             params: {
                 templateUrl: 'scripts/expenses/views/editExpense.html',
-                controller: 'EditExpensesCtrl'
+                controller: 'EditExpenseCtrl'
             }
         });
 

@@ -1,9 +1,9 @@
 'use strict';
 
-angular.module('Expenses').factory('expensesRepositorySvc', ['$resource', 'expensesUrlMockWeb',
-    function($resource, expensesUrlMockWeb) {
+angular.module('Expenses').factory('expensesRepositorySvc', ['$resource', 'expensesUrlMockEmulate',
+    function($resource, expensesUrlMockEmulate) {
 
-        return $resource(expensesUrlMockWeb, {image: '@image' }, {
+        return $resource(expensesUrlMockEmulate, {image: '@image' }, {
                 'getExpenses': {
                     'method': 'GET',
                     'isArray': false
