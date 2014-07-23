@@ -1,8 +1,7 @@
 'use strict';
 
-angular.module('Login').factory('UserSvc', ['$resource', 'loginUrlMockWeb',
-    function($resource, loginUrlMockWeb) {
-        return $resource( loginUrlMockWeb, {}, {} );
-
+angular.module('Login').factory('UserSvc', ['$resource', 'baseUrlMockeyWeb', 'loginUrl',
+    function($resource, baseUrlMockeyWeb, loginUrl) {
+        return $resource( baseUrlMockeyWeb + loginUrl, {}, {} );
     }
 ]);

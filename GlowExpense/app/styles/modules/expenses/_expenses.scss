@@ -52,6 +52,7 @@
   padding-top: 1%;
   padding-bottom: 1%;
 }
+
 .expenseItem .itemName {
   display: inline-block;
   width:31%;
@@ -82,8 +83,8 @@
 }
 .expenseItem{
   height: 4em;
-    border-bottom: 1px solid rgb(102,102,102);
-    padding-top: 2em;
+  border-bottom: 1px solid rgb(102,102,102);
+  padding-top: 2em;
 }
 .itemName.right{
   margin-top:1em;
@@ -133,6 +134,7 @@
 .third.alignRight{
   width: 32%;
 }
+
 .sortingControlls{
   height: 5em;
   border: 1px solid gray;

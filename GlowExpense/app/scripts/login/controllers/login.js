@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('Login').controller('LoginCtrl', ['$scope', '$location', 'UserSvc', 'errorMsg',
-    function ($scope, $location, UserSvc, errorMsg) {
+angular.module('Login').controller('LoginCtrl', ['$scope', '$location', 'UserSvc', 'errorMsg', 'localStorageSvc',
+    function ($scope, $location, UserSvc, errorMsg, localStorageSvc) {
 
     $scope.errorMessage = errorMsg;
     $scope.showErrorMessage = false;
@@ -16,9 +16,7 @@ angular.module('Login').controller('LoginCtrl', ['$scope', '$location', 'UserSvc
             .then(function(response) {
                 $scope.showErrorMessage = false;
 
-                if( window.localStorage ){
-                    localStorage.setItem('session-token', response.session_token);
-                }
+                localStorageSvc.setItem('session-token', response.session_token);
 
                 $location.path('/expenses');
 

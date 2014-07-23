@@ -42,7 +42,7 @@
             
         </div>
         <div class="Infinity" infinite-scroll="getMoreExpenses()">
-            <div class="expenseItem ready"  ng-repeat="expense in expenses | filter:searchedExpense">
+            <div class="expenseItem ready" ng-repeat="expense in expenses | filter:searchedExpense">
                     <!--<div ng-click="selectMode() ? '' : expense.toggleDetails()">-->
                     <div ng-click="expense.toggleDetails()">
                         <div>
@@ -64,6 +64,7 @@
                                     <div>{{ expense.date }}</div>
                                 </div>
                             </div>
+
                         </div>
                         <div class="half right">
                             <div>
@@ -80,10 +81,14 @@
                                 </div>
                             </div>
                         </div>
+
+
                     </div>
-                    <div ng-show="expense.showDetails">
-                        <div ng-include="'./scripts/expenses/views/expense-details.html'"></div>
-                    </div>
+
+                <div ng-show="expense.showDetails">
+                    <div ng-include="'./scripts/expenses/views/expense-details.html'"></div>
+                </div>
+
             </div>
             <p ng-show="(expenses | filter:searchedExpense).length==0">No items found</p>
         </div>
