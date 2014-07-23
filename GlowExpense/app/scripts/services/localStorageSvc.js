@@ -2,6 +2,10 @@
 
 angular.module('Services').factory('localStorageSvc', [function(){
 
+    function localStorageExists(){
+        return window.localStorage;
+    }
+
     function setItem(key, value){
         localStorage.setItem(key, value);
     }
@@ -11,6 +15,7 @@ angular.module('Services').factory('localStorageSvc', [function(){
     }
 
     return {
+        localStorageExists: localStorageExists,
         setItem: setItem,
         getItem: getItem
     };

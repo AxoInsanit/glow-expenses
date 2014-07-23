@@ -3,28 +3,31 @@
 angular.module('Login').controller('LoginCtrl', ['$scope', '$location', 'UserSvc', 'errorMsg', 'localStorageSvc',
     function ($scope, $location, UserSvc, errorMsg, localStorageSvc) {
 
-    $scope.errorMessage = errorMsg;
-    $scope.showErrorMessage = false;
+        $scope.errorMessage = errorMsg;
+        $scope.showErrorMessage = false;
 
-    $scope.login=function(user){
+        $scope.login = function(user){
 
-        var User = new UserSvc();
-        User.username = user.username;
-        User.password = user.password;
+            function loginSuccess(response) {
+                if( localStorageSvc.localStorageExists() ){
+                    $scope.showErrorMessage = false;
+                    localStorageSvc.setItem('session-token', response.session_token);
+                    $location.path('/expenses');
+                } else {
+                    loginError();
+                }
+            }
 
-        User.$save()
-            .then(function(response) {
-                $scope.showErrorMessage = false;
-
-                localStorageSvc.setItem('session-token', response.session_token);
-
-                $location.path('/expenses');
-
-            },
-            function(){
+            function loginError(){
                 $scope.showErrorMessage = true;
                 $scope.user.username = '';
                 $scope.user.password = '';
-            });
-    };
-}]);
+            }
+
+            //We have to use the actions this way
+            UserSvc.login({
+                "username": user.username,
+                "password": user.password
+            }, loginSuccess, loginError);
+        };
+    }]);
