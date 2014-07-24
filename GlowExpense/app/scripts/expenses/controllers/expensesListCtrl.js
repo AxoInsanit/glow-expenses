@@ -24,26 +24,6 @@ angular.module('Expenses')
 
                 $scope.showDeleteMode = false;
 
-                $scope.takePhoto = function() {
-                    function onSuccess(imageURI) {
-                        $scope.imageSelectedPath = imageURI;
-                    }
-
-                    function onFail(message) {
-                        alert('Failed because: ' + message);
-                    }
-
-                    //main function for photo
-                    navigator.camera.getPicture(onSuccess, onFail,
-                        {
-                            quality: 50,
-                            destinationType: Camera.DestinationType.FILE_URI,
-                            targetWidth: 50,
-                            targetHeight: 50
-                        }
-                    );
-                };
-
                 $scope.addExpense = function() {
                     $location.path('/add-expense');
                 };
@@ -92,15 +72,6 @@ angular.module('Expenses')
 
                 $scope.toggleSearching = function (showSearch) {
                     $scope.showSearch = showSearch;
-                };
-
-                $scope.toggleSelectMode = function (select) {
-                    if (select) {
-                        mode = selectMode;
-                        expensesRequestNotificationChannelSvc.activateSelectMode();
-                    } else {
-                        mode = defaultMode;
-                    }
                 };
 
                 var orderBy = $filter('orderBy');

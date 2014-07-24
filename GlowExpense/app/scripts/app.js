@@ -57,15 +57,15 @@ angular.module('app', _mainModules )
             name: '/add-expense',
             params: {
                 templateUrl: 'scripts/expenses/views/add-expense.html',
-                controller: 'AddExpenseCtrl'
+                controller: 'AddEditExpenseCtrl'
             }
         });
 
         routes.push({
             name: '/edit-expense',
             params: {
-                templateUrl: 'scripts/expenses/views/editExpense.html',
-                controller: 'EditExpenseCtrl'
+                templateUrl: 'scripts/expenses/views/edit-expense.html',
+                controller: 'AddEditExpenseCtrl'
             }
         });
 
