@@ -4,52 +4,37 @@
 /* global alert: false */
 
 angular.module('Expenses')
-    .controller('AddExpenseCtrl', ['$scope', '$location', 'editExpenseSvc', 'addExpenseErrorMsg',
+    .controller('AddExpenseCtrl', ['$scope', '$location', 'expensesRepositorySvc', 'addExpenseErrorMsg',
+        'currenciesSvc', 'expenseTypesSvc',
 
-    function ($scope, $location, editExpenseSvc, addExpenseErrorMsg) {
+    function ($scope, $location, expensesRepositorySvc, addExpenseErrorMsg, currenciesSvc, expenseTypesSvc) {
 
         $scope.errorMessage = addExpenseErrorMsg;
         $scope.showErrorMessage = false;
         $scope.imageSelectedPath = '';
+
         $scope.date = new Date();
+        $scope.currencies = currenciesSvc.get();
+
+        $scope.expenseTypes = expenseTypesSvc.get();
 
        $scope.add = function(expense) {
-           //var Expense = new editExpenseSvc();
-           // add the expense id to expense object
-           //debugger;
-           function onSuccess(response) {
-            debugger;
+           function onSuccess() {
               $scope.showErrorMessage = false;
-               alert("Go other path");
-               $location.path('/expenses');
-              
+              $location.path('/expenses');
             }
 
-            function onFail(response) {
-              debugger;
+            function onFail() {
                 $scope.showErrorMessage = true;
             }
-           if(!$scope.expenseForm.$invalid)
-           {
-               alert("In");
-               debugger;
-               editExpenseSvc.save1(expense,onSuccess, onFail);
-                   // .then(function(response) {
-                   //  debugger;
-                   //     $scope.showErrorMessage = false;
-                   //     alert("Go other path");
-                   //     $location.path('/expenses');
 
-                   // },
-                   // function(){
-                   //  debugger;
-                   //  alert("Error");
-                   //     $scope.showErrorMessage = true;
-                   // });
+           if($scope.expenseForm.$valid)
+            {
+               expense.date = new Date();
+               expensesRepositorySvc.saveExpense(expense, onSuccess, onFail);
             }
             else
             {
-              alert("Out");
                 $scope.showErrorMessage = true;
             }
         };
@@ -74,6 +59,7 @@ angular.module('Expenses')
             }
 
             //main function for photo
-            navigator.camera.getPicture(onSuccess, onFail, { quality: 50, destinationType: Camera.DestinationType.FILE_URI });
+            navigator.camera.getPicture(onSuccess, onFail, { quality: 50, targetWidth: 100,
+                targetHeight: 100, destinationType: Camera.DestinationType.FILE_URI });
         };
     }]);

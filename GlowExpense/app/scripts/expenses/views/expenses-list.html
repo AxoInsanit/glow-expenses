@@ -8,7 +8,7 @@
         <div class="header font15" ng-show="!showSearch">
             <span class="icon left"></span>
             <span class="expensesHeader">Expenses</span>
-            <span class="icon right" ng-click="addExpense()"></span>
+            <a class="icon right" ng-href="/#/add-expense"></a>
         </div>
         <div ng-show="showSorting" class ="sortingControlls alignLeft">
             <div class="row">
@@ -58,7 +58,7 @@
                                         </div>
                                     </div>
 
-                                    <span >{{ expense.title }}</span>
+                                    <span >{{ expense.description }}</span>
                                 </div>
                                 <div>
                                     <div>{{ expense.date }}</div>

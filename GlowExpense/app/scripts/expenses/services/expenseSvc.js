@@ -9,7 +9,6 @@ angular.module('Expenses')
         var self = this;
 
         self.expenseId = initData.expenseId;
-        self.title = initData.title;
         self.expenseId =  initData.expenseId;
         self.submiter = initData.submiter;
         self.owner = initData.owner;
