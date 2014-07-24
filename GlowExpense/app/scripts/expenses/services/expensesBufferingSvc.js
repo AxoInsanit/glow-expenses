@@ -16,7 +16,7 @@ angular.module('Expenses')
                 return expenseSvc.getExpense(scope, item);
             });
 
-            expensesBuffer = expensesBuffer.splice(0, 3);
+            expensesBuffer = expensesBuffer.splice(0, 4);
 
             deferred.resolve(expensesBuffer);
 

@@ -16,6 +16,7 @@ var _mainModules = [
     ,'Expenses'
     ,'infinite-scroll'
     ,'InvoiceExpenseImage'
+    , 'Api'
     // yo:ngMainModules
 ];
 
