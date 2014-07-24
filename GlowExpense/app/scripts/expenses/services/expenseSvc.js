@@ -22,7 +22,6 @@ angular.module('Expenses')
         self.imageType = initData.imageType;
 
         self.currency = null;
-       // self.invoiceImage = './scripts/expenses/views/img.jpg';
         self.showDetails = false;
         self.selected = false;
         self.enabled = true;
@@ -80,10 +79,6 @@ angular.module('Expenses')
             this.selected = !this.selected;
         }
     };
-
-//    Expense.prototype.takeInvoiceImage = function() {
-//        // TODO get image with camera functionality; set invoiceImage
-//    };
 
     function getExpense(scope, initData){
             return new Expense(scope, initData);
