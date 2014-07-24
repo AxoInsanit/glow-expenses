@@ -1,23 +1,29 @@
 <div>
-    <span>Currency   </span>{{expense.currency.code}} - {{expense.currency.name}}
-</div>
-<div>
-    <span>Rate </span> {{expense.exchangeRate}}
-</div>
+    <div class="dotBorders">
+        <div>
+            <div class="third left alignLeft">Currency   </div>
+            <div class="seventy right alignRight">{{expense.currency.code}} - {{expense.currency.name}}</div>
+        </div>
+        <div>
+            <div class="third left alignLeft">Rate </div> 
+            <div class="seventy right alignRight">{{expense.exchangeRate}}</div> 
+        </div>
 
-<div ng-switch="expense.imageType !== 'void'">
-    <div ng-switch-when="true" ng-click="showInvoiceImage()">
-      image
+        <div ng-switch="expense.imageType !== 'void'" class="container">
+            <div ng-switch-when="true" ng-click="showInvoiceImage()">
+              Click here to view image
+            </div>
+            <div ng-switch-when="false">
+               No image
+            </div>
+        </div>
     </div>
-    <div ng-switch-when="false">
-       no image
+    <div class="margins alignRight right">
+         <div class="small">
+             <div class="bin"></div>
+         </div>
+         <div ng-click="editExpense()" class="small">
+             <div class="edit"></div>
+         </div>
     </div>
 </div>
-
-----------------------------------
- <div>
-     delete
- </div>
- <div ng-click="editExpense()">
-     edit
- </div>

@@ -1,9 +1,9 @@
 'use strict';
 
-angular.module('Services').factory('currenciesRepositorySvc', ['$resource', 'baseUrlMockeyWeb', 'currenciesUrl',
-    function($resource, baseUrlMockeyWeb, currenciesUrl) {
+angular.module('Services').factory('currenciesRepositorySvc', ['$resource', 'baseUrlMockeyEmulator', 'currenciesUrl',
+    function($resource, baseUrlMockeyEmulator, currenciesUrl) {
 
-        return $resource( baseUrlMockeyWeb + currenciesUrl, {}, {
+        return $resource( baseUrlMockeyEmulator + currenciesUrl, {}, {
             getCurrencies: {
                 method:'GET',
                 isArray:false

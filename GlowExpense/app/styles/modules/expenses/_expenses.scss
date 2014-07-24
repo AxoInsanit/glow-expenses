@@ -16,6 +16,10 @@
   display: inline-block;
   width:30%;
 }
+.seventy{
+  display: inline-block;
+  width:70%;
+}
 .expenses .icon.left{
   margin-left: 1.5em;
   padding: 0.25em;
@@ -55,7 +59,6 @@
 
 .expenseItem .itemName {
   display: inline-block;
-  width:31%;
 }
 .expenseItem .itemName div{
   display: block;
@@ -67,7 +70,7 @@
   display: inline-block!important;
 }
 .half{
-  width: 46%;
+  width: 50%;
 }
 .alignLeft{
   text-align: left;
@@ -82,9 +85,8 @@
   background-color:rgb(243,243,243);
 }
 .expenseItem{
-  height: 4em;
   border-bottom: 1px solid rgb(102,102,102);
-  padding-top: 2em;
+  margin-bottom: 1px;
 }
 .itemName.right{
   margin-top:1em;
@@ -223,6 +225,7 @@
   width: 3em;;
   margin-top: -2em;
   margin-right: -0.3em;
+  background-color: white;
 }
 .thickBorder{
   border: 1px solid rgb(176,176,176);
@@ -242,4 +245,61 @@
 }
 .alRight{
   text-align: right;
+}
+.expenses .expenseItem{
+  height: auto;
+  width: 100.5%;
+  float: left;
+  margin-left: -0.2%;
+}
+.expenses .showDetails{
+  display: block;
+  width: 97%;
+  float: left;
+  margin-left: 1%;
+}
+.dotBorders{
+  border-top: 1px dotted black;
+  border-bottom: 1px dotted black;
+  padding: 0.1%;
+}
+.margins{
+  margin:1%;
+}
+.small{
+  width:15%;
+  display:inline-block;
+}
+.margins.alignRight.right{
+  width:100%;
+  min-height: 50px;
+}
+.dotBorders .half{
+  margin-bottom:1%;
+}
+.small .edit{
+  background-image: url('../resources/images/edit.png');
+  height: 1.2em;
+  width: 1.2em;
+  background-size: 100% 100%;
+  float: left;
+  position: absolute;
+}
+.small .bin{
+  height: 1.3em;
+  width: 1em;
+  background-image: url('../resources/images/binB.png');
+  background-size: 100% 100%;
+  float:right;
+  position: absolute;
+}
+.expenseItem .half{
+  margin-top:1em;
+  margin-bottom:1em;
+}
+.showImg>img{
+  width:90%;
+}
+.grayOut{
+  background-color:rgba(120,120,120,0.1)!important;
 }

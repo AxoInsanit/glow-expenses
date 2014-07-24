@@ -830,6 +830,7 @@
 /Users/dimitarjilanov/Documents/glow-expenses/GlowExpense/platforms/android/assets/www/resources/images/arrowDown.png \
 /Users/dimitarjilanov/Documents/glow-expenses/GlowExpense/platforms/android/assets/www/resources/images/arrows.png \
 /Users/dimitarjilanov/Documents/glow-expenses/GlowExpense/platforms/android/assets/www/resources/images/bin.png \
+/Users/dimitarjilanov/Documents/glow-expenses/GlowExpense/platforms/android/assets/www/resources/images/binB.png \
 /Users/dimitarjilanov/Documents/glow-expenses/GlowExpense/platforms/android/assets/www/resources/images/camera.png \
 /Users/dimitarjilanov/Documents/glow-expenses/GlowExpense/platforms/android/assets/www/resources/images/cancel.png \
 /Users/dimitarjilanov/Documents/glow-expenses/GlowExpense/platforms/android/assets/www/resources/images/check.png \
@@ -837,15 +838,17 @@
 /Users/dimitarjilanov/Documents/glow-expenses/GlowExpense/platforms/android/assets/www/resources/images/date.png \
 /Users/dimitarjilanov/Documents/glow-expenses/GlowExpense/platforms/android/assets/www/resources/images/down.png \
 /Users/dimitarjilanov/Documents/glow-expenses/GlowExpense/platforms/android/assets/www/resources/images/downArrow.png \
+/Users/dimitarjilanov/Documents/glow-expenses/GlowExpense/platforms/android/assets/www/resources/images/edit.png \
 /Users/dimitarjilanov/Documents/glow-expenses/GlowExpense/platforms/android/assets/www/resources/images/email.png \
 /Users/dimitarjilanov/Documents/glow-expenses/GlowExpense/platforms/android/assets/www/resources/images/emptyPage.png \
+/Users/dimitarjilanov/Documents/glow-expenses/GlowExpense/platforms/android/assets/www/resources/images/img.jpg \
 /Users/dimitarjilanov/Documents/glow-expenses/GlowExpense/platforms/android/assets/www/resources/images/list.png \
 /Users/dimitarjilanov/Documents/glow-expenses/GlowExpense/platforms/android/assets/www/resources/images/loop.png \
 /Users/dimitarjilanov/Documents/glow-expenses/GlowExpense/platforms/android/assets/www/resources/images/picture.png \
 /Users/dimitarjilanov/Documents/glow-expenses/GlowExpense/platforms/android/assets/www/resources/images/plus-gr.png \
 /Users/dimitarjilanov/Documents/glow-expenses/GlowExpense/platforms/android/assets/www/resources/images/plus.png \
 /Users/dimitarjilanov/Documents/glow-expenses/GlowExpense/platforms/android/assets/www/resources/images/up.png \
-/Users/dimitarjilanov/Documents/glow-expenses/GlowExpense/platforms/android/assets/www/scripts/4b77a8ca.scripts.js \
+/Users/dimitarjilanov/Documents/glow-expenses/GlowExpense/platforms/android/assets/www/scripts/9b9003f0.scripts.js \
 /Users/dimitarjilanov/Documents/glow-expenses/GlowExpense/platforms/android/assets/www/scripts/expenses \
 /Users/dimitarjilanov/Documents/glow-expenses/GlowExpense/platforms/android/assets/www/scripts/f3385cff.modules.js \
 /Users/dimitarjilanov/Documents/glow-expenses/GlowExpense/platforms/android/assets/www/scripts/invoice_expense_image \
@@ -864,5 +867,5 @@
 /Users/dimitarjilanov/Documents/glow-expenses/GlowExpense/platforms/android/assets/www/scripts/invoice_expense_image/views/invoice-image-details.html \
 /Users/dimitarjilanov/Documents/glow-expenses/GlowExpense/platforms/android/assets/www/scripts/login/views \
 /Users/dimitarjilanov/Documents/glow-expenses/GlowExpense/platforms/android/assets/www/scripts/login/views/login.html \
-/Users/dimitarjilanov/Documents/glow-expenses/GlowExpense/platforms/android/assets/www/styles/3dc650c4.bundle.css \
+/Users/dimitarjilanov/Documents/glow-expenses/GlowExpense/platforms/android/assets/www/styles/345cc29e.bundle.css \
 /Users/dimitarjilanov/Documents/glow-expenses/GlowExpense/platforms/android/ant-build/AndroidManifest.xml \

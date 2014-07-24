@@ -64,6 +64,7 @@
                                     <div>{{ expense.date }}</div>
                                 </div>
                             </div>
+
                         </div>
                         <div class="half right">
                             <div>
@@ -79,10 +80,14 @@
                                 </div>
                             </div>
                         </div>
+
+
                     </div>
-                    <div ng-show="expense.showDetails">
-                        <div ng-include="'./scripts/expenses/views/expense-details.html'"></div>
-                    </div>
+
+                <div ng-show="expense.showDetails" class="showDetails">
+                    <div ng-include="'./scripts/expenses/views/expense-details.html'"></div>
+                </div>
+
             </div>
             <p ng-show="(expenses | filter:searchedExpense).length==0">No items found</p>
         </div>
