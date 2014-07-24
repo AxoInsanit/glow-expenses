@@ -35,7 +35,7 @@
         <div class="form-group">
             <input type="number" min="0.01" step="0.01" id="rate" placeholder="Rate" class="form-control" ng-model="expense.rate" required="" decimal-places="">
         </div>
-        <button class="btn btn-default btn-green" ng-class="{ disabled: expenseForm.$invalid }" type="submit" ng-click="add(expense)" ng-disabled="expenseForm.$invalid">Add</button>
+        <button class="btn btn-default btn-green" ng-class="{ disabled: expenseForm.$invalid }" type="submit" ng-click="add(expense)">Add</button>
         <loading></loading>
         <div ng-show="showErrorMessage">
             <div class="msg errorMsg">{{errorMessage}}</div>

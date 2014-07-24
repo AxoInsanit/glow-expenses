@@ -14,23 +14,42 @@ angular.module('Expenses')
         $scope.date = new Date();
 
        $scope.add = function(expense) {
-           var Expense = new editExpenseSvc();
+           //var Expense = new editExpenseSvc();
            // add the expense id to expense object
-           debugger;
+           //debugger;
+           function onSuccess(response) {
+            debugger;
+              $scope.showErrorMessage = false;
+               alert("Go other path");
+               $location.path('/expenses');
+              
+            }
+
+            function onFail(response) {
+              debugger;
+                $scope.showErrorMessage = true;
+            }
            if(!$scope.expenseForm.$invalid)
            {
-               Expense.$save(expense)
-                   .then(function(response) {
-                       $scope.showErrorMessage = false;
-                       $location.path('/expenses');
+               alert("In");
+               debugger;
+               editExpenseSvc.save1(expense,onSuccess, onFail);
+                   // .then(function(response) {
+                   //  debugger;
+                   //     $scope.showErrorMessage = false;
+                   //     alert("Go other path");
+                   //     $location.path('/expenses');
 
-                   },
-                   function(){
-                       $scope.showErrorMessage = true;
-                   });
+                   // },
+                   // function(){
+                   //  debugger;
+                   //  alert("Error");
+                   //     $scope.showErrorMessage = true;
+                   // });
             }
             else
             {
+              alert("Out");
                 $scope.showErrorMessage = true;
             }
         };

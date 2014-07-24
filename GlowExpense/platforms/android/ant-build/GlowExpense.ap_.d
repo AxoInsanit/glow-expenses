@@ -845,7 +845,7 @@
 /Users/dimitarjilanov/Documents/glow-expenses/GlowExpense/platforms/android/assets/www/resources/images/plus-gr.png \
 /Users/dimitarjilanov/Documents/glow-expenses/GlowExpense/platforms/android/assets/www/resources/images/plus.png \
 /Users/dimitarjilanov/Documents/glow-expenses/GlowExpense/platforms/android/assets/www/resources/images/up.png \
-/Users/dimitarjilanov/Documents/glow-expenses/GlowExpense/platforms/android/assets/www/scripts/da2516d7.scripts.js \
+/Users/dimitarjilanov/Documents/glow-expenses/GlowExpense/platforms/android/assets/www/scripts/4b77a8ca.scripts.js \
 /Users/dimitarjilanov/Documents/glow-expenses/GlowExpense/platforms/android/assets/www/scripts/expenses \
 /Users/dimitarjilanov/Documents/glow-expenses/GlowExpense/platforms/android/assets/www/scripts/f3385cff.modules.js \
 /Users/dimitarjilanov/Documents/glow-expenses/GlowExpense/platforms/android/assets/www/scripts/invoice_expense_image \
