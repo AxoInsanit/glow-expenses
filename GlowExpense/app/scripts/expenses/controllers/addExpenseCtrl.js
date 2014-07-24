@@ -5,9 +5,9 @@
 
 angular.module('Expenses')
     .controller('AddExpenseCtrl', ['$scope', '$location', 'expensesRepositorySvc', 'addExpenseErrorMsg',
-        'currenciesSvc', 'expenseTypesSvc',
+        'currenciesSvc', 'expenseTypesSvc', 'cameraSvc',
 
-    function ($scope, $location, expensesRepositorySvc, addExpenseErrorMsg, currenciesSvc, expenseTypesSvc) {
+    function ($scope, $location, expensesRepositorySvc, addExpenseErrorMsg, currenciesSvc, expenseTypesSvc, cameraSvc) {
 
         $scope.errorMessage = addExpenseErrorMsg;
         $scope.showErrorMessage = false;
@@ -38,28 +38,10 @@ angular.module('Expenses')
                 $scope.showErrorMessage = true;
             }
         };
-        // TODO Mitko move this to a service
-        $scope.cancelPhoto = function() {
-            $scope.imageSelectedPath = '';
-        }
+
         $scope.takePhoto = function() {
-            function onSuccess(imageURI) {
-                var x;
-                if (confirm("Upload image to expense?") == true) {
-                    alert("You pressed OK!");
-                    $scope.$apply(function(){ $scope.imageSelectedPath = imageURI; })    
-                } else {
-                    alert("You pressed Cancel!");
-                }
-                
-            }
-
-            function onFail(message) {
-                alert('Failed because: ' + message);
-            }
-
-            //main function for photo
-            navigator.camera.getPicture(onSuccess, onFail, { quality: 50, targetWidth: 100,
-                targetHeight: 100, destinationType: Camera.DestinationType.FILE_URI });
+            cameraSvc.takePhoto().then(function(result){
+                $scope.imageSelectedPath = result;
+            });
         };
     }]);
