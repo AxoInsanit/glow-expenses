@@ -18,13 +18,14 @@ angular.module('Expenses')
         // TODO Mitko move this to a service
         $scope.takePhoto = function() {
             function onSuccess(imageURI) {
-                $scope.imageSelectedPath = imageURI;
                 var x;
-                if (confirm("Upload image to expense? URL is"+imageURI) == true) {
-                    x = "You pressed OK!";
+                if (confirm("Upload image to expense?") == true) {
+                    alert("You pressed OK!");
+                    $scope.$apply(function(){ $scope.imageSelectedPath = imageURI; })    
                 } else {
-                    x = "You pressed Cancel!";
+                    alert("You pressed Cancel!");
                 }
+                
             }
 
             function onFail(message) {
@@ -32,13 +33,6 @@ angular.module('Expenses')
             }
 
             //main function for photo
-            navigator.camera.getPicture(onSuccess, onFail,
-                {
-                    quality: 50,
-                    destinationType: Camera.DestinationType.FILE_URI,
-                    targetWidth: 50,
-                    targetHeight: 50
-                }
-            );
+            navigator.camera.getPicture(onSuccess, onFail, { quality: 50, destinationType: Camera.DestinationType.FILE_URI });
         };
     }]);
