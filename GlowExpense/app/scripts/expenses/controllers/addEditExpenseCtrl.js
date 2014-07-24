@@ -1,8 +1,5 @@
 'use strict';
 
-/* global Camera: false */
-/* global alert: false */
-
 angular.module('Expenses')
     .controller('AddEditExpenseCtrl', ['$scope', '$location', 'expensesRepositorySvc', 'addExpenseErrorMsg',
         'currenciesSvc', 'expenseTypesSvc', 'cameraSvc',

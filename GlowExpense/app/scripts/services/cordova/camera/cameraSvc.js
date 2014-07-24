@@ -1,19 +1,22 @@
 'use strict';
 
+/* global Camera: false */
+/* global confirm: false */
+
 angular.module('Services').factory('cameraSvc', ['$q', function($q){
 
          function takePhoto() {
              var deferred = $q.defer();
 
             function onSuccess(imageURI) {
-                if (confirm("Upload image to expense?")) {
+                if (confirm('Upload image to expense?')) {
                     deferred.resolve(imageURI);
                 } else {
                     deferred.reject();
                 }
             }
 
-            function onFail(message) {
+            function onFail() {
                 deferred.reject();
             }
 
