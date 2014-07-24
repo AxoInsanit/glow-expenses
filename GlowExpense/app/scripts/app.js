@@ -12,7 +12,7 @@ var _mainModules = [
   //  ,'ngTouch'
   //  ,'ngMock'
   //  ,'ngLocale'
-    //,'Login'
+    ,'Login'
     ,'Expenses'
     ,'infinite-scroll'
     ,'InvoiceExpenseImage'
