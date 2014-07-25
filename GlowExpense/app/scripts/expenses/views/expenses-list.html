@@ -4,12 +4,6 @@
             <input placeholder="Search" ng-model="searchedExpense.description" />
             <span ng-click="toggleSearching(false); searchedExpense.description=''">Cancel</span>
         </div>
-
-        <div class="header font15" ng-show="!showSearch">
-            <span class="icon left"></span>
-            <span class="expensesHeader">Expenses</span>
-            <span class="icon right" ng-click="addExpense()"></span>
-        </div>
         <div ng-show="showSorting" class ="sortingControlls alignLeft">
             <div class="row">
                 <div ng-click="sort(true)">

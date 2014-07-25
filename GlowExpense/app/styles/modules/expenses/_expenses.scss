@@ -1,13 +1,19 @@
 /* expenses */
-.expenses .header {
+.expenses .headerMain {
   margin-top: -10px;
   padding-left: 0;
   padding-right: 0;
   margin-left: -30px;
-  background-color: #b0b2b7;
   height: 1.6em;
   padding-top: 0.2em;
   font-weight: 900;
+  border-bottom: 1px solid rgba(120,120,120,0.3);
+  font-size: 20px;
+  color:rgba(120,120,120,0.3);;
+}
+.expenses .headerMain .active {
+  color:#94BC00;
+  border-bottom: 5px solid #94BC00;
 }
 .right{
   float:right;
@@ -19,18 +25,6 @@
 .seventy{
   display: inline-block;
   width:70%;
-}
-.expenses .icon.left{
-  margin-left: 1.5em;
-  padding: 0.25em;
-  padding-right: 0.5em;
-  padding-left: 0.5em;
-  margin-top: 0;
-  color:white;
-  height:1em;
-  width: 1em;
-  background-image: url('../resources/images/list.png');
-  background-size: 100% 100%;
 }
 .left{
   float:left;
@@ -302,4 +296,7 @@
 }
 .grayOut{
   background-color:rgba(120,120,120,0.1)!important;
+}
+.icon.left.third.alignRight{
+  min-width:200px!important;
 }

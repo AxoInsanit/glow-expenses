@@ -44,10 +44,6 @@ angular.module('Expenses')
                     );
                 };
 
-                $scope.addExpense = function() {
-                    $location.path('/add-expense');
-                };
-
                 $scope.showInvoiceImage = function() {
                     $location.path('/invoice-expense-image');
                 };
