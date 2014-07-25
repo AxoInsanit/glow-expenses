@@ -10,7 +10,6 @@ angular.module('Expenses')
             $scope.showErrorMessage = false;
             $scope.imageSelectedPath = '';
 
-            $scope.date = new Date();
             $scope.currencies = currenciesSvc.get();
 
             $scope.expenseTypes = expenseTypesSvc.get();
@@ -27,7 +26,7 @@ angular.module('Expenses')
 
                 if(form.$valid)
                 {
-                    expense.date = new Date();
+                    expense.date = expense.date || new Date();
                     expensesRepositorySvc.saveExpense(expense, onSuccess, onFail);
                 }
                 else

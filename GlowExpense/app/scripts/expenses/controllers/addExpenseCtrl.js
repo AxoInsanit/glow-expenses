@@ -5,5 +5,7 @@ angular.module('Expenses')
         function ($scope, addExpensesTitle, addExpensesButtonLabel) {
             $scope.title = addExpensesTitle;
             $scope.buttonLabel = addExpensesButtonLabel;
+
+            $scope.date = new Date();
     }
 ]);

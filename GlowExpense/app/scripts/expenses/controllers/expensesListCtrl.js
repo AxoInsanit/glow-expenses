@@ -2,8 +2,8 @@
 
 angular.module('Expenses')
     .controller('ExpensesListCtrl', ['$scope', '$filter', '$location', 'expenseSvc', 'expensesBufferingSvc',
-        'defaultMode', 'selectMode',
-        function ($scope, $filter, $location, expenseSvc, expensesBufferingSvc, defaultMode, selectMode)  {
+        'defaultMode', 'selectMode', 'editExpenseSvc',
+        function ($scope, $filter, $location, expenseSvc, expensesBufferingSvc, defaultMode, selectMode, editExpenseSvc)  {
 
 
              //   var currencies = currenciesSvc.get();
@@ -32,7 +32,8 @@ angular.module('Expenses')
                     $location.path('/invoice-expense-image');
                 };
 
-                $scope.editExpense = function() {
+                $scope.editExpense = function(expense) {
+                    editExpenseSvc.setExpenseForEdit(expense);
                     $location.path('/edit-expense');
                 };
 
