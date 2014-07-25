@@ -2,15 +2,13 @@
 
 angular.module('Expenses')
     .factory('expenseSvc',
-        ['expensesRequestNotificationChannelSvc', 'currenciesSvc',
-            function(expensesRequestNotificationChannelSvc, currenciesSvc) {
+        ['expensesRequestNotificationChannelSvc', 'currenciesSvc','expenseTypesSvc',
+            function(expensesRequestNotificationChannelSvc, currenciesSvc, expenseTypesSvc) {
 
     function Expense(scope, initData){
         var self = this;
 
         self.expenseId = initData.expenseId;
-        self.title = initData.title;
-        self.expenseId =  initData.expenseId;
         self.submiter = initData.submiter;
         self.owner = initData.owner;
         self.description = initData.description;
@@ -19,10 +17,11 @@ angular.module('Expenses')
         self.originalCurrencyId = initData.originalCurrencyId;
         self.originalAmount = initData.originalAmount;
         self.exchangeRate = initData.exchangeRate;
+        self.expenseTypeName = initData.type;
         self.imageType = initData.imageType;
 
         self.currency = null;
-       // self.invoiceImage = './scripts/expenses/views/img.jpg';
+        self.expenseType = null;
         self.showDetails = false;
         self.selected = false;
         self.enabled = true;
@@ -36,6 +35,20 @@ angular.module('Expenses')
                 }
             });
             if (!self.currency){
+                // TODO how we handle errors in the app
+                // throw exception
+            }
+        }
+
+        function setExpenseType() {
+            var expenseTypes = expenseTypesSvc.get();
+            expenseTypes.some(function(expenseType){
+                if (expenseType.name === self.expenseTypeName){
+                    self.expenseType = expenseType;
+                    return true;
+                }
+            });
+            if (!self.expenseType){
                 // TODO how we handle errors in the app
                 // throw exception
             }
@@ -58,6 +71,7 @@ angular.module('Expenses')
 
         function initialize(){
             setCurrency();
+            setExpenseType();
 
             expensesRequestNotificationChannelSvc.onSelectModeActivated(scope, selectModeActivatedHandler);
             expensesRequestNotificationChannelSvc.onDetailsModeActivated(scope, detailsModeActivatedHandler);
@@ -80,10 +94,6 @@ angular.module('Expenses')
             this.selected = !this.selected;
         }
     };
-
-//    Expense.prototype.takeInvoiceImage = function() {
-//        // TODO get image with camera functionality; set invoiceImage
-//    };
 
     function getExpense(scope, initData){
             return new Expense(scope, initData);

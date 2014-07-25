@@ -2,9 +2,10 @@
 
 angular.module('Expenses')
     .controller('ExpensesListCtrl', ['$scope', '$filter', '$location', 'expenseSvc', 'expensesBufferingSvc',
-        'defaultMode', 'selectMode', 'expensesRequestNotificationChannelSvc',
-        function ($scope, $filter, $location, expenseSvc, expensesBufferingSvc, defaultMode, selectMode,
-                  expensesRequestNotificationChannelSvc) {
+        'defaultMode', 'selectMode', 'editExpenseSvc', 'cameraSvc',
+        function ($scope, $filter, $location, expenseSvc, expensesBufferingSvc, defaultMode, selectMode, editExpenseSvc,
+                  cameraSvc)  {
+
 
              //   var currencies = currenciesSvc.get();
 
@@ -48,7 +49,8 @@ angular.module('Expenses')
                     $location.path('/invoice-expense-image');
                 };
 
-                $scope.editExpense = function() {
+                $scope.editExpense = function(expense) {
+                    editExpenseSvc.setExpenseForEdit(expense);
                     $location.path('/edit-expense');
                 };
 
@@ -90,13 +92,11 @@ angular.module('Expenses')
                     $scope.showSearch = showSearch;
                 };
 
-                $scope.toggleSelectMode = function (select) {
-                    if (select) {
-                        mode = selectMode;
-                        expensesRequestNotificationChannelSvc.activateSelectMode();
-                    } else {
-                        mode = defaultMode;
-                    }
+                $scope.takePhoto = function(expense) {
+                    cameraSvc.takePhoto().then(function(){
+                        // TODO get the type from the image or make constants with the types
+                        expense.imageType = 'jpg';
+                    });
                 };
 
                 var orderBy = $filter('orderBy');

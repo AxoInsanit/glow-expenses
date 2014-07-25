@@ -1,0 +1,16 @@
+{
+     "exchangeRates": [
+            {
+                    "id": 1
+                    "name": "REPORTABLE",
+            },
+            {
+                    "id": 2
+                    "name": "PERSONAL",
+            },
+            {
+                      "id": 3,
+                       "name": "REPORTABLE_REBILLABLE"
+            }
+      ]
+}

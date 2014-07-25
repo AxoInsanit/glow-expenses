@@ -57,7 +57,7 @@ angular.module('app', _mainModules )
         routes.push({
             name: '/add-expense',
             params: {
-                templateUrl: 'scripts/expenses/views/add-expense.html',
+                templateUrl: 'scripts/expenses/views/add-edit-expense.html',
                 controller: 'AddExpenseCtrl'
             }
         });
@@ -65,7 +65,7 @@ angular.module('app', _mainModules )
         routes.push({
             name: '/edit-expense',
             params: {
-                templateUrl: 'scripts/expenses/views/editExpense.html',
+                templateUrl: 'scripts/expenses/views/add-edit-expense.html',
                 controller: 'EditExpenseCtrl'
             }
         });
@@ -128,10 +128,15 @@ angular.module('app', _mainModules )
 
     }])
 
-    .run(['currenciesRepositorySvc', 'currenciesSvc', function(currenciesRepositorySvc, currenciesSvc) {
-        currenciesRepositorySvc.getCurrencies().$promise.then(function (result) {
-            currenciesSvc.set(result.currencies);
-        });
+    .run(['currenciesRepositorySvc', 'currenciesSvc', 'expenseTypesRepositorySvc', 'expenseTypesSvc',
+        function(currenciesRepositorySvc, currenciesSvc, expenseTypesRepositorySvc, expenseTypesSvc) {
+            currenciesRepositorySvc.getCurrencies().$promise.then(function (result) {
+                currenciesSvc.set(result.currencies);
+            });
+
+            expenseTypesRepositorySvc.getExpenseTypes().$promise.then(function (result) {
+                expenseTypesSvc.set(result.expenseTypes);
+            });
     }]);
 
 

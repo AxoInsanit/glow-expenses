@@ -1,38 +1,24 @@
 'use strict';
 
-/* global Camera: false */
-/* global alert: false */
-
 angular.module('Expenses')
-    .controller('EditExpenseCtrl', ['$scope', '$location', 'editExpenseErrorMsg',
+    .controller('EditExpenseCtrl', ['$scope', 'editExpensesTitle', 'editExpensesButtonLabel', 'editExpenseSvc', 'cameraSvc',
+        function ($scope, editExpensesTitle, editExpensesButtonLabel, editExpenseSvc, cameraSvc) {
+            $scope.title = editExpensesTitle;
+            $scope.buttonLabel = editExpensesButtonLabel;
 
-        function ($scope, $location, addExpenseErrorMsg) {
+            $scope.expense = editExpenseSvc.getExpenseForEdit();
+            $scope.date = $scope.expense.date;
 
-        $scope.errorMessage = addExpenseErrorMsg;
-        $scope.showErrorMessage = false;
-        $scope.imageSelectedPath = '';
+            $scope.imageSelectedPath = null;
 
-
-        $scope.date = new Date();
-
-        // TODO Mitko move this to a service
-        $scope.takePhoto = function() {
-            function onSuccess(imageURI) {
-                var x;
-                if (confirm("Upload image to expense?") == true) {
-                    alert("You pressed OK!");
-                    $scope.$apply(function(){ $scope.imageSelectedPath = imageURI; })    
-                } else {
-                    alert("You pressed Cancel!");
-                }
-                
+            if ($scope.expense.imageType !== 'void'){
+                $scope.imageSelectedPath = './scripts/expenses/views/img.jpg';
             }
 
-            function onFail(message) {
-                alert('Failed because: ' + message);
-            }
-
-            //main function for photo
-            navigator.camera.getPicture(onSuccess, onFail, { quality: 50, destinationType: Camera.DestinationType.FILE_URI });
-        };
-    }]);
+            $scope.takePhoto = function() {
+                cameraSvc.takePhoto().then(function(result){
+                    $scope.imageSelectedPath = result;
+                });
+            };
+        }
+]);

@@ -21,7 +21,7 @@
     <!-- used for dark background -->
     <div class="overlay hide"></div>
     <!-- Include Cordova -->
-    <script type="text/javascript" charset="utf-8" src="bower_components/cordova.js"></script>
+    <!--<script type="text/javascript" charset="utf-8" src="bower_components/cordova.js"></script>-->
 
     <!-- build:js scripts/modules.js -->
     
@@ -61,8 +61,8 @@
 
     <script src="scripts/header/controllers/headerCtrl.js"></script>
     <script src="scripts/login/controllers/login.js"></script>
-    <script src="scripts/expenses/controllers/ExpensesListCtrl.js"></script>
-    <script src="scripts/expenses/controllers/ExpensesListSelectCtrl.js"></script>
+    <script src="scripts/expenses/controllers/addEditExpenseCtrl.js"></script>
+    <script src="scripts/expenses/controllers/expensesListCtrl.js"></script>
     <script src="scripts/expenses/controllers/editExpenseCtrl.js"></script>
     <script src="scripts/expenses/controllers/addExpenseCtrl.js"></script>
 
@@ -78,15 +78,17 @@
 
     <script src="scripts/services/currencies/currenciesRepositorySvc.js"></script>
     <script src="scripts/services/currencies/currenciesSvc.js"></script>
+
+    <script src="scripts/services/expense_types/expenseTypesRepositorySvc.js"></script>
+    <script src="scripts/services/expense_types/expenseTypesSvc.js"></script>
+    <script src="scripts/services/cordova/camera/cameraSvc.js"></script>
    <!--<script src="scripts/invoice_expense_image/services/invoiceImageSvc.js"></script>-->
 
     <script src="scripts/expenses/services/expenseSvc.js"></script>
     <script src="scripts/expenses/services/expensesBufferingSvc.js"></script>
     <script src="scripts/expenses/services/expensesRepositorySvc.js"></script>
     <script src="scripts/expenses/services/expensesRequestNotificationChannelSvc.js"></script>
-
-    <script src="scripts/expenses/services/editExpensesSvc.js"></script>
-
+    <script src="scripts/expenses/services/editExpenseSvc.js"></script>
 
     <!-- yo:services -->
 

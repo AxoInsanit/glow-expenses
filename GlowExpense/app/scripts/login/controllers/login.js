@@ -26,8 +26,8 @@ angular.module('Login').controller('LoginCtrl', ['$scope', '$location', 'UserSvc
 
             //We have to use the actions this way
             UserSvc.login({
-                "username": user.username,
-                "password": user.password
+                'username': user.username,
+                'password': user.password
             }, loginSuccess, loginError);
         };
     }]);
