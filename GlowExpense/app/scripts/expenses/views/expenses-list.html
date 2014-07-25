@@ -1,3 +1,5 @@
+<!-- header of the website -->
+<div ng-include="'./scripts/header/views/header.html'" ng-controller="HeaderCtrl"></div>
 <div class="expenses">
     <div>
         <div ng-show="showSearch" class="searchCOntain">
@@ -89,4 +91,4 @@
     </div>
     <div ng-show="selectMode()" ng-click="toggleSelectMode(false)">Cancel</div>
 </div>
-<loading></loading>
+<!-- <loading></loading> -->

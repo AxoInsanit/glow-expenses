@@ -4,12 +4,6 @@
             <input placeholder="Search" ng-model="searchedExpense.description">
             <span ng-click="toggleSearching(false); searchedExpense.description=''">Cancel</span>
         </div>
-
-        <div class="header font15" ng-show="!showSearch">
-            <span class="icon left"></span>
-            <span class="expensesHeader">Expenses</span>
-            <span class="icon right" ng-click="addExpense()"></span>
-        </div>
         <div ng-show="showSorting" class="sortingControlls alignLeft">
             <div class="row">
                 <div ng-click="sort(true)">
@@ -42,7 +36,7 @@
             
         </div>
         <div class="Infinity" infinite-scroll="getMoreExpenses()">
-            <div class="expenseItem ready" ng-repeat="expense in expenses | filter:searchedExpense">
+            <div class="expenseItem ready" ng-repeat="expense in expenses | filter:searchedExpense" ng-class="!expense.enabled ? ' grayOut' : ' '">
                     <!--<div ng-click="selectMode() ? '' : expense.toggleDetails()">-->
                     <div ng-click="expense.toggleDetails()">
                         <div>
@@ -58,7 +52,7 @@
                                         </div>
                                     </div>
 
-                                    <span>{{ expense.title }}</span>
+                                    <span>{{ expense.description }}</span>
                                 </div>
                                 <div>
                                     <div>{{ expense.date }}</div>
@@ -70,11 +64,11 @@
                             <div>
                                 <span class="money">{{ expense.originalAmount | currency }}</span>
 
-                                <div ng-switch="expense.imageType === 'void'" stop-event="click">
+                                <div ng-switch="expense.imageType !== 'void'" stop-event="click">
                                     <div ng-switch-when="true" ng-click="expense.toggleSelect()" class="thickBorder right" ng-class="expense.selected ? ' backGreen' : ' '">
                                         <span class="icon thick"></span>
                                     </div>
-                                    <div ng-switch-when="false" ng-click="takePhoto()" class="cameraBorder right">
+                                    <div ng-switch-when="false" ng-click="takePhoto(expense)" class="cameraBorder right">
                                         <div class="icon photo cameraFoot"></div>
                                     </div>
                                 </div>
@@ -94,4 +88,4 @@
     </div>
     <div ng-show="selectMode()" ng-click="toggleSelectMode(false)">Cancel</div>
 </div>
-<loading></loading>
+<!-- <loading></loading> -->
