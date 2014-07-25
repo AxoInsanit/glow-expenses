@@ -8,7 +8,6 @@ angular.module('Expenses')
 
             $scope.errorMessage = addExpenseErrorMsg;
             $scope.showErrorMessage = false;
-            $scope.imageSelectedPath = '';
 
             $scope.currencies = currenciesSvc.get();
 
