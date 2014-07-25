@@ -1,3 +1,3 @@
 {
-     "invoiceImage": "./resources/images/emptyPage.png"
+     "invoiceImage": "./scripts/expenses/views/img.jpg"
 }
