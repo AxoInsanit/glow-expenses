@@ -71,10 +71,10 @@ angular.module('app', _mainModules )
         });
 
         routes.push({
-            name: '/sendexpenses',
+            name: '/reports',
             params: {
                 templateUrl: 'scripts/expenses/views/send-expenses-report.html',
-                controller: 'ExpensesCtrl'
+                controller: 'LoginCtrl'
             }
         });
 
