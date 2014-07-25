@@ -1,4 +1,4 @@
-<div class="expenses">
+<div class="expenses" ng-controller="AddEditExpenseCtrl">
     <div class="header font15">
         <div class="left fift" back-button></div>
         <span class="expensesHeader">{{title}}</span>
@@ -18,7 +18,7 @@
             <div class="descr pullDown"></div>
         </div>
         <div>
-            <select ng-model="expense.expenseType" ng-options="expenseType.name for expenseType in expenseTypes">
+            <select class="form-group" ng-model="expense.expenseType" ng-options="expenseType.name for expenseType in expenseTypes">
                 <option value="">-- choose expense type --</option>
             </select>
         </div>
@@ -31,7 +31,7 @@
             <input type="number" min="0.01" step="0.01" id="amount" placeholder="Amount"  class="form-control" ng-model="expense.amount" required decimal-places>
         </div>
         <div>
-            <select ng-model="expense.currency" ng-options="currency.name for currency in currencies">
+            <select class="form-group" ng-model="expense.currency" ng-options="currency.name for currency in currencies">
                 <option value="">-- choose currency --</option>
             </select>
         </div>
