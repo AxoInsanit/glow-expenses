@@ -2,9 +2,9 @@
 
 angular.module('Expenses')
     .controller('AddEditExpenseCtrl', ['$scope', '$location', 'expensesRepositorySvc', 'addExpenseErrorMsg',
-        'currenciesSvc', 'expenseTypesSvc', 'cameraSvc',
+        'currenciesSvc', 'expenseTypesSvc',
 
-        function ($scope, $location, expensesRepositorySvc, addExpenseErrorMsg, currenciesSvc, expenseTypesSvc, cameraSvc) {
+        function ($scope, $location, expensesRepositorySvc, addExpenseErrorMsg, currenciesSvc, expenseTypesSvc) {
 
             $scope.errorMessage = addExpenseErrorMsg;
             $scope.showErrorMessage = false;
@@ -14,7 +14,7 @@ angular.module('Expenses')
 
             $scope.expenseTypes = expenseTypesSvc.get();
 
-            $scope.add = function(form, expense) {
+            $scope.addOrEdit = function(form, expense) {
                 function onSuccess() {
                     $scope.showErrorMessage = false;
                     $location.path('/expenses');
@@ -35,10 +35,5 @@ angular.module('Expenses')
                 }
             };
 
-            $scope.takePhoto = function() {
-                cameraSvc.takePhoto().then(function(result){
-                    $scope.imageSelectedPath = result;
-                });
-            };
         }
 ]);

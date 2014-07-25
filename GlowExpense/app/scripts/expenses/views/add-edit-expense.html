@@ -4,7 +4,7 @@
         <span class="expensesHeader">{{title}}</span>
     </div>
     <div class="camera ">
-        <div class="icon cameraFoot" ng-click="takePhoto()" ng-hide="imageSelectedPath.length>1">
+        <div class="icon cameraFoot" ng-click="angular.isDefined(takePhoto()) && takePhoto()" ng-hide="imageSelectedPath.length>1">
 
         </div>
         <div class="icon cameraFoot" style="background-image: url('{{imageSelectedPath}}')" ng-show="imageSelectedPath.length>1">
@@ -40,7 +40,7 @@
             <input type="number" min="0.01" step="0.01" id="rate" placeholder="Rate"  class="form-control"
                    ng-model="expense.exchangeRate" required decimal-places>
         </div>
-        <button class="btn btn-default btn-green" type="submit" ng-click="add(expenseForm, expense)">{{buttonLabel}}</button>
+        <button class="btn btn-default btn-green" type="submit" ng-click="addOrEdit(expenseForm, expense)">{{buttonLabel}}</button>
         <loading></loading>
         <div ng-show="showErrorMessage">
             <div class="msg errorMsg">{{errorMessage}}</div>
