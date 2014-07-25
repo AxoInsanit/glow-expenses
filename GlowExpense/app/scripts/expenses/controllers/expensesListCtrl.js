@@ -2,8 +2,9 @@
 
 angular.module('Expenses')
     .controller('ExpensesListCtrl', ['$scope', '$filter', '$location', 'expenseSvc', 'expensesBufferingSvc',
-        'defaultMode', 'selectMode', 'editExpenseSvc',
-        function ($scope, $filter, $location, expenseSvc, expensesBufferingSvc, defaultMode, selectMode, editExpenseSvc)  {
+        'defaultMode', 'selectMode', 'editExpenseSvc', 'cameraSvc',
+        function ($scope, $filter, $location, expenseSvc, expensesBufferingSvc, defaultMode, selectMode, editExpenseSvc,
+                  cameraSvc)  {
 
 
              //   var currencies = currenciesSvc.get();
@@ -73,6 +74,13 @@ angular.module('Expenses')
 
                 $scope.toggleSearching = function (showSearch) {
                     $scope.showSearch = showSearch;
+                };
+
+                $scope.takePhoto = function(expense) {
+                    cameraSvc.takePhoto().then(function(){
+                        // TODO get the type from the image or make constants with the types
+                        expense.imageType = 'jpg';
+                    });
                 };
 
                 var orderBy = $filter('orderBy');

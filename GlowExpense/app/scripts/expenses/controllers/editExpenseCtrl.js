@@ -15,7 +15,6 @@ angular.module('Expenses')
                 $scope.imageSelectedPath = './scripts/expenses/views/img.jpg';
             }
 
-
             $scope.takePhoto = function() {
                 cameraSvc.takePhoto().then(function(result){
                     $scope.imageSelectedPath = result;
