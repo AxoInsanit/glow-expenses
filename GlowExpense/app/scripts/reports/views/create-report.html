@@ -1,0 +1,31 @@
+<!-- header of the website -->
+<div ng-include="'./scripts/header/views/header.html'" ng-controller="HeaderCtrl"></div>
+<div class="expenses">
+    <div class="header font15">
+        <div class="left fift" back-button></div>
+        <span class="expensesHeader active"> Send Expense Report </span>
+    </div>
+    <form role="form" name="expenseForm">
+        <div class="form-group">
+            <input type="text" id="description" placeholder="Title"  class="form-control" ng-model="expense.description" required>
+        </div>
+        <div class="radio-toolbar" class="form-group">
+            <input type="radio" id="radio1" name="radios" value="all" checked>
+            <label for="radio1">All</label>
+            <input type="radio" id="radio2" name="radios"value="false">
+            <label for="radio2">Open</label>
+            <input type="radio" id="radio3" name="radios" value="true">
+            <label for="radio3">Archived</label> 
+        </div>
+        <div>
+            <select class="form-group" ng-model="expense.expenseType" ng-options="expenseType.name for expenseType in expenseTypes">
+                <option value="">-- choose expense type --</option>
+            </select>
+        </div>
+        <button class="btn btn-default btn-green" type="submit" ng-click="addOrEdit(expenseForm, expense)">V</button>
+        <loading></loading>
+        <div ng-show="showErrorMessage">
+            <div class="msg errorMsg">{{errorMessage}}</div>
+        </div>
+    </form>
+</div>

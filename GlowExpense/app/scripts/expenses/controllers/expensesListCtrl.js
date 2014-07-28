@@ -13,7 +13,7 @@ angular.module('Expenses')
 
                 // TODO remove this when real services are implemented
                 var firstLoad = true;
-
+                $scope.isMain = true;
                 $scope.expenses = [];
 
                 $scope.searchedExpense = {};

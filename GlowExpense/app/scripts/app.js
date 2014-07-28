@@ -15,6 +15,7 @@ var _mainModules = [
     ,'Header'
     ,'Login'
     ,'Expenses'
+    ,'Reports'
     ,'infinite-scroll'
     ,'InvoiceExpenseImage'
     , 'Api'
@@ -73,8 +74,16 @@ angular.module('app', _mainModules )
         routes.push({
             name: '/reports',
             params: {
-                templateUrl: 'scripts/expenses/views/send-expenses-report.html',
-                controller: 'LoginCtrl'
+                templateUrl: 'scripts/reports/views/main-report-view.html',
+                controller: 'ReportsCtrl'
+            }
+        });
+
+        routes.push({
+            name: '/create-report',
+            params: {
+                templateUrl: 'scripts/reports/views/create-report.html',
+                controller: 'CreateReportCtrl'
             }
         });
 
