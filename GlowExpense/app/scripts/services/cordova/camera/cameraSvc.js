@@ -6,8 +6,7 @@
 angular.module('Services').factory('cameraSvc', ['$q', function($q){
 
          function takePhoto() {
-             var deferred = $q.defer();
-
+            var deferred = $q.defer();
             function onSuccess(imageURI) {
                 if (confirm('Upload image to expense?')) {
                     deferred.resolve(imageURI);
@@ -17,15 +16,14 @@ angular.module('Services').factory('cameraSvc', ['$q', function($q){
             }
 
             function onFail() {
+                alert("Fail");
                 deferred.reject();
             }
-
+            alert("navigator.camera is "+navigator.camera);
             navigator.camera.getPicture(onSuccess, onFail, { quality: 50, targetWidth: 100,
                 targetHeight: 100, destinationType: Camera.DestinationType.FILE_URI });
-
             return deferred.promise;
         }
-
         return {
             takePhoto: takePhoto
         };

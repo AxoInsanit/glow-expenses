@@ -9,11 +9,11 @@ angular.module('Expenses')
             $scope.expense = editExpenseSvc.getExpenseForEdit();
             $scope.date = $scope.expense.date;
 
-            $scope.imageSelectedPath = null;
-
-            if ($scope.expense.imageType !== 'void'){
-                $scope.imageSelectedPath = './scripts/expenses/views/img.jpg';
-            }
+            $scope.imageSelectedPath = "";
+            
+            // if ($scope.expense.imageType !== 'void'){
+            //     $scope.imageSelectedPath = './scripts/expenses/views/img.jpg';
+            // }
 
             $scope.takePhoto = function() {
                 cameraSvc.takePhoto().then(function(result){

@@ -8,21 +8,19 @@
     <meta name="viewport" content="width=device-width">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
-        <link rel="stylesheet" href="styles/8c23a6dc.bundle.css">
+        <link rel="stylesheet" href="styles/a7467d5d.bundle.css">
 </head>
   <body ng-app="app">
-    <!-- header of the website -->
-    <div ng-include="'./scripts/header/views/header.html'" ng-controller="HeaderCtrl"></div>
     <!-- Add your site or application content here -->
     <div class="container" ng-view=""></div>
     <!-- used for dark background -->
     <div class="overlay hide"></div>
     <!-- Include Cordova -->
-    <!--<script type="text/javascript" charset="utf-8" src="bower_components/cordova.js"></script>-->
+    <script type="text/javascript" charset="utf-8" src="bower_components/cordova.js"></script>
 
     <script src="scripts/027553c2.modules.js"></script>
 
-    <script src="scripts/168b40bd.scripts.js"></script>
+    <script src="scripts/964b41cb.scripts.js"></script>
     <script type="text/javascript">
         var onDeviceReady = function() {
             angular.bootstrap( document, ['app']);

@@ -1,3 +1,5 @@
+<!-- header of the website -->
+<div ng-include="'./scripts/header/views/header.html'" ng-controller="HeaderCtrl"></div>
 <div class="expenses" ng-controller="AddEditExpenseCtrl">
     <div class="header font15">
         <div class="left fift" back-button=""></div>
@@ -10,7 +12,7 @@
         <div class="icon cameraFoot" style="background-image: url('{{imageSelectedPath}}')" ng-show="imageSelectedPath.length>1">
 
         </div>
-        <button ng-click="cancelPhoto()" ng-show="imageSelectedPath.length>1">Cancel image</button>
+       <button ng-click="cancelPhoto()" ng-show="imageSelectedPath.length>1">Cancel image</button>
     </div>
     <form role="form" name="expenseForm">
         <div class="form-group">

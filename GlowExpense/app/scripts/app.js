@@ -78,6 +78,14 @@ angular.module('app', _mainModules )
             }
         });
 
+        routes.push({
+            name: '/settings',
+            params: {
+                templateUrl: 'scripts/expenses/views/settings.html',
+                controller: 'LoginCtrl'
+            }
+        });
+
         
 // yo:ngRoutes
 

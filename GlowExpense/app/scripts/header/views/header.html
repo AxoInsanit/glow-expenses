@@ -3,7 +3,7 @@
         <div class="headerMain font15">
             <div class="icon left third alignRight" ng-click="switch()"> <span ng-class="active ? ' active' : ' '" > Amex Expenses </span> </div>
             <div class="icon third alignRight" ng-click="switch()"> <span ng-class="!active ? ' active' : ' '" > Reports </span> </div>
-            <div class="icon right third" ng-click="addExpense()"></div>
+            <div class="icon right third" ng-click="addExpense()" ng-show="isExpenses"></div>
         </div>
     </div>
 </div>
