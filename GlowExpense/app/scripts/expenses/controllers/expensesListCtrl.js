@@ -25,6 +25,9 @@ angular.module('Expenses')
 
                 $scope.showDeleteMode = false;
 
+                //when edit list is active
+                $scope.$on('EditList', function(event, args) {});
+
                 $scope.takePhoto = function() {
                     function onSuccess(imageURI) {
                         $scope.imageSelectedPath = imageURI;

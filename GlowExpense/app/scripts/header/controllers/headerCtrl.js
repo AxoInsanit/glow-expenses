@@ -3,6 +3,8 @@
 angular.module('Header')
     .controller('HeaderCtrl', ['$scope', '$filter', '$location',
         function ($scope, $filter, $location) {
+            //check are we at edit mode
+            $scope.editMode = false;
         	//change witch one of the top is active
             $scope.isActive = function (viewLocation) { 
                 return viewLocation === $location.path();
@@ -13,7 +15,9 @@ angular.module('Header')
             };
 
             $scope.openEditMode = function() {
-                $location.path('/add-expense');
+                //TODO: Add edit functionality ( green dot at front and )
+                $scope.editMode=!$scope.editMode;
+                $scope.$emit('EditList', $scope.editMode);
             };
 
             $scope.openProfile = function() {

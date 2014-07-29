@@ -9,15 +9,11 @@
             		<a ng-class="{ active: isActive('/expenses')}" href="#/expenses"> Amex Expenses </a> 
             	</div>
             </div>
-            <div class="icon third alignRight">
-            	<div > 
-            		<a ng-class="{ active: isActive('/reports')}" href="#/reports"> Reports </a> 
-            	</div>
-            	<div > 
-            		<i ng-click="openEditMode()"> Edit Icon </i> 
-            	</div>
+            <div class="icon third alignRight"> 
+            	<a ng-class="{ active: isActive('/reports')}" href="#/reports"> Reports </a> 
             </div>
-            <div class="icon right third" ng-click="addExpense()"></div>
+            <div class="right third" ng-click="openEditMode()" ng-hide="editMode"> Edit Icon </div>
+            <div class="right third" ng-click="openEditMode()" ng-show="editMode" data-edit="true"> Done </div>
         </div>
     </div>
 </div>
