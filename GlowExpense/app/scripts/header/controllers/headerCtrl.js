@@ -11,4 +11,14 @@ angular.module('Header')
 			$scope.addExpense = function() {
                 $location.path('/add-expense');
             };
+
+            $scope.openProfile = function() {
+                if (confirm("her emust be modal. Press yes to act like Sign out!") == true) {
+                    alert("You are loged out!");
+                    localStorage.setItem("session-token",undefined);
+                    $location.path('/login');
+                } else {
+                    alert("You pressed Cancel!");
+                }
+            };
 		}]);
