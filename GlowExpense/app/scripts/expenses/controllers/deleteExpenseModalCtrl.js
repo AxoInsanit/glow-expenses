@@ -1,13 +1,16 @@
-var DeleteExpModalCtrl = function ($scope, $modalInstance, items, expensesRepositorySvc) {
+'use strict';
+
+angular.module('Expenses')
+    .controller('DeleteExpModalCtrl', ['$scope',  '$modal',
+        function ($scope, $modal)  {
 
   $scope.ok = function () {
   	debugger;
-    expensesRepositorySvc.deleteExpense({"token":localStorage.getItem("session-token"),"expenseId":expenseId}, onSuccess, onFail);
+  	$scope.$emit('DeleteExpense');
   };
 
   $scope.cancel = function () {
-  	debugger;
     $modalInstance.dismiss('cancel');
   };
   
-};
+}]);

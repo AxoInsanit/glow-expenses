@@ -27,9 +27,16 @@ angular.module('Expenses')
 
                 $scope.showEditMode = false;
 
+                $scope.expenseForDeletion = null;
+
                 //when edit list is active
                 $scope.$on('EditList', function(event, args) {
                     $scope.showEditMode = args;
+                });
+
+                $scope.$on('DeleteExpense', function(event, args) {
+                    debugger;
+                    expensesRepositorySvc.deleteExpense({"token":localStorage.getItem("session-token"),"expenseId":expenseId}, onSuccess, onFail);
                 });
 
                 $scope.deleteExpense = function(expenseId) {
@@ -42,14 +49,16 @@ angular.module('Expenses')
                     function onFail() {
                         alert("Could not connect");
                     }
-            
-                     var modalInstance = $modal.open({
-                      templateUrl: 'deleteModal',
-                      controller: DeleteExpModalCtrl,
-                      size: "sm",
-                      resolve: {
+
+                    $scope.expenseForDeletion = expenseId;
+
+                    var modalInstance = $modal.open({
+                        templateUrl: 'deleteModal',
+                        controller: DeleteExpModalCtrl,
+                        size: "sm",
+                        resolve: {
                         items: function () {
-                          return $scope.items;
+                          return expenseId;
                         }
                       }
                     });                
