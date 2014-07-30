@@ -45,12 +45,9 @@
                             <div class="itemName half left alignLeft">
                                 <div class="icon inBl">
 
-                                    <div ng-switch="expense.selected" ng-show="selectMode()" ng-click="expense.toggleSelect()" >
-                                        <div ng-switch-when="true">
-                                            <span class="icon">selected</span>
-                                        </div>
-                                        <div ng-switch-when="false">
-                                            <span class="icon">unselected</span>
+                                    <div ng-switch="expense.selected" ng-show="showEditMode" ng-click="deleteExpense($index)" >
+                                        <div>
+                                            <span class="icon">delete icon</span>
                                         </div>
                                     </div>
 

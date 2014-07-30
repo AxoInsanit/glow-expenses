@@ -20,6 +20,7 @@ var _mainModules = [
     ,'InvoiceExpenseImage'
     , 'Api'
     // yo:ngMainModules
+    ,'ui.bootstrap'
 ];
 
 angular.module('app', _mainModules )

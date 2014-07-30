@@ -14,6 +14,9 @@ angular.module('Expenses').factory('expensesRepositorySvc', ['$resource', 'baseU
                 },
                 'saveExpense': {
                     'method': 'POST'
+                },
+                'deleteExpense': {
+                    'method': 'POST'
                 }
             }
         );

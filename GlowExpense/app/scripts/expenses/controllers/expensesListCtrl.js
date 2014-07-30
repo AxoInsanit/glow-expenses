@@ -1,9 +1,9 @@
 'use strict';
 
 angular.module('Expenses')
-    .controller('ExpensesListCtrl', ['$scope', '$filter', '$location', 'expenseSvc', 'expensesBufferingSvc',
+    .controller('ExpensesListCtrl', ['$scope', '$filter', '$location', 'expenseSvc', 'expensesRepositorySvc', 'expensesBufferingSvc',
         'defaultMode', 'selectMode', 'editExpenseSvc', 'cameraSvc',
-        function ($scope, $filter, $location, expenseSvc, expensesBufferingSvc, defaultMode, selectMode, editExpenseSvc,
+        function ($scope, $filter, $location, expenseSvc, expensesRepositorySvc, expensesBufferingSvc, defaultMode, selectMode, editExpenseSvc,
                   cameraSvc)  {
 
 
@@ -25,8 +25,26 @@ angular.module('Expenses')
 
                 $scope.showDeleteMode = false;
 
+                $scope.showEditMode = false;
+
                 //when edit list is active
-                $scope.$on('EditList', function(event, args) {});
+                $scope.$on('EditList', function(event, args) {
+                    $scope.showEditMode = args;
+                });
+
+                $scope.deleteExpense = function(expenseId) {
+                    
+                    function onSuccess() {
+                        $scope.expenses.splice(expenseId,1);
+                    }
+
+                    function onFail() {
+                        alert("Could not connect");
+                    }
+
+                    expensesRepositorySvc.deleteExpense({"token":localStorage.getItem("session-token"),"expenseId":expenseId}, onSuccess, onFail);
+                    
+                };
 
                 $scope.takePhoto = function() {
                     function onSuccess(imageURI) {
