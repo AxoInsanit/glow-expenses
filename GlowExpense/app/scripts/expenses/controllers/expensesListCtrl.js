@@ -2,9 +2,9 @@
 
 angular.module('Expenses')
     .controller('ExpensesListCtrl', ['$scope', '$filter', '$location', 'expenseSvc', 'expensesRepositorySvc', 'expensesBufferingSvc',
-        'defaultMode', 'selectMode', 'editExpenseSvc', 'cameraSvc',
+        'defaultMode', 'selectMode', 'editExpenseSvc', 'cameraSvc', '$modal',
         function ($scope, $filter, $location, expenseSvc, expensesRepositorySvc, expensesBufferingSvc, defaultMode, selectMode, editExpenseSvc,
-                  cameraSvc)  {
+                  cameraSvc, $modal)  {
 
 
              //   var currencies = currenciesSvc.get();
@@ -36,14 +36,23 @@ angular.module('Expenses')
                     
                     function onSuccess() {
                         $scope.expenses.splice(expenseId,1);
+                        alert("Succesfully deleted the expense");
                     }
 
                     function onFail() {
                         alert("Could not connect");
                     }
-
-                    expensesRepositorySvc.deleteExpense({"token":localStorage.getItem("session-token"),"expenseId":expenseId}, onSuccess, onFail);
-                    
+            
+                     var modalInstance = $modal.open({
+                      templateUrl: 'deleteModal',
+                      controller: DeleteExpModalCtrl,
+                      size: "sm",
+                      resolve: {
+                        items: function () {
+                          return $scope.items;
+                        }
+                      }
+                    });                
                 };
 
                 $scope.takePhoto = function() {

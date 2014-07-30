@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('Header')
-    .controller('HeaderCtrl', ['$scope', '$filter', '$location',
-        function ($scope, $filter, $location) {
+    .controller('HeaderCtrl', ['$scope', '$filter', '$location', '$modal',
+        function ($scope, $filter, $location, $modal) {
             //check are we at edit mode
             $scope.editMode = false;
         	//change witch one of the top is active
@@ -21,12 +21,17 @@ angular.module('Header')
             };
 
             $scope.openProfile = function() {
-                if (confirm("Here must be modal. Press yes to act like Sign out!") == true) {
-                    alert("You are loged out!");
-                    localStorage.setItem("session-token",undefined);
-                    $location.path('/login');
-                } else {
-                    alert("You pressed Cancel!");
-                }
+                 var modalInstance = $modal.open({
+                  templateUrl: 'signOutModal',
+                  controller: SignOutModalCtrl,
+                  size: "sm",
+                  resolve: {
+                    items: function () {
+                      return $scope.items;
+                    }
+                  }
+                });
+
+                modalInstance.result;
             };
 		}]);
