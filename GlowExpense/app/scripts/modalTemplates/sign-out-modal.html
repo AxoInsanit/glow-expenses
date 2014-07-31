@@ -1,8 +1,11 @@
 <script type="text/ng-template" id="signOutModal">
-    <div class="modal-header">
-        <h3 class="modal-title">User name!</h3>
+    <div class="modal-header darker">
+        <h3 class="name">{{profileName}}</h3>
     </div>
-    <div class="modal-body">
-        <button class="btn btn-primary" ng-click="ok()">Sign out</button> Sign out!
+    <div class="modal-footer">
+        <button class="btn btn-with-icon sign-out" ng-click="ok()">
+        	<img src="../../../resources/images/low-res/signout.png" alt="">
+        	<span>Sign out</span>
+        </button>
     </div>
 </script>

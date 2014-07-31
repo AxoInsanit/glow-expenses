@@ -26,7 +26,7 @@ angular.module('Expenses')
                 $scope.showDeleteMode = false;
 
                 $scope.showEditMode = false;
-
+                $scope.repository = expensesRepositorySvc;
                 $scope.expenseForDeletion = null;
 
                 //when edit list is active
@@ -34,31 +34,15 @@ angular.module('Expenses')
                     $scope.showEditMode = args;
                 });
 
-                $scope.$on('DeleteExpense', function(event, args) {
-                    debugger;
-                    expensesRepositorySvc.deleteExpense({"token":localStorage.getItem("session-token"),"expenseId":expenseId}, onSuccess, onFail);
-                });
-
-                $scope.deleteExpense = function(expenseId) {
-                    
-                    function onSuccess() {
-                        $scope.expenses.splice(expenseId,1);
-                        alert("Succesfully deleted the expense");
-                    }
-
-                    function onFail() {
-                        alert("Could not connect");
-                    }
-
+                $scope.deleteExpense = function(expenseId, expensesRepositorySvc) {
                     $scope.expenseForDeletion = expenseId;
-
                     var modalInstance = $modal.open({
                         templateUrl: 'deleteModal',
-                        controller: DeleteExpModalCtrl,
+                        controller: 'deleteExpModalCtrl',
                         size: "sm",
                         resolve: {
-                        items: function () {
-                          return expenseId;
+                        item: function () {
+                          return {"expenseId":expenseId,"expensesRepositorySvc":expensesRepositorySvc};
                         }
                       }
                     });                
@@ -89,16 +73,15 @@ angular.module('Expenses')
                 };
 
                 $scope.editExpense = function(expense) {
-                    editExpenseSvc.setExpenseForEdit(expense);
-                    $location.path('/edit-expense');
+                    if(!$scope.showEditMode)
+                    {
+                        editExpenseSvc.setExpenseForEdit(expense);
+                        $location.path('/edit-expense');
+                    }
                 };
 
                 $scope.selectMode = function () {
                     return mode === selectMode;
-                };
-
-                $scope.select = function () {
-
                 };
 
                 $scope.getMoreExpenses = function () {
