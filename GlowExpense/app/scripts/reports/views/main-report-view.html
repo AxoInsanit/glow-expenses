@@ -1,21 +1,79 @@
 <!-- header of the website -->
 <div class="reports-head" ng-include="'./scripts/header/views/header.html'" ng-controller="HeaderCtrl"></div>
 <div class="reports-body">
-    <div class="selectWrapper">
-        <div class="create-report" ng-click="createReport()">
-            Create report
+    <!-- <div class="header font15">
+        <div class="left fift"></div>
+        <span class="expensesHeader"> Send Expense Report</span>
+    </div> -->
+    <article>
+        <section class="item">
+            <a href="" ng-click="createReport()" class="btn-with-icon create-report">
+                <span class="icon icon-create-report"></span>
+                <span>Create Report</span>
+            </a>
+        </section>
+        <div class="reports-list">
+            <section class="item">
+                <div class="left-part">
+                    <p class="main-text">
+                        Expenses list to:
+                    </p>
+                    <p class="info-text">
+                        In Draft
+                    </p>
+                </div>
+                <div class="right-part">
+                    <p class="info-text text-right">
+                        $123
+                    </p>
+                </div>
+            </section>
+            <section class="item">
+                <div class="left-part">
+                    <p class="main-text">
+                        Expenses list to:
+                    </p>
+                    <p class="info-text red">
+                        In Draft
+                    </p>
+                </div>
+                <div class="right-part">
+                    <a href="" class="icon icon-alert float-right"></a>
+                    <p class="info-text text-right float-right">
+                        $123
+                    </p>
+                </div>
+            </section>
+             <section class="item">
+                <div class="left-part">
+                    <p class="main-text">
+                        Expenses list to:
+                    </p>
+                    <p class="info-text yellow">
+                        In Draft
+                    </p>
+                </div>
+                <div class="right-part">
+                    <p class="info-text text-right">
+                        $123
+                    </p>
+                </div>
+            </section>
+             <section class="item">
+                <div class="left-part">
+                    <p class="main-text">
+                        Expenses list to:
+                    </p>
+                    <p class="info-text green-dark">
+                        In Draft
+                    </p>
+                </div>
+                <div class="right-part">
+                    <p class="info-text text-right">
+                        $123
+                    </p>
+                </div>
+            </section>
         </div>
-        <div class="draft">
-            <div> Expenses list to:draft</div>
-        </div>
-        <div class="pending">
-            <div> Expenses list to:pend</div>
-        </div>
-        <div class="preparing">
-            <div> Expenses list to:prepare</div>
-        </div>
-        <div class="paid">
-            <div> Expenses list to:paid</div>
-        </div>
-    </div>
+    </article>
 </div>

@@ -41,9 +41,8 @@
                 <!--<div ng-click="selectMode() ? '' : expense.toggleDetails()">-->
                 <section class="expense-cont" ng-click="editExpense(expense)">
                     <div class="left-part">
-                        <span class="icon delete float-left" ng-switch="expense.selected" ng-show="showEditMode" ng-click="deleteExpense(expenses[$index],repository)" >
-                            <img src="../../../../resources/images/low-res/delete.png" alt="">
-                        </span>
+                        <a href="" class="icon icon-delete float-left" ng-switch="expense.selected" ng-show="showEditMode" ng-click="deleteExpense(expenses[$index],repository)" >
+                        </a>
                         <p class="main-text desc">{{ expense.description }}</p>
                         <span class="info-text date">{{ expense.date }}</span>
                     </div>
@@ -54,11 +53,11 @@
                             <div ng-switch-when="true" ng-click="expense.toggleSelect()"
                             class="thickBorder right" ng-class="expense.selected ? ' backGreen' : ' '">
                         </div>
-                        <a ng-switch-when="true" ng-click="takePhoto(expense)" class="icon take-photo"  >
-                            <img src="../../../../resources/images/low-res/edit-image.png" alt="">
+                        <a ng-switch-when="true" ng-click="takePhoto(expense)" class="icon icon-photo">
+                            
                         </a>
                         <a ng-switch-when="false" ng-click="takePhoto(expense)" class="icon take-photo"  >
-                            <img src="../../../../resources/images/delete-image.png" alt="">
+                            
                         </a>
                     </div>
                 </div>

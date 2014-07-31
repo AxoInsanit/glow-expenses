@@ -1,22 +1,3 @@
-<!--<div class="expenses" ng-show="isMain">
-    <div>
-        <div class="headerMain font15">
-        	<div class="icon left third alignLeft">
-        		<div> 
-        			<span ng-click="openProfile()"> {{profileName}} </span> 
-        		</div>
-            	<div> 
-            		<a ng-class="{ active: isActive('/expenses')}" href="#/expenses"> Amex Expenses </a> 
-            	</div>
-            </div>
-            <div class="icon third alignRight"> 
-            	<a ng-class="{ active: isActive('/reports')}" href="#/reports"> Reports </a> 
-            </div>
-            <div class="right third" ng-click="openEditMode()" ng-hide="editMode"> Edit Icon </div>
-            <div class="right third" ng-click="openEditMode()" ng-show="editMode" data-edit="true"> Done </div>
-        </div>
-    </div>
-</div> -->
 <!-- sign out modal -->
 <div ng-include="'./scripts/modalTemplates/sign-out-modal.html'"></div>
 
@@ -35,11 +16,10 @@
                 <a ng-class="{ active: isActive('/reports')}" href="#/reports"> <span>Reports</span> </a>
             </li>
             <li class="btn-helper edit">
-                <a class="icon" ng-click="openEditMode()" ng-hide="editMode" href="">
-                    <img src="../../../../resources/images/low-res/edit.png" alt=""></a>
-                </li>
-                <li class="btn-helper done"><a ng-click="openEditMode()" ng-show="editMode" data-edit="true" href="">Done</a></li>
-                <div class="line"></div>
-            </ul>
-        </nav>
-    </header>
+                <a class="icon icon-edit" ng-click="openEditMode()" ng-hide="editMode" href=""></a>
+            </li>
+            <li class="btn-helper done"><a ng-click="openEditMode()" ng-show="editMode" data-edit="true" href="">Done</a></li>
+            <div class="line"></div>
+        </ul>
+    </nav>
+</header>

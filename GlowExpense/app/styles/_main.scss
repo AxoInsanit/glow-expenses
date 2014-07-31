@@ -30,6 +30,8 @@ Fonts
   font-weight: normal;
 }
 
+
+
 // RESET
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
@@ -85,7 +87,7 @@ table {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
-  word-break:break-all;
+  word-break:break-word;
 }
 
 // GLOBAL STYLES
@@ -117,7 +119,9 @@ table {
   }  
 }
 .btn-with-icon.create-report {
-  color: $text-green;
+  span {
+    color: $text-green;
+  }
 }
 
 
@@ -134,18 +138,30 @@ table {
 a {
   text-decoration: none;
 }
+// sprite icons
 .icon {
-  width: 36px;
-  height:36px;
+  background-image:url('../../resources/images/low-res/sprite.png');
   display: block;
-  img {
-    @include img-responsive();
+  width: 36px;
+  height: 36px;
+  &.icon-edit {
+    background-position: 0px -414px;
   }
-  &.delete {
-    width: 26px;
-    height: 26px;
+  &.icon-photo {
+    background-position: 0px -460px;
+  }
+  &.icon-create-report {
+    background-position: 0px 0px;
+  }
+  &.icon-alert {
+    background-position: 0px -46px;
+  }
+  &.icon-sign-out {
+    background-position: 0px -644px;
+  }
+  &.icon-delete {
+    background-position: 0px -230px;
     margin-right: 10px;
-    margin-top: 5px;
   }
 }
 .circle {

@@ -61,7 +61,7 @@ header {
 						}
 					}
 					&.done {
-						right:0.5em;
+						right:15px;
 						bottom:0.5em;
 						a {
 							color:$text-grey-dark;
@@ -103,11 +103,12 @@ header {
 	.left-part {
 		width: 60%;
 		float: left;
+		padding-right: 10px;
 	}
 	.right-part {
 		width: 40%;
 		float: right;
-		.take-photo {
+		.icon-photo {
 			float: right;
 		}
 	}

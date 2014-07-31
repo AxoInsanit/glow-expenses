@@ -3,12 +3,10 @@
 angular.module('Expenses').controller('deleteExpModalCtrl', ['$scope', '$modalInstance', 'item', '$location',
         function ($scope, $modalInstance, item, $location) {
         	function onFetchSuccess() {
-                alert("Succesfully deleted the expense and reload the page");
                 $modalInstance.dismiss('cancel');
             }
 
             function onFetchFail() {
-                alert("The expense was deleted but could not fetch the new list");
                 $modalInstance.dismiss('cancel');
             }
 
