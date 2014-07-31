@@ -5,6 +5,7 @@ angular.module('Header')
         function ($scope, $filter, $location, $modal) {
             //check are we at edit mode
             $scope.editMode = false;
+            $scope.profileName = localStorage.getItem("userName");
         	//change witch one of the top is active
             $scope.isActive = function (viewLocation) { 
                 return viewLocation === $location.path();
