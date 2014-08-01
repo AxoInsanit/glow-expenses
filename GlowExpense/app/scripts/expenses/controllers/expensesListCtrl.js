@@ -40,12 +40,19 @@ angular.module('Expenses')
                         templateUrl: 'deleteModal',
                         controller: 'deleteExpModalCtrl',
                         size: "sm",
-                        resolve: {
-                        item: function () {
-                          return {"expenseId":expenseId,"expensesRepositorySvc":expensesRepositorySvc};
+                        resolve: {}
+                    });   
+                    modalInstance.result.then(function () {
+                        function onSuccess(expensesRepositorySvc) {
+                            expensesRepositorySvc.getExpenses();
                         }
-                      }
-                    });                
+
+                        function onFail(message) {
+                            alert('Failed because: ' + message);
+                        }
+                        expensesRepositorySvc.deleteExpense({"token":localStorage.getItem("session-token"),"expenseId":$scope.expenseForDeletion.expenseId},onSuccess(expensesRepositorySvc),onFail());
+                    }, function () {
+                    });             
                 };
 
                 $scope.takePhoto = function() {

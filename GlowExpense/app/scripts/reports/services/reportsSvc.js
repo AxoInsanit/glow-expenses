@@ -5,7 +5,7 @@ angular.module('Reports')
         ['expensesRequestNotificationChannelSvc', 'currenciesSvc','expenseTypesSvc',
             function(expensesRequestNotificationChannelSvc, currenciesSvc, expenseTypesSvc) {
 
-    function Expense(scope, initData){
+    function Reports(scope, initData){
         var self = this;
 
         self.expenseId = initData.expenseId;
