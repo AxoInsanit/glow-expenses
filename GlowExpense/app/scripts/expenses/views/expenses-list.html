@@ -37,14 +37,17 @@
             
         </div>
         <div class="Infinity" infinite-scroll="getMoreExpenses()">
-            <article class="item ready" ng-repeat="expense in expenses | filter:searchedExpense" ng-class="!expense.enabled ? ' grayOut' : ' '">
+            <article class="ready expense-cont" ng-repeat="expense in expenses | filter:searchedExpense" ng-class="!expense.enabled ? ' grayOut' : ' '">
                 <!--<div ng-click="selectMode() ? '' : expense.toggleDetails()">-->
-                <section class="expense-cont" ng-click="editExpense(expense)">
+                <section class="item" ng-click="editExpense(expense)" ng-class="{true: 'editMode'}[showEditMode]">
                     <div class="left-part">
-                        <a href="" class="icon icon-delete float-left" ng-switch="expense.selected" ng-show="showEditMode" ng-click="deleteExpense(expenses[$index],repository)" >
-                        </a>
-                        <p class="main-text desc">{{ expense.description }}</p>
-                        <span class="info-text date">{{ expense.date }}</span>
+                        <div class="remove">
+                            <a href="" class="icon icon-delete float-left" ng-switch="expense.selected"  ng-show="showEditMode"  ng-click="deleteExpense(reportCollection[$index],repository)" ></a>
+                        </div>
+                        <div class="desc">
+                            <p class="main-text desc">{{ expense.description }}</p>
+                            <span class="info-text date">{{ expense.date }}</span>
+                        </div>
                     </div>
                     <div class="right-part">
                         <span class="info-text money">{{ expense.originalAmount | currency }}</span>
@@ -53,12 +56,8 @@
                             <div ng-switch-when="true" ng-click="expense.toggleSelect()"
                             class="thickBorder right" ng-class="expense.selected ? ' backGreen' : ' '">
                         </div>
-                        <a ng-switch-when="true" ng-click="takePhoto(expense)" class="icon icon-photo">
-                            
-                        </a>
-                        <a ng-switch-when="false" ng-click="takePhoto(expense)" class="icon take-photo"  >
-                            
-                        </a>
+                        <a ng-switch-when="true" ng-click="takePhoto(expense)" class="icon icon-photo"></a>
+                        <a ng-switch-when="false" ng-click="takePhoto(expense)" class="icon icon-photo-taken"></a>
                     </div>
                 </div>
             </section>
@@ -71,5 +70,5 @@
     <div ng-show="selectMode()" ng-click="toggleSelectMode(false)">Cancel</div>
 </div>
 <!-- <loading></loading> -->
-<!-- sign out modal -->
+<!-- delete modal -->
 <div ng-include="'./scripts/modalTemplates/delete-modal.html'"></div>

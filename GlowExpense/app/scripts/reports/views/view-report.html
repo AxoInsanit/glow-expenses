@@ -9,13 +9,14 @@
         <section class="item">
             <a href="" ng-click="createReport()" class="btn-with-icon create-report">
                 <span class="icon icon-create-report"></span>
-                <span>Create Report</span>
+                <span>Create Expense</span>
             </a>
         </section>
+
         <div class="reports-list">
             <div class="draft">
                 <div class="SPAM" ng-repeat="report in reportCollection">
-                    <section class="item " ng-class="{locked:report.locked,editMode:showEditMode}" ng-click="viewReport(report)">
+                    <section class="item " ng-class="{locked:report.locked,editMode:showEditMode}" ng-click="viewReport()">
                         <div class="right-part">
                             <p class="info-text text-right">
                                 <span>{{report.societyCurrency}}</span>
@@ -23,14 +24,9 @@
                             </p>
                         </div>
                         <div class="left-part">
-                            <ng-switch on="report.locked">
-                                <div class="remove" ng-switch-default>
-                                    <a href="" class="icon icon-delete float-left" ng-switch="expense.selected"  ng-show="showEditMode"  ng-click="deleteReport(reportCollection[$index],repository)" ></a>
-                                </div>
-                                <div ng-switch-when="true">
-                                    
-                                </div>
-                            </ng-switch>
+                            <div class="remove">
+                                <a href="" class="icon icon-delete float-left" ng-switch="expense.selected"  ng-show="showEditMode"  ng-click="deleteReport(reportCollection[$index],repository)" ></a>
+                            </div>
                             <div class="desc">
                                 <p class="main-text">
                                     {{report.description}}

@@ -1,10 +1,10 @@
 'use strict';
 
 angular.module('Expenses')
-    .controller('AddEditExpenseCtrl', ['$scope', '$location', 'expensesRepositorySvc', 'addExpenseErrorMsg',
+    .controller('AddEditExpenseCtrl', ['$scope', '$location', 'expensesRepositorySvc', 'addExpenseErrorMsg', '$modal',
         'currenciesSvc', 'expenseTypesSvc',
 
-        function ($scope, $location, expensesRepositorySvc, addExpenseErrorMsg, currenciesSvc, expenseTypesSvc) {
+        function ($scope, $location, expensesRepositorySvc, addExpenseErrorMsg, $modal, currenciesSvc, expenseTypesSvc) {
 
             $scope.errorMessage = addExpenseErrorMsg;
             $scope.showErrorMessage = false;
@@ -12,6 +12,32 @@ angular.module('Expenses')
             $scope.currencies = currenciesSvc.get();
 
             $scope.expenseTypes = expenseTypesSvc.get();
+
+            $scope.expenseTypeModal = function() {
+                var modalInstance = $modal.open({
+                  templateUrl: 'expenseTypeModal',
+                  controller: SignOutModalCtrl,
+                  size: "sm",
+                  resolve: {
+                    items: function () {
+                      return $scope.items;
+                    }
+                  }
+                });
+            };
+
+            $scope.expenseCurrencyModal = function() {
+                var modalInstance = $modal.open({
+                  templateUrl: 'expenseCurrencyModal',
+                  controller: SignOutModalCtrl,
+                  size: "sm",
+                  resolve: {
+                    items: function () {
+                      return $scope.items;
+                    }
+                  }
+                });
+            };
 
             $scope.addOrEdit = function(form, expense) {
                 function onSuccess() {

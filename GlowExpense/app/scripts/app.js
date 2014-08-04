@@ -89,6 +89,23 @@ angular.module('app', _mainModules )
         });
 
         routes.push({
+            name: '/edit-report',
+            params: {
+                templateUrl: 'scripts/reports/views/edit-report.html',
+                controller: 'CreateReportCtrl'
+            }
+        });
+
+
+        routes.push({
+            name: '/view-report',
+            params: {
+                templateUrl: 'scripts/reports/views/view-report.html',
+                controller: 'CreateReportCtrl'
+            }
+        });
+
+        routes.push({
             name: '/settings',
             params: {
                 templateUrl: 'scripts/expenses/views/settings.html',

@@ -1,3 +1,4 @@
+// STYLES FOR GLOBAL ELEMENTS 
 // HEADER 
 header {
 	border-top: 10px solid $bg-green;
@@ -70,7 +71,14 @@ header {
 						}
 					}
 				}
-			}		
+			}	
+			// single link header
+			&.single {
+				.btn-main {
+					width: 100%;
+					text-align: center;
+				}
+			}	
 		}
 	}
 	// header line
@@ -95,6 +103,21 @@ header {
 		transform:rotate(180deg);
 	}
 }
+ul.single {
+	.line {
+		background: -moz-linear-gradient(left, rgba(153,191,0,0) 0%, rgba(153,191,0,1) 40%, rgba(153,191,0,1) 60%, rgba(153,191,0,0) 100%); /* FF3.6+ */
+		background: -webkit-gradient(linear, left top, right top, color-stop(0%,rgba(153,191,0,0)), color-stop(40%,rgba(153,191,0,1)), color-stop(60%,rgba(153,191,0,1)), color-stop(100%,rgba(153,191,0,0))); /* Chrome,Safari4+ */
+		background: -webkit-linear-gradient(left, rgba(153,191,0,0) 0%,rgba(153,191,0,1) 40%,rgba(153,191,0,1) 60%,rgba(153,191,0,0) 100%); /* Chrome10+,Safari5.1+ */
+		background: -o-linear-gradient(left, rgba(153,191,0,0) 0%,rgba(153,191,0,1) 40%,rgba(153,191,0,1) 60%,rgba(153,191,0,0) 100%); /* Opera 11.10+ */
+		background: -ms-linear-gradient(left, rgba(153,191,0,0) 0%,rgba(153,191,0,1) 40%,rgba(153,191,0,1) 60%,rgba(153,191,0,0) 100%); /* IE10+ */
+		background: linear-gradient(to right, rgba(153,191,0,0) 0%,rgba(153,191,0,1) 40%,rgba(153,191,0,1) 60%,rgba(153,191,0,0) 100%); /* W3C */
+		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0099bf00', endColorstr='#0099bf00',GradientType=1 ); /* IE6-9 */
+	}
+	.btn-helper {
+		top: 15px;
+		left:10px;
+	}
+}
 // expense&reports item
 .item {
 	@include clearfix();
@@ -104,6 +127,14 @@ header {
 		width: 60%;
 		float: left;
 		padding-right: 10px;
+		.remove {
+			width: 0;
+			float: left;
+		}
+		.desc {
+			width:100%;
+			float: left;
+		}
 	}
 	.right-part {
 		width: 40%;
@@ -140,6 +171,17 @@ header {
 			float: left;
 			width: 100%;
 		}
+	}
+	&.editMode {
+		.remove {
+			width: 30%;
+		}
+		.desc {
+			width:70%;
+		}
+	}
+	&.locked {
+		background: $bg-locked;
 	}
 }
 
@@ -188,3 +230,69 @@ header {
 		}
 	}
 }
+
+// FORMS
+form {
+	@include clearfix();
+	padding-bottom: 94px;
+	.form-group {
+		@include border-radius(5px);
+		border:1px solid $text-grey-lighter;
+		.form-item {
+			@include clearfix();
+			border-top: 1px solid $text-grey-lighter;
+			height: 60px;
+			width: 100%;
+			position:relative;
+			&.checked {
+				.icon {
+					position:absolute;
+					right: 10px;
+					top:10px;
+				}
+				input {
+					padding-right: 50px;
+				}
+			}
+			* {
+				font-size: $size-global;
+				color:$text-grey-lighter;
+			}
+			&:first-child {
+				border:none;
+			}
+			input {
+				width: 100%;
+				height: 100%;
+				display: block;
+				border:none;
+				outline: none;
+				padding: 15px 10px;
+				line-height: 1;
+				max-height: 60px;
+				@include border-radius(5px);
+			}
+			.select-custom {
+				width: 100%;
+				height: 100%;
+				overflow: hidden;
+				background: url('../../resources/images/low-res/dropdown-arrow.png') center right no-repeat;
+				select {
+					width: 100%;
+					height: 100%;
+					max-height: 60px;
+					display: block;
+					border:none;
+					outline: none;
+					padding: 15px 50px 15px 10px;
+					line-height: 1;
+					background-color: transparent;
+					background-image: none;
+					-webkit-appearance: none;
+					-moz-appearance: none;
+					appearance: none;
+				}	
+			}
+		}
+	}
+}	

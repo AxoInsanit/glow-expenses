@@ -90,6 +90,8 @@
     display: table;
     margin: 20px auto;
     .form-group {
+      border:none;
+      @include border-radius(0px);
       &:first-child {
         border-bottom:1px solid $border-login;
       }

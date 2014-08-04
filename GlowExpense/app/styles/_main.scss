@@ -150,6 +150,9 @@ a {
   &.icon-photo {
     background-position: 0px -460px;
   }
+  &.icon-photo-taken {
+    background-position: 0px -184px;
+  }
   &.icon-create-report {
     background-position: 0px 0px;
   }
@@ -163,6 +166,25 @@ a {
     background-position: 0px -230px;
     margin-right: 10px;
   }
+  &.icon-close-black {
+    background-position: 0px -276px;
+  }
+  &.icon-close-green {
+    background-position: 0px -322px;
+  }
+  &.icon-close-white {
+    background-position: 0px -368px;
+  }
+  &.icon-check-green {
+    background-position: 0px -138px;
+  }
+  &.icon-camera-big {
+    background-image:url('../../resources/images/low-res/edit-image-big.png');
+    width: 96px;
+    height: 96px;
+    @include centered();
+  }
+
 }
 .circle {
   width: 36px;

@@ -1,51 +1,92 @@
 <!-- header of the website -->
 <div ng-include="'./scripts/header/views/header.html'" ng-controller="HeaderCtrl"></div>
-<div class="expenses" ng-controller="AddEditExpenseCtrl">
-    <div class="header font15">
-        <div class="left fift" back-button></div>
-        <span class="expensesHeader">{{title}}</span>
-    </div>
-    <div class="camera ">
-        <div class="icon cameraFoot" ng-click="angular.isDefined(takePhoto()) && takePhoto()" ng-hide="imageSelectedPath.length>1">
-
-        </div>
+<header>
+    <nav>
+        <ul class="single">
+            <li class="btn-helper">
+                <a class="icon icon-close-black"  back-button></a>
+            </li>
+            <li class="btn-main">
+                <a class="active"><span>{{title}}</span></a>
+            </li>
+            <div class="line"></div>
+        </ul>
+    </nav>
+</header>
+<article class="expenses-body with-padding" ng-controller="AddEditExpenseCtrl">
+    <section class="camera">
+        <a class="icon icon-camera-big" ng-click="angular.isDefined(takePhoto()) && takePhoto()" ng-hide="imageSelectedPath.length>1">
+        </a>
+        <p class="text-info">Add Invoice Image </p>
         <div class="icon cameraFoot" style="background-image: url('{{imageSelectedPath}}')" ng-show="imageSelectedPath.length>1">
 
         </div>
-       <button ng-click="cancelPhoto()" ng-show="imageSelectedPath.length>1">Cancel image</button>
-    </div>
+        <button ng-click="cancelPhoto()" ng-show="imageSelectedPath.length>1">Cancel image</button>
+    </section>
     <form role="form" name="expenseForm">
         <div class="form-group">
-            <input type="text" id="description" placeholder="Title"  class="form-control" ng-model="expense.description" required>
-            <div class="descr pullDown"></div>
+            <div class="form-item checked">
+                <input type="text" class="input-checked" id="description" placeholder="Title"  class="form-control" ng-model="expense.description" required>
+                <div class="descr pullDown"></div>
+                <span class="icon icon-check-green"></span>
+            </div>
+            <div class="form-item">
+                <div class="select-custom">
+                    <select ng-model="expense.expenseType" ng-options="expenseType.name for expenseType in expenseTypes" ng-click="expenseTypeModal()">
+                        <option value="">-- choose expense type --</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-item">
+                <input type="text" id="date" class="form-control" placeholder="{{ date | date:'yyyy-MM-dd' }}"  disabled>
+                <div class="date pullDown"></div>
+            </div>
+            <div class="form-item">
+                <input type="number" min="0.01" step="0.01" id="amount" placeholder="Amount"  class="form-control"
+                ng-model="expense.originalAmount" required decimal-places>
+            </div>
+            <div class="form-item">
+                <div class="select-custom">
+                <select ng-model="expense.currency" ng-options="currency.name for currency in currencies" ng-click="expenseCurrencyModal()">>
+                    <option value="">-- choose currency --</option>
+                </select>
+            </div>
+            </div>
+            <div class="form-item">
+                <input type="number" min="0.01" step="0.01" id="rate" placeholder="Rate"  class="form-control"
+                ng-model="expense.exchangeRate" required decimal-places>
+            </div>
         </div>
-        <div>
-            <select class="form-group" ng-model="expense.expenseType" ng-options="expenseType.name for expenseType in expenseTypes">
-                <option value="">-- choose expense type --</option>
-            </select>
+        <div class="btn-fixed">
+            <button class="btn" type="submit" ng-click="addOrEdit(expenseForm, expense)">{{buttonLabel}}</button>
         </div>
-        <div class="form-group">
-            <input type="text" id="date" class="form-control" placeholder="{{ date | date:'yyyy-MM-dd' }}"  disabled>
-
-            <div class="date pullDown"></div>
-        </div>
-        <div class="form-group">
-            <input type="number" min="0.01" step="0.01" id="amount" placeholder="Amount"  class="form-control"
-                   ng-model="expense.originalAmount" required decimal-places>
-        </div>
-        <div>
-            <select class="form-group" ng-model="expense.currency" ng-options="currency.name for currency in currencies">
-                <option value="">-- choose currency --</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <input type="number" min="0.01" step="0.01" id="rate" placeholder="Rate"  class="form-control"
-                   ng-model="expense.exchangeRate" required decimal-places>
-        </div>
-        <button class="btn btn-default btn-green" type="submit" ng-click="addOrEdit(expenseForm, expense)">{{buttonLabel}}</button>
         <loading></loading>
         <div ng-show="showErrorMessage">
             <div class="msg errorMsg">{{errorMessage}}</div>
         </div>
     </form>
-</div>
+</article>
+<script type="text/ng-template" id="expenseTypeModal">
+    <!-- <div class="modal-header">
+        <h3 class="modal-title">Im a modal!</h3>
+    </div> -->
+    <div class="modal-body">
+        put divs here
+    </div>
+    <div class="modal-footer">
+        <button class="btn" ng-click="ok()">OK</button>
+        <button class="btn" ng-click="cancel()">Cancel</button>
+    </div>
+</script>
+<script type="text/ng-template" id="expenseCurrencyModal">
+    <!-- <div class="modal-header">
+        <h3 class="modal-title">Im a modal!</h3>
+    </div> -->
+    <div class="modal-body">
+        put divs here
+    </div>
+    <div class="modal-footer">
+        <button class="btn" ng-click="ok()">OK</button>
+        <button class="btn" ng-click="cancel()">Cancel</button>
+    </div>
+</script>
