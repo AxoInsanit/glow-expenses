@@ -13,6 +13,10 @@ angular.module('Expenses')
 
             $scope.expenseTypes = expenseTypesSvc.get();
 
+            $scope.createReport = function() {
+                $location.path('/create-report');
+            };
+
             $scope.expenseTypeModal = function($event) {
                 var modalInstance = $modal.open({
                   templateUrl: 'expenseTypeModal',
@@ -29,7 +33,6 @@ angular.module('Expenses')
                 var modalInstance = $modal.open({
                   templateUrl: 'expenseCurrencyModal',
                   controller: expenseCurrencyModalCtrl,
-                  size: "sm",
                   resolve: {
                     currencies: function () {
                       return {"types": $scope.currencies,"target":event.target};

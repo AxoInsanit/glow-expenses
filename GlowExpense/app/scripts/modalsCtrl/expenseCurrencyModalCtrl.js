@@ -12,6 +12,6 @@ var expenseCurrencyModalCtrl = function ($scope, $modalInstance, currencies) {
 	      	item.selected = false;
 	    });
   		currencie.selected = true;
-
+  		$modalInstance.dismiss('cancel');
   	};  
 };
