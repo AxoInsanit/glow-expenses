@@ -13,27 +13,26 @@ angular.module('Expenses')
 
             $scope.expenseTypes = expenseTypesSvc.get();
 
-            $scope.expenseTypeModal = function() {
+            $scope.expenseTypeModal = function($event) {
                 var modalInstance = $modal.open({
                   templateUrl: 'expenseTypeModal',
-                  controller: SignOutModalCtrl,
-                  size: "sm",
+                  controller: expenseTypeModalCtrl,
                   resolve: {
-                    items: function () {
-                      return $scope.items;
+                    expenseTypes: function () {
+                      return {"types": $scope.expenseTypes,"target":event.target};
                     }
                   }
                 });
             };
 
-            $scope.expenseCurrencyModal = function() {
+            $scope.expenseCurrencyModal = function($event) {
                 var modalInstance = $modal.open({
                   templateUrl: 'expenseCurrencyModal',
-                  controller: SignOutModalCtrl,
+                  controller: expenseCurrencyModalCtrl,
                   size: "sm",
                   resolve: {
-                    items: function () {
-                      return $scope.items;
+                    currencies: function () {
+                      return {"types": $scope.currencies,"target":event.target};
                     }
                   }
                 });

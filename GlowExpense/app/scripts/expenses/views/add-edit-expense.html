@@ -24,6 +24,36 @@
         <button ng-click="cancelPhoto()" ng-show="imageSelectedPath.length>1">Cancel image</button>
     </section>
     <form role="form" name="expenseForm">
+        <div ng-show="showErrorMessage" class="error-message">
+            <div class="msg errorMsg">{{errorMessage}}
+            </div>
+            <a class="icon icon-error-close">x</a>
+        </div>
+        <div class="form-group bottom20">
+            <div class="form-item head">
+                Assign Expense to:
+            </div>
+            <div class="form-item checked">
+                <label for="test">
+                    <input type="radio" class="input-checked" id="test" placeholder="Title" name="assign"  class="form-control" ng-model="expense.description" required>
+                    <span class="icon icon-check-green"></span>
+                    Lorem ipsum.
+                </label>
+            </div>
+            <div class="form-item checked">
+                <label for="test1">
+                    <input type="radio" class="input-checked" id="test1" placeholder="Title" name="assign" class="form-control" ng-model="expense.description" required>
+                    <span class="icon icon-check-green"></span>
+                    Lorem ipsum dolor.
+                </label>
+            </div>
+            <div class="form-item with-btn">
+                <a href="" ng-click="createReport()" class="btn-with-icon create-report">
+                    <span class="icon icon-create-report"></span>
+                    <span>Create Report</span>
+                </a>
+            </div>
+        </div>
         <div class="form-group">
             <div class="form-item checked">
                 <input type="text" class="input-checked" id="description" placeholder="Title"  class="form-control" ng-model="expense.description" required>
@@ -31,10 +61,11 @@
                 <span class="icon icon-check-green"></span>
             </div>
             <div class="form-item">
-                <div class="select-custom">
-                    <select ng-model="expense.expenseType" ng-options="expenseType.name for expenseType in expenseTypes" ng-click="expenseTypeModal()">
+                <div class="select-custom" ng-click="expenseTypeModal($event)">
+                    <span class="selected"> -- choose expense type -- </span>
+                    <!-- <select ng-model="expense.expenseType" ng-options="expenseType.name for expenseType in expenseTypes" ng-click="expenseTypeModal()">
                         <option value="">-- choose expense type --</option>
-                    </select>
+                    </select> -->
                 </div>
             </div>
             <div class="form-item">
@@ -46,11 +77,12 @@
                 ng-model="expense.originalAmount" required decimal-places>
             </div>
             <div class="form-item">
-                <div class="select-custom">
-                <select ng-model="expense.currency" ng-options="currency.name for currency in currencies" ng-click="expenseCurrencyModal()">>
-                    <option value="">-- choose currency --</option>
-                </select>
-            </div>
+                <div class="select-custom" ng-click="expenseCurrencyModal($event)">
+                    <span class="selected"> -- choose currency -- </span>
+                    <!-- <select ng-model="expense.currency" ng-options="currency.name for currency in currencies" ng-click="expenseCurrencyModal()">>
+                        <option value="">-- choose currency --</option>
+                    </select> -->
+                </div>
             </div>
             <div class="form-item">
                 <input type="number" min="0.01" step="0.01" id="rate" placeholder="Rate"  class="form-control"
@@ -60,33 +92,9 @@
         <div class="btn-fixed">
             <button class="btn" type="submit" ng-click="addOrEdit(expenseForm, expense)">{{buttonLabel}}</button>
         </div>
-        <loading></loading>
-        <div ng-show="showErrorMessage">
-            <div class="msg errorMsg">{{errorMessage}}</div>
-        </div>
+        <loading></loading>        
     </form>
 </article>
-<script type="text/ng-template" id="expenseTypeModal">
-    <!-- <div class="modal-header">
-        <h3 class="modal-title">Im a modal!</h3>
-    </div> -->
-    <div class="modal-body">
-        put divs here
-    </div>
-    <div class="modal-footer">
-        <button class="btn" ng-click="ok()">OK</button>
-        <button class="btn" ng-click="cancel()">Cancel</button>
-    </div>
-</script>
-<script type="text/ng-template" id="expenseCurrencyModal">
-    <!-- <div class="modal-header">
-        <h3 class="modal-title">Im a modal!</h3>
-    </div> -->
-    <div class="modal-body">
-        put divs here
-    </div>
-    <div class="modal-footer">
-        <button class="btn" ng-click="ok()">OK</button>
-        <button class="btn" ng-click="cancel()">Cancel</button>
-    </div>
-</script>
+
+<div ng-include="'./scripts/modalTemplates/expense-currency-modal.html'" ng-controller="HeaderCtrl"></div>
+<div ng-include="'./scripts/modalTemplates/expense-type-modal.html'" ng-controller="HeaderCtrl"></div>

@@ -8,7 +8,7 @@ angular.module('Expenses')
 
             $scope.expense = editExpenseSvc.getExpenseForEdit();
             $scope.date = $scope.expense.date;
-
+            $scope.isEdit = true;
             $scope.imageSelectedPath = "";
             
             // if ($scope.expense.imageType !== 'void'){

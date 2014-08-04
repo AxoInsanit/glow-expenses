@@ -229,12 +229,52 @@ ul.single {
 			color: $text-grey-dark;
 		}
 	}
+	.modal-select {
+		padding: 0;
+		.item {
+			color:$text-select;
+			position:relative;
+			cursor: pointer;
+			&.checked {
+				padding-right: 50px;
+				.icon {
+					position: absolute;
+					right: 10px;
+					top: 50%;
+					margin-top: -18px;
+				}
+			}
+		}
+	}
 }
 
 // FORMS
 form {
 	@include clearfix();
 	padding-bottom: 94px;
+	::-webkit-input-placeholder {
+		color: $text-select;
+		line-height: 0.6;
+		font-weight: normal;
+	}
+
+	:-moz-placeholder { /* Firefox 18- */
+		color: $text-select;
+		line-height: 0.6;
+		font-weight: normal;  
+	}
+
+	::-moz-placeholder {  /* Firefox 19+ */
+		color: $text-select;
+		line-height: 0.6;
+		font-weight: normal;  
+	}
+
+	:-ms-input-placeholder {  
+		color: $text-select;
+		line-height: 0.6;
+		font-weight: normal;  
+	}
 	.form-group {
 		@include border-radius(5px);
 		border:1px solid $text-grey-lighter;
@@ -244,6 +284,28 @@ form {
 			height: 60px;
 			width: 100%;
 			position:relative;
+			&.head {
+				font-size: $size-small;
+				color:$text-grey;
+				font-weight: bold;
+				height: 40px;
+				line-height: 40px;
+				padding: 0 10px;	
+			}
+			&.with-btn {
+				a {
+					@include clearfix();
+					padding:0 10px;
+					.icon {
+						margin-top: 11px;
+					}
+					span {
+						line-height: 60px;
+						color:$text-green;
+						font-weight: bold;
+					}
+				}
+			}
 			&.checked {
 				.icon {
 					position:absolute;
@@ -272,20 +334,38 @@ form {
 				max-height: 60px;
 				@include border-radius(5px);
 			}
+			input[type="radio"] ,input[type="checkbox"] {
+				display: none;
+			}
+			label {
+				width: 100%;
+				height: 100%;
+				display: block;
+				padding: 0 10px;
+				line-height: 60px;
+				color: $text-grey-lighter;
+				float: left;
+				.icon {
+					display: none;
+				}
+				input[type="radio"]:checked ~ .icon {
+					display: block;
+				}
+			}
 			.select-custom {
 				width: 100%;
 				height: 100%;
 				overflow: hidden;
 				background: url('../../resources/images/low-res/dropdown-arrow.png') center right no-repeat;
-				select {
+				.selected {
 					width: 100%;
 					height: 100%;
 					max-height: 60px;
 					display: block;
 					border:none;
 					outline: none;
-					padding: 15px 50px 15px 10px;
-					line-height: 1;
+					padding: 0 50px 0 10px;
+					line-height: 60px;
 					background-color: transparent;
 					background-image: none;
 					-webkit-appearance: none;
@@ -293,6 +373,31 @@ form {
 					appearance: none;
 				}	
 			}
+		}
+	}
+	.error-message {
+		@include clearfix();
+		@include border-radius(5px);
+		border:1px solid $text-red;
+		display: block;
+		width: 100%;
+		height: 30px;
+		padding:0 10px;
+		color: $text-red;
+		line-height: 28px;
+		position: relative;
+		margin-bottom: 20px;
+		.msg  {
+			padding-right: 30px;
+			width: 100%;
+		}
+		.icon {
+			position: absolute;
+			right: 0;
+			top: -2px;
+			background: none;
+			text-align: center;
+			height: 28px;
 		}
 	}
 }	

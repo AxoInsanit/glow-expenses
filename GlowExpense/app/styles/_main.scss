@@ -100,13 +100,16 @@ table {
 .float-right {
   float:right;
 }
-
+.bottom20 {
+  margin-bottom: 20px;
+}
 // BUTTONS
 .btn {
   @include btn();
   @include border-radius(5px);
 }
 .btn-with-icon {
+  height: 36px;
   @include btn-with-icon();
   img {
     float: left;
@@ -121,6 +124,7 @@ table {
 .btn-with-icon.create-report {
   span {
     color: $text-green;
+    font-weight: bold;
   }
 }
 

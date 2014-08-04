@@ -101,7 +101,7 @@ angular.module('app', _mainModules )
             name: '/view-report',
             params: {
                 templateUrl: 'scripts/reports/views/view-report.html',
-                controller: 'CreateReportCtrl'
+                controller: 'ViewReportCtrl'
             }
         });
 
