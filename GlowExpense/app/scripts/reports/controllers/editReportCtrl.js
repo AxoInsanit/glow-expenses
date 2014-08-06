@@ -15,6 +15,14 @@ angular.module('Reports')
                 alert('Failed because: ' + message);
             };
 
+            function onSuccessSave() {
+            	$location.path('/view-report');
+            };
+
+            function onFailSave(message) {
+                alert('Failed because: ' + message);
+            };
+            
             $scope.projectNameModal = function($event) {
             	//debugger;
                 var modalInstance = $modal.open({
@@ -39,7 +47,7 @@ angular.module('Reports')
           //debugger;           
           //TODO: SEND THE FORM NOW IT DOESNT SEND ANYTHING
           $scope.save = function(form){
-          	reportsRepositorySvc.editReports({},function(asd){debugger;},function(asd){debugger;});
+          	reportsRepositorySvc.editReports({},onSuccessSave,onFailSave);
           };
 
         }

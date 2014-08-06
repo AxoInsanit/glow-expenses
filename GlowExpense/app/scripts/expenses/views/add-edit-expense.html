@@ -85,10 +85,10 @@
             </div>
             <div class="form-item">
                 <div class="select-custom" ng-click="expenseTypeModal($event)">
-                    <span class="selected">Description</span>
-                    <!-- <select ng-model="expense.expenseType" ng-options="expenseType.name for expenseType in expenseTypes" ng-click="expenseTypeModal()">
-                        <option value="">-- choose expense type --</option>
-                    </select> -->
+                    <ng-switch on="isEditExpense">
+                        <span class="selected" ng-switch-default>{{expense.expenseTypeName}}</span>
+                        <span class="selected" ng-switch-when="false">Description</span>
+                    </ng-switch>
                 </div>
             </div>
             <div class="form-item">
@@ -101,10 +101,10 @@
             </div>
             <div class="form-item">
                 <div class="select-custom" ng-click="expenseCurrencyModal($event)">
-                    <span class="selected">Current</span>
-                    <!-- <select ng-model="expense.currency" ng-options="currency.name for currency in currencies" ng-click="expenseCurrencyModal()">>
-                        <option value="">-- choose currency --</option>
-                    </select> -->
+                    <ng-switch on="isEditExpense">
+                        <span class="selected" ng-switch-default>{{expense.currency.code}}</span>
+                        <span class="selected" ng-switch-when="false">Current</span>
+                    </ng-switch>                   
                 </div>
             </div>
             <div class="form-item">

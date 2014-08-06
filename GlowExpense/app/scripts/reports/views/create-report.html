@@ -15,7 +15,7 @@
         </nav>
     </header>
     <article class="expenses-body with-padding">
-        <form role="form" name="expenseForm">
+        <form role="form" name="reportForm">
             <div ng-show="showErrorMessage" class="error-message">
             <div class="msg errorMsg">{{errorMessage}}
             </div>
@@ -62,7 +62,7 @@
             </div>
         </div>      
         <div class="btn-fixed">
-            <button class="btn" type="submit" ng-click="addOrEdit(expenseForm, expense)">Create</button>
+            <button class="btn" type="submit" ng-click="save(reportForm)">Create</button>
         </div>
         <div>
         </form>
