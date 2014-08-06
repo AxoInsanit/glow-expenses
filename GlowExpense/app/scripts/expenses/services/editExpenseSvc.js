@@ -3,6 +3,7 @@
 angular.module('Expenses').factory('editExpenseSvc', [function() {
 
         var expenseForEdit = null;
+        var report = null;
 
         function getExpenseForEdit() {
             return expenseForEdit;
@@ -12,9 +13,19 @@ angular.module('Expenses').factory('editExpenseSvc', [function() {
             expenseForEdit = expense;
         }
 
+        function setReport(sreport) {
+            report = sreport;
+        }
+
+        function getReport(sreport) {
+            return report
+        }
+
         return {
             getExpenseForEdit: getExpenseForEdit,
-            setExpenseForEdit: setExpenseForEdit
+            setExpenseForEdit: setExpenseForEdit,
+            setReport: setReport,
+            getReport: getReport
         };
     }
 ]);

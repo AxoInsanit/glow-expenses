@@ -2,16 +2,25 @@
 
 angular.module('Expenses')
     .controller('AddEditExpenseCtrl', ['$scope', '$location', 'expensesRepositorySvc', 'addExpenseErrorMsg', '$modal',
-        'currenciesSvc', 'expenseTypesSvc',
+        'currenciesSvc', 'expenseTypesSvc', 'reportSharingSvc',
 
-        function ($scope, $location, expensesRepositorySvc, addExpenseErrorMsg, $modal, currenciesSvc, expenseTypesSvc) {
+        function ($scope, $location, expensesRepositorySvc, addExpenseErrorMsg, $modal, currenciesSvc, expenseTypesSvc, reportSharingSvc) {
 
             $scope.errorMessage = addExpenseErrorMsg;
             $scope.showErrorMessage = false;
-
+            $scope.report = reportSharingSvc.getReport().data;
+            $scope.selectedReport = null;
+            //debugger;
             $scope.currencies = currenciesSvc.get();
 
             $scope.expenseTypes = expenseTypesSvc.get();
+
+            $scope.isEditExpense = false;
+
+            if($location.$$path.indexOf("edit-")>0)
+            {
+              $scope.isEditExpense = true;
+            }
 
             $scope.createReport = function() {
                 $location.path('/create-report');
@@ -41,10 +50,24 @@ angular.module('Expenses')
                 });
             };
 
+            //on click of report list into free expense
+            $scope.selectReport  = function(reportId) {
+                $scope.selectedReport = reportId;
+            };
+
             $scope.addOrEdit = function(form, expense) {
+              expense.reportId = $scope.selectedReport;
                 function onSuccess() {
                     $scope.showErrorMessage = false;
-                    $location.path('/expenses');
+                    var modalInstance = $modal.open({
+                      templateUrl: 'editSaveExpenseModal',
+                      controller: editSaveCtrl,
+                      resolve: {
+                        data: function () {
+                          return {"report":$scope.report};
+                        }
+                      }
+                    });
                 }
 
                 function onFail() {

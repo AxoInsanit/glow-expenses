@@ -1,0 +1,36 @@
+[
+    {
+        "expenseId": 123456,
+        "editionLevel": 0,
+        "contableCodeId": 123456,
+        "submiter": "fabio.olaechea",
+        "owner": "fabio.olaechea",
+        "description": "thisisadescription",
+        "invoiceNumber": 10213,
+        "provider": "prodiverbla",
+        "date": "2013-05-10",
+        "originalCurrencyId": 1234,
+        "originalAmount": 1400,
+        "exchangeRate": 5.47,
+        "societyCurrencyId": 1234,
+        "type": "REPORTABLE",
+        "imageType": "void|jpg|pdf"
+    },
+    {
+        "expenseId": 123457,
+        "editionLevel": 1,
+        "contableCodeId": 123455,
+        "submiter": "amex",
+        "owner": "fabio.olaechea",
+        "description": "thisisadescription1",
+        "invoiceNumber": 10213,
+        "provider": "prodiverbla",
+        "date": "2013-05-11",
+        "originalCurrencyId": 1234,
+        "originalAmount": 1500,
+        "exchangeRate": 5.47,
+        "societyCurrencyId": 1234,
+        "type": "REPORTABLE",
+        "imageType": "void|jpg|pdf"
+    }
+]

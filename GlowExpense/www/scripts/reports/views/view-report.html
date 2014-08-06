@@ -1,0 +1,58 @@
+<!-- header of the website -->
+<div class="reports-head" ng-include="'./scripts/header/views/header.html'" ng-controller="HeaderCtrl"></div>
+<div class="reports-body">
+    <header>
+        <nav>
+            <ul class="single">
+                <li class="btn-helper">
+                    <a class="icon icon-close-black" back-button=""></a>
+                </li>
+                <li class="btn-main">
+                    <a class="active"><span>NY Trip</span></a>
+                </li>
+                <div class="line"></div>
+            </ul>
+        </nav>
+    </header>
+    <article>
+        <section class="item">
+            <a class="btn-with-icon create-report">
+                <span class="icon icon-create-report"></span>
+                <span ng-click="createExpense()">Create Expense</span>
+            </a>
+        </section>
+        <section class="item">
+            <div class="left-part">
+                <div class="remove">
+                    <a href="" class="icon icon-delete float-left ng-hide" ng-switch="expense.selected" ng-show="showEditMode" ng-click="deleteExpense(reportCollection[$index],repository)"></a>
+                </div>
+                <div class="desc">
+                    <p class="main-text desc ng-binding">Lunch</p>
+                    <span class="info-text date ng-binding">2013-01-01</span>
+                </div>
+            </div>
+            <div class="right-part">
+                <span class="info-text money ng-binding">$1,400</span>
+                <a class="icon icon-photo-taken float-right"></a>
+            </div>
+        </section>
+        <section class="item">
+            <div class="left-part">
+                <div class="remove">
+                    <a href="" class="icon icon-delete float-left ng-hide" ng-switch="expense.selected" ng-show="showEditMode" ng-click="deleteExpense(reportCollection[$index],repository)"></a>
+                </div>
+                <div class="desc">
+                    <p class="main-text desc ng-binding">Lunch</p>
+                    <span class="info-text date ng-binding">2013-01-01</span>
+                </div>
+            </div>
+            <div class="right-part">
+                <span class="info-text money ng-binding">$1,400</span>
+                <a class="icon icon-check-green float-right"></a>
+            </div>
+        </section>
+
+    </article>
+</div>
+<!-- delete modal -->
+<div ng-include="'./scripts/modalTemplates/delete-modal.html'"></div>

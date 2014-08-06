@@ -4,12 +4,16 @@
     <header>
         <nav>
             <ul class="single">
-                <li class="btn-helper">
+                <li class="btn-helper close">
                     <a class="icon icon-close-black"  back-button></a>
                 </li>
                 <li class="btn-main">
-                    <a class="active"><span>NY Trip</span></a>
+                    <a class="active"><span> {{report.description}}</span></a>
                 </li>
+                <li class="btn-helper edit">
+                    <a class="icon icon-edit" ng-click="openEditMode()" ng-hide="editMode" href=""></a>
+                </li>
+                <li class="btn-helper done"><a ng-click="openEditMode()" ng-show="editMode" data-edit="true" href="">Done</a></li>
                 <div class="line"></div>
             </ul>
         </nav>
@@ -21,38 +25,33 @@
                 <span ng-click="createExpense()">Create Expense</span>
             </a>
         </section>
-        <section class="item">
+    </article>
+    <article ng-repeat="expense in expenses">
+        <section class="item" ng-class="{editMode:editMode}" ng-click="editExpense(expense)">
             <div class="left-part">
                 <div class="remove">
-                    <a href="" class="icon icon-delete float-left ng-hide" ng-switch="expense.selected" ng-show="showEditMode" ng-click="deleteExpense(reportCollection[$index],repository)"></a>
+                    <a href="" class="icon icon-delete float-left ng-hide" ng-switch="expense.selected" ng-show="editMode" ng-click="deleteExpense(expense)"></a>
                 </div>
                 <div class="desc">
-                    <p class="main-text desc ng-binding">Lunch</p>
-                    <span class="info-text date ng-binding">2013-01-01</span>
+                    <p class="main-text desc ng-binding">{{expense.description}}</p>
+                    <span class="info-text date ng-binding">{{expense.date}}</span>
                 </div>
             </div>
             <div class="right-part">
-                <span class="info-text money ng-binding">$1,400</span>
+                <span class="info-text money ng-binding">{{expense.originalAmount}}</span>
                 <a class="icon icon-photo-taken float-right"></a>
             </div>
-        </section>
-        <section class="item">
-            <div class="left-part">
-                <div class="remove">
-                    <a href="" class="icon icon-delete float-left ng-hide" ng-switch="expense.selected" ng-show="showEditMode" ng-click="deleteExpense(reportCollection[$index],repository)"></a>
-                </div>
-                <div class="desc">
-                    <p class="main-text desc ng-binding">Lunch</p>
-                    <span class="info-text date ng-binding">2013-01-01</span>
-                </div>
-            </div>
-            <div class="right-part">
-                <span class="info-text money ng-binding">$1,400</span>
-                <a class="icon icon-check-green float-right"></a>
-            </div>
-        </section>
-
+    </article>
+    <article>
+        <div class="btn-fixed grey">
+            <a class="left-part" ng-click="goToEdit()">Edit Report</a>
+            <p class="right-part">TOTAL {{report.total}}</p>
+            <button class="btn ng-binding" type="submit" ng-click="addOrEdit()">Send Report</button>
+        </div>
     </article>
 </div>
+<!-- delete modal -->
+<div ng-include="'./scripts/modalTemplates/save-report.html'"></div>
+<div ng-include="'./scripts/modalTemplates/expense-currency-modal.html'" ng-controller="HeaderCtrl"></div>
 <!-- delete modal -->
 <div ng-include="'./scripts/modalTemplates/delete-modal.html'"></div>

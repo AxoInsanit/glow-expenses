@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('Reports')
-    .controller('ReportsCtrl', ['$scope', '$filter', '$location', 'reportsRepositorySvc', '$modal',
-        function ($scope, $filter, $location, reportsRepositorySvc, $modal)  {
+    .controller('ReportsCtrl', ['$scope', '$filter', '$location', 'reportsRepositorySvc', '$modal', 'reportSharingSvc',
+            function ($scope, $filter, $location, reportsRepositorySvc, $modal, reportSharingSvc)  {
             $scope.isMain = true;
             $scope.reportCollection = {};
 
@@ -38,6 +38,7 @@ angular.module('Reports')
             $scope.viewReport = function(report) {
                 if((!$scope.showEditMode)&&(!report.locked))
                 {
+                    reportSharingSvc.setReport(report);
                     $location.path('/view-report');
                 }
             };

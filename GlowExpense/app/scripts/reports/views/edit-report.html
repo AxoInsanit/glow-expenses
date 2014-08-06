@@ -1,31 +1,72 @@
 <!-- header of the website -->
 <div class="reports-head" ng-include="'./scripts/header/views/header.html'" ng-controller="HeaderCtrl"></div>
-<div class="reports-body">
-    <div class="header font15">
-        <div class="left fift" back-button></div>
-        <span class="expensesHeader active"> Edit Expense Report </span>
-    </div>
-    <form role="form" name="expenseForm">
-        <div class="form-group">
-            <input type="text" id="description" placeholder="Title"  class="form-control" ng-model="expense.description" required>
+<div class="reports-body create">
+    <header>
+        <nav>
+            <ul class="single">
+                <li class="btn-helper close">
+                    <a class="icon icon-close-black"  back-button></a>
+                </li>
+                <li class="btn-main">
+                    <a class="active"><span>Edit Report</span></a>
+                </li>
+                <div class="line"></div>
+            </ul>
+        </nav>
+    </header>
+    <article class="expenses-body with-padding">
+        <form role="form" name="expenseForm">
+            <div ng-show="showErrorMessage" class="error-message">
+            <div class="msg errorMsg">{{errorMessage}}
+            </div>
+            <a class="icon icon-error-close">x</a>
         </div>
-        <div class="radio-toolbar" class="form-group">
-            <input type="radio" id="radio1" name="radios" value="all" checked>
-            <label for="radio1">All</label>
-            <input type="radio" id="radio2" name="radios"value="false">
-            <label for="radio2">Open</label>
-            <input type="radio" id="radio3" name="radios" value="true">
-            <label for="radio3">Archived</label> 
+            <div class="form-group bottom20">
+                <div class="form-item">
+                    <input type="text" id="description" placeholder="{{report.description}}"  class="form-control" ng-model="expense.description" required>
+                </div>
+            </div>
+            <div class="form-group bottom20">
+                <div class="form-item head">
+                    Assign Expense to:
+                </div>
+                <div class="form-item checked">
+                    <label for="test">
+                        <input type="radio" class="input-checked" id="All" placeholder="Title" name="all"  class="form-control" ng-model="expense.description" required>
+                        <span class="icon icon-check-green"></span>
+                        All
+                    </label>
+                </div>
+                <div class="form-item checked">
+                    <label for="test_1">
+                        <input type="radio" class="input-checked" id="Open" placeholder="Title" name="open"  class="form-control" ng-model="expense.description" required>
+                        <span class="icon icon-check-green"></span>
+                        Open
+                    </label>
+                </div>
+                <div class="form-item checked">
+                    <label for="test_2">
+                        <input type="radio" class="input-checked" id="Archived" placeholder="Title" name="archived"  class="form-control" ng-model="expense.description" required>
+                        <span class="icon icon-check-green"></span>
+                        Archived
+                    </label>
+                </div>
+            </div>
+            <loading></loading>
+            <div class="form-group">
+                <div class="form-item">
+                    <div class="select-custom" ng-click="expenseTypeModal()">
+                        <span class="selected"> -- choose expense type -- </span>
+                    <!-- <select ng-model="expense.expenseType" ng-options="expenseType.name for expenseType in expenseTypes" ng-click="expenseTypeModal()">
+                        <option value="">-- choose expense type --</option>
+                    </select> -->
+                </div>
+            </div>
+        </div>      
+        <div class="btn-fixed">
+            <button class="btn" type="submit" ng-click="addOrEdit(expenseForm, expense)">Create</button>
         </div>
         <div>
-            <select class="form-group" ng-model="expense.expenseType" ng-options="expenseType.name for expenseType in expenseTypes">
-                <option value="">-- choose expense type --</option>
-            </select>
-        </div>
-        <button class="btn btn-default btn-green" type="submit" ng-click="addOrEdit(expenseForm, expense)">V</button>
-        <loading></loading>
-        <div ng-show="showErrorMessage">
-            <div class="msg errorMsg">{{errorMessage}}</div>
-        </div>
-    </form>
+        </form>
+    </article>
 </div>

@@ -8,8 +8,8 @@ angular.module('Expenses', [])
     .constant('detailsModeActivated','_DETAILS_MODE_ACTIVATED')
     .constant('addExpenseErrorMsg','Please complete all fields!')
     .constant('addExpensesTitle','Add Expenses')
-    .constant('addExpensesButtonLabel','Add')
+    .constant('addExpensesButtonLabel','Create')
     .constant('editExpensesTitle','Edit Expenses')
-    .constant('editExpensesButtonLabel','Edit');
+    .constant('editExpensesButtonLabel','Save');
 
 

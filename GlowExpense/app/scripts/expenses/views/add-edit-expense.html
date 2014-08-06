@@ -3,7 +3,7 @@
 <header>
     <nav>
         <ul class="single">
-            <li class="btn-helper">
+            <li class="btn-helper close">
                 <a class="icon icon-close-black"  back-button></a>
             </li>
             <li class="btn-main">
@@ -29,31 +29,54 @@
             </div>
             <a class="icon icon-error-close">x</a>
         </div>
-        <div class="form-group bottom20">
-            <div class="form-item head">
-                Assign Expense to:
+        <ng-switch on="isEditExpense">
+            <div class="form-group bottom20" ng-switch-default>
+                <ng-switch on="haveReport">
+                    <div ng-switch-default>
+                        <div class="form-item head">
+                            Assign Expense to:
+                        </div>
+                        <div class="form-item checked" ng-repeat="report in reportCollection">
+                            <label for="test" ng-click="selectReport(report.expenseReportId)">
+                                <input type="radio" class="input-checked" id="test" placeholder="Title" name="assign"  class="form-control" ng-model="expense.description" required>
+                                <span class="icon icon-check-green"></span>
+                                {{report.description}}.
+                            </label> 
+                        </div>    
+                        <div class="form-item with-btn" ng-click="createReport()">
+                            <a class="btn-with-icon create-report">
+                                <span class="icon icon-create-report"></span>
+                                <span>Create Report</span>
+                            </a>
+                        </div>
+                    </div>
+                    <div ng-switch-when="true">
+                        <div class="form-item head">
+                            Assign Expense to:
+                        </div>
+                        <div class="form-item checked">
+                            <label for="test" >
+                                <input type="radio" class="input-checked" id="test" placeholder="Title" name="assign"  class="form-control" ng-model="expense.description" required>
+                                <span class="icon icon-check-green"></span>
+                                {{report.description}}.
+                            </label> 
+                        </div>    
+                    </div>
+                </ng-switch>
             </div>
-            <div class="form-item checked">
-                <label for="test">
-                    <input type="radio" class="input-checked" id="test" placeholder="Title" name="assign"  class="form-control" ng-model="expense.description" required>
-                    <span class="icon icon-check-green"></span>
-                    Lorem ipsum.
-                </label>
-            </div>
-            <div class="form-item checked">
-                <label for="test1">
-                    <input type="radio" class="input-checked" id="test1" placeholder="Title" name="assign" class="form-control" ng-model="expense.description" required>
-                    <span class="icon icon-check-green"></span>
-                    Lorem ipsum dolor.
-                </label>
-            </div>
-            <div class="form-item with-btn" ng-click="createReport()">
-                <a class="btn-with-icon create-report">
-                    <span class="icon icon-create-report"></span>
-                    <span>Create Report</span>
-                </a>
-            </div>
-        </div>
+            <div class="form-group bottom20"  ng-switch-when="false">
+                <div class="form-item head">
+                    Assign Expense to:
+                </div>
+                <div class="form-item checked" >
+                    <label for="test">
+                        <input type="radio" class="input-checked" id="test" placeholder="Title" value="{{report.expenseReportId}}" name="assign"  class="form-control" ng-model="expense.description" required>
+                        <span class="icon icon-check-green"></span>
+                        {{report.description}}
+                    </label>
+                </div>    
+            </div> 
+        </ng-switch>
         <div class="form-group">
             <div class="form-item checked">
                 <input type="text" class="input-checked" id="description" placeholder="Title"  class="form-control" ng-model="expense.description" required>
@@ -62,7 +85,7 @@
             </div>
             <div class="form-item">
                 <div class="select-custom" ng-click="expenseTypeModal($event)">
-                    <span class="selected"> -- choose expense type -- </span>
+                    <span class="selected">Description</span>
                     <!-- <select ng-model="expense.expenseType" ng-options="expenseType.name for expenseType in expenseTypes" ng-click="expenseTypeModal()">
                         <option value="">-- choose expense type --</option>
                     </select> -->
@@ -78,7 +101,7 @@
             </div>
             <div class="form-item">
                 <div class="select-custom" ng-click="expenseCurrencyModal($event)">
-                    <span class="selected"> -- choose currency -- </span>
+                    <span class="selected">Current</span>
                     <!-- <select ng-model="expense.currency" ng-options="currency.name for currency in currencies" ng-click="expenseCurrencyModal()">>
                         <option value="">-- choose currency --</option>
                     </select> -->
@@ -98,3 +121,4 @@
 
 <div ng-include="'./scripts/modalTemplates/expense-currency-modal.html'" ng-controller="HeaderCtrl"></div>
 <div ng-include="'./scripts/modalTemplates/expense-type-modal.html'" ng-controller="HeaderCtrl"></div>
+<div ng-include="'./scripts/modalTemplates/edit-save-expense.html'" ng-controller="HeaderCtrl"></div>

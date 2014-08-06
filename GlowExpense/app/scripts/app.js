@@ -92,7 +92,7 @@ angular.module('app', _mainModules )
             name: '/edit-report',
             params: {
                 templateUrl: 'scripts/reports/views/edit-report.html',
-                controller: 'CreateReportCtrl'
+                controller: 'EditReportCtrl'
             }
         });
 

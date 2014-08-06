@@ -1,35 +1,34 @@
 <!-- header of the website -->
-<div ng-include="'./scripts/header/views/header.html'" ng-controller="HeaderCtrl"></div>
-<div class="expenses">
-    <div>
-        <div ng-show="showSearch" class="searchCOntain">
-            <input placeholder="Search" ng-model="searchedExpense.description">
-            <span ng-click="toggleSearching(false); searchedExpense.description=''">Cancel</span>
-        </div>
-        <div ng-show="showSorting" class="sortingControlls alignLeft">
-            <div class="row">
-                <div ng-click="sort(true)">
-                    <span class="">Create Day</span><span class="upArrow"></span>
-                    <span ng-show="reverseSorting" class="checkSign greenThick right"></span>
-                </div>
-            </div>
-            <hr>
-            <div class="row">
-                <div ng-click="sort(false)" class="top1">
-                    <span class="">Create Day</span><span class="downArrow"></span>
-                    <span ng-show="!reverseSorting" class="checkSign greenThick right"></span>
-                </div>
+<div class="expenses-head" ng-include="'./scripts/header/views/header.html'" ng-controller="HeaderCtrl"></div>
+<div class="expenses-body">
+    <div ng-show="showSearch" class="searchCOntain">
+        <input placeholder="Search" ng-model="searchedExpense.description">
+        <span ng-click="toggleSearching(false); searchedExpense.description=''">Cancel</span>
+    </div>
+    <div ng-show="showSorting" class="sortingControlls alignLeft">
+        <div class="row">
+            <div ng-click="sort(true)">
+                <span class="">Create Day</span><span class="upArrow"></span>
+                <span ng-show="reverseSorting" class="checkSign greenThick right"></span>
             </div>
         </div>
-        <div ng-show="!selectMode()" class="nav font15">
-            <div class="third alignLeft">
-                
+        <hr>
+        <div class="row">
+            <div ng-click="sort(false)" class="top1">
+                <span class="">Create Day</span><span class="downArrow"></span>
+                <span ng-show="!reverseSorting" class="checkSign greenThick right"></span>
             </div>
-            <div class="third arrow">
-                <div ng-click="enableSorting()"></div>
-            </div>
-            
-            <div class="third alignRight">
+        </div>
+    </div>
+    <div ng-show="!selectMode()" class="nav font15">
+        <div class="third alignLeft">
+
+        </div>
+        <div class="third arrow">
+            <div ng-click="enableSorting()"></div>
+        </div>
+
+        <div class="third alignRight">
                 <!--
                     <div class="selectExp">Select</div>
                 -->
@@ -38,56 +37,37 @@
             
         </div>
         <div class="Infinity" infinite-scroll="getMoreExpenses()">
-            <div class="expenseItem ready" ng-repeat="expense in expenses | filter:searchedExpense" ng-class="!expense.enabled ? ' grayOut' : ' '">
-                    <!--<div ng-click="selectMode() ? '' : expense.toggleDetails()">-->
-                    <div ng-click="expense.toggleDetails()">
-                        <div>
-                            <div class="itemName half left alignLeft">
-                                <div class="icon inBl">
-
-                                    <div ng-switch="expense.selected" ng-show="selectMode()" ng-click="expense.toggleSelect()">
-                                        <div ng-switch-when="true">
-                                            <span class="icon">selected</span>
-                                        </div>
-                                        <div ng-switch-when="false">
-                                            <span class="icon">unselected</span>
-                                        </div>
-                                    </div>
-
-                                    <span>{{ expense.description }}</span>
-                                </div>
-                                <div>
-                                    <div>{{ expense.date }}</div>
-                                </div>
-                            </div>
-
+            <article class="ready expense-cont" ng-repeat="expense in expenses | filter:searchedExpense" ng-class="!expense.enabled ? ' grayOut' : ' '">
+                <!--<div ng-click="selectMode() ? '' : expense.toggleDetails()">-->
+                <section class="item" ng-click="editExpense(expense)" ng-class="{true: 'editMode'}[showEditMode]">
+                    <div class="left-part">
+                        <div class="remove">
+                            <a href="" class="icon icon-delete float-left" ng-switch="expense.selected" ng-show="showEditMode" ng-click="deleteExpense(reportCollection[$index],repository)"></a>
                         </div>
-                        <div class="half right">
-                            <div>
-                                <span class="money">{{ expense.originalAmount | currency }}</span>
-
-                                <div ng-switch="expense.imageType !== 'void'" stop-event="click">
-                                    <div ng-switch-when="true" ng-click="expense.toggleSelect()" class="thickBorder right" ng-class="expense.selected ? ' backGreen' : ' '">
-                                        <span class="icon thick"></span>
-                                    </div>
-                                    <div ng-switch-when="false" ng-click="takePhoto(expense)" class="cameraBorder right">
-                                        <div class="icon photo cameraFoot"></div>
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="desc">
+                            <p class="main-text desc">{{ expense.description }}</p>
+                            <span class="info-text date">{{ expense.date }}</span>
                         </div>
-
-
                     </div>
+                    <div class="right-part">
+                        <span class="info-text money">{{ expense.originalAmount | currency }}</span>
 
-                <div ng-show="expense.showDetails" class="showDetails">
-                    <div ng-include="'./scripts/expenses/views/expense-details.html'"></div>
+                        <div class="float-right" ng-switch="expense.imageType !== 'void'" stop-event="click">
+                            <div ng-switch-when="true" ng-click="expense.toggleSelect()" class="thickBorder right" ng-class="expense.selected ? ' backGreen' : ' '">
+                        </div>
+                        <a ng-switch-when="true" ng-click="takePhoto(expense)" class="icon icon-photo"></a>
+                        <a ng-switch-when="false" ng-click="takePhoto(expense)" class="icon icon-photo-taken"></a>
+                    </div>
                 </div>
-
-            </div>
-            <p ng-show="(expenses | filter:searchedExpense).length==0">No items found</p>
-        </div>
+            </section>
+            <section ng-show="expense.showDetails" class="showDetails">
+                <div ng-include="'./scripts/expenses/views/expense-details.html'"></div>
+            </section>
+        </article>
+        <p ng-show="(expenses | filter:searchedExpense).length==0">No items found</p>
     </div>
     <div ng-show="selectMode()" ng-click="toggleSelectMode(false)">Cancel</div>
 </div>
 <!-- <loading></loading> -->
+<!-- delete modal -->
+<div ng-include="'./scripts/modalTemplates/delete-modal.html'"></div>
