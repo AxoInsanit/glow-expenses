@@ -10,4 +10,5 @@ angular.module('Api', [])
     .constant('expensesUrl', '/service/expense/:image')
     .constant('currenciesUrl', '/service/currencies')
     .constant('expenseTypesUrl', '/service/expenseTypes')
-    .constant('reportsUrl', '/service/expese/report');
+    .constant('reportsUrl', '/service/expese/report')
+    .constant('projectsUrl', '/service/expese/project');
