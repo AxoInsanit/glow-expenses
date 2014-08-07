@@ -12,7 +12,6 @@ angular.module('Expenses')
             $scope.reportCollection = null;
 
             $scope.haveReport = (editExpenseSvc.getReport() != undefined);
-            //debugger;
             
             function onSuccess(reports) {
                 $scope.reportCollection = reports;

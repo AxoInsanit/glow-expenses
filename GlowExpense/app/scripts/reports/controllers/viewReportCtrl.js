@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('Reports')
-    .controller('ViewReportCtrl', ['$scope', '$filter', '$location', 'addReportErrorMsg', '$modal', 'reportSharingSvc', 'reportExpensesSvc', 'editExpenseSvc', 'expensesRepositorySvc',
-        function ($scope, $filter, $location, addReportErrorMsg, $modal, reportSharingSvc, reportExpensesSvc, editExpenseSvc, expensesRepositorySvc)  {
+    .controller('ViewReportCtrl', ['$scope', '$filter', '$location', 'addReportErrorMsg', '$modal', 'reportSharingSvc', 'reportExpensesSvc', 'editExpenseSvc', 'expensesRepositorySvc', 'expensesBufferingSvc',
+        function ($scope, $filter, $location, addReportErrorMsg, $modal, reportSharingSvc, reportExpensesSvc, editExpenseSvc, expensesRepositorySvc, expensesBufferingSvc)  {
         	//debugger;
         	$scope.report = reportSharingSvc.getReport().data;
             $scope.errorMessage = addReportErrorMsg;
@@ -17,6 +17,7 @@ angular.module('Reports')
             $scope.editExpense = function(expense) {
                 if(!$scope.editMode)
                 {
+                    debugger;
                     editExpenseSvc.setExpenseForEdit(expense);
                     editExpenseSvc.setReport($scope.report);
                     $location.path('/edit-expense');
@@ -27,15 +28,15 @@ angular.module('Reports')
                 $location.path('/edit-report');
             };
 
-            function onSuccess(expenses) {
-            	$scope.expenses = expenses;
-            };
-
             function onFail(message) {
                 alert('Failed because: ' + message);
             };
 
-            reportExpensesSvc.getExpenses( onSuccess,onFail );
+            expensesBufferingSvc.getExpenses($scope).then(function (result) {
+                result.forEach(function (item) {
+                    $scope.expenses.push(item);
+                });
+            });
             $scope.createExpense = function() {
              	$location.path('/add-expense');
             };

@@ -6,7 +6,7 @@ angular.module('Expenses').factory('reportExpensesSvc', ['$resource', 'baseUrlMo
         return $resource(baseUrlMockeyWeb + expensesUrl + "/?token="+ localStorage.getItem("session-token") +"&expenseReportId=" + reportId, {}, {
                 'getExpenses': {
                     'method': 'GET',
-                    'isArray': true
+                    'isArray': false
                 },
                 'saveExpense': {
                     'method': 'POST'

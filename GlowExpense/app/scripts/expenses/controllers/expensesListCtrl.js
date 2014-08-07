@@ -10,7 +10,6 @@ angular.module('Expenses')
              //   var currencies = currenciesSvc.get();
 
                 var mode = defaultMode;
-
                 // TODO remove this when real services are implemented
                 var firstLoad = true;
                 $scope.isMain = true;
@@ -82,6 +81,7 @@ angular.module('Expenses')
                 $scope.editExpense = function(expense) {
                     if(!$scope.showEditMode)
                     {
+                        debugger;
                         editExpenseSvc.setExpenseForEdit(expense);
                         $location.path('/edit-expense');
                     }

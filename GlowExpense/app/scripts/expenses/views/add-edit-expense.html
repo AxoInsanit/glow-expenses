@@ -87,7 +87,7 @@
             <div class="form-item">
                 <div class="select-custom" ng-click="expenseTypeModal($event)">
                     <ng-switch on="isEditExpense">
-                        <span class="selected" ng-switch-default>{{expense.type}}</span>
+                        <span class="selected" ng-switch-default>{{expense.expenseTypeName}}</span>
                         <span class="selected" ng-switch-when="false">Description</span>
                     </ng-switch>
                 </div>
@@ -105,7 +105,7 @@
             <div class="form-item">
                 <div class="select-custom" ng-click="expenseCurrencyModal($event)">
                     <ng-switch on="isEditExpense">
-                        <span class="selected" ng-switch-default>{{expense.societyCurrency}}</span>
+                        <span class="selected" ng-switch-default>{{expense.currency.code}}</span>
                         <span class="selected" ng-switch-when="false">Current</span>
                     </ng-switch>                   
                 </div>
