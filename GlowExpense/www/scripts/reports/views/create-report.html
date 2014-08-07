@@ -4,7 +4,7 @@
     <header>
         <nav>
             <ul class="single">
-                <li class="btn-helper">
+                <li class="btn-helper close">
                     <a class="icon icon-close-black" back-button=""></a>
                 </li>
                 <li class="btn-main">
@@ -15,7 +15,7 @@
         </nav>
     </header>
     <article class="expenses-body with-padding">
-        <form role="form" name="expenseForm">
+        <form role="form" name="reportForm">
             <div ng-show="showErrorMessage" class="error-message">
             <div class="msg errorMsg">{{errorMessage}}
             </div>
@@ -34,39 +34,37 @@
                     <label for="test">
                         <input type="radio" class="input-checked" id="test" placeholder="Title" name="assign" class="form-control" ng-model="expense.description" required="">
                         <span class="icon icon-check-green"></span>
-                        All
+                        Project Assigned
                     </label>
                 </div>
                 <div class="form-item checked">
                     <label for="test_1">
                         <input type="radio" class="input-checked" id="test_1" placeholder="Title" name="assign" class="form-control" ng-model="expense.description" required="">
                         <span class="icon icon-check-green"></span>
-                        Open
+                        All Projects
                     </label>
                 </div>
                 <div class="form-item checked">
                     <label for="test_2">
                         <input type="radio" class="input-checked" id="test_2" placeholder="Title" name="assign" class="form-control" ng-model="expense.description" required="">
                         <span class="icon icon-check-green"></span>
-                        Archived
+                        Organizational Unit
                     </label>
                 </div>
             </div>
             <loading></loading>
             <div class="form-group">
                 <div class="form-item">
-                    <div class="select-custom" ng-click="expenseTypeModal()">
-                        <span class="selected"> -- choose expense type -- </span>
-                    <!-- <select ng-model="expense.expenseType" ng-options="expenseType.name for expenseType in expenseTypes" ng-click="expenseTypeModal()">
-                        <option value="">-- choose expense type --</option>
-                    </select> -->
+                    <div class="select-custom" ng-click="projectNameModal($event)">
+                        <span class="selected"> Project Name </span>
+                    </div>
                 </div>
             </div>
-        </div>      
+        </form></article></div>      
         <div class="btn-fixed">
-            <button class="btn" type="submit" ng-click="addOrEdit(expenseForm, expense)">Create</button>
+            <button class="btn" type="submit" ng-click="save(reportForm)">Create</button>
         </div>
         <div>
-        </div></form>
-    </article>
+        
+    
 </div>

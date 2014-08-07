@@ -1,0 +1,21 @@
+{
+    "projects": [{
+        "id": 5551111,
+        "studio": "Gaming",
+        "client": {
+            "id": 1234,
+            "name": "Disney"
+        },
+        "tag": "dny555",
+        "name": "New Website Development"
+    }, {
+        "id": 9990000,
+        "studio": "Consumer Experience",
+        "client": {
+            "id": 71771,
+            "name": "HSBC"
+        },
+        "tag": "hsbc08",
+        "name": "Client Website"
+    }]
+}

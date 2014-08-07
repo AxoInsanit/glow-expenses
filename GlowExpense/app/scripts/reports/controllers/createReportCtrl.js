@@ -6,6 +6,9 @@ angular.module('Reports')
             $scope.errorMessage = addReportErrorMsg;
             $scope.showErrorMessage = false;
             $scope.projects = null;
+
+            $scope.reportData = {};
+
             //debugger;
             function onSuccess(projects) {
             	$scope.projects = projects;
@@ -44,10 +47,18 @@ angular.module('Reports')
             projectRepositorySvc.getProjects( onSuccess,onFail );
 
           
-           //TODO: SEND THE FORM NOW IT DOESNT SEND ANYTHING
-           $scope.save = function(form){
-          	 reportsRepositorySvc.saveReports({},onSuccessSave,onFailSave);
-           };
+            //TODO: SEND THE FORM NOW IT DOESNT SEND ANYTHING
+            $scope.save = function(form){
+                $scope.reportData.token = localStorage.getItem("session-token");
+                //dont know from where to get it. Ask geronimo
+                $scope.reportData.expense = undefined;
+                $scope.reportData.expenseID = undefined;
+
+                $scope.reportData.description = form.title;
+
+                // TODO: GET THE DATA-ID,DATA-NAME FROM THE PROJECT INPUT
+          	    reportsRepositorySvc.saveReports($scope.reportData,onSuccessSave,onFailSave);
+            };
 
         }
     ]);

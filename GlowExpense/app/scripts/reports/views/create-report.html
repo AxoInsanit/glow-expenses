@@ -23,7 +23,7 @@
         </div>
             <div class="form-group bottom20">
                 <div class="form-item">
-                    <input type="text" id="description" placeholder="Title"  class="form-control" ng-model="expense.description" required>
+                    <input type="text" id="title" placeholder="Title"  class="form-control" ng-model="reportForm.title" required>
                 </div>
             </div>
             <div class="form-group bottom20">
@@ -31,22 +31,22 @@
                     Assign Expense to:
                 </div>
                 <div class="form-item checked">
-                    <label for="test">
-                        <input type="radio" class="input-checked" id="test" placeholder="Title" name="assign"  class="form-control" ng-model="expense.description" required>
+                    <label for="test_0">
+                        <input type="radio" class="input-checked" id="test_0" placeholder="Title" name="assign"  class="form-control" ng-model="reportForm.type" required  value="project assigned">
                         <span class="icon icon-check-green"></span>
                         Project Assigned
                     </label>
                 </div>
                 <div class="form-item checked">
                     <label for="test_1">
-                        <input type="radio" class="input-checked" id="test_1" placeholder="Title" name="assign"  class="form-control" ng-model="expense.description" required>
+                        <input type="radio" class="input-checked" id="test_1" placeholder="Title" name="assign"  class="form-control" ng-model="reportForm.type" required  value="all projects">
                         <span class="icon icon-check-green"></span>
                         All Projects
                     </label>
                 </div>
                 <div class="form-item checked">
                     <label for="test_2">
-                        <input type="radio" class="input-checked" id="test_2" placeholder="Title" name="assign"  class="form-control" ng-model="expense.description" required>
+                        <input type="radio" class="input-checked" id="test_2" placeholder="Title" name="assign"  class="form-control" ng-model="reportForm.type" required value="organizational unit">  
                         <span class="icon icon-check-green"></span>
                         Organizational Unit
                     </label>
@@ -56,6 +56,7 @@
             <div class="form-group">
                 <div class="form-item">
                     <div class="select-custom" ng-click="projectNameModal($event)">
+                        <input type="radio" class="input-checked" id="test_2" placeholder="Title" name="assign"  class="form-control" ng-model="reportForm.projectName" required checked value="test">
                         <span class="selected"> Project Name </span>
                     </div>
                 </div>
@@ -68,3 +69,5 @@
         </form>
     </article>
 </div>
+<!-- delete modal -->
+<div ng-include="'./scripts/modalTemplates/project-name-modal.html'"></div>
