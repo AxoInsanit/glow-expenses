@@ -7,7 +7,7 @@ angular.module('Expenses', [])
     .constant('selectModeActivated','_SELECT_MODE_ACTIVATED')
     .constant('detailsModeActivated','_DETAILS_MODE_ACTIVATED')
     .constant('addExpenseErrorMsg','Please complete all fields!')
-    .constant('addExpensesTitle','Add Expenses')
+    .constant('addExpensesTitle','Create Expenses')
     .constant('addExpensesButtonLabel','Create')
     .constant('editExpensesTitle','Edit Expense')
     .constant('editExpensesButtonLabel','Save');

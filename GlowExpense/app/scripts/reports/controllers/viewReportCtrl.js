@@ -5,7 +5,6 @@ angular.module('Reports')
         function ($scope, $filter, $location, addReportErrorMsg, $modal, reportSharingSvc, reportExpensesSvc, editExpenseSvc, expensesRepositorySvc)  {
         	//debugger;
         	$scope.report = reportSharingSvc.getReport().data;
-          //debugger;
             $scope.errorMessage = addReportErrorMsg;
             $scope.showErrorMessage = false;
             $scope.expenses = [];

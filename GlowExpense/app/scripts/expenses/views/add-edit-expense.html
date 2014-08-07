@@ -79,8 +79,10 @@
         </ng-switch>
         <div class="form-group">
             <div class="form-item checked">
-                <input type="text" class="input-checked" id="description" placeholder="Title"  class="form-control" required>
-                <div class="descr pullDown"></div>
+                 <ng-switch on="isEditExpense">
+                        <input type="text" class="input-checked" id="description" placeholder="expense.description"  class="form-control" value="expense.description" required ng-switch-default>
+                        <input type="text" class="input-checked" id="description" placeholder="Title"  class="form-control" required ng-switch-when="false">
+                    </ng-switch> 
             </div>
             <div class="form-item">
                 <div class="select-custom" ng-click="expenseTypeModal($event)">
@@ -95,8 +97,10 @@
                 <div class="date pullDown"></div>
             </div>
             <div class="form-item">
-                <input type="number" min="0.01" step="0.01" id="amount" placeholder="Amount"  class="form-control"
-                 required decimal-places>
+                 <ng-switch on="isEditExpense">
+                    <input type="number" min="0.01" step="0.01" id="amount" placeholder="Amount"  class="form-control" required decimal-places ng-switch-default value="{{expense.originalAmount}}">
+                    <input type="number" min="0.01" step="0.01" id="amount" placeholder="Amount"  class="form-control" required decimal-places ng-switch-when="false">
+                </ng-switch>
             </div>
             <div class="form-item">
                 <div class="select-custom" ng-click="expenseCurrencyModal($event)">
