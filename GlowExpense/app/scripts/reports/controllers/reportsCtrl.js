@@ -36,7 +36,7 @@ angular.module('Reports')
             };
 
             $scope.viewReport = function(report) {
-                if((!$scope.showEditMode)&&(!report.locked))
+                if((!$scope.showEditMode)&&(!report.locked)&&(report.state == "Draft expense"))
                 {
                     reportSharingSvc.setReport(report);
                     $location.path('/view-report');
