@@ -30,8 +30,6 @@ angular.module('Reports')
 
             function onSuccess(expenses) {
             	$scope.expenses = expenses;
-                
-                //debugger;
             };
 
             function onFail(message) {

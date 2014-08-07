@@ -14,7 +14,8 @@
         "exchangeRate": 5.47,
         "societyCurrencyId": 1234,
         "type": "REPORTABLE",
-        "imageType": "void|jpg|pdf"
+        "imageType": "void|jpg|pdf",
+"societyCurrency" : "BG"
     },
     {
         "expenseId": 123457,
@@ -31,6 +32,7 @@
         "exchangeRate": 5.47,
         "societyCurrencyId": 1234,
         "type": "REPORTABLE",
-        "imageType": "void|jpg|pdf"
+        "imageType": "void|jpg|pdf",
+"societyCurrency" : "BG"
     }
 ]

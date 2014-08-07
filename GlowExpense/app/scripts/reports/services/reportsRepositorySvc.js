@@ -8,16 +8,13 @@ angular.module('Reports').factory('reportsRepositorySvc', ['$resource', 'baseUrl
                     'isArray': true
                 },
                 'saveReports': {
-                    'method': 'POST',
-                    'isArray': true
+                    'method': 'POST'
                 },
                 'editReports': {
-                    'method': 'PUT',
-                    'isArray': true
+                    'method': 'PUT'
                 },
                 'deleteReports': {
-                    'method': 'DELETE',
-                    'isArray': true
+                    'method': 'DELETE'
                 }
             }
         );

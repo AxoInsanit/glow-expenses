@@ -18,9 +18,9 @@ angular.module('Expenses').controller('deleteExpModalCtrl', ['$scope', '$modalIn
             // }
             $scope.location = function(){
                 if($location.$$path.indexOf("report")>0)
-                    return "report";
+                    return "Report";
                 else
-                    return "expense";
+                    return "Expense";
             };
 
 

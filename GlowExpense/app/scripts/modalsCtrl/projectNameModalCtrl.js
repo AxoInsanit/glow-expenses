@@ -8,7 +8,8 @@ angular.module('Reports').controller('projectNameModalCtrl', ['$scope', '$modalI
             $scope.chousen = function (choise) {
                 //change the input value
                 $($scope.target).html(choise.name);
-                $($scope.target).attr("data-projId",choise.id);
+                $($scope.target).parent().find('input').attr("data-projId",choise.id);
+                $($scope.target).parent().find('input').attr("data-projName",choise.name);
                 
                 $.grep($scope.projects, function(item){
                   if( item.selected == true );
