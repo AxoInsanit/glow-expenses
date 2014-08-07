@@ -15,7 +15,8 @@
 			"exchangeRate": 5.47,
 			"societyCurrencyId": 1234,
 			"type":"REPORTABLE",
-			"imageType": "void"
+			"imageType": "void",
+"societyCurrency":"BG"
 		},
 		{
 			"expenseId": 1234567,
@@ -32,7 +33,8 @@
 			"exchangeRate": 5.47,
 			"societyCurrencyId": 1234,
 			"type":"REPORTABLE",
-			"imageType": "jpg"
+			"imageType": "jpg",
+"societyCurrency":"A~G"
 		},
 		{
 			"expenseId": 1234568,
@@ -49,7 +51,8 @@
 			"exchangeRate": 5.47,
 			"societyCurrencyId": 1234,
 			"type":"REPORTABLE",
-			"imageType": "void"
+			"imageType": "void",
+"societyCurrency":"PT"
 		},
 		{
 			"expenseId": 1234569,
@@ -66,7 +69,8 @@
 			"exchangeRate": 5.47,
 			"societyCurrencyId": 1234,
 			"type":"REPORTABLE",
-			"imageType": "jpg"
+			"imageType": "jpg",
+"societyCurrency":"RG"
 		},
 		{
 			"expenseId": 1234561,
@@ -83,7 +87,8 @@
 			"exchangeRate": 5.47,
 			"societyCurrencyId": 1234,
 			"type":"REPORTABLE",
-			"imageType": "jpg"
+			"imageType": "jpg",
+"societyCurrency":"SF"
 		},
 		{
 			"expenseId": 1234562,
@@ -100,7 +105,8 @@
 			"exchangeRate": 5.47,
 			"societyCurrencyId": 1234,
 			"type":"REPORTABLE",
-			"imageType": "void"
+			"imageType": "void",
+"societyCurrency":"MG"
 		}
 	]
 }

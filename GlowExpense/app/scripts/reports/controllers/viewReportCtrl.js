@@ -17,7 +17,7 @@ angular.module('Reports')
             $scope.editExpense = function(expense) {
                 if(!$scope.editMode)
                 {
-                    debugger;
+                    //debugger;
                     editExpenseSvc.setExpenseForEdit(expense);
                     editExpenseSvc.setReport($scope.report);
                     $location.path('/edit-expense');

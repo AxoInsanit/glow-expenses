@@ -7,7 +7,7 @@ angular.module('Expenses')
             $scope.buttonLabel = editExpensesButtonLabel;
 
             $scope.expense = editExpenseSvc.getExpenseForEdit();
-            debugger;
+            //debugger;
             $scope.report = null;
             $scope.reportCollection = null;
 

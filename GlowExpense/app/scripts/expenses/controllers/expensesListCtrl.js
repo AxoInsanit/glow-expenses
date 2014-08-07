@@ -81,7 +81,7 @@ angular.module('Expenses')
                 $scope.editExpense = function(expense) {
                     if(!$scope.showEditMode)
                     {
-                        debugger;
+                        //debugger;
                         editExpenseSvc.setExpenseForEdit(expense);
                         $location.path('/edit-expense');
                     }

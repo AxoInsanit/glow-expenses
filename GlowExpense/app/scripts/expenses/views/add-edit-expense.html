@@ -80,7 +80,7 @@
         <div class="form-group">
             <div class="form-item checked">
                  <ng-switch on="isEditExpense">
-                        <input type="text" class="input-checked" id="description" placeholder="expense.description"  class="form-control" value="expense.description" required ng-switch-default>
+                        <input type="text" class="input-checked" id="description" placeholder="expense.description"  class="form-control" value="{{expense.description}}" required ng-switch-default>
                         <input type="text" class="input-checked" id="description" placeholder="Title"  class="form-control" required ng-switch-when="false">
                     </ng-switch> 
             </div>
