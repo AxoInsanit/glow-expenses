@@ -46,7 +46,7 @@
                         </div>
                         <div class="desc">
                             <p class="main-text">{{ expense.description }}</p>
-                            <span class="info-text date">{{ expense.date }}</span>
+                            <span class="info-text date">{{ expense.date | date:'dd MMMM yyyy' }}</span>
                         </div>
                     </div>
                     <div class="right-part">

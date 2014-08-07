@@ -5,7 +5,7 @@
         <nav>
             <ul class="single">
                 <li class="btn-helper close">
-                    <a class="icon icon-close-black"  back-button></a>
+                    <a class="icon icon-back-arrow"  back-button></a>
                 </li>
                 <li class="btn-main">
                     <a class="active"><span> {{report.description}}</span></a>
@@ -34,7 +34,7 @@
                 </div>
                 <div class="desc">
                     <p class="main-text desc ng-binding">{{expense.description}}</p>
-                    <span class="info-text date ng-binding">{{expense.date}}</span>
+                    <span class="info-text date ng-binding">{{expense.date | date:'dd MMMM yyyy'}}</span>
                 </div>
             </div>
             <div class="right-part">
@@ -45,7 +45,7 @@
     <article>
         <div class="btn-fixed grey">
             <a class="left-part underscored" ng-click="goToEdit()">Edit Report</a>
-            <p class="right-part">TOTAL {{report.total}}</p>
+            <p class="right-part">TOTAL {{expense.societyCurrency}} {{report.total}}</p>
             <button class="btn ng-binding" type="submit" ng-click="addOrEdit()">Send Report</button>
         </div>
     </article>

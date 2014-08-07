@@ -9,7 +9,7 @@ angular.module('Expenses', [])
     .constant('addExpenseErrorMsg','Please complete all fields!')
     .constant('addExpensesTitle','Add Expenses')
     .constant('addExpensesButtonLabel','Create')
-    .constant('editExpensesTitle','Edit Expenses')
+    .constant('editExpensesTitle','Edit Expense')
     .constant('editExpensesButtonLabel','Save');
 
 
