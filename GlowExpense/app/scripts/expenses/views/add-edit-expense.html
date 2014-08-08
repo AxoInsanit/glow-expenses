@@ -37,8 +37,8 @@
                             Assign Expense to:
                         </div>
                         <div class="form-item checked" ng-repeat="report in reportCollection">
-                            <label for="test" ng-click="selectReport(report.expenseReportId)">
-                                <input type="radio" class="input-checked" id="test" placeholder="Title" name="assign"  class="form-control" ng-model="expense.description" required>
+                            <label for="test{{$index}}" ng-click="selectReport(report.expenseReportId)">
+                                <input type="radio" class="input-checked" id="test{{$index}}" placeholder="Title" name="assign"  class="form-control" ng-model="expense.description" required>
                                 <span class="icon icon-check-green"></span>
                                 {{report.description}}.
                             </label> 

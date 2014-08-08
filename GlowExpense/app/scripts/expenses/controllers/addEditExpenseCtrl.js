@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('Expenses')
-    .controller('AddEditExpenseCtrl', ['$scope', '$location', 'expensesRepositorySvc', 'addExpenseErrorMsg', '$modal',
+    .controller('AddEditExpenseCtrl', ['$scope', '$location', 'expensesRepositorySvc', 'addExpenseErrorMsg', '$modal', 
         'currenciesSvc', 'expenseTypesSvc', 'reportSharingSvc',
 
         function ($scope, $location, expensesRepositorySvc, addExpenseErrorMsg, $modal, currenciesSvc, expenseTypesSvc, reportSharingSvc) {
@@ -17,7 +17,7 @@ angular.module('Expenses')
 
             $scope.isEditExpense = false;
 
-            if($location.$$path.indexOf("edit-")>0)
+            if($location.$$path.indexOf('edit-')>0)
             {
               $scope.isEditExpense = true;
             }
@@ -32,7 +32,7 @@ angular.module('Expenses')
                   controller: expenseTypeModalCtrl,
                   resolve: {
                     expenseTypes: function () {
-                      return {"types": $scope.expenseTypes,"target":event.target};
+                      return {'types': $scope.expenseTypes,'target':event.target};
                     }
                   }
                 });
@@ -44,7 +44,7 @@ angular.module('Expenses')
                   controller: expenseCurrencyModalCtrl,
                   resolve: {
                     currencies: function () {
-                      return {"types": $scope.currencies,"target":event.target};
+                      return {'types': $scope.currencies,'target':event.target};
                     }
                   }
                 });
@@ -64,7 +64,7 @@ angular.module('Expenses')
                       controller: editSaveCtrl,
                       resolve: {
                         data: function () {
-                          return {"report":$scope.report};
+                          return {'report':$scope.report};
                         }
                       }
                     });
