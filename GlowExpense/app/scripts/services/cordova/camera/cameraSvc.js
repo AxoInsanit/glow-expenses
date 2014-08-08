@@ -2,6 +2,7 @@
 
 /* global Camera: false */
 /* global confirm: false */
+/* global alert */
 
 angular.module('Services').factory('cameraSvc', ['$q', function($q){
 
@@ -16,10 +17,10 @@ angular.module('Services').factory('cameraSvc', ['$q', function($q){
             }
 
             function onFail() {
-                alert("Fail");
+                alert('Fail');
                 deferred.reject();
             }
-            alert("navigator.camera is "+navigator.camera);
+            alert('navigator.camera is '+navigator.camera);
             navigator.camera.getPicture(onSuccess, onFail, { quality: 50, targetWidth: 100,
                 targetHeight: 100, destinationType: Camera.DestinationType.FILE_URI });
             return deferred.promise;

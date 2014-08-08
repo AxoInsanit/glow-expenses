@@ -1,4 +1,5 @@
 'use strict';
+/*global alert */
 
 angular.module('Reports')
     .controller('ReportsCtrl', ['$scope', '$filter', '$location', 'reportsRepositorySvc', '$modal', 'reportSharingSvc',
@@ -13,8 +14,7 @@ angular.module('Reports')
             });
 
             $scope.deleteReport = function(report) {
-            	
-            	$scope.reportForDeletion = report;
+                $scope.reportForDeletion = report;
                 var modalInstance = $modal.open({
                     templateUrl: 'deleteModal',
                     controller: 'deleteExpModalCtrl',
@@ -29,14 +29,14 @@ angular.module('Reports')
                     function onFail(message) {
                         alert('Failed because: ' + message);
                     }
-                    reportsRepositorySvc.deleteReports({"token":localStorage.getItem("session-token"),"expenseReportId":$scope.reportForDeletion.expenseReportId},onSuccess(reportsRepositorySvc),onFail());
+                    reportsRepositorySvc.deleteReports({'token':localStorage.getItem('session-token'),'expenseReportId':$scope.reportForDeletion.expenseReportId},onSuccess(reportsRepositorySvc),onFail());
                 }, function () {
-                });     
+                });
 
             };
 
             $scope.viewReport = function(report) {
-                if((!$scope.showEditMode)&&(!report.locked)&&(report.state == "Draft expense"))
+                if((!$scope.showEditMode)&&(!report.locked)&&(report.state === 'Draft expense'))
                 {
                     reportSharingSvc.setReport(report);
                     $location.path('/view-report');
@@ -47,9 +47,7 @@ angular.module('Reports')
                 $location.path('/create-report');
             };
             function onSuccess(reports) {
-            	$scope.reportCollection = reports;
-                //debugger;
-                
+                $scope.reportCollection = reports;
             }
 
             function onFail(message) {

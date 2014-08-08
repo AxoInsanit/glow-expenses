@@ -13,5 +13,5 @@ angular.module('Reports')
         getReport: function() {
             return report;
         }
-    }
+    };
 });

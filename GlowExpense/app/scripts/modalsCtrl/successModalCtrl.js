@@ -1,5 +1,7 @@
-var successModalCtrl = function ($scope, $modalInstance, data, $location) {
+'use strict';
 
-	$scope.saveEditTitle = data.expenses.description;		
-	$scope.text = "";
+var successModalCtrl = function ($scope, $modalInstance, data) {
+
+	$scope.saveEditTitle = data.expenses.description;
+	$scope.text = '';
 };

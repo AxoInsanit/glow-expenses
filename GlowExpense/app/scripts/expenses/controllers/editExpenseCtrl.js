@@ -1,8 +1,9 @@
 'use strict';
+/*global alert */
 
 angular.module('Expenses')
-    .controller('EditExpenseCtrl', ['$scope', 'editExpensesTitle', 'editExpensesButtonLabel', 'editExpenseSvc', 'cameraSvc', 'reportsRepositorySvc',
-        function ($scope, editExpensesTitle, editExpensesButtonLabel, editExpenseSvc, cameraSvc, reportsRepositorySvc) {
+    .controller('EditExpenseCtrl', ['$scope', 'editExpensesTitle', 'editExpensesButtonLabel', 'editExpenseSvc', 'cameraSvc', 'reportsRepositorySvc', '$location',
+        function ($scope, editExpensesTitle, editExpensesButtonLabel, editExpenseSvc, cameraSvc, reportsRepositorySvc, $location) {
             $scope.title = editExpensesTitle;
             $scope.buttonLabel = editExpensesButtonLabel;
 
@@ -24,7 +25,7 @@ angular.module('Expenses')
 
             $scope.createReport = function() {
                 $location.path('/create-report');
-            }
+            };
 
             //debugger;
             $scope.date = $scope.expense.date;

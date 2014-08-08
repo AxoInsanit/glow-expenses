@@ -1,4 +1,5 @@
 'use strict';
+/*global alert */
 
 angular.module('Reports')
     .controller('CreateReportCtrl', ['$scope', '$filter', '$location', 'addReportErrorMsg', 'reportSharingSvc', 'projectRepositorySvc', '$modal', 'reportsRepositorySvc',
@@ -12,36 +13,36 @@ angular.module('Reports')
             //debugger;
             function onSuccess(projects) {
             	$scope.projects = projects;
-            };
+            }
 
             function onFail(message) {
                 alert('Failed because: ' + message);
-            };
+            }
 
             function onSuccessSave() {
-            	$location.path('/reports');
-            };
+                $location.path('/reports');
+            }
 
             function onFailSave(message) {
                 alert('Failed because: ' + message);
-            };
+            }
 
             $scope.projectNameModal = function($event) {
-            	//debugger;
+                //debugger;
                 var modalInstance = $modal.open({
                     templateUrl: 'projectNameModal',
                     controller: 'projectNameModalCtrl',
-                    size: "sm",
+                    size: 'sm',
                     resolve: {
                     data: function () {
-                      return {"projects": $scope.projects,"target":event.target};
+                      return {'projects': $scope.projects,'target':event.target};
                     }
                   }
-                });   
+                });
                 modalInstance.result.then(function () {
                    //onclose
                 }, function () {
-                }); 
+                });
             };
 
             projectRepositorySvc.getProjects( onSuccess,onFail );
@@ -57,7 +58,7 @@ angular.module('Reports')
                 $scope.reportData.description = form.title;
 
                 // TODO: GET THE DATA-ID,DATA-NAME FROM THE PROJECT INPUT
-          	    reportsRepositorySvc.saveReports($scope.reportData,onSuccessSave,onFailSave);
+                reportsRepositorySvc.saveReports($scope.reportData,onSuccessSave,onFailSave);
             };
 
         }

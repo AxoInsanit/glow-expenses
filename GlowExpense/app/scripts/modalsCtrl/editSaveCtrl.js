@@ -1,6 +1,8 @@
+'use strict';
+
 var editSaveCtrl = function ($scope, $modalInstance, data, $location) {
 
-	if($location.$$path.indexOf("edit")>0)
+	if($location.$$path.indexOf('edit')>0)
 	{
 		$scope.text = 'edited';
 	}

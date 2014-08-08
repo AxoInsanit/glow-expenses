@@ -1,10 +1,11 @@
 'use strict';
+/*global alert */
 
 angular.module('Reports')
     .controller('ViewReportCtrl', ['$scope', '$filter', '$location', 'addReportErrorMsg', '$modal', 'reportSharingSvc', 'reportExpensesSvc', 'editExpenseSvc', 'expensesRepositorySvc', 'expensesBufferingSvc',
         function ($scope, $filter, $location, addReportErrorMsg, $modal, reportSharingSvc, reportExpensesSvc, editExpenseSvc, expensesRepositorySvc, expensesBufferingSvc)  {
-        	//debugger;
-        	$scope.report = reportSharingSvc.getReport().data;
+            //debugger;
+            $scope.report = reportSharingSvc.getReport().data;
             $scope.errorMessage = addReportErrorMsg;
             $scope.showErrorMessage = false;
             $scope.expenses = [];
@@ -30,7 +31,7 @@ angular.module('Reports')
 
             function onFail(message) {
                 alert('Failed because: ' + message);
-            };
+            }
 
             expensesBufferingSvc.getExpenses($scope).then(function (result) {
                 result.forEach(function (item) {
@@ -38,7 +39,7 @@ angular.module('Reports')
                 });
             });
             $scope.createExpense = function() {
-             	$location.path('/add-expense');
+                $location.path('/add-expense');
             };
 
             $scope.deleteExpense = function(expense) {
@@ -46,9 +47,9 @@ angular.module('Reports')
                 var modalInstance = $modal.open({
                     templateUrl: 'deleteModal',
                     controller: 'deleteExpModalCtrl',
-                    size: "sm",
+                    size: 'sm',
                     resolve: {}
-                });   
+                });
                 modalInstance.result.then(function () {
                     function onSuccess() {
                         reportExpensesSvc.getExpenses( onSuccess,onFail );
@@ -58,9 +59,9 @@ angular.module('Reports')
                         alert('Failed because: ' + message);
                     }
                     //debugger;
-                    expensesRepositorySvc.deleteExpense({"token":localStorage.getItem("session-token"),"expenseId":$scope.expenseForDeletion},onSuccess(),onFail());
+                    expensesRepositorySvc.deleteExpense({'token':localStorage.getItem('session-token'),'expenseId':$scope.expenseForDeletion},onSuccess(),onFail());
                 }, function () {
-                });             
+                });
             };
 
             $scope.addOrEdit = function() {
@@ -70,7 +71,7 @@ angular.module('Reports')
                   resolve: {
                     data: function () {
                       return {
-                        "expenses":$scope.report
+                        'expenses':$scope.report
                       };
                     }
                   }
