@@ -7,9 +7,6 @@ angular.module('Expenses')
         function ($scope, $filter, $location, expenseSvc, expensesRepositorySvc, expensesBufferingSvc, defaultMode, selectMode, editExpenseSvc,
                   cameraSvc, $modal)  {
 
-
-             //   var currencies = currenciesSvc.get();
-
                 var mode = defaultMode;
                 // TODO remove this when real services are implemented
                 var firstLoad = true;
@@ -55,26 +52,6 @@ angular.module('Expenses')
                     });
                 };
 
-                $scope.takePhoto = function() {
-                    function onSuccess(imageURI) {
-                        $scope.imageSelectedPath = imageURI;
-                    }
-
-                    function onFail(message) {
-                        alert('Failed because: ' + message);
-                    }
-
-                    //main function for photo
-                    navigator.camera.getPicture(onSuccess, onFail,
-                        {
-                            quality: 50,
-                            destinationType: Camera.DestinationType.FILE_URI,
-                            targetWidth: 50,
-                            targetHeight: 50
-                        }
-                    );
-                };
-
                 $scope.showInvoiceImage = function() {
                     $location.path('/invoice-expense-image');
                 };
@@ -108,32 +85,12 @@ angular.module('Expenses')
                     });
                 };
 
-                $scope.enableSorting = function () {
-                    $scope.showSorting = true;
-                };
-
-                $scope.sort = function (reverseSorting) {
-                    $scope.reverseSorting = reverseSorting;
-                    order('date', reverseSorting);
-                    $scope.showSorting = false;
-                };
-
-                $scope.toggleSearching = function (showSearch) {
-                    $scope.showSearch = showSearch;
-                };
-
                 $scope.takePhoto = function(expense) {
                     cameraSvc.takePhoto().then(function(){
                         // TODO get the type from the image or make constants with the types
                         expense.imageType = 'jpg';
                     });
                 };
-
-                var orderBy = $filter('orderBy');
-
-                function order(predicate, reverse) {
-                    $scope.expenses = orderBy($scope.expenses, predicate, reverse);
-                }
 
                 expensesBufferingSvc.getExpenses($scope).then(function (result) {
                     result.forEach(function (item) {
