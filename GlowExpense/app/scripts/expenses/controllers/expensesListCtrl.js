@@ -38,9 +38,9 @@ angular.module('Expenses')
                     var modalInstance = $modal.open({
                         templateUrl: 'deleteModal',
                         controller: 'deleteExpModalCtrl',
-                        size: "sm",
+                        size: 'sm',
                         resolve: {}
-                    });   
+                    });
                     modalInstance.result.then(function () {
                         function onSuccess(expensesRepositorySvc) {
                             expensesRepositorySvc.getExpenses();
@@ -49,9 +49,9 @@ angular.module('Expenses')
                         function onFail(message) {
                             alert('Failed because: ' + message);
                         }
-                        expensesRepositorySvc.deleteExpense({"token":localStorage.getItem("session-token"),"expenseId":$scope.expenseForDeletion.expenseId},onSuccess(expensesRepositorySvc),onFail());
+                        expensesRepositorySvc.deleteExpense({'token':localStorage.getItem('session-token'),'expenseId':$scope.expenseForDeletion.expenseId},onSuccess(expensesRepositorySvc),onFail());
                     }, function () {
-                    });             
+                    });
                 };
 
                 $scope.takePhoto = function() {

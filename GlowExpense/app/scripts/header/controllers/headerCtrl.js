@@ -5,12 +5,12 @@ angular.module('Header')
         function ($scope, $filter, $location, $modal) {
             //check are we at edit mode
             $scope.editMode = false;
-        	  //change witch one of the top is active
-            $scope.isActive = function (viewLocation) { 
+            //change witch one of the top is active
+            $scope.isActive = function (viewLocation) {
                 return viewLocation === $location.path();
             };
 
-			$scope.addExpense = function() {
+            $scope.addExpense = function() {
                 $location.path('/add-expense');
             };
 
@@ -24,14 +24,12 @@ angular.module('Header')
                  var modalInstance = $modal.open({
                   templateUrl: 'signOutModal',
                   controller: SignOutModalCtrl,
-                  size: "sm",
+                  size: 'sm',
                   resolve: {
                     items: function () {
                       return $scope.items;
                     }
                   }
                 });
-
-                modalInstance.result;
             };
 		}]);

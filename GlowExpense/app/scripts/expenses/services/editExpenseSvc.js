@@ -17,8 +17,8 @@ angular.module('Expenses').factory('editExpenseSvc', [function() {
             report = sreport;
         }
 
-        function getReport(sreport) {
-            return report
+        function getReport() {
+            return report;
         }
 
         return {

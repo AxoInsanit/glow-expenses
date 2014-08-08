@@ -11,25 +11,25 @@ angular.module('Expenses')
             $scope.report = null;
             $scope.reportCollection = null;
 
-            $scope.haveReport = (editExpenseSvc.getReport() != undefined);
+            $scope.haveReport = (editExpenseSvc.getReport() !== undefined);
             
             function onSuccess(reports) {
                 $scope.reportCollection = reports;
                 //debugger;                
-            };
+            }
 
             function onFail(message) {
                 alert('Failed because: ' + message);
-            };
+            }
 
             $scope.createReport = function() {
                 $location.path('/create-report');
-            };
+            }
 
             //debugger;
             $scope.date = $scope.expense.date;
             $scope.isEdit = true;
-            $scope.imageSelectedPath = "";
+            $scope.imageSelectedPath = '';
             
             // if ($scope.expense.imageType !== 'void'){
             //     $scope.imageSelectedPath = './scripts/expenses/views/img.jpg';

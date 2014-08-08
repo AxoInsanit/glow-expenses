@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('Expenses')
-    .controller('AddEditExpenseCtrl', ['$scope', '$location', 'expensesRepositorySvc', 'addExpenseErrorMsg', '$modal', 
+    .controller('AddEditExpenseCtrl', ['$scope', '$location', 'expensesRepositorySvc', 'addExpenseErrorMsg', '$modal',
         'currenciesSvc', 'expenseTypesSvc', 'reportSharingSvc',
 
         function ($scope, $location, expensesRepositorySvc, addExpenseErrorMsg, $modal, currenciesSvc, expenseTypesSvc, reportSharingSvc) {
@@ -49,9 +49,9 @@ angular.module('Expenses')
                   }
                 });
                 modalInstance.result.then(function (selectedItem) {
-                    debugger;
+                    //debugger;
                 }, function (item) {
-                    debugger;
+                    //debugger;
                 });
             };
 
