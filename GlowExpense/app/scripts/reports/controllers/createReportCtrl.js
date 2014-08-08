@@ -12,7 +12,7 @@ angular.module('Reports')
 
             //debugger;
             function onSuccess(projects) {
-            	$scope.projects = projects;
+                $scope.projects = projects;
             }
 
             function onFail(message) {
@@ -50,7 +50,7 @@ angular.module('Reports')
           
             //TODO: SEND THE FORM NOW IT DOESNT SEND ANYTHING
             $scope.save = function(form){
-                $scope.reportData.token = localStorage.getItem("session-token");
+                $scope.reportData.token = localStorage.getItem('session-token');
                 //dont know from where to get it. Ask geronimo
                 $scope.reportData.expense = undefined;
                 $scope.reportData.expenseID = undefined;

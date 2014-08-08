@@ -10,9 +10,11 @@ var expenseTypeModalCtrl = function ($scope, $modalInstance, expenseTypes) {
 		$($scope.target).html(expense.name);
 		$.grep($scope.expenses, function(item){
 	      if( item.selected === true );
-	      	item.selected = false;
-	    });
+	      {
+			item.selected = false;
+	      }
+		});
 		expense.selected = true;
 		$modalInstance.dismiss(expense);
-  	};
+	};
 };

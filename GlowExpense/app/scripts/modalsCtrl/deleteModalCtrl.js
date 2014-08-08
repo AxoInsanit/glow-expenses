@@ -1,5 +1,4 @@
 'use strict';
-/*global alert */
 
 angular.module('Expenses').controller('deleteExpModalCtrl', ['$scope', '$modalInstance', '$location',
         function ($scope, $modalInstance, $location) {
@@ -7,11 +6,11 @@ angular.module('Expenses').controller('deleteExpModalCtrl', ['$scope', '$modalIn
             $scope.location = function(){
                 if($location.$$path.indexOf('report')>0)
                 {
-                    return 'Report';  
+                    return 'Report';
                 }
                 else
                 {
-                    return 'Expense'; 
+                    return 'Expense';
                 }
             };
 

@@ -18,9 +18,9 @@ angular.module('Reports')
                 var modalInstance = $modal.open({
                     templateUrl: 'deleteModal',
                     controller: 'deleteExpModalCtrl',
-                    size: "sm",
+                    size: 'sm',
                     resolve: {}
-                });   
+                });
                 modalInstance.result.then(function () {
                     function onSuccess(reportsRepositorySvc) {
                         reportsRepositorySvc.getReports();
