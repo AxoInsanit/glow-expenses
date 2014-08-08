@@ -11,6 +11,6 @@ var expenseTypeModalCtrl = function ($scope, $modalInstance, expenseTypes) {
 	      	item.selected = false;
 	    });
   		expense.selected = true;
-  		$modalInstance.dismiss('cancel');
+  		$modalInstance.dismiss(expense);
   	};
 };

@@ -48,6 +48,11 @@ angular.module('Expenses')
                     }
                   }
                 });
+                modalInstance.result.then(function (selectedItem) {
+                    debugger;
+                }, function (item) {
+                    debugger;
+                });
             };
 
             //on click of report list into free expense
