@@ -28,13 +28,7 @@
                     </div>
                 </div>
             </section>
-            <section ng-show="expense.showDetails" class="showDetails">
-                <div ng-include="'./scripts/expenses/views/expense-details.html'"></div>
-            </section>
         </article>
     </div>
-    <div ng-show="selectMode()" ng-click="toggleSelectMode(false)">Cancel</div>
 </div>
 <!-- <loading></loading> -->
-<!-- delete modal -->
-<div ng-include="'./scripts/modalTemplates/delete-modal.html'"></div>

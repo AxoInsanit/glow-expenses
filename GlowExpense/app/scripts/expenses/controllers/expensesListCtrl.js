@@ -26,6 +26,7 @@ angular.module('Expenses')
 
                     $scope.deleteExpense = function(expenseId){
                         confirmDeleteDialogSvc.open(entityName).then(function(){
+                            // TODO uncomment when service is working with params
 //                            expensesRepositorySvc.deleteExpense(
 //                                {
 //                                    expenseId: expenseId,
@@ -72,10 +73,12 @@ angular.module('Expenses')
                     };
 
                     $scope.takePhoto = function(expense) {
-                        cameraSvc.takePhoto().then(function(){
-                            // TODO get the type from the image or make constants with the types
-                            expense.imageType = 'jpg';
-                        });
+                        if(!$scope.isEditMode){
+                            cameraSvc.takePhoto().then(function(){
+                                // TODO get the type from the image or make constants with the types
+                                expense.imageType = 'jpg';
+                            });
+                        }
                     };
 
                     expensesBufferingSvc.getExpenses($scope).then(function (result) {
