@@ -2,101 +2,104 @@
 /*global alert */
 
 angular.module('Expenses')
-    .controller('ExpensesListCtrl', ['$scope', '$filter', '$location', 'expenseSvc', 'expensesRepositorySvc', 'expensesBufferingSvc',
-        'defaultMode', 'selectMode', 'editExpenseSvc', 'cameraSvc', '$modal',
-        function ($scope, $filter, $location, expenseSvc, expensesRepositorySvc, expensesBufferingSvc, defaultMode, selectMode, editExpenseSvc,
-                  cameraSvc, $modal)  {
+    .controller('ExpensesListCtrl', ['$scope', '$filter', '$location', 'expenseSvc', 'expensesRepositorySvc',
+        'expensesBufferingSvc', 'defaultMode', 'selectMode', 'editExpenseSvc', 'cameraSvc', '$modal',
+        'editModeNotificationChannelSvc',
 
-                var mode = defaultMode;
-                // TODO remove this when real services are implemented
-                var firstLoad = true;
-                $scope.isMain = true;
-                $scope.expenses = [];
+        function ($scope, $filter, $location, expenseSvc, expensesRepositorySvc, expensesBufferingSvc, defaultMode,
+                  selectMode, editExpenseSvc, cameraSvc, $modal, editModeNotificationChannelSvc)  {
 
-                $scope.searchedExpense = {};
 
-                $scope.showSorting = false;
-                $scope.reverseSorting = true;
-
-                $scope.showSearch = false;
-
-                $scope.showDeleteMode = false;
-
-                $scope.showEditMode = false;
-                $scope.repository = expensesRepositorySvc;
-                $scope.expenseForDeletion = null;
-
-                //when edit list is active
-                $scope.$on('EditList', function(event, args) {
-                    $scope.showEditMode = args;
-                });
-
-                $scope.deleteExpense = function(expenseId, expensesRepositorySvc) {
-                    $scope.expenseForDeletion = expenseId;
-                    var modalInstance = $modal.open({
-                        templateUrl: 'deleteModal',
-                        controller: 'deleteExpModalCtrl',
-                        size: 'sm',
-                        resolve: {}
-                    });
-                    modalInstance.result.then(function () {
-                        function onSuccess(expensesRepositorySvc) {
-                            expensesRepositorySvc.getExpenses();
-                        }
-
-                        function onFail(message) {
-                            alert('Failed because: ' + message);
-                        }
-                        expensesRepositorySvc.deleteExpense({'token':localStorage.getItem('session-token'),'expenseId':$scope.expenseForDeletion.expenseId},onSuccess(expensesRepositorySvc),onFail());
-                    }, function () {
-                    });
-                };
-
-                $scope.showInvoiceImage = function() {
-                    $location.path('/invoice-expense-image');
-                };
-
-                $scope.editExpense = function(expense) {
-                    if(!$scope.showEditMode)
-                    {
-                        //debugger;
-                        editExpenseSvc.setExpenseForEdit(expense);
-                        $location.path('/edit-expense');
-                    }
-                };
-
-                $scope.selectMode = function () {
-                    return mode === selectMode;
-                };
-
-                $scope.getMoreExpenses = function () {
-
+                    var mode = defaultMode;
                     // TODO remove this when real services are implemented
-                    if (firstLoad) {
-                        firstLoad = false;
-                        return;
+                    var firstLoad = true;
+
+                    $scope.expenses = [];
+
+                    $scope.isEditMode = false;
+                    $scope.expenseForDeletion = null;
+
+                    function toggleEditModeHandler(isEditMode){
+                        debugger;
+                        $scope.isEditMode = isEditMode;
                     }
 
-                    expensesBufferingSvc.getMoreExpenses($scope).then(function (result) {
-                        result.forEach(function (item) {
-                            $scope.expenses.push(expenseSvc.getExpense($scope, item));
+                    editModeNotificationChannelSvc.onEditModeToggled($scope, toggleEditModeHandler);
+
+
+                    $scope.deleteExpense = function(expenseId, expensesRepositorySvc) {
+                        $scope.expenseForDeletion = expenseId;
+                        var modalInstance = $modal.open({
+                            templateUrl: 'deleteModal',
+                            controller: 'deleteExpModalCtrl',
+                            size: 'sm',
+                            resolve: {}
                         });
+                        modalInstance.result.then(function () {
+                            function onSuccess(expensesRepositorySvc) {
+                                expensesRepositorySvc.getExpenses();
+                            }
 
+                            function onFail(message) {
+                                alert('Failed because: ' + message);
+                            }
+                            expensesRepositorySvc.deleteExpense(
+                                {
+                                    'token':localStorage.getItem('session-token'),
+                                    'expenseId':$scope.expenseForDeletion.expenseId
+                                },
+                                onSuccess(expensesRepositorySvc),
+                                onFail());
+                        }, function () {
+
+                        });
+                    };
+
+                    $scope.showInvoiceImage = function() {
+                        $location.path('/invoice-expense-image');
+                    };
+
+                    $scope.editExpense = function(expense) {
+                        if(!$scope.showEditMode)
+                        {
+                            //debugger;
+                            editExpenseSvc.setExpenseForEdit(expense);
+                            $location.path('/edit-expense');
+                        }
+                    };
+
+                    $scope.selectMode = function () {
+                        return mode === selectMode;
+                    };
+
+                    $scope.getMoreExpenses = function () {
+
+                        // TODO remove this when real services are implemented
+                        if (firstLoad) {
+                            firstLoad = false;
+                            return;
+                        }
+
+                        expensesBufferingSvc.getMoreExpenses($scope).then(function (result) {
+                            result.forEach(function (item) {
+                                $scope.expenses.push(expenseSvc.getExpense($scope, item));
+                            });
+
+                        });
+                    };
+
+                    $scope.takePhoto = function(expense) {
+                        cameraSvc.takePhoto().then(function(){
+                            // TODO get the type from the image or make constants with the types
+                            expense.imageType = 'jpg';
+                        });
+                    };
+
+                    expensesBufferingSvc.getExpenses($scope).then(function (result) {
+                        result.forEach(function (item) {
+                            $scope.expenses.push(item);
+                        });
                     });
-                };
 
-                $scope.takePhoto = function(expense) {
-                    cameraSvc.takePhoto().then(function(){
-                        // TODO get the type from the image or make constants with the types
-                        expense.imageType = 'jpg';
-                    });
-                };
-
-                expensesBufferingSvc.getExpenses($scope).then(function (result) {
-                    result.forEach(function (item) {
-                        $scope.expenses.push(item);
-                    });
-                });
-
-            }
+                }
     ]);

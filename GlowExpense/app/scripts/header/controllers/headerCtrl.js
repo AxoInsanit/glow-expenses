@@ -1,23 +1,19 @@
 'use strict';
 
 angular.module('Header')
-    .controller('HeaderCtrl', ['$scope', '$filter', '$location', '$modal',
-        function ($scope, $filter, $location, $modal) {
-            //check are we at edit mode
-            $scope.editMode = false;
-            //change witch one of the top is active
+    .controller('HeaderCtrl', ['$scope', '$location', '$modal', 'editModeNotificationChannelSvc',
+        function ($scope, $location, $modal, editModeNotificationChannelSvc) {
+
+            $scope.isEditMode = false;
+
+            // TODO refactor this
             $scope.isActive = function (viewLocation) {
                 return viewLocation === $location.path();
             };
 
-            $scope.addExpense = function() {
-                $location.path('/add-expense');
-            };
-
             $scope.openEditMode = function() {
-                //TODO: Add edit functionality ( green dot at front and )
-                $scope.editMode=!$scope.editMode;
-                $scope.$emit('EditList', $scope.editMode);
+                $scope.isEditMode = !$scope.isEditMode;
+                editModeNotificationChannelSvc.toggleEditMode($scope.isEditMode);
             };
 
             $scope.openProfile = function() {

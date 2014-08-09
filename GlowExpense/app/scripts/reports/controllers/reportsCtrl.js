@@ -4,7 +4,7 @@
 angular.module('Reports')
     .controller('ReportsCtrl', ['$scope', '$filter', '$location', 'reportsRepositorySvc', '$modal', 'reportSharingSvc',
             function ($scope, $filter, $location, reportsRepositorySvc, $modal, reportSharingSvc)  {
-            $scope.isMain = true;
+
             $scope.reportCollection = {};
 
             $scope.showEditMode = false;
