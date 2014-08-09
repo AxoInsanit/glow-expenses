@@ -6,7 +6,6 @@ angular.module('Services').factory('editModeNotificationChannelSvc', ['$rootScop
             //subscribe
             var onEditModeToggled = function($scope, handler){
                 $scope.$on(editModeToggled, function(event, args){
-                    debugger;
                     handler(args.isEditMode);
                 });
             };
