@@ -3,11 +3,12 @@
 
 angular.module('Expenses')
     .controller('ExpensesListCtrl', ['$scope', '$filter', '$location', 'expenseSvc', 'expensesRepositorySvc',
-        'expensesBufferingSvc', 'editExpenseSvc', 'cameraSvc', '$modal',
-        'editModeNotificationChannelSvc',
+        'expensesBufferingSvc', 'editExpenseSvc', 'cameraSvc',
+        'editModeNotificationChannelSvc', 'confirmDeleteDialogSvc', 'entityName',
 
         function ($scope, $filter, $location, expenseSvc, expensesRepositorySvc, expensesBufferingSvc,
-                  editExpenseSvc, cameraSvc, $modal, editModeNotificationChannelSvc)  {
+                  editExpenseSvc, cameraSvc, editModeNotificationChannelSvc, confirmDeleteDialogSvc,  entityName)  {
+
 
                     // TODO remove this when real services are implemented
                     var firstLoad = true;
@@ -23,31 +24,22 @@ angular.module('Expenses')
 
                     editModeNotificationChannelSvc.onEditModeToggled($scope, toggleEditModeHandler);
 
-                    $scope.deleteExpense = function(expenseId, expensesRepositorySvc) {
-                        $scope.expenseForDeletion = expenseId;
-                        var modalInstance = $modal.open({
-                            templateUrl: 'deleteModal',
-                            controller: 'deleteExpModalCtrl',
-                            size: 'sm',
-                            resolve: {}
-                        });
-                        modalInstance.result.then(function () {
-                            function onSuccess(expensesRepositorySvc) {
-                                expensesRepositorySvc.getExpenses();
-                            }
+                    $scope.deleteExpense = function(expenseId){
+                        confirmDeleteDialogSvc.open(entityName).then(function(){
+//                            expensesRepositorySvc.deleteExpense(
+//                                {
+//                                    expenseId: expenseId,
+//                                    token: localStorage.getItem('session-token')
+//                                }
+//                            ).$promise.then(function(){
+//                                    $scope.expenses = $scope.expenses.filter(function (expense) {
+//                                        return expense.expenseId !== expenseId;
+//                                    });
+//                            });
 
-                            function onFail(message) {
-                                alert('Failed because: ' + message);
-                            }
-                            expensesRepositorySvc.deleteExpense(
-                                {
-                                    'token':localStorage.getItem('session-token'),
-                                    'expenseId':$scope.expenseForDeletion.expenseId
-                                },
-                                onSuccess(expensesRepositorySvc),
-                                onFail());
-                        }, function () {
-
+                            $scope.expenses = $scope.expenses.filter(function (expense) {
+                                return expense.expenseId !== expenseId;
+                            });
                         });
                     };
 
@@ -56,9 +48,8 @@ angular.module('Expenses')
                     };
 
                     $scope.editExpense = function(expense) {
-                        if(!$scope.showEditMode)
+                        if(!$scope.isEditMode)
                         {
-                            //debugger;
                             editExpenseSvc.setExpenseForEdit(expense);
                             $location.path('/edit-expense');
                         }

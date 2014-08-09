@@ -7,8 +7,8 @@
                 <section class="item" ng-click="editExpense(expense)" ng-class="{editMode: isEditMode}">
                     <div class="left-part">
                         <div class="remove">
-                            <a href="" class="icon icon-delete float-left" ng-switch="expense.selected"
-                               ng-show="isEditMode"  ng-click="deleteExpense(reportCollection[$index])" >
+                            <a href="" class="icon icon-delete float-left"
+                               ng-show="isEditMode"  ng-click="deleteExpense(expense.expenseId)" >
                             </a>
                         </div>
                         <div class="desc">
