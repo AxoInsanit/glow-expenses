@@ -1,7 +1,7 @@
 <!-- header of the website -->
 <div class="expenses-head" ng-include="'./scripts/header/views/header.html'" ng-controller="HeaderCtrl"></div>
 <div class="expenses-body">
-    <div ng-show="!selectMode()" class="nav font15">
+    <div class="nav font15">
         <div class="Infinity" infinite-scroll="getMoreExpenses()">
             <article class="ready expense-cont" ng-repeat="expense in expenses">
                 <section class="item" ng-click="editExpense(expense)" ng-class="{editMode: isEditMode}">

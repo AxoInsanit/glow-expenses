@@ -3,14 +3,12 @@
 
 angular.module('Expenses')
     .controller('ExpensesListCtrl', ['$scope', '$filter', '$location', 'expenseSvc', 'expensesRepositorySvc',
-        'expensesBufferingSvc', 'defaultMode', 'selectMode', 'editExpenseSvc', 'cameraSvc', '$modal',
+        'expensesBufferingSvc', 'editExpenseSvc', 'cameraSvc', '$modal',
         'editModeNotificationChannelSvc',
 
-        function ($scope, $filter, $location, expenseSvc, expensesRepositorySvc, expensesBufferingSvc, defaultMode,
-                  selectMode, editExpenseSvc, cameraSvc, $modal, editModeNotificationChannelSvc)  {
+        function ($scope, $filter, $location, expenseSvc, expensesRepositorySvc, expensesBufferingSvc,
+                  editExpenseSvc, cameraSvc, $modal, editModeNotificationChannelSvc)  {
 
-
-                    var mode = defaultMode;
                     // TODO remove this when real services are implemented
                     var firstLoad = true;
 
@@ -25,7 +23,6 @@ angular.module('Expenses')
                     }
 
                     editModeNotificationChannelSvc.onEditModeToggled($scope, toggleEditModeHandler);
-
 
                     $scope.deleteExpense = function(expenseId, expensesRepositorySvc) {
                         $scope.expenseForDeletion = expenseId;
@@ -66,10 +63,6 @@ angular.module('Expenses')
                             editExpenseSvc.setExpenseForEdit(expense);
                             $location.path('/edit-expense');
                         }
-                    };
-
-                    $scope.selectMode = function () {
-                        return mode === selectMode;
                     };
 
                     $scope.getMoreExpenses = function () {
