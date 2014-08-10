@@ -19,16 +19,14 @@
                     <div class="right-part">
                         <span class="info-text money">{{ expense.originalAmount | currency }}</span>
 
-                        <div class="float-right" ng-switch="expense.imageType !== 'void'" stop-event="click">
-                            <div ng-switch-when="true" ng-click="expense.toggleSelect()"
-                            class="thickBorder right" ng-class="expense.selected ? ' backGreen' : ' '">
+                        <div class="float-right" ng-switch="expense.imageType === 'void'" stop-event="click">
+                            <a ng-switch-when="true" ng-click="takePhoto(expense)" class="icon icon-photo"></a>
+                            <a ng-switch-when="false" class="icon icon-photo-taken"></a>
                         </div>
-                        <a ng-switch-when="true" ng-click="takePhoto(expense)" class="icon icon-photo"></a>
-                        <a ng-switch-when="false" ng-click="takePhoto(expense)" class="icon icon-photo-taken"></a>
                     </div>
-                </div>
-            </section>
-        </article>
+                </section>
+            </article>
+        </div>
     </div>
 </div>
 <!-- <loading></loading> -->

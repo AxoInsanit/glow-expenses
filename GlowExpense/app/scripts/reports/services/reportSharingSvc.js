@@ -2,13 +2,12 @@
 
 angular.module('Reports')
     .factory('reportSharingSvc', function() {
-    var report = {
-        data: 'test object value'
-    };
-    
+
+    var report = null;
+
     return {
         setReport: function(value) {
-            report.data = value;
+            report = value;
         },
         getReport: function() {
             return report;

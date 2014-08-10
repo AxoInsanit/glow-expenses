@@ -8,7 +8,7 @@ angular.module('Expenses')
             $scope.buttonLabel = editExpensesButtonLabel;
 
             $scope.expense = editExpenseSvc.getExpenseForEdit();
-            //debugger;
+
             $scope.report = null;
             $scope.reportCollection = null;
 
@@ -27,7 +27,6 @@ angular.module('Expenses')
                 $location.path('/create-report');
             };
 
-            //debugger;
             $scope.date = $scope.expense.date;
             $scope.isEdit = true;
             $scope.imageSelectedPath = '';
@@ -45,7 +44,7 @@ angular.module('Expenses')
             if($scope.haveReport)
             {
                 $scope.report = editExpenseSvc.getReport();
-                editExpenseSvc.setReport(undefined);
+               // editExpenseSvc.setReport(undefined);
             }
             else
             {

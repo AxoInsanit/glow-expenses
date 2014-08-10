@@ -16,7 +16,6 @@ angular.module('Expenses')
                     $scope.expenses = [];
 
                     $scope.isEditMode = false;
-                    $scope.expenseForDeletion = null;
 
                     function toggleEditModeHandler(isEditMode){
                         $scope.isEditMode = isEditMode;

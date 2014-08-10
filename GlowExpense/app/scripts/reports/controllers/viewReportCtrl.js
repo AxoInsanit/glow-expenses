@@ -5,7 +5,8 @@ angular.module('Reports')
     .controller('ViewReportCtrl', ['$scope', '$filter', '$location', 'addReportErrorMsg', '$modal', 'reportSharingSvc', 'reportExpensesSvc', 'editExpenseSvc', 'expensesRepositorySvc', 'expensesBufferingSvc',
         function ($scope, $filter, $location, addReportErrorMsg, $modal, reportSharingSvc, reportExpensesSvc, editExpenseSvc, expensesRepositorySvc, expensesBufferingSvc)  {
             //debugger;
-            $scope.report = reportSharingSvc.getReport().data;
+            $scope.report = reportSharingSvc.getReport();
+
             $scope.errorMessage = addReportErrorMsg;
             $scope.showErrorMessage = false;
             $scope.expenses = [];
@@ -38,6 +39,7 @@ angular.module('Reports')
                     $scope.expenses.push(item);
                 });
             });
+
             $scope.createExpense = function() {
                 $location.path('/add-expense');
             };

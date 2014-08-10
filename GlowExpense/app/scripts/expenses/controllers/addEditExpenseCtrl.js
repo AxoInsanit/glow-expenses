@@ -6,9 +6,11 @@ angular.module('Expenses')
 
         function ($scope, $location, expensesRepositorySvc, addExpenseErrorMsg, $modal, currenciesSvc, expenseTypesSvc, reportSharingSvc) {
 
+            $scope.reportName = 'Test Report';
+
             $scope.errorMessage = addExpenseErrorMsg;
             $scope.showErrorMessage = false;
-            $scope.report = reportSharingSvc.getReport().data;
+           // $scope.report = reportSharingSvc.getReport();
             $scope.selectedReport = null;
             //debugger;
             $scope.currencies = currenciesSvc.get();
@@ -60,35 +62,46 @@ angular.module('Expenses')
                 $scope.selectedReport = reportId;
             };
 
+//            $scope.addOrEdit = function(form, expense) {
+//              expense.reportId = $scope.selectedReport;
+//                function onSuccess() {
+//                    $scope.showErrorMessage = false;
+//                    var modalInstance = $modal.open({
+//                      templateUrl: 'editSaveExpenseModal',
+//                      controller: editSaveCtrl,
+//                      resolve: {
+//                        data: function () {
+//                          return {'report':$scope.report};
+//                        }
+//                      }
+//                    });
+//                }
+//
+//                function onFail() {
+//                    $scope.showErrorMessage = true;
+//                }
+//
+//                if(form.$valid)
+//                {
+//                    expense.date = expense.date || new Date();
+//                    expensesRepositorySvc.saveExpense(expense, onSuccess, onFail);
+//                }
+//                else
+//                {
+//                    $scope.showErrorMessage = true;
+//                }
+//            };
+
             $scope.addOrEdit = function(form, expense) {
-              expense.reportId = $scope.selectedReport;
-                function onSuccess() {
-                    $scope.showErrorMessage = false;
-                    var modalInstance = $modal.open({
-                      templateUrl: 'editSaveExpenseModal',
-                      controller: editSaveCtrl,
-                      resolve: {
-                        data: function () {
-                          return {'report':$scope.report};
-                        }
-                      }
-                    });
-                }
-
-                function onFail() {
-                    $scope.showErrorMessage = true;
-                }
-
                 if(form.$valid)
                 {
                     expense.date = expense.date || new Date();
-                    expensesRepositorySvc.saveExpense(expense, onSuccess, onFail);
+                   // expensesRepositorySvc.saveExpense(expense, onSuccess, onFail);
                 }
                 else
                 {
                     $scope.showErrorMessage = true;
                 }
             };
-
         }
 ]);
