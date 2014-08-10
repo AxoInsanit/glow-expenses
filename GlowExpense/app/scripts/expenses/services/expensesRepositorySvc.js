@@ -12,8 +12,11 @@ angular.module('Expenses').factory('expensesRepositorySvc', ['$resource', 'baseU
                     'method': 'GET',
                     'isArray': false
                 },
-                'saveExpense': {
+                'createExpense': {
                     'method': 'POST'
+                },
+                'saveExpense': {
+                    'method': 'PUT'
                 },
                 'deleteExpense': {
                     'method': 'DELETE'

@@ -69,12 +69,8 @@
             </div>
         </div>
         <div class="btn-fixed">
-            <button class="btn" type="submit" ng-click="addOrEdit(expenseForm, expense)">{{buttonLabel}}</button>
+            <button class="btn" type="submit" ng-click="save(expenseForm, expense)">{{buttonLabel}}</button>
         </div>
         <loading></loading>
     </form>
 </article>
-
-<div ng-include="'./scripts/modalTemplates/expense-currency-modal.html'" ng-controller="HeaderCtrl"></div>
-<div ng-include="'./scripts/modalTemplates/expense-type-modal.html'" ng-controller="HeaderCtrl"></div>
-<div ng-include="'./scripts/modalTemplates/edit-save-expense.html'" ng-controller="HeaderCtrl"></div>

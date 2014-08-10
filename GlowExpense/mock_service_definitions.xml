@@ -10,5 +10,7 @@
 <serviceref file=".\mockey_def_depot\Reports\Reports.xml"/>
 <serviceref file=".\mockey_def_depot\expense_(auto_generated)\expense_(auto_generated).xml"/>
 <serviceref file=".\mockey_def_depot\project_(auto_generated)\project_(auto_generated).xml"/>
+<serviceref file=".\mockey_def_depot\report_(auto_generated)\report_(auto_generated).xml"/>
+<serviceref file=".\mockey_def_depot\project_(auto_generated)\project_(auto_generated).xml"/>
 <service_plan description="" id="1" name="test" tag="test"/>
 </mockservice>

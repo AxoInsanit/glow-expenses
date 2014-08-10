@@ -3,16 +3,40 @@
 
 angular.module('Expenses')
     .controller('EditExpenseCtrl', ['$scope', '$location', 'editExpensesTitle', 'editExpensesButtonLabel', 'editExpenseSvc',
-        'cameraSvc', 'reportsRepositorySvc', 'currencySelectDialogSvc',
+        'cameraSvc', 'reportsRepositorySvc', 'currencySelectDialogSvc', 'expensesRepositorySvc', 'editSaveExpenseDialogSvc',
+        'reportSharingSvc',
         function ($scope,  $location, editExpensesTitle, editExpensesButtonLabel, editExpenseSvc, cameraSvc,
-                  reportsRepositorySvc, currencySelectDialogSvc ) {
+                  reportsRepositorySvc, currencySelectDialogSvc, expensesRepositorySvc, editSaveExpenseDialogSvc,
+                  reportSharingSvc) {
 
             $scope.title = editExpensesTitle;
             $scope.buttonLabel = editExpensesButtonLabel;
-
+            $scope.showErrorMessage = false;
             $scope.expense = editExpenseSvc.getExpenseForEdit();
 
-            $scope.report = null;
+            $scope.save = function(form, expense) {
+                if(form.$valid)
+                {
+                    expense.date = expense.date;
+                    // TODO Uncomment this when services are ready
+//                    expensesRepositorySvc.saveExpense(expense).then(function(){
+//                        editSaveExpenseDialogSvc.openEditExpenseDialog($scope.report.description).then(function(){
+//                            $location.path(url);
+//                        });
+//                    });
+
+                    editSaveExpenseDialogSvc.openEditExpenseDialog($scope.report.description).then(function(url){
+                        debugger;
+                        $location.path(url);
+                    });
+                }
+                else
+                {
+                    $scope.showErrorMessage = true;
+                }
+            };
+
+         //   $scope.report = null;
             $scope.reportCollection = null;
 
             $scope.haveReport = (editExpenseSvc.getReport() !== undefined);
@@ -44,15 +68,15 @@ angular.module('Expenses')
 
             //and we check are we looking in expense that is in report or we look at 
             //free one in the list
-            if($scope.haveReport)
-            {
-                $scope.report = editExpenseSvc.getReport();
-               // editExpenseSvc.setReport(undefined);
-            }
-            else
-            {
-                reportsRepositorySvc.getReports(onSuccess,onFail);
-            }
+//            if($scope.haveReport)
+//            {
+//                $scope.report = editExpenseSvc.getReport();
+//               // editExpenseSvc.setReport(undefined);
+//            }
+//            else
+//            {
+//                reportsRepositorySvc.getReports(onSuccess,onFail);
+//            }
 
 
             $scope.takePhoto = function() {

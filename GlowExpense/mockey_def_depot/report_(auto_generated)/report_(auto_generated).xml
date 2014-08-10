@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<mockservice version="1.0" xml:lang="en-US">
+<service default_real_url_index="0" default_scenario_id="null" description="" error_scenario_id="null" hang_time="0" name="report (auto generated)" request_inspector_name="null" service_response_type="0" tag="" url="http://expense/report">
+<request_inspector_json_rules enable_flag="false"/>
+<response_schema enable_flag="false"/>
+<real_url url="http://expense/report"/>
+</service>
+</mockservice>
