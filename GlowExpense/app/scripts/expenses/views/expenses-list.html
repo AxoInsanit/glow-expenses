@@ -1,6 +1,6 @@
 <!-- header of the website -->
 <div class="expenses-head" ng-include="'./scripts/header/views/header.html'" ng-controller="HeaderCtrl"></div>
-<div class="expenses-body">
+<div class="expenses-body" ng-swipe-right="goToReports()">
     <div class="nav font15">
         <div class="Infinity" infinite-scroll="getMoreExpenses()">
             <article class="ready expense-cont" ng-repeat="expense in expenses">

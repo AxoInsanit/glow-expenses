@@ -9,7 +9,7 @@ var _mainModules = [
   //  ,'ngSanitize'
   //  ,'ngCookies'
   //  ,'ngAnimate'
-  //  ,'ngTouch'
+    ,'ngTouch'
   //  ,'ngMock'
   //  ,'ngLocale'
     ,'Header'

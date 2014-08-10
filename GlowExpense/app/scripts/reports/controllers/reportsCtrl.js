@@ -5,6 +5,10 @@ angular.module('Reports')
     .controller('ReportsCtrl', ['$scope', '$filter', '$location', '$modal', 'reportsSharingSvc',
             function ($scope, $filter, $location, $modal, reportsSharingSvc)  {
 
+            $scope.goToExpenses = function(){
+                $location.path('/expenses');
+            };
+
             reportsSharingSvc.getReports().then(function(reports){
                 $scope.reportCollection = reports;
             });

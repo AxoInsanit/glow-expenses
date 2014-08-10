@@ -9,6 +9,9 @@ angular.module('Expenses')
         function ($scope, $filter, $location, expenseSvc, expensesRepositorySvc, expensesBufferingSvc,
                   editExpenseSvc, cameraSvc, editModeNotificationChannelSvc, confirmDeleteDialogSvc,  entityName)  {
 
+                    $scope.goToReports =  function(){
+                        $location.path('/reports');
+                    };
 
                     // TODO remove this when real services are implemented
                     var firstLoad = true;
