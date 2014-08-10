@@ -4,6 +4,6 @@
 <request_inspector_json_rules enable_flag="false"/>
 <response_schema enable_flag="false"/>
 <real_url url="http://expense/"/>
-<xi:include href="./mockey_def_depot/expense_(auto_generated)/scenarios/expenseReports.xml" parse="xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+<xi:include href=".\mockey_def_depot\expense_(auto_generated)\scenarios\expenseReports.xml" parse="xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
 </service>
 </mockservice>

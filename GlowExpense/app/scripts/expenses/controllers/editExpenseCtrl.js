@@ -2,8 +2,11 @@
 /*global alert */
 
 angular.module('Expenses')
-    .controller('EditExpenseCtrl', ['$scope', 'editExpensesTitle', 'editExpensesButtonLabel', 'editExpenseSvc', 'cameraSvc', 'reportsRepositorySvc', '$location',
-        function ($scope, editExpensesTitle, editExpensesButtonLabel, editExpenseSvc, cameraSvc, reportsRepositorySvc, $location) {
+    .controller('EditExpenseCtrl', ['$scope', '$location', 'editExpensesTitle', 'editExpensesButtonLabel', 'editExpenseSvc',
+        'cameraSvc', 'reportsRepositorySvc', 'currencySelectDialogSvc',
+        function ($scope,  $location, editExpensesTitle, editExpensesButtonLabel, editExpenseSvc, cameraSvc,
+                  reportsRepositorySvc, currencySelectDialogSvc ) {
+
             $scope.title = editExpensesTitle;
             $scope.buttonLabel = editExpensesButtonLabel;
 

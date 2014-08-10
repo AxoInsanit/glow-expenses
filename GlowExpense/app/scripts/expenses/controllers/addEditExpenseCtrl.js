@@ -2,11 +2,10 @@
 
 angular.module('Expenses')
     .controller('AddEditExpenseCtrl', ['$scope', '$location', 'expensesRepositorySvc', 'addExpenseErrorMsg', '$modal',
-        'currenciesSvc', 'expenseTypesSvc', 'reportSharingSvc',
+        'currenciesSvc', 'reportSharingSvc', 'currencySelectDialogSvc',
 
-        function ($scope, $location, expensesRepositorySvc, addExpenseErrorMsg, $modal, currenciesSvc, expenseTypesSvc, reportSharingSvc) {
-
-            $scope.reportName = 'Test Report';
+        function ($scope, $location, expensesRepositorySvc, addExpenseErrorMsg, $modal, currenciesSvc, reportSharingSvc,
+                  currencySelectDialogSvc) {
 
             $scope.errorMessage = addExpenseErrorMsg;
             $scope.showErrorMessage = false;
@@ -15,7 +14,13 @@ angular.module('Expenses')
             //debugger;
             $scope.currencies = currenciesSvc.get();
 
-            $scope.expenseTypes = expenseTypesSvc.get();
+            $scope.selectCurrency = function(currency){
+                debugger;
+                currencySelectDialogSvc.open(currency, $scope.currencies).then(function(selectedCurrency){
+                    debugger;
+                    $scope.expense.currency = selectedCurrency;
+                });
+            };
 
             $scope.isEditExpense = false;
 

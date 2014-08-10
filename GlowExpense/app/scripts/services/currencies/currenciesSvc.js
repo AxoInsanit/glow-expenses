@@ -9,6 +9,9 @@ angular.module('Services').factory('currenciesSvc', [function(){
         }
 
         function set(currenciesData){
+            currenciesData.map(function(item){
+                item.selected = false;
+            });
             currencies = currenciesData;
         }
 

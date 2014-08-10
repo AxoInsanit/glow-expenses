@@ -9,5 +9,7 @@ angular.module('Expenses')
             $scope.date = new Date();
 
             $scope.report = reportSharingSvc.getReport();
+
+            $scope.expense = {};
     }
 ]);
