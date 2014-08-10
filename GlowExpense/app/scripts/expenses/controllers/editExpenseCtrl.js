@@ -4,15 +4,17 @@
 angular.module('Expenses')
     .controller('EditExpenseCtrl', ['$scope', '$location', 'editExpensesTitle', 'editExpensesButtonLabel', 'editExpenseSvc',
         'cameraSvc', 'reportsRepositorySvc', 'currencySelectDialogSvc', 'expensesRepositorySvc', 'editSaveExpenseDialogSvc',
-        'reportSharingSvc',
+        'expenseReportsDialogSvc',
         function ($scope,  $location, editExpensesTitle, editExpensesButtonLabel, editExpenseSvc, cameraSvc,
                   reportsRepositorySvc, currencySelectDialogSvc, expensesRepositorySvc, editSaveExpenseDialogSvc,
-                  reportSharingSvc) {
+                  expenseReportsDialogSvc) {
 
             $scope.title = editExpensesTitle;
             $scope.buttonLabel = editExpensesButtonLabel;
             $scope.showErrorMessage = false;
+            
             $scope.expense = editExpenseSvc.getExpenseForEdit();
+            $scope.report = {};
 
             $scope.save = function(form, expense) {
                 if(form.$valid)
@@ -25,8 +27,7 @@ angular.module('Expenses')
 //                        });
 //                    });
 
-                    editSaveExpenseDialogSvc.openEditExpenseDialog($scope.report.description).then(function(url){
-                        debugger;
+                    editSaveExpenseDialogSvc.openSuccessEditExpenseDialog($scope.report.description).then(function(url){
                         $location.path(url);
                     });
                 }
@@ -34,6 +35,13 @@ angular.module('Expenses')
                 {
                     $scope.showErrorMessage = true;
                 }
+            };
+
+            $scope.selectReport = function(){
+                expenseReportsDialogSvc.open().then(function(report){
+                    debugger;
+                    $scope.report = report;
+                });
             };
 
          //   $scope.report = null;

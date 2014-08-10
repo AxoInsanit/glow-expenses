@@ -2,10 +2,12 @@
 /*global alert */
 
 angular.module('Reports')
-    .controller('ReportsCtrl', ['$scope', '$filter', '$location', 'reportsRepositorySvc', '$modal', 'reportSharingSvc',
-            function ($scope, $filter, $location, reportsRepositorySvc, $modal, reportSharingSvc)  {
+    .controller('ReportsCtrl', ['$scope', '$filter', '$location', '$modal', 'reportsSharingSvc',
+            function ($scope, $filter, $location, $modal, reportsSharingSvc)  {
 
-            $scope.reportCollection = {};
+            reportsSharingSvc.getReports().then(function(reports){
+                $scope.reportCollection = reports;
+            });
 
             $scope.showEditMode = false;
             //when edit list is active
@@ -36,9 +38,9 @@ angular.module('Reports')
             };
 
             $scope.viewReport = function(report) {
-                if((!$scope.showEditMode)&&(!report.locked)&&(report.state === 'Draft expense'))
+                if((!$scope.showEditMode)&&(!report.locked)&&(report.state === 'Draft Expense'))
                 {
-                    reportSharingSvc.setReport(report);
+                    reportsSharingSvc.setReport(report);
                     $location.path('/view-report');
                 }
             };
@@ -46,15 +48,5 @@ angular.module('Reports')
             $scope.createReport = function() {
                 $location.path('/create-report');
             };
-            function onSuccess(reports) {
-                $scope.reportCollection = reports;
-            }
-
-            function onFail(message) {
-                alert('Failed because: ' + message);
-            }
-           reportsRepositorySvc.getReports(onSuccess,onFail);
-
-            
         }
     ]);

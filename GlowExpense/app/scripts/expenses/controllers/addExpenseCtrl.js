@@ -1,15 +1,17 @@
 'use strict';
 
 angular.module('Expenses')
-    .controller('AddExpenseCtrl', ['$scope', '$location', 'addExpensesTitle', 'addExpensesButtonLabel', 'reportSharingSvc',
+    .controller('AddExpenseCtrl', ['$scope', '$location', 'addExpensesTitle', 'addExpensesButtonLabel', 'reportsSharingSvc',
         'expensesRepositorySvc', 'editSaveExpenseDialogSvc',
-        function ($scope, $location, addExpensesTitle, addExpensesButtonLabel, reportSharingSvc,
+        function ($scope, $location, addExpensesTitle, addExpensesButtonLabel, reportsSharingSvc,
           expensesRepositorySvc, editSaveExpenseDialogSvc) {
 
             $scope.title = addExpensesTitle;
             $scope.buttonLabel = addExpensesButtonLabel;
             $scope.showErrorMessage = false;
+
             $scope.expense = {};
+            $scope.report = reportsSharingSvc.getReport();
 
             $scope.save = function(form, expense) {
                 if(form.$valid)
@@ -22,7 +24,7 @@ angular.module('Expenses')
 //                        });
 //                    });
 
-                    editSaveExpenseDialogSvc.openSaveExpenseDialog().then(function(){
+                    editSaveExpenseDialogSvc.openSuccessSaveExpenseDialog().then(function(){
                         $location.path(url);
                     });
                 }

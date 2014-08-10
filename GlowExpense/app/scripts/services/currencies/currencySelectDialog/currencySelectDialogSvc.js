@@ -20,7 +20,6 @@ angular.module('Services').factory('currencySelectDialogSvc', ['$modal',  functi
                     }
 
                     $scope.select = function(currency) {
-                        debugger;
                         if (lastSelectedCurrency){
                             lastSelectedCurrency.selected = false;
                         }

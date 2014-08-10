@@ -2,10 +2,10 @@
 /*global alert */
 
 angular.module('Reports')
-    .controller('ViewReportCtrl', ['$scope', '$filter', '$location', 'addReportErrorMsg', '$modal', 'reportSharingSvc', 'reportExpensesSvc', 'editExpenseSvc', 'expensesRepositorySvc', 'expensesBufferingSvc',
-        function ($scope, $filter, $location, addReportErrorMsg, $modal, reportSharingSvc, reportExpensesSvc, editExpenseSvc, expensesRepositorySvc, expensesBufferingSvc)  {
+    .controller('ViewReportCtrl', ['$scope', '$filter', '$location', 'addReportErrorMsg', '$modal', 'reportsSharingSvc', 'reportExpensesSvc', 'editExpenseSvc', 'expensesRepositorySvc', 'expensesBufferingSvc',
+        function ($scope, $filter, $location, addReportErrorMsg, $modal, reportsSharingSvc, reportExpensesSvc, editExpenseSvc, expensesRepositorySvc, expensesBufferingSvc)  {
             //debugger;
-            $scope.report = reportSharingSvc.getReport();
+            $scope.report = reportsSharingSvc.getReport();
 
             $scope.errorMessage = addReportErrorMsg;
             $scope.showErrorMessage = false;
@@ -17,6 +17,7 @@ angular.module('Reports')
             };
 
             $scope.editExpense = function(expense) {
+                debugger;
                 if(!$scope.editMode)
                 {
                     //debugger;

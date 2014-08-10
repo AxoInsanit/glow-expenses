@@ -2,8 +2,8 @@
 /*global alert */
 
 angular.module('Reports')
-    .controller('EditReportCtrl', ['$scope', '$filter', '$location', 'addReportErrorMsg', 'reportSharingSvc', 'projectRepositorySvc', '$modal', 'reportsRepositorySvc',
-        function ($scope, $filter, $location, addReportErrorMsg,reportSharingSvc,projectRepositorySvc, $modal, reportsRepositorySvc)  {
+    .controller('EditReportCtrl', ['$scope', '$filter', '$location', 'addReportErrorMsg', 'reportsSharingSvc', 'projectRepositorySvc', '$modal', 'reportsRepositorySvc',
+        function ($scope, $filter, $location, addReportErrorMsg,reportsSharingSvc,projectRepositorySvc, $modal, reportsRepositorySvc)  {
             $scope.errorMessage = addReportErrorMsg;
             $scope.showErrorMessage = false;
             $scope.projects = null;
@@ -47,7 +47,7 @@ angular.module('Reports')
 
             projectRepositorySvc.getProjects( onSuccess,onFail );
 
-            $scope.report = reportSharingSvc.getReport().data;
+            $scope.report = reportsSharingSvc.getReport().data;
           //debugger;           
           //TODO: SEND THE FORM NOW IT DOESNT SEND ANYTHING
           $scope.save = function(form){

@@ -32,7 +32,7 @@
                 <div class="form-item head">
                     Assign Expense to:
                 </div>
-                <div class="form-item">
+                <div class="form-item" ng-click="angular.isDefined(selectReport()) && selectReport()">
                     <label for="report">
                         <input type="text" id="report" placeholder="Select a report" class="form-control"
                                ng-model="report.description" disabled>

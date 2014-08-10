@@ -3,7 +3,7 @@
 angular.module('Expenses').factory('editSaveExpenseDialogSvc', ['$modal', 'expensesPath', 'reportsPath',
     function($modal, expensesPath, reportsPath){
 
-        function openEditExpenseDialog(reportName) {
+        function openSuccessEditExpenseDialog(reportName) {
             var modalInstance = $modal.open({
                 templateUrl: 'scripts/expenses/services/editSaveExpenseDialog/edit-expense-dialog.html',
                 controller: function($scope, $modalInstance) {
@@ -25,7 +25,7 @@ angular.module('Expenses').factory('editSaveExpenseDialogSvc', ['$modal', 'expen
             });
         }
 
-        function openSaveExpenseDialog() {
+        function openSuccessSaveExpenseDialog() {
             var modalInstance = $modal.open({
                 templateUrl: 'scripts/expenses/services/editSaveExpenseDialog/save-expense-dialog.html',
                 controller: function($scope, $modalInstance) {
@@ -42,8 +42,8 @@ angular.module('Expenses').factory('editSaveExpenseDialogSvc', ['$modal', 'expen
         }
 
         return {
-            openEditExpenseDialog: openEditExpenseDialog,
-            openSaveExpenseDialog: openSaveExpenseDialog
+            openSuccessEditExpenseDialog: openSuccessEditExpenseDialog,
+            openSuccessSaveExpenseDialog: openSuccessSaveExpenseDialog
         };
     }
 ]);

@@ -2,8 +2,8 @@
 /*global alert */
 
 angular.module('Reports')
-    .controller('CreateReportCtrl', ['$scope', '$filter', '$location', 'addReportErrorMsg', 'reportSharingSvc', 'projectRepositorySvc', '$modal', 'reportsRepositorySvc',
-        function ($scope, $filter, $location, addReportErrorMsg,reportSharingSvc,projectRepositorySvc, $modal, reportsRepositorySvc)  {
+    .controller('CreateReportCtrl', ['$scope', '$filter', '$location', 'addReportErrorMsg', 'reportsSharingSvc', 'projectRepositorySvc', '$modal', 'reportsRepositorySvc',
+        function ($scope, $filter, $location, addReportErrorMsg,reportsSharingSvc,projectRepositorySvc, $modal, reportsRepositorySvc)  {
             $scope.errorMessage = addReportErrorMsg;
             $scope.showErrorMessage = false;
             $scope.projects = null;
