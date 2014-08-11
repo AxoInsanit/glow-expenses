@@ -5,7 +5,7 @@ angular.module('Services').factory('confirmDeleteDialogSvc', ['$modal',  functio
         function open(entityName) {
             var modalInstance = $modal.open({
                 templateUrl: 'scripts/services/confirmDeleteDialog/confirm-delete-dialog.html',
-                controller: function($scope, $modalInstance) {
+                controller: ['$scope', '$modalInstance', function($scope, $modalInstance) {
 
                     $scope.entityName = entityName;
 
@@ -16,7 +16,7 @@ angular.module('Services').factory('confirmDeleteDialogSvc', ['$modal',  functio
                     $scope.cancel = function() {
                         $modalInstance.dismiss('false');
                     };
-                }
+                }]
             });
 
             return modalInstance.result.then(function(response) {
