@@ -1,3 +1,22 @@
 .underscored {
   text-decoration: underline;
 }
+
+/* expense-reports-dialog */
+.expense-reports-dialog {
+  height: 9em;
+  padding: 1em;
+}
+
+.expense-reports-dialog input {
+  float: right;
+  line-height: 10px;
+}
+
+.expense-reports-dialog .input-holder {
+  height: 2em;
+}
+
+.expense-reports-dialog div div {
+  color: black;
+}
