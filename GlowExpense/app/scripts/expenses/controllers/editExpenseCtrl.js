@@ -4,10 +4,10 @@
 angular.module('Expenses')
     .controller('EditExpenseCtrl', ['$scope', '$location', 'editExpensesTitle', 'editExpensesButtonLabel', 'editExpenseSvc',
         'cameraSvc', 'reportsRepositorySvc', 'currencySelectDialogSvc', 'expensesRepositorySvc', 'editSaveExpenseDialogSvc',
-        'expenseReportsDialogSvc',
+        'expenseReportsDialogSvc', '$http',
         function ($scope,  $location, editExpensesTitle, editExpensesButtonLabel, editExpenseSvc, cameraSvc,
                   reportsRepositorySvc, currencySelectDialogSvc, expensesRepositorySvc, editSaveExpenseDialogSvc,
-                  expenseReportsDialogSvc) {
+                  expenseReportsDialogSvc, $http) {
 
             $scope.title = editExpensesTitle;
             $scope.buttonLabel = editExpensesButtonLabel;
@@ -15,6 +15,15 @@ angular.module('Expenses')
             
             $scope.expense = editExpenseSvc.getExpenseForEdit();
             $scope.report = {};
+            $scope.imageSelectedPath = '';
+
+            //debugger;
+            if($scope.expense.imageType != "void")
+            {
+                expensesRepositorySvc.getImage({},  {'image': 'image'}).$promise.then(function (result) {
+                    $scope.imageSelectedPath = result.invoiceImage;
+                });
+            }
 
             $scope.save = function(form, expense) {
                 if(form.$valid)
@@ -64,8 +73,15 @@ angular.module('Expenses')
 
             $scope.date = $scope.expense.date;
             $scope.isEdit = true;
-            $scope.imageSelectedPath = '';
             
+            $scope.cancelPhoto = function() {
+                $scope.imageSelectedPath = "";
+            };
+            
+            $scope.viewImage = function() {
+                $location.path('/invoice-expense-image');
+            };
+
             // if ($scope.expense.imageType !== 'void'){
             //     $scope.imageSelectedPath = './scripts/expenses/views/img.jpg';
             // }

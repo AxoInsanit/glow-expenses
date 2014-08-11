@@ -917,7 +917,6 @@
 /Users/dimitarjilanov/Documents/glow-expenses/GlowExpense/platforms/android/assets/www/scripts/header \
 /Users/dimitarjilanov/Documents/glow-expenses/GlowExpense/platforms/android/assets/www/scripts/invoice_expense_image \
 /Users/dimitarjilanov/Documents/glow-expenses/GlowExpense/platforms/android/assets/www/scripts/login \
-/Users/dimitarjilanov/Documents/glow-expenses/GlowExpense/platforms/android/assets/www/scripts/modals \
 /Users/dimitarjilanov/Documents/glow-expenses/GlowExpense/platforms/android/assets/www/scripts/reports \
 /Users/dimitarjilanov/Documents/glow-expenses/GlowExpense/platforms/android/assets/www/scripts/expenses/views \
 /Users/dimitarjilanov/Documents/glow-expenses/GlowExpense/platforms/android/assets/www/scripts/expenses/views/add-edit-expense.html \
@@ -933,7 +932,6 @@
 /Users/dimitarjilanov/Documents/glow-expenses/GlowExpense/platforms/android/assets/www/scripts/invoice_expense_image/views/invoice-image-details.html \
 /Users/dimitarjilanov/Documents/glow-expenses/GlowExpense/platforms/android/assets/www/scripts/login/views \
 /Users/dimitarjilanov/Documents/glow-expenses/GlowExpense/platforms/android/assets/www/scripts/login/views/login.html \
-/Users/dimitarjilanov/Documents/glow-expenses/GlowExpense/platforms/android/assets/www/scripts/modals/confirm-delete-dialog.html \
 /Users/dimitarjilanov/Documents/glow-expenses/GlowExpense/platforms/android/assets/www/scripts/reports/views \
 /Users/dimitarjilanov/Documents/glow-expenses/GlowExpense/platforms/android/assets/www/scripts/reports/views/create-report.html \
 /Users/dimitarjilanov/Documents/glow-expenses/GlowExpense/platforms/android/assets/www/scripts/reports/views/edit-report.html \
