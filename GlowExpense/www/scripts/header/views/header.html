@@ -1,7 +1,7 @@
 <!-- sign out modal -->
 <div ng-include="'./scripts/modalTemplates/sign-out-modal.html'"></div>
 
-<header ng-show="isMain">
+<header>
     <nav>
         <ul>
             <li class="btn-helper profile">
@@ -16,9 +16,9 @@
                 <a ng-class="{ active: isActive('/reports')}" href="#/reports"> <span>Reports</span> </a>
             </li>
             <li class="btn-helper edit">
-                <a class="icon icon-edit" ng-click="openEditMode()" ng-hide="editMode" href=""></a>
+                <a class="icon icon-edit" ng-click="openEditMode()" ng-hide="isEditMode" href=""></a>
             </li>
-            <li class="btn-helper done"><a ng-click="openEditMode()" ng-show="editMode" data-edit="true" href="">Done</a></li>
+            <li class="btn-helper done"><a ng-click="openEditMode()" ng-show="isEditMode" data-edit="true" href="">Done</a></li>
             <div class="line"></div>
         </ul>
     </nav>

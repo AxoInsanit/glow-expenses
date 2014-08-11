@@ -3,7 +3,9 @@
 
 angular.module('Reports')
     .controller('ReportsCtrl', ['$scope', '$filter', '$location', '$modal', 'reportsSharingSvc',
-            function ($scope, $filter, $location, $modal, reportsSharingSvc)  {
+        'editModeNotificationChannelSvc', 'reportsRepositorySvc',
+            function ($scope, $filter, $location, $modal, reportsSharingSvc, editModeNotificationChannelSvc,
+                      reportsRepositorySvc)  {
 
             $scope.goToExpenses = function(){
                 $location.path('/expenses');
@@ -13,11 +15,17 @@ angular.module('Reports')
                 $scope.reportCollection = reports;
             });
 
-            $scope.showEditMode = false;
+            $scope.isEditMode = false;
             //when edit list is active
-            $scope.$on('EditList', function(event, args) {
-                $scope.showEditMode = args;
-            });
+//            $scope.$on('EditList', function(event, args) {
+//                $scope.isEditMode = args;
+//            });
+
+            function toggleEditModeHandler(isEditMode){
+                $scope.isEditMode = isEditMode;
+            }
+
+            editModeNotificationChannelSvc.onEditModeToggled($scope, toggleEditModeHandler);
 
             $scope.deleteReport = function(report) {
                 $scope.reportForDeletion = report;
@@ -42,7 +50,7 @@ angular.module('Reports')
             };
 
             $scope.viewReport = function(report) {
-                if((!$scope.showEditMode)&&(!report.locked)&&(report.state === 'Draft Expense'))
+                if((!$scope.isEditMode)&&(!report.locked)&&(report.state === 'Draft expense'))
                 {
                     reportsSharingSvc.setReport(report);
                     $location.path('/view-report');

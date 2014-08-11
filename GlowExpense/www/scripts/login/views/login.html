@@ -13,7 +13,7 @@
             <div class="form-group">
                 <input type="password" id="password" placeholder="Password*" class="form-control" ng-model="user.password" ng-click="onFocus($event)" ng-blur="onBlur($event)" required="">
             </div>
-            <button class="btn" ng-class="{ disabled: loginForm.$invalid }" type="submit" ng-click="login(user)" ng-disabled="loginForm.$invalid">LOG IN</button>
+            <button class="btn" ng-class="{ disabled: loginForm.$invalid }" type="submit" ng-click="login(user)" ng-disabled="loginForm.$invalid">SIGN IN</button>
             <loading></loading>
             <div ng-show="showErrorMessage">
                 <div class="msg errorMsg font15">{{errorMessage}}</div>

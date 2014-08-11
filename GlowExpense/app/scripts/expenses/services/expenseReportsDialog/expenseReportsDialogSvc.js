@@ -12,7 +12,8 @@ angular.module('Expenses').factory('expenseReportsDialogSvc', ['$modal', 'report
                     $scope.searchedReport = null;
 
                     var statesWhiteList = [
-                        'Draft Expense',
+                        'Draft expense',
+                        'Pending',
                         'Rejected by Finance',
                         'Rejected by Manager',
                         'Rejected by Manager',
@@ -26,6 +27,8 @@ angular.module('Expenses').factory('expenseReportsDialogSvc', ['$modal', 'report
 
                     reportsSharingSvc.getReports().then(function(response){
                         $scope.reports = response.filter(checkIfInState);
+
+                        debugger;
                     });
 
                     $scope.selectReport = function(report) {

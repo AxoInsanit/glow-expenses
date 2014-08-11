@@ -1,73 +1,31 @@
 <!-- header of the website -->
 <div class="expenses-head" ng-include="'./scripts/header/views/header.html'" ng-controller="HeaderCtrl"></div>
-<div class="expenses-body">
-    <div ng-show="showSearch" class="searchCOntain">
-        <input placeholder="Search" ng-model="searchedExpense.description">
-        <span ng-click="toggleSearching(false); searchedExpense.description=''">Cancel</span>
-    </div>
-    <div ng-show="showSorting" class="sortingControlls alignLeft">
-        <div class="row">
-            <div ng-click="sort(true)">
-                <span class="">Create Day</span><span class="upArrow"></span>
-                <span ng-show="reverseSorting" class="checkSign greenThick right"></span>
-            </div>
-        </div>
-        <hr>
-        <div class="row">
-            <div ng-click="sort(false)" class="top1">
-                <span class="">Create Day</span><span class="downArrow"></span>
-                <span ng-show="!reverseSorting" class="checkSign greenThick right"></span>
-            </div>
-        </div>
-    </div>
-    <div ng-show="!selectMode()" class="nav font15">
-        <div class="third alignLeft">
-
-        </div>
-        <div class="third arrow">
-            <div ng-click="enableSorting()"></div>
-        </div>
-
-        <div class="third alignRight">
-                <!--
-                    <div class="selectExp">Select</div>
-                -->
-                <div ng-click="toggleSearching(true)"></div>
-            </div>
-            
-        </div>
+<div class="expenses-body" ng-swipe-right="goToReports()">
+    <div class="nav font15">
         <div class="Infinity" infinite-scroll="getMoreExpenses()">
-            <article class="ready expense-cont" ng-repeat="expense in expenses | filter:searchedExpense" ng-class="!expense.enabled ? ' grayOut' : ' '">
-                <!--<div ng-click="selectMode() ? '' : expense.toggleDetails()">-->
-                <section class="item" ng-click="editExpense(expense)" ng-class="{true: 'editMode'}[showEditMode]">
+            <article class="ready expense-cont" ng-repeat="expense in expenses">
+                <section class="item" ng-click="editExpense(expense)" ng-class="{editMode: isEditMode}">
                     <div class="left-part">
                         <div class="remove">
-                            <a href="" class="icon icon-delete float-left" ng-switch="expense.selected" ng-show="showEditMode" ng-click="deleteExpense(reportCollection[$index],repository)"></a>
+                            <a href="" class="icon icon-delete float-left" ng-show="isEditMode" ng-click="deleteExpense(expense.expenseId)">
+                            </a>
                         </div>
                         <div class="desc">
                             <p class="main-text">{{ expense.description }}</p>
-                            <span class="info-text date">{{ expense.date }}</span>
+                            <span class="info-text date">{{ expense.date | date:'dd MMMM yyyy' }}</span>
                         </div>
                     </div>
                     <div class="right-part">
                         <span class="info-text money">{{ expense.originalAmount | currency }}</span>
 
-                        <div class="float-right" ng-switch="expense.imageType !== 'void'" stop-event="click">
-                            <div ng-switch-when="true" ng-click="expense.toggleSelect()" class="thickBorder right" ng-class="expense.selected ? ' backGreen' : ' '">
+                        <div class="float-right" ng-switch="expense.imageType === 'void'" stop-event="click">
+                            <a ng-switch-when="true" ng-click="takePhoto(expense)" class="icon icon-photo"></a>
+                            <a ng-switch-when="false" class="icon icon-photo-taken"></a>
                         </div>
-                        <a ng-switch-when="true" ng-click="takePhoto(expense)" class="icon icon-photo"></a>
-                        <a ng-switch-when="false" ng-click="takePhoto(expense)" class="icon icon-photo-taken"></a>
                     </div>
-                </div>
-            </section>
-            <section ng-show="expense.showDetails" class="showDetails">
-                <div ng-include="'./scripts/expenses/views/expense-details.html'"></div>
-            </section>
-        </article>
-        <p ng-show="(expenses | filter:searchedExpense).length==0">No items found</p>
+                </section>
+            </article>
+        </div>
     </div>
-    <div ng-show="selectMode()" ng-click="toggleSelectMode(false)">Cancel</div>
 </div>
 <!-- <loading></loading> -->
-<!-- delete modal -->
-<div ng-include="'./scripts/modalTemplates/delete-modal.html'"></div>
