@@ -911,7 +911,7 @@
 /Users/dimitarjilanov/Documents/glow-expenses/GlowExpense/platforms/android/assets/www/resources/images/low-res/signout.png \
 /Users/dimitarjilanov/Documents/glow-expenses/GlowExpense/platforms/android/assets/www/resources/images/low-res/sprite-legend.jpg \
 /Users/dimitarjilanov/Documents/glow-expenses/GlowExpense/platforms/android/assets/www/resources/images/low-res/sprite.png \
-/Users/dimitarjilanov/Documents/glow-expenses/GlowExpense/platforms/android/assets/www/scripts/a6a4ad04.scripts.js \
+/Users/dimitarjilanov/Documents/glow-expenses/GlowExpense/platforms/android/assets/www/scripts/27c82235.scripts.js \
 /Users/dimitarjilanov/Documents/glow-expenses/GlowExpense/platforms/android/assets/www/scripts/d1b27dc7.modules.js \
 /Users/dimitarjilanov/Documents/glow-expenses/GlowExpense/platforms/android/assets/www/scripts/expenses \
 /Users/dimitarjilanov/Documents/glow-expenses/GlowExpense/platforms/android/assets/www/scripts/header \
@@ -939,5 +939,5 @@
 /Users/dimitarjilanov/Documents/glow-expenses/GlowExpense/platforms/android/assets/www/scripts/reports/views/edit-report.html \
 /Users/dimitarjilanov/Documents/glow-expenses/GlowExpense/platforms/android/assets/www/scripts/reports/views/main-report-view.html \
 /Users/dimitarjilanov/Documents/glow-expenses/GlowExpense/platforms/android/assets/www/scripts/reports/views/view-report.html \
-/Users/dimitarjilanov/Documents/glow-expenses/GlowExpense/platforms/android/assets/www/styles/40416a78.bundle.css \
+/Users/dimitarjilanov/Documents/glow-expenses/GlowExpense/platforms/android/assets/www/styles/11782f25.bundle.css \
 /Users/dimitarjilanov/Documents/glow-expenses/GlowExpense/platforms/android/ant-build/AndroidManifest.xml \
