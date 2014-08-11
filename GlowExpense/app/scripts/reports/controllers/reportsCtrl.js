@@ -3,23 +3,16 @@
 
 angular.module('Reports')
     .controller('ReportsCtrl', ['$scope', '$filter', '$location', '$modal', 'reportsSharingSvc',
-        'editModeNotificationChannelSvc', 'reportsRepositorySvc',
+        'editModeNotificationChannelSvc', 'reportsRepositorySvc', 'filterReportByStateSvc', 'entityName',
+        'confirmDeleteDialogSvc',
             function ($scope, $filter, $location, $modal, reportsSharingSvc, editModeNotificationChannelSvc,
-                      reportsRepositorySvc)  {
-
-            $scope.goToExpenses = function(){
-                $location.path('/expenses');
-            };
+                      reportsRepositorySvc, filterReportByStateSvc, entityName, confirmDeleteDialogSvc)  {
 
             reportsSharingSvc.getReports().then(function(reports){
                 $scope.reportCollection = reports;
             });
 
             $scope.isEditMode = false;
-            //when edit list is active
-//            $scope.$on('EditList', function(event, args) {
-//                $scope.isEditMode = args;
-//            });
 
             function toggleEditModeHandler(isEditMode){
                 $scope.isEditMode = isEditMode;
@@ -28,37 +21,32 @@ angular.module('Reports')
             editModeNotificationChannelSvc.onEditModeToggled($scope, toggleEditModeHandler);
 
             $scope.deleteReport = function(report) {
-                $scope.reportForDeletion = report;
-                var modalInstance = $modal.open({
-                    templateUrl: 'deleteModal',
-                    controller: 'deleteExpModalCtrl',
-                    size: 'sm',
-                    resolve: {}
-                });
-                modalInstance.result.then(function () {
-                    function onSuccess(reportsRepositorySvc) {
-                        reportsRepositorySvc.getReports();
-                    }
 
-                    function onFail(message) {
-                        alert('Failed because: ' + message);
-                    }
-                    reportsRepositorySvc.deleteReports({'token':localStorage.getItem('session-token'),'expenseReportId':$scope.reportForDeletion.expenseReportId},onSuccess(reportsRepositorySvc),onFail());
-                }, function () {
-                });
+                confirmDeleteDialogSvc.open(entityName).then(function(){
+                    // TODO uncomment when service is working with params
+//                    reportsRepositorySvc.deleteExpense(
+//                        {
+//                            'token':localStorage.getItem('session-token'),
+//                            'expenseReportId': report.expenseReportId
+//                        }
+//                    ).$promise.then(function(){
+//                            $scope.reportCollection = $scope.reportCollection.filter(function (item) {
+//                                return item.expenseReportId !== report.expenseReportId;
+//                            });
+//                    });
 
+                    $scope.reportCollection = $scope.reportCollection.filter(function (item) {
+                        return item.expenseReportId !== report.expenseReportId;
+                    });
+                });
             };
 
             $scope.viewReport = function(report) {
-                if((!$scope.isEditMode)&&(!report.locked)&&(report.state === 'Draft expense'))
+                if((!$scope.isEditMode) && (!report.locked) && (filterReportByStateSvc.checkIfInState(report)))
                 {
                     reportsSharingSvc.setReport(report);
                     $location.path('/view-report');
                 }
-            };
-
-            $scope.createReport = function() {
-                $location.path('/create-report');
             };
         }
     ]);

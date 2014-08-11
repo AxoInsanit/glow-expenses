@@ -15,7 +15,7 @@
         <div class="reports-list">
             <div class="draft">
                 <div class="SPAM" ng-repeat="report in reportCollection">
-                    <section class="item" ng-class="{locked:report.locked,editMode:showEditMode}" ng-click="viewReport(report)">
+                    <section class="item" ng-class="{locked:report.locked,editMode:isEditMode}" ng-click="viewReport(report)">
                         <div class="right-part">
                             <p class="info-text text-right">
                                 <span>{{report.societyCurrency}}</span>
@@ -25,7 +25,7 @@
                         <div class="left-part">
                             <ng-switch on="report.locked">
                                 <div class="remove" ng-switch-default="">
-                                    <a href="" class="icon icon-delete float-left" ng-switch="expense.selected" ng-show="showEditMode" ng-click="deleteReport(reportCollection[$index],repository)"></a>
+                                    <a href="" class="icon icon-delete float-left" ng-switch="expense.selected" ng-show="isEditMode" ng-click="deleteReport(reportCollection[$index],repository)"></a>
                                 </div>
                                 <div ng-switch-when="true">
                                     
