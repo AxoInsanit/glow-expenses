@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('Expenses').factory('expenseReportsDialogSvc', ['$modal', 'reportsSharingSvc',
-    function($modal, reportsSharingSvc){
+angular.module('Expenses').factory('expenseReportsDialogSvc', ['$modal', 'reportsSharingSvc', 'filterReportByStateSvc',
+    function($modal, reportsSharingSvc, filterReportByStateSvc){
 
         function open() {
             var modalInstance = $modal.open({
@@ -11,22 +11,20 @@ angular.module('Expenses').factory('expenseReportsDialogSvc', ['$modal', 'report
                     $scope.reports = [];
                     $scope.searchedReport = null;
 
-                    var statesWhiteList = [
-                        'Draft expense',
-                        'Pending',
-                        'Rejected by Finance',
-                        'Rejected by Manager',
-                        'Rejected by Manager',
-                        'Rejected to Submitter'
-                    ];
-
-                    function checkIfInState(report){
-                        var result = statesWhiteList.indexOf(report.state) > -1;
-                        return result;
-                    }
+//                    var statesWhiteList = [
+//                        'Draft Expense',
+//                        'Rejected by Finance',
+//                        'Rejected by Manager',
+//                        'Rejected to Submitter'
+//                    ];
+//
+//                    function checkIfInState(report){
+//                        var result = statesWhiteList.indexOf(report.state) > -1;
+//                        return result;
+//                    }
 
                     reportsSharingSvc.getReports().then(function(response){
-                        $scope.reports = response.filter(checkIfInState);
+                        $scope.reports = response.filter(filterReportByStateSvc.checkIfInState);
 
                         debugger;
                     });

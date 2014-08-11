@@ -3,9 +3,9 @@
 
 angular.module('Reports')
     .controller('ReportsCtrl', ['$scope', '$filter', '$location', '$modal', 'reportsSharingSvc',
-        'editModeNotificationChannelSvc', 'reportsRepositorySvc',
+        'editModeNotificationChannelSvc', 'reportsRepositorySvc', 'filterReportByStateSvc',
             function ($scope, $filter, $location, $modal, reportsSharingSvc, editModeNotificationChannelSvc,
-                      reportsRepositorySvc)  {
+                      reportsRepositorySvc, filterReportByStateSvc)  {
 
             $scope.goToExpenses = function(){
                 $location.path('/expenses');
@@ -50,7 +50,7 @@ angular.module('Reports')
             };
 
             $scope.viewReport = function(report) {
-                if((!$scope.isEditMode)&&(!report.locked)&&(report.state === 'Draft expense'))
+                if((!$scope.isEditMode)&&(!report.locked)&&(filterReportByStateSvc.checkIfInState(report)))
                 {
                     reportsSharingSvc.setReport(report);
                     $location.path('/view-report');
