@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('Header')
-    .controller('HeaderCtrl', ['$scope', '$location', '$modal', 'editModeNotificationChannelSvc',
-        function ($scope, $location, $modal, editModeNotificationChannelSvc) {
+    .controller('HeaderCtrl', ['$scope', '$location', '$modal', 'editModeNotificationChannelSvc', 'signOutDialogSvc',
+        function ($scope, $location, $modal, editModeNotificationChannelSvc, signOutDialogSvc) {
 
             $scope.isEditMode = false;
 
@@ -17,15 +17,8 @@ angular.module('Header')
             };
 
             $scope.signOut = function() {
-                 var modalInstance = $modal.open({
-                  templateUrl: 'signOutModal',
-                  controller: SignOutModalCtrl,
-                  size: 'sm',
-                  resolve: {
-                    items: function () {
-                      return $scope.items;
-                    }
-                  }
-                });
+                signOutDialogSvc.open().then(function(url){
+                    $location.path(url);
+                })
             };
 		}]);

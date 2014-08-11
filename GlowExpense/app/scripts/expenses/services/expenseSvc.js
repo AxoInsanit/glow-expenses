@@ -2,8 +2,8 @@
 
 angular.module('Expenses')
     .factory('expenseSvc',
-        ['expensesRequestNotificationChannelSvc', 'currenciesSvc','expenseTypesSvc',
-            function(expensesRequestNotificationChannelSvc, currenciesSvc, expenseTypesSvc) {
+        ['currenciesSvc',
+            function(currenciesSvc) {
 
     function Expense(scope, initData){
         var self = this;
@@ -54,46 +54,13 @@ angular.module('Expenses')
 //            }
 //        }
 
-        function selectModeActivatedHandler() {
-            self.showDetails = false;
-        }
-
-        function detailsModeActivatedHandler(expenseId, isAnotherExpenseOpened) {
-            if (self.expenseId !== expenseId){
-                if (isAnotherExpenseOpened){
-                    self.showDetails = false;
-                    self.enabled = false;
-                } else {
-                    self.enabled = true;
-                }
-            }
-        }
-
         function initialize(){
             setCurrency();
           //  setExpenseType();
-
-            expensesRequestNotificationChannelSvc.onSelectModeActivated(scope, selectModeActivatedHandler);
-            expensesRequestNotificationChannelSvc.onDetailsModeActivated(scope, detailsModeActivatedHandler);
         }
 
         initialize();
     }
-
-    Expense.prototype.toggleDetails = function() {
-
-        if (this.enabled) {
-            this.selected = false;
-            this.showDetails = !this.showDetails;
-            expensesRequestNotificationChannelSvc.activateDetailsMode(this.expenseId, this.showDetails);
-        }
-    };
-
-    Expense.prototype.toggleSelect = function() {
-        if (this.enabled && !this.showDetails){
-            this.selected = !this.selected;
-        }
-    };
 
     function getExpense(scope, initData){
             return new Expense(scope, initData);
