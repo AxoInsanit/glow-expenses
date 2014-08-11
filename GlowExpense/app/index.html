@@ -59,6 +59,7 @@
     <script src="scripts/reports/reports.js"></script>
     <script src="scripts/invoice_expense_image/invoiceExpenseImage.js"></script>
     <script src="scripts/api/api.js"></script>
+    <script src="scripts/modals/modals.js"></script>
     <!-- yo:features -->
 
     <script src="scripts/header/controllers/headerCtrl.js"></script>
@@ -67,8 +68,9 @@
     <script src="scripts/expenses/controllers/expensesListCtrl.js"></script>
     <script src="scripts/expenses/controllers/editExpenseCtrl.js"></script>
     <script src="scripts/expenses/controllers/addExpenseCtrl.js"></script>
-    <script src="scripts/expenses/services/editSaveExpenseDialog/editSaveExpenseDialogSvc.js"></script>
-    <script src="scripts/expenses/services/expenseReportsDialog/expenseReportsDialogSvc.js"></script>
+    <script src="scripts/modals/services/editSaveExpenseDialogSvc.js"></script>
+    <script src="scripts/modals/services/expenseReportsDialogSvc.js"></script>
+    <script src="scripts/modals/services/sendReportDialogSvc.js"></script>
 
     <script src="scripts/reports/controllers/reportsCtrl.js"></script>
     <script src="scripts/reports/controllers/createReportCtrl.js"></script>
@@ -85,10 +87,10 @@
     <script src="scripts/services/localStorageSvc.js"></script>
     <script src="scripts/services/requestNotificationChannelSvc.js"></script>
     <script src="scripts/services/editModeNotificationChannelSvc.js"></script>
-    <script src="scripts/services/confirmDeleteDialog/confirmDeleteDialogSvc.js"></script>
-    <script src="scripts/services/currencies/currencySelectDialog/currencySelectDialogSvc.js"></script>
+    <script src="scripts/modals/services/confirmDeleteDialogSvc.js"></script>
+    <script src="scripts/modals/services/currencySelectDialogSvc.js"></script>
     <script src="scripts/services/filterReportByStateSvc.js"></script>
-    <script src="scripts/header/services/signOutDialogSvc.js"></script>
+    <script src="scripts/modals/services/signOutDialogSvc.js"></script>
 
     <script src="scripts/services/expenseReportStatesSvc.js"></script>
 
@@ -102,7 +104,9 @@
     <script src="scripts/services/cordova/camera/cameraSvc.js"></script>
 
 
-    <script src="scripts/services/projects/projectSvc.js"></script>
+    <script src="scripts/services/projects/projectsRepositorySvc.js"></script>
+    <script src="scripts/services/projects/projectsSharingSvc.js"></script>
+    <script src="scripts/reports/services/selectProjectsDialogSvc.js"></script>
     <script src="scripts/reports/services/reportsRepositorySvc.js"></script>
     <script src="scripts/reports/services/reportsSharingSvc.js"></script>
    <!--<script src="scripts/invoice_expense_image/services/invoiceImageSvc.js"></script>-->

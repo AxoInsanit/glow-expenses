@@ -1,10 +1,10 @@
 'use strict';
 
-angular.module('Services').factory('confirmDeleteDialogSvc', ['$modal',  function($modal){
+angular.module('Modals').factory('confirmDeleteDialogSvc', ['$modal',  function($modal){
 
         function open(entityName) {
             var modalInstance = $modal.open({
-                templateUrl: 'scripts/services/confirmDeleteDialog/confirm-delete-dialog.html',
+                templateUrl: 'scripts/modals/views/confirm-delete-dialog.html',
                 controller: ['$scope', '$modalInstance', function($scope, $modalInstance) {
 
                     $scope.entityName = entityName;

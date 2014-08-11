@@ -19,6 +19,7 @@ var _mainModules = [
     ,'infinite-scroll'
     ,'InvoiceExpenseImage'
     , 'Api'
+    , 'Modals'
     // yo:ngMainModules
     ,'ui.bootstrap'
 ];
@@ -169,9 +170,9 @@ angular.module('app', _mainModules )
                 currenciesSvc.set(result.currencies);
             });
 
-            expenseTypesRepositorySvc.getExpenseTypes().$promise.then(function (result) {
-                expenseTypesSvc.set(result.expenseTypes);
-            });
+//            expenseTypesRepositorySvc.getExpenseTypes().$promise.then(function (result) {
+//                expenseTypesSvc.set(result.expenseTypes);
+//            });
     }]);
 
 

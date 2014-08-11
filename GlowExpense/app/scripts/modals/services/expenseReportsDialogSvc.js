@@ -1,12 +1,12 @@
 'use strict';
 
-angular.module('Expenses').factory('expenseReportsDialogSvc', ['$modal', 'reportsSharingSvc', 'filterReportByStateSvc',
+angular.module('Modals').factory('expenseReportsDialogSvc', ['$modal', 'reportsSharingSvc', 'filterReportByStateSvc',
     function($modal, reportsSharingSvc, filterReportByStateSvc){
 
         function open() {
             var modalInstance = $modal.open({
-                templateUrl: 'scripts/expenses/services/expenseReportsDialog/expense-reports-dialog.html',
-                controller: function($scope, $modalInstance) {
+                templateUrl: 'scripts/modals/views/expense-reports-dialog.html',
+                controller: ['$scope', '$modalInstance', function($scope, $modalInstance) {
 
                     $scope.reports = [];
                     $scope.searchedReport = null;
@@ -18,7 +18,7 @@ angular.module('Expenses').factory('expenseReportsDialogSvc', ['$modal', 'report
                     $scope.selectReport = function(report) {
                         $modalInstance.close(report);
                     };
-                }
+                }]
             });
 
             return modalInstance.result.then(function(response) {

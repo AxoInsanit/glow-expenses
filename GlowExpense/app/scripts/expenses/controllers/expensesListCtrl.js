@@ -3,10 +3,10 @@
 angular.module('Expenses')
     .controller('ExpensesListCtrl', ['$scope', '$filter', '$location', 'expenseSvc', 'expensesRepositorySvc',
         'expensesBufferingSvc', 'editExpenseSvc', 'cameraSvc',
-        'editModeNotificationChannelSvc', 'confirmDeleteDialogSvc', 'entityName',
+        'editModeNotificationChannelSvc', 'confirmDeleteDialogSvc', 'reportEntity',
 
         function ($scope, $filter, $location, expenseSvc, expensesRepositorySvc, expensesBufferingSvc,
-                  editExpenseSvc, cameraSvc, editModeNotificationChannelSvc, confirmDeleteDialogSvc,  entityName)  {
+                  editExpenseSvc, cameraSvc, editModeNotificationChannelSvc, confirmDeleteDialogSvc,  reportEntity)  {
 
                     $scope.goToReports =  function(){
                         $location.path('/reports');
@@ -26,7 +26,7 @@ angular.module('Expenses')
                     editModeNotificationChannelSvc.onEditModeToggled($scope, toggleEditModeHandler);
 
                     $scope.deleteExpense = function(expenseId){
-                        confirmDeleteDialogSvc.open(entityName).then(function(){
+                        confirmDeleteDialogSvc.open(reportEntity).then(function(){
                             // TODO uncomment when service is working with params
 //                            expensesRepositorySvc.deleteExpense(
 //                                {
@@ -87,6 +87,5 @@ angular.module('Expenses')
                             $scope.expenses.push(item);
                         });
                     });
-
                 }
     ]);

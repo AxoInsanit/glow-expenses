@@ -1,14 +1,14 @@
 'use strict';
 
-angular.module('Header').factory('signOutDialogSvc', ['$modal', 'loginPath',
-    function($modal, loginPath){
+angular.module('Modals').factory('sendReportDialogSvc', ['$modal',
+    function($modal){
 
-        function open() {
+        function open(reportName) {
             var modalInstance = $modal.open({
-                templateUrl: 'scripts/header/views/sign-out-dialog.html',
+                templateUrl: 'scripts/modals/views/send-report-dialog.html',
                 controller: ['$scope', '$modalInstance', function($scope, $modalInstance) {
 
-                    $scope.profileName = localStorage.getItem('userName');
+                    $scope.reportName = reportName;
 
                     $scope.ok = function() {
                         $modalInstance.close(loginPath);

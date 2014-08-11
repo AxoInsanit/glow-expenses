@@ -53,19 +53,17 @@
             <loading></loading>
             <div class="form-group">
                 <div class="form-item">
-                    <div class="select-custom" ng-click="projectNameModal($event)">
-                        <input type="radio" class="input-checked" id="test_2" placeholder="Title" name="assign"  class="form-control" ng-model="reportForm.projectName" required checked value="test">
-                        <span class="selected"> Project Name </span>
+                    <div class="select-custom" ng-click="selectProject(report.project)">
+                        <input type="text" placeholder="Project Name" class="form-control"
+                               ng-model="report.project.name" required>
                     </div>
                 </div>
             </div>
         </div>      
         <div class="btn-fixed">
-            <button class="btn" type="submit" ng-click="save(reportForm)">Create</button>
+            <button class="btn" type="submit" ng-click="save(reportForm, report)">Create</button>
         </div>
         <div>
         </form>
     </article>
 </div>
-<!-- delete modal -->
-<div ng-include="'./scripts/modalTemplates/project-name-modal.html'"></div>

@@ -1,11 +1,11 @@
 'use strict';
 
-angular.module('Services').factory('currencySelectDialogSvc', ['$modal',  function($modal){
+angular.module('Modals').factory('currencySelectDialogSvc', ['$modal',  function($modal){
 
         function open(lastSelectedCurrency, currencies) {
             var modalInstance = $modal.open({
-                templateUrl: 'scripts/services/currencies/currencySelectDialog/currency-select-dialog.html',
-                controller: function($scope, $modalInstance) {
+                templateUrl: 'scripts/modals/views/currency-select-dialog.html',
+                controller: ['$scope', '$modalInstance', function($scope, $modalInstance) {
 
                     $scope.currencies = currencies;
 
@@ -27,7 +27,7 @@ angular.module('Services').factory('currencySelectDialogSvc', ['$modal',  functi
                         currency.selected = true;
                         $modalInstance.close(currency);
                     };
-                }
+                }]
             });
 
             return modalInstance.result.then(function(response) {

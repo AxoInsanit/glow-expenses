@@ -1,12 +1,12 @@
 'use strict';
 
-angular.module('Expenses').factory('editSaveExpenseDialogSvc', ['$modal', 'expensesPath', 'reportsPath',
+angular.module('Modals').factory('editSaveExpenseDialogSvc', ['$modal', 'expensesPath', 'reportsPath',
     function($modal, expensesPath, reportsPath){
 
         function openSuccessEditExpenseDialog(reportName) {
             var modalInstance = $modal.open({
-                templateUrl: 'scripts/expenses/services/editSaveExpenseDialog/edit-expense-dialog.html',
-                controller: function($scope, $modalInstance) {
+                templateUrl: 'scripts/modals/views/edit-expense-dialog.html',
+                controller: ['$scope', '$modalInstance', function($scope, $modalInstance) {
 
                     $scope.reportName = reportName;
 
@@ -17,7 +17,7 @@ angular.module('Expenses').factory('editSaveExpenseDialogSvc', ['$modal', 'expen
                     $scope.navigateToExpensesList = function() {
                         $modalInstance.close(expensesPath);
                     };
-                }
+                }]
             });
 
             return modalInstance.result.then(function(response) {
@@ -27,13 +27,13 @@ angular.module('Expenses').factory('editSaveExpenseDialogSvc', ['$modal', 'expen
 
         function openSuccessSaveExpenseDialog() {
             var modalInstance = $modal.open({
-                templateUrl: 'scripts/expenses/services/editSaveExpenseDialog/save-expense-dialog.html',
-                controller: function($scope, $modalInstance) {
+                templateUrl: 'scripts/modals/views//save-expense-dialog.html',
+                controller: ['$scope', '$modalInstance', function($scope, $modalInstance) {
 
                     $scope.ok = function() {
                         $modalInstance.close('ok');
                     };
-                }
+                }]
             });
 
             return modalInstance.result.then(function(response) {
