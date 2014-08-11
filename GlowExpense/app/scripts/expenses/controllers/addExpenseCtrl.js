@@ -24,7 +24,7 @@ angular.module('Expenses')
 //                        });
 //                    });
 
-                    editSaveExpenseDialogSvc.openSuccessSaveExpenseDialog().then(function(){
+                    editSaveExpenseDialogSvc.openSuccessSaveExpenseDialog().then(function(url){
                         $location.path(url);
                     });
                 }

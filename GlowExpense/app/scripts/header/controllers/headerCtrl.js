@@ -16,16 +16,16 @@ angular.module('Header')
                 editModeNotificationChannelSvc.toggleEditMode($scope.isEditMode);
             };
 
-            $scope.openProfile = function() {
-                 var modalInstance = $modal.open({
-                  templateUrl: 'signOutModal',
-                  controller: SignOutModalCtrl,
-                  size: 'sm',
-                  resolve: {
-                    items: function () {
-                      return $scope.items;
-                    }
-                  }
-                });
-            };
+//            $scope.openProfile = function() {
+//                 var modalInstance = $modal.open({
+//                  templateUrl: 'signOutModal',
+//                  controller: SignOutModalCtrl,
+//                  size: 'sm',
+//                  resolve: {
+//                    items: function () {
+//                      return $scope.items;
+//                    }
+//                  }
+//                });
+//            };
 		}]);
