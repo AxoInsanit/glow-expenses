@@ -40,19 +40,19 @@ angular.module('Expenses')
             }
         }
 
-        function setExpenseType() {
-            var expenseTypes = expenseTypesSvc.get();
-            expenseTypes.some(function(expenseType){
-                if (expenseType.name === self.expenseTypeName){
-                    self.expenseType = expenseType;
-                    return true;
-                }
-            });
-            if (!self.expenseType){
-                // TODO how we handle errors in the app
-                // throw exception
-            }
-        }
+//        function setExpenseType() {
+//            var expenseTypes = expenseTypesSvc.get();
+//            expenseTypes.some(function(expenseType){
+//                if (expenseType.name === self.expenseTypeName){
+//                    self.expenseType = expenseType;
+//                    return true;
+//                }
+//            });
+//            if (!self.expenseType){
+//                // TODO how we handle errors in the app
+//                // throw exception
+//            }
+//        }
 
         function selectModeActivatedHandler() {
             self.showDetails = false;
@@ -71,7 +71,7 @@ angular.module('Expenses')
 
         function initialize(){
             setCurrency();
-            setExpenseType();
+          //  setExpenseType();
 
             expensesRequestNotificationChannelSvc.onSelectModeActivated(scope, selectModeActivatedHandler);
             expensesRequestNotificationChannelSvc.onDetailsModeActivated(scope, detailsModeActivatedHandler);

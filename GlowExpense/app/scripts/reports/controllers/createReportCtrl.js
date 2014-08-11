@@ -10,7 +10,6 @@ angular.module('Reports')
 
             $scope.reportData = {};
 
-            //debugger;
             function onSuccess(projects) {
                 $scope.projects = projects;
             }
@@ -27,7 +26,7 @@ angular.module('Reports')
                 alert('Failed because: ' + message);
             }
 
-            $scope.projectNameModal = function($event) {
+            $scope.projectNameModal = function() {
                 //debugger;
                 var modalInstance = $modal.open({
                     templateUrl: 'projectNameModal',

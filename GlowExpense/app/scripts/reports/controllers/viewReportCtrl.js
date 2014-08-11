@@ -1,10 +1,9 @@
 'use strict';
-/*global alert */
 
 angular.module('Reports')
     .controller('ViewReportCtrl', ['$scope', '$filter', '$location', 'addReportErrorMsg', '$modal', 'reportsSharingSvc', 'reportExpensesSvc', 'editExpenseSvc', 'expensesRepositorySvc', 'expensesBufferingSvc',
         function ($scope, $filter, $location, addReportErrorMsg, $modal, reportsSharingSvc, reportExpensesSvc, editExpenseSvc, expensesRepositorySvc, expensesBufferingSvc)  {
-            //debugger;
+
             $scope.report = reportsSharingSvc.getReport();
 
             $scope.errorMessage = addReportErrorMsg;
@@ -17,7 +16,6 @@ angular.module('Reports')
             };
 
             $scope.editExpense = function(expense) {
-                debugger;
                 if(!$scope.editMode)
                 {
                     //debugger;
@@ -31,9 +29,9 @@ angular.module('Reports')
                 $location.path('/edit-report');
             };
 
-            function onFail(message) {
-                alert('Failed because: ' + message);
-            }
+//            function onFail(message) {
+//                alert('Failed because: ' + message);
+//            }
 
             expensesBufferingSvc.getExpenses($scope).then(function (result) {
                 result.forEach(function (item) {
@@ -58,26 +56,12 @@ angular.module('Reports')
                         reportExpensesSvc.getExpenses( onSuccess,onFail );
                     }
 
-                    function onFail(message) {
-                        alert('Failed because: ' + message);
+                    function onFail() {
+                       // alert('Failed because: ' + message);
                     }
                     //debugger;
                     expensesRepositorySvc.deleteExpense({'token':localStorage.getItem('session-token'),'expenseId':$scope.expenseForDeletion},onSuccess(),onFail());
                 }, function () {
-                });
-            };
-
-            $scope.addOrEdit = function() {
-             	var modalInstance = $modal.open({
-                  templateUrl: 'createModal',
-                  controller: successModalCtrl,
-                  resolve: {
-                    data: function () {
-                      return {
-                        'expenses':$scope.report
-                      };
-                    }
-                  }
                 });
             };
         }

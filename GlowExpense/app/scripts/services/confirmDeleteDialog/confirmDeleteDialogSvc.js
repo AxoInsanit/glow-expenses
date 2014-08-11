@@ -10,11 +10,11 @@ angular.module('Services').factory('confirmDeleteDialogSvc', ['$modal',  functio
                     $scope.entityName = entityName;
 
                     $scope.ok = function() {
-                        $modalInstance.close("true");
+                        $modalInstance.close('true');
                     };
 
                     $scope.cancel = function() {
-                        $modalInstance.dismiss("false");
+                        $modalInstance.dismiss('false');
                     };
                 }
             });
