@@ -1,0 +1,10 @@
+<script type="text/ng-template" id="expenseTypeModal">
+    <div class="modal-body modal-select" ng-repeat="expense in expenses">
+        <div class="item checked" ng-click="chousen(expense)">{{expense.name}} 
+        	<ng-switch on="expense.selected">
+        		<span class="" ng-switch-default></span>
+                <span class="icon icon-check-green" ng-switch-when="true"></span>
+            </ng-switch>
+        </div>
+    </div>
+</script>

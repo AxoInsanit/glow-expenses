@@ -1,0 +1,10 @@
+<script type="text/ng-template" id="expenseCurrencyModal">
+    <div class="modal-body modal-select" ng-repeat="currencie in currencies">
+        <div class="item checked" ng-click="chousen(currencie)" data-code="{{currencie.code}}">{{currencie.name}} 
+        	<ng-switch on="currencie.selected">
+        		<span class="" ng-switch-default></span>
+                <span class="icon icon-check-green" ng-switch-when="true"></span>
+            </ng-switch>
+        </div>
+    </div>
+</script>

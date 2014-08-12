@@ -1,5 +1,4 @@
 'use strict';
-/*global alert */
 
 angular.module('Reports')
     .controller('ReportsCtrl', ['$scope', '$filter', '$location', '$modal', 'reportsSharingSvc',

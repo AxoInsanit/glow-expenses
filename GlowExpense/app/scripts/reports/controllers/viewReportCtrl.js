@@ -1,10 +1,13 @@
 'use strict';
-/*global alert */
 
 angular.module('Reports')
-    .controller('ViewReportCtrl', ['$scope', '$filter', '$location', 'addReportErrorMsg', '$modal', 'reportsSharingSvc', 'reportExpensesSvc', 'editExpenseSvc', 'expensesRepositorySvc', 'expensesBufferingSvc',
-        function ($scope, $filter, $location, addReportErrorMsg, $modal, reportsSharingSvc, reportExpensesSvc, editExpenseSvc, expensesRepositorySvc, expensesBufferingSvc)  {
-            //debugger;
+    .controller('ViewReportCtrl', ['$scope', '$filter', '$location', 'addReportErrorMsg', '$modal', 'reportsSharingSvc',
+        'reportExpensesSvc', 'editExpenseSvc', 'expensesRepositorySvc', 'expensesBufferingSvc', 'confirmDeleteDialogSvc',
+        'entityName', 'sendReportDialogSvc',
+        function ($scope, $filter, $location, addReportErrorMsg, $modal, reportsSharingSvc, reportExpensesSvc,
+                  editExpenseSvc, expensesRepositorySvc, expensesBufferingSvc, confirmDeleteDialogSvc, entityName,
+                  sendReportDialogSvc)  {
+
             $scope.report = reportsSharingSvc.getReport();
 
             $scope.errorMessage = addReportErrorMsg;
@@ -16,24 +19,13 @@ angular.module('Reports')
               $scope.editMode = !$scope.editMode;
             };
 
-            $scope.editExpense = function(expense) {
-                //debugger;
-                if(!$scope.editMode)
-                {
-                    //debugger;
-                    editExpenseSvc.setExpenseForEdit(expense);
-                    editExpenseSvc.setReport($scope.report);
-                    $location.path('/edit-expense');
-                }
-            };
-
             $scope.goToEdit = function() {
                 $location.path('/edit-report');
             };
 
-            function onFail(message) {
-                alert('Failed because: ' + message);
-            }
+//            function onFail(message) {
+//                alert('Failed because: ' + message);
+//            }
 
             expensesBufferingSvc.getExpenses($scope).then(function (result) {
                 result.forEach(function (item) {
@@ -45,40 +37,28 @@ angular.module('Reports')
                 $location.path('/add-expense');
             };
 
-            $scope.deleteExpense = function(expense) {
-                $scope.expenseForDeletion = expense.expenseId;
-                var modalInstance = $modal.open({
-                    templateUrl: 'deleteModal',
-                    controller: 'deleteExpModalCtrl',
-                    size: 'sm',
-                    resolve: {}
-                });
-                modalInstance.result.then(function () {
-                    function onSuccess() {
-                        reportExpensesSvc.getExpenses( onSuccess,onFail );
-                    }
+            $scope.deleteExpense = function(expenseId){
+                confirmDeleteDialogSvc.open(entityName).then(function(){
+                    // TODO uncomment when service is working with params
+//                            expensesRepositorySvc.deleteExpense(
+//                                {
+//                                    expenseId: expenseId,
+//                                    token: localStorage.getItem('session-token')
+//                                }
+//                            ).$promise.then(function(){
+//                                    $scope.expenses = $scope.expenses.filter(function (expense) {
+//                                        return expense.expenseId !== expenseId;
+//                                    });
+//                            });
 
-                    function onFail(message) {
-                        alert('Failed because: ' + message);
-                    }
-                    //debugger;
-                    expensesRepositorySvc.deleteExpense({'token':localStorage.getItem('session-token'),'expenseId':$scope.expenseForDeletion},onSuccess(),onFail());
-                }, function () {
+                    $scope.expenses = $scope.expenses.filter(function (expense) {
+                        return expense.expenseId !== expenseId;
+                    });
                 });
             };
 
-            $scope.addOrEdit = function() {
-             	var modalInstance = $modal.open({
-                  templateUrl: 'createModal',
-                  controller: successModalCtrl,
-                  resolve: {
-                    data: function () {
-                      return {
-                        'expenses':$scope.report
-                      };
-                    }
-                  }
-                });
+            $scope.addOrEdit = function(){
+                sendReportDialogSvc.open($scope.report.description);
             };
         }
     ]);

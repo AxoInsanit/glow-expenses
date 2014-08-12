@@ -8,7 +8,7 @@ var _mainModules = [
     ,'ngResource'
   //  ,'ngSanitize'
   //  ,'ngCookies'
-  //  ,'ngAnimate'
+    ,'ngAnimate'
     ,'ngTouch'
   //  ,'ngMock'
   //  ,'ngLocale'

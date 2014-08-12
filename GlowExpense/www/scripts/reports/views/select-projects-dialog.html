@@ -1,0 +1,8 @@
+<div class="modal-body modal-select" ng-repeat="project in projects">
+    <div class="item checked" ng-click="select(project)" data-code="{{project.code}}">{{project.name}}
+        <ng-switch on="project.selected">
+            <span class="" ng-switch-default=""></span>
+            <span class="icon icon-check-green" ng-switch-when="true"></span>
+        </ng-switch>
+    </div>
+</div>
