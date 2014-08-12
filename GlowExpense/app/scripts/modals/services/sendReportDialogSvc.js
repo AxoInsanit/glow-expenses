@@ -11,7 +11,7 @@ angular.module('Modals').factory('sendReportDialogSvc', ['$modal',
                     $scope.reportName = reportName;
 
                     $scope.ok = function() {
-                        $modalInstance.close(loginPath);
+                        $modalInstance.close('ok');
                     };
                 }]
             });

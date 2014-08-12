@@ -19,6 +19,6 @@ angular.module('Header')
             $scope.signOut = function() {
                 signOutDialogSvc.open().then(function(url){
                     $location.path(url);
-                })
+                });
             };
 		}]);

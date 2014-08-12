@@ -1,3 +1,5 @@
+'use strict';
+
 angular.module('Services')
     .factory('projectsSharingSvc', ['$q', 'projectsRepositorySvc', function($q, projectsRepositorySvc) {
 

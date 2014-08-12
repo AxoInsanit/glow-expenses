@@ -16,7 +16,7 @@ angular.module('Expenses')
             $scope.report = {};
             $scope.imageSelectedPath = '';
 
-            if($scope.expense.imageType != "void")
+            if($scope.expense.imageType !== 'void')
             {
                 expensesRepositorySvc.getImage({},  {'image': 'image'}).$promise.then(function (result) {
                     $scope.imageSelectedPath = result.invoiceImage;
@@ -55,7 +55,7 @@ angular.module('Expenses')
 
             
             $scope.cancelPhoto = function() {
-                $scope.imageSelectedPath = "";
+                $scope.imageSelectedPath = '';
             };
             
             $scope.viewImage = function() {

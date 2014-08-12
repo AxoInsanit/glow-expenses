@@ -164,15 +164,12 @@ angular.module('app', _mainModules )
 
     }])
 
-    .run(['currenciesRepositorySvc', 'currenciesSvc', 'expenseTypesRepositorySvc', 'expenseTypesSvc',
-        function(currenciesRepositorySvc, currenciesSvc, expenseTypesRepositorySvc, expenseTypesSvc) {
+    .run(['currenciesRepositorySvc', 'currenciesSvc',
+        function(currenciesRepositorySvc, currenciesSvc) {
             currenciesRepositorySvc.getCurrencies().$promise.then(function (result) {
                 currenciesSvc.set(result.currencies);
             });
 
-//            expenseTypesRepositorySvc.getExpenseTypes().$promise.then(function (result) {
-//                expenseTypesSvc.set(result.expenseTypes);
-//            });
     }]);
 
 
