@@ -37,3 +37,97 @@
 .showImg {
   margin-top: 1%;
 }
+
+/* ANIMATIONS
+============================================================================= */
+.main-container {
+  bottom: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+
+.main-container.ng-leave {
+  z-index: 9999;
+}
+
+.main-container.ng-enter {
+  z-index: 8888;
+}
+
+.main-container.ng-leave {
+  -webkit-animation: slideOutLeft 0.75s both cubic-bezier(0.2, 0.7, 0.1, 1);
+  -moz-animation: slideOutLeft 0.75s both cubic-bezier(0.2, 0.7, 0.1, 1);
+  animation: slideOutLeft 0.75s both cubic-bezier(0.2, 0.7, 0.1, 1);
+}
+
+.main-container.ng-enter {
+  -webkit-animation: slideInLeft 0.75s both cubic-bezier(0.2, 0.7, 0.1, 1);
+  -moz-animation: slideInLeft 0.75s both cubic-bezier(0.2, 0.7, 0.1, 1);
+  animation: slideInLeft 0.75s both cubic-bezier(0.2, 0.7, 0.1, 1);
+}
+
+/* scale up */
+@keyframes scaleUp {
+  from {
+    opacity: 0.3;
+    transform: scale(0.8);
+  }
+}
+
+@-moz-keyframes scaleUp {
+  from {
+    opacity: 0.3;
+    -moz-transform: scale(0.8);
+  }
+}
+
+@-webkit-keyframes scaleUp {
+  from {
+    opacity: 0.3;
+    -webkit-transform: scale(0.8);
+  }
+}
+
+/* slide in from the bottom */
+@keyframes slideOutLeft {
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+@-moz-keyframes slideOutLeft {
+  to {
+    -moz-transform: translateX(-100%);
+  }
+}
+
+@-webkit-keyframes slideOutLeft {
+  to {
+    -webkit-transform: translateX(-100%);
+  }
+}
+
+/* slide in from the bottom */
+@keyframes slideInLeft {
+  from {
+    transform: translateX(100%);
+  }
+}
+
+@-moz-keyframes slideInLeft {
+  from {
+    -moz-transform: translateX(100%);
+  }
+}
+
+@-webkit-keyframes slideInLeft {
+  from {
+    -webkit-transform: translateX(100%);
+  }
+}
+
+/* test)1 */
+.header-img {
+  content: url("../resources/images/plus.png");
+}

@@ -10,7 +10,7 @@ angular.module('Reports')
         function getReports(){
             var deferred = $q.defer();
 
-            if (reports.length === 0){
+            if (reports.length == 0){
                 reportsRepositorySvc.getReports().$promise.then(function(response){
                     reports = response;
                     deferred.resolve(reports);

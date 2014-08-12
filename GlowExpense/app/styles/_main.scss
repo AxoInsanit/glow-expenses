@@ -6,27 +6,27 @@ Fonts
 
 @font-face {
   font-family: "HalvaticaNeue";
-  src: url('../../resources/fonts/HelveticaNeue.otf') format('opentype'); 
+  src: url('../resources/fonts/HelveticaNeue.otf') format('opentype'); 
   font-weight: normal;
 }
 @font-face {
   font-family: "HalvaticaNeueBold";
-  src: url('../../resources/fonts/HelveticaNeue-Bold.otf') format('opentype'); 
+  src: url('../resources/fonts/HelveticaNeue-Bold.otf') format('opentype'); 
   font-weight: normal;
 }
 @font-face {
   font-family: "HalvaticaNeueLight";
-  src: url('../../resources/fonts/HelveticaNeue-Light.otf') format('opentype'); 
+  src: url('../resources/fonts/HelveticaNeue-Light.otf') format('opentype'); 
   font-weight: normal;
 }
 @font-face {
   font-family: "FrutigerBlack";
-  src: url('../../resources/fonts/Frutiger-Black.ttf') format('truetype'); 
+  src: url('../resources/fonts/Frutiger-Black.ttf') format('truetype'); 
   font-weight: normal;
 }
 @font-face {
   font-family: "FrutigerLight";
-  src: url('../../resources/fonts/Frutiger-Light.ttf') format('truetype'); 
+  src: url('../resources/fonts/Frutiger-Light.ttf') format('truetype'); 
   font-weight: normal;
 }
 
@@ -91,6 +91,9 @@ table {
 }
 
 // GLOBAL STYLES
+.underlined{
+  text-decoration:underline;
+}
 .no-padding {
   padding: 0;
 }
@@ -145,9 +148,8 @@ table {
 a {
   text-decoration: none;
 }
-// sprite icons
 .icon {
-  background-image:url('../../resources/images/low-res/sprite.png');
+  background-image:url('../resources/images/low-res/sprite.png');
   display: block;
   width: 36px;
   height: 36px;
@@ -162,6 +164,9 @@ a {
   }
   &.icon-create-report {
     background-position: 0px 0px;
+  }
+  &.icon-back-arrow {
+    background-position: 0px -92px;
   }
   &.icon-alert {
     background-position: 0px -46px;
@@ -186,7 +191,7 @@ a {
     background-position: 0px -138px;
   }
   &.icon-camera-big {
-    background-image:url('../../resources/images/low-res/edit-image-big.png');
+    background-image:url('../resources/images/low-res/edit-image-big.png');
     width: 96px;
     height: 96px;
     @include centered();

@@ -1,0 +1,12 @@
+<div class="expense-reports-dialog">
+	<div ng-repeat="report in reports | filter:searchedReport">
+		<div ng-click="selectReport(report)">{{report.description}}</div>
+	</div>
+	<form action="">
+		<div class="form-group">
+			<div class="form-item">
+				<input type="text" ng-model="searchedReport" placeholder="Search for Report">
+			</div>
+		</div>
+	</form>
+</div>
