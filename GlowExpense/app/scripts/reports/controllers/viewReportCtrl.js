@@ -26,6 +26,13 @@ angular.module('Reports')
 //            function onFail(message) {
 //                alert('Failed because: ' + message);
 //            }
+            $scope.editExpense = function(expense) {
+                if(!$scope.isEditMode)
+                {
+                    editExpenseSvc.setExpenseForEdit(expense);
+                    $location.path('/edit-expense');
+                }
+            };
 
             expensesBufferingSvc.getExpenses($scope).then(function (result) {
                 result.forEach(function (item) {
