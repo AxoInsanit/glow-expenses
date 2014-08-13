@@ -7,12 +7,12 @@ angular.module('Expenses')
     var expensesBuffer = [];
     var resultExpenses = [];
 
-    function getExpenses(scope) {
+    function getExpenses() {
         var deferred = $q.defer();
         
         expensesRepositorySvc.getExpenses().$promise.then(function (result) {
             expensesBuffer = result.expenses.map(function(item){
-                return expenseSvc.getExpense(scope, item);
+                return expenseSvc.getExpense(item);
             });
 
             expensesBuffer = expensesBuffer.splice(0, 4);
@@ -24,7 +24,7 @@ angular.module('Expenses')
         return deferred.promise;
     }
 
-    function getMoreExpenses (scope) {
+    function getMoreExpenses () {
 
         var deferred = $q.defer();
 
@@ -32,7 +32,7 @@ angular.module('Expenses')
             resultExpenses = expensesBuffer.splice(0, 5);
             deferred.resolve(resultExpenses);
         } else {
-            getExpenses(scope).then(function(result){
+            getExpenses().then(function(result){
                 deferred.resolve(result);
             });
         }

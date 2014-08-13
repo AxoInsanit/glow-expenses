@@ -2,10 +2,10 @@
 
 angular.module('Expenses')
     .factory('expenseSvc',
-        ['currenciesSvc',
-            function(currenciesSvc) {
+        ['currenciesSvc', 'reportable',
+            function(currenciesSvc, reportable) {
 
-    function Expense(scope, initData){
+    function Expense(initData){
         var self = this;
 
         self.expenseId = initData.expenseId;
@@ -21,7 +21,7 @@ angular.module('Expenses')
         self.imageType = initData.imageType;
 
         self.currency = null;
-        self.expenseType = null;
+        self.expenseType = reportable;
         self.showDetails = false;
         self.selected = false;
         self.enabled = true;
@@ -40,30 +40,15 @@ angular.module('Expenses')
             }
         }
 
-//        function setExpenseType() {
-//            var expenseTypes = expenseTypesSvc.get();
-//            expenseTypes.some(function(expenseType){
-//                if (expenseType.name === self.expenseTypeName){
-//                    self.expenseType = expenseType;
-//                    return true;
-//                }
-//            });
-//            if (!self.expenseType){
-//                // TODO how we handle errors in the app
-//                // throw exception
-//            }
-//        }
-
         function initialize(){
             setCurrency();
-          //  setExpenseType();
         }
 
         initialize();
     }
 
-    function getExpense(scope, initData){
-            return new Expense(scope, initData);
+    function getExpense(initData){
+            return new Expense(initData);
         }
 
     return {
