@@ -27,7 +27,7 @@ angular.module('Reports')
                 alert('Failed because: ' + message);
             }
             
-            $scope.projectNameModal = function($event) {
+            $scope.projectNameModal = function(event) {
                 //debugger;
                 var modalInstance = $modal.open({
                     templateUrl: 'projectNameModal',

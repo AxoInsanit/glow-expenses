@@ -2,8 +2,8 @@
 /*global alert */
 
 angular.module('Reports')
-    .controller('CreateReportCtrl', ['$scope', '$filter', '$location', 'addReportErrorMsg', 'reportsSharingSvc', 'projectsRepositorySvc', '$modal', 'reportsRepositorySvc',
-        function ($scope, $filter, $location, addReportErrorMsg,reportsSharingSvc,projectRepositorySvc, $modal, reportsRepositorySvc)  {
+    .controller('CreateReportCtrl', ['$scope', '$filter', '$location', 'addReportErrorMsg', 'reportsSharingSvc', '$modal', 'reportsRepositorySvc',
+        function ($scope, $filter, $location, addReportErrorMsg,reportsSharingSvc,projectRepositorySvc, $modal)  {
             $scope.errorMessage = addReportErrorMsg;
             $scope.showErrorMessage = false;
             $scope.projects = null;
@@ -19,15 +19,7 @@ angular.module('Reports')
                 alert('Failed because: ' + message);
             }
 
-            function onSuccessSave() {
-                $location.path('/reports');
-            }
-
-            function onFailSave(message) {
-                alert('Failed because: ' + message);
-            }
-
-            $scope.projectNameModal = function($event) {
+            $scope.projectNameModal = function(event) {
                 //debugger;
                 var modalInstance = $modal.open({
                     templateUrl: 'projectNameModal',

@@ -13,7 +13,10 @@ angular.module('Reports').controller('projectNameModalCtrl', ['$scope', '$modalI
                 
                 $.grep($scope.projects, function(item){
                   if( item.selected === true )
+                  {
                     item.selected = false;
+                  }
+                    
                 });
                 choise.selected = true;
                 $modalInstance.dismiss('cancel');

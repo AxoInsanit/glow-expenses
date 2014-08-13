@@ -47,7 +47,7 @@ angular.module('Reports')
 
             $scope.deleteExpense = function(expense) {
                 $scope.expenseForDeletion = expense.expenseId;
-                var modalInstance = $modal.open({
+                    var modalInstance = $modal.open({
                     templateUrl: 'deleteModal',
                     controller: 'deleteExpModalCtrl',
                     size: 'sm',
@@ -67,18 +67,18 @@ angular.module('Reports')
                 });
             };
 
-            $scope.addOrEdit = function() {
-             	var modalInstance = $modal.open({
-                  templateUrl: 'createModal',
-                  controller: successModalCtrl,
-                  resolve: {
-                    data: function () {
-                      return {
-                        'expenses':$scope.report
-                      };
-                    }
-                  }
-                });
-            };
+            // $scope.addOrEdit = function() {
+            //     var modalInstance = $modal.open({
+            //       templateUrl: 'createModal',
+            //       controller: successModalCtrl,
+            //       resolve: {
+            //         data: function () {
+            //           return {
+            //             'expenses':$scope.report
+            //           };
+            //         }
+            //       }
+            //     });
+            // };
         }
     ]);
