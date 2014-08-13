@@ -3,10 +3,10 @@
 angular.module('Expenses')
     .controller('EditExpenseCtrl', ['$scope', '$location', 'editExpensesTitle', 'editExpensesButtonLabel', 'editExpenseSvc',
         'cameraSvc', 'reportsRepositorySvc', 'currencySelectDialogSvc', 'expensesRepositorySvc', 'editSaveExpenseDialogSvc',
-        'expenseReportsDialogSvc',
+        'expenseReportsDialogSvc', 'expenseViewImageSvc',
         function ($scope,  $location, editExpensesTitle, editExpensesButtonLabel, editExpenseSvc, cameraSvc,
                   reportsRepositorySvc, currencySelectDialogSvc, expensesRepositorySvc, editSaveExpenseDialogSvc,
-                  expenseReportsDialogSvc) {
+                  expenseReportsDialogSvc, expenseViewImageSvc) {
 
             $scope.title = editExpensesTitle;
             $scope.buttonLabel = editExpensesButtonLabel;
@@ -57,14 +57,16 @@ angular.module('Expenses')
             $scope.cancelPhoto = function() {
                 $scope.imageSelectedPath = '';
             };
-            
-            $scope.viewImage = function() {
-                $location.path('/invoice-expense-image');
-            };
 
             $scope.takePhoto = function() {
                 cameraSvc.takePhoto().then(function(result){
-                    $scope.imageSelectedPath = result;
+                    $scope.takePhoto();
+                });
+            };
+
+            $scope.viewImage = function(){
+                expenseViewImageSvc.open(currency, $scope.currencies).then(function(selectedCurrency){
+                    $scope.expense.currency = selectedCurrency;
                 });
             };
         }

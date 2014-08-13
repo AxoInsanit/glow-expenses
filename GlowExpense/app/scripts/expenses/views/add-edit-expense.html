@@ -18,12 +18,13 @@
             </a>
             <p class="text-info">Add Invoice Image </p>
         </div>
-        <div class="cameraFoot" style="background-image: url('{{imageSelectedPath}}')" ng-show="imageSelectedPath.length>1" ng-click="viewImage()">
 
+        <div ng-show="imageSelectedPath.length>1" ng-click="viewImage()">
+            <a class="icon icon-camera-big" ng-click="angular.isDefined(takePhoto()) && takePhoto()" >
+            </a>
+            <p class="text-info">Add Invoice Image </p>
         </div>
-        <div class="text-center center">
-            <button ng-click="cancelPhoto()" ng-show="imageSelectedPath.length>1">Select other image</button>
-        </div>
+
     </section>
     <form role="form" name="expenseForm" novalidate>
         <div ng-show="showErrorMessage" class="error-message">
