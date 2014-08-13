@@ -3,9 +3,10 @@
 angular.module('Reports')
     .controller('ReportsListCtrl', ['$scope', '$location', 'reportsSharingSvc',
         'editModeNotificationChannelSvc', 'reportsRepositorySvc', 'filterReportByStateSvc', 'entityName',
-        'confirmDeleteDialogSvc',
+        'confirmDeleteDialogSvc', 'viewReportPath',
             function ($scope, $location, reportsSharingSvc, editModeNotificationChannelSvc,
-                      reportsRepositorySvc, filterReportByStateSvc, entityName, confirmDeleteDialogSvc)  {
+                      reportsRepositorySvc, filterReportByStateSvc, entityName, confirmDeleteDialogSvc,
+                      viewReportPath)  {
 
             reportsSharingSvc.getReports().then(function(reports){
                 $scope.reports = reports;
@@ -44,7 +45,7 @@ angular.module('Reports')
                 if((!$scope.isEditMode) && (!report.locked) && (filterReportByStateSvc.checkIfInState(report)))
                 {
                     reportsSharingSvc.setReport(report);
-                    $location.path('/view-report');
+                    $location.path(viewReportPath);
                 }
             };
         }
