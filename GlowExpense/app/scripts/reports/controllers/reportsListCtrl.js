@@ -8,7 +8,7 @@ angular.module('Reports')
                       reportsRepositorySvc, filterReportByStateSvc, entityName, confirmDeleteDialogSvc)  {
 
             reportsSharingSvc.getReports().then(function(reports){
-                $scope.reportCollection = reports;
+                $scope.reports = reports;
             });
 
             $scope.isEditMode = false;
@@ -34,7 +34,7 @@ angular.module('Reports')
 //                            });
 //                    });
 
-                    $scope.reportCollection = $scope.reportCollection.filter(function (item) {
+                    $scope.reports = $scope.reports.filter(function (item) {
                         return item.expenseReportId !== report.expenseReportId;
                     });
                 });
