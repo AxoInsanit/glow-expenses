@@ -1,10 +1,10 @@
 'use strict';
 
 angular.module('Reports')
-    .controller('ReportsCtrl', ['$scope', '$filter', '$location', '$modal', 'reportsSharingSvc',
+    .controller('ReportsListCtrl', ['$scope', '$location', 'reportsSharingSvc',
         'editModeNotificationChannelSvc', 'reportsRepositorySvc', 'filterReportByStateSvc', 'entityName',
         'confirmDeleteDialogSvc',
-            function ($scope, $filter, $location, $modal, reportsSharingSvc, editModeNotificationChannelSvc,
+            function ($scope, $location, reportsSharingSvc, editModeNotificationChannelSvc,
                       reportsRepositorySvc, filterReportByStateSvc, entityName, confirmDeleteDialogSvc)  {
 
             reportsSharingSvc.getReports().then(function(reports){
