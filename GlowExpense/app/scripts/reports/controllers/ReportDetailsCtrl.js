@@ -1,10 +1,10 @@
 'use strict';
 
 angular.module('Reports')
-    .controller('ViewReportCtrl', ['$scope', '$filter', '$location', 'addReportErrorMsg', '$modal', 'reportsSharingSvc',
+    .controller('ReportDetailsCtrl', ['$scope', '$location', 'addReportErrorMsg', 'reportsSharingSvc',
         'reportExpensesSvc', 'editExpenseSvc', 'expensesRepositorySvc', 'expensesBufferingSvc', 'confirmDeleteDialogSvc',
         'entityName', 'sendReportDialogSvc',
-        function ($scope, $filter, $location, addReportErrorMsg, $modal, reportsSharingSvc, reportExpensesSvc,
+        function ($scope, $location, addReportErrorMsg, reportsSharingSvc, reportExpensesSvc,
                   editExpenseSvc, expensesRepositorySvc, expensesBufferingSvc, confirmDeleteDialogSvc, entityName,
                   sendReportDialogSvc)  {
 

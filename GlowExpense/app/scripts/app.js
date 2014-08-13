@@ -97,12 +97,11 @@ angular.module('app', _mainModules )
             }
         });
 
-
         routes.push({
             name: '/view-report',
             params: {
-                templateUrl: 'scripts/reports/views/view-report.html',
-                controller: 'ViewReportCtrl'
+                templateUrl: 'scripts/reports/views/report-details.html',
+                controller: 'ReportDetailsCtrl'
             }
         });
 
