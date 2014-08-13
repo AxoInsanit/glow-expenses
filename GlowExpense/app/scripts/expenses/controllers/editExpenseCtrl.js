@@ -60,13 +60,13 @@ angular.module('Expenses')
 
             $scope.takePhoto = function() {
                 cameraSvc.takePhoto().then(function(result){
-                    $scope.takePhoto();
+                    $scope.imageSelectedPath = result;
                 });
             };
 
             $scope.viewImage = function(){
-                expenseViewImageSvc.open(currency, $scope.currencies).then(function(selectedCurrency){
-                    $scope.expense.currency = selectedCurrency;
+                expenseViewImageSvc.open().then(function(){
+                    $scope.takePhoto();
                 });
             };
         }
