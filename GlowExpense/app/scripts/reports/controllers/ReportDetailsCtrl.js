@@ -3,15 +3,15 @@
 angular.module('Reports')
     .controller('ReportDetailsCtrl', ['$scope', '$location', 'addReportErrorMsg', 'reportsSharingSvc',
         'reportExpensesSvc', 'editExpenseSvc', 'expensesRepositorySvc', 'expensesBufferingSvc', 'confirmDeleteDialogSvc',
-        'entityName', 'sendReportDialogSvc', 'editExpensePath',
+        'entityName', 'sendReportDialogSvc', 'editExpensePath', 'expenseSvc', 'editModeNotificationChannelSvc',
         function ($scope, $location, addReportErrorMsg, reportsSharingSvc, reportExpensesSvc,
                   editExpenseSvc, expensesRepositorySvc, expensesBufferingSvc, confirmDeleteDialogSvc, entityName,
-                  sendReportDialogSvc, editExpensePath)  {
+                  sendReportDialogSvc, editExpensePath, expenseSvc, editModeNotificationChannelSvc)  {
 
             $scope.errorMessage = addReportErrorMsg;
             $scope.showErrorMessage = false;
             $scope.expenses = [];
-            $scope.editMode = false;
+            $scope.isEditMode = false;
 
             $scope.report = reportsSharingSvc.getReport();
 
@@ -22,23 +22,35 @@ angular.module('Reports')
             });
 
             $scope.openEditMode =function() {
-              $scope.editMode = !$scope.editMode;
+              $scope.isEditMode = !$scope.isEditMode;
+              editModeNotificationChannelSvc.toggleEditMode($scope.isEditMode);
             };
 
-            $scope.goToEdit = function() {
-                $location.path('/edit-report');
+            // TODO remove this when real services are implemented
+            var firstLoad = true;
+
+            $scope.getMoreExpenses = function () {
+
+                // TODO remove this when real services are implemented
+                if (firstLoad) {
+                    firstLoad = false;
+                    return;
+                }
+
+                expensesBufferingSvc.getMoreExpenses($scope).then(function (result) {
+                    result.forEach(function (item) {
+                        $scope.expenses.push(expenseSvc.getExpense($scope, item));
+                    });
+
+                });
             };
 
             $scope.editExpense = function(expense) {
-                if(!$scope.editMode)
+                if(!$scope.isEditMode)
                 {
                     editExpenseSvc.setExpenseForEdit(expense);
                     $location.path(editExpensePath);
                 }
-            };
-
-            $scope.createExpense = function() {
-                $location.path('/add-expense');
             };
 
             $scope.deleteExpense = function(expenseId){
