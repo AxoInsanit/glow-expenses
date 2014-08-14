@@ -8,6 +8,10 @@ angular.module('Expenses')
         function ($scope, $filter, $location, expenseSvc, expensesRepositorySvc, expensesBufferingSvc,
                   editExpenseSvc, cameraSvc, editModeNotificationChannelSvc, confirmDeleteDialogSvc,  reportEntity)  {
 
+                    $scope.sort = function(item) {
+                        return new Date(item.date);
+                    };
+
                     $scope.goToReports =  function(){
                         $location.path('/reports');
                     };
@@ -82,7 +86,7 @@ angular.module('Expenses')
                         }
                     };
 
-                    expensesBufferingSvc.getExpenses($scope).then(function (result) {
+                    expensesBufferingSvc.getExpenses().then(function (result) {
                         result.forEach(function (item) {
                             $scope.expenses.push(item);
                         });

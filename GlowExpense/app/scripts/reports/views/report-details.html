@@ -18,9 +18,9 @@
     </header>
     <article>
         <section class="item">
-            <a class="btn-with-icon icon-back">
+            <a class="btn-with-icon icon-back create-report" ng-href="#/add-expense">
                 <span class="icon icon-create-report"></span>
-                <span ng-click="createExpense()">Create Expense</span>
+                <span>Create Expense</span>
             </a>
         </section>
     </article>
@@ -44,7 +44,7 @@
         <div class="btn-fixed grey">
             <a class="left-part underscored" ng-click="goToEdit()">Edit Report</a>
             <p class="right-part">TOTAL {{report.societyCurrency}} {{report.total}}</p>
-            <button class="btn ng-binding" type="submit" ng-click="addOrEdit()">Send Report</button>
+            <button class="btn ng-binding" type="submit" ng-click="sendReport()">Send Report</button>
         </div>
     </article>
 </div>

@@ -1,14 +1,15 @@
 'use strict';
 
 angular.module('Reports')
-    .controller('ReportsCtrl', ['$scope', '$filter', '$location', '$modal', 'reportsSharingSvc',
+    .controller('ReportsListCtrl', ['$scope', '$location', 'reportsSharingSvc',
         'editModeNotificationChannelSvc', 'reportsRepositorySvc', 'filterReportByStateSvc', 'entityName',
-        'confirmDeleteDialogSvc',
-            function ($scope, $filter, $location, $modal, reportsSharingSvc, editModeNotificationChannelSvc,
-                      reportsRepositorySvc, filterReportByStateSvc, entityName, confirmDeleteDialogSvc)  {
+        'confirmDeleteDialogSvc', 'reportDetailsPath',
+            function ($scope, $location, reportsSharingSvc, editModeNotificationChannelSvc,
+                      reportsRepositorySvc, filterReportByStateSvc, entityName, confirmDeleteDialogSvc,
+                      reportDetailsPath)  {
 
             reportsSharingSvc.getReports().then(function(reports){
-                $scope.reportCollection = reports;
+                $scope.reports = reports;
             });
 
             $scope.isEditMode = false;
@@ -34,7 +35,7 @@ angular.module('Reports')
 //                            });
 //                    });
 
-                    $scope.reportCollection = $scope.reportCollection.filter(function (item) {
+                    $scope.reports = $scope.reports.filter(function (item) {
                         return item.expenseReportId !== report.expenseReportId;
                     });
                 });
@@ -44,7 +45,7 @@ angular.module('Reports')
                 if((!$scope.isEditMode) && (!report.locked) && (filterReportByStateSvc.checkIfInState(report)))
                 {
                     reportsSharingSvc.setReport(report);
-                    $location.path('/view-report');
+                    $location.path(reportDetailsPath);
                 }
             };
         }

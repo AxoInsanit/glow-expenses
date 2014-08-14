@@ -1,19 +1,25 @@
 'use strict';
 
 angular.module('Reports')
-    .controller('ViewReportCtrl', ['$scope', '$filter', '$location', 'addReportErrorMsg', '$modal', 'reportsSharingSvc',
+    .controller('ReportDetailsCtrl', ['$scope', '$location', 'addReportErrorMsg', 'reportsSharingSvc',
         'reportExpensesSvc', 'editExpenseSvc', 'expensesRepositorySvc', 'expensesBufferingSvc', 'confirmDeleteDialogSvc',
-        'entityName', 'sendReportDialogSvc',
-        function ($scope, $filter, $location, addReportErrorMsg, $modal, reportsSharingSvc, reportExpensesSvc,
+        'entityName', 'sendReportDialogSvc', 'editExpensePath',
+        function ($scope, $location, addReportErrorMsg, reportsSharingSvc, reportExpensesSvc,
                   editExpenseSvc, expensesRepositorySvc, expensesBufferingSvc, confirmDeleteDialogSvc, entityName,
-                  sendReportDialogSvc)  {
-
-            $scope.report = reportsSharingSvc.getReport();
+                  sendReportDialogSvc, editExpensePath)  {
 
             $scope.errorMessage = addReportErrorMsg;
             $scope.showErrorMessage = false;
             $scope.expenses = [];
             $scope.editMode = false;
+
+            $scope.report = reportsSharingSvc.getReport();
+
+            expensesBufferingSvc.getExpenses($scope.report.expenseReportId).then(function (result) {
+                result.forEach(function (item) {
+                    $scope.expenses.push(item);
+                });
+            });
 
             $scope.openEditMode =function() {
               $scope.editMode = !$scope.editMode;
@@ -23,22 +29,13 @@ angular.module('Reports')
                 $location.path('/edit-report');
             };
 
-//            function onFail(message) {
-//                alert('Failed because: ' + message);
-//            }
             $scope.editExpense = function(expense) {
-                if(!$scope.isEditMode)
+                if(!$scope.editMode)
                 {
                     editExpenseSvc.setExpenseForEdit(expense);
-                    $location.path('/edit-expense');
+                    $location.path(editExpensePath);
                 }
             };
-
-            expensesBufferingSvc.getExpenses($scope).then(function (result) {
-                result.forEach(function (item) {
-                    $scope.expenses.push(item);
-                });
-            });
 
             $scope.createExpense = function() {
                 $location.path('/add-expense');
@@ -64,7 +61,7 @@ angular.module('Reports')
                 });
             };
 
-            $scope.addOrEdit = function(){
+            $scope.sendReport = function(){
                 sendReportDialogSvc.open($scope.report.description);
             };
         }
