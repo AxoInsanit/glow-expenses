@@ -3,10 +3,12 @@
 angular.module('Reports')
     .controller('ReportsListCtrl', ['$scope', '$location', 'reportsSharingSvc',
         'editModeNotificationChannelSvc', 'reportsRepositorySvc', 'filterReportByStateSvc', 'entityName',
-        'confirmDeleteDialogSvc', 'reportDetailsPath',
+        'confirmDeleteDialogSvc', 'reportDetailsPath', 'expensesBufferingSvc',
             function ($scope, $location, reportsSharingSvc, editModeNotificationChannelSvc,
                       reportsRepositorySvc, filterReportByStateSvc, entityName, confirmDeleteDialogSvc,
-                      reportDetailsPath)  {
+                      reportDetailsPath, expensesBufferingSvc)  {
+
+
 
             reportsSharingSvc.getReports().then(function(reports){
                 $scope.reports = reports;

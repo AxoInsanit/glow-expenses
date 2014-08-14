@@ -20,6 +20,7 @@ var _mainModules = [
     ,'InvoiceExpenseImage'
     , 'Api'
     , 'Modals'
+    , 'Partials'
     // yo:ngMainModules
     ,'ui.bootstrap'
 ];
