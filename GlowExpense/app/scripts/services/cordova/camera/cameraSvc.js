@@ -21,7 +21,7 @@ angular.module('Services').factory('cameraSvc', ['$q', function($q){
                 deferred.reject();
             }
             navigator.camera.getPicture(onSuccess, onFail, { quality: 50, targetWidth: 100,
-                targetHeight: 100, destinationType: Camera.DestinationType.FILE_URI });
+                targetHeight: 100, destinationType: Camera.DestinationType.FILE_URI, saveToPhotoAlbum: false });
             return deferred.promise;
         }
         return {

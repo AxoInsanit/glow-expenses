@@ -276,6 +276,11 @@ ul.single {
 			}
 		}
 	}
+	.expense-reports-dialog {
+		.form-group {
+			margin-top: 20px;
+		}
+	}
 }
 .btn-fixed {
 	height: 115px;
@@ -442,6 +447,9 @@ form {
 					-moz-appearance: none;
 					appearance: none;
 				}	
+			}
+			.assign-select {
+				padding: 0;
 			}
 		}
 	}

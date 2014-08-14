@@ -3,7 +3,7 @@
 angular.module('InvoiceExpenseImage').controller('InvoiceImageCtrl', ['$scope', 'expensesRepositorySvc',
     function($scope, expensesRepositorySvc){
 		$scope.viewImage = false;
-
+		
 		$scope.tabImage = function(){
 			$scope.viewImage = !$scope.viewImage;
 		};
