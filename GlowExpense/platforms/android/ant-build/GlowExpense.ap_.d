@@ -911,9 +911,9 @@
 /Users/dimitarjilanov/Documents/GlowMobile/GlowExpense/platforms/android/assets/www/resources/images/low-res/signout.png \
 /Users/dimitarjilanov/Documents/GlowMobile/GlowExpense/platforms/android/assets/www/resources/images/low-res/sprite-legend.jpg \
 /Users/dimitarjilanov/Documents/GlowMobile/GlowExpense/platforms/android/assets/www/resources/images/low-res/sprite.png \
+/Users/dimitarjilanov/Documents/GlowMobile/GlowExpense/platforms/android/assets/www/scripts/3e7d3c8b.scripts.js \
 /Users/dimitarjilanov/Documents/GlowMobile/GlowExpense/platforms/android/assets/www/scripts/d1b27dc7.modules.js \
 /Users/dimitarjilanov/Documents/GlowMobile/GlowExpense/platforms/android/assets/www/scripts/expenses \
-/Users/dimitarjilanov/Documents/GlowMobile/GlowExpense/platforms/android/assets/www/scripts/f6f54d5d.scripts.js \
 /Users/dimitarjilanov/Documents/GlowMobile/GlowExpense/platforms/android/assets/www/scripts/header \
 /Users/dimitarjilanov/Documents/GlowMobile/GlowExpense/platforms/android/assets/www/scripts/invoice_expense_image \
 /Users/dimitarjilanov/Documents/GlowMobile/GlowExpense/platforms/android/assets/www/scripts/login \
@@ -939,6 +939,7 @@
 /Users/dimitarjilanov/Documents/GlowMobile/GlowExpense/platforms/android/assets/www/scripts/modals/views/currency-select-dialog.html \
 /Users/dimitarjilanov/Documents/GlowMobile/GlowExpense/platforms/android/assets/www/scripts/modals/views/edit-expense-dialog.html \
 /Users/dimitarjilanov/Documents/GlowMobile/GlowExpense/platforms/android/assets/www/scripts/modals/views/expense-reports-dialog.html \
+/Users/dimitarjilanov/Documents/GlowMobile/GlowExpense/platforms/android/assets/www/scripts/modals/views/expense-view-image.html \
 /Users/dimitarjilanov/Documents/GlowMobile/GlowExpense/platforms/android/assets/www/scripts/modals/views/save-expense-dialog.html \
 /Users/dimitarjilanov/Documents/GlowMobile/GlowExpense/platforms/android/assets/www/scripts/modals/views/send-report-dialog.html \
 /Users/dimitarjilanov/Documents/GlowMobile/GlowExpense/platforms/android/assets/www/scripts/modals/views/sign-out-dialog.html \
@@ -953,5 +954,5 @@
 /Users/dimitarjilanov/Documents/GlowMobile/GlowExpense/platforms/android/assets/www/scripts/reportsNew/views/edit-report.html \
 /Users/dimitarjilanov/Documents/GlowMobile/GlowExpense/platforms/android/assets/www/scripts/reportsNew/views/main-report-view.html \
 /Users/dimitarjilanov/Documents/GlowMobile/GlowExpense/platforms/android/assets/www/scripts/reportsNew/views/view-report.html \
-/Users/dimitarjilanov/Documents/GlowMobile/GlowExpense/platforms/android/assets/www/styles/7dd1fbef.bundle.css \
+/Users/dimitarjilanov/Documents/GlowMobile/GlowExpense/platforms/android/assets/www/styles/6d92bc3b.bundle.css \
 /Users/dimitarjilanov/Documents/GlowMobile/GlowExpense/platforms/android/ant-build/AndroidManifest.xml \

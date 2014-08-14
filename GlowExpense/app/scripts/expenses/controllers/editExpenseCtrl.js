@@ -67,7 +67,7 @@ angular.module('Expenses')
             $scope.viewImage = function(){
                 expenseViewImageSvc.open().then(function(){
                     $scope.takePhoto();
-                });
+                },{});
             };
         }
 ]);
