@@ -11,6 +11,7 @@
         </ul>
     </nav>
 </header>
-<div class="showImg text-centered">
-	<img ng-src="{{invoiceImage}}">
+<div class="showImg text-centered" ng-click="tabImage()">
+    <img ng-src="{{invoiceImage}}" width="200" height="200" ng-hide="viewImage">
+	<img ng-src="{{invoiceImage}}" class="view-image" ng-show="viewImage">
 </div>
