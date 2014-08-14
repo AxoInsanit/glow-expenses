@@ -4,7 +4,9 @@ angular.module('Reports', [])
     .config(function () {})
     .constant('addReportErrorMsg','Please complete all fields!')
     .constant('entityName','Report')
-    .constant('viewReportPath','/view-report');
+    .constant('reportDetailsPath','/report-details')
+    .constant('editExpensePath','/edit-expense');
+
 
 
 
