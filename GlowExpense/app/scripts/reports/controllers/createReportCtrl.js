@@ -54,7 +54,7 @@ angular.module('Reports')
 
                 reportsSharingSvc.setReport($scope.reportData);
 
-                $location.path('/edit-report');
+                $location.path('/reports');
 
                 // TODO: GET THE DATA-ID,DATA-NAME FROM THE PROJECT INPUT
                 //reportsRepositorySvc.saveReports($scope.reportData,onSuccessSave,onFailSave);
