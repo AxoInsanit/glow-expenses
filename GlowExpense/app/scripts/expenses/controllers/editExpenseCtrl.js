@@ -3,17 +3,19 @@
 angular.module('Expenses')
     .controller('EditExpenseCtrl', ['$scope', '$location', 'editExpensesTitle', 'editExpensesButtonLabel', 'editExpenseSvc',
         'cameraSvc', 'reportsRepositorySvc', 'currencySelectDialogSvc', 'expensesRepositorySvc', 'editSaveExpenseDialogSvc',
-        'expenseReportsDialogSvc', 'expenseViewImageSvc',
+        'expenseReportsDialogSvc', 'expenseViewImageSvc', 'reportsSharingSvc',
         function ($scope,  $location, editExpensesTitle, editExpensesButtonLabel, editExpenseSvc, cameraSvc,
                   reportsRepositorySvc, currencySelectDialogSvc, expensesRepositorySvc, editSaveExpenseDialogSvc,
-                  expenseReportsDialogSvc, expenseViewImageSvc) {
+                  expenseReportsDialogSvc, expenseViewImageSvc, reportsSharingSvc) {
 
             $scope.title = editExpensesTitle;
             $scope.buttonLabel = editExpensesButtonLabel;
             $scope.showErrorMessage = false;
             
             $scope.expense = editExpenseSvc.getExpenseForEdit();
-            $scope.report = {};
+
+            $scope.report = reportsSharingSvc.getReport();
+
             $scope.imageSelectedPath = '';
 
             if($scope.expense.imageType !== 'void')

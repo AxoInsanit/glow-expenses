@@ -2,10 +2,19 @@
 
 angular.module('Expenses')
     .controller('ExpensesListCtrl', ['$scope', '$location', 'cameraSvc', 'expensesBufferingSvc', 'expenseSvc',
-        function ($scope, $location, cameraSvc, expensesBufferingSvc, expenseSvc)  {
+        'editExpenseSvc', 'editModeNotificationChannelSvc', 'reportsSharingSvc',
+        function ($scope, $location, cameraSvc, expensesBufferingSvc, expenseSvc, editExpenseSvc,
+                  editModeNotificationChannelSvc, reportsSharingSvc)  {
+
 
         $scope.expenses = [];
+        $scope.isEditMode = false;
 
+        function toggleEditModeHandler(isEditMode){
+            $scope.isEditMode = isEditMode;
+        }
+
+        editModeNotificationChannelSvc.onEditModeToggled($scope, toggleEditModeHandler);
 
         // TODO remove this when real services are implemented
         var firstLoad = true;
@@ -22,7 +31,6 @@ angular.module('Expenses')
                 result.forEach(function (item) {
                     $scope.expenses.push(expenseSvc.getExpense(item));
                 });
-
             });
         };
 
@@ -42,6 +50,15 @@ angular.module('Expenses')
                     // TODO get the type from the image or make constants with the types
                     expense.imageType = 'jpg';
                 });
+            }
+        };
+
+        $scope.editExpense = function(expense) {
+            if(!$scope.isEditMode)
+            {
+                editExpenseSvc.setExpenseForEdit(expense);
+                reportsSharingSvc.setReport();
+                $location.path('/edit-expense');
             }
         };
     }

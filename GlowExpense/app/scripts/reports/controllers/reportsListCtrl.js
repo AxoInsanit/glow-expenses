@@ -8,7 +8,6 @@ angular.module('Reports')
                       reportsRepositorySvc, filterReportByStateSvc, entityName, confirmDeleteDialogSvc,
                       reportDetailsPath)  {
 
-
             reportsSharingSvc.getReports().then(function(reports){
                 $scope.reports = reports;
             });
@@ -49,5 +48,6 @@ angular.module('Reports')
                     $location.path(reportDetailsPath);
                 }
             };
+
         }
     ]);

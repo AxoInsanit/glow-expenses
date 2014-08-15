@@ -4,7 +4,7 @@ angular.module('Reports')
     .factory('reportsSharingSvc', ['$q', 'reportsRepositorySvc', function($q, reportsRepositorySvc) {
 
         var reports = [];
-        var report = null;
+        var report = {};
 
         // lazy load reports on demand
         function getReports(){
@@ -23,13 +23,17 @@ angular.module('Reports')
             return deferred.promise;
         }
 
+        function getReport() {
+            return report;
+        }
+
+        function setReport(value) {
+            report = value || {};
+        }
+
         return {
-            setReport: function(value) {
-                report = value;
-            },
-            getReport: function() {
-                return report;
-            },
+            setReport: setReport,
+            getReport: getReport,
             getReports: getReports
         };
     }

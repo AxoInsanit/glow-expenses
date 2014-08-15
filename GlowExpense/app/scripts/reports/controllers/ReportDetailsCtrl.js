@@ -21,7 +21,8 @@ angular.module('Reports')
                 });
             });
 
-            $scope.openEditMode =function() {
+            $scope.openEditMode = function() {
+
               $scope.isEditMode = !$scope.isEditMode;
               editModeNotificationChannelSvc.toggleEditMode($scope.isEditMode);
             };
@@ -43,14 +44,6 @@ angular.module('Reports')
                     });
 
                 });
-            };
-
-            $scope.editExpense = function(expense) {
-                if(!$scope.isEditMode)
-                {
-                    editExpenseSvc.setExpenseForEdit(expense);
-                    $location.path(editExpensePath);
-                }
             };
 
             $scope.deleteExpense = function(expenseId){
@@ -75,6 +68,15 @@ angular.module('Reports')
 
             $scope.sendReport = function(){
                 sendReportDialogSvc.open($scope.report.description);
+            };
+
+            $scope.editExpense = function(expense) {
+                if(!$scope.isEditMode)
+                {
+                    editExpenseSvc.setExpenseForEdit(expense);
+                    reportsSharingSvc.setReport($scope.report);
+                    $location.path('/edit-expense');
+                }
             };
         }
     ]);

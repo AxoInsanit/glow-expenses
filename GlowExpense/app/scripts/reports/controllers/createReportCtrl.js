@@ -6,6 +6,7 @@ angular.module('Reports')
         'projectsRepositorySvc', 'reportsRepositorySvc', 'selectProjectsDialogSvc',
         function ($scope, $location, addReportErrorMsg,reportsSharingSvc,projectsRepositorySvc,
                   reportsRepositorySvc, selectProjectsDialogSvc)  {
+
             $scope.errorMessage = addReportErrorMsg;
             $scope.showErrorMessage = false;
             $scope.projects = null;
