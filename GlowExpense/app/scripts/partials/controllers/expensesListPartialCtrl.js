@@ -2,11 +2,10 @@
 
 angular.module('Partials')
     .controller('expensesListPartialCtrl', ['$scope', '$location', 'expenseSvc', 'expensesRepositorySvc',
-        'expensesBufferingSvc', 'editExpenseSvc',
-        'editModeNotificationChannelSvc', 'confirmDeleteDialogSvc', 'reportEntity',
+        'expensesBufferingSvc', 'confirmDeleteDialogSvc', 'reportEntity',
 
         function ($scope, $location, expenseSvc, expensesRepositorySvc, expensesBufferingSvc,
-                  editExpenseSvc, editModeNotificationChannelSvc, confirmDeleteDialogSvc,  reportEntity)  {
+                  confirmDeleteDialogSvc,  reportEntity)  {
 
             $scope.sort = function(item) {
                 return new Date(item.date);

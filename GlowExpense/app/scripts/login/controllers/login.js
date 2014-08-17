@@ -13,6 +13,7 @@ angular.module('Login').controller('LoginCtrl', ['$scope', '$location', 'UserSvc
                     $scope.showErrorMessage = false;
                     localStorageSvc.setItem('session-token', response.session_token);
                     localStorageSvc.setItem('userName', $scope.user.username);
+
                     $location.path('/expenses');
                 } else {
                     loginError();

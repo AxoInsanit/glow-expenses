@@ -2,10 +2,10 @@
 
 angular.module('Reports')
     .controller('ReportDetailsCtrl', ['$scope', '$location', 'addReportErrorMsg', 'reportsSharingSvc',
-        'reportExpensesSvc', 'editExpenseSvc', 'expensesRepositorySvc', 'expensesBufferingSvc', 'confirmDeleteDialogSvc',
+        'reportExpensesSvc', 'expenseSharingSvc', 'expensesRepositorySvc', 'expensesBufferingSvc', 'confirmDeleteDialogSvc',
         'entityName', 'sendReportDialogSvc', 'editExpensePath', 'expenseSvc', 'editModeNotificationChannelSvc',
         function ($scope, $location, addReportErrorMsg, reportsSharingSvc, reportExpensesSvc,
-                  editExpenseSvc, expensesRepositorySvc, expensesBufferingSvc, confirmDeleteDialogSvc, entityName,
+                  expenseSharingSvc, expensesRepositorySvc, expensesBufferingSvc, confirmDeleteDialogSvc, entityName,
                   sendReportDialogSvc, editExpensePath, expenseSvc, editModeNotificationChannelSvc)  {
 
             $scope.errorMessage = addReportErrorMsg;
@@ -14,10 +14,12 @@ angular.module('Reports')
             $scope.isEditMode = false;
 
             $scope.report = reportsSharingSvc.getReport();
+            $scope.report.expenseIds = [];
 
             expensesBufferingSvc.getExpenses($scope.report.expenseReportId).then(function (result) {
                 result.forEach(function (item) {
                     $scope.expenses.push(item);
+                    $scope.report.expenseIds.push(item.expenseId);
                 });
             });
 
@@ -73,9 +75,9 @@ angular.module('Reports')
             $scope.editExpense = function(expense) {
                 if(!$scope.isEditMode)
                 {
-                    editExpenseSvc.setExpenseForEdit(expense);
+                    expenseSharingSvc.setExpenseForEdit(expense);
                     reportsSharingSvc.setReport($scope.report);
-                    $location.path('/edit-expense');
+                    $location.path(editExpensePath);
                 }
             };
         }
