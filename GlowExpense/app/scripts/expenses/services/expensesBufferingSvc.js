@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('Expenses')
-    .factory('expensesBufferingSvc', ['$q', 'expensesRepositorySvc', 'expenseSvc', 'localStorageSvc',
-        function($q, expensesRepositorySvc, expenseSvc, localStorageSvc) {
+    .factory('expensesBufferingSvc', ['$q', 'expensesRepositorySvc', 'expenseSvc', 'localStorageSvc', 'sessionToken',
+        function($q, expensesRepositorySvc, expenseSvc, localStorageSvc, sessionToken) {
 
     var expensesBuffer = [];
     var resultExpenses = [];
@@ -26,7 +26,7 @@ angular.module('Expenses')
 
         expensesRepositorySvc.getExpenses(
             {
-               'token': localStorageSvc.getItem(),
+               'token': localStorageSvc.getItem(sessionToken),
                'expenseReportId': reportId
             },
             getExpensesSuccess,

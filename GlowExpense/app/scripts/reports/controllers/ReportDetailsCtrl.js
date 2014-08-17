@@ -4,9 +4,10 @@ angular.module('Reports')
     .controller('ReportDetailsCtrl', ['$scope', '$location', 'addReportErrorMsg', 'reportsSharingSvc',
         'reportExpensesSvc', 'expenseSharingSvc', 'expensesRepositorySvc', 'expensesBufferingSvc', 'confirmDeleteDialogSvc',
         'entityName', 'sendReportDialogSvc', 'editExpensePath', 'expenseSvc', 'editModeNotificationChannelSvc',
+        'sessionToken',
         function ($scope, $location, addReportErrorMsg, reportsSharingSvc, reportExpensesSvc,
                   expenseSharingSvc, expensesRepositorySvc, expensesBufferingSvc, confirmDeleteDialogSvc, entityName,
-                  sendReportDialogSvc, editExpensePath, expenseSvc, editModeNotificationChannelSvc)  {
+                  sendReportDialogSvc, editExpensePath, expenseSvc, editModeNotificationChannelSvc, sessionToken)  {
 
             $scope.errorMessage = addReportErrorMsg;
             $scope.showErrorMessage = false;
@@ -49,22 +50,27 @@ angular.module('Reports')
             };
 
             $scope.deleteExpense = function(expenseId){
-                confirmDeleteDialogSvc.open(entityName).then(function(){
-                    // TODO uncomment when service is working with params
-//                            expensesRepositorySvc.deleteExpense(
-//                                {
-//                                    expenseId: expenseId,
-//                                    token: localStorage.getItem('session-token')
-//                                }
-//                            ).$promise.then(function(){
-//                                    $scope.expenses = $scope.expenses.filter(function (expense) {
-//                                        return expense.expenseId !== expenseId;
-//                                    });
-//                            });
 
+                function deleteSuccess(){
+                    debugger;
                     $scope.expenses = $scope.expenses.filter(function (expense) {
                         return expense.expenseId !== expenseId;
                     });
+                }
+
+                confirmDeleteDialogSvc.open(entityName).then(function(){
+                    // TODO uncomment when service is working with params
+                            expensesRepositorySvc.deleteExpense(
+                                {
+                                    expenseId: expenseId,
+                                    token: localStorage.getItem(sessionToken)
+                                },
+                                deleteSuccess
+                            );
+
+//                    $scope.expenses = $scope.expenses.filter(function (expense) {
+//                        return expense.expenseId !== expenseId;
+//                    });
                 });
             };
 

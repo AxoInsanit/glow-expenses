@@ -165,6 +165,7 @@ angular.module('app', _mainModules )
 
     }])
     .constant('serverErrorMsg','Server error!')
+    .constant('sessionToken', 'session-token')
 
     .run(['currenciesRepositorySvc', 'currenciesSvc',
         function(currenciesRepositorySvc, currenciesSvc) {
@@ -172,7 +173,7 @@ angular.module('app', _mainModules )
                 currenciesSvc.set(result.currencies);
             });
 
-    }]);
+        }]);
 
 
 
