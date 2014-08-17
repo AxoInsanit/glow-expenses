@@ -21,6 +21,8 @@ var _mainModules = [
     , 'Api'
     , 'Modals'
     , 'Partials'
+    , 'pasvaz.bindonce'
+
     // yo:ngMainModules
     ,'ui.bootstrap'
 ];

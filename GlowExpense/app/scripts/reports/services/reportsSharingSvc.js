@@ -12,7 +12,10 @@ angular.module('Reports')
 
             if (reports.length === 0){
                 reportsRepositorySvc.getReports().$promise.then(function(response){
-                    reports = response;
+                    response.forEach(function(item){
+                        item.title = item.description;
+                        reports.push(item);
+                    });
                     deferred.resolve(reports);
                 });
             }

@@ -33,6 +33,7 @@ module.exports = function(config) {
             'app/bower_components/snapjs/snap.js',
             'app/bower_components/angular-snap/angular-snap.js',
             'app/bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
+            'app/bower_components/angular-bindonce/bindonce.js',
             // endbower
             'node_modules/jasmine-expect/dist/jasmine-matchers.js',
             'app/scripts/{,*/}/*.js',

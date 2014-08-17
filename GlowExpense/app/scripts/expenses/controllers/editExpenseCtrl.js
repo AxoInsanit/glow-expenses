@@ -3,10 +3,12 @@
 angular.module('Expenses')
     .controller('EditExpenseCtrl', ['$scope', '$location', 'editExpensesTitle', 'editExpensesButtonLabel', 'editExpenseSvc',
         'cameraSvc', 'reportsRepositorySvc', 'currencySelectDialogSvc', 'expensesRepositorySvc', 'editSaveExpenseDialogSvc',
-        'expenseReportsDialogSvc', 'expenseViewImageSvc', 'reportsSharingSvc',
+        'expenseReportsDialogSvc', 'expenseViewImageSvc', 'reportsSharingSvc', 'reportEntityName', 'filterReportByStateSvc',
+        'itemsSelectionDialogSvc',
         function ($scope,  $location, editExpensesTitle, editExpensesButtonLabel, editExpenseSvc, cameraSvc,
                   reportsRepositorySvc, currencySelectDialogSvc, expensesRepositorySvc, editSaveExpenseDialogSvc,
-                  expenseReportsDialogSvc, expenseViewImageSvc, reportsSharingSvc) {
+                  expenseReportsDialogSvc, expenseViewImageSvc, reportsSharingSvc, reportEntityName, filterReportByStateSvc,
+                  itemsSelectionDialogSvc) {
 
             $scope.title = editExpensesTitle;
             $scope.buttonLabel = editExpensesButtonLabel;
@@ -47,8 +49,11 @@ angular.module('Expenses')
             };
 
             $scope.selectReport = function(){
-                expenseReportsDialogSvc.open().then(function(report){
-                    $scope.report = report;
+                reportsSharingSvc.getReports().then(function(response){
+                    $scope.reports = response.filter(filterReportByStateSvc.checkIfInState);
+                    itemsSelectionDialogSvc.open($scope.reports, reportEntityName).then(function(selectedReport){
+                        $scope.report =  selectedReport;
+                    });
                 });
             };
 
