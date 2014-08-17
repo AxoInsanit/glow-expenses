@@ -26,7 +26,6 @@ angular.module('Expenses').factory('expenseSharingSvc', ['reportsRepositorySvc',
                 }
             });
 
-            debugger;
             return expenseIdsReadyToBeAssigned;
         }
 

@@ -20,7 +20,6 @@ var _mainModules = [
     ,'InvoiceExpenseImage'
     , 'Api'
     , 'Modals'
-    , 'Partials'
     , 'pasvaz.bindonce'
 
     // yo:ngMainModules
