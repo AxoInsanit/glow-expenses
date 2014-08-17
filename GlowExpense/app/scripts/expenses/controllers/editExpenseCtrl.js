@@ -62,7 +62,6 @@ angular.module('Expenses')
             $scope.date = $scope.expense.date;
             $scope.isEdit = true;
 
-            
             $scope.cancelPhoto = function() {
                 $scope.imageSelectedPath = '';
             };
