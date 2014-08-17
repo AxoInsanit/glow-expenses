@@ -22,7 +22,7 @@ angular.module('Reports')
 
             $scope.createReport = function(){
                 reportsSharingSvc.setReport();
-                $location.path("/create-report");
+                $location.path('/create-report');
             };
 
             $scope.deleteReport = function(report) {

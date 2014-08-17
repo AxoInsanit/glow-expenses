@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('Expenses').factory('expenseSharingSvc', ['reportsRepositorySvc',function(reportsRepositorySvc) {
+angular.module('Expenses').factory('expenseSharingSvc', [function() {
 
         var expenseForEdit = null;
 

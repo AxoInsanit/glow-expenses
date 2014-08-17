@@ -52,7 +52,6 @@ angular.module('Reports')
             $scope.deleteExpense = function(expenseId){
 
                 function deleteSuccess(){
-                    debugger;
                     $scope.expenses = $scope.expenses.filter(function (expense) {
                         return expense.expenseId !== expenseId;
                     });
