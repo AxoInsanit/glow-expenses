@@ -54,5 +54,8 @@ angular.module('Reports')
                 }
             };
 
+            $scope.goToExpenses = function(){
+                $location.path('/expenses');
+            };
         }
     ]);
