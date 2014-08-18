@@ -20,13 +20,6 @@ angular.module('Expenses')
 
             $scope.imageSelectedPath = '';
 
-            if($scope.expense.imageType !== 'void')
-            {
-                expensesRepositorySvc.getImage({},  {'image': 'image'}).$promise.then(function (result) {
-                    $scope.imageSelectedPath = result.invoiceImage;
-                });
-            }
-
             $scope.save = function(form, expense) {
                 if(form.$valid)
                 {
