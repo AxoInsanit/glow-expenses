@@ -1,0 +1,16 @@
+<div style="height: 300px;overflow: scroll">
+    <button ng-click="close()">X</button>
+    <form action="">
+        Assign {{entityName}}:
+        <div class="form-group">
+            <div class="form-item">
+                <input type="text" ng-model="searchedEntity" placeholder="Search">
+            </div>
+        </div>
+    </form>
+
+    <div bindonce="" ng-repeat="entity in entities | filter:searchedEntity">
+        <div ng-click="selectEntity(entity)">{{entity.title}}</div>
+    </div>
+
+</div>

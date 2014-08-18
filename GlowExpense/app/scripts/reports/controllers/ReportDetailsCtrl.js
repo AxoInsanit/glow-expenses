@@ -49,30 +49,6 @@ angular.module('Reports')
                 });
             };
 
-            $scope.deleteExpense = function(expenseId){
-
-                function deleteSuccess(){
-                    $scope.expenses = $scope.expenses.filter(function (expense) {
-                        return expense.expenseId !== expenseId;
-                    });
-                }
-
-                confirmDeleteDialogSvc.open(entityName).then(function(){
-                    // TODO uncomment when service is working with params
-                            expensesRepositorySvc.deleteExpense(
-                                {
-                                    expenseId: expenseId,
-                                    token: localStorage.getItem(sessionToken)
-                                },
-                                deleteSuccess
-                            );
-
-//                    $scope.expenses = $scope.expenses.filter(function (expense) {
-//                        return expense.expenseId !== expenseId;
-//                    });
-                });
-            };
-
             $scope.sendReport = function(){
                 sendReportDialogSvc.open($scope.report.description);
             };

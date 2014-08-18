@@ -8,16 +8,19 @@ angular.module('Reports')
 
         // lazy load reports on demand
         function getReports(){
+
+            function reportsSuccess(response){
+                response.forEach(function(item){
+                    item.title = item.description;
+                    reports.push(item);
+                });
+                deferred.resolve(reports);
+            }
+
             var deferred = $q.defer();
 
             if (reports.length === 0){
-                reportsRepositorySvc.getReports().$promise.then(function(response){
-                    response.forEach(function(item){
-                        item.title = item.description;
-                        reports.push(item);
-                    });
-                    deferred.resolve(reports);
-                });
+                reportsRepositorySvc.getReports({}, reportsSuccess)
             }
             else {
                 deferred.resolve(reports);
