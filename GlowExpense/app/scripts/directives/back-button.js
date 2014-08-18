@@ -9,7 +9,7 @@ angular.module('Directives').directive('backButton', function() {
                 history.back();
                 //we add the controlling class
                 var element = document.getElementsByTagName('body')[0];
-                element.className = element.className + ' inApp';
+                element.className = element.className + ' backAnimation';
                 //animation is 0.75 seconds so when animation is over we remove the controll class
                 setTimeout(function(){
                     //we remove the controlling class

@@ -1,1 +1,1 @@
-{ "token": "sample token" }
+{ "session_token": "sample token" }

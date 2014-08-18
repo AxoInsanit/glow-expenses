@@ -113,40 +113,40 @@
 }
 
 /* animate forward */
-.main-container {
+.mainContainer {
   bottom: 0;
   position: absolute;
   top: 0;
   width: 100%;
 }
 
-.main-container.ng-leave {
+.mainContainer.ng-leave {
   z-index: 9999;
 }
 
-.main-container.ng-enter {
+.mainContainer.ng-enter{
   z-index: 8888;
 }
 
-.main-container.ng-leave {
+.mainContainer.ng-leave {
   -webkit-animation: slideOutLeft 0.75s both cubic-bezier(0.2, 0.7, 0.1, 1);
   -moz-animation: slideOutLeft 0.75s both cubic-bezier(0.2, 0.7, 0.1, 1);
   animation: slideOutLeft 0.75s both cubic-bezier(0.2, 0.7, 0.1, 1);
 }
 
-.main-container.ng-enter {
+.mainContainer.ng-enter {
   -webkit-animation: slideInLeft 0.75s both cubic-bezier(0.2, 0.7, 0.1, 1);
   -moz-animation: slideInLeft 0.75s both cubic-bezier(0.2, 0.7, 0.1, 1);
   animation: slideInLeft 0.75s both cubic-bezier(0.2, 0.7, 0.1, 1);
 }
 
-.inApp .main-container.ng-leave {
+.backAnimation .mainContainer.ng-leave {
   -webkit-animation: slideOutRight 0.75s both cubic-bezier(0.2, 0.7, 0.1, 1);
   -moz-animation: slideOutRight 0.75s both cubic-bezier(0.2, 0.7, 0.1, 1);
   animation: slideOutRight 0.75s both cubic-bezier(0.2, 0.7, 0.1, 1);
 }
 
-.inApp .main-container.ng-enter {
+.backAnimation .mainContainer.ng-enter {
   -webkit-animation: slideInRight 0.75s both cubic-bezier(0.2, 0.7, 0.1, 1);
   -moz-animation: slideInRight 0.75s both cubic-bezier(0.2, 0.7, 0.1, 1);
   animation: slideInRight 0.75s both cubic-bezier(0.2, 0.7, 0.1, 1);
@@ -159,4 +159,66 @@
 .view-image{
 	max-width: 100%;
 	max-height: 100%;
+}
+
+/* items selection */
+.loop {
+  background-image: url("../resources/images/loop.png");
+  display: block;
+  width: 36px;
+  height: 36px;
+  background-size: 100%;
+  position: absolute;
+  z-index: 1050;
+  margin-top: 2%;
+  margin-left: 2%;
+}
+
+.items-selection-modal {
+  height: 270px;
+  padding: 1em;
+  overflow: hidden;
+}
+
+.items-selection-modal span{
+  color:black;
+}
+
+.items-selection-modal form .form-group{
+  border-top: 4px solid gray;
+}
+
+.items-selection-modal input{
+  padding-left: 50px!important;
+  color:black!important;
+  margin-top: -1%;
+}
+
+.items-selection-modal .icon-close-black {
+  float: right;
+  display: inline-block;
+  margin-top: -1%;
+}
+
+.items-selection-modal .row span {
+  height: 40px;
+  display: inline-block;
+}
+
+.items-selection-modal form {
+  padding-bottom: 0px;
+}
+
+.items-selection-modal .item-container {
+  overflow: scroll;
+  height: 150px;
+}
+
+.items-selection-modal .green-hover:hover{ 
+  background-color:rgb(173,255,47);
+  color:black;
+}
+
+.html{
+  overflow: hidden;
 }

@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <mockservice version="1.0" xml:lang="en-US">
 <proxy_settings proxy_enabled="true" proxy_url=""/>
-<serviceref file=".\mockey_def_depot\Login\Login.xml"/>
-<serviceref file=".\mockey_def_depot\Expense\Expense.xml"/>
-<serviceref file=".\mockey_def_depot\currencies\currencies.xml"/>
-<serviceref file=".\mockey_def_depot\getInvoiceImage\getInvoiceImage.xml"/>
-<serviceref file=".\mockey_def_depot\EditExpense\EditExpense.xml"/>
-<serviceref file=".\mockey_def_depot\expenseTypes\expenseTypes.xml"/>
-<serviceref file=".\mockey_def_depot\Reports\Reports.xml"/>
-<serviceref file=".\mockey_def_depot\expense_(auto_generated)\expense_(auto_generated).xml"/>
-<serviceref file=".\mockey_def_depot\project_(auto_generated)\project_(auto_generated).xml"/>
+<serviceref file="./mockey_def_depot/Login/Login.xml"/>
+<serviceref file="./mockey_def_depot/Expense/Expense.xml"/>
+<serviceref file="./mockey_def_depot/currencies/currencies.xml"/>
+<serviceref file="./mockey_def_depot/getInvoiceImage/getInvoiceImage.xml"/>
+<serviceref file="./mockey_def_depot/EditExpense/EditExpense.xml"/>
+<serviceref file="./mockey_def_depot/expenseTypes/expenseTypes.xml"/>
+<serviceref file="./mockey_def_depot/Reports/Reports.xml"/>
+<serviceref file="./mockey_def_depot/expense_(auto_generated)/expense_(auto_generated).xml"/>
+<serviceref file="./mockey_def_depot/project_(auto_generated)/project_(auto_generated).xml"/>
 <service_plan description="" id="1" name="test" tag="test"/>
 </mockservice>

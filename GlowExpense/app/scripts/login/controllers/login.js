@@ -7,7 +7,7 @@ angular.module('Login').controller('LoginCtrl', ['$scope', '$location', 'UserSvc
 
         $scope.errorMessage = errorMsg;
         $scope.showErrorMessage = false;
-
+        $scope.loginPage = true;
         $scope.login = function(user){
 
             function loginSuccess(response) {
@@ -16,9 +16,7 @@ angular.module('Login').controller('LoginCtrl', ['$scope', '$location', 'UserSvc
                     $scope.showErrorMessage = false;
                     localStorageSvc.setItem(sessionToken, response.session_token);
                     localStorageSvc.setItem(userName, $scope.user.username);
-
                     $location.path('/expenses');
-
                 } else {
                     loginError();
                 }

@@ -27,6 +27,7 @@ angular.module('Expenses')
                 });
             }
 
+
             $scope.save = function(form, expense) {
                 if(form.$valid)
                 {
