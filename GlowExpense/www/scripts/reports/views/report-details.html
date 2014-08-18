@@ -20,17 +20,17 @@
         <section class="item">
             <a class="btn-with-icon icon-back create-report" ng-href="#/add-expense">
                 <span class="icon icon-create-report"></span>
-                <span>Create Report</span>
+                <span>Create Expense</span>
             </a>
         </section>
     </article>
 
-    <div ng-include="'./scripts/partials/views/expenses-list-partial.html'"></div>
+    <expenses-list></expenses-list>
 
     <article>
         <div class="btn-fixed grey">
             <a class="left-part underscored" ng-href="#/edit-report">Edit Report</a>
-            <p class="right-part">TOTAL {{report.societyCurrency}} {{report.total}}</p>
+            <p class="right-part">TOTAL {{report.societyCurrency}} {{report.total | currency}}</p>
             <button class="btn ng-binding" type="submit" ng-click="sendReport()">Send Report</button>
         </div>
     </article>

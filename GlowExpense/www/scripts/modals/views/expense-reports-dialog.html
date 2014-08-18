@@ -1,5 +1,5 @@
 <div class="expense-reports-dialog">
-	<div ng-repeat="report in reports | filter:searchedReport">
+	<div bindonce="" ng-repeat="report in reports | filter:searchedReport">
 		<div ng-click="selectReport(report)">{{report.description}}</div>
 	</div>
 	<form action="">

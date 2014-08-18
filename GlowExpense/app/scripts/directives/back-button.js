@@ -14,7 +14,7 @@ angular.module('Directives').directive('backButton', function() {
                 setTimeout(function(){
                     //we remove the controlling class
                     document.getElementsByTagName('body')[0].className = 'ng-scope';
-                }, 1000);
+                }, 1500);
             });
         }
     };
