@@ -26,7 +26,7 @@
         </div>
 
     </section>
-    <form role="form" name="expenseForm" novalidate>
+    <form role="form" name="expenseForm" novalidate  ng-submit="enterCurrency()">
         <div ng-show="showErrorMessage" class="error-message">
             <div class="msg errorMsg">{{errorMessage}}
             </div>
@@ -53,8 +53,8 @@
                 </div>
                 <div class="form-item" >
                     <label for="amount">
-                        <input type="number" id="amount" placeholder="Amount" class="form-control"
-                               ng-model="expense.originalAmount" required>
+                        <input type="text" id="amount" class="form-control"
+                               ng-model="expense.originalAmount" field="currencyVal"  currency-input size="30" placeholder="Amount"  required> 
                     </label>
                 </div>
                 <div class="form-item" ng-click="selectCurrency(expense.currency)">

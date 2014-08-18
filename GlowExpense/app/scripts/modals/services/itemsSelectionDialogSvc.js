@@ -7,19 +7,16 @@ angular.module('Modals').factory('itemsSelectionDialogSvc', ['$modal', function(
                 templateUrl: 'scripts/modals/views/items-selection-dialog.html',
                 controller: ['$scope', '$modalInstance', function($scope, $modalInstance) {
 
-                    debugger;
                     $scope.entities = entities;
                     $scope.searchedEntity = null;
                     $scope.selectedEntity = null;
                     $scope.entityName = entityName;
 
                     $scope.selectEntity = function(entity) {
-                        debugger;
                         $scope.selectedEntity = entity;
                     };
 
                     $scope.close = function() {
-                        debugger;
                         $modalInstance.close($scope.selectedEntity);
                     };
                 }]

@@ -85,7 +85,6 @@ angular.module('Reports')
             $scope.selectProject = function() {
                 projectsSharingSvc.getProjects().then(function(response){
                     itemsSelectionDialogSvc.open(response, projectEntityName).then(function(selectedProject){
-                        debugger;
                         if (selectedProject){
                             $scope.report.project = selectedProject;
                         }
