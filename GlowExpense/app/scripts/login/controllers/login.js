@@ -1,7 +1,9 @@
 'use strict';
 
 angular.module('Login').controller('LoginCtrl', ['$scope', '$location', 'UserSvc', 'errorMsg', 'localStorageSvc',
-    function ($scope, $location, UserSvc, errorMsg, localStorageSvc) {
+    'currenciesRepositorySvc', 'currenciesSvc', 'sessionToken', 'userName',
+    function ($scope, $location, UserSvc, errorMsg, localStorageSvc, currenciesRepositorySvc, currenciesSvc,
+              sessionToken, userName) {
 
         $scope.errorMessage = errorMsg;
         $scope.showErrorMessage = false;
@@ -9,12 +11,12 @@ angular.module('Login').controller('LoginCtrl', ['$scope', '$location', 'UserSvc
         $scope.login = function(user){
 
             function loginSuccess(response) {
+
                 if( localStorageSvc.localStorageExists() ){
                     $scope.showErrorMessage = false;
-                    localStorageSvc.setItem('session-token', response.session_token);
-                    localStorageSvc.setItem('userName', $scope.user.username);
+                    localStorageSvc.setItem(sessionToken, response.session_token);
+                    localStorageSvc.setItem(userName, $scope.user.username);
                     $location.path('/expenses');
-                    $('.container')[0].className = $('.container')[0].className + ' main-container';
                 } else {
                     loginError();
                 }

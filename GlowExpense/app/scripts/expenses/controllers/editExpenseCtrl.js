@@ -1,18 +1,20 @@
 'use strict';
 
 angular.module('Expenses')
-    .controller('EditExpenseCtrl', ['$scope', '$location', 'editExpensesTitle', 'editExpensesButtonLabel', 'editExpenseSvc',
+    .controller('EditExpenseCtrl', ['$scope', '$location', 'editExpensesTitle', 'editExpensesButtonLabel', 'expenseSharingSvc',
         'cameraSvc', 'reportsRepositorySvc', 'currencySelectDialogSvc', 'expensesRepositorySvc', 'editSaveExpenseDialogSvc',
-        'expenseReportsDialogSvc', 'expenseViewImageSvc', 'reportsSharingSvc',
-        function ($scope,  $location, editExpensesTitle, editExpensesButtonLabel, editExpenseSvc, cameraSvc,
+        'expenseReportsDialogSvc', 'expenseViewImageSvc', 'reportsSharingSvc', 'reportEntityName', 'filterReportByStateSvc',
+        'itemsSelectionDialogSvc',
+        function ($scope,  $location, editExpensesTitle, editExpensesButtonLabel, expenseSharingSvc, cameraSvc,
                   reportsRepositorySvc, currencySelectDialogSvc, expensesRepositorySvc, editSaveExpenseDialogSvc,
-                  expenseReportsDialogSvc, expenseViewImageSvc, reportsSharingSvc) {
+                  expenseReportsDialogSvc, expenseViewImageSvc, reportsSharingSvc, reportEntityName, filterReportByStateSvc,
+                  itemsSelectionDialogSvc) {
 
             $scope.title = editExpensesTitle;
             $scope.buttonLabel = editExpensesButtonLabel;
             $scope.showErrorMessage = false;
             
-            $scope.expense = editExpenseSvc.getExpenseForEdit();
+            $scope.expense = expenseSharingSvc.getExpenseForEdit();
 
             $scope.report = reportsSharingSvc.getReport();
 
@@ -47,15 +49,19 @@ angular.module('Expenses')
             };
 
             $scope.selectReport = function(){
-                expenseReportsDialogSvc.open().then(function(report){
-                    $scope.report = report;
+                reportsSharingSvc.getReports().then(function(response){
+                    $scope.reports = response.filter(filterReportByStateSvc.checkIfInState);
+                    itemsSelectionDialogSvc.open($scope.reports, reportEntityName).then(function(selectedReport){
+                        if (selectedReport){
+                            $scope.report =  selectedReport;
+                        }
+                    });
                 });
             };
 
             $scope.date = $scope.expense.date;
             $scope.isEdit = true;
 
-            
             $scope.cancelPhoto = function() {
                 $scope.imageSelectedPath = '';
             };

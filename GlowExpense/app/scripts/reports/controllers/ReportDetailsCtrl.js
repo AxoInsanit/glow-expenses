@@ -2,11 +2,12 @@
 
 angular.module('Reports')
     .controller('ReportDetailsCtrl', ['$scope', '$location', 'addReportErrorMsg', 'reportsSharingSvc',
-        'reportExpensesSvc', 'editExpenseSvc', 'expensesRepositorySvc', 'expensesBufferingSvc', 'confirmDeleteDialogSvc',
+        'reportExpensesSvc', 'expenseSharingSvc', 'expensesRepositorySvc', 'expensesBufferingSvc', 'confirmDeleteDialogSvc',
         'entityName', 'sendReportDialogSvc', 'editExpensePath', 'expenseSvc', 'editModeNotificationChannelSvc',
+        'sessionToken',
         function ($scope, $location, addReportErrorMsg, reportsSharingSvc, reportExpensesSvc,
-                  editExpenseSvc, expensesRepositorySvc, expensesBufferingSvc, confirmDeleteDialogSvc, entityName,
-                  sendReportDialogSvc, editExpensePath, expenseSvc, editModeNotificationChannelSvc)  {
+                  expenseSharingSvc, expensesRepositorySvc, expensesBufferingSvc, confirmDeleteDialogSvc, entityName,
+                  sendReportDialogSvc, editExpensePath, expenseSvc, editModeNotificationChannelSvc, sessionToken)  {
 
             $scope.errorMessage = addReportErrorMsg;
             $scope.showErrorMessage = false;
@@ -14,10 +15,12 @@ angular.module('Reports')
             $scope.isEditMode = false;
 
             $scope.report = reportsSharingSvc.getReport();
+            $scope.report.expenseIds = [];
 
             expensesBufferingSvc.getExpenses($scope.report.expenseReportId).then(function (result) {
                 result.forEach(function (item) {
                     $scope.expenses.push(item);
+                    $scope.report.expenseIds.push(item.expenseId);
                 });
             });
 
@@ -47,22 +50,26 @@ angular.module('Reports')
             };
 
             $scope.deleteExpense = function(expenseId){
-                confirmDeleteDialogSvc.open(entityName).then(function(){
-                    // TODO uncomment when service is working with params
-//                            expensesRepositorySvc.deleteExpense(
-//                                {
-//                                    expenseId: expenseId,
-//                                    token: localStorage.getItem('session-token')
-//                                }
-//                            ).$promise.then(function(){
-//                                    $scope.expenses = $scope.expenses.filter(function (expense) {
-//                                        return expense.expenseId !== expenseId;
-//                                    });
-//                            });
 
+                function deleteSuccess(){
                     $scope.expenses = $scope.expenses.filter(function (expense) {
                         return expense.expenseId !== expenseId;
                     });
+                }
+
+                confirmDeleteDialogSvc.open(entityName).then(function(){
+                    // TODO uncomment when service is working with params
+                            expensesRepositorySvc.deleteExpense(
+                                {
+                                    expenseId: expenseId,
+                                    token: localStorage.getItem(sessionToken)
+                                },
+                                deleteSuccess
+                            );
+
+//                    $scope.expenses = $scope.expenses.filter(function (expense) {
+//                        return expense.expenseId !== expenseId;
+//                    });
                 });
             };
 
@@ -73,9 +80,9 @@ angular.module('Reports')
             $scope.editExpense = function(expense) {
                 if(!$scope.isEditMode)
                 {
-                    editExpenseSvc.setExpenseForEdit(expense);
+                    expenseSharingSvc.setExpenseForEdit(expense);
                     reportsSharingSvc.setReport($scope.report);
-                    $location.path('/edit-expense');
+                    $location.path(editExpensePath);
                 }
             };
         }

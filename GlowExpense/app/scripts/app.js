@@ -20,7 +20,7 @@ var _mainModules = [
     ,'InvoiceExpenseImage'
     , 'Api'
     , 'Modals'
-    , 'Partials'
+
     // yo:ngMainModules
     ,'ui.bootstrap'
 ];
@@ -85,16 +85,16 @@ angular.module('app', _mainModules )
         routes.push({
             name: '/create-report',
             params: {
-                templateUrl: 'scripts/reports/views/create-report.html',
-                controller: 'CreateReportCtrl'
+                templateUrl: 'scripts/reports/views/create-edit-report.html',
+                controller: 'CreateEditReportCtrl'
             }
         });
 
         routes.push({
             name: '/edit-report',
             params: {
-                templateUrl: 'scripts/reports/views/edit-report.html',
-                controller: 'EditReportCtrl'
+                templateUrl: 'scripts/reports/views/create-edit-report.html',
+                controller: 'CreateEditReportCtrl'
             }
         });
 
@@ -163,6 +163,8 @@ angular.module('app', _mainModules )
         $httpProvider.responseInterceptors.push(interceptor);
 
     }])
+    .constant('serverErrorMsg','Server error!')
+    .constant('sessionToken', 'session-token')
 
     .run(['currenciesRepositorySvc', 'currenciesSvc',
         function(currenciesRepositorySvc, currenciesSvc) {
@@ -170,7 +172,7 @@ angular.module('app', _mainModules )
                 currenciesSvc.set(result.currencies);
             });
 
-    }]);
+        }]);
 
 
 

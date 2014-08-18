@@ -6,7 +6,7 @@
                     <a class="icon icon-close-black"  back-button></a>
                 </li>
                 <li class="btn-main">
-                    <a class="active"><span>Edit Report</span></a>
+                    <a class="active"><span>{{title}}</span></a>
                 </li>
                 <div class="line"></div>
             </ul>
@@ -15,13 +15,20 @@
     <article class="expenses-body with-padding">
         <form role="form" name="reportForm">
             <div ng-show="showErrorMessage" class="error-message">
-            <div class="msg errorMsg">{{errorMessage}}
+                <div class="msg errorMsg">{{errorMessage}}
+                </div>
+                <a class="icon icon-error-close">x</a>
             </div>
-            <a class="icon icon-error-close">x</a>
-        </div>
+            <div ng-show="showServerErrorMessage" class="error-message">
+                <div class="msg errorMsg">{{serverErrorMsg}}
+                </div>
+                <a class="icon icon-error-close">x</a>
+            </div>
+
+
             <div class="form-group bottom20">
                 <div class="form-item">
-                    <input type="text" id="description" ng-model="report.description"  class="form-control" required>
+                    <input type="text" id="title" placeholder="Title"  class="form-control" ng-model="report.title" required>
                 </div>
             </div>
             <div class="form-group bottom20">
@@ -29,27 +36,23 @@
                     Assign Report to:
                 </div>
                 <div class="form-item checked">
-                    <label for="test">
-                        <input type="radio" class="input-checked" id="test" placeholder="Title" name="assign"  class="form-control" ng-model="expense.description">
+                    <label for="project-assigned">
+                        <input type="radio" class="input-checked" id="project-assigned" name="assign"  class="form-control"
+                                ng-model="report.assignedTo">
                         <span class="icon icon-check-green"></span>
-                        Project Assigned
+                        {{projectAssigned}}
                     </label>
                 </div>
                 <div class="form-item checked">
-                    <label for="test_1">
-                        <input type="radio" class="input-checked" id="test_1" placeholder="Title" name="assign"  class="form-control" ng-model="expense.description">
+                    <label for="all-projects">
+                        <input type="radio" class="input-checked" id="all-projects" name="assign"  class="form-control"
+                               ng-model="report.assignedTo">
                         <span class="icon icon-check-green"></span>
-                        All Projects
-                    </label>
-                </div>
-                <div class="form-item checked">
-                    <label for="test_2">
-                        <input type="radio" class="input-checked" id="test_2" placeholder="Title" name="assign"  class="form-control" ng-model="expense.description">
-                        <span class="icon icon-check-green"></span>
-                        Organizational Unit
+                        {{allProjects}}
                     </label>
                 </div>
             </div>
+
             <loading></loading>
             <div class="form-group">
                 <div class="form-item">
@@ -59,11 +62,11 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="btn-fixed">
-            <button class="btn" type="submit" ng-click="save(reportForm)">Save</button>
-        </div>
-        <div>
-        </form>
+</div>
+<div class="btn-fixed">
+    <button class="btn" type="submit" ng-click="save(reportForm, report)">{{buttonLabel}}</button>
+</div>
+<div>
+    </form>
     </article>
 </div>

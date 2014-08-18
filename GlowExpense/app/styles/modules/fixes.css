@@ -162,21 +162,31 @@
   max-height: 100%;
 }
 
-/* expense-reports-dialog */
-.expense-reports-dialog {
-  height: 9em;
+/* items selection */
+.items-selection-modal {
+  height: 270px;
   padding: 1em;
+  overflow: hidden;
 }
 
-.expense-reports-dialog input {
+.items-selection-modal button {
   float: right;
-  line-height: 10px;
 }
 
-.expense-reports-dialog .input-holder {
-  height: 2em;
+.items-selection-modal .row span {
+  height: 40px;
+  display: inline-block;
 }
 
-.expense-reports-dialog div div {
-  color: black;
+.items-selection-modal form {
+  padding-bottom: 0px;
+}
+
+.items-selection-modal .item-container {
+  overflow: scroll;
+  height: 150px;
+}
+
+.items-selection-modal .green-hover:hover {
+  background-color: #eeffe0;
 }

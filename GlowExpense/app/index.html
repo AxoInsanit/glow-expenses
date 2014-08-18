@@ -42,6 +42,7 @@
     <script src="bower_components/snapjs/snap.js"></script>
     <script src="bower_components/angular-snap/angular-snap.js"></script>
     <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script src="bower_components/angular-bindonce/bindonce.js"></script>
     <!-- endbower -->
     <script src="bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>
     <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
@@ -61,7 +62,6 @@
     <script src="scripts/invoice_expense_image/invoiceExpenseImage.js"></script>
     <script src="scripts/api/api.js"></script>
     <script src="scripts/modals/modals.js"></script>
-    <script src="scripts/partials/partials.js"></script>
     <!-- yo:features -->
 
     <script src="scripts/header/controllers/headerCtrl.js"></script>
@@ -75,13 +75,10 @@
     <script src="scripts/modals/services/sendReportDialogSvc.js"></script>
 
     <script src="scripts/reports/controllers/reportsListCtrl.js"></script>
-    <script src="scripts/reports/controllers/createReportCtrl.js"></script>
     <script src="scripts/reports/controllers/reportDetailsCtrl.js"></script>
-    <script src="scripts/reports/controllers/editReportCtrl.js"></script>
+    <script src="scripts/reports/controllers/createEditReportCtrl.js"></script>
 
     <script src="scripts/invoice_expense_image/controllers/invoiceImageCtrl.js"></script>
-
-    <script src="scripts/partials/controllers/expensesListPartialCtrl.js"></script>
 
     <!-- yo:controllers -->
 
@@ -98,6 +95,7 @@
     <script src="scripts/modals/services/currencySelectDialogSvc.js"></script>
     <script src="scripts/services/filterReportByStateSvc.js"></script>
     <script src="scripts/modals/services/signOutDialogSvc.js"></script>
+    <script src="scripts/modals/services/itemsSelectionDialogSvc.js"></script>
 
     <script src="scripts/services/expenseReportStatesSvc.js"></script>
 
@@ -112,16 +110,16 @@
 
     <script src="scripts/services/projects/projectsRepositorySvc.js"></script>
     <script src="scripts/services/projects/projectsSharingSvc.js"></script>
-    <script src="scripts/reports/services/selectProjectsDialogSvc.js"></script>
     <script src="scripts/reports/services/reportsRepositorySvc.js"></script>
     <script src="scripts/reports/services/reportsSharingSvc.js"></script>
     <script src="scripts/services/projects/projectsRepositorySvc.js"></script>
+
    <!--<script src="scripts/invoice_expense_image/services/invoiceImageSvc.js"></script>-->
 
     <script src="scripts/expenses/services/expenseSvc.js"></script>
     <script src="scripts/expenses/services/expensesBufferingSvc.js"></script>
     <script src="scripts/expenses/services/expensesRepositorySvc.js"></script>
-    <script src="scripts/expenses/services/editExpenseSvc.js"></script>
+    <script src="scripts/expenses/services/expenseSharingSvc.js"></script>
 
     <!-- yo:services -->
 
@@ -133,6 +131,7 @@
     <script src="scripts/directives/loading.js"></script>
     <script src="scripts/directives/stop-event.js"></script>
     <script src="scripts/directives/back-button.js"></script>
+    <script src="scripts/directives/expenses-list.js"></script>
     <!-- yo:directives -->
     <!-- endbuild -->
     <script type="text/javascript">

@@ -1,0 +1,22 @@
+<div class="items-selection-modal">
+    <div class="row">
+        <span>
+            Assign {{entityName}}:
+        </span>
+        <button ng-click="close()">X</button>
+    </div>
+    
+    <form action="">
+        
+        <div class="form-group">
+            <div class="form-item">
+                <input type="text" ng-model="searchedEntity" placeholder="Search">
+            </div>
+        </div>
+    </form>
+    <div class="item-container">
+        <div class="item green-hover" bindonce ng-repeat="entity in entities | filter:searchedEntity">
+            <div ng-click="selectEntity(entity)">{{entity.title}}</div>
+        </div>
+    </div>
+</div>

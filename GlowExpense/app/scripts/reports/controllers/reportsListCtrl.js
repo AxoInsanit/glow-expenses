@@ -20,6 +20,11 @@ angular.module('Reports')
 
             editModeNotificationChannelSvc.onEditModeToggled($scope, toggleEditModeHandler);
 
+            $scope.createReport = function(){
+                reportsSharingSvc.setReport();
+                $location.path('/create-report');
+            };
+
             $scope.deleteReport = function(report) {
 
                 confirmDeleteDialogSvc.open(entityName).then(function(){
@@ -49,5 +54,8 @@ angular.module('Reports')
                 }
             };
 
+            $scope.goToExpenses = function(){
+                $location.path('/expenses');
+            };
         }
     ]);

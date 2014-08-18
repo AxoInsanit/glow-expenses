@@ -1,16 +1,19 @@
 'use strict';
 
 angular.module('Reports').factory('reportsRepositorySvc', ['$resource', 'baseUrlMockeyWeb', 'reportsUrl',
-    function($resource, baseUrlMockeyWeb, reportsUrl) {
-        return $resource(baseUrlMockeyWeb + reportsUrl + '?token='+ localStorage.getItem('session-token'), {}, {
+    'localStorageSvc',
+    function($resource, baseUrlMockeyWeb, reportsUrl, localStorageSvc) {
+
+
+        return $resource(baseUrlMockeyWeb + reportsUrl + '?token='+ localStorageSvc.getItem('session-token'), {}, {
                 'getReports': {
                     'method': 'GET',
                     'isArray': true
                 },
-                'saveReports': {
+                'createReport': {
                     'method': 'POST'
                 },
-                'editReports': {
+                'saveReport': {
                     'method': 'PUT'
                 },
                 'deleteReports': {

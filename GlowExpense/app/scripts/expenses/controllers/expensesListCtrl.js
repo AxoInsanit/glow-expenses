@@ -2,8 +2,8 @@
 
 angular.module('Expenses')
     .controller('ExpensesListCtrl', ['$scope', '$location', 'cameraSvc', 'expensesBufferingSvc', 'expenseSvc',
-        'editExpenseSvc', 'editModeNotificationChannelSvc', 'reportsSharingSvc',
-        function ($scope, $location, cameraSvc, expensesBufferingSvc, expenseSvc, editExpenseSvc,
+        'expenseSharingSvc', 'editModeNotificationChannelSvc', 'reportsSharingSvc',
+        function ($scope, $location, cameraSvc, expensesBufferingSvc, expenseSvc, expenseSharingSvc,
                   editModeNotificationChannelSvc, reportsSharingSvc)  {
 
 
@@ -42,6 +42,7 @@ angular.module('Expenses')
             result.forEach(function (item) {
                 $scope.expenses.push(item);
             });
+            expenseSharingSvc.setExpenses($scope.expenses);
         });
 
         $scope.takePhoto = function(expense) {
@@ -56,7 +57,7 @@ angular.module('Expenses')
         $scope.editExpense = function(expense) {
             if(!$scope.isEditMode)
             {
-                editExpenseSvc.setExpenseForEdit(expense);
+                expenseSharingSvc.setExpenseForEdit(expense);
                 reportsSharingSvc.setReport();
                 $location.path('/edit-expense');
             }

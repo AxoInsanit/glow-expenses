@@ -1,4 +1,4 @@
-<div class="nav font15" ng-controller="expensesListPartialCtrl">
+<div class="nav font15">
     <div class="Infinity" infinite-scroll="getMoreExpenses()">
         <article class="ready expense-cont" ng-repeat="expense in expenses | orderBy:sort : true">
             <section class="item" ng-click="editExpense(expense)" ng-class="{editMode: isEditMode}">

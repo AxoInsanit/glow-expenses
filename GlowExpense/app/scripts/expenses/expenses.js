@@ -8,6 +8,7 @@ angular.module('Expenses', [])
     .constant('editExpensesTitle','Edit Expense')
     .constant('editExpensesButtonLabel','Save')
     .constant('reportEntity','Expense')
-    .constant('reportable', 'REPORTABLE');
+    .constant('reportable', 'REPORTABLE')
+    .constant('reportEntityName', 'report');
 
 
