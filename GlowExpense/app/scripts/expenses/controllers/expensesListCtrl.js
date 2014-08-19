@@ -9,6 +9,7 @@ angular.module('Expenses')
 
         $scope.expenses = [];
         $scope.isEditMode = false;
+        $scope.infScroll = true;
 
         function toggleEditModeHandler(isEditMode){
             $scope.isEditMode = isEditMode;
@@ -17,15 +18,15 @@ angular.module('Expenses')
         editModeNotificationChannelSvc.onEditModeToggled($scope, toggleEditModeHandler);
 
         // TODO remove this when real services are implemented
-        var firstLoad = true;
+        //var firstLoad = true;
 
         $scope.getMoreExpenses = function () {
-
+            // debugger;
             // TODO remove this when real services are implemented
-            if (firstLoad) {
-                firstLoad = false;
-                return;
-            }
+            // if (firstLoad) {
+            //     firstLoad = false;
+            //     return;
+            // }
 
             expensesBufferingSvc.getMoreExpenses().then(function (result) {
                 result.forEach(function (item) {
@@ -35,6 +36,7 @@ angular.module('Expenses')
         };
 
         $scope.goToReports =  function(){
+            debugger;
             $location.path('/reports');
         };
 

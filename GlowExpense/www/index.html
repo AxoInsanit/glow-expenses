@@ -9,19 +9,19 @@
     <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
-    <link rel="stylesheet" href="styles/d57c417a.bundle.css">
+    <link rel="stylesheet" href="styles/542b3e5f.bundle.css">
 </head>
   <body ng-app="app">
     <!-- When it is login page we dont want to slow the load with an animation so we remove them for the login -->
-    <div class="container" ng-class="{ mainContainer:!loginPage }" ng-view=""></div>
+    <div class="container" ng-class="{ mainContainer:!loginPage,staticHeight:infScroll }" ng-view=""></div>
     <!-- used for dark background -->
     <div class="overlay hide"></div>
     <!-- Include Cordova -->
     <!-- <script type="text/javascript" src="bower_components/cordova.js"></script> -->
 
-    <script src="scripts/d1b27dc7.modules.js"></script>
+    <script src="scripts/da3f7966.modules.js"></script>
 
-    <script src="scripts/3cd18e2a.scripts.js"></script>
+    <script src="scripts/0f5d3161.scripts.js"></script>
     <script type="text/javascript">
         var onDeviceReady = function() {
             angular.bootstrap( document, ['app']);
