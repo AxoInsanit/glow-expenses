@@ -1,0 +1,40 @@
+{
+    "expenses": [
+        {
+            "expenseId": 123456,
+            "editionLevel": 0,
+            "contableCodeId": 123456,
+            "submiter": "fabio.olaechea",
+            "owner": "fabio.olaechea",
+            "description": "Lunch",
+            "invoiceNumber": 10213,
+            "provider": "prodiver bla",
+            "date": "2013-01-01",
+            "originalCurrencyId": 1234,
+            "originalAmount": 1400,
+            "exchangeRate": 5.47,
+            "societyCurrencyId": 1234,
+            "type": "REPORTABLE",
+            "imageType": "void",
+            "societyCurrency": "BG"
+        },
+        {
+            "expenseId": 123456,
+            "editionLevel": 0,
+            "contableCodeId": 123456,
+            "submiter": "fabio.olaechea",
+            "owner": "fabio.olaechea",
+            "description": "Lunch",
+            "invoiceNumber": 10213,
+            "provider": "prodiverbla",
+            "date": "2013-01-01",
+            "originalCurrencyId": 1234,
+            "originalAmount": 1400,
+            "exchangeRate": 5.47,
+            "societyCurrencyId": 1234,
+            "type": "REPORTABLE",
+            "imageType": "void",
+            "societyCurrency": "AG"
+        }
+    ]
+}

@@ -8,16 +8,22 @@ var _mainModules = [
     ,'ngResource'
   //  ,'ngSanitize'
   //  ,'ngCookies'
-  //  ,'ngAnimate'
-  //  ,'ngTouch'
+    ,'ngAnimate'
+    ,'ngTouch'
   //  ,'ngMock'
   //  ,'ngLocale'
+    ,'pasvaz.bindonce'
+    ,'Header'
     ,'Login'
     ,'Expenses'
-    ,'AddExpenses'
+    ,'Reports'
     ,'infinite-scroll'
+    ,'InvoiceExpenseImage'
+    , 'Api'
+    , 'Modals'
 
     // yo:ngMainModules
+    ,'ui.bootstrap'
 ];
 
 angular.module('app', _mainModules )
@@ -46,26 +52,66 @@ angular.module('app', _mainModules )
         });
 
         routes.push({
-            name: '/add-image',
+            name: '/invoice-expense-image',
             params: {
-                templateUrl: 'scripts/add-image/views/add-image.html',
-                controller: 'AddImageCtrl'
+                templateUrl: 'scripts/invoice_expense_image/views/invoice-image-details.html',
+                controller: 'InvoiceImageCtrl'
             }
         });
         
         routes.push({
-            name: '/addexpenses',
+            name: '/add-expense',
             params: {
-                templateUrl: 'scripts/add-expenses/views/add-expenses.html',
-                controller: 'AddExpensesCtrl'
+                templateUrl: 'scripts/expenses/views/add-edit-expense.html',
+                controller: 'AddExpenseCtrl'
             }
         });
 
         routes.push({
-            name: '/sendexpenses',
+            name: '/edit-expense',
             params: {
-                templateUrl: 'scripts/expenses/views/send-expenses-report.html',
-                controller: 'ExpensesCtrl'
+                templateUrl: 'scripts/expenses/views/add-edit-expense.html',
+                controller: 'EditExpenseCtrl'
+            }
+        });
+
+        routes.push({
+            name: '/reports',
+            params: {
+                templateUrl: 'scripts/reports/views/reports-list.html',
+                controller: 'ReportsListCtrl'
+            }
+        });
+
+        routes.push({
+            name: '/create-report',
+            params: {
+                templateUrl: 'scripts/reports/views/create-edit-report.html',
+                controller: 'CreateEditReportCtrl'
+            }
+        });
+
+        routes.push({
+            name: '/edit-report',
+            params: {
+                templateUrl: 'scripts/reports/views/create-edit-report.html',
+                controller: 'CreateEditReportCtrl'
+            }
+        });
+
+        routes.push({
+            name: '/report-details',
+            params: {
+                templateUrl: 'scripts/reports/views/report-details.html',
+                controller: 'ReportDetailsCtrl'
+            }
+        });
+
+        routes.push({
+            name: '/settings',
+            params: {
+                templateUrl: 'scripts/expenses/views/settings.html',
+                controller: 'LoginCtrl'
             }
         });
 
@@ -117,4 +163,17 @@ angular.module('app', _mainModules )
 
         $httpProvider.responseInterceptors.push(interceptor);
 
-    }]);
+    }])
+    .constant('serverErrorMsg','Server error!')
+    .constant('sessionToken', 'session-token')
+
+    .run(['currenciesRepositorySvc', 'currenciesSvc',
+        function(currenciesRepositorySvc, currenciesSvc) {
+            currenciesRepositorySvc.getCurrencies().$promise.then(function (result) {
+                currenciesSvc.set(result.currencies);
+            });
+
+        }]);
+
+
+

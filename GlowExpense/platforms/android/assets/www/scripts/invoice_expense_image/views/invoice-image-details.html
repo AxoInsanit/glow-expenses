@@ -1,0 +1,17 @@
+<header>
+    <nav>
+        <ul class="single">
+            <li class="btn-helper close">
+                <a class="icon icon-close-black" back-button=""></a>
+            </li>
+            <li class="btn-main">
+                <a class="active"><span>View image</span></a>
+            </li>
+            <div class="line"></div>
+        </ul>
+    </nav>
+</header>
+<div class="showImg text-centered" ng-click="tabImage()">
+    <img ng-src="{{invoiceImage}}" width="200" height="200" ng-hide="viewImage">
+	<img ng-src="{{invoiceImage}}" class="view-image" ng-show="viewImage">
+</div>

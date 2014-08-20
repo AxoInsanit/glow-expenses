@@ -1,0 +1,49 @@
+'use strict';
+
+angular.module('Modals').factory('editSaveExpenseDialogSvc', ['$modal', 'expensesPath', 'reportsPath',
+    function($modal, expensesPath, reportsPath){
+
+        function openSuccessEditExpenseDialog(reportName) {
+            var modalInstance = $modal.open({
+                templateUrl: 'scripts/modals/views/edit-expense-dialog.html',
+                controller: ['$scope', '$modalInstance', function($scope, $modalInstance) {
+
+                    $scope.reportName = reportName;
+
+                    $scope.navigateToReports = function() {
+                        $modalInstance.close(reportsPath);
+                    };
+
+                    $scope.navigateToExpensesList = function() {
+                        $modalInstance.close(expensesPath);
+                    };
+                }]
+            });
+
+            return modalInstance.result.then(function(response) {
+                return response;
+            });
+        }
+
+        function openSuccessSaveExpenseDialog() {
+            var modalInstance = $modal.open({
+                templateUrl: 'scripts/modals/views//save-expense-dialog.html',
+                controller: ['$scope', '$modalInstance', function($scope, $modalInstance) {
+
+                    $scope.ok = function() {
+                        $modalInstance.close('ok');
+                    };
+                }]
+            });
+
+            return modalInstance.result.then(function(response) {
+                return response;
+            });
+        }
+
+        return {
+            openSuccessEditExpenseDialog: openSuccessEditExpenseDialog,
+            openSuccessSaveExpenseDialog: openSuccessSaveExpenseDialog
+        };
+    }
+]);

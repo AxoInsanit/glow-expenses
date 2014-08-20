@@ -2,13 +2,13 @@
 
 angular.module('Expenses')
     .factory('expenseSvc',
-        ['expensesRequestNotificationChannelSvc',
-            function(expensesRequestNotificationChannelSvc) {
+        ['currenciesSvc', 'reportable',
+            function(currenciesSvc, reportable) {
 
-    function Expense(scope, initData){
+    function Expense(initData){
         var self = this;
 
-        self.expenseId =  initData.expenseId;
+        self.expenseId = initData.expenseId;
         self.submiter = initData.submiter;
         self.owner = initData.owner;
         self.description = initData.description;
@@ -17,28 +17,38 @@ angular.module('Expenses')
         self.originalCurrencyId = initData.originalCurrencyId;
         self.originalAmount = initData.originalAmount;
         self.exchangeRate = initData.exchangeRate;
+        self.expenseTypeName = initData.type;
         self.imageType = initData.imageType;
 
+        self.currency = null;
+        self.expenseType = reportable;
         self.showDetails = false;
         self.selected = false;
+        self.enabled = true;
+
+        function setCurrency(){
+            var currencies = currenciesSvc.get();
+            currencies.some(function(currency){
+                if (currency.id === self.originalCurrencyId){
+                    self.currency = currency;
+                    return true;
+                }
+            });
+            if (!self.currency){
+                // TODO how we handle errors in the app
+                // throw exception
+            }
+        }
 
         function initialize(){
-            expensesRequestNotificationChannelSvc.onSelectModeActivated(scope, function() {self.showDetails = false;});
+            setCurrency();
         }
 
         initialize();
     }
 
-    Expense.prototype.toggleDetails = function() {
-        this.showDetails = !this.showDetails;
-    };
-
-    Expense.prototype.toggleSelect = function() {
-        this.selected = !this.selected;
-    };
-
-    function getExpense(scope, initData){
-            return new Expense(scope, initData);
+    function getExpense(initData){
+            return new Expense(initData);
         }
 
     return {

@@ -1,0 +1,76 @@
+<header>
+    <nav>
+        <ul class="single">
+            <li class="btn-helper close">
+                <a class="icon icon-close-black" back-button=""></a>
+            </li>
+            <li class="btn-main">
+                <a class="active"><span>{{title}}</span></a>
+            </li>
+            <div class="line"></div>
+        </ul>
+    </nav>
+</header>
+<article class="expenses-body with-padding" ng-controller="AddEditExpenseCtrl">
+    <section class="camera">
+        <div ng-hide="imageSelectedPath.length>1">
+            <a class="icon icon-camera-big" ng-click="angular.isDefined(takePhoto()) && takePhoto()">
+            </a>
+            <p class="text-info">Add Invoice Image </p>
+        </div>
+
+        <div ng-show="imageSelectedPath.length>1" ng-click="viewImage()">
+            <a class="icon icon-camera-big">
+            </a>
+            <p class="text-info">Add Invoice Image </p>
+        </div>
+
+    </section>
+    <form role="form" name="expenseForm" novalidate="" ng-submit="enterCurrency()">
+        <div ng-show="showErrorMessage" class="error-message">
+            <div class="msg errorMsg">{{errorMessage}}
+            </div>
+            <a class="icon icon-error-close">x</a>
+        </div>
+        <div>
+            <div class="form-group bottom20">
+                <div class="form-item head">
+                    Assign Expense to:
+                </div>
+                <div class="form-item" ng-click="angular.isDefined(selectReport()) && selectReport()">
+                    <label class="assign-select" for="report">
+                        <input type="text" id="report" placeholder="Select a report" class="form-control" ng-model="report.description" disabled="disabled" required="">
+                    </label>
+                </div>
+            </div>
+            <div class="form-group bottom20">
+                <div class="form-item">
+                    <label for="description">
+                        <input type="text" id="description" placeholder="Description" class="form-control" ng-model="expense.description" required="">
+                    </label>
+                </div>
+                <div class="form-item">
+                    <label for="amount">
+                        <input type="text" id="amount" class="form-control" ng-model="expense.originalAmount" field="currencyVal" currency-input="" size="30" placeholder="Amount" required=""> 
+                    </label>
+                </div>
+                <div class="form-item" ng-click="selectCurrency(expense.currency)">
+                    <div class="select-custom">
+                        <label for="currency">
+                            <input type="text" id="currency" placeholder="Currency" class="form-control" ng-model="expense.currency.name" required="">
+                        </label>
+                    </div>
+                </div>
+                <div class="form-item">
+                    <label for="exchangeRate">
+                        <input type="text" id="exchangeRate" placeholder="Exchange Rate" class="form-control" ng-model="expense.exchangeRate" required="">
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="btn-fixed">
+            <button class="btn" type="submit" ng-click="save(expenseForm, expense)">{{buttonLabel}}</button>
+        </div>
+        <loading></loading>
+    </form>
+</article>

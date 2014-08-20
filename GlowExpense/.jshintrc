@@ -7,7 +7,7 @@
     "curly": true,
     "eqeqeq": true,
     "immed": true,
-    "indent": 4,
+    "indent": false,
     "latedef": true,
     "newcap": false,
     "noarg": true,
@@ -20,19 +20,19 @@
     "smarttabs": true,
     "laxcomma": true,
     "globals": {
-        "angular": false,
+        "angular": true,
         "expect": false,
         "it": false,
-        "element": false,
+        "element": true,
         "describe": false,
-        "window": false,
+        "window": true,
         "document": false,
         "inject": false,
-        "module": false,
+        "module": true,
         "_": false,
         "beforeEach": false,
-        "browser": false,
+        "browser": true,
         "app": false,
-        "$": false
+        "$": true
     }
 }

@@ -1,28 +1,27 @@
 'use strict';
 
-angular.module('Expenses').factory('expensesRepositorySvc', ['$resource', 'expensesUrlMockWeb', 'expenseSvc',
-    function($resource, expensesUrlMockWeb, expenseSvc) {
+angular.module('Expenses').factory('expensesRepositorySvc', ['$resource', 'baseUrlMockeyWeb', 'expensesUrl',
+    function($resource, baseUrlMockeyWeb, expensesUrl) {
 
-        function resource(scope) {
-            return $resource( expensesUrlMockWeb, {}, {
-                query: {
-                    method: 'GET',
-                    isArray: true,
-                    transformResponse: function (result) {
-                        var wrappedExpenses = angular.fromJson(result);
-                        var expenses = [];
-
-                        wrappedExpenses.forEach(function (item) {
-                            expenses.push(expenseSvc.getExpense(scope, item));
-                        });
-                        return expenses;
-                    }
+        return $resource(baseUrlMockeyWeb + expensesUrl, {image: '@image' }, {
+                'getExpenses': {
+                    'method': 'GET',
+                    'isArray': false
+                },
+                'getImage': {
+                    'method': 'GET',
+                    'isArray': false
+                },
+                'createExpense': {
+                    'method': 'POST'
+                },
+                'saveExpense': {
+                    'method': 'PUT'
+                },
+                'deleteExpense': {
+                    'method': 'DELETE'
                 }
-            });
-        }
-
-        return {
-            resource: resource
-        };
-    }]);
-
+            }
+        );
+    }
+]);

@@ -1,6 +1,9 @@
 'use strict';
 
-angular.module('Login').factory('UserSvc', ['$resource', 'loginUrlMockEmulateWebMocky', function($resource, loginUrlMockEmulateWebMocky) {
-    return $resource( loginUrlMockEmulateWebMocky, {}, {} );
-
-}]);
+angular.module('Login').factory('UserSvc', ['$resource', 'baseUrlMockeyWeb', 'loginUrl',
+    function($resource, baseUrlMockeyWeb, loginUrl) {
+        return $resource( baseUrlMockeyWeb + loginUrl, {}, {
+            login : { method: 'POST' }
+        });
+    }
+]);

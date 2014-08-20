@@ -1,28 +1,42 @@
 'use strict';
 
 angular.module('Expenses')
-    .factory('expensesBufferingSvc', ['expensesRepositorySvc','$q',
-        function(expensesRepositorySvc, $q) {
+    .factory('expensesBufferingSvc', ['$q', 'expensesRepositorySvc', 'expenseSvc', 'localStorageSvc', 'sessionToken',
+        function($q, expensesRepositorySvc, expenseSvc, localStorageSvc, sessionToken) {
 
     var expensesBuffer = [];
     var resultExpenses = [];
 
-    function getExpenses(scope) {
+    function getExpenses(reportId) {
         var deferred = $q.defer();
 
-        expensesRepositorySvc.resource(scope).query().$promise.then(function (result) {
+        function getExpensesSuccess(response) {
+            expensesBuffer = response.expenses.map(function(item) {
+                return expenseSvc.getExpense(item);
+            });
 
-            expensesBuffer = result;
-            expensesBuffer = expensesBuffer.splice(0, 3);
+            expensesBuffer = expensesBuffer.splice(0, 4);
 
             deferred.resolve(expensesBuffer);
+        }
 
-        });
+        function getExpensesError(){
+            deferred.reject();
+        }
+
+        expensesRepositorySvc.getExpenses(
+            {
+               'token': localStorageSvc.getItem(sessionToken),
+               'expenseReportId': reportId
+            },
+            getExpensesSuccess,
+            getExpensesError
+        );
 
         return deferred.promise;
     }
 
-    function getMoreExpenses (scope) {
+    function getMoreExpenses () {
 
         var deferred = $q.defer();
 
@@ -30,7 +44,7 @@ angular.module('Expenses')
             resultExpenses = expensesBuffer.splice(0, 5);
             deferred.resolve(resultExpenses);
         } else {
-            getExpenses(scope).then(function(result){
+            getExpenses().then(function(result){
                 deferred.resolve(result);
             });
         }

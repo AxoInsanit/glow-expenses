@@ -1,15 +1,18 @@
-<div class="expenses">
-	<div class="header font15">
-        <span class="icon left"></span>
-        <span class="expensesHeader">Expenses</span>
-        <span class="icon right"></span>
-    </div>
-    <div class="imageHolder">
-	    <div class="expensesImage">
-			
-	    </div>
-	</div>
-    <div class="imageLabel font2">
-		<span>No Expenses Yet</span>
-    </div>
-</div>
+<header>
+    <nav>
+        <ul class="single">
+            <li class="btn-helper close">
+                <a class="icon icon-close-black" back-button=""></a>
+            </li>
+            <li class="btn-main">
+                <a class="active"><span>Expenses</span></a>
+            </li>
+            <div class="line"></div>
+        </ul>
+    </nav>
+</header>
+<article class="expenses-body with-padding no-expenses" ng-controller="AddEditExpenseCtrl">
+    <section>
+       <h2>No expenses</h2>
+    </section>
+</article>

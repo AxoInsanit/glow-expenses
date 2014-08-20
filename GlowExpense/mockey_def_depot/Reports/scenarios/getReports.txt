@@ -1,0 +1,74 @@
+[
+    {
+        "expenseReportId": 123456,
+        "description": "this is a description",
+        "creationDate": "2013-05-10",
+        "author": "Mike Wazowski",
+        "state": "Draft Expense",
+        "locked": false,
+        "approvalResponsible": "Roberto Marcelo French",
+        "societyCurrency": "ARS",
+        "submitter": "Facundo Roncaglia",
+        "total": 1234.5
+    },
+    {
+        "expenseReportId": 123457,
+        "description": "this is another description",
+        "creationDate": "2013-05-12",
+        "author": "Mike Wazowski",
+        "state": "Rejected by Finance",
+        "locked": false,
+        "approvalResponsible": "Roberto Marcelo French",
+        "societyCurrency": "ARS",
+        "submitter": "Facundo Roncaglia",
+        "total": 4234.5
+    },
+    {
+        "expenseReportId": 123458,
+        "description": "thisisanotherdescription",
+        "creationDate": "2013-05-12",
+        "author": "MikeWazowski",
+        "state": "Rejected by Manager",
+        "locked": false,
+        "approvalResponsible": "RobertoMarceloFrench",
+        "societyCurrency": "ARS",
+        "submitter": "FacundoRoncaglia",
+        "total": 4234.5
+    },
+    {
+        "expenseReportId": 123459,
+        "description": "this is another description",
+        "creationDate": "2013-05-12",
+        "author": "Mike Wazowski",
+        "state": "Preparing",
+        "locked": true,
+        "approvalResponsible": "Roberto Marcelo French",
+        "societyCurrency": "ARS",
+        "submitter": "Facundo Roncaglia",
+        "total": 42314.5
+    },
+    {
+        "expenseReportId": 123460,
+        "description": "thisisanotherdescription",
+        "creationDate": "2013-05-12",
+        "author": "MikeWazowski",
+        "state": "Paid",
+        "locked": true,
+        "approvalResponsible": "RobertoMarceloFrench",
+        "societyCurrency": "ARS",
+        "submitter": "FacundoRoncaglia",
+        "total": 42324.5
+    },
+    {
+        "expenseReportId": 123461,
+        "description": "this is another description",
+        "creationDate": "2013-05-12",
+        "author": "Mike Wazowski",
+        "state": "Paid",
+        "locked": true,
+        "approvalResponsible": "Roberto Marcelo French",
+        "societyCurrency": "ARS",
+        "submitter": "Facundo Roncaglia",
+        "total": 42334.5
+    }
+]
