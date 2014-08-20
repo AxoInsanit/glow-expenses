@@ -1,5 +1,5 @@
 <div class="nav font15">
-    <div class="Infinity" infinite-scroll="getMoreExpenses()">
+    <div class="Infinity" infinite-scroll="getMoreExpenses()" style="min-height:1000px;">
         <article class="ready expense-cont" ng-repeat="expense in expenses | orderBy:sort : true">
             <section class="item" ng-click="editExpense(expense)" ng-class="{editMode: isEditMode}">
                 <div class="left-part">

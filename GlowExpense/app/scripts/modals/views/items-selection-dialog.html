@@ -16,8 +16,8 @@
         </div>
     </form>
     <div class="item-container">
-        <div class="item green-hover" bindonce ng-repeat="entity in entities | filter:searchedEntity">
-            <div ng-click="selectEntity(entity)">{{entity.title}}</div>
+        <div class="item green-hover" bindonce ng-repeat="entity in entities | filter:searchedEntity"  ng-click="selectEntity(entity)">
+            <div>{{entity.title}}</div>
         </div>
     </div>
 </div>

@@ -1,5 +1,7 @@
 <div class="nav font15">
-    <div class="Infinity" infinite-scroll="getMoreExpenses()">
+
+    <div class="Infinity" infinite-scroll="getMoreExpenses()" style="min-height:1000px">
+
         <article class="ready expense-cont" ng-repeat="expense in expenses | orderBy:sort : true">
             <section class="item" ng-click="editExpense(expense)" ng-class="{editMode: isEditMode}">
                 <div class="left-part">
@@ -13,8 +15,8 @@
                     </div>
                 </div>
                 <div class="right-part">
-                    <span class="info-text money">{{expense.currency.code}} {{expense.originalAmount}}</span>
 
+                    <span class="info-text money">{{expense.currency.code}} {{expense.originalAmount | currency}}</span>
                     <div class="float-right" ng-switch="expense.imageType === 'void'" stop-event="click">
                         <a ng-switch-when="true" ng-click="takePhoto(expense)" class="icon icon-photo"></a>
                         <a ng-switch-when="false" class="icon icon-photo-taken"></a>

@@ -58,6 +58,7 @@ angular.module('Reports')
             };
 
             $scope.goToExpenses = function(){
+                debugger;
                 $location.path('/expenses');
             };
         }

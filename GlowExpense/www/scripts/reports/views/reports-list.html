@@ -1,6 +1,6 @@
 <!-- header of the website -->
 <div class="reports-head" ng-include="'./scripts/header/views/header.html'" ng-controller="HeaderCtrl"></div>
-<div class="reports-body" ng-swipe-left="goToExpenses()">
+<div class="reports-body" ng-swipe-right="goToExpenses()">
     <!-- <div class="header font15">
         <div class="left fift"></div>
         <span class="expensesHeader"> Send Expense Report</span>
@@ -19,7 +19,7 @@
                         <div class="right-part">
                             <p class="info-text text-right">
                                 <span>{{report.societyCurrency}}</span>
-                                <span>{{report.total}}</span>
+                                <span>{{report.total | currency}}</span>
                             </p>
                         </div>
                         <div class="left-part">

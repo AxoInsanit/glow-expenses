@@ -118,6 +118,7 @@
   position: absolute;
   top: 0;
   width: 100%;
+  -webkit-transform-style: preserve-3d;
 }
 
 .mainContainer.ng-leave {
@@ -221,4 +222,9 @@
 
 .html{
   overflow: hidden;
+}
+
+.staticHeight{
+  height: 101%;
+  width:100%;
 }
