@@ -1,7 +1,8 @@
 'use strict';
 
 angular.module('InvoiceExpenseImage', [])
-    .config(function () {});
+    .config(function () {})
+    .constant()
 
 
 

@@ -14,7 +14,3 @@ angular.module('Reports', [])
     .constant('editReportBtnLabel','Save')
     .constant('projectAssigned','Project Assigned')
     .constant('allProjects','All Projects');
-
-
-
-

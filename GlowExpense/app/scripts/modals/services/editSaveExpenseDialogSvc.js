@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('Modals').factory('editSaveExpenseDialogSvc', ['$modal', 'expensesPath', 'reportsPath',
-    function($modal, expensesPath, reportsPath){
+angular.module('Modals').factory('editSaveExpenseDialogSvc', ['$modal', 'expensesPath', 'reportsPath', 'reportDetailsPath',
+    function($modal, expensesPath, reportsPath, reportDetailsPath){
 
         function openSuccessEditExpenseDialog(reportName) {
             var modalInstance = $modal.open({
@@ -30,9 +30,10 @@ angular.module('Modals').factory('editSaveExpenseDialogSvc', ['$modal', 'expense
                 templateUrl: 'scripts/modals/views//save-expense-dialog.html',
                 controller: ['$scope', '$modalInstance', function($scope, $modalInstance) {
 
-                    $scope.ok = function() {
-                        $modalInstance.close('ok');
+                    $scope.navigateToReport = function() {
+                        $modalInstance.close(reportDetailsPath);
                     };
+
                 }]
             });
 

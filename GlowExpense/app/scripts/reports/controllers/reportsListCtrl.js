@@ -3,10 +3,10 @@
 angular.module('Reports')
     .controller('ReportsListCtrl', ['$scope', '$location', 'reportsSharingSvc',
         'editModeNotificationChannelSvc', 'reportsRepositorySvc', 'filterReportByStateSvc', 'entityName',
-        'confirmDeleteDialogSvc', 'reportDetailsPath',
+        'confirmDeleteDialogSvc', 'reportDetailsPath', 'sessionToken',
             function ($scope, $location, reportsSharingSvc, editModeNotificationChannelSvc,
                       reportsRepositorySvc, filterReportByStateSvc, entityName, confirmDeleteDialogSvc,
-                      reportDetailsPath)  {
+                      reportDetailsPath, sessionToken)  {
 
             reportsSharingSvc.getReports().then(function(reports){
                 $scope.reports = reports;
@@ -27,22 +27,25 @@ angular.module('Reports')
 
             $scope.deleteReport = function(report) {
 
-                confirmDeleteDialogSvc.open(entityName).then(function(){
-                    // TODO uncomment when service is working with params
-//                    reportsRepositorySvc.deleteExpense(
-//                        {
-//                            'token':localStorage.getItem('session-token'),
-//                            'expenseReportId': report.expenseReportId
-//                        }
-//                    ).$promise.then(function(){
-//                            $scope.reportCollection = $scope.reportCollection.filter(function (item) {
-//                                return item.expenseReportId !== report.expenseReportId;
-//                            });
-//                    });
-
+                function deleteReportSuccess(){
                     $scope.reports = $scope.reports.filter(function (item) {
                         return item.expenseReportId !== report.expenseReportId;
                     });
+                }
+
+                function deleteReportFail(){
+
+                }
+
+                confirmDeleteDialogSvc.open(entityName).then(function(){
+                    reportsRepositorySvc.deleteReport(
+                        {
+                            'token':localStorage.getItem(sessionToken),
+                            'expenseReportId': report.expenseReportId
+                        },
+                        deleteReportSuccess,
+                        deleteReportFail
+                    );
                 });
             };
 

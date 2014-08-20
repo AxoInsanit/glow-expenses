@@ -2,12 +2,14 @@
 
 angular.module('Expenses')
     .controller('AddEditExpenseCtrl', ['$scope', '$location', 'expensesRepositorySvc', 'addExpenseErrorMsg', '$modal',
-        'currenciesSvc', 'reportsSharingSvc', 'currencySelectDialogSvc',
+        'currenciesSvc', 'reportsSharingSvc', 'currencySelectDialogSvc', 'serverErrorMsg',
 
         function ($scope, $location, expensesRepositorySvc, addExpenseErrorMsg, $modal, currenciesSvc, reportsSharingSvc,
-                  currencySelectDialogSvc) {
+                  currencySelectDialogSvc, serverErrorMsg) {
 
             $scope.errorMessage = addExpenseErrorMsg;
+            $scope.serverErrorMsg = serverErrorMsg;
+
             $scope.currencies = currenciesSvc.get();
 
             $scope.selectCurrency = function(currency){
