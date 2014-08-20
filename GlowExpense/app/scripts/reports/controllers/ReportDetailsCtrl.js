@@ -4,10 +4,9 @@ angular.module('Reports')
     .controller('ReportDetailsCtrl', ['$scope', '$location', 'addReportErrorMsg', 'reportsSharingSvc',
         'reportExpensesSvc', 'expenseSharingSvc', 'expensesRepositorySvc', 'expensesBufferingSvc', 'confirmDeleteDialogSvc',
         'entityName', 'sendReportDialogSvc', 'editExpensePath', 'expenseSvc', 'editModeNotificationChannelSvc',
-        'sessionToken',
         function ($scope, $location, addReportErrorMsg, reportsSharingSvc, reportExpensesSvc,
                   expenseSharingSvc, expensesRepositorySvc, expensesBufferingSvc, confirmDeleteDialogSvc, entityName,
-                  sendReportDialogSvc, editExpensePath, expenseSvc, editModeNotificationChannelSvc, sessionToken)  {
+                  sendReportDialogSvc, editExpensePath, expenseSvc, editModeNotificationChannelSvc)  {
 
             $scope.errorMessage = addReportErrorMsg;
             $scope.showErrorMessage = false;

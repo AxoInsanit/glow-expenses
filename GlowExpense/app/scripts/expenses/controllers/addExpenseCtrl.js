@@ -16,7 +16,9 @@ angular.module('Expenses')
             function createExpenseSuccess(response, responseHeaders){
 
                 function addExpenseToReportSuccess(){
-                    $location.path(url);
+                    editSaveExpenseDialogSvc.openSuccessSaveExpenseDialog().then(function(url){
+                        $location.path(url);
+                    });
                 }
 
                 function addExpenseToReportFail(){
@@ -27,8 +29,8 @@ angular.module('Expenses')
                 var createdExpenseId = getIdFromLocationSvc.getIdFromLocation(headers.Location);
 
                 var reportObj = {
-                    "expenseReportId": report.expenseReportId,
-                    "expenseIds": [createdExpenseId]
+                    'expenseReportId': $scope.report.expenseReportId,
+                    'expenseIds': [createdExpenseId]
                 };
 
                 reportExpensesRepositorySvc.addExpensesToReport(
@@ -36,9 +38,7 @@ angular.module('Expenses')
                     addExpenseToReportSuccess,
                     addExpenseToReportFail
                 );
-                editSaveExpenseDialogSvc.openSuccessSaveExpenseDialog().then(function(url){
-                    $location.path(url);
-                });
+
             }
 
             function createExpenseFail(){

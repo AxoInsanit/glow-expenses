@@ -43,8 +43,8 @@ angular.module('Expenses')
             }
 
             var reportObj = {
-                "expenseReportId": $scope.report.expenseReportId,
-                "expenseIds": [$scope.expense.expenseId]
+                'expenseReportId': $scope.report.expenseReportId,
+                'expenseIds': [$scope.expense.expenseId]
             };
 
             $scope.save = function(form, expense) {
@@ -56,7 +56,7 @@ angular.module('Expenses')
                             reportObj,
                             addExpenseSuccess,
                             addExpenseFail
-                        )
+                        );
                     }
 
                     function deleteExpenseFail(){
@@ -71,7 +71,7 @@ angular.module('Expenses')
                             reportObj,
                             addExpenseSuccess,
                             addExpenseFail
-                        )
+                        );
                     }
                     else {
                         // change assigned expense to another report

@@ -20,7 +20,7 @@ angular.module('Reports')
             var deferred = $q.defer();
 
             if (reports.length === 0){
-                reportsRepositorySvc.getReports({}, reportsSuccess)
+                reportsRepositorySvc.getReports({}, reportsSuccess);
             }
             else {
                 deferred.resolve(reports);
