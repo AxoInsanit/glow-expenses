@@ -6,12 +6,12 @@ angular.module('Api', [])
     .constant('baseUrlMockeyWeb', 'http://127.0.0.1:8080')
     .constant('baseUrlMockeyEmulator', 'http://10.0.3.2:8080')
 
-    .constant('loginUrl', '/service/login')
-    .constant('expensesUrl', '/service/expense/:image')
-    .constant('currenciesUrl', '/service/currencies')
-    .constant('expenseTypesUrl', '/service/expenseTypes')
-    .constant('reportsUrl', '/service/expense/report')
-    .constant('projectsUrl', '/service/project')
+    .constant('loginUrl', '/system/login')
+    .constant('expensesUrl', '/expense/:image')
+    .constant('currenciesUrl', '/currencies')
+    .constant('expenseTypesUrl', '/expenseTypes')
+    .constant('reportsUrl', '/expense/report')
+    .constant('projectsUrl', '/project')
 
     .constant('expensesPath', '/expenses')
     .constant('reportsPath', '/reports');

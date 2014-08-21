@@ -949,5 +949,5 @@
 /Users/dimitarjilanov/Documents/GlowMobile/GlowExpense/platforms/android/assets/www/scripts/reports/views/create-report.html \
 /Users/dimitarjilanov/Documents/GlowMobile/GlowExpense/platforms/android/assets/www/scripts/reports/views/report-details.html \
 /Users/dimitarjilanov/Documents/GlowMobile/GlowExpense/platforms/android/assets/www/scripts/reports/views/reports-list.html \
-/Users/dimitarjilanov/Documents/GlowMobile/GlowExpense/platforms/android/assets/www/styles/542b3e5f.bundle.css \
+/Users/dimitarjilanov/Documents/GlowMobile/GlowExpense/platforms/android/assets/www/styles/64b21162.bundle.css \
 /Users/dimitarjilanov/Documents/GlowMobile/GlowExpense/platforms/android/ant-build/AndroidManifest.xml \
