@@ -4,7 +4,8 @@ angular.module('Expenses').factory('expensesRepositorySvc', ['$resource', 'baseU
     'localStorageSvc', 'sessionToken',
     function($resource, baseUrlMockeyWeb, expensesUrl, localStorageSvc, sessionToken) {
 
-        return $resource(baseUrlMockeyWeb + expensesUrl + '/?token='+ localStorageSvc.getItem(sessionToken),
+        //return $resource(baseUrlMockeyWeb + expensesUrl + '/?token='+ localStorageSvc.getItem(sessionToken),
+        return $resource(baseUrlMockeyWeb + expensesUrl ,
             {},
             {
                 'getExpenses': {

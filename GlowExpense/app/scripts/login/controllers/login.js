@@ -11,7 +11,7 @@ angular.module('Login').controller('LoginCtrl', ['$scope', '$location', 'UserSvc
         $scope.login = function(user){
 
             function loginSuccess(response) {
-
+                debugger;
                 if( localStorageSvc.localStorageExists() ){
                     $scope.showErrorMessage = false;
                     localStorageSvc.setItem(sessionToken, response.session_token);
