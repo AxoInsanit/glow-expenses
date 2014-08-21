@@ -16,7 +16,6 @@ angular.module('Expenses')
             });
 
             expensesBuffer = expensesBuffer.splice(0, 4);
-
             deferred.resolve(expensesBuffer);
         }
 

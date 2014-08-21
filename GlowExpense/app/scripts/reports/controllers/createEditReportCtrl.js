@@ -29,8 +29,6 @@ angular.module('Reports')
                 $scope.title = editReportTitle;
                 $scope.buttonLabel = editReportBtnLabel;
 
-                $scope.report = reportsSharingSvc.getReport();
-
                 // TODO where are we getting the report project from ? The report api does not have such a property. Hardcode this for now
                 $scope.report.project = {
                     name:  'New Website Development'
@@ -48,7 +46,6 @@ angular.module('Reports')
             }
 
             $scope.save = function(form, report){
-
                 function onSuccess(){
                     $location.path(reportsPath);
                 }
@@ -74,7 +71,6 @@ angular.module('Reports')
                     else {
                         reportsRepositorySvc.createReport(reportViewModel,onSuccess,onFail);
                     }
-
                 }
                 else {
                     $scope.showServerErrorMessage = false;

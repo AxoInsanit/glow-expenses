@@ -36,7 +36,6 @@ angular.module('Expenses')
         };
 
         $scope.goToReports =  function(){
-            debugger;
             $location.path('/reports');
         };
 

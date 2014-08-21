@@ -4,10 +4,9 @@ angular.module('Reports')
     .controller('ReportDetailsCtrl', ['$scope', '$location', 'addReportErrorMsg', 'reportsSharingSvc',
         'reportExpensesSvc', 'expenseSharingSvc', 'expensesRepositorySvc', 'expensesBufferingSvc', 'confirmDeleteDialogSvc',
         'entityName', 'sendReportDialogSvc', 'editExpensePath', 'expenseSvc', 'editModeNotificationChannelSvc',
-        'sessionToken',
         function ($scope, $location, addReportErrorMsg, reportsSharingSvc, reportExpensesSvc,
                   expenseSharingSvc, expensesRepositorySvc, expensesBufferingSvc, confirmDeleteDialogSvc, entityName,
-                  sendReportDialogSvc, editExpensePath, expenseSvc, editModeNotificationChannelSvc, sessionToken)  {
+                  sendReportDialogSvc, editExpensePath, expenseSvc, editModeNotificationChannelSvc)  {
 
             $scope.errorMessage = addReportErrorMsg;
             $scope.showErrorMessage = false;
@@ -46,30 +45,6 @@ angular.module('Reports')
                         $scope.expenses.push(expenseSvc.getExpense($scope, item));
                     });
 
-                });
-            };
-
-            $scope.deleteExpense = function(expenseId){
-
-                function deleteSuccess(){
-                    $scope.expenses = $scope.expenses.filter(function (expense) {
-                        return expense.expenseId !== expenseId;
-                    });
-                }
-
-                confirmDeleteDialogSvc.open(entityName).then(function(){
-                    // TODO uncomment when service is working with params
-                            expensesRepositorySvc.deleteExpense(
-                                {
-                                    expenseId: expenseId,
-                                    token: localStorage.getItem(sessionToken)
-                                },
-                                deleteSuccess
-                            );
-
-//                    $scope.expenses = $scope.expenses.filter(function (expense) {
-//                        return expense.expenseId !== expenseId;
-//                    });
                 });
             };
 

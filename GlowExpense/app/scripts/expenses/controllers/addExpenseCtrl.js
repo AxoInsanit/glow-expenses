@@ -2,9 +2,9 @@
 
 angular.module('Expenses')
     .controller('AddExpenseCtrl', ['$scope', '$location', 'addExpensesTitle', 'addExpensesButtonLabel', 'reportsSharingSvc',
-        'expensesRepositorySvc', 'editSaveExpenseDialogSvc',
+        'expensesRepositorySvc', 'editSaveExpenseDialogSvc', 'getIdFromLocationSvc', 'reportExpensesRepositorySvc',
         function ($scope, $location, addExpensesTitle, addExpensesButtonLabel, reportsSharingSvc,
-          expensesRepositorySvc, editSaveExpenseDialogSvc) {
+          expensesRepositorySvc, editSaveExpenseDialogSvc, getIdFromLocationSvc, reportExpensesRepositorySvc) {
 
             $scope.title = addExpensesTitle;
             $scope.buttonLabel = addExpensesButtonLabel;
@@ -13,20 +13,43 @@ angular.module('Expenses')
             $scope.expense = {};
             $scope.report = reportsSharingSvc.getReport();
 
+            function createExpenseSuccess(response, responseHeaders){
+
+                function addExpenseToReportSuccess(){
+                    editSaveExpenseDialogSvc.openSuccessSaveExpenseDialog().then(function(url){
+                        $location.path(url);
+                    });
+                }
+
+                function addExpenseToReportFail(){
+
+                }
+
+                var headers = responseHeaders();
+                var createdExpenseId = getIdFromLocationSvc.getIdFromLocation(headers.Location);
+
+                var reportObj = {
+                    'expenseReportId': $scope.report.expenseReportId,
+                    'expenseIds': [createdExpenseId]
+                };
+
+                reportExpensesRepositorySvc.addExpensesToReport(
+                    reportObj,
+                    addExpenseToReportSuccess,
+                    addExpenseToReportFail
+                );
+
+            }
+
+            function createExpenseFail(){
+
+            }
+
             $scope.save = function(form, expense) {
                 if(form.$valid)
                 {
                     expense.date = new Date();
-                    // TODO Uncomment this when services are ready
-//                    expensesRepositorySvc.createExpense(expense).then(function(){
-//                        editSaveExpenseDialogSvc.openSaveExpenseDialog().then(function(){
-//                            $location.path(url);
-//                        });
-//                    });
-
-                    editSaveExpenseDialogSvc.openSuccessSaveExpenseDialog().then(function(url){
-                        $location.path(url);
-                    });
+                    expensesRepositorySvc.createExpense(expense, createExpenseSuccess, createExpenseFail);
                 }
                 else
                 {

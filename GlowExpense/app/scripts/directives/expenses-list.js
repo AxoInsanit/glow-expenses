@@ -21,9 +21,7 @@ angular.module('Directives').directive('expensesList', [function() {
                             });
                         }
 
-
                         confirmDeleteDialogSvc.open(reportEntity).then(function(){
-                            // TODO uncomment when service is working with params
                             expensesRepositorySvc.deleteExpense(
                                 {
                                     expenseId: expenseId,
