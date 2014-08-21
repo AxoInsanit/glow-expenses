@@ -4,8 +4,9 @@ angular.module('Reports').factory('reportExpensesRepositorySvc', ['$resource', '
     'reportsSharingSvc', 'localStorageSvc', 'sessionToken',
     function($resource, baseUrlMockeyWeb, reportExpensesUrl, localStorageSvc, sessionToken) {
 
-        return $resource(baseUrlMockeyWeb + reportExpensesUrl + '/?token='+ localStorageSvc.getItem(sessionToken), {}, {
-
+        return $resource(baseUrlMockeyWeb + reportExpensesUrl,// + '/?token='+ localStorageSvc.getItem(sessionToken), {}, {
+            {},
+            {
                 'addExpensesToReport': {
                     'method': 'POST'
                 },

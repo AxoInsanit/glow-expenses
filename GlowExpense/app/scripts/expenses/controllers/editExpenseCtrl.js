@@ -5,12 +5,12 @@ angular.module('Expenses')
         'cameraSvc', 'reportsRepositorySvc', 'currencySelectDialogSvc', 'expensesRepositorySvc', 'editSaveExpenseDialogSvc',
         'expenseViewImageSvc', 'reportsSharingSvc', 'reportEntityName', 'filterReportByStateSvc',
         'itemsSelectionDialogSvc', 'reportExpensesRepositorySvc', 'localStorageSvc', 'sessionToken', 'reportDetailsPath',
-        'expensesPath',
+        'expensesPath', 'invoiceImageRepositorySvc',
         function ($scope,  $location, editExpensesTitle, editExpensesButtonLabel, expenseSharingSvc, cameraSvc,
                   reportsRepositorySvc, currencySelectDialogSvc, expensesRepositorySvc, editSaveExpenseDialogSvc,
                   expenseViewImageSvc, reportsSharingSvc, reportEntityName, filterReportByStateSvc,
                   itemsSelectionDialogSvc, reportExpensesRepositorySvc, localStorageSvc, sessionToken, reportDetailsPath,
-                expensesPath) {
+                expensesPath, invoiceImageRepositorySvc) {
 
             $scope.title = editExpensesTitle;
             $scope.buttonLabel = editExpensesButtonLabel;
@@ -25,11 +25,21 @@ angular.module('Expenses')
 
             $scope.imageSelectedPath = '';
 
+            function getImageSuccess(result){
+                $scope.imageSelectedPath = result.invoiceImage;
+            }
+
+            function getImageFail(){
+
+            }
+
             if($scope.expense.imageType !== 'void')
             {
-                expensesRepositorySvc.getImage({},  {'image': 'image'}).$promise.then(function (result) {
-                    $scope.imageSelectedPath = result.invoiceImage;
-                });
+                invoiceImageRepositorySvc.getImage(
+                    {},
+                    getImageSuccess,
+                    getImageFail
+                );
             }
 
             function addExpenseSuccess(){
