@@ -15,7 +15,7 @@ angular.module('InvoiceExpenseImage').controller('InvoiceImageCtrl', ['$scope', 
         function getImageFail(){
 
         }
-
+        //debugger;
         invoiceImageRepositorySvc.getImage(
             {},
             getImageSuccess,

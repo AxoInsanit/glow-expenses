@@ -19,7 +19,6 @@ angular.module('Expenses')
 
             $scope.expense = expenseSharingSvc.getExpenseForEdit();
             var  originalExpense = angular.copy($scope.expense);
-
             $scope.report = reportsSharingSvc.getReport();
             var lastSelectedReport = $scope.report.description;
 
@@ -27,9 +26,10 @@ angular.module('Expenses')
 
             if($scope.expense.imageType !== 'void')
             {
-                expensesRepositorySvc.getImage({},  {'image': 'image'}).$promise.then(function (result) {
-                    $scope.imageSelectedPath = result.invoiceImage;
-                });
+                // expensesRepositorySvc.getImage({},  {'image': 'image'}).$promise.then(function (result) {
+                //     $scope.imageSelectedPath = result.invoiceImage;
+                // });
+                $scope.imageSelectedPath = 'image';
             }
 
             function addExpenseSuccess(){

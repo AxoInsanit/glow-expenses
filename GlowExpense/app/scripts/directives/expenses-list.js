@@ -21,13 +21,18 @@ angular.module('Directives').directive('expensesList', [function() {
                             });
                         }
 
+                        function deleteError(errorResponse){
+                            
+                        }
+
                         confirmDeleteDialogSvc.open(reportEntity).then(function(){
                             expensesRepositorySvc.deleteExpense(
                                 {
                                     expenseId: expenseId,
                                     token: localStorage.getItem(sessionToken)
                                 },
-                                deleteSuccess
+                                deleteSuccess,
+                                deleteError
                             );
 
 //                            $scope.expenses = $scope.expenses.filter(function (expense) {
