@@ -13,6 +13,7 @@ angular.module('Expenses')
             $scope.currencies = currenciesSvc.get();
 
             $scope.selectCurrency = function(currency){
+                //debugger;
                 currencySelectDialogSvc.open(currency, $scope.currencies).then(function(selectedCurrency){
                     $scope.expense.currency = selectedCurrency;
                 });
