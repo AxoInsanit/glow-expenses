@@ -4,8 +4,8 @@ angular.module('Reports').factory('reportsRepositorySvc', ['$resource', 'baseUrl
     'localStorageSvc', 'sessionToken',
     function($resource, baseUrlMockeyWeb, reportsUrl, localStorageSvc, sessionToken) {
 
-
-        return $resource(baseUrlMockeyWeb + reportsUrl + '/?token='+ localStorageSvc.getItem(sessionToken),
+        //return $resource(baseUrlMockeyWeb + reportsUrl + '/?token='+ localStorageSvc.getItem(sessionToken),
+        return $resource(baseUrlMockeyWeb + reportsUrl ,
             {},
             {
                 'getReports': {
