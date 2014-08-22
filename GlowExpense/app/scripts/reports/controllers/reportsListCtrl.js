@@ -3,10 +3,10 @@
 angular.module('Reports')
     .controller('ReportsListCtrl', ['$scope', '$location', 'reportsSharingSvc',
         'editModeNotificationChannelSvc', 'reportsRepositorySvc', 'filterReportByStateSvc', 'entityName',
-        'confirmDeleteDialogSvc', 'reportDetailsPath', 'sessionToken',
+        'confirmDeleteDialogSvc', 'reportDetailsPath', 'sessionToken', 'errorHandlerDefaultSvc',
             function ($scope, $location, reportsSharingSvc, editModeNotificationChannelSvc,
                       reportsRepositorySvc, filterReportByStateSvc, entityName, confirmDeleteDialogSvc,
-                      reportDetailsPath, sessionToken)  {
+                      reportDetailsPath, sessionToken, errorHandlerDefaultSvc)  {
 
             reportsSharingSvc.getReports().then(function(reports){
                 $scope.reports = reports;
@@ -33,10 +33,6 @@ angular.module('Reports')
                     });
                 }
 
-                function deleteReportFail(){
-
-                }
-
                 confirmDeleteDialogSvc.open(entityName).then(function(){
                     reportsRepositorySvc.deleteReport(
                         {
@@ -44,7 +40,7 @@ angular.module('Reports')
                             'expenseReportId': report.expenseReportId
                         },
                         deleteReportSuccess,
-                        deleteReportFail
+                        errorHandlerDefaultSvc.handleError
                     );
                 });
             };
@@ -58,6 +54,7 @@ angular.module('Reports')
             };
 
             $scope.goToExpenses = function(){
+
                 $location.path('/expenses');
             };
         }

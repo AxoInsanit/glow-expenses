@@ -5,9 +5,9 @@ angular.module('Directives').directive('expensesList', [function() {
             restrict: 'E',
             replace: true,
             controller: ['$scope', '$location', 'expenseSvc', 'expensesRepositorySvc', 'expensesBufferingSvc',
-                'confirmDeleteDialogSvc', 'reportEntity', 'sessionToken',
+                'confirmDeleteDialogSvc', 'reportEntity', 'sessionToken', 'errorHandlerDefaultSvc',
                 function($scope, $location, expenseSvc, expensesRepositorySvc, expensesBufferingSvc,
-                    confirmDeleteDialogSvc, reportEntity, sessionToken) {
+                    confirmDeleteDialogSvc, reportEntity, sessionToken, errorHandlerDefaultSvc) {
 
                     $scope.sort = function(item) {
                         return new Date(item.date);
@@ -21,23 +21,15 @@ angular.module('Directives').directive('expensesList', [function() {
                             });
                         }
 
-                        function deleteError(errorResponse){
-                            
-                        }
-
                         confirmDeleteDialogSvc.open(reportEntity).then(function(){
                             expensesRepositorySvc.deleteExpense(
                                 {
-                                    expenseId: expenseId,
+                                    expenseId1: expenseId,
                                     token: localStorage.getItem(sessionToken)
                                 },
                                 deleteSuccess,
-                                deleteError
+                                errorHandlerDefaultSvc.handleError
                             );
-
-//                            $scope.expenses = $scope.expenses.filter(function (expense) {
-//                                return expense.expenseId !== expenseId;
-//                            });
                         });
                     };
 

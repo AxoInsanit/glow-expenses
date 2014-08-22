@@ -3,8 +3,10 @@
 angular.module('Expenses')
     .controller('AddExpenseCtrl', ['$scope', '$location', 'addExpensesTitle', 'addExpensesButtonLabel', 'reportsSharingSvc',
         'expensesRepositorySvc', 'editSaveExpenseDialogSvc', 'getIdFromLocationSvc', 'reportExpensesRepositorySvc',
+        'errorDialogSvc', 'errorMessageSvc', 'errorHandlerDefaultSvc',
         function ($scope, $location, addExpensesTitle, addExpensesButtonLabel, reportsSharingSvc,
-          expensesRepositorySvc, editSaveExpenseDialogSvc, getIdFromLocationSvc, reportExpensesRepositorySvc) {
+          expensesRepositorySvc, editSaveExpenseDialogSvc, getIdFromLocationSvc, reportExpensesRepositorySvc,
+          errorDialogSvc, errorMessageSvc, errorHandlerDefaultSvc) {
 
             $scope.title = addExpensesTitle;
             $scope.buttonLabel = addExpensesButtonLabel;
@@ -21,10 +23,6 @@ angular.module('Expenses')
                     });
                 }
 
-                function addExpenseToReportFail(){
-
-                }
-
                 var headers = responseHeaders();
                 var createdExpenseId = getIdFromLocationSvc.getIdFromLocation(headers.Location);
 
@@ -36,20 +34,19 @@ angular.module('Expenses')
                 reportExpensesRepositorySvc.addExpensesToReport(
                     reportObj,
                     addExpenseToReportSuccess,
-                    addExpenseToReportFail
+                    errorHandlerDefaultSvc.handleError
                 );
-
-            }
-
-            function createExpenseFail(){
-
             }
 
             $scope.save = function(form, expense) {
                 if(form.$valid)
                 {
                     expense.date = new Date();
-                    expensesRepositorySvc.createExpense(expense, createExpenseSuccess, createExpenseFail);
+                    expensesRepositorySvc.createExpense(
+                        expense,
+                        createExpenseSuccess,
+                        errorHandlerDefaultSvc.handleError
+                    );
                 }
                 else
                 {

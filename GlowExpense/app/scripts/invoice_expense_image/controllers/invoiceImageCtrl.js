@@ -1,7 +1,8 @@
 'use strict';
 
 angular.module('InvoiceExpenseImage').controller('InvoiceImageCtrl', ['$scope', 'invoiceImageRepositorySvc',
-    function($scope, invoiceImageRepositorySvc){
+    'errorHandlerDefaultSvc',
+    function($scope, invoiceImageRepositorySvc, errorHandlerDefaultSvc){
 		$scope.viewImage = false;
 		
 		$scope.tabImage = function(){
@@ -12,14 +13,10 @@ angular.module('InvoiceExpenseImage').controller('InvoiceImageCtrl', ['$scope', 
             $scope.invoiceImage = result.invoiceImage;
         }
 
-        function getImageFail(){
-
-        }
-        //debugger;
         invoiceImageRepositorySvc.getImage(
             {},
             getImageSuccess,
-            getImageFail
+            errorHandlerDefaultSvc.handleError
         );
     }
 ]);

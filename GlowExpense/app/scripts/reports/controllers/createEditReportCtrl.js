@@ -4,20 +4,17 @@ angular.module('Reports')
     .controller('CreateEditReportCtrl', ['$scope', '$location', 'addReportErrorMsg', 'reportsSharingSvc',
         'reportsRepositorySvc', 'itemsSelectionDialogSvc', 'projectsSharingSvc', 'projectEntityName', 'projectAssigned',
         'allProjects','serverErrorMsg', 'editReportTitle', 'editReportBtnLabel', 'createReportTitle',
-        'createReportBtnLabel', 'reportsPath', 'expenseSharingSvc',
+        'createReportBtnLabel', 'reportsPath', 'expenseSharingSvc', 'errorHandlerDefaultSvc',
         function ($scope, $location, addReportErrorMsg, reportsSharingSvc, reportsRepositorySvc,
                    itemsSelectionDialogSvc,  projectsSharingSvc, projectEntityName, projectAssigned, allProjects,
                    serverErrorMsg, editReportTitle, editReportBtnLabel, createReportTitle, createReportBtnLabel,
-                   reportsPath, expenseSharingSvc)  {
+                   reportsPath, expenseSharingSvc, errorHandlerDefaultSvc)  {
 
             $scope.projectAssigned = projectAssigned;
             $scope.allProjects = allProjects;
 
             $scope.errorMessage = addReportErrorMsg;
-            $scope.serverErrorMsg = serverErrorMsg;
-
             $scope.showErrorMessage = false;
-            $scope.showServerErrorMessage  = false;
 
             var expenseIds = [];
 
@@ -28,11 +25,6 @@ angular.module('Reports')
 
                 $scope.title = editReportTitle;
                 $scope.buttonLabel = editReportBtnLabel;
-
-                // TODO where are we getting the report project from ? The report api does not have such a property. Hardcode this for now
-                $scope.report.project = {
-                    name:  'New Website Development'
-                };
 
                 expenseIds = $scope.report.expenseIds;
             }
@@ -50,18 +42,21 @@ angular.module('Reports')
                     $location.path(reportsPath);
                 }
 
-                function onFail(){
-                    $scope.showErrorMessage = false;
-                    $scope.showServerErrorMessage = true;
+                function onFail(errorResponse){
+                    errorHandlerDefaultSvc.handleError(errorResponse).then(function(){
+                        $scope.showErrorMessage = false;
+                    });
                 }
 
                 if(form.$valid)
                 {
+                    var projectId = projectsSharingSvc.getProjectIdByName(report.project.name);
+
                     var reportViewModel = {
                         'expenseReportId': report.expenseReportId,
                         'description': report.description,
                         'applyTo': report.project.name,
-                        'entityId': 1245,
+                        'entityId': projectId,
                         'expenseIds': expenseIds
                     };
 
@@ -73,7 +68,6 @@ angular.module('Reports')
                     }
                 }
                 else {
-                    $scope.showServerErrorMessage = false;
                     $scope.showErrorMessage = true;
                 }
             };

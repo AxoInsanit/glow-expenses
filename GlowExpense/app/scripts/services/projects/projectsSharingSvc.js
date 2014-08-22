@@ -30,8 +30,21 @@ angular.module('Services')
             return deferred.promise;
         }
 
+        function getProjectIdByName(name){
+            var result = null;
+            projects.some(function(project){
+                if (project.name === name){
+                    result = project.id;
+                    return true;
+                }
+            });
+
+            return result;
+        }
+
         return {
-            getProjects: getProjects
+            getProjects: getProjects,
+            getProjectIdByName: getProjectIdByName
         };
     }
 ]);

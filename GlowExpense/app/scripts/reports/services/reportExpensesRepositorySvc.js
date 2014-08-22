@@ -4,8 +4,9 @@ angular.module('Reports').factory('reportExpensesRepositorySvc', ['$resource', '
     'reportsSharingSvc',
     function($resource, baseUrlMockeyWeb, reportExpensesUrl) {
 
-        return $resource(baseUrlMockeyWeb + reportExpensesUrl, {}, {
-
+        return $resource(baseUrlMockeyWeb + reportExpensesUrl,
+            {},
+            {
                 'addExpensesToReport': {
                     'method': 'POST'
                 },

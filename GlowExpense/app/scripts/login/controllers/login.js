@@ -1,9 +1,9 @@
 'use strict';
 
 angular.module('Login').controller('LoginCtrl', ['$scope', '$location', 'UserSvc', 'errorMsg', 'localStorageSvc',
-    'currenciesRepositorySvc', 'currenciesSvc', 'sessionToken', 'userName',
+    'currenciesRepositorySvc', 'currenciesSvc', 'sessionToken', 'userName', 'errorHandlerDefaultSvc',
     function ($scope, $location, UserSvc, errorMsg, localStorageSvc, currenciesRepositorySvc, currenciesSvc,
-              sessionToken, userName) {
+              sessionToken, userName, errorHandlerDefaultSvc) {
 
         $scope.errorMessage = errorMsg;
         $scope.showErrorMessage = false;
@@ -21,10 +21,12 @@ angular.module('Login').controller('LoginCtrl', ['$scope', '$location', 'UserSvc
                 }
             }
 
-            function loginError(){
-                $scope.showErrorMessage = true;
-                $scope.user.username = '';
-                $scope.user.password = '';
+            function loginError(errorResponse){
+                errorHandlerDefaultSvc.handleError(errorResponse).then(function(){
+                    $scope.showErrorMessage = true;
+                    $scope.user.username = '';
+                    $scope.user.password = '';
+                });
             }
 
             //We have to use the actions this way
