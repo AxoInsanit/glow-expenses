@@ -14,8 +14,6 @@ angular.module('Reports')
             $scope.allProjects = allProjects;
 
             $scope.errorMessage = addReportErrorMsg;
-            $scope.serverErrorMsg = serverErrorMsg;
-
             $scope.showErrorMessage = false;
 
             var expenseIds = [];
@@ -27,11 +25,6 @@ angular.module('Reports')
 
                 $scope.title = editReportTitle;
                 $scope.buttonLabel = editReportBtnLabel;
-
-                // TODO where are we getting the report project from ? The report api does not have such a property. Hardcode this for now
-                $scope.report.project = {
-                    name:  'New Website Development'
-                };
 
                 expenseIds = $scope.report.expenseIds;
             }
@@ -57,11 +50,13 @@ angular.module('Reports')
 
                 if(form.$valid)
                 {
+                    var projectId = projectsSharingSvc.getProjectIdByName(report.project.name);
+
                     var reportViewModel = {
                         'expenseReportId': report.expenseReportId,
                         'description': report.description,
                         'applyTo': report.project.name,
-                        'entityId': 1245,
+                        'entityId': projectId,
                         'expenseIds': expenseIds
                     };
 

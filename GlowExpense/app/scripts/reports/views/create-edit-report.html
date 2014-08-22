@@ -51,8 +51,16 @@
             <div class="form-group">
                 <div class="form-item">
                     <div class="select-custom" ng-click="selectProject(report.project)">
-                        <input type="text" placeholder="Project Name" class="form-control"
-                               ng-model="report.project.name" required>
+                        <div ng-switch="report.expenseReportId > 0">
+                            <div ng-switch-when="true">
+                                <input type="text" placeholder="Project Name" class="form-control"
+                                       ng-model="report.project.name">
+                            </div>
+                            <div ng-switch-when="false">
+                                <input type="text" placeholder="Project Name" class="form-control"
+                                       ng-model="report.project.name" required>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
