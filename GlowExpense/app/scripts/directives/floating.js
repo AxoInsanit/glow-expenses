@@ -136,4 +136,3 @@ angular.module('Directives').directive('floatingDecimal', function () {
             }
         };
     });
-});

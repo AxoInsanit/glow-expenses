@@ -8,8 +8,7 @@ angular.module('Reports').factory('reportsRepositorySvc', ['$resource', 'baseUrl
             {},
             {
                 'getReports': {
-                    'method': 'GET',
-                    'isArray': true
+                    'method': 'GET'
                 },
                 'createReport': {
                     'method': 'POST'
