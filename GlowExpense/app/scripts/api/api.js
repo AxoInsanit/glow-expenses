@@ -8,7 +8,7 @@ angular.module('Api', [])
 
     .constant('loginUrl', '/system/login')
     .constant('expensesUrl', '/expense/:image')
-    .constant('currenciesUrl', '/currencies')
+    .constant('currenciesUrl', '/currency')
     .constant('expenseTypesUrl', '/expenseTypes')
     .constant('reportsUrl', '/expense/report')
     .constant('projectsUrl', '/project')

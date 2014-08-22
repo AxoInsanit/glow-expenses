@@ -10,7 +10,8 @@ angular.module('Reports')
         function getReports(){
 
             function reportsSuccess(response){
-                response.forEach(function(item){
+                var responseArray = response.expenses;
+                responseArray.forEach(function(item){
                     item.title = item.description;
                     reports.push(item);
                 });

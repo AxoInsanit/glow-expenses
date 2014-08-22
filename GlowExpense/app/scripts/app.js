@@ -21,7 +21,6 @@ var _mainModules = [
     ,'InvoiceExpenseImage'
     , 'Api'
     , 'Modals'
-
     // yo:ngMainModules
     ,'ui.bootstrap'
 ];

@@ -1,14 +1,14 @@
 'use strict';
 
-angular.module('Reports').factory('reportsRepositorySvc', ['$resource', 'baseUrlMockeyWeb', 'reportsUrl',
-    function($resource, baseUrlMockeyWeb, reportsUrl) {
+angular.module('Reports').factory('reportsRepositorySvc', ['$resource', 'baseUrlMockeyWeb', 'reportsUrl', 'localStorageSvc', 'sessionToken',
+    function($resource, baseUrlMockeyWeb, reportsUrl, localStorageSvc, sessionToken) {
 
-        return $resource(baseUrlMockeyWeb + reportsUrl ,
+        //return $resource(baseUrlMockeyWeb + reportsUrl + '/?token='+ localStorageSvc.getItem(sessionToken),
+        return $resource(baseUrlMockeyWeb + reportsUrl + '?token=' + localStorageSvc.getItem(sessionToken) ,
             {},
             {
                 'getReports': {
-                    'method': 'GET',
-                    'isArray': true
+                    'method': 'GET'
                 },
                 'createReport': {
                     'method': 'POST'
