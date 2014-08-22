@@ -1,10 +1,9 @@
 'use strict';
 
 angular.module('Expenses').factory('expensesRepositorySvc', ['$resource', 'baseUrlMockeyWeb', 'expensesUrl',
-    'localStorageSvc', 'sessionToken',
-    function($resource, baseUrlMockeyWeb, expensesUrl, localStorageSvc, sessionToken) {
 
-        //return $resource(baseUrlMockeyWeb + expensesUrl + '/?token='+ localStorageSvc.getItem(sessionToken),
+    function($resource, baseUrlMockeyWeb, expensesUrl) {
+
         return $resource(baseUrlMockeyWeb + expensesUrl ,
             {},
             {

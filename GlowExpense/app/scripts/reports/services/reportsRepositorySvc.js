@@ -1,10 +1,8 @@
 'use strict';
 
 angular.module('Reports').factory('reportsRepositorySvc', ['$resource', 'baseUrlMockeyWeb', 'reportsUrl',
-    'localStorageSvc', 'sessionToken',
-    function($resource, baseUrlMockeyWeb, reportsUrl, localStorageSvc, sessionToken) {
+    function($resource, baseUrlMockeyWeb, reportsUrl) {
 
-        //return $resource(baseUrlMockeyWeb + reportsUrl + '/?token='+ localStorageSvc.getItem(sessionToken),
         return $resource(baseUrlMockeyWeb + reportsUrl ,
             {},
             {

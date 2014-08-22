@@ -4,11 +4,11 @@ angular.module('Reports')
     .controller('CreateEditReportCtrl', ['$scope', '$location', 'addReportErrorMsg', 'reportsSharingSvc',
         'reportsRepositorySvc', 'itemsSelectionDialogSvc', 'projectsSharingSvc', 'projectEntityName', 'projectAssigned',
         'allProjects','serverErrorMsg', 'editReportTitle', 'editReportBtnLabel', 'createReportTitle',
-        'createReportBtnLabel', 'reportsPath', 'expenseSharingSvc',
+        'createReportBtnLabel', 'reportsPath', 'expenseSharingSvc', 'errorHandlerDefaultSvc',
         function ($scope, $location, addReportErrorMsg, reportsSharingSvc, reportsRepositorySvc,
                    itemsSelectionDialogSvc,  projectsSharingSvc, projectEntityName, projectAssigned, allProjects,
                    serverErrorMsg, editReportTitle, editReportBtnLabel, createReportTitle, createReportBtnLabel,
-                   reportsPath, expenseSharingSvc)  {
+                   reportsPath, expenseSharingSvc, errorHandlerDefaultSvc)  {
 
             $scope.projectAssigned = projectAssigned;
             $scope.allProjects = allProjects;
@@ -17,7 +17,6 @@ angular.module('Reports')
             $scope.serverErrorMsg = serverErrorMsg;
 
             $scope.showErrorMessage = false;
-            $scope.showServerErrorMessage  = false;
 
             var expenseIds = [];
 
@@ -50,9 +49,10 @@ angular.module('Reports')
                     $location.path(reportsPath);
                 }
 
-                function onFail(){
-                    $scope.showErrorMessage = false;
-                    $scope.showServerErrorMessage = true;
+                function onFail(errorResponse){
+                    errorHandlerDefaultSvc.handleError(errorResponse).then(function(){
+                        $scope.showErrorMessage = false;
+                    });
                 }
 
                 if(form.$valid)
@@ -73,7 +73,6 @@ angular.module('Reports')
                     }
                 }
                 else {
-                    $scope.showServerErrorMessage = false;
                     $scope.showErrorMessage = true;
                 }
             };
