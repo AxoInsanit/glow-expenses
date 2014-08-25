@@ -237,3 +237,9 @@
 .Infinity {
   min-height: 1000px;
 }
+
+.error-message {
+  border: 1px solid #dc9987;
+  color: #9c0201;
+  background-color: #ffffd5;
+}

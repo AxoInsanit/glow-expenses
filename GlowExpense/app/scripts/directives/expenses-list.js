@@ -24,7 +24,7 @@ angular.module('Directives').directive('expensesList', [function() {
                         confirmDeleteDialogSvc.open(reportEntity).then(function(){
                             expensesRepositorySvc.deleteExpense(
                                 {
-                                    expenseId1: expenseId,
+                                    expenseId: expenseId,
                                     token: localStorage.getItem(sessionToken)
                                 },
                                 deleteSuccess,

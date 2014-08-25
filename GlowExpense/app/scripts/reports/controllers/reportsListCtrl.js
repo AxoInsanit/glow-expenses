@@ -36,7 +36,6 @@ angular.module('Reports')
                 confirmDeleteDialogSvc.open(entityName).then(function(){
                     reportsRepositorySvc.deleteReport(
                         {
-                            'token':localStorage.getItem(sessionToken),
                             'expenseReportId': report.expenseReportId
                         },
                         deleteReportSuccess,
