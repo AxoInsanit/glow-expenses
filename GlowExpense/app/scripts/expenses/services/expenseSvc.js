@@ -19,6 +19,9 @@ angular.module('Expenses')
         self.exchangeRate = initData.exchangeRate;
         self.expenseTypeName = initData.type;
         self.imageType = initData.imageType;
+        self.contableCodeId = initData.contableCodeId;
+        self.provider = initData.provider;
+        self.type = initData.type;
 
         self.currency = null;
         self.expenseType = reportable;
@@ -47,12 +50,12 @@ angular.module('Expenses')
         initialize();
     }
 
-    function getExpense(initData){
+    function create(initData){
             return new Expense(initData);
         }
 
     return {
-        getExpense: getExpense
+        create: create
     };
 }]);
 

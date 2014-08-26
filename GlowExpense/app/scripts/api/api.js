@@ -7,7 +7,7 @@ angular.module('Api', [])
     .constant('baseUrlMockeyEmulator', 'http://10.0.3.2:8080')
 
     .constant('loginUrl', '/system/login')
-    .constant('expensesUrl', '/expense/:image')
+    .constant('expensesUrl', '/expense')
     .constant('currenciesUrl', '/currency')
     .constant('expenseTypesUrl', '/expenseTypes')
     .constant('reportsUrl', '/expense/report')
@@ -16,4 +16,5 @@ angular.module('Api', [])
     .constant('reportExpensesUrl', '/expense/report/expenses')
 
     .constant('expensesPath', '/expenses')
-    .constant('reportsPath', '/reports');
+    .constant('reportsPath', '/reports')
+    .constant('expensePath', '/expense');

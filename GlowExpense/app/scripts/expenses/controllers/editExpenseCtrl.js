@@ -5,30 +5,34 @@ angular.module('Expenses')
         'cameraSvc', 'reportsRepositorySvc', 'currencySelectDialogSvc', 'expensesRepositorySvc', 'editSaveExpenseDialogSvc',
         'expenseViewImageSvc', 'reportsSharingSvc', 'reportEntityName', 'filterReportByStateSvc',
         'itemsSelectionDialogSvc', 'reportExpensesRepositorySvc', 'localStorageSvc', 'sessionToken', 'reportDetailsPath',
-        'expensesPath', 'invoiceImageRepositorySvc', 'errorHandlerDefaultSvc',
+        'expensesPath', 'invoiceImageRepositorySvc', 'errorHandlerDefaultSvc', 'getIdFromLocationSvc',
         function ($scope,  $location, editExpensesTitle, editExpensesButtonLabel, expenseSharingSvc, cameraSvc,
                   reportsRepositorySvc, currencySelectDialogSvc, expensesRepositorySvc, editSaveExpenseDialogSvc,
                   expenseViewImageSvc, reportsSharingSvc, reportEntityName, filterReportByStateSvc,
                   itemsSelectionDialogSvc, reportExpensesRepositorySvc, localStorageSvc, sessionToken, reportDetailsPath,
-                expensesPath, invoiceImageRepositorySvc, errorHandlerDefaultSvc) {
+                expensesPath, invoiceImageRepositorySvc, errorHandlerDefaultSvc, getIdFromLocationSvc) {
 
             $scope.title = editExpensesTitle;
             $scope.buttonLabel = editExpensesButtonLabel;
             $scope.showErrorMessage = false;
-            $scope.showServerErrorMessage = false;
 
-            $scope.expense = expenseSharingSvc.getExpenseForEdit();
+            var expenseId = getIdFromLocationSvc.getIdFromLocation($location.path());
+            $scope.expense = expenseSharingSvc.getExpenseById(expenseId);
+
             var  originalExpense = angular.copy($scope.expense);
             $scope.report = reportsSharingSvc.getReport();
+
             var lastSelectedReport = $scope.report.description;
 
             $scope.imageSelectedPath = '';
 
             function getImageSuccess(result){
+                // TODO result is empty
                 $scope.imageSelectedPath = result.invoiceImage;
             }
 
             function getImageFail(errorResponse){
+
                 errorHandlerDefaultSvc.handleError(errorResponse).then(function(){
                     resetExpense();
                 });
@@ -38,7 +42,7 @@ angular.module('Expenses')
             {
 
                 invoiceImageRepositorySvc.getImage(
-                    {},
+                    { 'token': localStorageSvc.getItem(sessionToken), 'expenseId': expenseId },
                     getImageSuccess,
                     getImageFail
                 );
@@ -64,6 +68,8 @@ angular.module('Expenses')
 
             $scope.save = function(form, expense) {
                 function saveExpenseSuccess(){
+                    expenseSharingSvc.updateExpense(expense);
+
 
                     function deleteExpenseSuccess(){
 
@@ -110,14 +116,15 @@ angular.module('Expenses')
                             }
                             // it is unassigned go to expenses list
                             else {
+                                debugger;
                                 $location.path(expensesPath);
                             }
                         }
                     }
 
-                    editSaveExpenseDialogSvc.openSuccessEditExpenseDialog($scope.report.description).then(function(url){
-                        $location.path(url);
-                    });
+//                    editSaveExpenseDialogSvc.openSuccessEditExpenseDialog($scope.report.description).then(function(url){
+//                        $location.path(url);
+//                    });
                 }
 
                 function saveExpenseError(errorResponse){
@@ -129,8 +136,8 @@ angular.module('Expenses')
                 if(form.$valid)
                 {
                     expense.date = $scope.expense.date;
-
-                    expensesRepositorySvc.saveExpense(expense, saveExpenseSuccess, saveExpenseError);
+                    var paramsObj = { 'token': localStorageSvc.getItem(sessionToken) };
+                    expensesRepositorySvc.saveExpense(paramsObj, expense, saveExpenseSuccess, saveExpenseError);
                 }
                 else
                 {

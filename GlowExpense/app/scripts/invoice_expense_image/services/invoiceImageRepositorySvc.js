@@ -1,11 +1,14 @@
 'use strict';
 
 angular.module('InvoiceExpenseImage').factory('invoiceImageRepositorySvc', ['$resource', 'baseUrlMockeyWeb', 'imagesUrl',
-    'expenseSharingSvc', 'expensesUrl', 'localStorageSvc',
-    function($resource, baseUrlMockeyWeb, imagesUrl, expenseSharingSvc, expensesUrl,localStorageSvc) {
+    'expensesUrl',
+    function($resource, baseUrlMockeyWeb, imagesUrl, expensesUrl) {
 
-        return $resource(baseUrlMockeyWeb + expensesUrl + imagesUrl +'?expenseId=' + expenseSharingSvc.getExpenseForEdit().expenseId + "&token="+localStorageSvc.getItem("session-token"),
-            {},
+        return $resource(baseUrlMockeyWeb + expensesUrl + imagesUrl +'?expenseId=:expenseId' + '&token=:token',
+            {
+                expenseId: 'expenseId',
+                token: 'token'
+            },
             {
                 'getImage': {
                     'method': 'GET',

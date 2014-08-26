@@ -2,9 +2,9 @@
 
 angular.module('Expenses')
     .controller('ExpensesListCtrl', ['$scope', '$location', 'cameraSvc', 'expensesBufferingSvc', 'expenseSvc',
-        'expenseSharingSvc', 'editModeNotificationChannelSvc', 'reportsSharingSvc',
+        'expenseSharingSvc', 'editModeNotificationChannelSvc', 'reportsSharingSvc', 'expensePath', 'reportsPath',
         function ($scope, $location, cameraSvc, expensesBufferingSvc, expenseSvc, expenseSharingSvc,
-                  editModeNotificationChannelSvc, reportsSharingSvc)  {
+                  editModeNotificationChannelSvc, reportsSharingSvc, expensePath, reportsPath)  {
 
         $scope.expenses = [];
         $scope.isEditMode = false;
@@ -24,14 +24,11 @@ angular.module('Expenses')
         };
 
         $scope.goToReports =  function(){
-            $location.path('/reports');
+            $location.path(reportsPath);
         };
 
-        expensesBufferingSvc.getExpenses().then(function (result) {
-            result.forEach(function (item) {
-                $scope.expenses.push(item);
-            });
-            expenseSharingSvc.setExpenses($scope.expenses);
+        expenseSharingSvc.getExpenses().then(function(result){
+            $scope.expenses = result;
         });
 
         $scope.takePhoto = function(expense) {
@@ -48,7 +45,7 @@ angular.module('Expenses')
             {
                 expenseSharingSvc.setExpenseForEdit(expense);
                 reportsSharingSvc.setReport();
-                $location.path('/edit-expense');
+                $location.path(expensePath + '/' + expense.expenseId);
             }
         };
     }

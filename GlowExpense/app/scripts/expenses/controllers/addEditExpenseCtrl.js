@@ -1,11 +1,9 @@
 'use strict';
 
 angular.module('Expenses')
-    .controller('AddEditExpenseCtrl', ['$scope', '$location', 'expensesRepositorySvc', 'addExpenseErrorMsg', '$modal',
-        'currenciesSvc', 'reportsSharingSvc', 'currencySelectDialogSvc',
+    .controller('AddEditExpenseCtrl', ['$scope', 'addExpenseErrorMsg',  'currenciesSvc', 'currencySelectDialogSvc',
 
-        function ($scope, $location, expensesRepositorySvc, addExpenseErrorMsg, $modal, currenciesSvc, reportsSharingSvc,
-                  currencySelectDialogSvc) {
+        function ($scope, addExpenseErrorMsg, currenciesSvc, currencySelectDialogSvc) {
 
             $scope.errorMessage = addExpenseErrorMsg;
 
