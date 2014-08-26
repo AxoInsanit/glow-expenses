@@ -137,6 +137,7 @@ angular.module('Expenses')
                 {
                     expense.date = $scope.expense.date;
                     var paramsObj = { 'token': localStorageSvc.getItem(sessionToken) };
+                    debugger;
                     expensesRepositorySvc.saveExpense(paramsObj, expense, saveExpenseSuccess, saveExpenseError);
                 }
                 else

@@ -27,7 +27,8 @@ angular.module('Expenses')
             $location.path(reportsPath);
         };
 
-        expenseSharingSvc.getExpenses().then(function(result){
+
+        expenseSharingSvc.getExpenses().then(function(result) {
             $scope.expenses = result;
         });
 
@@ -50,3 +51,11 @@ angular.module('Expenses')
         };
     }
 ]);
+
+//=======
+//    expensesBufferingSvc.getExpenses().then(function (result) {
+//        result.forEach(function (item) {
+//            $scope.expenses.push(item);
+//        });
+//
+//    });

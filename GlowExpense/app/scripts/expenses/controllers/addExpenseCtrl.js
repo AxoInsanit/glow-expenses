@@ -26,16 +26,14 @@ angular.module('Expenses')
                 var headers = responseHeaders();
                 var createdExpenseId = getIdFromLocationSvc.getIdFromLocation(headers.Location);
 
-                var reportObj = {
-                    'expenseReportId': $scope.report.expenseReportId,
-                    'expenseIds': [createdExpenseId]
-                };
-
                 reportExpensesRepositorySvc.addExpensesToReport(
-                    reportObj,
-                    addExpenseToReportSuccess,
-                    errorHandlerDefaultSvc.handleError
-                );
+                        {
+                            'expenseReportId': $scope.report.expenseReportId,
+                            'expenseIds': [createdExpenseId]
+                        },
+                        addExpenseToReportSuccess,
+                        errorHandlerDefaultSvc.handleError
+                    );
             }
 
             $scope.save = function(form, expense) {
