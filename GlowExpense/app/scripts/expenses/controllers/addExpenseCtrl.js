@@ -51,6 +51,7 @@ angular.module('Expenses')
                     newExpense.originalCurrency = 1;
 
                     expensesRepositorySvc.createExpense(
+
                         { 'token': localStorageSvc.getItem(sessionToken) },
                         newExpense,
                         createExpenseSuccess,
