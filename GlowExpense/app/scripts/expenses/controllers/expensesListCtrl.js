@@ -31,6 +31,7 @@ angular.module('Expenses')
             result.forEach(function (item) {
                 $scope.expenses.push(item);
             });
+                    //debugger;
             expenseSharingSvc.setExpenses($scope.expenses);
         });
 
