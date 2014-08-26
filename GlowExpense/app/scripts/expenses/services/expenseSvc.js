@@ -8,20 +8,20 @@ angular.module('Expenses')
     function Expense(initData){
         var self = this;
 
-        self.expenseId = initData.expenseId;
-        self.submiter = initData.submiter;
-        self.owner = initData.owner;
-        self.description = initData.description;
-        self.invoiceNumber = initData.invoiceNumber;
-        self.date = initData.date;
-        self.originalCurrencyId = initData.originalCurrencyId;
-        self.originalAmount = initData.originalAmount;
-        self.exchangeRate = initData.exchangeRate;
-        self.expenseTypeName = initData.type;
-        self.imageType = initData.imageType;
-        self.contableCodeId = initData.contableCodeId;
-        self.provider = initData.provider;
-        self.type = initData.type;
+        self.expenseId = initData.expenseId || 0;
+        self.submiter = initData.submiter || null;
+        self.owner = initData.owner || null;
+        self.description = initData.description || null;
+        self.invoiceNumber = initData.invoiceNumber || 0;
+        self.date = initData.date || null;
+        self.originalCurrencyId = initData.originalCurrencyId || 0;
+        self.originalAmount = initData.originalAmount || 0;
+        self.exchangeRate = initData.exchangeRate || 0;
+        self.expenseTypeName = initData.type || null;
+        self.imageType = initData.imageType || null;
+        self.contableCodeId = initData.contableCodeId || 0;
+        self.provider = initData.provider || null;
+        self.type = initData.type || null;
 
         self.currency = null;
         self.expenseType = reportable;

@@ -51,11 +51,3 @@ angular.module('Expenses')
         };
     }
 ]);
-
-//=======
-//    expensesBufferingSvc.getExpenses().then(function (result) {
-//        result.forEach(function (item) {
-//            $scope.expenses.push(item);
-//        });
-//
-//    });

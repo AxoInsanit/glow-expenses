@@ -38,14 +38,15 @@ angular.module('Reports')
             }
 
             $scope.save = function(form, report){
-                function onSuccess(){
+
+                function createReportSuccess(){
+                    reportsSharingSvc.addReport(report);
                     $location.path(reportsPath);
                 }
 
-                function onFail(errorResponse){
-                    errorHandlerDefaultSvc.handleError(errorResponse).then(function(){
-                        $scope.showErrorMessage = false;
-                    });
+                function saveReportSuccess(){
+                    reportsSharingSvc.updateReport(report);
+                    $location.path(reportsPath);
                 }
 
                 if(form.$valid)
@@ -61,10 +62,18 @@ angular.module('Reports')
                     };
 
                     if ($scope.report) {
-                        reportsRepositorySvc.saveReport(reportViewModel,onSuccess,onFail);
+                        reportsRepositorySvc.saveReport(
+                            reportViewModel,
+                            saveReportSuccess,
+                            errorHandlerDefaultSvc.handleError
+                        );
                     }
                     else {
-                        reportsRepositorySvc.createReport(reportViewModel,onSuccess,onFail);
+                        reportsRepositorySvc.createReport(
+                            reportViewModel,
+                            createReportSuccess,
+                            errorHandlerDefaultSvc.handleError
+                        );
                     }
                 }
                 else {

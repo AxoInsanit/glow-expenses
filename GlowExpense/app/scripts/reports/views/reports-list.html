@@ -26,7 +26,7 @@
                             <ng-switch on="report.locked">
                                 <div class="remove" ng-switch-default>
                                     <a href="" class="icon icon-delete float-left" ng-switch="expense.selected"
-                                       ng-show="isEditMode"  ng-click="deleteReport(report)" ></a>
+                                       ng-show="isEditMode"  ng-click="deleteReport(report.expenseReportId)" ></a>
                                 </div>
                                 <div ng-switch-when="true">
                                     

@@ -1,7 +1,8 @@
 'use strict';
 
 angular.module('Reports')
-    .factory('reportsSharingSvc', ['$q', 'reportsRepositorySvc', function($q, reportsRepositorySvc) {
+    .factory('reportsSharingSvc', ['$q', 'reportsRepositorySvc', 'localStorageSvc', 'sessionToken', 'errorHandlerDefaultSvc',
+        function($q, reportsRepositorySvc, localStorageSvc, sessionToken, errorHandlerDefaultSvc) {
 
         var reports = [];
         var report = {};
@@ -21,13 +22,40 @@ angular.module('Reports')
             var deferred = $q.defer();
 
             if (reports.length === 0){
-                reportsRepositorySvc.getReports({}, reportsSuccess);
+                reportsRepositorySvc.getReports(
+                    { 'token': localStorageSvc.getItem(sessionToken) },
+                    reportsSuccess,
+                    errorHandlerDefaultSvc.handleError
+                );
             }
             else {
                 deferred.resolve(reports);
             }
 
             return deferred.promise;
+        }
+
+        // TODO service that is called from within delete and update expense/report as the logic is the same
+        function deleteReport(reportId){
+            var reportToDeleteIndex = null;
+            reports.some(function(item, index){
+                if (item.expenseReportId === reportId){
+                    reportToDeleteIndex = index;
+                    return true;
+                }
+            });
+            if (reportToDeleteIndex){
+                reports.splice(reportToDeleteIndex, 1);
+            }
+        }
+
+        function updateReport(report){
+            reports.some(function(item){
+                if(item.expenseReportId === report.expenseReportId){
+                    item = report;
+                    return true;
+                }
+            });
         }
 
         function getReport() {
@@ -41,7 +69,9 @@ angular.module('Reports')
         return {
             setReport: setReport,
             getReport: getReport,
-            getReports: getReports
+            getReports: getReports,
+            deleteReport: deleteReport,
+            updateReport: updateReport
         };
     }
 ]);

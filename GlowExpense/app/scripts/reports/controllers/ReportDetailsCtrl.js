@@ -29,25 +29,6 @@ angular.module('Reports')
               editModeNotificationChannelSvc.toggleEditMode($scope.isEditMode);
             };
 
-            // TODO remove this when real services are implemented
-            var firstLoad = true;
-
-            $scope.getMoreExpenses = function () {
-
-                // TODO remove this when real services are implemented
-                if (firstLoad) {
-                    firstLoad = false;
-                    return;
-                }
-
-                expensesBufferingSvc.getMoreExpenses($scope).then(function (result) {
-                    result.forEach(function (item) {
-                        $scope.expenses.push(expenseSvc.getExpense($scope, item));
-                    });
-
-                });
-            };
-
             $scope.sendReport = function(){
                 sendReportDialogSvc.open($scope.report.description);
             };
