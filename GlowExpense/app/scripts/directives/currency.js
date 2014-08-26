@@ -10,29 +10,24 @@
             return angular.isUndefined(value) || value === '' || value === null || value !== value;
         }
 
-        var p = function (viewValue) {
-            var nums = viewValue.toString().replace(/[^\d.]/g, '');
-            return nums;
-        };
-
         var f = function (modelValue, setdec) {
             setdec = setdec !== undefined ? setdec : true;
-            var decimalSplit = modelValue.toString().split(".");
+            var decimalSplit = modelValue.toString().split('.');
             var intPart = decimalSplit[0];
             var decPart = decimalSplit[1];
 
-            intPart = (intPart == "" && setdec) ? "0" : intPart;
+            intPart = (intPart === '' && setdec) ? '0' : intPart;
             intPart = intPart.replace(/[^\d]/g, '');
             if (intPart.length > 3) {
                 var intDiv = Math.floor(intPart.length / 3);
                 while (intDiv > 0) {
-                    var lastComma = intPart.indexOf(",");
+                    var lastComma = intPart.indexOf(',');
                     if (lastComma < 0) {
                         lastComma = intPart.length;
                     }
 
                     if (lastComma - 3 > 0) {
-                        intPart = intPart.splice(lastComma - 3, 0, ",");
+                        intPart = intPart.splice(lastComma - 3, 0, ',');
                     }
                     intDiv--;
                 }
@@ -40,19 +35,25 @@
 
             if (decPart === undefined) {
                 if (setdec)
-                    decPart = ".00";
+                {
+                    decPart = '.00';
+                }
                 else
-                    decPart = "";
+                {
+                    decPart = '';
+                }
             }
             else {
                 if (setdec) {
                     if (decPart.length > 2)
+                    {
                         decPart = decPart.slice(0, 2);
+                    }
                     while (decPart.length < 2) {
-                        decPart = decPart + "0"
+                        decPart = decPart + '0';
                     }
                 }
-                decPart = "." + decPart;
+                decPart = '.' + decPart;
             }
 
             return [intPart, decPart].join('');
@@ -62,8 +63,8 @@
             require: '?ngModel',
             restrict: 'A',
             link: function (scope, element, attr, ctrl) {
-                scope.$watch(function () { return { min: attr.min } }, function () { ctrl.$setViewValue(ctrl.$viewValue); }, true);
-                scope.$watch(function () { return { max: attr.max } }, function () { ctrl.$setViewValue(ctrl.$viewValue); }, true);
+                scope.$watch(function () { return { min: attr.min }; }, function () { ctrl.$setViewValue(ctrl.$viewValue); }, true);
+                scope.$watch(function () { return { max: attr.max }; }, function () { ctrl.$setViewValue(ctrl.$viewValue); }, true);
 
                 var minValidator = function (value) {
                     var min = scope.$eval(attr.min) || 0;
@@ -88,7 +89,7 @@
                 };
 
                 element.bind('keypress', function (e) {
-                    var charCode = (typeof e.which == "number") ? e.which : e.keyCode,
+                    var charCode = (typeof e.which === 'number') ? e.which : e.keyCode,
                         currentValue = $(this).val(),
                         start = this.selectionStart,
                         end = this.selectionEnd;
@@ -96,8 +97,10 @@
                         charCount = end - start;
                     var newValue = currentValue.splice(start, charCount, insertValue);
 
-                    if (charCode == 0 || charCode == 8)
+                    if (charCode === 0 || charCode === 8)
+                    {
                         return;
+                    }
                     if (String.fromCharCode(charCode).match(/[^\d.]/g)) {
                         e.preventDefault();
                         return;
@@ -106,17 +109,17 @@
                         e.preventDefault();
                         return;
                     }
-                    if (newValue.split(".").length > 2 && charCode == 46) {
+                    if (newValue.split('.').length > 2 && charCode === 46) {
                         e.preventDefault();
                         return;
                     }
                 });
 
-                $(element).bind('blur paste', function (e) {
+                $(element).bind('blur paste', function () {
                     element.val(f($(this).val()));
                 });
 
-                $(element).bind('keyup', function (e) {
+                $(element).bind('keyup', function () {
                     element.val(f($(this).val(), false));
                 });
 

@@ -41,6 +41,9 @@ angular.module('Expenses')
                 {
                     expense.date = new Date();
                     expensesRepositorySvc.createExpense(
+                        {
+                            'token': localStorage.getItem('session-token')
+                        },
                         expense,
                         createExpenseSuccess,
                         errorHandlerDefaultSvc.handleError

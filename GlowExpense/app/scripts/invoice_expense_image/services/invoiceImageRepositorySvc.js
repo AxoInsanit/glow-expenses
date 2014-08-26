@@ -4,7 +4,7 @@ angular.module('InvoiceExpenseImage').factory('invoiceImageRepositorySvc', ['$re
     'expenseSharingSvc', 'expensesUrl', 'localStorageSvc',
     function($resource, baseUrlMockeyWeb, imagesUrl, expenseSharingSvc, expensesUrl,localStorageSvc) {
 
-        return $resource(baseUrlMockeyWeb + expensesUrl + imagesUrl +'?expenseId=' + expenseSharingSvc.getExpenseForEdit().expenseId + "&token="+localStorageSvc.getItem("session-token"),
+        return $resource(baseUrlMockeyWeb + expensesUrl + imagesUrl +'?expenseId=' + expenseSharingSvc.getExpenseForEdit().expenseId + '&token='+localStorageSvc.getItem('session-token'),
             {},
             {
                 'getImage': {

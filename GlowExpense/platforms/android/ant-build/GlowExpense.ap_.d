@@ -36,6 +36,7 @@
 /Users/dimitarjilanov/Documents/GlowMobile/GlowExpense/platforms/android/assets/www/favicon.ico \
 /Users/dimitarjilanov/Documents/GlowMobile/GlowExpense/platforms/android/assets/www/index.html \
 /Users/dimitarjilanov/Documents/GlowMobile/GlowExpense/platforms/android/assets/www/offline.html \
+/Users/dimitarjilanov/Documents/GlowMobile/GlowExpense/platforms/android/assets/www/phonegap.js \
 /Users/dimitarjilanov/Documents/GlowMobile/GlowExpense/platforms/android/assets/www/plugins \
 /Users/dimitarjilanov/Documents/GlowMobile/GlowExpense/platforms/android/assets/www/resources \
 /Users/dimitarjilanov/Documents/GlowMobile/GlowExpense/platforms/android/assets/www/robots.txt \
