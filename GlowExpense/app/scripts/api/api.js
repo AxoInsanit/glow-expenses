@@ -12,6 +12,9 @@ angular.module('Api', [])
     // .constant('baseUrlMockeyEmulator', 'http://10.0.3.2:8080')
     // .constant('baseUrlMockeyIOS', 'localhost:8080')
 
+    //globant end point
+    //.constant('baseUrlMockeyWeb', 'http://esb.dev.corp.globant.com:8080') 
+
     .constant('loginUrl', '/system/login')
     .constant('expensesUrl', '/expense/:image')
     .constant('currenciesUrl', '/currency')
