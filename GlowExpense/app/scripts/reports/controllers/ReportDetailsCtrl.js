@@ -37,6 +37,10 @@ angular.module('Reports')
                 $scope.expensesCollection.shown += $scope.counter;
             }
 
+            function onSuccessReportSend(){
+                sendReportDialogSvc.open($scope.report.description);
+            }
+            
             $scope.getMoreExpenses = function () {
                 setMoreExpenses();
 
@@ -71,15 +75,11 @@ angular.module('Reports')
             };
 
             $scope.sendReport = function(){
-                debugger;
                 reportSendRepositorySvc.sendReport(
                     {
                         'token': localStorage.getItem('session-token'),
                         'expenseReportId': $scope.report.expenseReportId
-                    }).then(function() {
-                    debugger;
-                    sendReportDialogSvc.open($scope.report.description);
-                    });
+                    },onSuccessReportSend);
 
                
             };
