@@ -116,7 +116,6 @@ angular.module('Expenses')
                             }
                             // it is unassigned go to expenses list
                             else {
-                                debugger;
                                 $location.path(expensesPath);
                             }
                         }
@@ -137,7 +136,7 @@ angular.module('Expenses')
                 {
                     expense.date = $scope.expense.date;
                     var paramsObj = { 'token': localStorageSvc.getItem(sessionToken) };
-                    debugger;
+
                     expensesRepositorySvc.saveExpense(paramsObj, expense, saveExpenseSuccess, saveExpenseError);
                 }
                 else

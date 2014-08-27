@@ -7,27 +7,31 @@ angular.module('Expenses').factory('expenseSharingSvc', ['$q', 'expensesReposito
 
         var expenseForEdit = null;
 
-        var allExpenses = [];
+        var reportExpensesMapper =
+        {
+            0: []
+        };
+
         var expenseIdsReadyToBeAssigned = [];
 
         // lazy load expenses on demand
         function getExpenses(reportId){
+            var reportKey = reportId || 0;
+            reportExpensesMapper[reportKey] = reportExpensesMapper[reportKey] || [];
 
             function getExpensesSuccess(response){
-
                 response.expenses.forEach(function(item){
                     item.title = item.description;
                     var expense = expenseSvc.create(item);
-                    allExpenses.push(expense);
+                    reportExpensesMapper[reportKey].push(expense);
                 });
-                deferred.resolve(allExpenses);
+                deferred.resolve(reportExpensesMapper[reportKey]);
             }
 
             var deferred = $q.defer();
 
-            if (allExpenses.length === 0){
-
-                var paramsObj = reportId ?
+            if (reportExpensesMapper[reportKey].length === 0){
+                var paramsObj = reportKey > 0 ?
                 { 'token': localStorageSvc.getItem(sessionToken), 'expenseReportId': reportId } :
                 { 'token': localStorageSvc.getItem(sessionToken) };
 
@@ -38,7 +42,7 @@ angular.module('Expenses').factory('expenseSharingSvc', ['$q', 'expensesReposito
                 );
             }
             else {
-                deferred.resolve(allExpenses);
+                deferred.resolve(reportExpensesMapper[reportKey]);
             }
 
             return deferred.promise;
@@ -53,19 +57,19 @@ angular.module('Expenses').factory('expenseSharingSvc', ['$q', 'expensesReposito
         }
 
         function getExpenseIdsForReportAssign(){
-            allExpenses.forEach(function(expense){
-                if (expense.imageType !== 'void'){
-                    expenseIdsReadyToBeAssigned.push(expense.expenseId);
-                }
-            });
+//            allExpenses.forEach(function(expense){
+//                if (expense.imageType !== 'void'){
+//                    expenseIdsReadyToBeAssigned.push(expense.expenseId);
+//                }
+//            });
 
             return expenseIdsReadyToBeAssigned;
         }
 
-        function getExpenseById(expenseId){
-
+        function getExpenseById(expenseId, reportId){
+            var reportKey = reportId || 0;
             var result = null;
-            allExpenses.some(function(item){
+            reportExpensesMapper[reportKey].some(function(item){
                 if(item.expenseId === expenseId){
                     result = item;
                     return true;
@@ -80,8 +84,9 @@ angular.module('Expenses').factory('expenseSharingSvc', ['$q', 'expensesReposito
             return result;
         }
 
-        function updateExpense(expense){
-            allExpenses.some(function(item){
+        function updateExpense(expense, reportId){
+            var reportKey = reportId || 0;
+            reportExpensesMapper[reportKey].some(function(item){
                 if(item.expenseId === expense.expenseId){
                     item = expense;
                     return true;
@@ -89,16 +94,17 @@ angular.module('Expenses').factory('expenseSharingSvc', ['$q', 'expensesReposito
             });
         }
 
-        function deleteExpense(expenseId){
+        function deleteExpense(expenseId, reportId){
+            var reportKey = reportId || 0;
             var expenseToDeleteIndex = null;
-            allExpenses.some(function(item, index){
+            reportExpensesMapper[reportKey].some(function(item, index){
                 if (item.expenseId === expenseId){
                     expenseToDeleteIndex = index;
                     return true;
                 }
             });
             if (expenseToDeleteIndex){
-                allExpenses.splice(expenseToDeleteIndex, 1);
+                reportExpensesMapper[reportKey].splice(expenseToDeleteIndex, 1);
             }
         }
 

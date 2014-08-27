@@ -25,6 +25,7 @@ angular.module('Expenses')
                 }
 
                 var headers = responseHeaders();
+
                 // TODO remove when the service returns location
                 headers.Location = 'http://localhost:8080/expense/1234';
                 var createdExpenseId = getIdFromLocationSvc.getIdFromLocation(headers.Location);

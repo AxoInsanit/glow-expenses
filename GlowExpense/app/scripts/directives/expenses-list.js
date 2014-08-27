@@ -4,11 +4,11 @@ angular.module('Directives').directive('expensesList', ['expensesListTemplateUrl
         return {
             restrict: 'E',
             replace: true,
-            controller: ['$scope', '$location', 'expenseSvc', 'expensesRepositorySvc', 'expensesBufferingSvc',
-                'confirmDeleteDialogSvc', 'reportEntity', 'sessionToken', 'errorHandlerDefaultSvc', 'expenseSharingSvc',
-                function($scope, $location, expenseSvc, expensesRepositorySvc, expensesBufferingSvc,
-                    confirmDeleteDialogSvc, reportEntity, sessionToken, errorHandlerDefaultSvc, expenseSharingSvc ) {
+            controller: ['$scope', '$location', 'expenseSvc', 'expensesRepositorySvc', 'confirmDeleteDialogSvc',
+                'reportEntity', 'sessionToken', 'errorHandlerDefaultSvc', 'expenseSharingSvc', 'getIdFromLocationSvc',
 
+                function($scope, $location, expenseSvc, expensesRepositorySvc,  confirmDeleteDialogSvc, reportEntity,
+                   sessionToken, errorHandlerDefaultSvc, expenseSharingSvc, getIdFromLocationSvc) {
 
                     $scope.sort = function(item) {
                         return new Date(item.date);
@@ -17,7 +17,8 @@ angular.module('Directives').directive('expensesList', ['expensesListTemplateUrl
                     $scope.deleteExpense = function(expenseId){
 
                         function deleteSuccess(){
-                            expenseSharingSvc.deleteExpense(expenseId);
+                            var reportId = getIdFromLocationSvc.getIdFromLocation($location.path());
+                            expenseSharingSvc.deleteExpense(expenseId, reportId);
                         }
 
                         confirmDeleteDialogSvc.open(reportEntity).then(function(){

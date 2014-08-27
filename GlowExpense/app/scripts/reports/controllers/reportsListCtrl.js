@@ -28,7 +28,7 @@ angular.module('Reports')
             $scope.deleteReport = function(reportId) {
 
                 function deleteReportSuccess(){
-                    reportsSharingSvc.deleteReport(reportId)
+                    reportsSharingSvc.deleteReport(reportId);
                 }
 
                 confirmDeleteDialogSvc.open(entityName).then(function(){
@@ -47,7 +47,7 @@ angular.module('Reports')
                 if((!$scope.isEditMode) && (!report.locked) && (filterReportByStateSvc.checkIfInState(report)))
                 {
                     reportsSharingSvc.setReport(report);
-                    $location.path(reportDetailsPath);
+                    $location.path(reportDetailsPath + '/' + report.expenseReportId);
                 }
             };
 

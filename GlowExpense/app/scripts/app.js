@@ -99,7 +99,7 @@ angular.module('app', _mainModules )
         });
 
         routes.push({
-            name: '/report-details',
+            name: '/report-details/:id',
             params: {
                 templateUrl: 'scripts/reports/views/report-details.html',
                 controller: 'ReportDetailsCtrl'

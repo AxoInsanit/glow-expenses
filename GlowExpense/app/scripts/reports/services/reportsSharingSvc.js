@@ -1,8 +1,9 @@
 'use strict';
 
 angular.module('Reports')
-    .factory('reportsSharingSvc', ['$q', 'reportsRepositorySvc', 'localStorageSvc', 'sessionToken', 'errorHandlerDefaultSvc',
-        function($q, reportsRepositorySvc, localStorageSvc, sessionToken, errorHandlerDefaultSvc) {
+    .factory('reportsSharingSvc', ['$q', 'reportsRepositorySvc', 'localStorageSvc', 'sessionToken',
+        'errorHandlerDefaultSvc', 'expenseSharingSvc',
+        function($q, reportsRepositorySvc, localStorageSvc, sessionToken, errorHandlerDefaultSvc, expenseSharingSvc) {
 
         var reports = [];
         var report = {};
@@ -71,7 +72,8 @@ angular.module('Reports')
             getReport: getReport,
             getReports: getReports,
             deleteReport: deleteReport,
-            updateReport: updateReport
+            updateReport: updateReport,
+            expenseSharingSvc: expenseSharingSvc
         };
     }
 ]);

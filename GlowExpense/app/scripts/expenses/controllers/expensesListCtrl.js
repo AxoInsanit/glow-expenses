@@ -27,7 +27,6 @@ angular.module('Expenses')
             $location.path(reportsPath);
         };
 
-
         expenseSharingSvc.getExpenses().then(function(result) {
             $scope.expenses = result;
         });
