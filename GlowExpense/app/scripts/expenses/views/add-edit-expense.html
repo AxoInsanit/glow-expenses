@@ -39,8 +39,16 @@
                 </div>
                 <div class="form-item" ng-click="angular.isDefined(selectReport()) && selectReport()">
                     <label class="assign-select" for="report">
-                        <input type="text" id="report" placeholder="Select a report" class="form-control"
-                               ng-model="report.description" disabled required>
+                        <div ng-switch="angular.isDefined(report.description) === true">
+                            <div ng-switch-when="true">
+                                <input type="text" id="report" placeholder="Select a report" class="form-control"
+                                       ng-model="report.description" disabled required>
+                            </div>
+                            <div ng-switch-when="false">
+                                <input type="text" id="report" placeholder="Select a report" class="form-control"
+                                       ng-model="report.description" disabled>
+                            </div>
+                        </div>
                     </label>
                 </div>
             </div>
@@ -54,7 +62,7 @@
                 <div class="form-item" >
                     <label for="amount">
                         <input type="text" id="amount" class="form-control"
-                               ng-model="expense.originalAmount" field="currencyVal" placeholder="Amount"  currency required> 
+                               ng-model="expense.originalAmount" field="currencyVal" placeholder="Amount"  currency required>
                     </label>
                 </div>
                 <div class="form-item" ng-click="selectCurrency(expense.currency)">
@@ -68,7 +76,7 @@
                 <div class="form-item" >
                     <label for="exchangeRate">
                         <input type="text" id="exchangeRate" placeholder="Exchange Rate" class="form-control"
-                               ng-model="expense.exchangeRate" required>
+                               ng-model="expense.exchangeRate"required>
                     </label>
                 </div>
             </div>

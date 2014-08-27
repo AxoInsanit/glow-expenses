@@ -1,13 +1,14 @@
 'use strict';
 
-angular.module('Directives').directive('expensesList', [function() {
+angular.module('Directives').directive('expensesList', ['expensesListTemplateUrl', function(expensesListTemplateUrl) {
         return {
             restrict: 'E',
             replace: true,
-            controller: ['$scope', '$location', 'expenseSvc', 'expensesRepositorySvc', 'expensesBufferingSvc',
-                'confirmDeleteDialogSvc', 'reportEntity', 'sessionToken', 'errorHandlerDefaultSvc',
-                function($scope, $location, expenseSvc, expensesRepositorySvc, expensesBufferingSvc,
-                    confirmDeleteDialogSvc, reportEntity, sessionToken, errorHandlerDefaultSvc) {
+            controller: ['$scope', '$location', 'expenseSvc', 'expensesRepositorySvc', 'confirmDeleteDialogSvc',
+                'reportEntity', 'sessionToken', 'errorHandlerDefaultSvc', 'expenseSharingSvc', 'getIdFromLocationSvc',
+
+                function($scope, $location, expenseSvc, expensesRepositorySvc,  confirmDeleteDialogSvc, reportEntity,
+                   sessionToken, errorHandlerDefaultSvc, expenseSharingSvc, getIdFromLocationSvc) {
 
                     $scope.sort = function(item) {
                         return new Date(item.date);
@@ -16,9 +17,8 @@ angular.module('Directives').directive('expensesList', [function() {
                     $scope.deleteExpense = function(expenseId){
 
                         function deleteSuccess(){
-                            $scope.expenses = $scope.expenses.filter(function (expense) {
-                                return expense.expenseId !== expenseId;
-                            });
+                            var reportId = getIdFromLocationSvc.getIdFromLocation($location.path());
+                            expenseSharingSvc.deleteExpense(expenseId, reportId);
                         }
 
                         confirmDeleteDialogSvc.open(reportEntity).then(function(){
@@ -32,13 +32,9 @@ angular.module('Directives').directive('expensesList', [function() {
                             );
                         });
                     };
-
-                    $scope.showInvoiceImage = function() {
-                        $location.path('/invoice-expense-image');
-                    };
                 }
             ],
-            templateUrl: 'scripts/directives/views/expenses-list.html'
+            templateUrl: expensesListTemplateUrl
         };
     }
 ]);

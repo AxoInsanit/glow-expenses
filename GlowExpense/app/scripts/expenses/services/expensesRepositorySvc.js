@@ -4,8 +4,11 @@ angular.module('Expenses').factory('expensesRepositorySvc', ['$resource', 'baseU
 
     function($resource, baseUrlMockeyWeb, expensesUrl) {
 
-        return $resource(baseUrlMockeyWeb + expensesUrl   ,
-            {},
+
+        return $resource(baseUrlMockeyWeb + expensesUrl + '?token=:token' ,
+            {
+                token: 'token'
+            },
             {
                 'getExpenses': {
                     'method': 'GET',

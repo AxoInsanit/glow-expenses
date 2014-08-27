@@ -5,7 +5,7 @@ angular.module('Services').factory('errorHandlerDefaultSvc', ['errorDialogSvc', 
 
         function handleError(errorResponse){
             var errorMessage = errorMessageSvc.getErrorMessage(errorResponse.status);
-            errorDialogSvc.open(errorMessage);
+            return errorDialogSvc.open(errorMessage);
         }
 
         return {

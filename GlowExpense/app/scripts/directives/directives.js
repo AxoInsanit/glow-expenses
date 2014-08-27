@@ -1,4 +1,5 @@
 'use strict';
 
 angular.module('Directives', [])
-    .config(function () {});
+    .config(function () {})
+    .constant('expensesListTemplateUrl', 'scripts/directives/views/expenses-list.html');

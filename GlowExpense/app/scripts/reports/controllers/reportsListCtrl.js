@@ -3,10 +3,10 @@
 angular.module('Reports')
     .controller('ReportsListCtrl', ['$scope', '$location', 'reportsSharingSvc',
         'editModeNotificationChannelSvc', 'reportsRepositorySvc', 'filterReportByStateSvc', 'entityName',
-        'confirmDeleteDialogSvc', 'reportDetailsPath', 'sessionToken', 'errorHandlerDefaultSvc',
+        'confirmDeleteDialogSvc', 'reportDetailsPath', 'sessionToken', 'errorHandlerDefaultSvc', 'localStorageSvc',
             function ($scope, $location, reportsSharingSvc, editModeNotificationChannelSvc,
                       reportsRepositorySvc, filterReportByStateSvc, entityName, confirmDeleteDialogSvc,
-                      reportDetailsPath, sessionToken, errorHandlerDefaultSvc)  {
+                      reportDetailsPath, sessionToken, errorHandlerDefaultSvc, localStorageSvc)  {
 
             reportsSharingSvc.getReports().then(function(reports){
                 $scope.reports = reports;
@@ -25,18 +25,17 @@ angular.module('Reports')
                 $location.path('/create-report');
             };
 
-            $scope.deleteReport = function(report) {
+            $scope.deleteReport = function(reportId) {
 
                 function deleteReportSuccess(){
-                    $scope.reports = $scope.reports.filter(function (item) {
-                        return item.expenseReportId !== report.expenseReportId;
-                    });
+                    reportsSharingSvc.deleteReport(reportId);
                 }
 
                 confirmDeleteDialogSvc.open(entityName).then(function(){
                     reportsRepositorySvc.deleteReport(
                         {
-                            'expenseReportId': report.expenseReportId
+                            'token': localStorageSvc.getItem(sessionToken),
+                            'expenseReportId': reportId
                         },
                         deleteReportSuccess,
                         errorHandlerDefaultSvc.handleError
@@ -48,12 +47,11 @@ angular.module('Reports')
                 if((!$scope.isEditMode) && (!report.locked) && (filterReportByStateSvc.checkIfInState(report)))
                 {
                     reportsSharingSvc.setReport(report);
-                    $location.path(reportDetailsPath);
+                    $location.path(reportDetailsPath + '/' + report.expenseReportId);
                 }
             };
 
             $scope.goToExpenses = function(){
-
                 $location.path('/expenses');
             };
         }
