@@ -4,11 +4,11 @@ angular.module('Api', [])
     .config(function () {})
     .constant('baseUrl', 'https://esb.dev.corp.globant.com')
     //our network
-    //.constant('baseUrlMockeyWeb', 'http://10.10.10.123:7000')
+    .constant('baseUrlMockeyWeb', 'http://10.10.10.123:7000')
     //public network
     //.constant('baseUrlMockeyWeb', 'http://92.247.83.122:7000')
     //localhost
-    .constant('baseUrlMockeyWeb', 'http://127.0.0.1:7000')
+    // .constant('baseUrlMockeyWeb', 'http://127.0.0.1:7000')
     // .constant('baseUrlMockeyEmulator', 'http://10.0.3.2:8080')
     // .constant('baseUrlMockeyIOS', 'localhost:8080')
 

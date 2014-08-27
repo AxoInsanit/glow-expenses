@@ -71,6 +71,7 @@ angular.module('Reports')
             };
 
             $scope.sendReport = function(){
+                
                 sendReportDialogSvc.open($scope.report.description);
             };
 

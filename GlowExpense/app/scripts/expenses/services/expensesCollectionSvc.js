@@ -12,17 +12,17 @@ angular.module('Expenses').factory('expenseSharingSvc', ['$q', 'expensesReposito
 
         function setMoreExpenses(){
             //we save the code from error if we go over the array length
-            if($scope.expensesCollection.items.length < $scope.expensesCollection.shown +$scope.counter)
+            if(expensesCollection.items.length < expensesCollection.shown + counter)
             {
-                $scope.expensesCollection.shown = $scope.expensesCollection.items.length - $scope.counter;
+                expensesCollection.shown = expensesCollection.items.length - counter;
             }
 
-            for(var counter = $scope.expensesCollection.shown; counter < $scope.expensesCollection.shown +$scope.counter; counter++)
+            for(var counter = expensesCollection.shown; counter < expensesCollection.shown +counter; counter++)
             {
-                $scope.expenses[counter] = $scope.expensesCollection.items[counter];
+                expenses[counter] = expensesCollection.items[counter];
             }
 
-            $scope.expensesCollection.shown += $scope.counter;
+            expensesCollection.shown += counter;
         }
 
         function setCollection(result){
