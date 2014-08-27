@@ -23,11 +23,11 @@ angular.module('Expenses')
                         $location.path(url);
                     });
                 }
-
+                debugger;
                 var headers = responseHeaders();
 
                 // TODO remove when the service returns location
-                headers.Location = 'http://localhost:8080/expense/1234';
+                headers.Location = response.location;
                 var createdExpenseId = getIdFromLocationSvc.getIdFromLocation(headers.Location);
 
                 reportExpensesRepositorySvc.addExpensesToReport(
