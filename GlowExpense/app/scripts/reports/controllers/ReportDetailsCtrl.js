@@ -3,10 +3,10 @@
 angular.module('Reports')
     .controller('ReportDetailsCtrl', ['$scope', '$location', 'addReportErrorMsg', 'reportsSharingSvc',
          'expensesRepositorySvc', 'confirmDeleteDialogSvc',
-        'entityName', 'sendReportDialogSvc', 'editExpensePath', 'expenseSvc', 'editModeNotificationChannelSvc',
+        'entityName', 'sendReportDialogSvc', 'editExpensePath', 'expenseSvc', 'editModeNotificationChannelSvc', 'reportSendRepositorySvc',
         function ($scope, $location, addReportErrorMsg, reportsSharingSvc,
                   expensesRepositorySvc, confirmDeleteDialogSvc, entityName,
-                  sendReportDialogSvc, editExpensePath, expenseSvc, editModeNotificationChannelSvc)  {
+                  sendReportDialogSvc, editExpensePath, expenseSvc, editModeNotificationChannelSvc, reportSendRepositorySvc)  {
 
             $scope.errorMessage = addReportErrorMsg;
             $scope.showErrorMessage = false;
@@ -71,8 +71,17 @@ angular.module('Reports')
             };
 
             $scope.sendReport = function(){
-                
-                sendReportDialogSvc.open($scope.report.description);
+                debugger;
+                reportSendRepositorySvc.sendReport(
+                    {
+                        'token': localStorage.getItem('session-token'),
+                        'expenseReportId': $scope.report.expenseReportId
+                    }).then(function() {
+                    debugger;
+                    sendReportDialogSvc.open($scope.report.description);
+                    });
+
+               
             };
 
             $scope.editExpense = function(expense) {
