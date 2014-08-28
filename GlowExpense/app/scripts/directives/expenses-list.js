@@ -21,7 +21,6 @@ angular.module('Directives').directive('expensesList', ['expensesListTemplateUrl
 
                             expenseSharingSvc.deleteExpense(expenseId, reportId);
                         }
-                        debugger;
                         confirmDeleteDialogSvc.open(reportEntity).then(function(){
                             expensesRepositorySvc.deleteExpense(
                                 {

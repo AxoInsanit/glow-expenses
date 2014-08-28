@@ -15,7 +15,7 @@ angular.module('Login').controller('LoginCtrl', ['$scope', '$location', 'UserSvc
                     $scope.showErrorMessage = false;
                     localStorageSvc.setItem(sessionToken, response.session_token);
                     localStorageSvc.setItem(userName, $scope.user.username);
-                    expenseSharingSvc.getExpenses().then(function(result) {
+                    expenseSharingSvc.getExpenses().then(function() {
                         $location.path('/expenses');
                     });
 

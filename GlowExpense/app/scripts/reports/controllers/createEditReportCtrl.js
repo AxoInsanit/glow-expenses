@@ -81,7 +81,7 @@ angular.module('Reports')
                     }
                     else {
 
-                        var reportViewModel = {
+                        var reportVM = {
                             'description': report.title,
                             'applyTo': report.project.name,
                             'entityId': projectId,
@@ -93,7 +93,7 @@ angular.module('Reports')
                             {
                                 'token': localStorageSvc.getItem(sessionToken)
                             },
-                            reportViewModel,
+                            reportVM,
                             createReportSuccess,
                             errorHandlerDefaultSvc.handleError
                         );

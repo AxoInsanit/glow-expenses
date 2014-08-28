@@ -117,7 +117,6 @@ angular.module('Expenses')
                         // no change in the state of expense
                         else
                         {
-                            debugger;
                             // it is assigned go to report details
                             if ($scope.report.description){
                                 addExpenseSuccess();

@@ -16,7 +16,6 @@ angular.module('Expenses')
 
             var reportId = getIdFromLocationSvc.getFirstIdFromLocation($location.path());
             $scope.report = reportsSharingSvc.getReportById(reportId);
-            debugger;
 
             $scope.save = function(form, expense) {
 

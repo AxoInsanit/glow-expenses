@@ -95,12 +95,10 @@ angular.module('Expenses').factory('expenseSharingSvc', ['$q', 'expensesReposito
         }
 
         function deleteExpense(expenseId, reportId){
-            debugger;
             var reportKey = reportId || 0;
             var expenseToDeleteIndex = null;
             reportExpensesMapper[reportKey].some(function(item, index){
                 if (item.expenseId === expenseId){
-                    debugger;
                     expenseToDeleteIndex = index;
                     return true;
                 }
