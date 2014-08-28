@@ -18,7 +18,7 @@ angular.module('Expenses')
         self.originalAmount = initData.originalAmount || 0;
         self.exchangeRate = initData.exchangeRate || 0;
         self.expenseTypeName = initData.type || null;
-        self.imageType = initData.imageType || null;
+        self.imageType = initData.imageType || 'void';
         self.contableCodeId = initData.contableCodeId || 0;
         self.provider = initData.provider || null;
         self.type = initData.type || null;

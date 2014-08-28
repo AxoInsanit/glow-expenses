@@ -21,12 +21,10 @@ angular.module('Reports')
             editModeNotificationChannelSvc.onEditModeToggled($scope, toggleEditModeHandler);
 
             $scope.createReport = function(){
-                reportsSharingSvc.setReport();
-                $location.path('/create-report');
+                $location.path('/report');
             };
 
             $scope.deleteReport = function(reportId) {
-
                 function deleteReportSuccess(){
                     reportsSharingSvc.deleteReport(reportId);
                 }
@@ -46,7 +44,6 @@ angular.module('Reports')
             $scope.viewReport = function(report) {
                 if((!$scope.isEditMode) && (!report.locked) && (filterReportByStateSvc.checkIfInState(report)))
                 {
-                    reportsSharingSvc.setReport(report);
                     $location.path(reportDetailsPath + '/' + report.expenseReportId);
                 }
             };

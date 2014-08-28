@@ -5,22 +5,27 @@ angular.module('Expenses')
         'cameraSvc', 'reportsRepositorySvc', 'currencySelectDialogSvc', 'expensesRepositorySvc', 'editSaveExpenseDialogSvc',
         'expenseViewImageSvc', 'reportsSharingSvc', 'reportEntityName', 'filterReportByStateSvc',
         'itemsSelectionDialogSvc', 'reportExpensesRepositorySvc', 'localStorageSvc', 'sessionToken', 'reportDetailsPath',
-        'expensesPath', 'invoiceImageRepositorySvc', 'errorHandlerDefaultSvc', 'getIdFromLocationSvc',
+        'expensesPath', 'invoiceImageRepositorySvc', 'errorHandlerDefaultSvc', 'getIdFromLocationSvc', 'expenseSvc',
         function ($scope,  $location, editExpensesTitle, editExpensesButtonLabel, expenseSharingSvc, cameraSvc,
                   reportsRepositorySvc, currencySelectDialogSvc, expensesRepositorySvc, editSaveExpenseDialogSvc,
                   expenseViewImageSvc, reportsSharingSvc, reportEntityName, filterReportByStateSvc,
                   itemsSelectionDialogSvc, reportExpensesRepositorySvc, localStorageSvc, sessionToken, reportDetailsPath,
-                expensesPath, invoiceImageRepositorySvc, errorHandlerDefaultSvc, getIdFromLocationSvc) {
+                expensesPath, invoiceImageRepositorySvc, errorHandlerDefaultSvc, getIdFromLocationSvc, expenseSvc) {
 
             $scope.title = editExpensesTitle;
             $scope.buttonLabel = editExpensesButtonLabel;
             $scope.showErrorMessage = false;
 
-            var expenseId = getIdFromLocationSvc.getIdFromLocation($location.path());
-            $scope.expense = expenseSharingSvc.getExpenseById(expenseId);
+            var expenseId = getIdFromLocationSvc.getLastIdFromLocation($location.path());
+
+            $scope.expense = expenseSharingSvc.getExpenseById(expenseId, $scope.reportId);
 
             var  originalExpense = angular.copy($scope.expense);
-            $scope.report = reportsSharingSvc.getReport();
+         //   $scope.report = reportsSharingSvc.getReport();
+
+            var reportId = getIdFromLocationSvc.getFirstIdFromLocation($location.path());
+
+            $scope.report = reportsSharingSvc.getReportById(reportId);
 
             var lastSelectedReport = $scope.report.description;
 
@@ -40,19 +45,18 @@ angular.module('Expenses')
 
             if($scope.expense.imageType !== 'void')
             {
-
-                invoiceImageRepositorySvc.getImage(
-                    { 'token': localStorageSvc.getItem(sessionToken), 'expenseId': expenseId },
-                    getImageSuccess,
-                    getImageFail
-                );
-                // TODO  ???
-                $scope.imageSelectedPath = 'image';
+//                invoiceImageRepositorySvc.getImage(
+//                    { 'token': localStorageSvc.getItem(sessionToken), 'expenseId': expenseId },
+//                    getImageSuccess,
+//                    getImageFail
+//                );
+//                // TODO  ???
+//                $scope.imageSelectedPath = 'image';
             }
 
             function addExpenseSuccess(){
-                reportsSharingSvc.setReport($scope.report);
-                $location.path(reportDetailsPath);
+                reportsSharingSvc.expenseSharingSvc.addExpense($scope.expense, $scope.report.expenseReportId);
+                $location.path(reportDetailsPath + '/' + $scope.report.expenseReportId);
             }
 
             function addExpenseFail(errorResponse){
@@ -61,19 +65,21 @@ angular.module('Expenses')
                 });
             }
 
-            var reportObj = {
-                'expenseReportId': $scope.report.expenseReportId,
-                'expenseIds': [$scope.expense.expenseId]
-            };
-
             $scope.save = function(form, expense) {
+
+                var reportObj = {
+                    'expenseReportId': $scope.report.expenseReportId,
+                    'expenseIds': [$scope.expense.expenseId]
+                };
+
                 function saveExpenseSuccess(){
                     expenseSharingSvc.updateExpense(expense);
 
 
                     function deleteExpenseSuccess(){
-
+                        reportsSharingSvc.expenseSharingSvc.deleteExpense($scope.expense.expenseId, reportId);
                         reportExpensesRepositorySvc.addExpensesToReport(
+                            { 'token': localStorageSvc.getItem(sessionToken) },
                             reportObj,
                             addExpenseSuccess,
                             addExpenseFail
@@ -90,6 +96,7 @@ angular.module('Expenses')
                     if (!lastSelectedReport && $scope.report.description){
 
                         reportExpensesRepositorySvc.addExpensesToReport(
+                            { 'token': localStorageSvc.getItem(sessionToken) },
                             reportObj,
                             addExpenseSuccess,
                             addExpenseFail
@@ -100,7 +107,7 @@ angular.module('Expenses')
                         if (lastSelectedReport !== $scope.report.description){
                             reportExpensesRepositorySvc.deleteExpense(
                                 {
-                                    'token': localStorageSvc.setItem(sessionToken),
+                                    'token': localStorageSvc.getItem(sessionToken),
                                     'expenseId': $scope.expense.expenseId
                                 },
                                 deleteExpenseSuccess,
@@ -110,6 +117,7 @@ angular.module('Expenses')
                         // no change in the state of expense
                         else
                         {
+                            debugger;
                             // it is assigned go to report details
                             if ($scope.report.description){
                                 addExpenseSuccess();
@@ -135,9 +143,11 @@ angular.module('Expenses')
                 if(form.$valid)
                 {
                     expense.date = $scope.expense.date;
+                    var newExpense = expenseSvc.create(expense);
+
                     var paramsObj = { 'token': localStorageSvc.getItem(sessionToken) };
 
-                    expensesRepositorySvc.saveExpense(paramsObj, expense, saveExpenseSuccess, saveExpenseError);
+                    expensesRepositorySvc.saveExpense(paramsObj, newExpense, saveExpenseSuccess, saveExpenseError);
                 }
                 else
                 {

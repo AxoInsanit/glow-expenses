@@ -13,24 +13,33 @@ angular.module('Expenses')
             $scope.showErrorMessage = false;
 
             $scope.expense = {};
-            $scope.report = reportsSharingSvc.getReport();
 
-            function createExpenseSuccess(response, responseHeaders){
+            var reportId = getIdFromLocationSvc.getFirstIdFromLocation($location.path());
+            $scope.report = reportsSharingSvc.getReportById(reportId);
+            debugger;
 
-                function addExpenseToReportSuccess(){
+            $scope.save = function(form, expense) {
 
-                    editSaveExpenseDialogSvc.openSuccessSaveExpenseDialog().then(function(url){
-                        $location.path(url);
-                    });
-                }
-                debugger;
-                var headers = responseHeaders();
+                function createExpenseSuccess(response, responseHeaders){
 
-                // TODO remove when the service returns location
-                headers.Location = response.location;
-                var createdExpenseId = getIdFromLocationSvc.getIdFromLocation(headers.Location);
+                    var headers = responseHeaders();
 
-                reportExpensesRepositorySvc.addExpensesToReport(
+                    // TODO remove when the service returns location
+                    headers.Location = response.location;
+                    var createdExpenseId = getIdFromLocationSvc.getLastIdFromLocation(headers.Location);
+
+                    function addExpenseToReportSuccess(){
+
+                        expense.expenseId = createdExpenseId;
+
+                        reportsSharingSvc.expenseSharingSvc.addExpense(expense, $scope.report.expenseReportId);
+
+                        editSaveExpenseDialogSvc.openSuccessSaveExpenseDialog().then(function(url){
+                            $location.path(url + '/' + $scope.report.expenseReportId);
+                        });
+                    }
+
+                    reportExpensesRepositorySvc.addExpensesToReport(
                         {
                             'token': localStorageSvc.getItem(sessionToken)
                         },
@@ -41,9 +50,8 @@ angular.module('Expenses')
                         addExpenseToReportSuccess,
                         errorHandlerDefaultSvc.handleError
                     );
-            }
+                }
 
-            $scope.save = function(form, expense) {
                 if(form.$valid)
                 {
                     expense.date = new Date();

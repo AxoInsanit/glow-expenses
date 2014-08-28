@@ -3,7 +3,8 @@
 angular.module('Services').factory('filterReportByStateSvc', [function(){
 
         var statesWhiteList = [
-            'Draft Expense',
+           // 'Draft Expense',
+            'Draft',
             'Rejected by Finance',
             'Rejected by Manager',
             'Rejected to Submitter'

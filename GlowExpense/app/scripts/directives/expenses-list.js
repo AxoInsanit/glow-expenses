@@ -17,10 +17,11 @@ angular.module('Directives').directive('expensesList', ['expensesListTemplateUrl
                     $scope.deleteExpense = function(expenseId){
 
                         function deleteSuccess(){
-                            var reportId = getIdFromLocationSvc.getIdFromLocation($location.path());
+                            var reportId = getIdFromLocationSvc.getLastIdFromLocation($location.path());
+
                             expenseSharingSvc.deleteExpense(expenseId, reportId);
                         }
-
+                        debugger;
                         confirmDeleteDialogSvc.open(reportEntity).then(function(){
                             expensesRepositorySvc.deleteExpense(
                                 {

@@ -6,7 +6,6 @@ angular.module('Reports')
         function($q, reportsRepositorySvc, localStorageSvc, sessionToken, errorHandlerDefaultSvc, expenseSharingSvc) {
 
         var reports = [];
-        var report = {};
 
         // lazy load reports on demand
         function getReports(){
@@ -45,8 +44,9 @@ angular.module('Reports')
                     return true;
                 }
             });
-            if (reportToDeleteIndex){
-                reports.splice(reportToDeleteIndex, 1);
+
+            if (reportToDeleteIndex !== null){
+               reports.splice(reportToDeleteIndex, 1);
             }
         }
 
@@ -59,21 +59,41 @@ angular.module('Reports')
             });
         }
 
-        function getReport() {
-            return report;
+        function getReportById(reportId){
+            var result = null;
+            reports.some(function(item){
+                if(item.expenseReportId === reportId){
+                    result = item;
+                    return true;
+                }
+            });
+
+            // TODO handler errors
+            if (!result){
+              //  throw new Error('Report not found');
+                result = {};
+            }
+
+            return result;
         }
 
-        function setReport(value) {
-            report = value || {};
+        function addReport(report){
+            reports.push(report);
+            expenseSharingSvc.addReport(report.expenseReportId);
+        }
+
+        function resetReports(){
+            reports = [];
         }
 
         return {
-            setReport: setReport,
-            getReport: getReport,
             getReports: getReports,
             deleteReport: deleteReport,
             updateReport: updateReport,
-            expenseSharingSvc: expenseSharingSvc
+            expenseSharingSvc: expenseSharingSvc,
+            getReportById: getReportById,
+            addReport: addReport,
+            resetReports: resetReports
         };
     }
 ]);

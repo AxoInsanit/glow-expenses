@@ -17,8 +17,8 @@
         </nav>
     </header>
     <article>
-        <section class="item">
-            <a class="btn-with-icon icon-back create-report" ng-href="#/expense">
+        <section class="item" ng-click="createExpense()">
+            <a class="btn-with-icon icon-back create-report" >
                 <span class="icon icon-create-report"></span>
                 <span>Create Expense</span>
             </a>
@@ -29,7 +29,7 @@
 
     <article>
         <div class="btn-fixed grey">
-            <a class="left-part underscored" ng-href="#/edit-report">Edit Report</a>
+            <a class="left-part underscored" ng-click="editReport()">Edit Report</a>
             <p class="right-part">TOTAL {{report.societyCurrency}} {{report.total | currency}}</p>
             <button class="btn ng-binding" type="submit" ng-click="sendReport()">Send Report</button>
         </div>

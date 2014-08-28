@@ -57,11 +57,11 @@ angular.module('Expenses').factory('expenseSharingSvc', ['$q', 'expensesReposito
         }
 
         function getExpenseIdsForReportAssign(){
-//            allExpenses.forEach(function(expense){
-//                if (expense.imageType !== 'void'){
-//                    expenseIdsReadyToBeAssigned.push(expense.expenseId);
-//                }
-//            });
+            reportExpensesMapper[0].forEach(function(expense){
+                if (expense.imageType !== 'void'){
+                    expenseIdsReadyToBeAssigned.push(expense.expenseId);
+                }
+            });
 
             return expenseIdsReadyToBeAssigned;
         }
@@ -95,17 +95,37 @@ angular.module('Expenses').factory('expenseSharingSvc', ['$q', 'expensesReposito
         }
 
         function deleteExpense(expenseId, reportId){
+            debugger;
             var reportKey = reportId || 0;
             var expenseToDeleteIndex = null;
             reportExpensesMapper[reportKey].some(function(item, index){
                 if (item.expenseId === expenseId){
+                    debugger;
                     expenseToDeleteIndex = index;
                     return true;
                 }
             });
-            if (expenseToDeleteIndex){
+
+            if (expenseToDeleteIndex !== null){
                 reportExpensesMapper[reportKey].splice(expenseToDeleteIndex, 1);
             }
+        }
+
+        function addExpense(expense, reportId){
+            var reportKey = reportId || 0;
+            reportExpensesMapper[reportKey] = reportExpensesMapper[reportKey] || [];
+            reportExpensesMapper[reportKey].push(expense);
+        }
+
+        function addReport(reportId){
+            reportExpensesMapper[reportId] = [];
+
+            reportExpensesMapper[0] = reportExpensesMapper[0].map(function(item, index){
+                if (item.imageType !== 'void'){
+                    reportExpensesMapper[0].splice(index, 1);
+                    return true;
+                }
+            });
         }
 
         return {
@@ -115,7 +135,9 @@ angular.module('Expenses').factory('expenseSharingSvc', ['$q', 'expensesReposito
             getExpenses: getExpenses,
             getExpenseById: getExpenseById,
             updateExpense: updateExpense,
-            deleteExpense: deleteExpense
+            deleteExpense: deleteExpense,
+            addExpense: addExpense,
+            addReport: addReport
         };
     }
 ]);

@@ -2,30 +2,22 @@
 
 angular.module('Reports')
     .controller('ReportDetailsCtrl', ['$scope', '$location', 'addReportErrorMsg', 'reportsSharingSvc',
-         'expensesRepositorySvc', 'confirmDeleteDialogSvc',
-        'entityName', 'sendReportDialogSvc', 'editExpensePath', 'expenseSvc', 'editModeNotificationChannelSvc',
-        function ($scope, $location, addReportErrorMsg, reportsSharingSvc,
-                  expensesRepositorySvc, confirmDeleteDialogSvc, entityName,
-                  sendReportDialogSvc, editExpensePath, expenseSvc, editModeNotificationChannelSvc)  {
+         'expensesRepositorySvc', 'confirmDeleteDialogSvc', 'entityName', 'sendReportDialogSvc', 'expensePath',
+        'expenseSvc', 'editModeNotificationChannelSvc', 'getIdFromLocationSvc',
+        function ($scope, $location, addReportErrorMsg, reportsSharingSvc, expensesRepositorySvc, confirmDeleteDialogSvc,
+            entityName, sendReportDialogSvc, expensePath, expenseSvc, editModeNotificationChannelSvc, getIdFromLocationSvc)  {
 
             $scope.errorMessage = addReportErrorMsg;
             $scope.showErrorMessage = false;
             $scope.expenses = [];
             $scope.isEditMode = false;
 
-            $scope.report = reportsSharingSvc.getReport();
-            $scope.report.expenseIds = [];
+            var reportId = getIdFromLocationSvc.getLastIdFromLocation($location.path());
+            $scope.report = reportsSharingSvc.getReportById(reportId);
 
             reportsSharingSvc.expenseSharingSvc.getExpenses($scope.report.expenseReportId).then(function(result) {
                 $scope.expenses = result;
             });
-
-//            expensesBufferingSvc.getExpenses($scope.report.expenseReportId).then(function (result) {
-//                result.forEach(function (item) {
-//                    $scope.expenses.push(item);
-//                    $scope.report.expenseIds.push(item.expenseId);
-//                });
-//            });
 
             $scope.openEditMode = function() {
 
@@ -40,10 +32,18 @@ angular.module('Reports')
             $scope.editExpense = function(expense) {
                 if(!$scope.isEditMode)
                 {
-                   // expenseSharingSvc.setExpenseForEdit(expense);
-                    reportsSharingSvc.setReport($scope.report);
-                    $location.path(editExpensePath);
+                    $location.path('/report-details/' + $scope.report.expenseReportId + '/expense/' + expense.expenseId);
                 }
             };
+
+            $scope.createExpense = function(){
+                $location.path('/report-details/' + $scope.report.expenseReportId + '/expense');
+            };
+
+            $scope.editReport = function(){
+                $location.path('/report' + '/' + reportId);
+            }
+
+
         }
     ]);

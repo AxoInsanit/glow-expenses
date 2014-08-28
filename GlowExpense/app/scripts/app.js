@@ -59,7 +59,7 @@ angular.module('app', _mainModules )
         });
         
         routes.push({
-            name: '/expense',
+            name: '/report-details/:reportId/expense',
             params: {
                 templateUrl: 'scripts/expenses/views/add-edit-expense.html',
                 controller: 'AddExpenseCtrl'
@@ -83,7 +83,7 @@ angular.module('app', _mainModules )
         });
 
         routes.push({
-            name: '/create-report',
+            name: '/report',
             params: {
                 templateUrl: 'scripts/reports/views/create-edit-report.html',
                 controller: 'CreateEditReportCtrl'
@@ -91,7 +91,7 @@ angular.module('app', _mainModules )
         });
 
         routes.push({
-            name: '/edit-report',
+            name: '/report/:id',
             params: {
                 templateUrl: 'scripts/reports/views/create-edit-report.html',
                 controller: 'CreateEditReportCtrl'
@@ -103,6 +103,14 @@ angular.module('app', _mainModules )
             params: {
                 templateUrl: 'scripts/reports/views/report-details.html',
                 controller: 'ReportDetailsCtrl'
+            }
+        });
+
+        routes.push({
+            name: '/report-details/:reportId/expense/:expenseId',
+            params: {
+                templateUrl: 'scripts/reports/views/report-details-expense.html',
+                controller: 'EditReportExpenseCtrl'
             }
         });
 

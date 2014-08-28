@@ -4,11 +4,13 @@ angular.module('Reports')
     .controller('CreateEditReportCtrl', ['$scope', '$location', 'addReportErrorMsg', 'reportsSharingSvc',
         'reportsRepositorySvc', 'itemsSelectionDialogSvc', 'projectsSharingSvc', 'projectEntityName', 'projectAssigned',
         'allProjects','serverErrorMsg', 'editReportTitle', 'editReportBtnLabel', 'createReportTitle',
-        'createReportBtnLabel', 'reportsPath', 'expenseSharingSvc', 'errorHandlerDefaultSvc',
+        'createReportBtnLabel', 'reportsPath', 'expenseSharingSvc', 'errorHandlerDefaultSvc', 'getIdFromLocationSvc',
+        'localStorageSvc', 'sessionToken',
         function ($scope, $location, addReportErrorMsg, reportsSharingSvc, reportsRepositorySvc,
                    itemsSelectionDialogSvc,  projectsSharingSvc, projectEntityName, projectAssigned, allProjects,
                    serverErrorMsg, editReportTitle, editReportBtnLabel, createReportTitle, createReportBtnLabel,
-                   reportsPath, expenseSharingSvc, errorHandlerDefaultSvc)  {
+                   reportsPath, expenseSharingSvc, errorHandlerDefaultSvc, getIdFromLocationSvc, localStorageSvc,
+                   sessionToken)  {
 
             $scope.projectAssigned = projectAssigned;
             $scope.allProjects = allProjects;
@@ -18,10 +20,10 @@ angular.module('Reports')
 
             var expenseIds = [];
 
-            var report = reportsSharingSvc.getReport();
+            var reportId = getIdFromLocationSvc.getLastIdFromLocation($location.path());
 
-            if (report.expenseReportId){
-                $scope.report = report;
+            if (reportId){
+                $scope.report = reportsSharingSvc.getReportById(reportId);
 
                 $scope.title = editReportTitle;
                 $scope.buttonLabel = editReportBtnLabel;
@@ -33,14 +35,13 @@ angular.module('Reports')
 
                 $scope.title = createReportTitle;
                 $scope.buttonLabel = createReportBtnLabel;
-
-                expenseIds = expenseSharingSvc.getExpenseIdsForReportAssign();
             }
 
             $scope.save = function(form, report){
 
                 function createReportSuccess(){
-                    reportsSharingSvc.addReport(report);
+                    reportsSharingSvc.resetReports();
+                    reportsSharingSvc.expenseSharingSvc.addReport(report.expenseReportId);
                     $location.path(reportsPath);
                 }
 
@@ -51,25 +52,47 @@ angular.module('Reports')
 
                 if(form.$valid)
                 {
-                    var projectId = projectsSharingSvc.getProjectIdByName(report.project.name);
+                    var projectId = 0;
+                    if (report.project){
+                        projectId = projectsSharingSvc.getProjectIdByName(report.project.name);
+                    }
 
-                    var reportViewModel = {
-                        'expenseReportId': report.expenseReportId,
-                        'description': report.description,
-                        'applyTo': report.project.name,
-                        'entityId': projectId,
-                        'expenseIds': expenseIds
-                    };
+                    expenseIds = expenseSharingSvc.getExpenseIdsForReportAssign();
 
-                    if ($scope.report) {
+                    if (reportId) {
+
+                        var reportViewModel = {
+                            'expenseReportId': report.expenseReportId,
+                            'description': report.title,
+                            'applyTo': '',
+                            'entityId': projectId,
+                            'owner': 'facundo.roncaglia',
+                            'expenseIds': expenseIds
+                        };
+
                         reportsRepositorySvc.saveReport(
+                            {
+                                'token': localStorageSvc.getItem(sessionToken)
+                            },
                             reportViewModel,
                             saveReportSuccess,
                             errorHandlerDefaultSvc.handleError
                         );
                     }
                     else {
+
+                        var reportViewModel = {
+                            'description': report.title,
+                            'applyTo': report.project.name,
+                            'entityId': projectId,
+                            'owner': 'facundo.roncaglia',
+                            'expenseIds': expenseIds
+                        };
+
                         reportsRepositorySvc.createReport(
+                            {
+                                'token': localStorageSvc.getItem(sessionToken)
+                            },
                             reportViewModel,
                             createReportSuccess,
                             errorHandlerDefaultSvc.handleError

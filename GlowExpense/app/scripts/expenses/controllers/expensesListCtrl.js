@@ -15,14 +15,6 @@ angular.module('Expenses')
 
         editModeNotificationChannelSvc.onEditModeToggled($scope, toggleEditModeHandler);
 
-        $scope.getMoreExpenses = function () {
-            expensesBufferingSvc.getMoreExpenses().then(function (result) {
-                result.forEach(function (item) {
-                    $scope.expenses.push(expenseSvc.getExpense(item));
-                });
-            });
-        };
-
         $scope.goToReports =  function(){
             $location.path(reportsPath);
         };
@@ -43,8 +35,6 @@ angular.module('Expenses')
         $scope.editExpense = function(expense) {
             if(!$scope.isEditMode)
             {
-                expenseSharingSvc.setExpenseForEdit(expense);
-                reportsSharingSvc.setReport();
                 $location.path(expensePath + '/' + expense.expenseId);
             }
         };
