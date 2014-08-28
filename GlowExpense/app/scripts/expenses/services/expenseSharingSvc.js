@@ -86,9 +86,17 @@ angular.module('Expenses').factory('expenseSharingSvc', ['$q', 'expensesReposito
 
         function updateExpense(expense, reportId){
             var reportKey = reportId || 0;
+            
             reportExpensesMapper[reportKey].some(function(item){
                 if(item.expenseId === expense.expenseId){
-                    item = expense;
+                    item.currency = expense.currency
+                    item.date = expense.date;
+                    item.description = expense.description;
+                    item.exchangeRate = expense.exchangeRate;
+                    item.expenseId = expense.expenseId;
+                    item.originalAmount = expense.originalAmount;
+                    item.expense = expense.expense;
+
                     return true;
                 }
             });

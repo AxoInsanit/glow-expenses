@@ -73,8 +73,7 @@ angular.module('Expenses')
                 };
 
                 function saveExpenseSuccess(){
-                    expenseSharingSvc.updateExpense(expense);
-
+                    expenseSharingSvc.updateExpense(expense, $scope.report.expenseReportId);
 
                     function deleteExpenseSuccess(){
                         reportsSharingSvc.expenseSharingSvc.deleteExpense($scope.expense.expenseId, reportId);
