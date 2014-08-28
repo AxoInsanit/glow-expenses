@@ -2,10 +2,12 @@
 
 angular.module('Reports')
     .controller('ReportDetailsCtrl', ['$scope', '$location', 'addReportErrorMsg', 'reportsSharingSvc',
-         'expensesRepositorySvc', 'confirmDeleteDialogSvc', 'entityName', 'sendReportDialogSvc', 'expensePath',
-        'expenseSvc', 'editModeNotificationChannelSvc', 'getIdFromLocationSvc',
+        'expensesRepositorySvc', 'confirmDeleteDialogSvc', 'entityName', 'sendReportDialogSvc', 'expensePath',
+        'expenseSvc', 'editModeNotificationChannelSvc', 'getIdFromLocationSvc', 'localStorageSvc', 'sessionToken',
+        'reportSendRepositorySvc', 'errorHandlerDefaultSvc',
         function ($scope, $location, addReportErrorMsg, reportsSharingSvc, expensesRepositorySvc, confirmDeleteDialogSvc,
-            entityName, sendReportDialogSvc, expensePath, expenseSvc, editModeNotificationChannelSvc, getIdFromLocationSvc)  {
+                  entityName, sendReportDialogSvc, expensePath, expenseSvc, editModeNotificationChannelSvc, getIdFromLocationSvc,
+                  localStorageSvc, sessionToken, reportSendRepositorySvc, errorHandlerDefaultSvc)  {
 
             $scope.errorMessage = addReportErrorMsg;
             $scope.showErrorMessage = false;
@@ -21,8 +23,8 @@ angular.module('Reports')
 
             $scope.openEditMode = function() {
 
-              $scope.isEditMode = !$scope.isEditMode;
-              editModeNotificationChannelSvc.toggleEditMode($scope.isEditMode);
+                $scope.isEditMode = !$scope.isEditMode;
+                editModeNotificationChannelSvc.toggleEditMode($scope.isEditMode);
             };
 
             $scope.sendReport = function(){
@@ -42,8 +44,23 @@ angular.module('Reports')
 
             $scope.editReport = function(){
                 $location.path('/report' + '/' + reportId);
-            }
+            };
 
+            $scope.sendReport = function(){
 
+                function reportSendSuccess(){
+                    reportsSharingSvc.resetReports();
+                    $location.path('/reports');
+                }
+
+                reportSendRepositorySvc.sendReport(
+                    {
+                        'token': localStorageSvc.getItem(sessionToken),
+                        'expenseReportId': $scope.report.expenseReportId
+                    },
+                    reportSendSuccess,
+                    errorHandlerDefaultSvc.handleError
+                );
+            };
         }
     ]);

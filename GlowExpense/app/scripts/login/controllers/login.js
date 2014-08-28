@@ -1,9 +1,9 @@
 'use strict';
 
 angular.module('Login').controller('LoginCtrl', ['$scope', '$location', 'UserSvc', 'errorMsg', 'localStorageSvc',
-    'currenciesRepositorySvc', 'currenciesSvc', 'sessionToken', 'userName', 'errorHandlerDefaultSvc',
+    'currenciesRepositorySvc', 'currenciesSvc', 'sessionToken', 'userName', 'errorHandlerDefaultSvc', 'expenseSharingSvc',
     function ($scope, $location, UserSvc, errorMsg, localStorageSvc, currenciesRepositorySvc, currenciesSvc,
-              sessionToken, userName, errorHandlerDefaultSvc) {
+              sessionToken, userName, errorHandlerDefaultSvc, expenseSharingSvc) {
 
         $scope.errorMessage = errorMsg;
         $scope.showErrorMessage = false;
@@ -15,7 +15,10 @@ angular.module('Login').controller('LoginCtrl', ['$scope', '$location', 'UserSvc
                     $scope.showErrorMessage = false;
                     localStorageSvc.setItem(sessionToken, response.session_token);
                     localStorageSvc.setItem(userName, $scope.user.username);
-                    $location.path('/expenses');
+                    expenseSharingSvc.getExpenses().then(function(result) {
+                        $location.path('/expenses');
+                    });
+
                 } else {
                     loginError();
                 }

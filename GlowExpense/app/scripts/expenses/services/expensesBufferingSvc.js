@@ -10,7 +10,7 @@ angular.module('Expenses')
     function getExpenses(reportId) {
         var deferred = $q.defer();
 
-        function getExpensesSuccess(response) {
+        function getExpensesSuccess(response) {ç
             expensesBuffer = response.expenses.map(function(item) {
                 return expenseSvc.getExpense(item);
             });

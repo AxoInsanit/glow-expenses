@@ -36,7 +36,6 @@
 /Users/dimitarjilanov/Documents/GlowMobile/GlowExpense/platforms/android/assets/www/favicon.ico \
 /Users/dimitarjilanov/Documents/GlowMobile/GlowExpense/platforms/android/assets/www/index.html \
 /Users/dimitarjilanov/Documents/GlowMobile/GlowExpense/platforms/android/assets/www/offline.html \
-/Users/dimitarjilanov/Documents/GlowMobile/GlowExpense/platforms/android/assets/www/phonegap.js \
 /Users/dimitarjilanov/Documents/GlowMobile/GlowExpense/platforms/android/assets/www/plugins \
 /Users/dimitarjilanov/Documents/GlowMobile/GlowExpense/platforms/android/assets/www/resources \
 /Users/dimitarjilanov/Documents/GlowMobile/GlowExpense/platforms/android/assets/www/robots.txt \
@@ -913,7 +912,7 @@
 /Users/dimitarjilanov/Documents/GlowMobile/GlowExpense/platforms/android/assets/www/resources/images/low-res/signout.png \
 /Users/dimitarjilanov/Documents/GlowMobile/GlowExpense/platforms/android/assets/www/resources/images/low-res/sprite-legend.jpg \
 /Users/dimitarjilanov/Documents/GlowMobile/GlowExpense/platforms/android/assets/www/resources/images/low-res/sprite.png \
-/Users/dimitarjilanov/Documents/GlowMobile/GlowExpense/platforms/android/assets/www/scripts/789e8558.scripts.js \
+/Users/dimitarjilanov/Documents/GlowMobile/GlowExpense/platforms/android/assets/www/scripts/a1a938dc.scripts.js \
 /Users/dimitarjilanov/Documents/GlowMobile/GlowExpense/platforms/android/assets/www/scripts/da3f7966.modules.js \
 /Users/dimitarjilanov/Documents/GlowMobile/GlowExpense/platforms/android/assets/www/scripts/directives \
 /Users/dimitarjilanov/Documents/GlowMobile/GlowExpense/platforms/android/assets/www/scripts/expenses \

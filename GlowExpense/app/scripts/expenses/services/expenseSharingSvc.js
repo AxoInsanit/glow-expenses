@@ -120,7 +120,7 @@ angular.module('Expenses').factory('expenseSharingSvc', ['$q', 'expensesReposito
         function addReport(reportId){
             reportExpensesMapper[reportId] = [];
 
-            reportExpensesMapper[0] = reportExpensesMapper[0].map(function(item, index){
+            reportExpensesMapper[0].map(function(item, index){
                 if (item.imageType !== 'void'){
                     reportExpensesMapper[0].splice(index, 1);
                     return true;
