@@ -27,7 +27,7 @@ angular.module('Modals').factory('editSaveExpenseDialogSvc', ['$modal', 'expense
 
         function openSuccessSaveExpenseDialog() {
             var modalInstance = $modal.open({
-                templateUrl: 'scripts/modals/views//save-expense-dialog.html',
+                templateUrl: 'scripts/modals/views/save-expense-dialog.html',
                 controller: ['$scope', '$modalInstance', function($scope, $modalInstance) {
 
                     $scope.navigateToReport = function() {
