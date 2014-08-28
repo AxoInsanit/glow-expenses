@@ -1,9 +1,9 @@
 'use strict';
 
 angular.module('Expenses')
-    .controller('ExpensesListCtrl', ['$scope', '$location', 'cameraSvc', 'expensesBufferingSvc', 'expenseSvc',
+    .controller('ExpensesListCtrl', ['$scope', '$location', 'cameraSvc', 'expenseSvc',
         'expenseSharingSvc', 'editModeNotificationChannelSvc', 'reportsSharingSvc', 'expensePath', 'reportsPath',
-        function ($scope, $location, cameraSvc, expensesBufferingSvc, expenseSvc, expenseSharingSvc,
+        function ($scope, $location, cameraSvc, expenseSvc, expenseSharingSvc,
                   editModeNotificationChannelSvc, reportsSharingSvc, expensePath, reportsPath)  {
 
             $scope.expenses = [];
