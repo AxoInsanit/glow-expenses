@@ -13,7 +13,7 @@
                     </div>
                 </div>
                 <div class="right-part">
-                    <span class="info-text money">{{expense.currency.code}} {{expense.originalAmount | currency}}</span>
+                    <span class="info-text money">{{expense.currency.code}} {{expense.originalAmount }}</span>
 
                     <div class="float-right" ng-switch="expense.imageType === 'void'" stop-event="click">
                         <a ng-switch-when="true" ng-click="takePhoto(expense)" class="icon icon-photo"></a>
