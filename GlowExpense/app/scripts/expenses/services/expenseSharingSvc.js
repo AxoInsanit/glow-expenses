@@ -200,7 +200,7 @@ angular.module('Expenses').factory('expenseSharingSvc', ['$q', 'expensesReposito
 
             var deferred = $q.defer();
 
-            function getExpensesSuccess1(response){
+            function expensesSuccess(response){
                 reportExpensesMapper[reportId] = [];
                 response.expenses.forEach(function(item){
                     item.title = item.description;
@@ -216,7 +216,7 @@ angular.module('Expenses').factory('expenseSharingSvc', ['$q', 'expensesReposito
 
             expensesRepositorySvc.getExpenses(
                 { 'token': localStorageSvc.getItem(sessionToken), 'expenseReportId': reportId },
-                getExpensesSuccess1,
+                expensesSuccess,
                 error
             );
 
