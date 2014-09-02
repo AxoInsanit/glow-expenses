@@ -67,7 +67,7 @@ angular.module('Reports')
             };
 
             $scope.getMoreExpenses = function(){
-
+                debugger;
                 var result = reportsSharingSvc.expenseSharingSvc.getNextFiveExpenses();
                 result.forEach(function(item){
                     $scope.expenses.push(item);

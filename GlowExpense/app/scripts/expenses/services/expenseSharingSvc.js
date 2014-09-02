@@ -23,7 +23,7 @@ angular.module('Expenses').factory('expenseSharingSvc', ['$q', 'expensesReposito
 
         function getNextFiveExpenses(reportId){
             var reportKey = reportId || 0;
-
+            debugger;
             reportLastShownExpenseMapper[reportKey] = reportLastShownExpenseMapper[reportKey] || 0;
 
             var index = reportLastShownExpenseMapper[reportKey];
@@ -50,6 +50,7 @@ angular.module('Expenses').factory('expenseSharingSvc', ['$q', 'expensesReposito
 
         // lazy load expenses on demand
         function getExpenses(reportId){
+            debugger;
             var reportKey = reportId || 0;
             reportExpensesMapper[reportKey] = reportExpensesMapper[reportKey] || [];
 
