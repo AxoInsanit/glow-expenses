@@ -23,10 +23,12 @@
   <body ng-app="app">
     <!-- When it is login page we dont want to slow the load with an animation so we remove them for the login -->
     <div class="container" ng-class="{ mainContainer:!loginPage,staticHeight:infScroll }" ng-view></div>
+    <!-- TEST DIV WHITOUT CAMERA -->
+    <!-- <div class="container" ng-view></div> -->
     <!-- used for dark background -->
     <div class="overlay hide"></div>
     <!-- Include Cordova -->
-    <!-- <script type="text/javascript" src="bower_components/cordova.js"></script> -->
+    <script type="text/javascript" src="bower_components/cordova.js"></script>
 
     <!-- build:js scripts/modules.js -->
     
@@ -151,11 +153,11 @@
     <!-- yo:directives -->
     <!-- endbuild -->
     <script type="text/javascript">
-        var onDeviceReady = function() {
-            angular.bootstrap( document, ['app']);
-        }
-        document.addEventListener('deviceready',
-                onDeviceReady);
+        // var onDeviceReady = function() {
+        //     angular.bootstrap( document, ['app']);
+        // }
+        // document.addEventListener('deviceready',
+        //         onDeviceReady);
     </script>
 </body>
 </html>

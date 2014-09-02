@@ -112,7 +112,10 @@
   }
 }
 
+
 /* animate forward */
+
+
 .mainContainer {
   bottom: 0;
   position: absolute;
@@ -152,6 +155,10 @@
   -moz-animation: slideInRight 0.75s both cubic-bezier(0.2, 0.7, 0.1, 1);
   animation: slideInRight 0.75s both cubic-bezier(0.2, 0.7, 0.1, 1);
 }
+
+/* END OF ANIMATIONS
+============================================================================= 
+*/
 
 
 .header-img{
@@ -259,6 +266,6 @@
   filter: alpha(opacity=70);
   margin-top: -30%;
 }
-.container{
+/*.container{
   overflow-x: hidden;
-}
+}*/
