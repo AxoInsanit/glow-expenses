@@ -22,7 +22,6 @@ angular.module('Expenses').factory('expenseSharingSvc', ['$q', 'expensesReposito
         var expenseIdsReadyToBeAssigned = [];
 
         function getNextFiveExpenses(reportId){
-            debugger;
             var reportKey = reportId || 0;
 
             reportLastShownExpenseMapper[reportKey] = reportLastShownExpenseMapper[reportKey] || 0;
@@ -32,7 +31,6 @@ angular.module('Expenses').factory('expenseSharingSvc', ['$q', 'expensesReposito
             var result = [];
 
             var condition = index + expensesShownPerPage;
-            debugger;
             if (reportExpensesMapper[reportKey].length < condition){
                 var expensesLength = reportExpensesMapper[reportKey].length; // - index
 
@@ -52,12 +50,10 @@ angular.module('Expenses').factory('expenseSharingSvc', ['$q', 'expensesReposito
 
         // lazy load expenses on demand
         function getExpenses(reportId){
-            debugger;
             var reportKey = reportId || 0;
             reportExpensesMapper[reportKey] = reportExpensesMapper[reportKey] || [];
 
             function getExpensesSuccess(response){
-                debugger;
                 response.expenses.forEach(function(item){
                     item.title = item.description;
                     var expense = expenseSvc.create(item);
@@ -131,12 +127,11 @@ angular.module('Expenses').factory('expenseSharingSvc', ['$q', 'expensesReposito
         }
 
         function updateExpense(expense, reportId){
-            debugger;
             var reportKey = reportId || 0;
             
             reportExpensesMapper[reportKey].some(function(item){
                 if(item.expenseId === expense.expenseId){
-                    item.currency = expense.currency
+                    item.currency = expense.currency;
                     item.date = expense.date;
                     item.description = expense.description;
                     item.exchangeRate = expense.exchangeRate;
@@ -168,7 +163,6 @@ angular.module('Expenses').factory('expenseSharingSvc', ['$q', 'expensesReposito
             var reportKey = reportId || 0;
             reportExpensesMapper[reportKey] = reportExpensesMapper[reportKey] || [];
             reportExpensesMapper[reportKey].push(expense);
-            debugger;
         }
 
         function addReport(reportId){
@@ -185,13 +179,11 @@ angular.module('Expenses').factory('expenseSharingSvc', ['$q', 'expensesReposito
         function deleteReportMapping(reportId){
 
             var reportExpenses = [];
-            debugger;
             if (reportExpensesMapper[reportId]){
                 reportExpenses = reportExpensesMapper[reportId];
             }
             else {
                 getAllExpensesForReport(reportId).then(function(result){
-                    debugger;
                     reportExpenses = result;
                 });
             }
@@ -199,7 +191,6 @@ angular.module('Expenses').factory('expenseSharingSvc', ['$q', 'expensesReposito
             reportExpenses.forEach(function(item){
                 reportExpensesMapper[0].push(item);
             });
-            debugger;
             // way faster then delete reportExpensesMapper[reportId]
             reportExpensesMapper[reportId] = undefined;
         }
@@ -209,7 +200,6 @@ angular.module('Expenses').factory('expenseSharingSvc', ['$q', 'expensesReposito
             var deferred = $q.defer();
 
             function getExpensesSuccess1(response){
-                debugger;
                 reportExpensesMapper[reportId] = [];
                 response.expenses.forEach(function(item){
                     item.title = item.description;
@@ -221,10 +211,8 @@ angular.module('Expenses').factory('expenseSharingSvc', ['$q', 'expensesReposito
             }
 
             function error(){
-                debugger;
             }
 
-            debugger;
             expensesRepositorySvc.getExpenses(
                 { 'token': localStorageSvc.getItem(sessionToken), 'expenseReportId': reportId },
                 getExpensesSuccess1,

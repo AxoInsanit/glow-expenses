@@ -8,7 +8,6 @@ angular.module('Services').factory('getIdFromLocationSvc', [function(){
         }
 
         function getFirstIdFromLocation(url){
-            debugger;
             var match = url.match(/\d+/);
             return (match) ? Number(match[0]) : null;
         }

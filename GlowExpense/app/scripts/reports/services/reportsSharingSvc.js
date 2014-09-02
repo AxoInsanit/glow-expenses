@@ -12,14 +12,11 @@ angular.module('Reports')
         var reportsPerPage = 5;
 
         function getNextFiveReports(){
-            debugger;
-
             var reportsToShow = [];
 
             var condition = lastShownReport + reportsPerPage;
 
             if (reports.length < condition){
-                debugger;
                 reportsToShow = reports;
 //                var remainingReports = reports.length - lastShownReport;
 //
@@ -34,12 +31,11 @@ angular.module('Reports')
 
             }
             else {
-                debugger;
                 for (var i = 0; i < condition; i++){
                     reportsToShow.push(reports[i]);
                 }
 
-                lastShownReport += reportsPerPage
+                lastShownReport += reportsPerPage;
             }
 
             return reportsToShow;
@@ -47,11 +43,9 @@ angular.module('Reports')
 
         // lazy load reports on demand
         function getReports(){
-            debugger;
             var result = null;
 
             function reportsSuccess(response){
-                debugger;
                 var responseArray = response.expenses;
 //                responseArray.sort(function(a,b) {
 //                    return new Date(b.creationDate) - new Date(a.creationDate);
@@ -60,21 +54,18 @@ angular.module('Reports')
                     item.title = item.description;
                     reports.push(item);
                 });
-                debugger;
                 if (lastShownReport !== 0){
                     var reportsMapperCopy = angular.copy(reports);
                     result = reportsMapperCopy.splice(0, lastShownReport);
                 }
                 else {
                     result = getNextFiveReports();
-                    debugger;
                 }
 
                 deferred.resolve(result);
             }
 
             var deferred = $q.defer();
-            debugger;
             if (reports.length === 0){
 
                 reportsRepositorySvc.getReports(
@@ -86,8 +77,8 @@ angular.module('Reports')
             else {
                 var reportsMapperCopy = angular.copy(reports);
 
-                var result = reportsMapperCopy.splice(0, lastShownReport);
-                deferred.resolve(result);
+                var resultReports = reportsMapperCopy.splice(0, lastShownReport);
+                deferred.resolve(resultReports);
             }
 
             return deferred.promise;
@@ -105,7 +96,6 @@ angular.module('Reports')
 
             if (reportToDeleteIndex !== null){
                reports.splice(reportToDeleteIndex, 1);
-                debugger;
                expenseSharingSvc.deleteReportMapping(reportId);
             }
         }
@@ -139,7 +129,6 @@ angular.module('Reports')
 
         function addReport(){
            // lastShownReport = lastShownReport + 1;
-           // debugger;
           //  expenseSharingSvc.addReport(reportId);
         }
 

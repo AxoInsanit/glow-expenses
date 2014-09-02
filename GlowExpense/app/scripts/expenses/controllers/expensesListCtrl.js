@@ -38,7 +38,6 @@ angular.module('Expenses')
             $scope.editExpense = function(expense, index) {
                 if(!$scope.isEditMode)
                 {
-                    debugger;
                     expenseSharingSvc.selectedExpense = index;
                     $location.path(expensePath + '/' + expense.expenseId);
                 }

@@ -19,8 +19,7 @@ angular.module('Expenses')
 
             $scope.save = function(form, expense) {
 
-                function createExpenseSuccess(response, responseHeaders, test){
-                    debugger;
+                function createExpenseSuccess(response, responseHeaders){
                     var headers = responseHeaders();
 
                     // TODO remove when the service returns location
@@ -30,7 +29,6 @@ angular.module('Expenses')
                     function addExpenseToReportSuccess(){
 
                         expense.expenseId = createdExpenseId;
-                        debugger;
                         reportsSharingSvc.expenseSharingSvc.addExpense(expense, $scope.report.expenseReportId);
 
                         editSaveExpenseDialogSvc.openSuccessSaveExpenseDialog().then(function(url){
@@ -76,8 +74,8 @@ angular.module('Expenses')
             function validateNumbers(expense){
                 var result = false;
 
-                var exchangeRate = parseInt(expense.exchangeRate);
-                var originalAmount = parseInt(expense.originalAmount);
+                var exchangeRate = parseInt(expense.exchangeRate, 10);
+                var originalAmount = parseInt(expense.originalAmount, 10);
 
                 if ((exchangeRate && exchangeRate > 0) && (originalAmount && originalAmount > 0)){
                     result = true;

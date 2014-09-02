@@ -17,7 +17,6 @@ angular.module('Reports')
             $scope.reports = [];
 
             reportsSharingSvc.getReports().then(function(result){
-                debugger;
                 $scope.reports = result;
             });
 
@@ -35,15 +34,12 @@ angular.module('Reports')
 
             $scope.deleteReport = function(reportId) {
                 function deleteReportSuccess(){
-                    debugger;
                     reportsSharingSvc.deleteReport(reportId);
-                    debugger;
                     var reportToDeleteIndex = 0;
 
                     $scope.reports.some(function(item, index){
                         if (item.expenseReportId === reportId){
                             reportToDeleteIndex = index;
-                            debugger;
                             return true;
                         }
                     });
@@ -78,7 +74,6 @@ angular.module('Reports')
             };
 
             $scope.getMoreReports = function(){
-                debugger;
                 var result = reportsSharingSvc.getNextFiveReports();
                 $scope.reports = result;
             };

@@ -21,7 +21,6 @@ angular.module('Reports')
             var expenseIds = [];
 
             var reportId = getIdFromLocationSvc.getLastIdFromLocation($location.path());
-            debugger;
 
             if (reportId){
                 $scope.report = reportsSharingSvc.getReportById(reportId);

@@ -20,7 +20,6 @@ angular.module('Reports')
             $scope.report = reportsSharingSvc.getReportById(reportId);
 
             reportsSharingSvc.expenseSharingSvc.getExpenses($scope.report.expenseReportId).then(function(result) {
-                debugger;
                 $scope.expenses = result;
             });
 

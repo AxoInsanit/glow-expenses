@@ -3,9 +3,8 @@
 angular.module('Directives').directive('getFocus', function() {
     return {
         restrict: 'A',
-        link: function(scope, element, attrs) {
+        link: function(scope, element) {
             if (scope.$index === scope.selectedReportIndex){
-                debugger;
                 element.focus();
             }
         }
