@@ -8,8 +8,16 @@ angular.module('Reports')
                       reportsRepositorySvc, filterReportByStateSvc, entityName, confirmDeleteDialogSvc,
                       reportDetailsPath, sessionToken, errorHandlerDefaultSvc, localStorageSvc)  {
 
-            reportsSharingSvc.getReports().then(function(reports){
-                $scope.reports = reports;
+            $scope.sort = function(item) {
+                return new Date(item.creationDate);
+            };
+
+            $scope.selectedExpenseIndex = reportsSharingSvc.selectedReport;
+
+            $scope.reports = [];
+
+            reportsSharingSvc.getReports().then(function(result){
+                $scope.reports = result;
             });
 
             $scope.isEditMode = false;
@@ -27,6 +35,18 @@ angular.module('Reports')
             $scope.deleteReport = function(reportId) {
                 function deleteReportSuccess(){
                     reportsSharingSvc.deleteReport(reportId);
+                    var reportToDeleteIndex = 0;
+
+                    $scope.reports.some(function(item, index){
+                        if (item.expenseReportId === reportId){
+                            reportToDeleteIndex = index;
+                            return true;
+                        }
+                    });
+
+                    if (reportToDeleteIndex !== null){
+                        $scope.reports.splice(reportToDeleteIndex, 1);
+                    }
                 }
 
                 confirmDeleteDialogSvc.open(entityName).then(function(){
@@ -41,7 +61,8 @@ angular.module('Reports')
                 });
             };
 
-            $scope.viewReport = function(report) {
+            $scope.viewReport = function(report, index) {
+                reportsSharingSvc.selectedReport = index;
                 if((!$scope.isEditMode) && (!report.locked) && (filterReportByStateSvc.checkIfInState(report)))
                 {
                     $location.path(reportDetailsPath + '/' + report.expenseReportId);
@@ -50,6 +71,11 @@ angular.module('Reports')
 
             $scope.goToExpenses = function(){
                 $location.path('/expenses');
+            };
+
+            $scope.getMoreReports = function(){
+                var result = reportsSharingSvc.getNextFiveReports();
+                $scope.reports = result;
             };
         }
     ]);

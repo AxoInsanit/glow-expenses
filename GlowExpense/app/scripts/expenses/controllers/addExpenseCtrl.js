@@ -20,7 +20,6 @@ angular.module('Expenses')
             $scope.save = function(form, expense) {
 
                 function createExpenseSuccess(response, responseHeaders){
-
                     var headers = responseHeaders();
 
                     // TODO remove when the service returns location
@@ -30,7 +29,6 @@ angular.module('Expenses')
                     function addExpenseToReportSuccess(){
 
                         expense.expenseId = createdExpenseId;
-
                         reportsSharingSvc.expenseSharingSvc.addExpense(expense, $scope.report.expenseReportId);
 
                         editSaveExpenseDialogSvc.openSuccessSaveExpenseDialog().then(function(url){
@@ -51,7 +49,8 @@ angular.module('Expenses')
                     );
                 }
 
-                if(form.$valid)
+
+                if(form.$valid && validateNumbers(expense))
                 {
                     expense.date = new Date();
                     var newExpense = expenseSvc.create(expense);
@@ -71,5 +70,18 @@ angular.module('Expenses')
                     $scope.showErrorMessage = true;
                 }
             };
+
+            function validateNumbers(expense){
+                var result = false;
+
+                var exchangeRate = parseInt(expense.exchangeRate, 10);
+                var originalAmount = parseInt(expense.originalAmount, 10);
+
+                if ((exchangeRate && exchangeRate > 0) && (originalAmount && originalAmount > 0)){
+                    result = true;
+                }
+
+                return result;
+            }
     }
 ]);

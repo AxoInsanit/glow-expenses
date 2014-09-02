@@ -20,6 +20,19 @@ angular.module('Directives').directive('expensesList', ['expensesListTemplateUrl
                             var reportId = getIdFromLocationSvc.getLastIdFromLocation($location.path());
 
                             expenseSharingSvc.deleteExpense(expenseId, reportId);
+
+                            var expenseToDeleteIndex = 0;
+
+                            $scope.expenses.some(function(item, index){
+                                if (item.expenseId === expenseId){
+                                    expenseToDeleteIndex = index;
+                                    return true;
+                                }
+                            });
+
+                            if (expenseToDeleteIndex !== null){
+                                $scope.expenses.splice(expenseToDeleteIndex, 1);
+                            }
                         }
                         confirmDeleteDialogSvc.open(reportEntity).then(function(){
                             expensesRepositorySvc.deleteExpense(

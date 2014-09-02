@@ -7,11 +7,49 @@ angular.module('Reports')
 
         var reports = [];
 
+        var lastShownReport = 0;
+
+        var reportsPerPage = 5;
+
+        function getNextFiveReports(){
+            var reportsToShow = [];
+
+            var condition = lastShownReport + reportsPerPage;
+
+            if (reports.length < condition){
+                reportsToShow = reports;
+//                var remainingReports = reports.length - lastShownReport;
+//
+//                var reportCopy = angular.copy(reports);
+//                reportsToShow = reportCopy.splice(lastShownReport, remainingReports);
+//
+//                for (var i = 0; i < reportsToShow; i++){
+//                    reportsToShow.push(reports[i]);
+//                }
+//
+                lastShownReport += reportsToShow.length;
+
+            }
+            else {
+                for (var i = 0; i < condition; i++){
+                    reportsToShow.push(reports[i]);
+                }
+
+                lastShownReport += reportsPerPage;
+            }
+
+            return reportsToShow;
+        }
+
         // lazy load reports on demand
         function getReports(){
+            var result = null;
 
             function reportsSuccess(response){
                 var responseArray = response.expenses;
+//                responseArray.sort(function(a,b) {
+//                    return new Date(b.creationDate) - new Date(a.creationDate);
+//                });
                 responseArray.forEach(function(item){
                     item.title = item.description;
                     //check is it draft or rejected and if it is its locked. Else it is not.
@@ -26,12 +64,20 @@ angular.module('Reports')
                     reports.push(item);
                 });
 
-                deferred.resolve(reports);
+                if (lastShownReport !== 0){
+                    var reportsMapperCopy = angular.copy(reports);
+                    result = reportsMapperCopy.splice(0, lastShownReport);
+                }
+                else {
+                    result = getNextFiveReports();
+                }
+
+                deferred.resolve(result);
             }
 
             var deferred = $q.defer();
-
             if (reports.length === 0){
+
                 reportsRepositorySvc.getReports(
                     { 'token': localStorageSvc.getItem(sessionToken) },
                     reportsSuccess,
@@ -39,7 +85,10 @@ angular.module('Reports')
                 );
             }
             else {
-                deferred.resolve(reports);
+                var reportsMapperCopy = angular.copy(reports);
+
+                var resultReports = reportsMapperCopy.splice(0, lastShownReport);
+                deferred.resolve(resultReports);
             }
 
             return deferred.promise;
@@ -57,6 +106,7 @@ angular.module('Reports')
 
             if (reportToDeleteIndex !== null){
                reports.splice(reportToDeleteIndex, 1);
+               expenseSharingSvc.deleteReportMapping(reportId);
             }
         }
 
@@ -87,9 +137,9 @@ angular.module('Reports')
             return result;
         }
 
-        function addReport(report){
-            reports.push(report);
-            expenseSharingSvc.addReport(report.expenseReportId);
+        function addReport(){
+           // lastShownReport = lastShownReport + 1;
+          //  expenseSharingSvc.addReport(reportId);
         }
 
         function resetReports(){
@@ -103,7 +153,8 @@ angular.module('Reports')
             expenseSharingSvc: expenseSharingSvc,
             getReportById: getReportById,
             addReport: addReport,
-            resetReports: resetReports
+            resetReports: resetReports,
+            getNextFiveReports: getNextFiveReports
         };
     }
 ]);

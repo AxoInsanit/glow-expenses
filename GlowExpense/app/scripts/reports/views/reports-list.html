@@ -13,9 +13,10 @@
             </a>
         </section>
         <div class="reports-list">
-            <div class="draft">
-                <div class="SPAM" ng-repeat="report in reports">
-                    <section class="item " ng-class="{locked:report.locked,editMode:isEditMode}" ng-click="viewReport(report)">
+            <div class="draft Infinity" infinite-scroll="getMoreReports()">
+                <div class="SPAM" ng-repeat="report in reports track by $index | orderBy:sort : true">
+                    <section class="item " ng-class="{locked:report.locked,editMode:isEditMode}"
+                             ng-click="viewReport(report, $index)">
                         <div class="right-part">
                             <p class="info-text text-right">
                                 <span>{{report.societyCurrency}}</span>

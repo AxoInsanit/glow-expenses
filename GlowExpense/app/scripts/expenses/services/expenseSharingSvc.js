@@ -5,17 +5,52 @@ angular.module('Expenses').factory('expenseSharingSvc', ['$q', 'expensesReposito
 
     function($q, expensesRepositorySvc, errorHandlerDefaultSvc, localStorageSvc, sessionToken, expenseSvc) {
 
-        var expenseForEdit = null;
+        var expensesShownPerPage = 5;
+
+        var selectedExpenseIndex = 0;
 
         var reportExpensesMapper =
         {
             0: []
         };
 
+        var reportLastShownExpenseMapper =
+        {
+            0: 0
+        };
+
         var expenseIdsReadyToBeAssigned = [];
+
+        function getNextFiveExpenses(reportId){
+            var reportKey = reportId || 0;
+            debugger;
+            reportLastShownExpenseMapper[reportKey] = reportLastShownExpenseMapper[reportKey] || 0;
+
+            var index = reportLastShownExpenseMapper[reportKey];
+
+            var result = [];
+
+            var condition = index + expensesShownPerPage;
+            if (reportExpensesMapper[reportKey].length < condition){
+                var expensesLength = reportExpensesMapper[reportKey].length; // - index
+
+                var reportExpensesCopy = angular.copy(reportExpensesMapper[reportKey]);
+
+                result = reportExpensesCopy.splice(index, expensesLength);
+                reportLastShownExpenseMapper[reportKey] += (expensesLength - index);
+            }
+            else {
+                for (var i = index; i < condition; i++){
+                    result.push(reportExpensesMapper[reportKey][i]);
+                    reportLastShownExpenseMapper[reportKey] = condition;
+                }
+            }
+            return result;
+        }
 
         // lazy load expenses on demand
         function getExpenses(reportId){
+            debugger;
             var reportKey = reportId || 0;
             reportExpensesMapper[reportKey] = reportExpensesMapper[reportKey] || [];
 
@@ -25,7 +60,11 @@ angular.module('Expenses').factory('expenseSharingSvc', ['$q', 'expensesReposito
                     var expense = expenseSvc.create(item);
                     reportExpensesMapper[reportKey].push(expense);
                 });
-                deferred.resolve(reportExpensesMapper[reportKey]);
+
+                var result = getNextFiveExpenses(reportId);
+                deferred.resolve(result);
+
+               // deferred.resolve(reportExpensesMapper[reportKey]);
             }
 
             var deferred = $q.defer();
@@ -42,18 +81,22 @@ angular.module('Expenses').factory('expenseSharingSvc', ['$q', 'expensesReposito
                 );
             }
             else {
-                deferred.resolve(reportExpensesMapper[reportKey]);
+                var reportExpensesMapperCopy = angular.copy(reportExpensesMapper[reportKey]);
+                var result = null;
+                if (reportLastShownExpenseMapper[reportKey] && reportLastShownExpenseMapper[reportKey] !== 0){
+                    result = reportExpensesMapperCopy.splice(0, reportLastShownExpenseMapper[reportKey]);
+                    deferred.resolve(result);
+                }
+                else {
+                    result = reportExpensesMapperCopy;
+                    deferred.resolve(result);
+                }
+
+               // deferred.resolve(result);
+                //deferred.resolve(reportExpensesMapper[reportKey]);
             }
 
             return deferred.promise;
-        }
-
-        function getExpenseForEdit() {
-            return expenseForEdit;
-        }
-
-        function setExpenseForEdit(expense) {
-            expenseForEdit = expense;
         }
 
         function getExpenseIdsForReportAssign(){
@@ -89,7 +132,7 @@ angular.module('Expenses').factory('expenseSharingSvc', ['$q', 'expensesReposito
             
             reportExpensesMapper[reportKey].some(function(item){
                 if(item.expenseId === expense.expenseId){
-                    item.currency = expense.currency
+                    item.currency = expense.currency;
                     item.date = expense.date;
                     item.description = expense.description;
                     item.exchangeRate = expense.exchangeRate;
@@ -134,16 +177,64 @@ angular.module('Expenses').factory('expenseSharingSvc', ['$q', 'expensesReposito
             });
         }
 
+        function deleteReportMapping(reportId){
+
+            var reportExpenses = [];
+            if (reportExpensesMapper[reportId]){
+                reportExpenses = reportExpensesMapper[reportId];
+            }
+            else {
+                getAllExpensesForReport(reportId).then(function(result){
+                    reportExpenses = result;
+                });
+            }
+
+            reportExpenses.forEach(function(item){
+                reportExpensesMapper[0].push(item);
+            });
+            // way faster then delete reportExpensesMapper[reportId]
+            reportExpensesMapper[reportId] = undefined;
+        }
+
+        function getAllExpensesForReport(reportId){
+
+            var deferred = $q.defer();
+
+            function getExpensesSuccess1(response){
+                reportExpensesMapper[reportId] = [];
+                response.expenses.forEach(function(item){
+                    item.title = item.description;
+                    var expense = expenseSvc.create(item);
+                    reportExpensesMapper[reportId].push(expense);
+                });
+
+                deferred.resolve(reportExpensesMapper[reportId]);
+            }
+
+            function error(){
+            }
+
+            expensesRepositorySvc.getExpenses(
+                { 'token': localStorageSvc.getItem(sessionToken), 'expenseReportId': reportId },
+                getExpensesSuccess1,
+                error
+            );
+
+            return deferred.promise;
+        }
+
         return {
-            getExpenseForEdit: getExpenseForEdit,
-            setExpenseForEdit: setExpenseForEdit,
             getExpenseIdsForReportAssign: getExpenseIdsForReportAssign,
             getExpenses: getExpenses,
             getExpenseById: getExpenseById,
             updateExpense: updateExpense,
             deleteExpense: deleteExpense,
             addExpense: addExpense,
-            addReport: addReport
+            addReport: addReport,
+            getNextFiveExpenses: getNextFiveExpenses,
+            selectedExpense: selectedExpenseIndex,
+            deleteReportMapping: deleteReportMapping,
+            getAllExpensesForReport: getAllExpensesForReport
         };
     }
 ]);

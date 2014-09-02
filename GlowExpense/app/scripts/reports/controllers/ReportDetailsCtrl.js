@@ -14,6 +14,8 @@ angular.module('Reports')
             $scope.expenses = [];
             $scope.isEditMode = false;
 
+            $scope.selectedExpenseIndex = reportsSharingSvc.expenseSharingSvc.selectedExpense;
+
             var reportId = getIdFromLocationSvc.getLastIdFromLocation($location.path());
             $scope.report = reportsSharingSvc.getReportById(reportId);
 
@@ -34,6 +36,7 @@ angular.module('Reports')
             $scope.editExpense = function(expense) {
                 if(!$scope.isEditMode)
                 {
+                    $scope.selectedExpenseIndex = reportsSharingSvc.expenseSharingSvc.selectedExpense;
                     $location.path('/report-details/' + $scope.report.expenseReportId + '/expense/' + expense.expenseId);
                 }
             };
@@ -61,6 +64,14 @@ angular.module('Reports')
                     reportSendSuccess,
                     errorHandlerDefaultSvc.handleError
                 );
+            };
+
+            $scope.getMoreExpenses = function(){
+                debugger;
+                var result = reportsSharingSvc.expenseSharingSvc.getNextFiveExpenses();
+                result.forEach(function(item){
+                    $scope.expenses.push(item);
+                });
             };
         }
     ]);
