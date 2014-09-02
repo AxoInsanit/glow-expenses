@@ -21,6 +21,7 @@ angular.module('Reports')
             var expenseIds = [];
 
             var reportId = getIdFromLocationSvc.getLastIdFromLocation($location.path());
+            debugger;
 
             if (reportId){
                 $scope.report = reportsSharingSvc.getReportById(reportId);
@@ -41,7 +42,7 @@ angular.module('Reports')
 
                 function createReportSuccess(){
                     reportsSharingSvc.resetReports();
-                    reportsSharingSvc.expenseSharingSvc.addReport(report.expenseReportId);
+                    reportsSharingSvc.addReport(report.expenseReportId);
                     $location.path(reportsPath);
                 }
 

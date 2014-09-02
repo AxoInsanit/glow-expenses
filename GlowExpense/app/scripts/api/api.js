@@ -8,7 +8,7 @@ angular.module('Api', [])
     //public network
    // .constant('baseUrlMockeyWeb', 'http://92.247.83.122:7000')
     //localhost
-   .constant('baseUrlMockeyWeb', 'http://127.0.0.1:7000')
+   .constant('baseUrlMockeyWeb', 'http://127.0.0.1:8080')
     // .constant('baseUrlMockeyEmulator', 'http://10.0.3.2:8080')
     // .constant('baseUrlMockeyIOS', 'localhost:8080')
     // .constant('baseUrlMockeyWeb', 'http://127.0.0.1:7000')

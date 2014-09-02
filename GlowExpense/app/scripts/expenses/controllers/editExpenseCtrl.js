@@ -23,7 +23,10 @@ angular.module('Expenses')
             var  originalExpense = angular.copy($scope.expense);
          //   $scope.report = reportsSharingSvc.getReport();
 
-            var reportId = getIdFromLocationSvc.getFirstIdFromLocation($location.path());
+            var reportId = 0;
+            if (isInReport()){
+                reportId = getIdFromLocationSvc.getFirstIdFromLocation($location.path());
+            }
 
             $scope.report = reportsSharingSvc.getReportById(reportId);
 
@@ -55,7 +58,13 @@ angular.module('Expenses')
             }
 
             function addExpenseSuccess(){
+                debugger;
                 reportsSharingSvc.expenseSharingSvc.addExpense($scope.expense, $scope.report.expenseReportId);
+                $location.path(reportDetailsPath + '/' + $scope.report.expenseReportId);
+            }
+
+            function updateExpenseSuccess(){
+                reportsSharingSvc.expenseSharingSvc.updateExpense($scope.expense, $scope.report.expenseReportId);
                 $location.path(reportDetailsPath + '/' + $scope.report.expenseReportId);
             }
 
@@ -73,9 +82,11 @@ angular.module('Expenses')
                 };
 
                 function saveExpenseSuccess(){
-                    expenseSharingSvc.updateExpense(expense, $scope.report.expenseReportId);
+                    debugger;
+                    expenseSharingSvc.updateExpense(expense, reportId);
 
                     function deleteExpenseSuccess(){
+                        debugger;
                         reportsSharingSvc.expenseSharingSvc.deleteExpense($scope.expense.expenseId, reportId);
                         reportExpensesRepositorySvc.addExpensesToReport(
                             { 'token': localStorageSvc.getItem(sessionToken) },
@@ -103,7 +114,9 @@ angular.module('Expenses')
                     }
                     else {
                         // change assigned expense to another report
+                        debugger;
                         if (lastSelectedReport !== $scope.report.description){
+                            debugger;
                             reportExpensesRepositorySvc.deleteExpense(
                                 {
                                     'token': localStorageSvc.getItem(sessionToken),
@@ -116,9 +129,10 @@ angular.module('Expenses')
                         // no change in the state of expense
                         else
                         {
+                            debugger;
                             // it is assigned go to report details
                             if ($scope.report.description){
-                                addExpenseSuccess();
+                                updateExpenseSuccess();
                             }
                             // it is unassigned go to expenses list
                             else {
@@ -185,6 +199,10 @@ angular.module('Expenses')
 
             function resetExpense(){
                $scope.expense =  angular.copy(originalExpense);
+            }
+
+            function isInReport(){
+                return $location.path().indexOf('report-details') > -1;
             }
         }
 ]);

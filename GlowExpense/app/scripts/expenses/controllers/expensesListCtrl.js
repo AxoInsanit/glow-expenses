@@ -7,6 +7,9 @@ angular.module('Expenses')
                   editModeNotificationChannelSvc, reportsSharingSvc, expensePath, reportsPath)  {
 
             $scope.expenses = [];
+
+            $scope.selectedExpenseIndex = expenseSharingSvc.selectedExpense;
+
             $scope.isEditMode = false;
 
             function toggleEditModeHandler(isEditMode){
@@ -32,11 +35,21 @@ angular.module('Expenses')
                 }
             };
 
-            $scope.editExpense = function(expense) {
+            $scope.editExpense = function(expense, index) {
                 if(!$scope.isEditMode)
                 {
+                    debugger;
+                    expenseSharingSvc.selectedExpense = index;
                     $location.path(expensePath + '/' + expense.expenseId);
                 }
+            };
+
+            $scope.getMoreExpenses = function(){
+
+                var result = expenseSharingSvc.getNextFiveExpenses();
+                result.forEach(function(item){
+                    $scope.expenses.push(item);
+                });
             };
         }
     ]);
