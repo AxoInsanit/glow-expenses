@@ -5,7 +5,7 @@ angular.module('Directives').directive('loading', ['requestNotificationChannelSv
         return {
             restrict: 'E',
             replace:true,
-            template: '<div class="msg errorMsg loader"><img src="resources/images/ajax-loader.gif" />LOADING...</div>',
+            templateUrl: '/scripts/directives/views/loader.html',
             link: function (scope, element) {
 
                 element.hide();

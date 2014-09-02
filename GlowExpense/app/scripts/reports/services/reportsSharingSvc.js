@@ -52,8 +52,18 @@ angular.module('Reports')
 //                });
                 responseArray.forEach(function(item){
                     item.title = item.description;
+                    //check is it draft or rejected and if it is its locked. Else it is not.
+                    if((item.state.indexOf('Draft')>=0)||(item.state.indexOf('Reject')>=0))
+                    {
+                        item.locked = false;
+                    }
+                    else
+                    {
+                        item.locked = true;
+                    }
                     reports.push(item);
                 });
+
                 if (lastShownReport !== 0){
                     var reportsMapperCopy = angular.copy(reports);
                     result = reportsMapperCopy.splice(0, lastShownReport);
