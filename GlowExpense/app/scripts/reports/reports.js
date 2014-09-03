@@ -13,4 +13,5 @@ angular.module('Reports', [])
     .constant('createReportBtnLabel','Create')
     .constant('editReportBtnLabel','Save')
     .constant('projectAssigned','Project Assigned')
-    .constant('allProjects','All Projects');
+    .constant('allProjects','All Projects')
+    .constant('emptyReportErrorMsg', 'Cannot send a report with no expenses!');

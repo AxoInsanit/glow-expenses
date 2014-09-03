@@ -6,13 +6,13 @@ angular.module('Expenses')
         'expenseViewImageSvc', 'reportsSharingSvc', 'reportEntityName', 'filterReportByStateSvc',
         'itemsSelectionDialogSvc', 'reportExpensesRepositorySvc', 'localStorageSvc', 'sessionToken', 'reportDetailsPath',
         'expensesPath', 'invoiceImageRepositorySvc', 'errorHandlerDefaultSvc', 'getIdFromLocationSvc', 'expenseSvc', 
-        'baseUrlMockeyWeb', 'expenseIdShareSvc',
+        'baseUrlMockeyWeb', 'expenseIdShareSvc', 'validateNumbersSvc',
         function ($scope,  $location, editExpensesTitle, editExpensesButtonLabel, expenseSharingSvc, cameraSvc,
                     reportsRepositorySvc, currencySelectDialogSvc, expensesRepositorySvc, editSaveExpenseDialogSvc,
                     expenseViewImageSvc, reportsSharingSvc, reportEntityName, filterReportByStateSvc,
                     itemsSelectionDialogSvc, reportExpensesRepositorySvc, localStorageSvc, sessionToken, reportDetailsPath,
                     expensesPath, invoiceImageRepositorySvc, errorHandlerDefaultSvc, getIdFromLocationSvc, expenseSvc, 
-                    baseUrlMockeyWeb, expenseIdShareSvc) {
+                    baseUrlMockeyWeb, expenseIdShareSvc, validateNumbersSvc) {
 
             $scope.title = editExpensesTitle;
             $scope.buttonLabel = editExpensesButtonLabel;
@@ -37,7 +37,7 @@ angular.module('Expenses')
             }
 
             $scope.report = reportsSharingSvc.getReportById(reportId);
-
+            debugger;
             var lastSelectedReport = $scope.report.description;
 
             $scope.imageSelectedPath = '';
@@ -141,7 +141,7 @@ angular.module('Expenses')
                     });
                 }
 
-                if(form.$valid)
+                if(form.$valid && validateNumbersSvc.validate(expense))
                 {
                     expense.date = $scope.expense.date;
                     var newExpense = expenseSvc.create(expense);

@@ -3,10 +3,12 @@
 angular.module('Expenses')
     .controller('AddExpenseCtrl', ['$scope', '$location', 'addExpensesTitle', 'addExpensesButtonLabel', 'reportsSharingSvc',
         'expensesRepositorySvc', 'editSaveExpenseDialogSvc', 'getIdFromLocationSvc', 'reportExpensesRepositorySvc',
-        'errorDialogSvc', 'errorMessageSvc', 'errorHandlerDefaultSvc', 'localStorageSvc', 'sessionToken', 'expenseSvc', 'cameraSvc', 'invoiceImageRepositorySvc',
+        'errorDialogSvc', 'errorMessageSvc', 'errorHandlerDefaultSvc', 'localStorageSvc', 'sessionToken', 'expenseSvc',
+        'cameraSvc', 'invoiceImageRepositorySvc', 'validateNumbersSvc',
         function ($scope, $location, addExpensesTitle, addExpensesButtonLabel, reportsSharingSvc,
           expensesRepositorySvc, editSaveExpenseDialogSvc, getIdFromLocationSvc, reportExpensesRepositorySvc,
-          errorDialogSvc, errorMessageSvc, errorHandlerDefaultSvc, localStorageSvc, sessionToken, expenseSvc, cameraSvc, invoiceImageRepositorySvc) {
+          errorDialogSvc, errorMessageSvc, errorHandlerDefaultSvc, localStorageSvc, sessionToken, expenseSvc, cameraSvc,
+          invoiceImageRepositorySvc, validateNumbersSvc) {
 
             $scope.title = addExpensesTitle;
             $scope.buttonLabel = addExpensesButtonLabel;
@@ -17,7 +19,7 @@ angular.module('Expenses')
 
             var reportId = getIdFromLocationSvc.getFirstIdFromLocation($location.path());
             $scope.report = reportsSharingSvc.getReportById(reportId);
-
+            debugger;
             $scope.takePhoto = function(expense) {
                 
                 $scope.imagePath = cameraSvc.takePhoto();
@@ -27,10 +29,8 @@ angular.module('Expenses')
 
                 function createExpenseSuccess(response, responseHeaders){
                     var headers = responseHeaders();
-                    debugger;
-                    // TODO remove when the service returns location
-                    headers.Location = response.location;
-                    var createdExpenseId = getIdFromLocationSvc.getLastIdFromLocation(headers.Location);
+
+                    var createdExpenseId = getIdFromLocationSvc.getLastIdFromLocation(headers.location);
 
                     function addExpenseToReportSuccess(){
 
@@ -55,7 +55,7 @@ angular.module('Expenses')
                     );
                 }
 
-                if(form.$valid && validateNumbers(expense))
+                if(form.$valid && validateNumbersSvc.validate(expense))
                 {
                     debugger;
                     expense.date = new Date();
@@ -93,18 +93,5 @@ angular.module('Expenses')
                     $scope.showErrorMessage = true;
                 }
             };
-
-            function validateNumbers(expense){
-                var result = false;
-                debugger;
-                var exchangeRate = parseInt(expense.exchangeRate, 10);
-                var originalAmount = parseInt(expense.originalAmount, 10);
-
-                if ((exchangeRate && exchangeRate > 0) && (originalAmount && originalAmount > 0)){
-                    result = true;
-                }
-
-                return result;
-            }
     }
 ]);

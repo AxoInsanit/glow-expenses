@@ -24,7 +24,7 @@ angular.module('Reports')
 
             if (reportId){
                 $scope.report = reportsSharingSvc.getReportById(reportId);
-
+                debugger;
                 $scope.title = editReportTitle;
                 $scope.buttonLabel = editReportBtnLabel;
 
@@ -45,6 +45,7 @@ angular.module('Reports')
                 }
 
                 function saveReportSuccess(){
+                    debugger;
                     reportsSharingSvc.updateReport(report);
                     $location.path(reportsPath);
                 }

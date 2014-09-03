@@ -115,6 +115,7 @@ angular.module('Reports')
         function updateReport(report){
             reports.some(function(item){
                 if(item.expenseReportId === report.expenseReportId){
+                    debugger;
                     item = report;
                     return true;
                 }

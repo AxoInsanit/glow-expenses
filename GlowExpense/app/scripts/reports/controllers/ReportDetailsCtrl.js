@@ -4,10 +4,11 @@ angular.module('Reports')
     .controller('ReportDetailsCtrl', ['$scope', '$location', 'addReportErrorMsg', 'reportsSharingSvc',
         'expensesRepositorySvc', 'confirmDeleteDialogSvc', 'entityName', 'sendReportDialogSvc', 'expensePath',
         'expenseSvc', 'editModeNotificationChannelSvc', 'getIdFromLocationSvc', 'localStorageSvc', 'sessionToken',
-        'reportSendRepositorySvc', 'errorHandlerDefaultSvc',
+        'reportSendRepositorySvc', 'errorHandlerDefaultSvc', 'errorDialogSvc', 'emptyReportErrorMsg',
         function ($scope, $location, addReportErrorMsg, reportsSharingSvc, expensesRepositorySvc, confirmDeleteDialogSvc,
                   entityName, sendReportDialogSvc, expensePath, expenseSvc, editModeNotificationChannelSvc, getIdFromLocationSvc,
-                  localStorageSvc, sessionToken, reportSendRepositorySvc, errorHandlerDefaultSvc)  {
+                  localStorageSvc, sessionToken, reportSendRepositorySvc, errorHandlerDefaultSvc, errorDialogSvc,
+                  emptyReportErrorMsg)  {
 
             $scope.errorMessage = addReportErrorMsg;
             $scope.showErrorMessage = false;
@@ -56,14 +57,23 @@ angular.module('Reports')
                     $location.path('/reports');
                 }
 
-                reportSendRepositorySvc.sendReport(
-                    {
-                        'token': localStorageSvc.getItem(sessionToken),
-                        'expenseReportId': $scope.report.expenseReportId
-                    },
-                    reportSendSuccess,
-                    errorHandlerDefaultSvc.handleError
-                );
+                if ($scope.expenses.length === 0){
+                    errorDialogSvc.open(emptyReportErrorMsg).then(function(){
+                        return;
+                    })
+                }
+                else {
+
+                    reportSendRepositorySvc.sendReport(
+                        {
+                            'token': localStorageSvc.getItem(sessionToken),
+                            'expenseReportId': $scope.report.expenseReportId
+                        },
+                        reportSendSuccess,
+                        errorHandlerDefaultSvc.handleError
+                    );
+                }
+
             };
 
             $scope.getMoreExpenses = function(){
