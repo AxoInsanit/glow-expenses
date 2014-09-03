@@ -22,7 +22,7 @@ angular.module('Expenses')
 
                 function createExpenseSuccess(response, responseHeaders){
                     var headers = responseHeaders();
-
+                    debugger;
                     // TODO remove when the service returns location
                     headers.Location = response.location;
                     var createdExpenseId = getIdFromLocationSvc.getLastIdFromLocation(headers.Location);

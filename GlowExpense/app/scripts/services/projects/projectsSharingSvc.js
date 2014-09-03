@@ -18,7 +18,7 @@ angular.module('Services')
             if (projects.length === 0){
                 projectsRepositorySvc.getProjects(
                     {
-                        'scope': 'expense'
+                        
                     },
                     projectSuccess
                 );
