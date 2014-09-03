@@ -912,7 +912,7 @@
 /Users/dimitarjilanov/Documents/GlowMobile/GlowExpense/platforms/android/assets/www/resources/images/low-res/signout.png \
 /Users/dimitarjilanov/Documents/GlowMobile/GlowExpense/platforms/android/assets/www/resources/images/low-res/sprite-legend.jpg \
 /Users/dimitarjilanov/Documents/GlowMobile/GlowExpense/platforms/android/assets/www/resources/images/low-res/sprite.png \
-/Users/dimitarjilanov/Documents/GlowMobile/GlowExpense/platforms/android/assets/www/scripts/109210b9.scripts.js \
+/Users/dimitarjilanov/Documents/GlowMobile/GlowExpense/platforms/android/assets/www/scripts/1a766579.scripts.js \
 /Users/dimitarjilanov/Documents/GlowMobile/GlowExpense/platforms/android/assets/www/scripts/directives \
 /Users/dimitarjilanov/Documents/GlowMobile/GlowExpense/platforms/android/assets/www/scripts/e26c4812.modules.js \
 /Users/dimitarjilanov/Documents/GlowMobile/GlowExpense/platforms/android/assets/www/scripts/expenses \

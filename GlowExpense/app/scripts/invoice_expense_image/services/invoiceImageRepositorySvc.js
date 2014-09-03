@@ -5,7 +5,7 @@ angular.module('InvoiceExpenseImage').factory('invoiceImageRepositorySvc', ['$re
     function($resource, baseUrlMockeyWeb, imagesUrl, expensesUrl) {
 
 
-        return $resource(baseUrlMockeyWeb + expensesUrl + imagesUrl +'?expenseId=:expenseId' + '&token=:token',
+        return $resource(baseUrlMockeyWeb + expensesUrl + imagesUrl +'?expenseId=:expenseId' + '&token=:token' ,
             {
                 expenseId: 'expenseId',
                 token: 'token'
