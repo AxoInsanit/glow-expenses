@@ -90,7 +90,7 @@ angular.module('Expenses')
 
             function validateNumbers(expense){
                 var result = false;
-
+                debugger;
                 var exchangeRate = parseInt(expense.exchangeRate, 10);
                 var originalAmount = parseInt(expense.originalAmount, 10);
 

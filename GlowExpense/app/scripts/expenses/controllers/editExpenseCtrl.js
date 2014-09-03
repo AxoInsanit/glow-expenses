@@ -5,16 +5,21 @@ angular.module('Expenses')
         'cameraSvc', 'reportsRepositorySvc', 'currencySelectDialogSvc', 'expensesRepositorySvc', 'editSaveExpenseDialogSvc',
         'expenseViewImageSvc', 'reportsSharingSvc', 'reportEntityName', 'filterReportByStateSvc',
         'itemsSelectionDialogSvc', 'reportExpensesRepositorySvc', 'localStorageSvc', 'sessionToken', 'reportDetailsPath',
-        'expensesPath', 'invoiceImageRepositorySvc', 'errorHandlerDefaultSvc', 'getIdFromLocationSvc', 'expenseSvc',
+        'expensesPath', 'invoiceImageRepositorySvc', 'errorHandlerDefaultSvc', 'getIdFromLocationSvc', 'expenseSvc', 
+        'baseUrlMockeyWeb', 'expenseIdShareSvc',
         function ($scope,  $location, editExpensesTitle, editExpensesButtonLabel, expenseSharingSvc, cameraSvc,
-                  reportsRepositorySvc, currencySelectDialogSvc, expensesRepositorySvc, editSaveExpenseDialogSvc,
-                  expenseViewImageSvc, reportsSharingSvc, reportEntityName, filterReportByStateSvc,
-                  itemsSelectionDialogSvc, reportExpensesRepositorySvc, localStorageSvc, sessionToken, reportDetailsPath,
-                expensesPath, invoiceImageRepositorySvc, errorHandlerDefaultSvc, getIdFromLocationSvc, expenseSvc) {
+                    reportsRepositorySvc, currencySelectDialogSvc, expensesRepositorySvc, editSaveExpenseDialogSvc,
+                    expenseViewImageSvc, reportsSharingSvc, reportEntityName, filterReportByStateSvc,
+                    itemsSelectionDialogSvc, reportExpensesRepositorySvc, localStorageSvc, sessionToken, reportDetailsPath,
+                    expensesPath, invoiceImageRepositorySvc, errorHandlerDefaultSvc, getIdFromLocationSvc, expenseSvc, 
+                    baseUrlMockeyWeb, expenseIdShareSvc) {
 
             $scope.title = editExpensesTitle;
             $scope.buttonLabel = editExpensesButtonLabel;
             $scope.showErrorMessage = false;
+            $scope.expenseId = getIdFromLocationSvc.getLastIdFromLocation($location.path());
+            $scope.token = localStorageSvc.getItem(sessionToken);
+            $scope.path = baseUrlMockeyWeb;
 
             var expenseId = getIdFromLocationSvc.getLastIdFromLocation($location.path());
 
@@ -37,27 +42,14 @@ angular.module('Expenses')
 
             $scope.imageSelectedPath = '';
 
-//            function getImageSuccess(result){
-//                // TODO result is empty
-//                $scope.imageSelectedPath = result.invoiceImage;
-//            }
-
-//            function getImageFail(errorResponse){
-//
-//                errorHandlerDefaultSvc.handleError(errorResponse).then(function(){
-//                    resetExpense();
-//                });
-//            }
 
             if($scope.expense.imageType !== 'void')
             {
-//                invoiceImageRepositorySvc.getImage(
-//                    { 'token': localStorageSvc.getItem(sessionToken), 'expenseId': expenseId },
-//                    getImageSuccess,
-//                    getImageFail
-//                );
-//                // TODO  ???
-//                $scope.imageSelectedPath = 'image';
+               invoiceImageRepositorySvc.getImage(
+                   { 'token': localStorageSvc.getItem(sessionToken), 'expenseId': expenseId }
+               );
+               // TODO  ???
+               $scope.imageSelectedPath = 'image';
             }
 
             function addExpenseSuccess(){
@@ -189,6 +181,7 @@ angular.module('Expenses')
             };
 
             $scope.viewImage = function(){
+                expenseIdShareSvc.setId(expenseId);
                 expenseViewImageSvc.open().then(function(){
                     $scope.takePhoto();
                 },{});
@@ -197,6 +190,5 @@ angular.module('Expenses')
             function resetExpense(){
                $scope.expense =  angular.copy(originalExpense);
             }
-
         }
 ]);
