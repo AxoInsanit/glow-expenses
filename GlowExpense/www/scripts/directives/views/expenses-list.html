@@ -1,7 +1,7 @@
 <div class="nav font15">
     <div class="Infinity" infinite-scroll="getMoreExpenses()">
         <article class="ready expense-cont" ng-repeat="expense in expenses track by $index | orderBy:sort : true">
-            <section class="item" ng-click="editExpense(expense)" ng-class="{editMode: isEditMode}">
+            <section class="item" ng-click="editExpense(expense, $index)" ng-class="{editMode: isEditMode}">
                 <div class="left-part">
                     <div class="remove">
                         <a href="" class="icon icon-delete float-left" ng-show="isEditMode" ng-click="deleteExpense(expense.expenseId)">

@@ -4,9 +4,10 @@ angular.module('Expenses')
     .controller('AddExpenseCtrl', ['$scope', '$location', 'addExpensesTitle', 'addExpensesButtonLabel', 'reportsSharingSvc',
         'expensesRepositorySvc', 'editSaveExpenseDialogSvc', 'getIdFromLocationSvc', 'reportExpensesRepositorySvc',
         'errorDialogSvc', 'errorMessageSvc', 'errorHandlerDefaultSvc', 'localStorageSvc', 'sessionToken', 'expenseSvc',
+        '$http',
         function ($scope, $location, addExpensesTitle, addExpensesButtonLabel, reportsSharingSvc,
           expensesRepositorySvc, editSaveExpenseDialogSvc, getIdFromLocationSvc, reportExpensesRepositorySvc,
-          errorDialogSvc, errorMessageSvc, errorHandlerDefaultSvc, localStorageSvc, sessionToken, expenseSvc) {
+          errorDialogSvc, errorMessageSvc, errorHandlerDefaultSvc, localStorageSvc, sessionToken, expenseSvc,  $http) {
 
             $scope.title = addExpensesTitle;
             $scope.buttonLabel = addExpensesButtonLabel;
@@ -48,7 +49,6 @@ angular.module('Expenses')
                         errorHandlerDefaultSvc.handleError
                     );
                 }
-
 
                 if(form.$valid && validateNumbers(expense))
                 {
