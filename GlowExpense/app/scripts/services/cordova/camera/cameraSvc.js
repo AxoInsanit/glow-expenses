@@ -7,7 +7,6 @@
 angular.module('Services').factory('cameraSvc', ['$q', function($q){
 
          function takePhoto() {
-
             var deferred = $q.defer();
             function onSuccess(imageURI) {
                 if (confirm('Upload image to expense?')) {
