@@ -41,7 +41,6 @@ angular.module('Reports')
 
                 function createReportSuccess(){
                     reportsSharingSvc.resetReports();
-                    reportsSharingSvc.addReport(report.expenseReportId);
                     $location.path(reportsPath);
                 }
 

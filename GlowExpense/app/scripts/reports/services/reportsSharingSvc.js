@@ -47,9 +47,10 @@ angular.module('Reports')
 
             function reportsSuccess(response){
                 var responseArray = response.expenses;
-//                responseArray.sort(function(a,b) {
-//                    return new Date(b.creationDate) - new Date(a.creationDate);
-//                });
+                debugger;
+                responseArray.sort(function(a,b) {
+                    return new Date(b.creationDate) - new Date(a.creationDate);
+                });
                 responseArray.forEach(function(item){
                     item.title = item.description;
                     //check is it draft or rejected and if it is its locked. Else it is not.
@@ -76,6 +77,7 @@ angular.module('Reports')
             }
 
             var deferred = $q.defer();
+            debugger;
             if (reports.length === 0){
 
                 reportsRepositorySvc.getReports(

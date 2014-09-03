@@ -57,13 +57,20 @@ angular.module('Expenses')
 
                     newExpense.originalCurrency = 1;
 
-                    expensesRepositorySvc.createExpense(
+//                    expensesRepositorySvc.createExpense(
+//
+//                        { 'token': localStorageSvc.getItem(sessionToken) },
+//                        newExpense,
+//                        createExpenseSuccess,
+//                        errorHandlerDefaultSvc.handleError
+//                    );
 
-                        { 'token': localStorageSvc.getItem(sessionToken) },
-                        newExpense,
-                        createExpenseSuccess,
-                        errorHandlerDefaultSvc.handleError
-                    );
+                    $http.post('http://127.0.0.1:8080/expense?token=' + localStorageSvc.getItem(sessionToken), newExpense)
+                        .success(function(data, status, headers, config) {
+                           debugger;
+                        }).error(function(data, status, headers, config) {
+                           debugger;
+                        });
                 }
                 else
                 {
