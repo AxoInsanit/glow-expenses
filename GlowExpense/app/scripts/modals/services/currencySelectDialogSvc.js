@@ -18,6 +18,12 @@ angular.module('Modals').factory('currencySelectDialogSvc', ['$modal',  function
                             }
                         });
                     }
+                    else
+                    {
+                        $scope.currencies.forEach(function(item){
+                            item.selected = false;
+                        });
+                    }
 
                     $scope.select = function(currency) {
                         if (lastSelectedCurrency){
