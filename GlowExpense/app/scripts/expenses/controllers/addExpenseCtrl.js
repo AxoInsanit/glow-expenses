@@ -62,16 +62,16 @@ angular.module('Expenses')
                     var newExpense = expenseSvc.create(expense);
 
                     newExpense.originalCurrency = 1;
-                    console.log("$scope.imagePath " + $scope.imagePath);
-                    invoiceImageRepositorySvc.saveImage(
-                        {
-                            'expenseId': "123132fake1id",
-                            'token': localStorageSvc.getItem(sessionToken)
-                            
-                        },
-                        $scope.imagePath,
-                        createExpenseSuccess,
-                        errorHandlerDefaultSvc.handleError);
+//                    console.log("$scope.imagePath " + $scope.imagePath);
+//                    invoiceImageRepositorySvc.saveImage(
+//                        {
+//                            'expenseId': "123132fake1id",
+//                            'token': localStorageSvc.getItem(sessionToken)
+//
+//                        },
+//                        $scope.imagePath,
+//                        createExpenseSuccess,
+//                        errorHandlerDefaultSvc.handleError);
 
                     expensesRepositorySvc.createExpense(
 
