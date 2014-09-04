@@ -43,6 +43,7 @@ angular.module('Reports')
 
         // lazy load reports on demand
         function getReports(){
+
             var result = null;
 
             function reportsSuccess(response){
