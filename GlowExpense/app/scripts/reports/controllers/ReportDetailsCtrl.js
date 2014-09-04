@@ -18,7 +18,7 @@ angular.module('Reports')
             $scope.selectedExpenseIndex = reportsSharingSvc.expenseSharingSvc.selectedExpense;
 
             var reportId = getIdFromLocationSvc.getLastIdFromLocation($location.path());
-            $scope.report = reportsSharingSvc.getReportById(reportId);
+            $scope.report =reportsSharingSvc.getReportById(reportId);
 
             reportsSharingSvc.expenseSharingSvc.getExpenses($scope.report.expenseReportId).then(function(result) {
                 $scope.expenses = result;

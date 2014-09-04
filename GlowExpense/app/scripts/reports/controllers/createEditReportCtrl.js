@@ -23,7 +23,7 @@ angular.module('Reports')
             var reportId = getIdFromLocationSvc.getLastIdFromLocation($location.path());
 
             if (reportId){
-                $scope.report = reportsSharingSvc.getReportById(reportId);
+                $scope.report = angular.copy(reportsSharingSvc.getReportById(reportId));
                 debugger;
                 $scope.title = editReportTitle;
                 $scope.buttonLabel = editReportBtnLabel;

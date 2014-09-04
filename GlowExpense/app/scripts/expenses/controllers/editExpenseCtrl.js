@@ -23,7 +23,7 @@ angular.module('Expenses')
 
             var expenseId = getIdFromLocationSvc.getLastIdFromLocation($location.path());
 
-            $scope.expense = expenseSharingSvc.getExpenseById(expenseId, $scope.reportId);
+            $scope.expense = angular.copy(expenseSharingSvc.getExpenseById(expenseId, $scope.reportId));
 
             var  originalExpense = angular.copy($scope.expense);
 
@@ -97,7 +97,7 @@ angular.module('Expenses')
 
                     // expense was just assigned to a report
                     if (!lastSelectedReport && $scope.report.description){
-
+                        debugger;
                         reportExpensesRepositorySvc.addExpensesToReport(
                             { 'token': localStorageSvc.getItem(sessionToken) },
                             reportObj,
