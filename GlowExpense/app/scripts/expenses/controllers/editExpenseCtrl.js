@@ -53,6 +53,7 @@ angular.module('Expenses')
             }
 
             function addExpenseSuccess(){
+                debugger;
                 reportsSharingSvc.expenseSharingSvc.addExpense($scope.expense, $scope.report.expenseReportId);
                 $location.path(reportDetailsPath + '/' + $scope.report.expenseReportId);
             }
@@ -96,7 +97,7 @@ angular.module('Expenses')
 
                     // expense was just assigned to a report
                     if (!lastSelectedReport && $scope.report.description){
-
+                        debugger;
                         reportExpensesRepositorySvc.addExpensesToReport(
                             { 'token': localStorageSvc.getItem(sessionToken) },
                             reportObj,
