@@ -97,7 +97,7 @@ angular.module('Expenses')
 
                     // expense was just assigned to a report
                     if (!lastSelectedReport && $scope.report.description){
-                        debugger;
+
                         reportExpensesRepositorySvc.addExpensesToReport(
                             { 'token': localStorageSvc.getItem(sessionToken) },
                             reportObj,
