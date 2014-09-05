@@ -67,7 +67,7 @@ angular.module('Reports')
                             'description': report.title,
                             'applyTo': '',
                             'entityId': projectId,
-                            'owner': 'facundo.roncaglia',
+                            'owner': localStorageSvc.getItem('userName'),
                             'expenseIds': expenseIds
                         };
 
@@ -86,7 +86,7 @@ angular.module('Reports')
                             'description': report.title,
                             'applyTo': report.project.name,
                             'entityId': projectId,
-                            'owner': 'facundo.roncaglia',
+                            'owner': localStorageSvc.getItem('userName'),
                             'expenseIds': expenseIds
                         };
 
