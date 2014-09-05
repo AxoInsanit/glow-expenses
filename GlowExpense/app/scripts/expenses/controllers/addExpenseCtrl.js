@@ -3,10 +3,14 @@
 angular.module('Expenses')
     .controller('AddExpenseCtrl', ['$scope', '$location', 'addExpensesTitle', 'addExpensesButtonLabel', 'reportsSharingSvc',
         'expensesRepositorySvc', 'editSaveExpenseDialogSvc', 'getIdFromLocationSvc', 'reportExpensesRepositorySvc',
-        'errorDialogSvc', 'errorMessageSvc', 'errorHandlerDefaultSvc', 'localStorageSvc', 'sessionToken', 'expenseSvc', 'cameraSvc', 'invoiceImageRepositorySvc',
+        'errorDialogSvc', 'errorMessageSvc', 'errorHandlerDefaultSvc', 'localStorageSvc', 'sessionToken', 'expenseSvc', 'cameraSvc', 
+        'invoiceImageRepositorySvc', 'imageFileShareSvc', 'expenseIdShareSvc', 'expensePostImageSvc',
+        'cameraSelectDialog',
         function ($scope, $location, addExpensesTitle, addExpensesButtonLabel, reportsSharingSvc,
           expensesRepositorySvc, editSaveExpenseDialogSvc, getIdFromLocationSvc, reportExpensesRepositorySvc,
-          errorDialogSvc, errorMessageSvc, errorHandlerDefaultSvc, localStorageSvc, sessionToken, expenseSvc, cameraSvc, invoiceImageRepositorySvc) {
+          errorDialogSvc, errorMessageSvc, errorHandlerDefaultSvc, localStorageSvc, sessionToken, expenseSvc, 
+          cameraSvc, invoiceImageRepositorySvc, imageFileShareSvc, expenseIdShareSvc, expensePostImageSvc,
+          cameraSelectDialog) {
 
             $scope.title = addExpensesTitle;
             $scope.buttonLabel = addExpensesButtonLabel;
@@ -19,18 +23,27 @@ angular.module('Expenses')
             $scope.report = reportsSharingSvc.getReportById(reportId);
 
             $scope.takePhoto = function(expense) {
-                
-                $scope.imagePath = cameraSvc.takePhoto();
+                cameraSelectDialog.open().then(function() {
+                    cameraSvc.takePhoto().then(function(result){
+                        $scope.imageSelectedPath = result;
+                    });
+                });
             };
 
             $scope.save = function(form, expense) {
 
                 function createExpenseSuccess(response, responseHeaders){
                     var headers = responseHeaders();
-                    debugger;
                     // TODO remove when the service returns location
-                    headers.Location = response.location;
-                    var createdExpenseId = getIdFromLocationSvc.getLastIdFromLocation(headers.Location);
+                    var createdExpenseId = getIdFromLocationSvc.getLastIdFromLocation(headers.location);
+                    //push image tests
+                    var fd = new FormData();
+                    fd.append('file', $scope.imagePath);
+                    //save file i nservice
+                    imageFileShareSvc.setFile(fd);
+                    //save id in service
+                    expenseIdShareSvc.setId(createdExpenseId);
+                    //post image service
 
                     function addExpenseToReportSuccess(){
 
@@ -41,8 +54,8 @@ angular.module('Expenses')
                             $location.path(url + '/' + $scope.report.expenseReportId);
                         });
                     }
-
-                    reportExpensesRepositorySvc.addExpensesToReport(
+                    expensePostImageSvc.saveImage().when(function(response){
+                        reportExpensesRepositorySvc.addExpensesToReport(
                         {
                             'token': localStorageSvc.getItem(sessionToken)
                         },
@@ -53,26 +66,16 @@ angular.module('Expenses')
                         addExpenseToReportSuccess,
                         errorHandlerDefaultSvc.handleError
                     );
+                    });
                 }
 
 
                 if(form.$valid && validateNumbers(expense))
                 {
-                    debugger;
                     expense.date = new Date();
                     var newExpense = expenseSvc.create(expense);
 
                     newExpense.originalCurrency = 1;
-                    console.log("$scope.imagePath " + $scope.imagePath);
-                    invoiceImageRepositorySvc.saveImage(
-                        {
-                            'expenseId': "123132fake1id",
-                            'token': localStorageSvc.getItem(sessionToken)
-                            
-                        },
-                        $scope.imagePath,
-                        createExpenseSuccess,
-                        errorHandlerDefaultSvc.handleError);
 
                     expensesRepositorySvc.createExpense(
 
@@ -90,7 +93,6 @@ angular.module('Expenses')
 
             function validateNumbers(expense){
                 var result = false;
-                debugger;
                 var exchangeRate = parseInt(expense.exchangeRate, 10);
                 var originalAmount = parseInt(expense.originalAmount, 10);
 

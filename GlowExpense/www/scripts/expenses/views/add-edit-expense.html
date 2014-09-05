@@ -20,8 +20,10 @@
         </div>
 
         <div ng-show="imageSelectedPath.length>1" ng-click="viewImage()">
-            <a class="icon icon-camera-big">
+            <a class="icon icon-camera-big expense-image">
+                <img ng-src="{{path}}/expense/image?expenseId={{expenseId}}&token={{token}}">
             </a>
+            
             <p class="text-info">Add Invoice Image </p>
         </div>
 

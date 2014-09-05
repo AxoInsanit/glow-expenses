@@ -6,13 +6,13 @@ angular.module('Expenses')
         'expenseViewImageSvc', 'reportsSharingSvc', 'reportEntityName', 'filterReportByStateSvc',
         'itemsSelectionDialogSvc', 'reportExpensesRepositorySvc', 'localStorageSvc', 'sessionToken', 'reportDetailsPath',
         'expensesPath', 'invoiceImageRepositorySvc', 'errorHandlerDefaultSvc', 'getIdFromLocationSvc', 'expenseSvc', 
-        'baseUrlMockeyWeb', 'expenseIdShareSvc',
+        'baseUrlMockeyWeb', 'expenseIdShareSvc', 'cameraSelectDialog',
         function ($scope,  $location, editExpensesTitle, editExpensesButtonLabel, expenseSharingSvc, cameraSvc,
                     reportsRepositorySvc, currencySelectDialogSvc, expensesRepositorySvc, editSaveExpenseDialogSvc,
                     expenseViewImageSvc, reportsSharingSvc, reportEntityName, filterReportByStateSvc,
                     itemsSelectionDialogSvc, reportExpensesRepositorySvc, localStorageSvc, sessionToken, reportDetailsPath,
                     expensesPath, invoiceImageRepositorySvc, errorHandlerDefaultSvc, getIdFromLocationSvc, expenseSvc, 
-                    baseUrlMockeyWeb, expenseIdShareSvc) {
+                    baseUrlMockeyWeb, expenseIdShareSvc, cameraSelectDialog) {
 
             $scope.title = editExpensesTitle;
             $scope.buttonLabel = editExpensesButtonLabel;
@@ -175,8 +175,10 @@ angular.module('Expenses')
             };
 
             $scope.takePhoto = function() {
-                cameraSvc.takePhoto().then(function(result){
-                    $scope.imageSelectedPath = result;
+                cameraSelectDialog.open().then(function() {
+                    cameraSvc.takePhoto().then(function(result){
+                        $scope.imageSelectedPath = result;
+                    });
                 });
             };
 

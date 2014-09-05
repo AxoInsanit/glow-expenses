@@ -5,9 +5,32 @@
 /* global alert */
 
 angular.module('Services').factory('cameraSvc', ['$q', function($q){
+        
+        var source = null;
+        // if(typeof(Camera) != 'undefined')
+        // {
+        //     source = Camera.PictureSourceType.CAMERA;
+        // }
+        // else
+        // {
+        //     var Camera = {'PictureSourceType':{}};
+        // }
 
-         function takePhoto() {
+        function setSource(type)
+        {
+            if(type === 'camera')
+            {
+                source = Camera.PictureSourceType.CAMERA;
+            }
+            else
+            {
+                source = Camera.PictureSourceType.PHOTOLIBRARY;
+            }
+        }
+
+        function takePhoto() {
             var deferred = $q.defer();
+
             function onSuccess(imageURI) {
                 if (confirm('Upload image to expense?')) {
                     deferred.resolve(imageURI);
@@ -21,11 +44,12 @@ angular.module('Services').factory('cameraSvc', ['$q', function($q){
                 deferred.reject();
             }
             navigator.camera.getPicture(onSuccess, onFail, { quality: 50, targetWidth: 100,
-                targetHeight: 100, destinationType: Camera.DestinationType.FILE_URI, saveToPhotoAlbum: false });
+                targetHeight: 100, destinationType : Camera.DestinationType.DATA_URL, sourceType: source, saveToPhotoAlbum: false });
             return deferred.promise;
         }
         return {
-            takePhoto: takePhoto
+            takePhoto: takePhoto,
+            setSource: setSource
         };
     }
 ]);
