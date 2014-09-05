@@ -14,6 +14,7 @@ angular.module('Modals').factory('itemsSelectionDialogSvc', ['$modal', function(
 
                     $scope.selectEntity = function(entity) {
                         $scope.selectedEntity = entity;
+                        $modalInstance.close($scope.selectedEntity);
                     };
 
                     $scope.close = function() {

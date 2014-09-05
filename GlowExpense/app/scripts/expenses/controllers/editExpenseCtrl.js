@@ -6,13 +6,13 @@ angular.module('Expenses')
         'expenseViewImageSvc', 'reportsSharingSvc', 'reportEntityName', 'filterReportByStateSvc',
         'itemsSelectionDialogSvc', 'reportExpensesRepositorySvc', 'localStorageSvc', 'sessionToken', 'reportDetailsPath',
         'expensesPath', 'invoiceImageRepositorySvc', 'errorHandlerDefaultSvc', 'getIdFromLocationSvc', 'expenseSvc', 
-        'baseUrlMockeyWeb', 'expenseIdShareSvc', 'cameraSelectDialog',
+        'baseUrlMockeyWeb', 'expenseIdShareSvc', 'validateNumbersSvc', 'cameraSelectDialog',
         function ($scope,  $location, editExpensesTitle, editExpensesButtonLabel, expenseSharingSvc, cameraSvc,
                     reportsRepositorySvc, currencySelectDialogSvc, expensesRepositorySvc, editSaveExpenseDialogSvc,
                     expenseViewImageSvc, reportsSharingSvc, reportEntityName, filterReportByStateSvc,
                     itemsSelectionDialogSvc, reportExpensesRepositorySvc, localStorageSvc, sessionToken, reportDetailsPath,
                     expensesPath, invoiceImageRepositorySvc, errorHandlerDefaultSvc, getIdFromLocationSvc, expenseSvc, 
-                    baseUrlMockeyWeb, expenseIdShareSvc, cameraSelectDialog) {
+                    baseUrlMockeyWeb, expenseIdShareSvc, validateNumbersSvc, cameraSelectDialog) {
 
             $scope.title = editExpensesTitle;
             $scope.buttonLabel = editExpensesButtonLabel;
@@ -23,7 +23,7 @@ angular.module('Expenses')
 
             var expenseId = getIdFromLocationSvc.getLastIdFromLocation($location.path());
 
-            $scope.expense = expenseSharingSvc.getExpenseById(expenseId, $scope.reportId);
+            $scope.expense = angular.copy(expenseSharingSvc.getExpenseById(expenseId, $scope.reportId));
 
             var  originalExpense = angular.copy($scope.expense);
 
@@ -37,7 +37,7 @@ angular.module('Expenses')
             }
 
             $scope.report = reportsSharingSvc.getReportById(reportId);
-
+            debugger;
             var lastSelectedReport = $scope.report.description;
 
             $scope.imageSelectedPath = '';
@@ -53,6 +53,7 @@ angular.module('Expenses')
             }
 
             function addExpenseSuccess(){
+                debugger;
                 reportsSharingSvc.expenseSharingSvc.addExpense($scope.expense, $scope.report.expenseReportId);
                 $location.path(reportDetailsPath + '/' + $scope.report.expenseReportId);
             }
@@ -96,7 +97,7 @@ angular.module('Expenses')
 
                     // expense was just assigned to a report
                     if (!lastSelectedReport && $scope.report.description){
-
+                        debugger;
                         reportExpensesRepositorySvc.addExpensesToReport(
                             { 'token': localStorageSvc.getItem(sessionToken) },
                             reportObj,
@@ -141,7 +142,7 @@ angular.module('Expenses')
                     });
                 }
 
-                if(form.$valid)
+                if(form.$valid && validateNumbersSvc.validate(expense))
                 {
                     expense.date = $scope.expense.date;
                     var newExpense = expenseSvc.create(expense);

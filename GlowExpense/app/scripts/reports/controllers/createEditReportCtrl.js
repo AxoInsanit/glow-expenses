@@ -23,8 +23,8 @@ angular.module('Reports')
             var reportId = getIdFromLocationSvc.getLastIdFromLocation($location.path());
 
             if (reportId){
-                $scope.report = reportsSharingSvc.getReportById(reportId);
-
+                $scope.report = angular.copy(reportsSharingSvc.getReportById(reportId));
+                debugger;
                 $scope.title = editReportTitle;
                 $scope.buttonLabel = editReportBtnLabel;
 
@@ -41,11 +41,12 @@ angular.module('Reports')
 
                 function createReportSuccess(){
                     reportsSharingSvc.resetReports();
-                    reportsSharingSvc.addReport(report.expenseReportId);
+                    reportsSharingSvc.expenseSharingSvc.addReport();
                     $location.path(reportsPath);
                 }
 
                 function saveReportSuccess(){
+                    debugger;
                     reportsSharingSvc.updateReport(report);
                     $location.path(reportsPath);
                 }
@@ -66,7 +67,7 @@ angular.module('Reports')
                             'description': report.title,
                             'applyTo': '',
                             'entityId': projectId,
-                            'owner': 'facundo.roncaglia',
+                            'owner': localStorageSvc.getItem('userName'),
                             'expenseIds': expenseIds
                         };
 
@@ -85,7 +86,7 @@ angular.module('Reports')
                             'description': report.title,
                             'applyTo': report.project.name,
                             'entityId': projectId,
-                            'owner': 'facundo.roncaglia',
+                            'owner': localStorageSvc.getItem('userName'),
                             'expenseIds': expenseIds
                         };
 

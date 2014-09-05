@@ -53,6 +53,7 @@ angular.module('Expenses').factory('expenseSharingSvc', ['$q', 'expensesReposito
             reportExpensesMapper[reportKey] = reportExpensesMapper[reportKey] || [];
 
             function getExpensesSuccess(response){
+                debugger;
                 response.expenses.forEach(function(item){
                     item.title = item.description;
                     var expense = expenseSvc.create(item);
@@ -164,11 +165,11 @@ angular.module('Expenses').factory('expenseSharingSvc', ['$q', 'expensesReposito
             reportExpensesMapper[reportKey].push(expense);
         }
 
-        function addReport(reportId){
-            reportExpensesMapper[reportId] = [];
+        function addReport(){
 
             reportExpensesMapper[0].map(function(item, index){
                 if (item.imageType !== 'void'){
+                    debugger;
                     reportExpensesMapper[0].splice(index, 1);
                     return true;
                 }
@@ -198,7 +199,7 @@ angular.module('Expenses').factory('expenseSharingSvc', ['$q', 'expensesReposito
 
             var deferred = $q.defer();
 
-            function getExpensesSuccess1(response){
+            function expensesSuccess(response){
                 reportExpensesMapper[reportId] = [];
                 response.expenses.forEach(function(item){
                     item.title = item.description;
@@ -214,7 +215,7 @@ angular.module('Expenses').factory('expenseSharingSvc', ['$q', 'expensesReposito
 
             expensesRepositorySvc.getExpenses(
                 { 'token': localStorageSvc.getItem(sessionToken), 'expenseReportId': reportId },
-                getExpensesSuccess1,
+                expensesSuccess,
                 error
             );
 

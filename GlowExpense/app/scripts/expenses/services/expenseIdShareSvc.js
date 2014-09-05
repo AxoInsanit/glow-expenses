@@ -14,7 +14,7 @@ angular.module('Expenses').factory('expenseIdShareSvc', [function() {
 
         return {
             setId: setId,
-            getId: getId,
+            getId: getId
             
         };
     }
