@@ -3,23 +3,14 @@
 angular.module('Expenses')
     .controller('AddExpenseCtrl', ['$scope', '$location', 'addExpensesTitle', 'addExpensesButtonLabel', 'reportsSharingSvc',
         'expensesRepositorySvc', 'editSaveExpenseDialogSvc', 'getIdFromLocationSvc', 'reportExpensesRepositorySvc',
-<<<<<<< HEAD
         'errorDialogSvc', 'errorMessageSvc', 'errorHandlerDefaultSvc', 'localStorageSvc', 'sessionToken', 'expenseSvc', 'cameraSvc', 
         'invoiceImageRepositorySvc', 'imageFileShareSvc', 'expenseIdShareSvc', 'expensePostImageSvc',
-        'cameraSelectDialog',
+        'cameraSelectDialog', 'validateNumbersSvc',
         function ($scope, $location, addExpensesTitle, addExpensesButtonLabel, reportsSharingSvc,
           expensesRepositorySvc, editSaveExpenseDialogSvc, getIdFromLocationSvc, reportExpensesRepositorySvc,
           errorDialogSvc, errorMessageSvc, errorHandlerDefaultSvc, localStorageSvc, sessionToken, expenseSvc, 
           cameraSvc, invoiceImageRepositorySvc, imageFileShareSvc, expenseIdShareSvc, expensePostImageSvc,
-          cameraSelectDialog) {
-=======
-        'errorDialogSvc', 'errorMessageSvc', 'errorHandlerDefaultSvc', 'localStorageSvc', 'sessionToken', 'expenseSvc',
-        'cameraSvc', 'invoiceImageRepositorySvc', 'validateNumbersSvc',
-        function ($scope, $location, addExpensesTitle, addExpensesButtonLabel, reportsSharingSvc,
-          expensesRepositorySvc, editSaveExpenseDialogSvc, getIdFromLocationSvc, reportExpensesRepositorySvc,
-          errorDialogSvc, errorMessageSvc, errorHandlerDefaultSvc, localStorageSvc, sessionToken, expenseSvc, cameraSvc,
-          invoiceImageRepositorySvc, validateNumbersSvc) {
->>>>>>> b6c2254aaa1c9b4f3855fe3617360e7a59582694
+          cameraSelectDialog, validateNumbersSvc) {
 
             $scope.title = addExpensesTitle;
             $scope.buttonLabel = addExpensesButtonLabel;
@@ -111,4 +102,4 @@ angular.module('Expenses')
                 return result;
             }
     }
-]);
+] );

@@ -1,6 +1,9 @@
 // STYLES FOR GLOBAL ELEMENTS 
 // HEADER 
 header {
+	.header-img{
+		content: url("../resources/images/plus.png");
+	} //delete f
 	border-top: 10px solid $bg-green;
 	@include clearfix();
 	nav {
@@ -21,22 +24,36 @@ header {
 					&.expenses {
 						text-align: right;
 						padding-right: 10px;
+						a {
+							span {
+								float: right;
+							}
+						}
 					}
 					&.reports {
 						padding-left: 10px;
+						a {
+							span {
+								float: left;
+							}
+						}
 					}
 					a {
 						color:$text-grey-dim;
 						font-weight: bold;
-						line-height: 3.2em;
+						line-height: 22px;
 						display: block;
+						height: 100%;
 						width: 100%;
 						font-size: $size-global;
+						padding-top: 20px;
+						min-height: 60px;						
 						&.active {
 							color:$text-grey-dark;
 							span {
 								border-bottom: 6px solid $bg-green;
 								padding-bottom: 10px;
+								display: table;
 							}
 						}
 					}
@@ -77,6 +94,11 @@ header {
 				.btn-main {
 					width: 100%;
 					text-align: center;
+					span {
+						display: table;
+						margin: 0 auto;
+						max-width: 70%;
+					}
 				}
 			}	
 		}
@@ -86,7 +108,7 @@ header {
 		height: 2px;
 		position:absolute;
 		width: 100%;
-		bottom: 0.2em;
+		bottom: 0;
 		background: -moz-linear-gradient(left, rgba(255,255,255,0) 0%, rgba(153,191,0,1) 20%, rgba(153,191,0,1) 40%, rgba(153,191,0,0.45) 60%, rgba(255,255,255,0.01) 100%); /* FF3.6+ */
 		background: -webkit-gradient(linear, left top, right top, color-stop(0%,rgba(255,255,255,0)), color-stop(20%,rgba(153,191,0,1)), color-stop(40%,rgba(153,191,0,1)), color-stop(60%,rgba(153,191,0,0.45)), color-stop(100%,rgba(255,255,255,0.01))); /* Chrome,Safari4+ */
 		background: -webkit-linear-gradient(left, rgba(255,255,255,0) 0%,rgba(153,191,0,1) 20%,rgba(153,191,0,1) 40%,rgba(153,191,0,0.45) 60%,rgba(255,255,255,0.01) 100%); /* Chrome10+,Safari5.1+ */
@@ -121,6 +143,16 @@ ul.single {
 	}
 }
 // expense&reports item
+.expense-image{
+	background-image: none!important;
+	img{
+		height:100px;
+	}
+}
+.view-image{
+	max-width: 100%;
+	max-height: 100%;
+}
 .item {
 	@include clearfix();
 	border-bottom: 1px solid $border-grey-dark;
@@ -222,7 +254,7 @@ ul.single {
 		&.no-padding {
 			@include clearfix();
 			.message {
-			padding:10px 30px 20px 30px;
+				padding:10px 30px 20px 30px;
 			}
 			.btn-full {
 				width: 100%;
@@ -253,10 +285,14 @@ ul.single {
 			margin: 0;
 		}
 		&.sign-out {
-			border:none;
+			border: none;
 			width: 100%;
-			padding-left: 20px;
-			color: $text-grey-dark;
+			color: #333;
+			padding: 20px;
+			float: left;
+			display: block;
+			width: 100%;
+			height: 74px;
 		}
 	}
 	.modal-select {
@@ -281,7 +317,65 @@ ul.single {
 			margin-top: 20px;
 		}
 	}
+	
+	/* items selection */
+
+	.items-selection-modal {
+		.loop {
+			background-image: url("../resources/images/loop.png");
+			display: block;
+			width: 36px;
+			height: 36px;
+			background-size: 100%;
+			position: absolute;
+			z-index: 1050;
+			margin-top: 10px;
+			margin-left: 15px;
+		}
+		height: 350px;
+		overflow: hidden;
+		span{
+			color:black;
+		}
+		form {
+			padding-bottom: 0px;
+			.form-group { 
+				@include border-radius(0);
+
+				input{
+					padding-left: 50px!important;
+					color:black!important;
+					margin: 2%;
+					width: 90%;
+					margin: 0 auto;
+				}
+			}
+		}
+
+		.icon-close-black {
+			float: right;
+			display: inline-block;
+			margin-top: -1%;
+		}
+		.row {
+			padding:20px;
+			span {
+				line-height:25px; 
+				display: inline-block;
+			}
+		}
+		.item-container {
+			border-color:$border-login;
+			max-height: 203px;
+			overflow: auto;
+		}
+		.green-hover:hover{ 
+			background-color:$bg-green;
+			color:#fff;
+		}
+	}
 }
+
 .btn-fixed {
 	height: 115px;
 	position: fixed;
@@ -426,6 +520,11 @@ form {
 				input[type="radio"]:checked ~ .icon {
 					display: block;
 				}
+				&.assign-select {
+					input {
+						height: 58px;
+					}
+				}
 			}
 			.select-custom {
 				width: 100%;
@@ -480,5 +579,5 @@ form {
 	}
 }
 .header-img {
-  content: url("../resources/images/plus.png");
+	content: url("../resources/images/plus.png");
 }
