@@ -3,23 +3,14 @@
 angular.module('Expenses')
     .controller('AddExpenseCtrl', ['$scope', '$location', 'addExpensesTitle', 'addExpensesButtonLabel', 'reportsSharingSvc',
         'expensesRepositorySvc', 'editSaveExpenseDialogSvc', 'getIdFromLocationSvc', 'reportExpensesRepositorySvc',
-<<<<<<< HEAD
-        'errorDialogSvc', 'errorMessageSvc', 'errorHandlerDefaultSvc', 'localStorageSvc', 'sessionToken', 'expenseSvc', 'cameraSvc', 
-        'invoiceImageRepositorySvc', 'imageFileShareSvc', 'expenseIdShareSvc', 'expensePostImageSvc',
-        'cameraSelectDialog',
-        function ($scope, $location, addExpensesTitle, addExpensesButtonLabel, reportsSharingSvc,
-          expensesRepositorySvc, editSaveExpenseDialogSvc, getIdFromLocationSvc, reportExpensesRepositorySvc,
-          errorDialogSvc, errorMessageSvc, errorHandlerDefaultSvc, localStorageSvc, sessionToken, expenseSvc, 
-          cameraSvc, invoiceImageRepositorySvc, imageFileShareSvc, expenseIdShareSvc, expensePostImageSvc,
-          cameraSelectDialog) {
-=======
         'errorDialogSvc', 'errorMessageSvc', 'errorHandlerDefaultSvc', 'localStorageSvc', 'sessionToken', 'expenseSvc',
-        'cameraSvc', 'invoiceImageRepositorySvc', 'validateNumbersSvc',
+        'cameraSvc', 'invoiceImageRepositorySvc', 'validateNumbersSvc', 'imageFileShareSvc', 'expenseIdShareSvc',
+        'expensePostImageSvc', 'cameraSelectDialog',
         function ($scope, $location, addExpensesTitle, addExpensesButtonLabel, reportsSharingSvc,
           expensesRepositorySvc, editSaveExpenseDialogSvc, getIdFromLocationSvc, reportExpensesRepositorySvc,
           errorDialogSvc, errorMessageSvc, errorHandlerDefaultSvc, localStorageSvc, sessionToken, expenseSvc, cameraSvc,
-          invoiceImageRepositorySvc, validateNumbersSvc) {
->>>>>>> b6c2254aaa1c9b4f3855fe3617360e7a59582694
+          invoiceImageRepositorySvc, validateNumbersSvc, imageFileShareSvc, expenseIdShareSvc, expensePostImageSvc, cameraSelectDialog) {
+
 
             $scope.title = addExpensesTitle;
             $scope.buttonLabel = addExpensesButtonLabel;
@@ -43,7 +34,7 @@ angular.module('Expenses')
 
                 function createExpenseSuccess(response, responseHeaders){
                     var headers = responseHeaders();
-                    // TODO remove when the service returns location
+
                     var createdExpenseId = getIdFromLocationSvc.getLastIdFromLocation(headers.location);
                     //push image tests
                     var fd = new FormData();
@@ -98,17 +89,5 @@ angular.module('Expenses')
                     $scope.showErrorMessage = true;
                 }
             };
-
-            function validateNumbers(expense){
-                var result = false;
-                var exchangeRate = parseInt(expense.exchangeRate, 10);
-                var originalAmount = parseInt(expense.originalAmount, 10);
-
-                if ((exchangeRate && exchangeRate > 0) && (originalAmount && originalAmount > 0)){
-                    result = true;
-                }
-
-                return result;
-            }
     }
 ]);
