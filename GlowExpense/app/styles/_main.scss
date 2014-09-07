@@ -95,7 +95,7 @@ table {
   text-decoration:underline;
 }
 .no-padding {
-  padding: 0;
+  padding: 0!important;
 }
 .bold {
   font-weight: bold;
@@ -109,6 +109,7 @@ table {
 .bottom20 {
   margin-bottom: 20px;
 }
+
 // BUTTONS
 .btn {
   @include btn();
@@ -212,9 +213,67 @@ a {
     background: $bg-green;
   }
 }
+// Mitko styles
+.html{
+  overflow: hidden;
+}
 
+.staticHeight{
+  height: 101%;
+  width:100%;
+}
 
+.Infinity{
+  min-height:1000px;
+}
+.center{
+  text-align: center;
+}
 
+/* view image */
+.showImg{
+  margin-top: 1%;
+}
+
+.error-message{
+  border: 1px solid $text-red;
+  color:$text-red;
+  background-color: lighten($text-red, 60%);
+  .message {
+    span {
+    padding-bottom: 10px;
+    display: block;
+    }
+  }
+}
+
+.lig-background{
+  background-color: black;
+  -moz-opacity: 0.7; /* makes the div transparent, so you have a cool overlay effect */
+  opacity: .70;
+  filter: alpha(opacity=70);
+  width: 101%;
+  position: absolute;
+}
+
+.transparent-background .modal-content{
+  background-color: black;
+  -moz-opacity: 0.7; /* makes the div transparent, so you have a cool overlay effect */
+  opacity: .70;
+  filter: alpha(opacity=70);
+  margin-top: -30%;
+}
+.underscored{
+  text-decoration:underline;
+}
+/* when there is img camera */
+.cameraFoot{
+  height: 100px;
+  width: 100px;
+  margin: auto;
+  background-size: 100% 100%;
+}
+// Mitko styles
 
 
 /*

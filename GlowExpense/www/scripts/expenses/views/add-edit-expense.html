@@ -41,12 +41,12 @@
                 </div>
                 <div class="form-item" ng-click="angular.isDefined(selectReport()) && selectReport()">
                     <label class="assign-select" for="report">
-                        <div ng-switch="angular.isDefined(report.description) === true">
+                        <div ng-switch="angular.isDefined(report.title) === true">
                             <div ng-switch-when="true">
-                                <input type="text" id="report" placeholder="Select a report" class="form-control" ng-model="report.description" disabled="disabled" required="">
+                                <input type="text" id="report" placeholder="Select a report" class="form-control" ng-model="report.title" disabled="disabled" required="">
                             </div>
                             <div ng-switch-when="false">
-                                <input type="text" id="report" placeholder="Select a report" class="form-control" ng-model="report.description" disabled="disabled">
+                                <input type="text" id="report" placeholder="Select a report" class="form-control" ng-model="report.title" disabled="disabled">
                             </div>
                         </div>
                     </label>
