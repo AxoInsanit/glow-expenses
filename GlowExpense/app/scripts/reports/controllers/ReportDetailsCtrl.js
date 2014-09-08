@@ -60,7 +60,7 @@ angular.module('Reports')
                 if ($scope.expenses.length === 0){
                     errorDialogSvc.open(emptyReportErrorMsg).then(function(){
                         return;
-                    })
+                    });
                 }
                 else {
 
@@ -77,7 +77,6 @@ angular.module('Reports')
             };
 
             $scope.getMoreExpenses = function(){
-                debugger;
                 var result = reportsSharingSvc.expenseSharingSvc.getNextFiveExpenses();
                 result.forEach(function(item){
                     $scope.expenses.push(item);
