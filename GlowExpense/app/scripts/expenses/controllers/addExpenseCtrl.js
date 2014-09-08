@@ -54,7 +54,9 @@ angular.module('Expenses')
                             $location.path(url + '/' + $scope.report.expenseReportId);
                         });
                     }
-                    expensePostImageSvc.saveImage().when(function(response){
+
+                    expensePostImageSvc.saveImage().then(function(response){
+
                         reportExpensesRepositorySvc.addExpensesToReport(
                         {
                             'token': localStorageSvc.getItem(sessionToken)

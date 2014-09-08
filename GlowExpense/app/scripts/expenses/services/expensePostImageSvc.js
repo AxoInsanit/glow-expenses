@@ -6,7 +6,7 @@ angular.module('Expenses').factory('expensePostImageSvc', ['$resource', 'baseUrl
         localStorageSvc, sessionToken, $q) {
         
         function saveImage(){
-            var deffered = $q.deffer;
+            var deffered = $q.defer();
             var fd = imageFileShareSvc.getFile();
             $http.post(baseUrlMockeyWeb + expensesUrl + imagesUrl +'?expenseId='+ expenseIdShareSvc.getId() + '&token=' + localStorageSvc.getItem(sessionToken),fd, {
                     transformRequest: angular.identity,
