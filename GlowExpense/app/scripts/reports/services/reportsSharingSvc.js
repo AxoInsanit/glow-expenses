@@ -48,7 +48,7 @@ angular.module('Reports')
 
             function reportsSuccess(response){
                 var responseArray = response.expenses;
-                debugger;
+                //debugger;
                 responseArray.sort(function(a,b) {
                     return new Date(b.creationDate) - new Date(a.creationDate);
                 });
@@ -78,7 +78,7 @@ angular.module('Reports')
             }
 
             var deferred = $q.defer();
-            debugger;
+            //debugger;
             if (reports.length === 0){
 
                 reportsRepositorySvc.getReports(
@@ -116,7 +116,7 @@ angular.module('Reports')
         function updateReport(report){
             reports.some(function(item){
                 if(item.expenseReportId === report.expenseReportId){
-                    debugger;
+                    //debugger;
                     item = report;
                     return true;
                 }
