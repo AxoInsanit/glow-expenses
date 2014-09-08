@@ -23,7 +23,7 @@ angular.module('Expenses')
 
             if (cameraSelectDialogListenerSvc.openCameraSelectDlg){
                 cameraSelectDialogListenerSvc.openCameraSelectDlg = false;
-                
+
                 cameraSelectDialog.open().then(function() {
                     cameraSvc.takePhoto().then(function(result){
                         $scope.imageSelectedPath = result;
