@@ -1,10 +1,10 @@
 'use strict';
 
 angular.module('Expenses')
-    .controller('ExpensesListCtrl', ['$scope', '$location', 'cameraSvc', 'expenseSvc',
-        'expenseSharingSvc', 'editModeNotificationChannelSvc', 'reportsSharingSvc', 'expensePath', 'reportsPath',
-        function ($scope, $location, cameraSvc, expenseSvc, expenseSharingSvc,
-                  editModeNotificationChannelSvc, reportsSharingSvc, expensePath, reportsPath)  {
+    .controller('ExpensesListCtrl', ['$scope', '$location', 'cameraSvc', 'expenseSvc', 'expenseSharingSvc',
+        'editModeNotificationChannelSvc', 'reportsSharingSvc', 'expensePath', 'reportsPath', 'cameraSelectDialogListenerSvc',
+        function ($scope, $location, cameraSvc, expenseSvc, expenseSharingSvc, editModeNotificationChannelSvc,
+            reportsSharingSvc, expensePath, reportsPath, cameraSelectDialogListenerSvc)  {
 
             $scope.expenses = [];
 
@@ -28,10 +28,8 @@ angular.module('Expenses')
 
             $scope.takePhoto = function(expense) {
                 if(!$scope.isEditMode){
-                    cameraSvc.takePhoto().then(function(){
-                        // TODO get the type from the image or make constants with the types
-                        expense.imageType = 'jpg';
-                    });
+                    cameraSelectDialogListenerSvc.openCameraSelectDlg = true;
+                    $location.path(expensePath + '/' + expense.expenseId);
                 }
             };
 

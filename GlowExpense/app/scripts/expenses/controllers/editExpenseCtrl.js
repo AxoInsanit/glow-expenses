@@ -6,13 +6,13 @@ angular.module('Expenses')
         'expenseViewImageSvc', 'reportsSharingSvc', 'reportEntityName', 'filterReportByStateSvc',
         'itemsSelectionDialogSvc', 'reportExpensesRepositorySvc', 'localStorageSvc', 'sessionToken', 'reportDetailsPath',
         'expensesPath', 'invoiceImageRepositorySvc', 'errorHandlerDefaultSvc', 'getIdFromLocationSvc', 'expenseSvc',
-        'baseUrlMockeyWeb', 'validateNumbersSvc', 'cameraSelectDialog', 'expenseIdShareSvc',
+        'baseUrlMockeyWeb', 'validateNumbersSvc', 'cameraSelectDialog', 'expenseIdShareSvc', 'cameraSelectDialogListenerSvc',
         function ($scope,  $location, editExpensesTitle, editExpensesButtonLabel, expenseSharingSvc, cameraSvc,
                     reportsRepositorySvc, currencySelectDialogSvc, expensesRepositorySvc, editSaveExpenseDialogSvc,
                     expenseViewImageSvc, reportsSharingSvc, reportEntityName, filterReportByStateSvc,
                     itemsSelectionDialogSvc, reportExpensesRepositorySvc, localStorageSvc, sessionToken, reportDetailsPath,
                     expensesPath, invoiceImageRepositorySvc, errorHandlerDefaultSvc, getIdFromLocationSvc, expenseSvc,
-                    baseUrlMockeyWeb, validateNumbersSvc, cameraSelectDialog, expenseIdShareSvc) {
+                    baseUrlMockeyWeb, validateNumbersSvc, cameraSelectDialog, expenseIdShareSvc, cameraSelectDialogListenerSvc) {
 
             $scope.title = editExpensesTitle;
             $scope.buttonLabel = editExpensesButtonLabel;
@@ -20,6 +20,16 @@ angular.module('Expenses')
             $scope.expenseId = getIdFromLocationSvc.getLastIdFromLocation($location.path());
             $scope.token = localStorageSvc.getItem(sessionToken);
             $scope.path = baseUrlMockeyWeb;
+
+            if (cameraSelectDialogListenerSvc.openCameraSelectDlg){
+                cameraSelectDialogListenerSvc.openCameraSelectDlg = false;
+                
+                cameraSelectDialog.open().then(function() {
+                    cameraSvc.takePhoto().then(function(result){
+                        $scope.imageSelectedPath = result;
+                    });
+                });
+            }
 
             var expenseId = getIdFromLocationSvc.getLastIdFromLocation($location.path());
             //debugger;
@@ -196,7 +206,7 @@ angular.module('Expenses')
 
             $scope.takePhoto = function() {
                 cameraSelectDialog.open().then(function() {
-                    cameraSvc.takePhoto().when(function(result){
+                    cameraSvc.takePhoto().then(function(result){
                         $scope.imageSelectedPath = result;
                     });
                 });

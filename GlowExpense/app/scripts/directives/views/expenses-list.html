@@ -1,6 +1,6 @@
 <div class="nav font15">
     <div class="Infinity" infinite-scroll="getMoreExpenses()">
-        <article class="ready expense-cont" ng-repeat="expense in expenses | orderBy:sort : true track by $index" get-focus>
+        <article class="ready expense-cont" ng-repeat="expense in expenses | orderBy:sort : true track by $index">
             <section class="item" ng-click="editExpense(expense, $index)" ng-class="{editMode: isEditMode}" >
                 <div class="left-part">
                     <div class="remove">
