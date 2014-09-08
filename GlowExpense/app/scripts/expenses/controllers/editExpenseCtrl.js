@@ -196,7 +196,7 @@ angular.module('Expenses')
 
             $scope.takePhoto = function() {
                 cameraSelectDialog.open().then(function() {
-                    cameraSvc.takePhoto().then(function(result){
+                    cameraSvc.takePhoto().when(function(result){
                         $scope.imageSelectedPath = result;
                     });
                 });
