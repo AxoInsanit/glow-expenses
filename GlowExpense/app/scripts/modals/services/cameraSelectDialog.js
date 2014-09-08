@@ -4,22 +4,20 @@ angular.module('Modals').factory('cameraSelectDialog', ['$modal', 'cameraSvc',  
     cameraSvc){
 
        
-        function open(entityName) {
+        function open() {
 
             var modalInstance = $modal.open({
                 templateUrl: 'scripts/modals/views/camera-select-dialog.html',
                 controller: ['$scope', '$modalInstance', function($scope, $modalInstance) {
 
-                    $scope.entityName = entityName;
-
                     $scope.camera = function() {
                         cameraSvc.setSource('camera');
-                        $modalInstance.dismiss('cancel');
+                        $modalInstance.close('true');
                     };
 
                     $scope.galery = function() {
                         cameraSvc.setSource('library');
-                        $modalInstance.dismiss('cancel');
+                        $modalInstance.close('true');
                     };
                 }]
             });
