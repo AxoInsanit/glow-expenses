@@ -1,5 +1,18 @@
 'use strict';
 
+var isSafari = /constructor/i.test(window.HTMLElement);
+if (isSafari) {
+    var file = location.pathname.split( '/' ).pop();
+
+    var link = document.createElement( 'link' );
+    link.href = file.substr( 0, file.lastIndexOf( '.' ) ) + 'styles/safari.css';
+    link.type = 'text/css';
+    link.rel = 'stylesheet';
+    link.media = 'screen,print';
+
+    document.getElementsByTagName( 'head' )[0].appendChild( link );
+}
+
 var _mainModules = [
     'Services'
   //  ,'Filters'

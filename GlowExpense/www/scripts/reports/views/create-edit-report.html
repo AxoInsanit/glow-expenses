@@ -51,10 +51,10 @@
                     <div class="select-custom" ng-click="selectProject(report.project)">
                         <div ng-switch="report.expenseReportId > 0">
                             <div ng-switch-when="true">
-                                <input type="text" placeholder="Project Name" class="form-control" ng-model="report.project.name">
+                                <input type="text" placeholder="Project Name" class="form-control" ng-model="report.project.name" disabled="disabled">
                             </div>
                             <div ng-switch-when="false">
-                                <input type="text" placeholder="Project Name" class="form-control" ng-model="report.project.name" required="">
+                                <input type="text" placeholder="Project Name" class="form-control" ng-model="report.project.name" required="" disabled="disabled">
                             </div>
                         </div>
                     </div>

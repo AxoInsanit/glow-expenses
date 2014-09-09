@@ -54,11 +54,11 @@
                         <div ng-switch="report.expenseReportId > 0">
                             <div ng-switch-when="true">
                                 <input type="text" placeholder="Project Name" class="form-control"
-                                       ng-model="report.project.name">
+                                       ng-model="report.project.name" disabled>
                             </div>
                             <div ng-switch-when="false">
                                 <input type="text" placeholder="Project Name" class="form-control"
-                                       ng-model="report.project.name" required>
+                                       ng-model="report.project.name" required  disabled>
                             </div>
                         </div>
                     </div>

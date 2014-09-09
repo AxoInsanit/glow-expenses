@@ -114,19 +114,19 @@ angular.module('Reports')
         }
 
         function updateReport(report){
-            debugger;
+            //debugger;
             reports.some(function(item){
-                debugger;
+                //debugger;
                 if(item.expenseReportId === report.expenseReportId){
 
                     item.description = report.description;
                     item.title = report.title;
                     item.entityId = report.entityId;
-                    debugger;
+                    //debugger;
                     return true;
                 }
             });
-            debugger;
+            //debugger;
         }
 
         function getReportById(reportId){

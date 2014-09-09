@@ -14,16 +14,14 @@ angular.module('Expenses').factory('expensePostImageSvc', ['$resource', 'baseUrl
                 })
                 .success(function(){
                     deffered.resolve();
-                    alert('Happens');
                 })
                 .error(function(){
                     deffered.reject();
-                    alert('Sry');
                 });
                 return deffered.promise;
             }
         return {
             saveImage: saveImage
-        }
+        };
     }
 ]);
