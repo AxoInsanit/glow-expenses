@@ -17,6 +17,7 @@ angular.module('Reports')
             $scope.reports = [];
 
             reportsSharingSvc.getReports().then(function(result){
+                debugger;
                 $scope.reports = result;
             });
 

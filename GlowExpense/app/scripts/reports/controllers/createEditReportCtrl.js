@@ -40,8 +40,10 @@ angular.module('Reports')
             $scope.save = function(form, report){
 
                 function createReportSuccess(){
+                    debugger;
                     reportsSharingSvc.resetReports();
                     reportsSharingSvc.expenseSharingSvc.addReport();
+                    debugger;
                     $location.path(reportsPath);
                 }
 
@@ -89,7 +91,7 @@ angular.module('Reports')
                             'owner': localStorageSvc.getItem('userName'),
                             'expenseIds': expenseIds
                         };
-
+                        debugger;
                         reportsRepositorySvc.createReport(
                             {
                                 'token': localStorageSvc.getItem(sessionToken)
