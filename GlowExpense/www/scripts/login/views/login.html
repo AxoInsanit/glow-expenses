@@ -1,4 +1,4 @@
-<div class="login">
+<div class="login" id="login-page">
     <div class="top-part clearfix">
         <div class="logo">
             <h1>glow</h1>
@@ -26,3 +26,8 @@
         </div>
     </div>
 </div>
+<script type="text/javascript">
+    var loginPage = document.getElementById('login-page');
+    var docHeight = window.screen.height;
+    loginPage.style.height = docHeight + "px";
+</script>

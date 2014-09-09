@@ -53,7 +53,7 @@ angular.module('Expenses')
                     // TODO : WHEN WE REMOVE THE COMMENT WE NEED TO INCLUDE THE FUNCTION IN THE SUCCESS
 
                     function addExpenseToReportSuccess(){
-                        debugger;
+
                         expense.expenseId = createdExpenseId;
                         reportsSharingSvc.expenseSharingSvc.addExpense(expense, $scope.report.expenseReportId);
 
@@ -61,7 +61,7 @@ angular.module('Expenses')
                             $location.path(url + '/' + $scope.report.expenseReportId);
                         });
                     }
-debugger;
+
                     reportExpensesRepositorySvc.addExpensesToReport(
 
                         {
@@ -82,7 +82,7 @@ debugger;
                     var newExpense = expenseSvc.create(expense);
 
                     newExpense.originalCurrency = 1;
-                    debugger;
+
                     expensesRepositorySvc.createExpense(
 
                         { 'token': localStorageSvc.getItem(sessionToken) },
