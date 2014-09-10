@@ -22,6 +22,7 @@ angular.module('Expenses').factory('expenseSharingSvc', ['$q', 'expensesReposito
         var expenseIdsReadyToBeAssigned = [];
 
         function getNextFiveExpenses(reportId){
+            debugger;
             var reportKey = reportId || 0;
             reportLastShownExpenseMapper[reportKey] = reportLastShownExpenseMapper[reportKey] || 0;
 
@@ -49,10 +50,12 @@ angular.module('Expenses').factory('expenseSharingSvc', ['$q', 'expensesReposito
 
         // lazy load expenses on demand
         function getExpenses(reportId){
+            debugger;
             var reportKey = reportId || 0;
             reportExpensesMapper[reportKey] = reportExpensesMapper[reportKey] || [];
 
             function getExpensesSuccess(response){
+                debugger;
                 response.expenses.forEach(function(item){
                     item.title = item.description;
                     var expense = expenseSvc.create(item);
