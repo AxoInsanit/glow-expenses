@@ -1,9 +1,9 @@
 'use strict';
 
 angular.module('Expenses').factory('expenseSharingSvc', ['$q', 'expensesRepositorySvc', 'errorHandlerDefaultSvc',
-    'localStorageSvc', 'sessionToken', 'expenseSvc',
+    'localStorageSvc', 'sessionToken', 'expenseSvc', 'infiniteScrollEnabled',
 
-    function($q, expensesRepositorySvc, errorHandlerDefaultSvc, localStorageSvc, sessionToken, expenseSvc) {
+    function($q, expensesRepositorySvc, errorHandlerDefaultSvc, localStorageSvc, sessionToken, expenseSvc, infiniteScrollEnabled) {
 
         var expensesShownPerPage = 5;
 
@@ -22,7 +22,7 @@ angular.module('Expenses').factory('expenseSharingSvc', ['$q', 'expensesReposito
         var expenseIdsReadyToBeAssigned = [];
 
         function getNextFiveExpenses(reportId){
-            debugger;
+
             var reportKey = reportId || 0;
             reportLastShownExpenseMapper[reportKey] = reportLastShownExpenseMapper[reportKey] || 0;
 
@@ -50,22 +50,25 @@ angular.module('Expenses').factory('expenseSharingSvc', ['$q', 'expensesReposito
 
         // lazy load expenses on demand
         function getExpenses(reportId){
-            debugger;
+
             var reportKey = reportId || 0;
             reportExpensesMapper[reportKey] = reportExpensesMapper[reportKey] || [];
 
             function getExpensesSuccess(response){
-                debugger;
+
                 response.expenses.forEach(function(item){
                     item.title = item.description;
                     var expense = expenseSvc.create(item);
                     reportExpensesMapper[reportKey].push(expense);
                 });
 
-                var result = getNextFiveExpenses(reportId);
-                deferred.resolve(result);
-
-               // deferred.resolve(reportExpensesMapper[reportKey]);
+                if (infiniteScrollEnabled){
+                    var result = getNextFiveExpenses(reportId);
+                    deferred.resolve(result);
+                }
+                else {
+                    deferred.resolve(reportExpensesMapper[reportKey]);
+                }
             }
 
             var deferred = $q.defer();
@@ -82,19 +85,21 @@ angular.module('Expenses').factory('expenseSharingSvc', ['$q', 'expensesReposito
                 );
             }
             else {
-                var reportExpensesMapperCopy = angular.copy(reportExpensesMapper[reportKey]);
-                var result = null;
-                if (reportLastShownExpenseMapper[reportKey] && reportLastShownExpenseMapper[reportKey] !== 0){
-                    result = reportExpensesMapperCopy.splice(0, reportLastShownExpenseMapper[reportKey]);
-                    deferred.resolve(result);
+                if (infiniteScrollEnabled){
+                    var reportExpensesMapperCopy = angular.copy(reportExpensesMapper[reportKey]);
+                    var result = null;
+                    if (reportLastShownExpenseMapper[reportKey] && reportLastShownExpenseMapper[reportKey] !== 0){
+                        result = reportExpensesMapperCopy.splice(0, reportLastShownExpenseMapper[reportKey]);
+                        deferred.resolve(result);
+                    }
+                    else {
+                        result = reportExpensesMapperCopy;
+                        deferred.resolve(result);
+                    }
                 }
                 else {
-                    result = reportExpensesMapperCopy;
-                    deferred.resolve(result);
+                    deferred.resolve(reportExpensesMapper[reportKey]);
                 }
-
-               // deferred.resolve(result);
-                //deferred.resolve(reportExpensesMapper[reportKey]);
             }
 
             return deferred.promise;

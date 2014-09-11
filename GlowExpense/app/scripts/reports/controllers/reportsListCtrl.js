@@ -4,9 +4,10 @@ angular.module('Reports')
     .controller('ReportsListCtrl', ['$scope', '$location', 'reportsSharingSvc',
         'editModeNotificationChannelSvc', 'reportsRepositorySvc', 'filterReportByStateSvc', 'entityName',
         'confirmDeleteDialogSvc', 'reportDetailsPath', 'sessionToken', 'errorHandlerDefaultSvc', 'localStorageSvc',
+        'infiniteScrollEnabled',
             function ($scope, $location, reportsSharingSvc, editModeNotificationChannelSvc,
                       reportsRepositorySvc, filterReportByStateSvc, entityName, confirmDeleteDialogSvc,
-                      reportDetailsPath, sessionToken, errorHandlerDefaultSvc, localStorageSvc)  {
+                      reportDetailsPath, sessionToken, errorHandlerDefaultSvc, localStorageSvc, infiniteScrollEnabled)  {
 
             $scope.sort = function(item) {
                 return new Date(item.creationDate);
@@ -75,6 +76,11 @@ angular.module('Reports')
             };
 
             $scope.getMoreReports = function(){
+
+                if (!infiniteScrollEnabled){
+                    return;
+                }
+
                 var result = reportsSharingSvc.getNextFiveReports();
                 $scope.reports = result;
             };

@@ -3,8 +3,9 @@
 angular.module('Expenses')
     .controller('ExpensesListCtrl', ['$scope', '$location', 'cameraSvc', 'expenseSvc', 'expenseSharingSvc',
         'editModeNotificationChannelSvc', 'reportsSharingSvc', 'expensePath', 'reportsPath', 'cameraSelectDialogListenerSvc',
+        'infiniteScrollEnabled',
         function ($scope, $location, cameraSvc, expenseSvc, expenseSharingSvc, editModeNotificationChannelSvc,
-            reportsSharingSvc, expensePath, reportsPath, cameraSelectDialogListenerSvc)  {
+            reportsSharingSvc, expensePath, reportsPath, cameraSelectDialogListenerSvc, infiniteScrollEnabled)  {
 
             $scope.expenses = [];
 
@@ -42,7 +43,10 @@ angular.module('Expenses')
             };
 
             $scope.getMoreExpenses = function(){
-                debugger;
+
+                if (!infiniteScrollEnabled){
+                    return;
+                }
                 var result = expenseSharingSvc.getNextFiveExpenses();
                 result.forEach(function(item){
                     $scope.expenses.push(item);

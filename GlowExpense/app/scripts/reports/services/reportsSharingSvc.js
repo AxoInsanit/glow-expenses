@@ -2,8 +2,9 @@
 
 angular.module('Reports')
     .factory('reportsSharingSvc', ['$q', 'reportsRepositorySvc', 'localStorageSvc', 'sessionToken',
-        'errorHandlerDefaultSvc', 'expenseSharingSvc',
-        function($q, reportsRepositorySvc, localStorageSvc, sessionToken, errorHandlerDefaultSvc, expenseSharingSvc) {
+        'errorHandlerDefaultSvc', 'expenseSharingSvc', 'infiniteScrollEnabled',
+        function($q, reportsRepositorySvc, localStorageSvc, sessionToken, errorHandlerDefaultSvc, expenseSharingSvc,
+                 infiniteScrollEnabled) {
 
         var reports = [];
 
@@ -48,7 +49,6 @@ angular.module('Reports')
 
             function reportsSuccess(response){
                 var responseArray = response.expenses;
-                //debugger;
                 responseArray.sort(function(a,b) {
                     return new Date(b.creationDate) - new Date(a.creationDate);
                 });
@@ -66,19 +66,23 @@ angular.module('Reports')
                     reports.push(item);
                 });
 
-                if (lastShownReport !== 0){
-                    var reportsMapperCopy = angular.copy(reports);
-                    result = reportsMapperCopy.splice(0, lastShownReport);
+                if (infiniteScrollEnabled){
+                    if (lastShownReport !== 0){
+                        var reportsMapperCopy = angular.copy(reports);
+                        result = reportsMapperCopy.splice(0, lastShownReport);
+                    }
+                    else {
+                        result = getNextFiveReports();
+                    }
+
+                    deferred.resolve(result);
                 }
                 else {
-                    result = getNextFiveReports();
+                    deferred.resolve(reports);
                 }
-
-                deferred.resolve(result);
             }
 
             var deferred = $q.defer();
-            //debugger;
             if (reports.length === 0){
 
                 reportsRepositorySvc.getReports(
@@ -88,10 +92,16 @@ angular.module('Reports')
                 );
             }
             else {
-                var reportsMapperCopy = angular.copy(reports);
+                if(infiniteScrollEnabled){
+                    var reportsMapperCopy = angular.copy(reports);
 
-                var resultReports = reportsMapperCopy.splice(0, lastShownReport);
-                deferred.resolve(resultReports);
+                    var resultReports = reportsMapperCopy.splice(0, lastShownReport);
+                    deferred.resolve(resultReports);
+                }
+                else {
+                    deferred.resolve(reports);
+                }
+
             }
 
             return deferred.promise;
@@ -114,19 +124,15 @@ angular.module('Reports')
         }
 
         function updateReport(report){
-            //debugger;
             reports.some(function(item){
-                //debugger;
                 if(item.expenseReportId === report.expenseReportId){
 
                     item.description = report.description;
                     item.title = report.title;
                     item.entityId = report.entityId;
-                    //debugger;
                     return true;
                 }
             });
-            //debugger;
         }
 
         function getReportById(reportId){
