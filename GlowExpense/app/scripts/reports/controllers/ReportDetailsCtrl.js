@@ -20,9 +20,7 @@ angular.module('Reports')
             var reportId = getIdFromLocationSvc.getLastIdFromLocation($location.path());
             $scope.report =reportsSharingSvc.getReportById(reportId);
 
-            debugger;
             reportsSharingSvc.expenseSharingSvc.getExpenses($scope.report.expenseReportId).then(function(result) {
-                debugger;
                 $scope.expenses = result;
             });
 

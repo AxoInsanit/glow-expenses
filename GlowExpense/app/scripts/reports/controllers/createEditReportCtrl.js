@@ -71,7 +71,6 @@ angular.module('Reports')
                     expenseIds = expenseSharingSvc.getExpenseIdsForReportAssign();
 
                     if (reportId) {
-                        debugger;
                         var reportViewModel = {
                             'expenseReportId': report.expenseReportId,
                             'description': report.title,

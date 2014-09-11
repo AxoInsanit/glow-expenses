@@ -69,6 +69,7 @@ angular.module('Expenses')
 //                    fd.append('file', $scope.imageSelectedPath);
 //                    expensePostImageSvc.postImages(
 //                        {
+//                            'expenseId': createdExpenseId,
 //                            'token': localStorageSvc.getItem(sessionToken)
 //                        },
 //                        $scope.imageSelectedPath,

@@ -80,7 +80,6 @@ angular.module('Expenses')
             }
 
             $scope.save = function(form, expense) {
-                debugger;
                 var reportObj = {
                     'expenseReportId': $scope.report.expenseReportId,
                     'expenseIds': [$scope.expense.expenseId]
@@ -131,7 +130,6 @@ angular.module('Expenses')
                         {
                             // it is assigned go to report details
                             if ($scope.report.description){
-                                debugger;
                                 updateExpenseSuccess();
                             }
                             // it is unassigned go to expenses list
@@ -165,6 +163,7 @@ angular.module('Expenses')
 //                    fd.append('file', $scope.imageSelectedPath);
 //                    expensePostImageSvc.postImages(
 //                        {
+//                            'expenseId': $scope.expense.expenseId,
 //                            'token': localStorageSvc.getItem(sessionToken)
 //                        },
 //                        $scope.imageSelectedPath,

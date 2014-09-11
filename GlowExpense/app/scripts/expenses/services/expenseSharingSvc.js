@@ -176,7 +176,6 @@ angular.module('Expenses').factory('expenseSharingSvc', ['$q', 'expensesReposito
 
             reportExpensesMapper[0].map(function(item, index){
                 if (item.imageType !== 'void'){
-                    //debugger;
                     reportExpensesMapper[0].splice(index, 1);
                     return true;
                 }
