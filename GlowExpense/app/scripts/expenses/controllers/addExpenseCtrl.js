@@ -36,21 +36,6 @@ angular.module('Expenses')
                     var headers = responseHeaders();
 
                     var createdExpenseId = getIdFromLocationSvc.getLastIdFromLocation(headers.location);
-                    //push image tests
-                    var fd = new FormData();
-                    fd.append('file', $scope.imageSelectedPath);
-                    //post image service
-                    debugger;
-                    expensePostImageSvc.postImages(
-                        {
-                            'token': localStorageSvc.getItem(sessionToken)
-                        },
-                        $scope.imageSelectedPath,
-                        addExpenseToReportSuccess,
-                        errorHandlerDefaultSvc.handleError
-                    );
-
-                    // TODO : WHEN WE REMOVE THE COMMENT WE NEED TO INCLUDE THE FUNCTION IN THE SUCCESS
 
                     function addExpenseToReportSuccess(){
 
@@ -62,27 +47,43 @@ angular.module('Expenses')
                         });
                     }
 
-                    reportExpensesRepositorySvc.addExpensesToReport(
+                    function postImageSuccess(){
+                        reportExpensesRepositorySvc.addExpensesToReport(
 
-                        {
-                            'token': localStorageSvc.getItem(sessionToken)
-                        },
-                        {
-                            'expenseReportId': $scope.report.expenseReportId,
-                            'expenseIds': [createdExpenseId]
-                        },
-                        addExpenseToReportSuccess,
-                        errorHandlerDefaultSvc.handleError
-                    );
+                            {
+                                'token': localStorageSvc.getItem(sessionToken)
+                            },
+                            {
+                                'expenseReportId': $scope.report.expenseReportId,
+                                'expenseIds': [createdExpenseId]
+                            },
+                            addExpenseToReportSuccess,
+                            errorHandlerDefaultSvc.handleError
+                        );
+                    }
+                    // TODO remove when tested with real services with working upload image
+                    postImageSuccess();
+
+                    // TODO uncomment when tested with real services with working upload image
+//                    var fd = new FormData();
+//                    fd.append('file', $scope.imageSelectedPath);
+//                    expensePostImageSvc.postImages(
+//                        {
+//                            'token': localStorageSvc.getItem(sessionToken)
+//                        },
+//                        $scope.imageSelectedPath,
+//                        postImageSuccess,
+//                        errorHandlerDefaultSvc.handleError
+//                    );
                 }
 
-                if(form.$valid && validateNumbersSvc.validate(expense))
+                // TODO uncomment when tested with real services with working upload image
+                if(form.$valid && validateNumbersSvc.validate(expense)) // && $scope.imageSelectedPath)
                 {
                     expense.date = new Date();
+
                     var newExpense = expenseSvc.create(expense);
-
-                    newExpense.originalCurrency = 1;
-
+                    newExpense.originalCurrency =  expense.currency.id;
                     expensesRepositorySvc.createExpense(
 
                         { 'token': localStorageSvc.getItem(sessionToken) },

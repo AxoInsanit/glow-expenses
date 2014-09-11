@@ -7,12 +7,14 @@ angular.module('Expenses')
         'itemsSelectionDialogSvc', 'reportExpensesRepositorySvc', 'localStorageSvc', 'sessionToken', 'reportDetailsPath',
         'expensesPath', 'invoiceImageRepositorySvc', 'errorHandlerDefaultSvc', 'getIdFromLocationSvc', 'expenseSvc',
         'baseUrlMockeyWeb', 'validateNumbersSvc', 'cameraSelectDialog', 'expenseIdShareSvc', 'cameraSelectDialogListenerSvc',
+        'expensePostImageSvc',
         function ($scope,  $location, editExpensesTitle, editExpensesButtonLabel, expenseSharingSvc, cameraSvc,
                     reportsRepositorySvc, currencySelectDialogSvc, expensesRepositorySvc, editSaveExpenseDialogSvc,
                     expenseViewImageSvc, reportsSharingSvc, reportEntityName, filterReportByStateSvc,
                     itemsSelectionDialogSvc, reportExpensesRepositorySvc, localStorageSvc, sessionToken, reportDetailsPath,
                     expensesPath, invoiceImageRepositorySvc, errorHandlerDefaultSvc, getIdFromLocationSvc, expenseSvc,
-                    baseUrlMockeyWeb, validateNumbersSvc, cameraSelectDialog, expenseIdShareSvc, cameraSelectDialogListenerSvc) {
+                    baseUrlMockeyWeb, validateNumbersSvc, cameraSelectDialog, expenseIdShareSvc, cameraSelectDialogListenerSvc,
+            expensePostImageSvc) {
 
             $scope.title = editExpensesTitle;
             $scope.buttonLabel = editExpensesButtonLabel;
@@ -32,7 +34,7 @@ angular.module('Expenses')
             }
 
             var expenseId = getIdFromLocationSvc.getLastIdFromLocation($location.path());
-            //debugger;
+
             $scope.expense = angular.copy(expenseSharingSvc.getExpenseById(expenseId, $scope.reportId));
 
             var  originalExpense = angular.copy($scope.expense);
@@ -62,7 +64,6 @@ angular.module('Expenses')
             }
 
             function addExpenseSuccess(){
-                //debugger;
                 reportsSharingSvc.expenseSharingSvc.addExpense($scope.expense, $scope.report.expenseReportId);
                 $location.path(reportDetailsPath + '/' + $scope.report.expenseReportId);
             }
@@ -106,7 +107,6 @@ angular.module('Expenses')
 
                     // expense was just assigned to a report
                     if (!lastSelectedReport && $scope.report.description){
-                        //debugger;
                         reportExpensesRepositorySvc.addExpensesToReport(
                             { 'token': localStorageSvc.getItem(sessionToken) },
                             reportObj,
@@ -140,10 +140,6 @@ angular.module('Expenses')
                             }
                         }
                     }
-
-//                    editSaveExpenseDialogSvc.openSuccessEditExpenseDialog($scope.report.description).then(function(url){
-//                        $location.path(url);
-//                    });
                 }
 
                 function saveExpenseError(errorResponse){
@@ -152,34 +148,32 @@ angular.module('Expenses')
                     });
                 }
 
-                if(form.$valid && validateNumbersSvc.validate(expense))
-                {
+                function postImageSuccess(){
                     expense.date = $scope.expense.date;
 
-                    // TODO: UNCOMENT THIS WHEN POST IMAGE LOGIC IS READY
-                    // var fd = new FormData();
-                    // fd.append('file', $scope.imagePath);
-                    // //post image service
-
-                    // $http.post(baseUrlMockeyWeb + expensesUrl + imagesUrl +'?expenseId='+ createdExpenseId + '&token=' + localStorageSvc.getItem(sessionToken),fd, {
-                    //         transformRequest: angular.identity,
-                    //         headers: {'Content-Type': undefined}
-                    //     })
-                    //     .success(function(){
-                    //         alert('Happens');
-                    //         var newExpense = expenseSvc.create(expense);
-                    //         var paramsObj = { 'token': localStorageSvc.getItem(sessionToken) };
-                    //         expensesRepositorySvc.saveExpense(paramsObj, newExpense, saveExpenseSuccess, saveExpenseError);
-                    //     })
-                    //     .error(function(){
-                    //         alert('Sry');
-                    //     });
-
                     var newExpense = expenseSvc.create(expense);
-                    debugger;
                     var paramsObj = { 'token': localStorageSvc.getItem(sessionToken) };
 
                     expensesRepositorySvc.saveExpense(paramsObj, newExpense, saveExpenseSuccess, saveExpenseError);
+                }
+
+
+                if(form.$valid && validateNumbersSvc.validate(expense))
+                {
+                    // TODO uncomment when tested with real services with working upload image
+//                    var fd = new FormData();
+//                    fd.append('file', $scope.imageSelectedPath);
+//                    expensePostImageSvc.postImages(
+//                        {
+//                            'token': localStorageSvc.getItem(sessionToken)
+//                        },
+//                        $scope.imageSelectedPath,
+//                        postImageSuccess,
+//                        errorHandlerDefaultSvc.handleError
+//                    );
+
+                    // TODO remove when tested with real services with working upload image
+                    postImageSuccess();
                 }
                 else
                 {
