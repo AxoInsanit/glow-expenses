@@ -5,23 +5,36 @@ angular.module('Expenses').factory('expensePostImageSvc', ['$resource', 'baseUrl
     function($resource, baseUrlMockeyWeb, imagesUrl, expensesUrl, $http, imageFileShareSvc, expenseIdShareSvc,
         localStorageSvc, sessionToken, $q) {
         
-        function saveImage(){
-            var deffered = $q.defer();
-            var fd = imageFileShareSvc.getFile();
-            $http.post(baseUrlMockeyWeb + expensesUrl + imagesUrl +'?expenseId='+ expenseIdShareSvc.getId() + '&token=' + localStorageSvc.getItem(sessionToken),fd, {
-                    transformRequest: angular.identity,
-                    headers: {'Content-Type': undefined}
-                })
-                .success(function(){
-                    deffered.resolve();
-                })
-                .error(function(){
-                    deffered.reject();
-                });
-                return deffered.promise;
+        return $resource(baseUrlMockeyWeb + expensesUrl + imagesUrl +'?expenseId='+ expenseIdShareSvc.getId() + '?token=:token',
+            {
+                token: 'token'
+            },
+            {
+                'postImages' : {
+                    'method': 'POST',
+                    transformRequest : function(data){
+                        if (data === undefined)
+                          return data;
+
+                        var fd = new FormData();
+                        angular.forEach(data, function(value, key) {
+                          if (value instanceof FileList) {
+                            if (value.length == 1) {
+                              fd.append(key, value[0]);
+                            } else {
+                              angular.forEach(value, function(file, index) {
+                                fd.append(key + '_' + index, file);
+                              });
+                            }
+                          } else {
+                            fd.append(key, value);
+                          }
+                        });
+
+                        return fd;
+                    }
+                }
             }
-        return {
-            saveImage: saveImage
-        };
+        );
     }
 ]);

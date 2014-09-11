@@ -24,7 +24,7 @@ angular.module('Reports')
 
             if (reportId){
                 $scope.report = angular.copy(reportsSharingSvc.getReportById(reportId));
-                //debugger;
+                $scope.isProjectSelected = $scope.report.entityId > 0;
                 $scope.title = editReportTitle;
                 $scope.buttonLabel = editReportBtnLabel;
 
@@ -36,6 +36,18 @@ angular.module('Reports')
                 $scope.title = createReportTitle;
                 $scope.buttonLabel = createReportBtnLabel;
             }
+
+            $scope.select = function(choise){
+                if(choise==='allProjects')
+                {
+                    $scope.isProjectSelected = false;
+                }
+                else
+                {
+                    $scope.isProjectSelected = true;
+                }
+
+            };
 
             $scope.save = function(form, report){
 
@@ -63,7 +75,7 @@ angular.module('Reports')
                     expenseIds = expenseSharingSvc.getExpenseIdsForReportAssign();
 
                     if (reportId) {
-
+                        debugger;
                         var reportViewModel = {
                             'expenseReportId': report.expenseReportId,
                             'description': report.title,
