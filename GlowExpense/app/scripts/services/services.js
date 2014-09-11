@@ -6,7 +6,7 @@ angular.module('Services', [])
     .constant('reportAssigned', 'REPORT_ASSIGNED')
     .constant('expenseEdited', 'EXPENSE_EDITED')
 
-    .constant('unauthorized', 'Wrong username or password!')
+    .constant('unauthorized', 'The user is not authorized!')
     .constant('badRequest', 'Invalid parameters!')
     .constant('notFound', 'The requested resource is not available!')
     .constant('generalError', 'An error has occured!');
