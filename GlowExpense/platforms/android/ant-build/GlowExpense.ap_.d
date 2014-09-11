@@ -913,7 +913,7 @@
 /Users/dimitarjilanov/Documents/GlowMobile/GlowExpense/platforms/android/assets/www/resources/images/low-res/signout.png \
 /Users/dimitarjilanov/Documents/GlowMobile/GlowExpense/platforms/android/assets/www/resources/images/low-res/sprite-legend.jpg \
 /Users/dimitarjilanov/Documents/GlowMobile/GlowExpense/platforms/android/assets/www/resources/images/low-res/sprite.png \
-/Users/dimitarjilanov/Documents/GlowMobile/GlowExpense/platforms/android/assets/www/scripts/c9402ac5.scripts.js \
+/Users/dimitarjilanov/Documents/GlowMobile/GlowExpense/platforms/android/assets/www/scripts/25ca6714.scripts.js \
 /Users/dimitarjilanov/Documents/GlowMobile/GlowExpense/platforms/android/assets/www/scripts/directives \
 /Users/dimitarjilanov/Documents/GlowMobile/GlowExpense/platforms/android/assets/www/scripts/e26c4812.modules.js \
 /Users/dimitarjilanov/Documents/GlowMobile/GlowExpense/platforms/android/assets/www/scripts/expenses \
@@ -954,5 +954,5 @@
 /Users/dimitarjilanov/Documents/GlowMobile/GlowExpense/platforms/android/assets/www/scripts/reports/views/report-details-expense.html \
 /Users/dimitarjilanov/Documents/GlowMobile/GlowExpense/platforms/android/assets/www/scripts/reports/views/report-details.html \
 /Users/dimitarjilanov/Documents/GlowMobile/GlowExpense/platforms/android/assets/www/scripts/reports/views/reports-list.html \
-/Users/dimitarjilanov/Documents/GlowMobile/GlowExpense/platforms/android/assets/www/styles/a1498dbf.bundle.css \
+/Users/dimitarjilanov/Documents/GlowMobile/GlowExpense/platforms/android/assets/www/styles/d734a5b9.bundle.css \
 /Users/dimitarjilanov/Documents/GlowMobile/GlowExpense/platforms/android/ant-build/AndroidManifest.xml \

@@ -29,20 +29,16 @@
                 <div class="form-item head">
                     Assign Report to:
                 </div>
-                <div class="form-item checked">
-                    <label for="project-assigned">
-                        <input type="radio" class="input-checked" id="project-assigned" name="assign"  class="form-control"
-                                ng-model="report.assignedTo">
-                        <span class="icon icon-check-green"></span>
+                <div class="form-item checked" ng-click="select('projectAssigned')">
+                    <label for="all-projects">
                         {{projectAssigned}}
+                        <span class="display " ng-class="{'icon icon-check-green':isProjectSelected}"></span>
                     </label>
                 </div>
-                <div class="form-item checked">
+                <div class="form-item checked" ng-click="select('allProjects')">
                     <label for="all-projects">
-                        <input type="radio" class="input-checked" id="all-projects" name="assign"  class="form-control"
-                               ng-model="report.assignedTo">
-                        <span class="icon icon-check-green"></span>
                         {{allProjects}}
+                        <span class="display " ng-class="{'icon icon-check-green':!isProjectSelected}"></span>
                     </label>
                 </div>
             </div>

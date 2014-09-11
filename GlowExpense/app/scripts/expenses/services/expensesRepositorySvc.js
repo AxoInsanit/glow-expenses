@@ -14,10 +14,6 @@ angular.module('Expenses').factory('expensesRepositorySvc', ['$resource', 'baseU
                     'method': 'GET',
                     'isArray': false
                 },
-                'getImage': {
-                    'method': 'GET',
-                    'isArray': false
-                },
                 'createExpense': {
                     'method': 'POST'
                 },

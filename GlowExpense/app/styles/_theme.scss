@@ -377,8 +377,8 @@ ul.single {
 }
 
 .btn-fixed {
-	height: 115px;
-	position: fixed;
+	height: 90px;
+	position: relative;
 	bottom:0;
 	left:0;
 	padding: 20px;
@@ -409,18 +409,15 @@ ul.single {
 		}
 		.btn {
 			@include clearfix();
-			margin-top: 35px;
 		}
 	}
 	.btn {
 		@include clearfix();
-		margin-top: 25px;
 	}
 }
 // FORMS
 form {
 	@include clearfix();
-	padding-bottom: 94px;
 	::-webkit-input-placeholder {
 		color: $text-select;
 		line-height: 0.6;
@@ -580,4 +577,8 @@ form {
 }
 .header-img {
 	content: url("../resources/images/plus.png");
+}
+.display {
+	display:block!important;
+	
 }

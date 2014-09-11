@@ -4,17 +4,19 @@ angular.module('Expenses')
     .controller('AddExpenseCtrl', ['$scope', '$location', 'addExpensesTitle', 'addExpensesButtonLabel', 'reportsSharingSvc',
         'expensesRepositorySvc', 'editSaveExpenseDialogSvc', 'getIdFromLocationSvc', 'reportExpensesRepositorySvc',
         'errorDialogSvc', 'errorMessageSvc', 'errorHandlerDefaultSvc', 'localStorageSvc', 'sessionToken', 'expenseSvc', 'cameraSvc',
-        'invoiceImageRepositorySvc', 'cameraSelectDialog', 'validateNumbersSvc',
+        'invoiceImageRepositorySvc', 'cameraSelectDialog', 'validateNumbersSvc', 'baseUrlMockeyWeb', 'expensesUrl', 'imagesUrl',
+        'expensePostImageSvc',
         function ($scope, $location, addExpensesTitle, addExpensesButtonLabel, reportsSharingSvc,
           expensesRepositorySvc, editSaveExpenseDialogSvc, getIdFromLocationSvc, reportExpensesRepositorySvc,
           errorDialogSvc, errorMessageSvc, errorHandlerDefaultSvc, localStorageSvc, sessionToken, expenseSvc,
-          cameraSvc, invoiceImageRepositorySvc, cameraSelectDialog, validateNumbersSvc) {
+          cameraSvc, invoiceImageRepositorySvc, cameraSelectDialog, validateNumbersSvc, baseUrlMockeyWeb, expensesUrl, imagesUrl,
+          expensePostImageSvc) {
 
 
             $scope.title = addExpensesTitle;
             $scope.buttonLabel = addExpensesButtonLabel;
             $scope.showErrorMessage = false;
-            $scope.imagePath = null;
+            $scope.imageSelectedPath = null;
 
             $scope.expense = {};
 
@@ -35,25 +37,23 @@ angular.module('Expenses')
 
                     var createdExpenseId = getIdFromLocationSvc.getLastIdFromLocation(headers.location);
                     //push image tests
-                    // var fd = new FormData();
-                    // fd.append('file', $scope.imagePath);
-                    // //post image service
+                    var fd = new FormData();
+                    fd.append('file', $scope.imageSelectedPath);
+                    //post image service
+                    debugger;
+                    expensePostImageSvc.postImages(
+                        {
+                            'token': localStorageSvc.getItem(sessionToken)
+                        },
+                        $scope.imageSelectedPath,
+                        addExpenseToReportSuccess,
+                        errorHandlerDefaultSvc.handleError
+                    );
 
-                    // $http.post(baseUrlMockeyWeb + expensesUrl + imagesUrl +'?expenseId='+ createdExpenseId + '&token=' + localStorageSvc.getItem(sessionToken),fd, {
-                    //         transformRequest: angular.identity,
-                    //         headers: {'Content-Type': undefined}
-                    //     })
-                    //     .success(function(){
-                    //         alert('Happens');
-                    //         addExpenseToReport();
-                    //     })
-                    //     .error(function(){
-                    //         alert('Sry');
-                    //     });
                     // TODO : WHEN WE REMOVE THE COMMENT WE NEED TO INCLUDE THE FUNCTION IN THE SUCCESS
 
                     function addExpenseToReportSuccess(){
-                        debugger;
+
                         expense.expenseId = createdExpenseId;
                         reportsSharingSvc.expenseSharingSvc.addExpense(expense, $scope.report.expenseReportId);
 
@@ -61,7 +61,7 @@ angular.module('Expenses')
                             $location.path(url + '/' + $scope.report.expenseReportId);
                         });
                     }
-debugger;
+
                     reportExpensesRepositorySvc.addExpensesToReport(
 
                         {
@@ -82,7 +82,7 @@ debugger;
                     var newExpense = expenseSvc.create(expense);
 
                     newExpense.originalCurrency = 1;
-                    debugger;
+
                     expensesRepositorySvc.createExpense(
 
                         { 'token': localStorageSvc.getItem(sessionToken) },
