@@ -93,7 +93,7 @@ angular.module('Reports')
 
                         var reportVM = {
                             'description': report.title,
-                            'applyTo': report.project.name,
+                            'applyTo': 'PROJECT',
                             'entityId': projectId,
                             'owner': localStorageSvc.getItem('userName'),
                             'expenseIds': expenseIds
