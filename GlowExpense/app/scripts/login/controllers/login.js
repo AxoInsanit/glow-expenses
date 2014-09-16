@@ -39,7 +39,6 @@ angular.module('Login').controller('LoginCtrl', ['$scope', '$location', 'UserSvc
             function loginError(errorResponse){
                 errorHandlerDefaultSvc.handleError(errorResponse).then(function(){
                     $scope.showErrorMessage = true;
-                    $scope.user.username = '';
                     $scope.user.password = '';
                 });
             }
