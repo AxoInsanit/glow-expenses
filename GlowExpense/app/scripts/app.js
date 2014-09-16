@@ -189,22 +189,4 @@ angular.module('app', _mainModules )
     }])
     .constant('serverErrorMsg','Server error!')
     .constant('sessionToken', 'session-token')
-    .constant('infiniteScrollEnabled', true)
-
-    .run(['currenciesRepositorySvc', 'currenciesSvc', 'errorHandlerDefaultSvc',
-        function(currenciesRepositorySvc, currenciesSvc, errorHandlerDefaultSvc) {
-
-            function getCurrenciesSuccess(result){
-                currenciesSvc.set(result.currencies);
-            }
-
-            currenciesRepositorySvc.getCurrencies(
-                {},
-                getCurrenciesSuccess,
-                errorHandlerDefaultSvc.handleError
-            );
-
-        }]);
-
-
-
+    .constant('infiniteScrollEnabled', true);

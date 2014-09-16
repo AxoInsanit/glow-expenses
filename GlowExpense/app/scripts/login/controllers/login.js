@@ -10,11 +10,23 @@ angular.module('Login').controller('LoginCtrl', ['$scope', '$location', 'UserSvc
         $scope.loginPage = true;
         $scope.login = function(user){
 
+            function getCurrenciesSuccess(result){
+                currenciesSvc.set(result.currencies);
+            }
+
             function loginSuccess(response) {
                 if( localStorageSvc.localStorageExists() ){
                     $scope.showErrorMessage = false;
                     localStorageSvc.setItem(sessionToken, response.session_token);
                     localStorageSvc.setItem(userName, $scope.user.username);
+
+                    currenciesRepositorySvc.getCurrencies(
+                        { 'token': localStorageSvc.getItem(sessionToken) },
+                        getCurrenciesSuccess,
+                        errorHandlerDefaultSvc.handleError
+                    );
+
+
                     expenseSharingSvc.getExpenses().then(function(){
                         $location.path('/expenses');
                     });
