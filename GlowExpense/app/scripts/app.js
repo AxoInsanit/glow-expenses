@@ -189,4 +189,4 @@ angular.module('app', _mainModules )
     }])
     .constant('serverErrorMsg','Server error!')
     .constant('sessionToken', 'session-token')
-    .constant('infiniteScrollEnabled', true);
+    .constant('infiniteScrollEnabled', false);
