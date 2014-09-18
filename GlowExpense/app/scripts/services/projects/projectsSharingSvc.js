@@ -1,7 +1,8 @@
 'use strict';
 
 angular.module('Services')
-    .factory('projectsSharingSvc', ['$q', 'projectsRepositorySvc', function($q, projectsRepositorySvc) {
+    .factory('projectsSharingSvc', ['$q', 'projectsRepositorySvc', 'localStorageSvc', 'sessionToken',
+        function($q, projectsRepositorySvc, localStorageSvc, sessionToken) {
         var projects = [];
         // lazy load reports on demand
         function getProjects(){
@@ -17,9 +18,7 @@ angular.module('Services')
 
             if (projects.length === 0){
                 projectsRepositorySvc.getProjects(
-                    {
-                        
-                    },
+                    { 'token': localStorageSvc.getItem(sessionToken) },
                     projectSuccess
                 );
             }
