@@ -16,7 +16,7 @@ angular.module('Expenses')
         self.date = initData.date || null;
         self.originalCurrencyId = initData.originalCurrencyId || 0;
         self.originalAmount = initData.originalAmount || 0;
-        self.exchangeRate = initData.exchangeRate || 0;
+        self.exchangeRate = initData.exchangeRate || 1;
         self.expenseTypeName = initData.type || null;
         self.imageType = initData.imageType || 'void';
         self.contableCodeId = initData.contableCodeId || 0;

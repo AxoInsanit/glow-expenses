@@ -20,6 +20,8 @@ angular.module('Expenses')
 
             $scope.expense = {};
 
+            $scope.expense.exchangeRate = 1;
+
             var reportId = getIdFromLocationSvc.getFirstIdFromLocation($location.path());
             $scope.report = reportsSharingSvc.getReportById(reportId);
 
