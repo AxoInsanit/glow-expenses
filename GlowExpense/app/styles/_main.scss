@@ -135,8 +135,6 @@ table {
   }
 }
 
-
-
 .text-centered{
   text-align: center
 }
@@ -214,24 +212,25 @@ a {
   }
 }
 // Mitko styles
-.html{
+.html {
   overflow: hidden;
 }
 
-.staticHeight{
+.staticHeight {
   height: 101%;
   width:100%;
 }
 
-.Infinity{
+.Infinity {
   min-height:1000px;
 }
-.center{
+
+.center {
   text-align: center;
 }
 
 /* view image */
-.showImg{
+.showImg {
   margin-top: 1%;
 }
 
@@ -263,6 +262,7 @@ a {
   filter: alpha(opacity=70);
   margin-top: -30%;
 }
+
 .underscored{
   text-decoration:underline;
 }
@@ -273,8 +273,21 @@ a {
   margin: auto;
   background-size: 100% 100%;
 }
-// Mitko styles
 
+//Modals 
+
+#photo-control {
+  
+  .btn {
+    float: none;
+    width: 100%;
+    
+    &:first-child {
+      border-right: none;
+      border-bottom: 1px solid $border-grey-dark;  
+    }
+  }
+}
 
 /*
 -----------------------------------------------------------------------------------------------

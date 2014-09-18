@@ -10,6 +10,10 @@ angular.module('Modals').factory('editSaveExpenseDialogSvc', ['$modal', 'expense
 
                     $scope.reportName = reportName;
 
+                    $scope.$on('$locationChangeStart', function(event) {
+                        $modalInstance.close('true');
+                    });
+
                     $scope.navigateToReports = function() {
                         $modalInstance.close(reportsPath);
                     };

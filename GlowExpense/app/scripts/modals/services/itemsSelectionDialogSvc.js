@@ -12,6 +12,10 @@ angular.module('Modals').factory('itemsSelectionDialogSvc', ['$modal', function(
                     $scope.selectedEntity = {'title':'Search'};
                     $scope.entityName = entityName;
 
+                    $scope.$on('$locationChangeStart', function(event) {
+                        $modalInstance.close('true');
+                    });
+
                     $scope.selectEntity = function(entity) {
                         $scope.selectedEntity = entity;
                         $modalInstance.close($scope.selectedEntity);
