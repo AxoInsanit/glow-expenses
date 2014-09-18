@@ -60,7 +60,7 @@
                 </div>
                 <div class="form-item">
                     <label for="amount">
-                        <input type="text" id="amount" class="form-control" ng-model="expense.originalAmount" field="currencyVal" placeholder="Amount" currency="" required="">
+                       <input type="text" id="amount" class="form-control" ng-model="expense.originalAmount" field="currencyVal" placeholder="Amount" currency="" required="" number-focus="">
                     </label>
                 </div>
                 <div class="form-item" ng-click="selectCurrency(expense.currency)">
@@ -72,7 +72,7 @@
                 </div>
                 <div class="form-item">
                     <label for="exchangeRate">
-                        <input type="text" id="exchangeRate" placeholder="Exchange Rate" class="form-control" ng-model="expense.exchangeRate" currency="" required="">
+                        <input type="text" id="exchangeRate" placeholder="Exchange Rate" class="form-control" ng-model="expense.exchangeRate" currency="" required="" number-focus="">
                     </label>
                 </div>
             </div>
