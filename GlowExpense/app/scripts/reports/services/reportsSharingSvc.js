@@ -100,7 +100,6 @@ angular.module('Reports')
                 }
                 else {
                     deferred.resolve(reports);
-                    expenseSharingSvc.test();
                 }
 
             }
