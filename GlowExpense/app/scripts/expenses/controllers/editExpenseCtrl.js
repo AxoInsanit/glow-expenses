@@ -35,7 +35,7 @@ angular.module('Expenses')
             }
 
             var expenseWithSavedState = saveExpenseStateSvc.get();
-        
+
             if (!expenseWithSavedState){
                 var expenseId = getIdFromLocationSvc.getLastIdFromLocation($location.path());
 
@@ -59,16 +59,28 @@ angular.module('Expenses')
             $scope.report = reportsSharingSvc.getReportById(reportId);
             var lastSelectedReport = $scope.report.description;
 
-            $scope.imageSelectedPath = '';
+            var selectedImage = saveExpenseStateSvc.getImage();
 
+            if (selectedImage){
+                $scope.imageSelectedPath = selectedImage;
+            }
+            else {
+                $scope.imageSelectedPath = '';
+            }
+
+            function getImageSuccess(result){
+                $scope.imageSelectedPath = result;
+            }
+
+            function getImageError(){
+                $scope.imageSelectedPath = '';
+            }
 
             if($scope.expense.imageType !== 'void')
             {
                invoiceImageRepositorySvc.getImage(
                    { 'token': localStorageSvc.getItem(sessionToken), 'expenseId': expenseId }
-               );
-               // TODO  ???
-               $scope.imageSelectedPath = 'image';
+               ), getImageSuccess, getImageError;
             }
 
             function addExpenseSuccess(){
@@ -210,6 +222,7 @@ angular.module('Expenses')
                 cameraSelectDialog.open().then(function() {
                     cameraSvc.takePhoto().then(function(result){
                         $scope.imageSelectedPath = result;
+                        saveExpenseStateSvc.setImage(result);
                     });
                 });
             };

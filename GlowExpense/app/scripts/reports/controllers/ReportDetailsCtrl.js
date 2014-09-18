@@ -22,6 +22,7 @@ angular.module('Reports')
 
             reportsSharingSvc.expenseSharingSvc.getExpenses($scope.report.expenseReportId).then(function(result) {
                 $scope.expenses = result;
+                debugger;
             });
 
             $scope.openEditMode = function() {

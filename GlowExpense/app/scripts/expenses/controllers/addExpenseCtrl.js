@@ -32,7 +32,7 @@ angular.module('Expenses')
             };
 
             $scope.save = function(form, expense) {
-
+                var newExpense = expenseSvc.create(expense);
                 function createExpenseSuccess(response, responseHeaders){
                     var headers = responseHeaders();
 
@@ -41,7 +41,7 @@ angular.module('Expenses')
                     function addExpenseToReportSuccess(){
 
                         expense.expenseId = createdExpenseId;
-                        reportsSharingSvc.expenseSharingSvc.addExpense(expense, $scope.report.expenseReportId);
+                        reportsSharingSvc.expenseSharingSvc.addExpense(newExpense, $scope.report.expenseReportId);
 
                         editSaveExpenseDialogSvc.openSuccessSaveExpenseDialog().then(function(url){
                             $location.path(url + '/' + $scope.report.expenseReportId);
@@ -82,9 +82,7 @@ angular.module('Expenses')
                 // TODO uncomment when tested with real services with working upload image
                 if(form.$valid && validateNumbersSvc.validate(expense))// && $scope.imageSelectedPath)
                 {
-                    expense.date = new Date();
-
-                    var newExpense = expenseSvc.create(expense);
+                    newExpense.date = new Date();
                     newExpense.originalCurrency =  expense.currency.id;
                     expensesRepositorySvc.createExpense(
 
