@@ -4,11 +4,11 @@ angular.module('Reports')
     .controller('ReportDetailsCtrl', ['$scope', '$location', 'addReportErrorMsg', 'reportsSharingSvc',
         'expensesRepositorySvc', 'confirmDeleteDialogSvc', 'entityName', 'sendReportDialogSvc', 'expensePath',
         'expenseSvc', 'editModeNotificationChannelSvc', 'getIdFromLocationSvc', 'localStorageSvc', 'sessionToken',
-        'reportSendRepositorySvc', 'errorHandlerDefaultSvc', 'errorDialogSvc', 'emptyReportErrorMsg',
+        'reportSendRepositorySvc', 'errorHandlerDefaultSvc', 'errorDialogSvc', 'emptyReportErrorMsg', 'infiniteScrollEnabled',
         function ($scope, $location, addReportErrorMsg, reportsSharingSvc, expensesRepositorySvc, confirmDeleteDialogSvc,
                   entityName, sendReportDialogSvc, expensePath, expenseSvc, editModeNotificationChannelSvc, getIdFromLocationSvc,
                   localStorageSvc, sessionToken, reportSendRepositorySvc, errorHandlerDefaultSvc, errorDialogSvc,
-                  emptyReportErrorMsg)  {
+                  emptyReportErrorMsg, infiniteScrollEnabled)  {
 
             $scope.errorMessage = addReportErrorMsg;
             $scope.showErrorMessage = false;
@@ -77,6 +77,11 @@ angular.module('Reports')
             };
 
             $scope.getMoreExpenses = function(){
+
+                if (!infiniteScrollEnabled){
+                    return;
+                }
+
                 var result = reportsSharingSvc.expenseSharingSvc.getNextFiveExpenses(reportId);
                 result.forEach(function(item){
                     $scope.expenses.push(item);

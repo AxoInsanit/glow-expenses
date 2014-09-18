@@ -23,6 +23,7 @@ angular.module('Reports')
             var reportId = getIdFromLocationSvc.getLastIdFromLocation($location.path());
 
             if (reportId){
+
                 $scope.report = angular.copy(reportsSharingSvc.getReportById(reportId));
                 $scope.isProjectSelected = $scope.report.entityId > 0;
                 $scope.title = editReportTitle;
@@ -57,18 +58,25 @@ angular.module('Reports')
                 }
 
                 function saveReportSuccess(){
+
                     reportsSharingSvc.updateReport(report);
+
                     $location.path(reportsPath);
                 }
 
                 if(form.$valid)
                 {
                     var projectId = 0;
+
+
                     if (report.project){
                         projectId = projectsSharingSvc.getProjectIdByName(report.project.name);
+
                     }
 
                     expenseIds = expenseSharingSvc.getExpenseIdsForReportAssign();
+
+
 
                     if (reportId) {
                         var reportViewModel = {

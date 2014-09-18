@@ -36,6 +36,11 @@ angular.module('Reports')
             $scope.deleteReport = function(reportId) {
                 function deleteReportSuccess(){
                     reportsSharingSvc.deleteReport(reportId);
+
+                    if (!infiniteScrollEnabled){
+                        return;
+                    }
+
                     var reportToDeleteIndex = 0;
 
                     $scope.reports.some(function(item, index){

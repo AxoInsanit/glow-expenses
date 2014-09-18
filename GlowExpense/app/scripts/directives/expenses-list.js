@@ -6,9 +6,10 @@ angular.module('Directives').directive('expensesList', ['expensesListTemplateUrl
             replace: true,
             controller: ['$scope', '$location', 'expenseSvc', 'expensesRepositorySvc', 'confirmDeleteDialogSvc',
                 'reportEntity', 'sessionToken', 'errorHandlerDefaultSvc', 'expenseSharingSvc', 'getIdFromLocationSvc',
+                'infiniteScrollEnabled',
 
                 function($scope, $location, expenseSvc, expensesRepositorySvc,  confirmDeleteDialogSvc, reportEntity,
-                   sessionToken, errorHandlerDefaultSvc, expenseSharingSvc, getIdFromLocationSvc) {
+                   sessionToken, errorHandlerDefaultSvc, expenseSharingSvc, getIdFromLocationSvc, infiniteScrollEnabled) {
 
                     $scope.sort = function(item) {
                         return new Date(item.date);
@@ -20,6 +21,10 @@ angular.module('Directives').directive('expensesList', ['expensesListTemplateUrl
                             var reportId = getIdFromLocationSvc.getLastIdFromLocation($location.path());
 
                             expenseSharingSvc.deleteExpense(expenseId, reportId);
+
+                            if (!infiniteScrollEnabled){
+                                return;
+                            }
 
                             var expenseToDeleteIndex = 0;
 

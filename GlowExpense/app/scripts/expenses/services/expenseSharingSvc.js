@@ -50,7 +50,6 @@ angular.module('Expenses').factory('expenseSharingSvc', ['$q', 'expensesReposito
 
         // lazy load expenses on demand
         function getExpenses(reportId){
-
             var reportKey = reportId || 0;
             reportExpensesMapper[reportKey] = reportExpensesMapper[reportKey] || [];
 
@@ -85,6 +84,7 @@ angular.module('Expenses').factory('expenseSharingSvc', ['$q', 'expensesReposito
                 );
             }
             else {
+               // var reportExpensesMapperCopy = angular.copy(reportExpensesMapper[reportKey]);
                 if (infiniteScrollEnabled){
                     var reportExpensesMapperCopy = angular.copy(reportExpensesMapper[reportKey]);
                     var result = null;
@@ -239,7 +239,7 @@ angular.module('Expenses').factory('expenseSharingSvc', ['$q', 'expensesReposito
             getNextFiveExpenses: getNextFiveExpenses,
             selectedExpense: selectedExpenseIndex,
             deleteReportMapping: deleteReportMapping,
-            getAllExpensesForReport: getAllExpensesForReport
+            getAllExpensesForReport: getAllExpensesForReport,
         };
     }
 ]);
