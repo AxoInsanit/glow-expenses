@@ -6,7 +6,7 @@ var setupEnvironment = function ( environment ) {
     
     switch( environment ) {
         case 'production': 
-            url = 'https://esb.dev.corp.globant.com';
+            url = 'http://esb.dev.corp.globant.com:8080';
             break;
         case 'emulation':
             url = 'http://10.0.3.2:8080';

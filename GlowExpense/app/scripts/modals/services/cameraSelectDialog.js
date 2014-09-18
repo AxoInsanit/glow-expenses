@@ -8,6 +8,7 @@ angular.module('Modals').factory('cameraSelectDialog', ['$modal', 'cameraSvc',  
 
             var modalInstance = $modal.open({
                 templateUrl: 'scripts/modals/views/camera-select-dialog.html',
+                size: 'sm',
                 controller: ['$scope', '$modalInstance', function($scope, $modalInstance) {
 
                     $scope.camera = function() {

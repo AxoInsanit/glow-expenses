@@ -140,9 +140,9 @@ D:\work\apps\glow-expenses\GlowExpense\platforms\android\assets\www\resources\im
 D:\work\apps\glow-expenses\GlowExpense\platforms\android\assets\www\resources\images\low-res\sprite-legend.jpg \
 D:\work\apps\glow-expenses\GlowExpense\platforms\android\assets\www\resources\images\low-res\sprite.png \
 D:\work\apps\glow-expenses\GlowExpense\platforms\android\assets\www\scripts\334eede5.modules.js \
-D:\work\apps\glow-expenses\GlowExpense\platforms\android\assets\www\scripts\51795ace.scripts.js \
 D:\work\apps\glow-expenses\GlowExpense\platforms\android\assets\www\scripts\directives \
 D:\work\apps\glow-expenses\GlowExpense\platforms\android\assets\www\scripts\expenses \
+D:\work\apps\glow-expenses\GlowExpense\platforms\android\assets\www\scripts\f9f62d5a.scripts.js \
 D:\work\apps\glow-expenses\GlowExpense\platforms\android\assets\www\scripts\header \
 D:\work\apps\glow-expenses\GlowExpense\platforms\android\assets\www\scripts\invoice_expense_image \
 D:\work\apps\glow-expenses\GlowExpense\platforms\android\assets\www\scripts\login \

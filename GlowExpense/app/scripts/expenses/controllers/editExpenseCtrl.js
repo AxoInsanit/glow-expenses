@@ -159,20 +159,20 @@ angular.module('Expenses')
                 if(form.$valid && validateNumbersSvc.validate(expense))
                 {
                     // TODO uncomment when tested with real services with working upload image
-//                    var fd = new FormData();
-//                    fd.append('file', $scope.imageSelectedPath);
-//                    expensePostImageSvc.postImages(
-//                        {
-//                            'expenseId': $scope.expense.expenseId,
-//                            'token': localStorageSvc.getItem(sessionToken)
-//                        },
-//                        $scope.imageSelectedPath,
-//                        postImageSuccess,
-//                        errorHandlerDefaultSvc.handleError
-//                    );
+/*                   var fd = new FormData();
+                   fd.append('file', $scope.imageSelectedPath);
+                   expensePostImageSvc.postImages(
+                       {
+                           'expenseId': $scope.expense.expenseId,
+                           'token': localStorageSvc.getItem(sessionToken)
+                       },
+                       $scope.imageSelectedPath,
+                       postImageSuccess,
+                       errorHandlerDefaultSvc.handleError
+                   );*/
 
                     // TODO remove when tested with real services with working upload image
-                    postImageSuccess();
+                   postImageSuccess();
                 }
                 else
                 {

@@ -65,21 +65,21 @@ angular.module('Expenses')
                     postImageSuccess();
 
                     // TODO uncomment when tested with real services with working upload image
-//                    var fd = new FormData();
-//                    fd.append('file', $scope.imageSelectedPath);
-//                    expensePostImageSvc.postImages(
-//                        {
-//                            'expenseId': createdExpenseId,
-//                            'token': localStorageSvc.getItem(sessionToken)
-//                        },
-//                        $scope.imageSelectedPath,
-//                        postImageSuccess,
-//                        errorHandlerDefaultSvc.handleError
-//                    );
+/*                   var fd = new FormData();
+                   fd.append('file', $scope.imageSelectedPath);
+                   expensePostImageSvc.postImages(
+                       {
+                           'expenseId': createdExpenseId,
+                           'token': localStorageSvc.getItem(sessionToken)
+                       },
+                       $scope.imageSelectedPath,
+                       postImageSuccess,
+                       errorHandlerDefaultSvc.handleError
+                   );*/
                 }
 
                 // TODO uncomment when tested with real services with working upload image
-                if(form.$valid && validateNumbersSvc.validate(expense)) // && $scope.imageSelectedPath)
+                if(form.$valid && validateNumbersSvc.validate(expense))// && $scope.imageSelectedPath)
                 {
                     expense.date = new Date();
 
