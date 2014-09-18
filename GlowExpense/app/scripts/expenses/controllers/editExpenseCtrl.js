@@ -7,14 +7,14 @@ angular.module('Expenses')
         'itemsSelectionDialogSvc', 'reportExpensesRepositorySvc', 'localStorageSvc', 'sessionToken', 'reportDetailsPath',
         'expensesPath', 'invoiceImageRepositorySvc', 'errorHandlerDefaultSvc', 'getIdFromLocationSvc', 'expenseSvc',
         'baseUrlMockeyWeb', 'validateNumbersSvc', 'cameraSelectDialog', 'expenseIdShareSvc', 'cameraSelectDialogListenerSvc',
-        'expensePostImageSvc',
+        'expensePostImageSvc', 'saveExpenseStateSvc',
         function ($scope,  $location, editExpensesTitle, editExpensesButtonLabel, expenseSharingSvc, cameraSvc,
                     reportsRepositorySvc, currencySelectDialogSvc, expensesRepositorySvc, editSaveExpenseDialogSvc,
                     expenseViewImageSvc, reportsSharingSvc, reportEntityName, filterReportByStateSvc,
                     itemsSelectionDialogSvc, reportExpensesRepositorySvc, localStorageSvc, sessionToken, reportDetailsPath,
                     expensesPath, invoiceImageRepositorySvc, errorHandlerDefaultSvc, getIdFromLocationSvc, expenseSvc,
                     baseUrlMockeyWeb, validateNumbersSvc, cameraSelectDialog, expenseIdShareSvc, cameraSelectDialogListenerSvc,
-            expensePostImageSvc) {
+            expensePostImageSvc, saveExpenseStateSvc) {
 
             $scope.title = editExpensesTitle;
             $scope.buttonLabel = editExpensesButtonLabel;
@@ -22,8 +22,7 @@ angular.module('Expenses')
             $scope.expenseId = getIdFromLocationSvc.getLastIdFromLocation($location.path());
             $scope.token = localStorageSvc.getItem(sessionToken);
             $scope.path = baseUrlMockeyWeb;
-            
-            
+
             if (cameraSelectDialogListenerSvc.openCameraSelectDlg){
                 cameraSelectDialogListenerSvc.openCameraSelectDlg = false;
 
@@ -35,9 +34,16 @@ angular.module('Expenses')
                 });
             }
 
-            var expenseId = getIdFromLocationSvc.getLastIdFromLocation($location.path());
+            var expenseWithSavedState = saveExpenseStateSvc.get();
+        
+            if (!expenseWithSavedState){
+                var expenseId = getIdFromLocationSvc.getLastIdFromLocation($location.path());
 
-            $scope.expense = angular.copy(expenseSharingSvc.getExpenseById(expenseId, $scope.reportId));
+                $scope.expense = angular.copy(expenseSharingSvc.getExpenseById(expenseId, $scope.reportId));
+            }
+            else {
+                $scope.expense = expenseWithSavedState;
+            }
 
             var  originalExpense = angular.copy($scope.expense);
 
@@ -209,6 +215,7 @@ angular.module('Expenses')
             };
 
             $scope.viewImage = function(){
+                saveExpenseStateSvc.set($scope.expense);
                 expenseIdShareSvc.setId($scope.expenseId);
                 expenseViewImageSvc.open().then(function(){
                     $scope.takePhoto();
