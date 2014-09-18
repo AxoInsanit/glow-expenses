@@ -9,7 +9,7 @@ angular.module('Modals').factory('itemsSelectionDialogSvc', ['$modal', function(
 
                     $scope.entities = entities;
                     $scope.searchedEntity = null;
-                    $scope.selectedEntity = {'title':'Search'};
+                    $scope.selectedEntity = null;
                     $scope.entityName = entityName;
 
                     $scope.$on('$locationChangeStart', function(event) {
