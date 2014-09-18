@@ -86,6 +86,8 @@ angular.module('Expenses')
                 {
                     newExpense.date = new Date();
                     newExpense.originalCurrency =  expense.currency.id;
+                    newExpense.owner = localStorageSvc.getItem('userName');
+                    debugger;
                     expensesRepositorySvc.createExpense(
 
                         { 'token': localStorageSvc.getItem(sessionToken) },

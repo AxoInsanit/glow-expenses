@@ -41,9 +41,23 @@ angular.module('Services')
             return result;
         }
 
+        function getProjectByEntityId(id){
+            var result = null;
+            projects.some(function(project){
+                if (project.id === id){
+                    result = project;
+                    debugger;
+                    return true;
+                }
+            });
+
+            return result;
+        }
+
         return {
             getProjects: getProjects,
-            getProjectIdByName: getProjectIdByName
+            getProjectIdByName: getProjectIdByName,
+            getProjectByEntityId: getProjectByEntityId
         };
     }
 ]);

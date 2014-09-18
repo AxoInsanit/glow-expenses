@@ -21,10 +21,13 @@ angular.module('Reports')
             var expenseIds = [];
 
             var reportId = getIdFromLocationSvc.getLastIdFromLocation($location.path());
+            var report = angular.copy(reportsSharingSvc.getReportById(reportId));
+
+          //  var selectedProject = projectsSharingSvc.getProjectByEntityId(report.entityId);
 
             if (reportId){
 
-                $scope.report = angular.copy(reportsSharingSvc.getReportById(reportId));
+                $scope.report = report;
                 $scope.isProjectSelected = $scope.report.entityId > 0;
                 $scope.title = editReportTitle;
                 $scope.buttonLabel = editReportBtnLabel;
@@ -33,7 +36,9 @@ angular.module('Reports')
             }
             else {
                 $scope.report = {};
-
+//                if ($scope.isProjectSelected){
+//                    $scope.report.project = selectedProject;
+//                }
                 $scope.title = createReportTitle;
                 $scope.buttonLabel = createReportBtnLabel;
             }
@@ -42,10 +47,12 @@ angular.module('Reports')
                 if(choise==='allProjects')
                 {
                     $scope.isProjectSelected = false;
+                  //  $scope.report.project = {};
                 }
                 else
                 {
                     $scope.isProjectSelected = true;
+                   // $scope.report.project = selectedProject;
                 }
             };
 
@@ -124,7 +131,6 @@ angular.module('Reports')
             $scope.selectProject = function() {
                 projectsSharingSvc.getProjects().then(function(response){
                     itemsSelectionDialogSvc.open(response, projectEntityName).then(function(selectedProject){
-                        debugger;
                         if (selectedProject){
                             $scope.report.project = selectedProject;
                         }
