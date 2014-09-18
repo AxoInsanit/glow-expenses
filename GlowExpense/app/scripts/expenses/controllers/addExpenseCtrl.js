@@ -22,6 +22,7 @@ angular.module('Expenses')
 
             var reportId = getIdFromLocationSvc.getFirstIdFromLocation($location.path());
             $scope.report = reportsSharingSvc.getReportById(reportId);
+
             $scope.takePhoto = function() {
                 cameraSelectDialog.open().then(function() {
                     cameraSvc.takePhoto().then(function(result){

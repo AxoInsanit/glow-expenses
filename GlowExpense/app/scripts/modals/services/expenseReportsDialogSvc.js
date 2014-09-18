@@ -11,6 +11,10 @@ angular.module('Modals').factory('expenseReportsDialogSvc', ['$modal', 'reportsS
                     $scope.reports = [];
                     $scope.searchedReport = null;
 
+                    $scope.$on('$locationChangeStart', function(event) {
+                        $modalInstance.close('true');
+                    });
+
                     reportsSharingSvc.getReports().then(function(response){
                         $scope.reports = response.filter(filterReportByStateSvc.checkIfInState);
                     });

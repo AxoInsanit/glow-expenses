@@ -9,6 +9,10 @@ angular.module('Modals').factory('currencySelectDialogSvc', ['$modal',  function
 
                     $scope.currencies = currencies;
 
+                    $scope.$on('$locationChangeStart', function(event) {
+                        $modalInstance.close('true');
+                    });
+
                     if (lastSelectedCurrency) {
                         $scope.currencies.forEach(function(item){
                             if (lastSelectedCurrency.id === item.id){

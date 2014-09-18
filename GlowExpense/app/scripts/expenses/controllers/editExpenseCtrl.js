@@ -22,11 +22,13 @@ angular.module('Expenses')
             $scope.expenseId = getIdFromLocationSvc.getLastIdFromLocation($location.path());
             $scope.token = localStorageSvc.getItem(sessionToken);
             $scope.path = baseUrlMockeyWeb;
-
+            
+            
             if (cameraSelectDialogListenerSvc.openCameraSelectDlg){
                 cameraSelectDialogListenerSvc.openCameraSelectDlg = false;
 
                 cameraSelectDialog.open().then(function() {
+
                     cameraSvc.takePhoto().then(function(result){
                         $scope.imageSelectedPath = result;
                     });

@@ -8,6 +8,10 @@ angular.module('Modals').factory('sendReportDialogSvc', ['$modal',
                 templateUrl: 'scripts/modals/views/send-report-dialog.html',
                 controller: ['$scope', '$modalInstance', function($scope, $modalInstance) {
 
+                    $scope.$on('$locationChangeStart', function(event) {
+                        $modalInstance.close('true');
+                    });
+                    
                     $scope.reportName = reportName;
 
                     $scope.ok = function() {

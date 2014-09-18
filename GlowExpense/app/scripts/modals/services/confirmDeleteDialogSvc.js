@@ -9,6 +9,10 @@ angular.module('Modals').factory('confirmDeleteDialogSvc', ['$modal',  function(
 
                     $scope.entityName = entityName;
 
+                    $scope.$on('$locationChangeStart', function(event) {
+                        $modalInstance.close('true');
+                    });
+
                     $scope.ok = function() {
                         $modalInstance.close('true');
                     };

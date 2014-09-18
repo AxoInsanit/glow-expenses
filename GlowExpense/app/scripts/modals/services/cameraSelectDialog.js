@@ -11,6 +11,10 @@ angular.module('Modals').factory('cameraSelectDialog', ['$modal', 'cameraSvc',  
                 size: 'sm',
                 controller: ['$scope', '$modalInstance', function($scope, $modalInstance) {
 
+                    $scope.$on('$locationChangeStart', function(event) {
+                        $modalInstance.close('true');
+                    });
+
                     $scope.camera = function() {
                         cameraSvc.setSource('camera');
                         $modalInstance.close('true');
