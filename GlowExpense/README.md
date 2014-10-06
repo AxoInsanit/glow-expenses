@@ -1,3 +1,5 @@
+# DEPRECATE this needs to review
+
 # Angular seed
 
 This project is an application skeleton for a typical AngularJS application.

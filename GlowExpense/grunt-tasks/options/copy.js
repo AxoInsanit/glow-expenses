@@ -12,9 +12,22 @@ module.exports = function(grunt) {
                     src: [
                         '*.{ico,png,txt}',
                         'offline.html',
-                        '.htaccess',
+                        '.htaccess',//??
                         'resources/fonts/**',
-                        'resources/images/**',
+                        'resources/images/**'
+                    ]
+                }
+            ]
+        },
+		cordova: {
+            files: [
+                {
+                    expand: true,
+                    dot: true,
+                    cwd: '<%= grunt.config.dist %>',
+                    dest: '<%= grunt.config.cordova %>/www',
+                    src: [
+                        '**/*'
                     ]
                 }
             ]

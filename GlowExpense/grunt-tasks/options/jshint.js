@@ -7,15 +7,15 @@ module.exports = function(grunt) {
         },
         all: [
             // grunt file
-            'Gruntfile.js',
+//            'Gruntfile.js',
             // scripts and subfolders
             '<%= grunt.config.app %>/scripts/**/*.js',
             // tests and subfolders
-            '<%= grunt.config.app %>/tests/**/*.js',
+//            '<%= grunt.config.app %>/tests/**/*.js',
             // githooks
-            'git-hooks/*.js',
+//            'git-hooks/*.js',
             // grunt tasks and subfolders (options included)
-            'grunt-tasks/**/*.js'
+//            'grunt-tasks/**/*.js'
         ]
     });
 };

@@ -9,6 +9,21 @@ module.exports = function(grunt) {
                     '!<%= grunt.config.dist %>/.git*'
                 ]
             }]
+        },
+		temp: {
+            files: [{
+                dot: true,
+                src: [
+                    '.sass-cache',
+                    '.tmp'
+                ]
+            }]
+        },
+		cordova: {
+            files: [{
+                dot: true,
+                src: [grunt.config.cordova +'/www']
+            }]
         }
     });
 };

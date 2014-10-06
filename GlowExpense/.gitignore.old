@@ -2,7 +2,7 @@ coverage
 README.html
 *.appcache
 *.cache
-mockeyDebugFile.log
 app/scripts/services/environment-config.js
 /platforms/**
 /www/**
+.svn

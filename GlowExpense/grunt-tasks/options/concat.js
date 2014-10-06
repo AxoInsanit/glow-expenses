@@ -6,8 +6,8 @@ module.exports = function(grunt) {
             separator: ';'
         },
         component: {
-            src: ['app/scripts/*/*.js', 'app/scripts/*/*/*.js'],
-            dest: 'dist/scripts/scripts.js'
+            src: [grunt.config.app + '/scripts/*/*.js', 'app/scripts/*/*/*.js'],
+            dest: grunt.config.dist + '/scripts/scripts.js'
         }
     });
 };

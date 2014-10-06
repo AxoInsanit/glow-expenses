@@ -3,23 +3,26 @@
 module.exports = function(grunt) {
     grunt.registerTask('serve', function (target) {
         if (target === 'dist') {
-            return grunt.task.run(['build', 'open:dist', 'connect:dist:keepalive']);
-        }
+            grunt.task.run([
+				'build',
+				'open:dist',
+				'connect:dist:keepalive'
+			]);
+			return;
+		}
 
-        
         grunt.task.run([
-            'jshint',
+//            'jshint',
             'bowerInstall',
             'compass:dev',
-            'csslint',
+//            'csslint',
             'start-mockey',
             'connect:livereload',
             'open:server',
             'ngconstant:development',
+			'clean:temp',
             'watch'
         ]);
-        
-
         
     });
 
@@ -31,25 +34,25 @@ module.exports = function(grunt) {
     grunt.registerTask('kill-mockey', ['shell:mockey-async:kill']);
 
 
-    grunt.registerTask('run-e2e', [
-        'connect:test',
-        'selenium_start',
-        'protractor:e2e',
-        'selenium_stop'
-    ]);
+//    grunt.registerTask('run-e2e', [
+//        'connect:test',
+//        'selenium_start',
+//        'protractor:e2e',
+//        'selenium_stop'
+//    ]);
 
-    grunt.registerTask('run-utest', [
-        'karma:unit'
-    ]);
+//    grunt.registerTask('run-utest', [
+//        'karma:unit'
+//    ]);
 
-    grunt.registerTask('test', [
-        'run-utest',
-        'run-e2e'
-    ]);
+//    grunt.registerTask('test', [
+//        'run-utest',
+//        'run-e2e'
+//    ]);
 
     
     grunt.registerTask('build', [
-        'jshint',
+//        'jshint',
         'clean:dist',
         'bowerInstall',
         'compass:dist',
@@ -59,18 +62,14 @@ module.exports = function(grunt) {
         'concurrent:dist',
         'cssmin',
         'cdnify',
-        'ngmin',
-        'uglify',
+        'ngmin:dist',
+        'uglify:dist',
         'rev',
         'usemin',
-        'copy:dist'
-    ]);
-    
-
-    
-
-    grunt.registerTask('register-git-hooks', [
-        'githooks'
+        'copy:dist',
+		'clean:cordova',
+		'copy:cordova',
+		'clean:temp'
     ]);
 
     grunt.registerTask('default', [
@@ -88,7 +87,11 @@ module.exports = function(grunt) {
     ]);
 
     // commit task for git
-    grunt.registerTask('git-commit', ['jshint','test']);
+//    grunt.registerTask('git-commit', ['jshint','test']);
+
+//    grunt.registerTask('register-git-hooks', [
+//        'githooks'
+//    ]);
 
     grunt.registerTask('emulate-android', [
         'shell:emulate-android'
