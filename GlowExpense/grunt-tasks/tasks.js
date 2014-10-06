@@ -34,10 +34,18 @@ module.exports = function(grunt) {
     grunt.registerTask('kill-mockey', ['shell:mockey-async:kill']);
 
 
-	//runs on android device (connected or genymotion)
+	//runs on emulator
     grunt.registerTask('e', ['build','shell:emulate-android']);
 
+	//runs on android device (connected or genymotion)
     grunt.registerTask('a', ['build','shell:android-run']);
+
+	//runs on device with weinre! (be care full, this computer and device should be on the same network)
+	grunt.registerTask('aw', [
+		'build',
+		'replace:weinrePlaceholder',
+		'concurrent:weinre'
+	]);
 
 
     grunt.registerTask('android-release', [

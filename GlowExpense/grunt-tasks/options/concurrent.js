@@ -7,9 +7,13 @@ module.exports = function(grunt) {
 //        test: [
 //            'coffee'
 //        ],
-        dist: [
-            'imagemin',
-            'htmlmin'
-        ]
+		options: {
+			logConcurrentOutput: true
+		},
+
+		weinre:['shell:android-run', 'weinre:dev', 'open:weinre'],
+
+		dist: ['imagemin','htmlmin']
+
     });
 };
