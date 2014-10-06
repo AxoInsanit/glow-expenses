@@ -31,6 +31,17 @@ module.exports = function(grunt) {
                     ]
                 }
             ]
+        },
+		apk: {
+            files: [
+                {
+                    expand: true,
+                    dot: true,
+                    cwd: grunt.config.cordovaAndroid,
+                    dest: grunt.config.distApk +'/'+ grunt.config.pkg.version,
+                    src: [grunt.config.pkg.name +'.apk']
+                }
+            ]
         }
     });
 };

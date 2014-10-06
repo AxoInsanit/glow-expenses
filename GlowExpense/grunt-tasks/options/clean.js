@@ -22,7 +22,13 @@ module.exports = function(grunt) {
 		cordova: {
             files: [{
                 dot: true,
-                src: [grunt.config.cordova +'/www']
+                src: [grunt.config.cordova +'/www',
+//					grunt.config.cordova +'/platforms/android/assets',
+					grunt.config.cordova +'/platforms/android/ant-build',
+					grunt.config.cordova +'/platforms/android/ant-gen',
+					grunt.config.cordova +'/platforms/android/CordovaLib/ant-build',
+					grunt.config.cordova +'/platforms/android/CordovaLib/ant-gen'
+				]
             }]
         }
     });

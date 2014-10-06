@@ -34,6 +34,22 @@ module.exports = function(grunt) {
     grunt.registerTask('kill-mockey', ['shell:mockey-async:kill']);
 
 
+	//runs on android device (connected or genymotion)
+    grunt.registerTask('e', ['build','shell:emulate-android']);
+
+    grunt.registerTask('a', ['build','shell:android-run']);
+
+
+    grunt.registerTask('android-release', [
+		'clean:cordova',
+		'replace:configXML',
+		'build',
+		'shell:android-build',
+		'shell:jarsigner',
+		'copy:apk'
+	]);
+
+
 //    grunt.registerTask('run-e2e', [
 //        'connect:test',
 //        'selenium_start',

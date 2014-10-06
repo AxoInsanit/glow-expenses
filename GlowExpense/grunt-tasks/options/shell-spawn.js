@@ -22,10 +22,66 @@ module.exports = function(grunt) {
                 }
             }
         },
-//        'emulate-android': {
-//            command: 'cd cordova && cordova build && cordova emulate android'
-//        },
-        options: {
+
+        'emulate-android': {
+			options: {
+				stdout: true,
+				failOnError: true,
+				stdin: true,
+				execOptions: {
+					cwd:  grunt.config.cordova
+				}
+			},
+			command: 'cordova emulate'
+        },
+
+		'android-run': {
+			options: {
+				stdout: true,
+				failOnError: true,
+				stdin: true,
+				execOptions: {
+					cwd:  grunt.config.cordova
+				}
+			},
+			command: 'cordova run android'
+		},
+
+		'android-build': {
+			options: {
+				stdout: true,
+				failOnError: true,
+				stdin: true,
+				execOptions: {
+					cwd:  grunt.config.cordova
+				}
+			},
+			command: 'cordova build android --release'
+		},
+
+
+		'jarsigner': {
+			options: {
+				stdout: true,
+				failOnError: true,
+				stdin: true
+			},
+			command: [
+					'jarsigner -verbose -digestalg SHA1 -sigalg MD5withRSA -keystore cert/release.keystore '+
+					grunt.config.cordovaAndroid +'/'+ grunt.config.pkg.name +'-release-unsigned.apk ' +
+					grunt.config.secAlias +
+					' -storepass '+ grunt.config.secStorePass +
+					' -keypass '+ grunt.config.secKeypass,
+					'jarsigner -verify '+
+					grunt.config.cordovaAndroid +'/'+ grunt.config.pkg.name +'-release-unsigned.apk' +
+					' -keystore cert/release.keystore',
+					'zipalign -v 4 '+
+					grunt.config.cordovaAndroid +'/'+ grunt.config.pkg.name +'-release-unsigned.apk '+
+					grunt.config.cordovaAndroid +'/'+ grunt.config.pkg.name +'.apk'
+			].join('&&')
+		},
+
+		options: {
             stdout: true,
             stderr: true,
             failOnError: true

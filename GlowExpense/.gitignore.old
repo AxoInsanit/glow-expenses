@@ -1,8 +1,0 @@
-coverage
-README.html
-*.appcache
-*.cache
-app/scripts/services/environment-config.js
-/platforms/**
-/www/**
-.svn

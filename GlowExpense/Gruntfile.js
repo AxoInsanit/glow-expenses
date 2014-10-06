@@ -13,11 +13,17 @@ module.exports = function (grunt) {
     require('time-grunt')(grunt);
 
     // config
+	grunt.config.pkg = grunt.file.readJSON('package.json');
     grunt.config.app = 'app';
-    grunt.config.dist = 'dist';
+    grunt.config.dist = 'dist/www';
+    grunt.config.distApk = 'dist/apk';
     grunt.config.core = 'core';
     grunt.config.ip = 'localhost';
 	grunt.config.cordova = 'cordova';
+	grunt.config.cordovaAndroid = grunt.config.cordova + '/platforms/android/ant-build';
+	grunt.config.secAlias = 'androidreleasekey';
+	grunt.config.secStorePass = 'provisoryKey1';
+	grunt.config.secKeypass = 'provisoryKey1';
     grunt.config.LIVERELOAD_PORT = 35729;
     grunt.config.SERVER_DEV_PORT = 9000;
     grunt.config.SERVER_DIST_PORT = 9010;
