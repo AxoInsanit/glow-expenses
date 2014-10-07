@@ -13,7 +13,6 @@
     "angular-animate": "~1.2.13",
     "angular-touch": "~1.2.13",
     "angular-mocks": "~1.2.13",
-    "angular-i18n": "~1.2.13",
     "underscore": "~1.5.2",
     "ngInfiniteScroll": "~1.0.0",
     "angular-snap": "~1.5.4",
