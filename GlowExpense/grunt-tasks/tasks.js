@@ -94,6 +94,7 @@ module.exports = function(grunt) {
         'copy:dist',
 		'clean:cordova',
 		'copy:cordova',
+	    'replace:setProduction',
 		'clean:temp'
     ]);
 
