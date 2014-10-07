@@ -59,6 +59,49 @@ module.exports = function(grunt) {
 			command: 'cordova build android --release'
 		},
 
+	    "ios-run": {
+		    options: {
+			    stdout: false,
+			    failOnError: true,
+			    stdin: true,
+			    execOptions: {
+				    maxBuffer: Infinity,
+				    cwd:  grunt.config.cordova
+			    }
+		    },
+		    command: "cordova run ios --debug --device"
+	    },
+
+	    'iosBuild': {
+		    options: {
+			    stdout: false,
+			    failOnError: true,
+			    stdin: true,
+			    execOptions: {
+				    cwd:  grunt.config.cordova,
+				    maxBuffer: Infinity
+			    }
+		    },
+		    command: [
+			    'cordova build ios --release --device',
+			    'xcrun -sdk iphoneos PackageApplication -v "platforms/ios/build/device/'+  grunt.config.pkg.name +'.app" -o "`pwd`/platforms/ios/build/device/'+ grunt.config.pkg.name +'.ipa"'
+		    ].join("&&")
+	    },
+
+	    "fixMacPermissions": {
+		    options: {
+			    stdout: true,
+			    failOnError: true,
+			    stdin: true,
+			    execOptions: {
+				    cwd: grunt.config.cordova
+			    }
+		    },
+		    command: [
+			    'chmod -R 777 platforms/android/cordova/*',
+//			    'chmod -R 777 platforms/ios/cordova/*'
+		    ].join("&&")
+	    },
 
 		'jarsigner': {
 			options: {

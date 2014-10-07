@@ -18,6 +18,7 @@ module.exports = function (grunt) {
     grunt.config.dist = 'dist/www';
     grunt.config.distApk = 'dist/apk';
     grunt.config.core = 'core';
+	grunt.config.os = 'Msac'; //Mac or PC
     grunt.config.ip = '10.0.1.2';//for local work and weinre
 	grunt.config.cordova = 'cordova';
 	grunt.config.cordovaAndroid = grunt.config.cordova + '/platforms/android/ant-build';

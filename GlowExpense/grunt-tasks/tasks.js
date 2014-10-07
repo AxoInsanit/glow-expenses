@@ -77,6 +77,7 @@ module.exports = function(grunt) {
     
     grunt.registerTask('build', [
 //        'jshint',
+	    grunt.config.os === 'Mac' ? 'shell:fixMacPermissions' : 'nothing',
         'clean:dist',
         'bowerInstall',
         'compass:dist',
@@ -99,6 +100,9 @@ module.exports = function(grunt) {
     grunt.registerTask('default', [
         'build'
     ]);
+
+	//auxiliars
+    grunt.registerTask('nothing', []);
 
     grunt.registerTask('production', [
         'ngconstant:production'
