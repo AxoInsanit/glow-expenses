@@ -99,7 +99,7 @@ module.exports = function(grunt) {
 		    },
 		    command: [
 			    'chmod -R 777 platforms/android/cordova/*',
-//			    'chmod -R 777 platforms/ios/cordova/*'
+			    'chmod -R 777 platforms/ios/cordova/*'
 		    ].join("&&")
 	    },
 
