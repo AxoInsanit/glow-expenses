@@ -18,17 +18,20 @@ module.exports = function (grunt) {
     grunt.config.dist = 'dist/www';
     grunt.config.distApk = 'dist/apk';
     grunt.config.core = 'core';
-	grunt.config.os = 'Msac'; //Mac or PC
-    grunt.config.ip = '10.0.1.2';//for local work and weinre
 	grunt.config.cordova = 'cordova';
 	grunt.config.cordovaAndroid = grunt.config.cordova + '/platforms/android/ant-build';
-	grunt.config.secAlias = 'androidreleasekey';
-	grunt.config.secStorePass = 'provisoryKey1';
-	grunt.config.secKeypass = 'provisoryKey1';
     grunt.config.WEINRE_PORT = 8082;
     grunt.config.LIVERELOAD_PORT = 35729;
     grunt.config.SERVER_DEV_PORT = 9000;
     grunt.config.SERVER_DIST_PORT = 9010;
+
+	//private values on localProperties
+	grunt.config.localProperties = grunt.file.readJSON('localProperties.json');
+	grunt.config.os = grunt.config.localProperties.so; //Mac or PC
+	grunt.config.ip = grunt.config.localProperties.ip;//for local work and weinre
+	grunt.config.secAlias = grunt.config.localProperties.secAlias;
+	grunt.config.secStorePass = grunt.config.localProperties.secStorePass;
+	grunt.config.secKeypass = grunt.config.localProperties.secKeypass;
 
     // load all grunt tasks
     require('load-grunt-tasks')(grunt);
