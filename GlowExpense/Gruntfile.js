@@ -27,7 +27,7 @@ module.exports = function (grunt) {
 
 	//private values on localProperties
 	grunt.config.localProperties = grunt.file.readJSON('localProperties.json');
-	grunt.config.os = grunt.config.localProperties.so; //Mac or PC
+	grunt.config.os = grunt.config.localProperties.os; //Mac or PC
 	grunt.config.ip = grunt.config.localProperties.ip;//for local work and weinre
 	grunt.config.secAlias = grunt.config.localProperties.secAlias;
 	grunt.config.secStorePass = grunt.config.localProperties.secStorePass;
@@ -37,6 +37,6 @@ module.exports = function (grunt) {
     require('load-grunt-tasks')(grunt);
 
     // load defualts tasks and configs
-    grunt.loadTasks('grunt-tasks/');
-    grunt.loadTasks('grunt-tasks/options');
+    grunt.loadTasks('grunt/');
+    grunt.loadTasks('grunt/options');
 };

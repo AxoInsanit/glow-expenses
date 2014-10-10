@@ -1,3 +1,60 @@
+# GLOW - EXPENSES
+
+# FEATURES:
+* Generation of package
+
+## INSTALL:
+
+### Prerequisites:
+* git
+* nodejs & npm
+* 
+
+### Instalation
+* `git clone https://github.com/GlobantMobileStudio/glow-expenses.git`
+* `git checkout TitleX`
+* `cd GlowExpense`
+* `npm i`
+* `bower i`
+
+**Done!**
+
+## CONFIG:
+On localProperties.json there are local configuration for individual workstation
+This file content:
+
+	ip = your ip whene you are connected on globant network, this is useful when you use weinre
+	so = "Mac" or "Pc"
+	secAlias, secStorePass and secKeypass = About android certification:
+
+## GRUNT
+
+
+TODO:
+
+dist > apk
+
+features:
+weinre
+
+en old mantengo lo viejo, sobre grunt
+
+cert
+
+versiones
+
+grunt serve
+grunt serve:dist
+grunt run-mockey
+grunt start-mockey
+grunt kill-mockey
+grunt e | grunt emulate-android
+grunt a
+grunt aw
+grunt android-release
+
+
+
 # DEPRECATE this needs to review
 
 # Angular seed
