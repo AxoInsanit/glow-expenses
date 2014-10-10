@@ -29,7 +29,6 @@ This file content:
 
 ## GRUNT
 
-
 TODO:
 
 dist > apk
