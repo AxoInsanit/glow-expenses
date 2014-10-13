@@ -46,7 +46,6 @@ angular.module('Services')
             projects.some(function(project){
                 if (project.id === id){
                     result = project;
-                    debugger;
                     return true;
                 }
             });

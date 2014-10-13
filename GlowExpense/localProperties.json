@@ -1,0 +1,7 @@
+{
+	"ip": "localhost",
+	"so": "Mac",
+	"secAlias": "androidreleasekey",
+	"secStorePass": "provisoryKey1",
+	"secKeypass": "provisoryKey1"
+}
