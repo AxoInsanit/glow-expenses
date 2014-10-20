@@ -68,7 +68,7 @@ angular.module('Expenses')
                     postImageSuccess();
 
                     // TODO uncomment when tested with real services with working upload image
-/*                   var fd = new FormData();
+                   var fd = new FormData();
                    fd.append('file', $scope.imageSelectedPath);
                    expensePostImageSvc.postImages(
                        {
@@ -78,7 +78,7 @@ angular.module('Expenses')
                        $scope.imageSelectedPath,
                        postImageSuccess,
                        errorHandlerDefaultSvc.handleError
-                   );*/
+                   );
                 }
 
                 // TODO uncomment when tested with real services with working upload image
@@ -87,6 +87,25 @@ angular.module('Expenses')
                     newExpense.date = new Date();
                     newExpense.originalCurrency =  expense.currency.id;
                     newExpense.owner = localStorageSvc.getItem('userName');
+
+                    console.log('addExpenseseOriginal',newExpense);
+                    delete newExpense.expenseId;
+                    delete newExpense.submiter;
+                    delete newExpense.originalCurrencyId;
+                    delete newExpense.expenseTypeName;
+                    delete newExpense.imageType;
+                    delete newExpense.currency;
+                    delete newExpense.expenseType;
+                    delete newExpense.showDetails;
+                    delete newExpense.selected;
+                    delete newExpense.enabled;
+                    delete newExpense.originalCurrency;
+                    newExpense.contableCodeId = 4434889;
+                    newExpense.provider = "provider blah";
+                    newExpense.type = "REPORTABLE_REBILLABLE";
+                    newExpense.exchangeRate = parseFloat(newExpense.exchangeRate);
+                    newExpense.originalAmount = parseFloat(newExpense.originalAmount);
+                    console.log('addExpenseseMod',newExpense);
 
 					expensesRepositorySvc.createExpense(
 
