@@ -53,6 +53,15 @@ grunt aw
 grunt android-release
 
 
+JMETER
+http://jmeter.apache.org/download_jmeter.cgi
+
+plugs:
+http://jmeter-plugins.org/downloads/all/
+JMeterPlugins-Standard
+JMeterPlugins-Extras
+JMeterPlugins-ExtrasLibs
+
 
 # DEPRECATE this needs to review
 
