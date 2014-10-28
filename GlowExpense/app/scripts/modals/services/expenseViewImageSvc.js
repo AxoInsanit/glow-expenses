@@ -10,7 +10,7 @@ angular.module('Modals').factory('expenseViewImageSvc', ['$modal', '$location',
 
                     $scope.profileName = localStorage.getItem('userName');
 
-                    $scope.$on('$locationChangeStart', function(event) {
+                    $scope.$on('$locationChangeStart', function() {
                         $modalInstance.close('true');
                     });
 

@@ -8,7 +8,7 @@ angular.module('Modals').factory('sendReportDialogSvc', ['$modal',
                 templateUrl: 'scripts/modals/views/send-report-dialog.html',
                 controller: ['$scope', '$modalInstance', function($scope, $modalInstance) {
 
-                    $scope.$on('$locationChangeStart', function(event) {
+                    $scope.$on('$locationChangeStart', function() {
                         $modalInstance.close('true');
                     });
                     

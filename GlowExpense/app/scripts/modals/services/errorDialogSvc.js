@@ -9,7 +9,7 @@ angular.module('Modals').factory('errorDialogSvc', ['$modal', function($modal){
 
                     $scope.errorMessage = errorMessage;
 
-                    $scope.$on('$locationChangeStart', function(event) {
+                    $scope.$on('$locationChangeStart', function() {
                         $modalInstance.close('true');
                     });
 

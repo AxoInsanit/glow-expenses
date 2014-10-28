@@ -19,6 +19,7 @@
     "trailing": true,
     "smarttabs": true,
     "laxcomma": true,
+    "funcscope": true,
     "globals": {
         "angular": true,
         "expect": false,

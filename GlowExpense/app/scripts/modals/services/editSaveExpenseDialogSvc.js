@@ -10,7 +10,7 @@ angular.module('Modals').factory('editSaveExpenseDialogSvc', ['$modal', 'expense
 
                     $scope.reportName = reportName;
 
-                    $scope.$on('$locationChangeStart', function(event) {
+                    $scope.$on('$locationChangeStart', function() {
                         $modalInstance.close('true');
                     });
 

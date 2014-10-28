@@ -6,14 +6,6 @@
 angular.module('Services').factory('cameraSvc', ['$q', function($q){
 
         var source = null;
-        // if(typeof(Camera) != 'undefined')
-        // {
-        //     source = Camera.PictureSourceType.CAMERA;
-        // }
-        // else
-        // {
-        //     var Camera = {'PictureSourceType':{}};
-        // }
 
         function setSource(type)
         {
@@ -30,7 +22,7 @@ angular.module('Services').factory('cameraSvc', ['$q', function($q){
         function takePhoto() {
             var deferred = $q.defer();
             function onSuccess(imageURI) {
-                var imagePrefix = "data:image/jpeg;base64,";
+                var imagePrefix = 'data:image/jpeg;base64,';
 
                 if (confirm('Upload image to expense?')) {
                     deferred.resolve(imagePrefix + imageURI);
