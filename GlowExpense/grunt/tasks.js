@@ -2,6 +2,23 @@
 
 module.exports = function(grunt) {
     grunt.registerTask('serve', function (target) {
+        var tasks = [];
+
+        if(grunt.option('mockey')) {
+            tasks.push('start-mockey');
+        }
+
+        tasks.push(
+            'jshint', 
+            'compass:dev', 
+            // 'csslint',
+            'connect:livereload',
+            'open:server',
+            'ngconstant:development',
+            'clean:temp',
+            'watch'
+        );
+
         if (target === 'dist') {
             grunt.task.run([
 				'build',
@@ -10,20 +27,7 @@ module.exports = function(grunt) {
 			]);
 			return;
 		}
-
-        grunt.task.run([
-//            'jshint',
-            'bowerInstall',
-            'compass:dev',
-//            'csslint',
-            'start-mockey',
-            'connect:livereload',
-            'open:server',
-            'ngconstant:development',
-			'clean:temp',
-            'watch'
-        ]);
-        
+        grunt.task.run(tasks);
     });
 
     //runs mockey from console and waits
@@ -47,7 +51,6 @@ module.exports = function(grunt) {
 		'concurrent:weinre'
 	]);
 
-
     grunt.registerTask('android-release', [
 		'clean:cordova',
 		'replace:configXML',
@@ -57,26 +60,8 @@ module.exports = function(grunt) {
 		'copy:apk'
 	]);
 
-
-//    grunt.registerTask('run-e2e', [
-//        'connect:test',
-//        'selenium_start',
-//        'protractor:e2e',
-//        'selenium_stop'
-//    ]);
-
-//    grunt.registerTask('run-utest', [
-//        'karma:unit'
-//    ]);
-
-//    grunt.registerTask('test', [
-//        'run-utest',
-//        'run-e2e'
-//    ]);
-
-    
     grunt.registerTask('build', [
-//        'jshint',
+       'jshint',
 	    grunt.config.os === 'Mac' ? 'shell:fixMacPermissions' : 'nothing',
         'clean:dist',
         'bowerInstall',
@@ -114,13 +99,6 @@ module.exports = function(grunt) {
         'ngconstant:staging'
     // Add further deploy related tasks here
     ]);
-
-    // commit task for git
-//    grunt.registerTask('git-commit', ['jshint','test']);
-
-//    grunt.registerTask('register-git-hooks', [
-//        'githooks'
-//    ]);
 
     grunt.registerTask('emulate-android', [
         'shell:emulate-android'
