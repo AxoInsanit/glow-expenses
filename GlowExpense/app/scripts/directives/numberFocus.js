@@ -6,12 +6,12 @@ angular.module('Directives').directive('numberFocus', function () {
         
         restrict: 'A',
         
-        link: function ( scope, element, attrs) {
+        link: function (scope, element) {
 
-            element.on('focus', function( event ) {
+            element.on('focus', function() {
 
                 if (element.val() === '0.00') {
-                    element.val('')
+                    element.val('');
                     element[0].placeholder = '';
                 }
             });

@@ -64,11 +64,9 @@ angular.module('Expenses')
                             errorHandlerDefaultSvc.handleError
                         );
                     }
-                    // TODO remove when tested with real services with working upload image
-                    postImageSuccess();
 
                     // TODO uncomment when tested with real services with working upload image
-/*                   var fd = new FormData();
+                   var fd = new FormData();
                    fd.append('file', $scope.imageSelectedPath);
                    expensePostImageSvc.postImages(
                        {
@@ -78,7 +76,7 @@ angular.module('Expenses')
                        $scope.imageSelectedPath,
                        postImageSuccess,
                        errorHandlerDefaultSvc.handleError
-                   );*/
+                   );
                 }
 
                 // TODO uncomment when tested with real services with working upload image

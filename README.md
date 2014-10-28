@@ -34,6 +34,8 @@ Folder "Cert" have certificates for release build.
 
 `grunt serve:dist` server of dist folder with compiled files
 
+'grunt serve --mockey=true' server for dev, on app folder but running MOCKEY by default.
+
 `grunt run-mockey` server for data mockup on dev mode
 
 `grunt start-mockey` async

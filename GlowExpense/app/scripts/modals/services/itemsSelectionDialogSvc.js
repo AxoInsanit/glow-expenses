@@ -12,7 +12,7 @@ angular.module('Modals').factory('itemsSelectionDialogSvc', ['$modal', function(
                     $scope.selectedEntity = null;
                     $scope.entityName = entityName;
 
-                    $scope.$on('$locationChangeStart', function(event) {
+                    $scope.$on('$locationChangeStart', function() {
                         $modalInstance.close('true');
                     });
 
