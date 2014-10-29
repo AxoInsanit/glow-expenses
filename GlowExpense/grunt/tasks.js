@@ -10,6 +10,7 @@ module.exports = function(grunt) {
 
         tasks.push(
             'jshint', 
+            'bowerInstall',
             'compass:dev', 
             // 'csslint',
             'connect:livereload',
@@ -62,6 +63,7 @@ module.exports = function(grunt) {
 
     grunt.registerTask('build', [
        'jshint',
+       'bowerInstall',
 	    grunt.config.os === 'Mac' ? 'shell:fixMacPermissions' : 'nothing',
         'clean:dist',
         'bowerInstall',
