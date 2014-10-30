@@ -46,7 +46,7 @@ angular.module('app', _mainModules )
             .otherwise({
                 redirectTo: '/login'
             });
-        
+
         var routes = [];
 
         routes.push({
@@ -72,7 +72,7 @@ angular.module('app', _mainModules )
                 controller: 'InvoiceImageCtrl'
             }
         });
-        
+
         routes.push({
             name: '/report-details/:reportId/expense',
             params: {
@@ -137,7 +137,7 @@ angular.module('app', _mainModules )
             }
         });
 
-        
+
 // yo:ngRoutes
 
         routes.forEach(function(route){
@@ -145,12 +145,14 @@ angular.module('app', _mainModules )
         });
 
         var $http,
-            interceptor = ['$q', '$injector', function ($q, $injector) {
-                var notificationChannel;
+            notificationChannel;
 
-                function success(response) {
+        $httpProvider.interceptors.push(function($q, $injector) {
+            return {
+                'response': function(response) {
                     // get $http via $injector because of circular dependency problem
                     $http = $http || $injector.get('$http');
+
                     // don't send notification until all requests are complete
                     if ($http.pendingRequests.length < 1) {
                         // get requestNotificationChannel via $injector because of circular dependency problem
@@ -158,12 +160,14 @@ angular.module('app', _mainModules )
                         // send a notification requests are complete
                         notificationChannel.requestEnded();
                     }
+
                     return response;
-                }
+                },
 
-                function error(response) {
+                'responseError': function(response) {
                     // get $http via $injector because of circular dependency problem
                     $http = $http || $injector.get('$http');
+
                     // don't send notification until all requests are complete
                     if ($http.pendingRequests.length < 1) {
                         // get requestNotificationChannel via $injector because of circular dependency problem
@@ -171,19 +175,11 @@ angular.module('app', _mainModules )
                         // send a notification requests are complete
                         notificationChannel.requestEnded();
                     }
+
                     return $q.reject(response);
                 }
-
-                return function (promise) {
-                    // get requestNotificationChannel via $injector because of circular dependency problem
-                    notificationChannel = notificationChannel || $injector.get('requestNotificationChannelSvc');
-                    // send a notification requests are complete
-                    notificationChannel.requestStarted();
-                    return promise.then(success, error);
-                };
-            }];
-
-        $httpProvider.responseInterceptors.push(interceptor);
+            };
+        });
 
 
     }])
