@@ -27,7 +27,6 @@ var _mainModules = [
     ,'ngTouch'
   //  ,'ngMock'
   //  ,'ngLocale'
-    ,'pasvaz.bindonce'
     ,'Header'
     ,'Login'
     ,'Expenses'

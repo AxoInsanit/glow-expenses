@@ -5,9 +5,9 @@
         </span>
         <div class="icon icon-close-black" ng-click="close()"></div>
     </div>
-    
+
     <form action="">
-        
+
         <div class="form-group">
             <div class="form-item">
                 <div class="loop"></div>
@@ -16,8 +16,8 @@
         </div>
     </form>
     <div class="item-container">
-        <div class="item green-hover" bindonce ng-repeat="entity in entities | filter:searchedEntity"  ng-click="selectEntity(entity)">
-            <div>{{entity.title}}</div>
+        <div class="item green-hover" ng-repeat="entity in ::entities | filter:searchedEntity"  ng-click="selectEntity(entity)">
+            <div ng-bind="::entity.title"></div>
         </div>
     </div>
 </div>
