@@ -171,21 +171,6 @@ angular.module('Expenses')
                     var newExpense = expenseSvc.create(expense);
                     var paramsObj = { 'token': localStorageSvc.getItem(sessionToken) };
 
-                    console.log('editExpenseseOriginal',newExpense);
-                    delete newExpense.currency;
-                    delete newExpense.enabled;
-                    delete newExpense.expenseType;
-                    delete newExpense.expenseTypeName;
-                    delete newExpense.imageType;
-                    delete newExpense.originalCurrencyId;
-                    delete newExpense.owner;
-                    delete newExpense.selected;
-                    delete newExpense.showDetails;
-                    delete newExpense.submiter;
-                    newExpense.exchangeRate = parseFloat(newExpense.exchangeRate);
-                    newExpense.originalAmount = parseFloat(newExpense.originalAmount);
-                    console.log('editExpenseseMod',newExpense);
-
                     expensesRepositorySvc.saveExpense(paramsObj, newExpense, saveExpenseSuccess, saveExpenseError);
                 }
 
@@ -193,7 +178,7 @@ angular.module('Expenses')
                 if(form.$valid && validateNumbersSvc.validate(expense))
                 {
                     // TODO uncomment when tested with real services with working upload image
-                   var fd = new FormData();
+/*                   var fd = new FormData();
                    fd.append('file', $scope.imageSelectedPath);
                    expensePostImageSvc.postImages(
                        {
@@ -203,7 +188,7 @@ angular.module('Expenses')
                        $scope.imageSelectedPath,
                        postImageSuccess,
                        errorHandlerDefaultSvc.handleError
-                   );
+                   );*/
 
                     // TODO remove when tested with real services with working upload image
                    postImageSuccess();

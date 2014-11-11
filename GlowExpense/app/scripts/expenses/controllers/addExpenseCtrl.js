@@ -86,25 +86,6 @@ angular.module('Expenses')
                     newExpense.originalCurrency =  expense.currency.id;
                     newExpense.owner = localStorageSvc.getItem('userName');
 
-                    console.log('addExpenseseOriginal',newExpense);
-                    delete newExpense.expenseId;
-                    delete newExpense.submiter;
-                    delete newExpense.originalCurrencyId;
-                    delete newExpense.expenseTypeName;
-                    delete newExpense.imageType;
-                    delete newExpense.currency;
-                    delete newExpense.expenseType;
-                    delete newExpense.showDetails;
-                    delete newExpense.selected;
-                    delete newExpense.enabled;
-                    delete newExpense.originalCurrency;
-                    newExpense.contableCodeId = 4434889;
-                    newExpense.provider = "provider blah";
-                    newExpense.type = "REPORTABLE_REBILLABLE";
-                    newExpense.exchangeRate = parseFloat(newExpense.exchangeRate);
-                    newExpense.originalAmount = parseFloat(newExpense.originalAmount);
-                    console.log('addExpenseseMod',newExpense);
-
 					expensesRepositorySvc.createExpense(
 
                         { 'token': localStorageSvc.getItem(sessionToken) },
