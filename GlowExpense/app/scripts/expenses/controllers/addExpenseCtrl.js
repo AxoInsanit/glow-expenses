@@ -64,8 +64,6 @@ angular.module('Expenses')
                             errorHandlerDefaultSvc.handleError
                         );
                     }
-                    // TODO remove when tested with real services with working upload image
-                    postImageSuccess();
 
                     // TODO uncomment when tested with real services with working upload image
                    var fd = new FormData();

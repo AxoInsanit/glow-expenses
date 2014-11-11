@@ -8,7 +8,7 @@ angular.module('Modals').factory('signOutDialogSvc', ['$modal', 'loginPath',
                 templateUrl: 'scripts/modals/views/sign-out-dialog.html',
                 controller: ['$scope', '$modalInstance', function($scope, $modalInstance) {
 
-                    $scope.$on('$locationChangeStart', function(event) {
+                    $scope.$on('$locationChangeStart', function() {
                         $modalInstance.close('true');
                     });
                     

@@ -11,7 +11,7 @@ angular.module('Modals').factory('expenseReportsDialogSvc', ['$modal', 'reportsS
                     $scope.reports = [];
                     $scope.searchedReport = null;
 
-                    $scope.$on('$locationChangeStart', function(event) {
+                    $scope.$on('$locationChangeStart', function() {
                         $modalInstance.close('true');
                     });
 

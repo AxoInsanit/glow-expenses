@@ -21,40 +21,41 @@
     <!-- endbuild -->
 </head>
 <body ng-app="app">
-<!-- When it is login page we dont want to slow the load with an animation so we remove them for the login -->
-<div class="container" ng-class="{ mainContainer:!loginPage,staticHeight:infScroll }" ng-view></div>
-<!-- <div class="container" ng-view></div> -->
-<!-- used for dark background -->
-<div class="overlay hide"></div>
+    <!-- When it is login page we dont want to slow the load with an animation so we remove them for the login -->
+    <div class="container" ng-class="{ mainContainer:!loginPage,staticHeight:infScroll }" ng-view></div>
+    <!-- <div class="container" ng-view></div> -->
+    <!-- used for dark background -->
+    <div class="overlay hide"></div>
 
-<script type="text/javascript" src="cordova.js"></script>
+    <loading></loading>
 
-<!-- build:js scripts/modules.js -->
+    <script type="text/javascript" src="cordova.js"></script>
 
-<!-- bower:js -->
-<script src="bower_components/es5-shim/es5-shim.js"></script>
-<script src="bower_components/jquery/jquery.js"></script>
-<script src="bower_components/angular/angular.js"></script>
-<script src="bower_components/json3/lib/json3.min.js"></script>
-<script src="bower_components/angular-route/angular-route.js"></script>
-<script src="bower_components/angular-resource/angular-resource.js"></script>
-<script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
-<script src="bower_components/angular-cookies/angular-cookies.js"></script>
-<script src="bower_components/angular-animate/angular-animate.js"></script>
-<script src="bower_components/angular-touch/angular-touch.js"></script>
-<script src="bower_components/angular-mocks/angular-mocks.js"></script>
-<script src="bower_components/underscore/underscore.js"></script>
-<script src="bower_components/ngInfiniteScroll/build/ng-infinite-scroll.js"></script>
-<script src="bower_components/snapjs/snap.js"></script>
-<script src="bower_components/angular-snap/angular-snap.js"></script>
-<script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
-<script src="bower_components/angular-bindonce/bindonce.js"></script>
-<!-- endbower -->
-<script src="bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>
-<script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
-<!-- endbuild -->
+    <!-- build:js scripts/modules.js -->
 
-<!-- build:js(app) scripts/scripts.js -->
+    <!-- bower:js -->
+    <script src="bower_components/es5-shim/es5-shim.js"></script>
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/json3/lib/json3.min.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-route/angular-route.js"></script>
+    <script src="bower_components/angular-resource/angular-resource.js"></script>
+    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
+    <script src="bower_components/angular-touch/angular-touch.js"></script>
+    <script src="bower_components/angular-mocks/angular-mocks.js"></script>
+    <script src="bower_components/underscore/underscore.js"></script>
+    <script src="bower_components/ngInfiniteScroll/build/ng-infinite-scroll.js"></script>
+    <script src="bower_components/snapjs/snap.js"></script>
+    <script src="bower_components/angular-snap/angular-snap.js"></script>
+    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <!-- endbower -->
+    <script src="bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>
+    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+    <!-- endbuild -->
+
+    <!-- build:js(app) scripts/scripts.js -->
 
 
 

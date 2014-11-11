@@ -78,9 +78,8 @@ angular.module('Expenses')
 
             if($scope.expense.imageType !== 'void')
             {
-               invoiceImageRepositorySvc.getImage(
-                   { 'token': localStorageSvc.getItem(sessionToken), 'expenseId': expenseId }
-               ), getImageSuccess, getImageError;
+                var expensePayload = { 'token': localStorageSvc.getItem(sessionToken), 'expenseId': expenseId };
+                invoiceImageRepositorySvc.getImage(expensePayload, getImageSuccess, getImageError);
             }
 
             function addExpenseSuccess(){

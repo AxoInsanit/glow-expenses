@@ -12,6 +12,7 @@ angular.module('Expenses').factory('expensePostImageSvc', ['$resource', 'baseUrl
                 'postImages' : {
                     'method': 'POST',
                     transformRequest : function(data){
+                        var FileList = FileList || {}; //Variable initialization. Check why it was not defined. Where's FileList coming from? - Talk to juan.arribillaga
                         if (data === undefined)
                         {
                             return data;
