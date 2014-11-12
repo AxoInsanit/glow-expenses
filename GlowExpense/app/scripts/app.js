@@ -146,7 +146,7 @@ angular.module('app', _mainModules )
         var $http,
             notificationChannel;
 
-        $httpProvider.interceptors.push(function($q, $injector) {
+        $httpProvider.interceptors.push(['$q', '$injector', function($q, $injector) {
             return {
                 'response': function(response) {
                     // get $http via $injector because of circular dependency problem
@@ -178,7 +178,7 @@ angular.module('app', _mainModules )
                     return $q.reject(response);
                 }
             };
-        });
+        }]);
 
 
     }])
