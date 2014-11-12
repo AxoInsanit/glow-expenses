@@ -75,6 +75,14 @@
                         </label>
                     </div>
                 </div>
+                <div class="form-item" ng-click="selectContableCode(expense.contableCode)">
+                    <div class="select-custom">
+                        <label for="contableCode">
+                            <input id="contableCode" placeholder="ContableCode" class="form-control"
+                                   ng-model="expense.contableCode.name" required>
+                        </label>
+                    </div>
+                </div>
                 <div class="form-item" >
                     <label for="exchangeRate">
                         <input type="text" id="exchangeRate" class="form-control"

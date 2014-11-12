@@ -2,8 +2,8 @@
 
 angular.module('Expenses')
     .factory('expenseSvc',
-        ['currenciesSvc', 'reportable',
-            function(currenciesSvc, reportable) {
+        ['currenciesSvc', 'contableCodesSvc', 'reportable',
+            function(currenciesSvc, contableCodesSvc, reportable) {
 
     function Expense(initData){
         var self = this;
@@ -15,7 +15,7 @@ angular.module('Expenses')
         self.invoiceNumber = initData.invoiceNumber || 0;
         self.date = initData.date || null;
         self.originalCurrencyId = initData.originalCurrencyId || 0;
-        self.originalAmount = initData.originalAmount || 0;
+        self.originalAmount = parseFloat(initData.originalAmount) || 0;
         self.exchangeRate = initData.exchangeRate || 1;
         self.expenseTypeName = initData.type || null;
         self.imageType = initData.imageType || 'void';
@@ -24,6 +24,7 @@ angular.module('Expenses')
         self.type = initData.type || null;
 
         self.currency = null;
+        self.contableCode = null;
         self.expenseType = reportable;
         self.showDetails = false;
         self.selected = false;
@@ -43,8 +44,23 @@ angular.module('Expenses')
             }
         }
 
+        function setContableCode(){
+            var contableCodes = contableCodesSvc.get();
+            contableCodes.some(function(contableCode){
+                if (contableCode.id === self.originalCurrencyId){
+                    self.contableCode = contableCode;
+                    return true;
+                }
+            });
+            if (!self.contableCode){
+                // TODO how we handle errors in the app
+                // throw exception
+            }
+        }
+
         function initialize(){
             setCurrency();
+            setContableCode();
         }
 
         initialize();

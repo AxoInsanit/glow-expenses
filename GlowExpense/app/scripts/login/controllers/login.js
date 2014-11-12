@@ -1,9 +1,10 @@
 'use strict';
 
 angular.module('Login').controller('LoginCtrl', ['$scope', '$location', 'UserSvc', 'errorMsg', 'localStorageSvc',
-    'currenciesRepositorySvc', 'currenciesSvc', 'sessionToken', 'userName', 'errorHandlerDefaultSvc', 'expenseSharingSvc',
+    'currenciesRepositorySvc', 'currenciesSvc', 'contableCodesRepositorySvc', 'contableCodesSvc', 'sessionToken',
+    'userName', 'errorHandlerDefaultSvc', 'expenseSharingSvc',
     function ($scope, $location, UserSvc, errorMsg, localStorageSvc, currenciesRepositorySvc, currenciesSvc,
-              sessionToken, userName, errorHandlerDefaultSvc, expenseSharingSvc) {
+              contableCodesRepositorySvc, contableCodesSvc, sessionToken, userName, errorHandlerDefaultSvc, expenseSharingSvc) {
 
         $scope.errorMessage = errorMsg;
         $scope.showErrorMessage = false;
@@ -12,6 +13,10 @@ angular.module('Login').controller('LoginCtrl', ['$scope', '$location', 'UserSvc
 
             function getCurrenciesSuccess(result){
                 currenciesSvc.set(result.currencies);
+            }
+
+            function getContableCodesSuccess(result){
+                contableCodesSvc.set(result.contableCodes);
             }
 
             function loginSuccess(response) {
@@ -26,6 +31,11 @@ angular.module('Login').controller('LoginCtrl', ['$scope', '$location', 'UserSvc
                         errorHandlerDefaultSvc.handleError
                     );
 
+                    contableCodesRepositorySvc.getContableCodes(
+                        { 'token': localStorageSvc.getItem(sessionToken) },
+                        getContableCodesSuccess(),
+                        errorHandlerDefaultSvc.handleError
+                    );
 
                     expenseSharingSvc.getExpenses().then(function(){
                         $location.path('/expenses');
