@@ -40,7 +40,7 @@ var _mainModules = [
 ];
 
 angular.module('app', _mainModules )
-    .config(['$routeProvider', '$httpProvider', function($routeProvider, $httpProvider){
+    .config(['$routeProvider', '$httpProvider', '$compileProvider', function($routeProvider, $httpProvider, $compileProvider){
         $routeProvider
             .otherwise({
                 redirectTo: '/login'
@@ -180,7 +180,8 @@ angular.module('app', _mainModules )
             };
         }]);
 
-
+        // avoid unsafe prefix on device image's sources
+        $compileProvider.imgSrcSanitizationWhitelist(/^\s*(https?|file|blob|cdvfile|content):|data:image\//);
     }])
     .constant('serverErrorMsg','Server error!')
     .constant('sessionToken', 'session-token')

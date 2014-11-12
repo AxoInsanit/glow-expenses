@@ -16,6 +16,8 @@ angular.module('Expenses')
                     baseUrlMockeyWeb, validateNumbersSvc, cameraSelectDialog, expenseIdShareSvc, cameraSelectDialogListenerSvc,
             expensePostImageSvc, saveExpenseStateSvc) {
 
+            var imageSelected = false;
+
             $scope.title = editExpensesTitle;
             $scope.buttonLabel = editExpensesButtonLabel;
             $scope.showErrorMessage = false;
@@ -29,6 +31,7 @@ angular.module('Expenses')
                 cameraSelectDialog.open().then(function() {
 
                     cameraSvc.takePhoto().then(function(result){
+                        imageSelected = true;
                         $scope.imageSelectedPath = result;
                     });
                 });
@@ -37,9 +40,7 @@ angular.module('Expenses')
             var expenseWithSavedState = saveExpenseStateSvc.get();
 
             if (!expenseWithSavedState){
-                var expenseId = getIdFromLocationSvc.getLastIdFromLocation($location.path());
-
-                $scope.expense = angular.copy(expenseSharingSvc.getExpenseById(expenseId, $scope.reportId));
+                $scope.expense = angular.copy(expenseSharingSvc.getExpenseById($scope.expenseId, $scope.reportId));
             }
             else {
                 $scope.expense = expenseWithSavedState;
@@ -68,18 +69,9 @@ angular.module('Expenses')
                 $scope.imageSelectedPath = '';
             }
 
-            function getImageSuccess(result){
-                $scope.imageSelectedPath = result;
-            }
-
-            function getImageError(){
-                $scope.imageSelectedPath = '';
-            }
-
             if($scope.expense.imageType !== 'void')
             {
-                var expensePayload = { 'token': localStorageSvc.getItem(sessionToken), 'expenseId': expenseId };
-                invoiceImageRepositorySvc.getImage(expensePayload, getImageSuccess, getImageError);
+                $scope.imageSelectedPath = invoiceImageRepositorySvc.getImage(localStorageSvc.getItem(sessionToken), $scope.expenseId);
             }
 
             function addExpenseSuccess(){
@@ -177,21 +169,14 @@ angular.module('Expenses')
 
                 if(form.$valid && validateNumbersSvc.validate(expense))
                 {
-                    // TODO uncomment when tested with real services with working upload image
-/*                   var fd = new FormData();
-                   fd.append('file', $scope.imageSelectedPath);
-                   expensePostImageSvc.postImages(
-                       {
-                           'expenseId': $scope.expense.expenseId,
-                           'token': localStorageSvc.getItem(sessionToken)
-                       },
-                       $scope.imageSelectedPath,
-                       postImageSuccess,
-                       errorHandlerDefaultSvc.handleError
-                   );*/
-
-                    // TODO remove when tested with real services with working upload image
-                   postImageSuccess();
+                  if (imageSelected) {
+                    expensePostImageSvc.postImages($scope.imageSelectedPath,
+                      localStorageSvc.getItem(sessionToken),
+                      $scope.expense.expenseId
+                    ).then(postImageSuccess, errorHandlerDefaultSvc.handleError, function (progress) {
+                        console.log('expenses-post-image', progress);
+                      });
+                  }
                 }
                 else
                 {
@@ -220,6 +205,7 @@ angular.module('Expenses')
             $scope.takePhoto = function() {
                 cameraSelectDialog.open().then(function() {
                     cameraSvc.takePhoto().then(function(result){
+                        imageSelected = true;
                         $scope.imageSelectedPath = result;
                         saveExpenseStateSvc.setImage(result);
                     });

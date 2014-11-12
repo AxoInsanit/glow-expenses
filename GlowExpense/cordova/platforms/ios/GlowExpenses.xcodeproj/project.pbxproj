@@ -41,6 +41,10 @@
 		AB655E41F67340138045F9C7 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65673D84A1F14DCC8BA9EC79 /* ImageIO.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		C28D74DC8ACE4D0BBD7A8AB4 /* CDVJpegHeaderWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = E295D90665EC4B5B803AD212 /* CDVJpegHeaderWriter.m */; };
 		D4A0D8761607E02300AEF8BB /* Default-568h@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = D4A0D8751607E02300AEF8BB /* Default-568h@2x~iphone.png */; };
+		D0DB9F65D57F4C9391649A96 /* CDVFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 325769269C78431B8666BA2D /* CDVFile.m */; };
+		A7A4D0962DEE4B70B08188EA /* CDVLocalFilesystem.m in Sources */ = {isa = PBXBuildFile; fileRef = CF536D3C79154C038429EB17 /* CDVLocalFilesystem.m */; };
+		EFA93ABE324A4F2DBD6A8941 /* CDVAssetLibraryFilesystem.m in Sources */ = {isa = PBXBuildFile; fileRef = 4549DC35D1734242A6211D73 /* CDVAssetLibraryFilesystem.m */; };
+		CDA45000B07F46B384294D58 /* CDVFileTransfer.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B9B48F30663440BB8DE6C48 /* CDVFileTransfer.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -111,6 +115,14 @@
 		EB87FDF31871DA8E0020F90C /* www */ = {isa = PBXFileReference; lastKnownFileType = folder; name = www; path = ../../www; sourceTree = "<group>"; };
 		EB87FDF41871DAF40020F90C /* config.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = config.xml; path = ../../config.xml; sourceTree = "<group>"; };
 		F840E1F0165FE0F500CFE078 /* config.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = config.xml; path = GlowExpenses/config.xml; sourceTree = "<group>"; };
+		325769269C78431B8666BA2D /* CDVFile.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "CDVFile.m"; path = "org.apache.cordova.file/CDVFile.m"; sourceTree = "<group>"; fileEncoding = 4; };
+		CF536D3C79154C038429EB17 /* CDVLocalFilesystem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "CDVLocalFilesystem.m"; path = "org.apache.cordova.file/CDVLocalFilesystem.m"; sourceTree = "<group>"; fileEncoding = 4; };
+		4549DC35D1734242A6211D73 /* CDVAssetLibraryFilesystem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "CDVAssetLibraryFilesystem.m"; path = "org.apache.cordova.file/CDVAssetLibraryFilesystem.m"; sourceTree = "<group>"; fileEncoding = 4; };
+		3D5EA6B967A84FDD8D63A50C /* CDVFile.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "CDVFile.h"; path = "org.apache.cordova.file/CDVFile.h"; sourceTree = "<group>"; fileEncoding = 4; };
+		4580F5B8E492416589F2305D /* CDVLocalFilesystem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "CDVLocalFilesystem.h"; path = "org.apache.cordova.file/CDVLocalFilesystem.h"; sourceTree = "<group>"; fileEncoding = 4; };
+		440D9D38DC68429E91DA5AFD /* CDVAssetLibraryFilesystem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "CDVAssetLibraryFilesystem.h"; path = "org.apache.cordova.file/CDVAssetLibraryFilesystem.h"; sourceTree = "<group>"; fileEncoding = 4; };
+		2B9B48F30663440BB8DE6C48 /* CDVFileTransfer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "CDVFileTransfer.m"; path = "org.apache.cordova.file-transfer/CDVFileTransfer.m"; sourceTree = "<group>"; fileEncoding = 4; };
+		BB6952B2F7934E80B5613718 /* CDVFileTransfer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "CDVFileTransfer.h"; path = "org.apache.cordova.file-transfer/CDVFileTransfer.h"; sourceTree = "<group>"; fileEncoding = 4; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -238,6 +250,14 @@
 				6649355E4DE140E5A605F4F1 /* CDVCamera.h */,
 				220E7D8CD1644F4EAE8D3C57 /* CDVJpegHeaderWriter.h */,
 				A6BD11ADAB0E4377AFF3EECE /* CDVExif.h */,
+				325769269C78431B8666BA2D /* CDVFile.m */,
+				CF536D3C79154C038429EB17 /* CDVLocalFilesystem.m */,
+				4549DC35D1734242A6211D73 /* CDVAssetLibraryFilesystem.m */,
+				3D5EA6B967A84FDD8D63A50C /* CDVFile.h */,
+				4580F5B8E492416589F2305D /* CDVLocalFilesystem.h */,
+				440D9D38DC68429E91DA5AFD /* CDVAssetLibraryFilesystem.h */,
+				2B9B48F30663440BB8DE6C48 /* CDVFileTransfer.m */,
+				BB6952B2F7934E80B5613718 /* CDVFileTransfer.h */,
 			);
 			name = Plugins;
 			path = GlowExpenses/Plugins;
@@ -434,6 +454,10 @@
 				302D95F114D2391D003F00A1 /* MainViewController.m in Sources */,
 				9ECE33D59EB94BD4AB156823 /* CDVCamera.m in Sources */,
 				C28D74DC8ACE4D0BBD7A8AB4 /* CDVJpegHeaderWriter.m in Sources */,
+				D0DB9F65D57F4C9391649A96 /* CDVFile.m in Sources */,
+				A7A4D0962DEE4B70B08188EA /* CDVLocalFilesystem.m in Sources */,
+				EFA93ABE324A4F2DBD6A8941 /* CDVAssetLibraryFilesystem.m in Sources */,
+				CDA45000B07F46B384294D58 /* CDVFileTransfer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

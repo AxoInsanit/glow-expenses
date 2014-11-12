@@ -12,7 +12,6 @@ angular.module('Expenses')
           cameraSvc, invoiceImageRepositorySvc, cameraSelectDialog, validateNumbersSvc, baseUrlMockeyWeb, expensesUrl, imagesUrl,
           expensePostImageSvc) {
 
-
             $scope.title = addExpensesTitle;
             $scope.buttonLabel = addExpensesButtonLabel;
             $scope.showErrorMessage = false;
@@ -65,18 +64,15 @@ angular.module('Expenses')
                         );
                     }
 
-                    // TODO uncomment when tested with real services with working upload image
-                   var fd = new FormData();
-                   fd.append('file', $scope.imageSelectedPath);
-                   expensePostImageSvc.postImages(
-                       {
-                           'expenseId': createdExpenseId,
-                           'token': localStorageSvc.getItem(sessionToken)
-                       },
-                       $scope.imageSelectedPath,
-                       postImageSuccess,
-                       errorHandlerDefaultSvc.handleError
-                   );
+                  // upload image
+                  if ($scope.imageSelectedPath) {
+                    expensePostImageSvc.postImages($scope.imageSelectedPath,
+                      localStorageSvc.getItem(sessionToken),
+                      createdExpenseId
+                    ).then(postImageSuccess, errorHandlerDefaultSvc.handleError, function (progress) {
+                        console.log('expenses-post-image', progress);
+                    });
+                  }
                 }
 
                 // TODO uncomment when tested with real services with working upload image
@@ -86,7 +82,7 @@ angular.module('Expenses')
                     newExpense.originalCurrency =  expense.currency.id;
                     newExpense.owner = localStorageSvc.getItem('userName');
 
-					expensesRepositorySvc.createExpense(
+                    expensesRepositorySvc.createExpense(
 
                         { 'token': localStorageSvc.getItem(sessionToken) },
                         newExpense,
