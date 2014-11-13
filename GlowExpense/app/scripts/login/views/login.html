@@ -6,18 +6,9 @@
         </div>
     </div>
     <div class="bottom-part clearfix">
-        <form role="form" name="loginForm">
-            <div class="form-group">
-                <input type="text" id="username" placeholder="Username*"  class="form-control" ng-model="user.username" ng-click="onFocus($event)" ng-blur="onBlur($event)" required autofocus>
-            </div>
-            <div class="form-group">
-                <input type="password" id="password" placeholder="Password*" class="form-control" ng-model="user.password" ng-click="onFocus($event)" ng-blur="onBlur($event)" required>
-            </div>
-            <button class="btn" ng-class="{ disabled: loginForm.$invalid }" type="submit" ng-click="login(user)" ng-disabled="loginForm.$invalid">SIGN IN</button>
-            <div ng-show="showErrorMessage">
-                <div class="msg errorMsg font15">{{errorMessage}}</div>
-            </div>
-        </form>
+
+        <button class="btn" type="submit" ng-click="login()">SIGN IN</button>
+
         <div class="logo">
             <a href="#">
                 <img src="resources/images/bot-logo.png" alt="">
