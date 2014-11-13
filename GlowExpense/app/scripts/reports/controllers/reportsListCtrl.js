@@ -4,21 +4,21 @@ angular.module('Reports')
     .controller('ReportsListCtrl', ['$scope', '$location', 'reportsSharingSvc',
         'editModeNotificationChannelSvc', 'reportsRepositorySvc', 'filterReportByStateSvc', 'entityName',
         'confirmDeleteDialogSvc', 'reportDetailsPath', 'sessionToken', 'errorHandlerDefaultSvc', 'localStorageSvc',
-        'infiniteScrollEnabled',
+        'infiniteScrollEnabled', '$filter',
             function ($scope, $location, reportsSharingSvc, editModeNotificationChannelSvc,
                       reportsRepositorySvc, filterReportByStateSvc, entityName, confirmDeleteDialogSvc,
-                      reportDetailsPath, sessionToken, errorHandlerDefaultSvc, localStorageSvc, infiniteScrollEnabled)  {
-
-            $scope.sort = function(item) {
-                return new Date(item.creationDate);
-            };
+                      reportDetailsPath, sessionToken, errorHandlerDefaultSvc, localStorageSvc, infiniteScrollEnabled, $filter)  {
 
             $scope.selectedExpenseIndex = reportsSharingSvc.selectedReport;
 
             $scope.reports = [];
 
             reportsSharingSvc.getReports().then(function(result){
-                $scope.reports = result;
+                function sortByRejected(item) {
+                    return item.state.indexOf('Rejected') < 0;
+                }
+
+                $scope.reports = $filter('orderBy')(result, sortByRejected);
             });
 
             $scope.isEditMode = false;
