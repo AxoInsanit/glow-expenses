@@ -157,13 +157,13 @@ angular.module('Expenses')
                     });
                 }
 
-                function postImageSuccess(){
+                function saveExpense(){
                     expense.date = $scope.expense.date;
 
                     var newExpense = expenseSvc.create(expense);
                     var paramsObj = { 'token': localStorageSvc.getItem(sessionToken) };
 
-                    expensesRepositorySvc.saveExpense(paramsObj, newExpense, saveExpenseSuccess, saveExpenseError);
+                    expensesRepositorySvc.saveExpense(paramsObj, newExpense.getData(), saveExpenseSuccess, saveExpenseError);
                 }
 
 
@@ -173,9 +173,11 @@ angular.module('Expenses')
                     expensePostImageSvc.postImages($scope.imageSelectedPath,
                       localStorageSvc.getItem(sessionToken),
                       $scope.expense.expenseId
-                    ).then(postImageSuccess, errorHandlerDefaultSvc.handleError, function (progress) {
-                        console.log('expenses-post-image', progress);
-                      });
+                    ).then(saveExpense, errorHandlerDefaultSvc.handleError, function (progress) {
+                      console.log('expenses-post-image', progress);
+                    });
+                  } else {
+                    saveExpense();
                   }
                 }
                 else

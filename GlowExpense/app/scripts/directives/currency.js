@@ -12,7 +12,7 @@
 
         var f = function (modelValue, setdec) {
             setdec = setdec !== undefined ? setdec : true;
-            var decimalSplit = modelValue.toString().split('.');
+            var decimalSplit = modelValue ? modelValue.toString().split('.') : ['1', '0'];
             var intPart = decimalSplit[0];
             var decPart = decimalSplit[1];
 

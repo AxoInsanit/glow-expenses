@@ -14,10 +14,15 @@ angular.module('Services').factory('localStorageSvc', [function(){
         return localStorage.getItem(key);
     }
 
+    function removeItem(key) {
+      return localStorage.removeItem(key);
+    }
+
     return {
         localStorageExists: localStorageExists,
         setItem: setItem,
-        getItem: getItem
+        getItem: getItem,
+        removeItem: removeItem
     };
 }
 ]);

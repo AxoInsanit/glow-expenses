@@ -1,10 +1,11 @@
 'use strict';
 
 angular.module('Login')
-  .controller('LoginCtrl', function ($scope, $location, UserSvc, errorMsg, localStorageSvc,
-                                                          currenciesRepositorySvc, currenciesSvc, sessionToken,
-                                                          userName, errorHandlerDefaultSvc, expenseSharingSvc,
-                                                          requestNotificationChannelSvc) {
+  .controller('LoginCtrl', function ($scope, $location, UserSvc, errorMsg, localStorageSvc, currenciesRepositorySvc,
+                                     currenciesSvc, sessionToken, userName, errorHandlerDefaultSvc, expenseSharingSvc,
+                                     requestNotificationChannelSvc) {
+
+      var savedToken = localStorageSvc.getItem('session-token');
 
       function getExpenses() {
         expenseSharingSvc.getExpenses().then(function() {
@@ -14,40 +15,43 @@ angular.module('Login')
         });
       }
 
-      $scope.login = function(){
-          var sessionToken = localStorageSvc.getItem('session-token');
-          function getCurrenciesSuccess(result){
-              currenciesSvc.set(result.currencies);
-          }
+      function getCurrencies(token) {
+        currenciesRepositorySvc.getCurrencies({
+            token: token
+          },
+          function (result){
+            currenciesSvc.set(result.currencies);
+          },
+          errorHandlerDefaultSvc.handleError
+        );
+      }
 
+      $scope.login = function() {
           // start loader
           requestNotificationChannelSvc.requestStarted();
 
-          if (sessionToken) {
-            getExpenses();
-          } else {
-            // init login flow
-            UserSvc.login().then(function (sessionToken) {
+          // init login flow
+          UserSvc.login().then(function (token) {
               if (localStorageSvc.localStorageExists()) {
-                $scope.showErrorMessage = false;
-                localStorageSvc.setItem('session-token', sessionToken);
+                  $scope.showErrorMessage = false;
+                  localStorageSvc.setItem(sessionToken, token);
 
-                currenciesRepositorySvc.getCurrencies(
-                  { 'token': sessionToken },
-                  getCurrenciesSuccess,
-                  errorHandlerDefaultSvc.handleError
-                );
-                
-                getExpenses();
+                  getCurrencies(token);
+                  getExpenses();
 
               } else {
-                requestNotificationChannelSvc.requestEnded();
+                  requestNotificationChannelSvc.requestEnded();
               }
-            }, function (){
+          }, function (){
               errorHandlerDefaultSvc.handleError({});
               requestNotificationChannelSvc.requestEnded();
-            });
-          }
-
+          });
       };
+
+      // if token exists then proceed
+      if (savedToken) {
+          getCurrencies(savedToken);
+          getExpenses();
+      }
+
   });
