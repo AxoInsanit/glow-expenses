@@ -11,7 +11,8 @@ angular.module('Services').service('oAuthInAppBrowser', function ($window) {
     login: function (url, resolveToken, rejectToken) {
 
       var inAppBrowser = $window.open(url, '_blank', 'location=no,clearcache=yes,clearsessioncache=yes,closebuttoncaption=Cancel,toolbar=yes'),
-        browserInterval;
+        browserInterval,
+        tokenFound = false;
 
       function showSpinner() {
         inAppBrowser.executeScript({code: loadingScript.show});
@@ -47,6 +48,7 @@ angular.module('Services').service('oAuthInAppBrowser', function ($window) {
             }
           });
           if (oAuthToken) {
+            tokenFound = true;
             // clean & close inAppBrowser
             inAppBrowser.removeEventListener('close', rejectToken);
             inAppBrowser.removeEventListener('exit', rejectToken);
@@ -80,6 +82,9 @@ angular.module('Services').service('oAuthInAppBrowser', function ($window) {
             checkToken(inAppBrowser);
           } else {
             clearInterval(browserInterval);
+            if (!tokenFound) {
+              rejectToken();
+            }
           }
         }, 2000);
       }

@@ -1,67 +1,53 @@
 'use strict';
 
-angular.module('Login').controller('LoginCtrl', ['$scope', '$location', 'UserSvc', 'errorMsg', 'localStorageSvc',
-    'currenciesRepositorySvc', 'currenciesSvc', 'sessionToken', 'userName', 'errorHandlerDefaultSvc', 'expenseSharingSvc',
-    function ($scope, $location, UserSvc, errorMsg, localStorageSvc, currenciesRepositorySvc, currenciesSvc,
-              sessionToken, userName, errorHandlerDefaultSvc, expenseSharingSvc) {
+angular.module('Login')
+  .controller('LoginCtrl', function ($scope, $location, UserSvc, errorMsg, localStorageSvc,
+                                                          currenciesRepositorySvc, currenciesSvc, sessionToken,
+                                                          userName, errorHandlerDefaultSvc, expenseSharingSvc,
+                                                          requestNotificationChannelSvc) {
 
-        $scope.errorMessage = errorMsg;
-        $scope.showErrorMessage = false;
-        $scope.loginPage = true;
-        $scope.login = function(){
+      function getExpenses() {
+        expenseSharingSvc.getExpenses().then(function() {
+          $location.path('/expenses');
+        }).finally(function() {
+          requestNotificationChannelSvc.requestEnded();
+        });
+      }
 
-            function getCurrenciesSuccess(result){
-                currenciesSvc.set(result.currencies);
-            }
+      $scope.login = function(){
+          var sessionToken = localStorageSvc.getItem('session-token');
+          function getCurrenciesSuccess(result){
+              currenciesSvc.set(result.currencies);
+          }
 
-//            function loginSuccess(response) {
-//                if( localStorageSvc.localStorageExists() ){
-//                    $scope.showErrorMessage = false;
-//                    localStorageSvc.setItem(sessionToken, response.session_token);
-//                    localStorageSvc.setItem(userName, $scope.user.username);
-//
-//                    currenciesRepositorySvc.getCurrencies(
-//                        { 'token': localStorageSvc.getItem(sessionToken) },
-//                        getCurrenciesSuccess,
-//                        errorHandlerDefaultSvc.handleError
-//                    );
-//
-//
-//                    expenseSharingSvc.getExpenses().then(function(){
-//                        $location.path('/expenses');
-//                    });
-//
-//                } else {
-//                    loginError();
-//                }
-//            }
-//
-//            function loginError(errorResponse){
-//                errorHandlerDefaultSvc.handleError(errorResponse).then(function(){
-//                    $scope.showErrorMessage = true;
-//                    $scope.user.password = '';
-//                });
-//            }
+          // start loader
+          requestNotificationChannelSvc.requestStarted();
 
-            //We have to use the actions this way
+          if (sessionToken) {
+            getExpenses();
+          } else {
+            // init login flow
             UserSvc.login().then(function (sessionToken) {
-                if( localStorageSvc.localStorageExists() ){
-                    $scope.showErrorMessage = false;
-                    localStorageSvc.setItem('session-token', sessionToken);
+              if (localStorageSvc.localStorageExists()) {
+                $scope.showErrorMessage = false;
+                localStorageSvc.setItem('session-token', sessionToken);
 
-                    currenciesRepositorySvc.getCurrencies(
-                        { 'token': sessionToken },
-                        getCurrenciesSuccess,
-                        errorHandlerDefaultSvc.handleError
-                    );
+                currenciesRepositorySvc.getCurrencies(
+                  { 'token': sessionToken },
+                  getCurrenciesSuccess,
+                  errorHandlerDefaultSvc.handleError
+                );
+                
+                getExpenses();
 
-                    expenseSharingSvc.getExpenses().then(function(){
-                        $location.path('/expenses');
-                    });
-
-                }
+              } else {
+                requestNotificationChannelSvc.requestEnded();
+              }
             }, function (){
               errorHandlerDefaultSvc.handleError({});
+              requestNotificationChannelSvc.requestEnded();
             });
-        };
-    }]);
+          }
+
+      };
+  });
