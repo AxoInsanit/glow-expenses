@@ -15,9 +15,12 @@
             </div>
         </div>
     </form>
-    <div class="item-container">
-        <div class="item green-hover" ng-repeat="entity in ::entities | filter:searchedEntity"  ng-click="selectEntity(entity)">
-            <div ng-bind="::entity.title"></div>
+    <div class="item-container accelerated">
+        <!-- NOTE!     doesn't work the search if you use "::"-->
+        <div class="item green-hover" ng-repeat="entity in entities | filter:searchedEntity | limitTo:limitTo track by entity.id"
+             ng-click="selectEntity(entity)">
+
+            <div ng-bind="entity.title"></div>
         </div>
     </div>
 </div>
