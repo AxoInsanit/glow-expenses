@@ -2,7 +2,7 @@
     <nav>
         <ul class="single">
             <li class="btn-helper close">
-                <a class="icon icon-close-black"  back-button></a>
+                <a class="icon icon-close"  back-button></a>
             </li>
             <li class="btn-main">
                 <a class="active"><span>{{title}}</span></a>
@@ -14,13 +14,13 @@
 <article class="expenses-body with-padding" ng-controller="AddEditExpenseCtrl">
     <section class="camera">
         <div ng-hide="imageSelectedPath.length>1">
-            <a class="icon icon-camera-big" ng-click="angular.isDefined(takePhoto()) && takePhoto()" >
+            <a class="icon icon-camera" ng-click="angular.isDefined(takePhoto()) && takePhoto()" >
             </a>
             <p class="text-info">Add Invoice Image </p>
         </div>
 
         <div ng-show="imageSelectedPath.length>1" ng-click="viewImage()">
-            <a class="icon icon-camera-big expense-image">
+            <a class="icon icon-camera expense-image">
                 <img ng-src="{{imageSelectedPath}}" />
             </a>
 
@@ -32,7 +32,7 @@
         <div ng-show="showErrorMessage" class="error-message">
             <div class="msg errorMsg">{{errorMessage}}
             </div>
-            <a class="icon icon-error-close">x</a>
+            <a class="icon icon-close"></a>
         </div>
         <div>
             <div class="form-group bottom20">

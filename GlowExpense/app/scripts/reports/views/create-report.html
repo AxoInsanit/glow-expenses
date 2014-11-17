@@ -3,7 +3,7 @@
         <nav>
             <ul class="single">
                 <li class="btn-helper close">
-                    <a class="icon icon-close-black"  back-button></a>
+                    <a class="icon icon-close"  back-button></a>
                 </li>
                 <li class="btn-main">
                     <a class="active"><span>Create Report</span></a>
@@ -17,7 +17,7 @@
             <div ng-show="showErrorMessage" class="error-message">
             <div class="msg errorMsg">{{errorMessage}}
             </div>
-            <a class="icon icon-error-close">x</a>
+            <a class="icon icon-close"></a>
         </div>
             <div class="form-group bottom20">
                 <div class="form-item">
@@ -31,21 +31,21 @@
                 <div class="form-item checked">
                     <label for="test">
                         <input type="radio" class="input-checked" id="test" placeholder="Title" name="assign"  class="form-control" ng-model="expense.description">
-                        <span class="icon icon-check-green"></span>
+                        <span class="icon icon-check"></span>
                         Project Assigned
                     </label>
                 </div>
                 <div class="form-item checked">
                     <label for="test_1">
                         <input type="radio" class="input-checked" id="test_1" placeholder="Title" name="assign"  class="form-control" ng-model="expense.description">
-                        <span class="icon icon-check-green"></span>
+                        <span class="icon icon-check"></span>
                         All Projects
                     </label>
                 </div>
                 <div class="form-item checked">
                     <label for="test_2">
                         <input type="radio" class="input-checked" id="test_2" placeholder="Title" name="assign"  class="form-control" ng-model="expense.description">
-                        <span class="icon icon-check-green"></span>
+                        <span class="icon icon-check"></span>
                         Organizational Unit
                     </label>
                 </div>
@@ -58,7 +58,7 @@
                     </div>
                 </div>
             </div>
-        </div>      
+        </div>
         <div class="btn-fixed">
             <button class="btn" type="submit" ng-click="save(reportForm, report)">Create</button>
         </div>

@@ -1,96 +1,11 @@
-/*
------------------------------------------------------------------------------------------------
-Fonts
------------------------------------------------------------------------------------------------
-*/
-
-@font-face {
-  font-family: "HalvaticaNeue";
-  src: url('../resources/fonts/HelveticaNeue.otf') format('opentype'); 
-  font-weight: normal;
-}
-@font-face {
-  font-family: "HalvaticaNeueBold";
-  src: url('../resources/fonts/HelveticaNeue-Bold.otf') format('opentype'); 
-  font-weight: normal;
-}
-@font-face {
-  font-family: "HalvaticaNeueLight";
-  src: url('../resources/fonts/HelveticaNeue-Light.otf') format('opentype'); 
-  font-weight: normal;
-}
-@font-face {
-  font-family: "FrutigerBlack";
-  src: url('../resources/fonts/Frutiger-Black.ttf') format('truetype'); 
-  font-weight: normal;
-}
-@font-face {
-  font-family: "FrutigerLight";
-  src: url('../resources/fonts/Frutiger-Light.ttf') format('truetype'); 
-  font-weight: normal;
-}
+@import "base/_reset";
+@import "base/_icon-fonts";
 
 
+/*------------------------------------*\
+    $GLOBAL-STYLES
+\*------------------------------------*/
 
-// RESET
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed, 
-figure, figcaption, footer, header, hgroup, 
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  font-size: 100%;
-  font: inherit;
-  vertical-align: baseline;
-  font-family: "HalvaticaNeue";
-}
-input {
-  font-family: "HalvaticaNeue";
-}
-/* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure, 
-footer, header, hgroup, menu, nav, section {
-  display: block;
-}
-body {
-  line-height: 1;
-}
-ol, ul {
-  list-style: none;
-}
-blockquote, q {
-  quotes: none;
-}
-blockquote:before, blockquote:after,
-q:before, q:after {
-  content: '';
-  content: none;
-}
-table {
-  border-collapse: collapse;
-  border-spacing: 0;
-}
-
-* , 
-*:before , 
-*:after {
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-  word-break:break-word;
-}
-
-// GLOBAL STYLES
 .underlined{
   text-decoration:underline;
 }
@@ -111,6 +26,7 @@ table {
 }
 
 // BUTTONS
+
 .btn {
   @include btn();
   @include border-radius(5px);
@@ -126,12 +42,17 @@ table {
     float: left;
     line-height: 36px;
     padding-left: 5px;
-  }  
+  }
 }
 .btn-with-icon.create-report {
   span {
     color: $text-green;
     font-weight: bold;
+  }
+  .icon {
+    padding-left: 0px;
+    padding-right: 5px;
+    font-size: 2em;
   }
 }
 
@@ -147,56 +68,7 @@ table {
 a {
   text-decoration: none;
 }
-.icon {
-  background-image:url('../resources/images/low-res/sprite.png');
-  display: block;
-  width: 36px;
-  height: 36px;
-  &.icon-edit {
-    background-position: 0px -414px;
-  }
-  &.icon-photo {
-    background-position: 0px -460px;
-  }
-  &.icon-photo-taken {
-    background-position: 0px -184px;
-  }
-  &.icon-create-report {
-    background-position: 0px 0px;
-  }
-  &.icon-back-arrow {
-    background-position: 0px -92px;
-  }
-  &.icon-alert {
-    background-position: 0px -46px;
-  }
-  &.icon-sign-out {
-    background-position: 0px -644px;
-  }
-  &.icon-delete {
-    background-position: 0px -230px;
-    margin-right: 10px;
-  }
-  &.icon-close-black {
-    background-position: 0px -276px;
-  }
-  &.icon-close-green {
-    background-position: 0px -322px;
-  }
-  &.icon-close-white {
-    background-position: 0px -368px;
-  }
-  &.icon-check-green {
-    background-position: 0px -138px;
-  }
-  &.icon-camera-big {
-    background-image:url('../resources/images/low-res/edit-image-big.png');
-    width: 96px;
-    height: 96px;
-    @include centered();
-  }
 
-}
 .circle {
   width: 36px;
   height: 36px;
@@ -211,7 +83,9 @@ a {
     background: $bg-green;
   }
 }
-// Mitko styles
+
+// MITKO STYLES
+
 .html {
   overflow: hidden;
 }
@@ -274,17 +148,17 @@ a {
   background-size: 100% 100%;
 }
 
-//Modals 
+// MODALS
 
 #photo-control {
-  
+
   .btn {
     float: none;
     width: 100%;
-    
+
     &:first-child {
       border-right: none;
-      border-bottom: 1px solid $border-grey-dark;  
+      border-bottom: 1px solid $border-grey-dark;
     }
   }
 }
