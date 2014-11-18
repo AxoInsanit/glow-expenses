@@ -11,6 +11,7 @@ angular.module('Modals').factory('itemsSelectionDialogSvc', ['$modal', function(
                     $scope.searchedEntity = null;
                     $scope.selectedEntity = null;
                     $scope.entityName = entityName;
+                    $scope.limitTo = 10;
 
                     $scope.$on('$locationChangeStart', function() {
                         $modalInstance.close('true');
@@ -20,6 +21,7 @@ angular.module('Modals').factory('itemsSelectionDialogSvc', ['$modal', function(
                         $scope.selectedEntity = entity;
                         $modalInstance.close($scope.selectedEntity);
                     };
+
 
                     $scope.close = function() {
                         $modalInstance.close($scope.selectedEntity);
