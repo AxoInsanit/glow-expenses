@@ -3,7 +3,7 @@
         <nav>
             <ul class="single">
                 <li class="btn-helper close">
-                    <a class="icon icon-close-black"  back-button></a>
+                    <a class="icon icon-close"  back-button></a>
                 </li>
                 <li class="btn-main">
                     <a class="active"><span>{{title}}</span></a>
@@ -17,7 +17,7 @@
             <div ng-show="showErrorMessage" class="error-message">
                 <div class="msg errorMsg">{{errorMessage}}
                 </div>
-                <a class="icon icon-error-close">x</a>
+                <a class="icon icon-close"></a>
             </div>
 
             <div class="form-group bottom20">
@@ -32,13 +32,13 @@
                 <div class="form-item checked" ng-click="select('projectAssigned')">
                     <label for="all-projects">
                         {{projectAssigned}}
-                        <span class="display " ng-class="{'icon icon-check-green':isProjectSelected}"></span>
+                        <span class="display " ng-class="{'icon icon-check':isProjectSelected}"></span>
                     </label>
                 </div>
                 <div class="form-item checked" ng-click="select('allProjects')">
                     <label for="all-projects">
                         {{allProjects}}
-                        <span class="display " ng-class="{'icon icon-check-green':!isProjectSelected}"></span>
+                        <span class="display " ng-class="{'icon icon-check':!isProjectSelected}"></span>
                     </label>
                 </div>
             </div>

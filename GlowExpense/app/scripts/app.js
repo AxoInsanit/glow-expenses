@@ -40,7 +40,7 @@ var _mainModules = [
 ];
 
 angular.module('app', _mainModules )
-    .config(['$routeProvider', '$httpProvider', function($routeProvider, $httpProvider){
+    .config(function($routeProvider, $httpProvider, $compileProvider, sessionToken){
         $routeProvider
             .otherwise({
                 redirectTo: '/login'
@@ -144,9 +144,10 @@ angular.module('app', _mainModules )
         });
 
         var $http,
-            notificationChannel;
+            notificationChannel,
+            localStorageSvc;
 
-        $httpProvider.interceptors.push(function($q, $injector) {
+        $httpProvider.interceptors.push(['$q', '$injector', '$location', function($q, $injector, $location) {
             return {
                 'response': function(response) {
                     // get $http via $injector because of circular dependency problem
@@ -175,13 +176,21 @@ angular.module('app', _mainModules )
                         notificationChannel.requestEnded();
                     }
 
+                    // check if token expired
+                    if (response.status === 401) {
+                      localStorageSvc = localStorageSvc || $injector.get('localStorageSvc');
+                      localStorageSvc.removeItem(sessionToken);
+                      $location.path('/');
+                    }
+
                     return $q.reject(response);
                 }
             };
-        });
+        }]);
 
-
-    }])
+        // avoid unsafe prefix on device image's sources
+        $compileProvider.imgSrcSanitizationWhitelist(/^\s*(https?|file|blob|cdvfile|content):|data:image\//);
+    })
     .constant('serverErrorMsg','Server error!')
     .constant('sessionToken', 'session-token')
     .constant('infiniteScrollEnabled', false);

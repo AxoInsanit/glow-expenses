@@ -88,7 +88,6 @@
   position: absolute;
   top: 0;
   width: 100%;
-  -webkit-transform-style: preserve-3d;
 }
 
 .mainContainer.ng-leave {
@@ -100,32 +99,41 @@
 }
 
 .mainContainer.ng-leave {
-  -webkit-animation: slideOutLeft 0.75s both cubic-bezier(0.2, 0.7, 0.1, 1);
-  -moz-animation: slideOutLeft 0.75s both cubic-bezier(0.2, 0.7, 0.1, 1);
-  animation: slideOutLeft 0.75s both cubic-bezier(0.2, 0.7, 0.1, 1);
+  -webkit-animation: slideOutLeft 1s;
+  -moz-animation: slideOutLeft 1s;
+  animation: slideOutLeft 1s;
 }
 
 .mainContainer.ng-enter {
-  -webkit-animation: slideInLeft 0.75s both cubic-bezier(0.2, 0.7, 0.1, 1);
-  -moz-animation: slideInLeft 0.75s both cubic-bezier(0.2, 0.7, 0.1, 1);
-  animation: slideInLeft 0.75s both cubic-bezier(0.2, 0.7, 0.1, 1);
+  -webkit-animation: slideInLeft 1s;
+  -moz-animation: slideInLeft 1s;
+  animation: slideInLeft 1s;
 }
 
 .backAnimation .mainContainer.ng-leave {
-  -webkit-animation: slideOutRight 0.75s both cubic-bezier(0.2, 0.7, 0.1, 1);
-  -moz-animation: slideOutRight 0.75s both cubic-bezier(0.2, 0.7, 0.1, 1);
-  animation: slideOutRight 0.75s both cubic-bezier(0.2, 0.7, 0.1, 1);
+  -webkit-animation: slideOutRight 1s;
+  -moz-animation: slideOutRight 1s;
+  animation: slideOutRight 1s;
 }
 
 .backAnimation .mainContainer.ng-enter {
-  -webkit-animation: slideInRight 0.75s both cubic-bezier(0.2, 0.7, 0.1, 1);
-  -moz-animation: slideInRight 0.75s both cubic-bezier(0.2, 0.7, 0.1, 1);
-  animation: slideInRight 0.75s both cubic-bezier(0.2, 0.7, 0.1, 1);
+  -webkit-animation: slideInRight 1s;
+  -moz-animation: slideInRight 1s;
+  animation: slideInRight 1s;
 }
 
 /* END OF ANIMATIONS
-============================================================================= 
+=============================================================================
 */
+
+/* Force GPU use */
+.accelerated {
+    -webkit-transform: translateZ(0);
+    -moz-transform: translateZ(0);
+    -ms-transform: translateZ(0);
+    -o-transform: translateZ(0);
+    transform: translateZ(0);
+}
 
 
 
