@@ -3,21 +3,24 @@
         <span>
             Assign {{entityName}}:
         </span>
-        <div class="icon icon-close-black" ng-click="close()"></div>
+        <div class="icon icon-close" ng-click="close()"></div>
     </div>
-    
+
     <form action="">
-        
+
         <div class="form-group">
             <div class="form-item">
-                <div class="loop"></div>
+                <div class="icon icon-search loop"></div>
                 <input type="text" ng-model="searchedEntity" placeholder="Search">
             </div>
         </div>
     </form>
-    <div class="item-container">
-        <div class="item green-hover" bindonce ng-repeat="entity in entities | filter:searchedEntity"  ng-click="selectEntity(entity)">
-            <div>{{entity.title}}</div>
+    <div class="item-container accelerated">
+        <!-- NOTE!     doesn't work the search if you use "::"-->
+        <div class="item green-hover" ng-repeat="entity in entities | filter:searchedEntity | limitTo:limitTo track by entity.id"
+             ng-click="selectEntity(entity)">
+
+            <div ng-bind="entity.title"></div>
         </div>
     </div>
 </div>

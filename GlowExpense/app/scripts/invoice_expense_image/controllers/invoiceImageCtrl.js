@@ -1,18 +1,14 @@
 'use strict';
 
 angular.module('InvoiceExpenseImage').controller('InvoiceImageCtrl', ['$scope', 'invoiceImageRepositorySvc',
-    'errorHandlerDefaultSvc', 'baseUrlMockeyWeb', 'expenseIdShareSvc', 'localStorageSvc', 'sessionToken',
-    function($scope, invoiceImageRepositorySvc, errorHandlerDefaultSvc, baseUrlMockeyWeb,
+    'errorHandlerDefaultSvc', 'expenseIdShareSvc', 'localStorageSvc', 'sessionToken',
+    function($scope, invoiceImageRepositorySvc, errorHandlerDefaultSvc,
         expenseIdShareSvc, localStorageSvc ,sessionToken){
-        
-		$scope.viewImage = false;
-        $scope.path = baseUrlMockeyWeb;
-        $scope.expenseId = expenseIdShareSvc.getId();
-        $scope.token = localStorageSvc.getItem(sessionToken);
 
+      $scope.imageUrl = invoiceImageRepositorySvc.getImage(localStorageSvc.getItem(sessionToken), expenseIdShareSvc.getId());
 		
-		$scope.tabImage = function(){
-			$scope.viewImage = !$scope.viewImage;
-		};
+      $scope.tabImage = function(){
+        $scope.viewImage = !$scope.viewImage;
+      };
     }
 ]);

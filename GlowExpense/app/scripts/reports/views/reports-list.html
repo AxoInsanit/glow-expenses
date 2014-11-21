@@ -8,7 +8,7 @@
     <article>
         <section class="item" ng-click="createReport()">
             <a class="btn-with-icon create-report">
-                <span class="icon icon-create-report"></span>
+                <span class="icon icon-plus"></span>
                 <span>Create Report</span>
             </a>
         </section>
@@ -30,7 +30,7 @@
                                        ng-show="isEditMode"  ng-click="deleteReport(report.expenseReportId)" ></a>
                                 </div>
                                 <div ng-switch-when="true">
-                                    
+
                                 </div>
                             </ng-switch>
                             <div class="desc">
@@ -41,17 +41,17 @@
                                     <p class="info-text" ng-switch-default>
                                         {{report.state}}
                                     </p>
-                                    <p class="info-text red" ng-switch-when="Pending">
+                                    <p class="info-text red" ng-switch-when="Pending Approval">
                                         {{report.state}}
                                     </p>
-                                    <p class="info-text yellow" ng-switch-when="Preparing">
+                                    <p class="info-text yellow" ng-switch-when="Preparing Payment">
                                         {{report.state}}
                                     </p>
                                     <p class="info-text green-dark" ng-switch-when="Paid">
                                         {{report.state}}
                                     </p>
                                 </ng-switch>
-                            </div>                      
+                            </div>
                         </div>
                     </section>
                 </div>

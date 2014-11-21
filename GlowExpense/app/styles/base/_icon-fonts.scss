@@ -1,0 +1,101 @@
+
+
+/*------------------------------------*\
+    $ICON-FONTS
+\*------------------------------------*/
+
+
+@font-face {
+  font-family: "HalvaticaNeue";
+  src: url('../resources/fonts/HelveticaNeue.otf') format('opentype');
+  font-weight: normal;
+}
+@font-face {
+  font-family: "HalvaticaNeueBold";
+  src: url('../resources/fonts/HelveticaNeue-Bold.otf') format('opentype');
+  font-weight: normal;
+}
+@font-face {
+  font-family: "HalvaticaNeueLight";
+  src: url('../resources/fonts/HelveticaNeue-Light.otf') format('opentype');
+  font-weight: normal;
+}
+@font-face {
+  font-family: "FrutigerBlack";
+  src: url('../resources/fonts/Frutiger-Black.ttf') format('truetype');
+  font-weight: normal;
+}
+@font-face {
+  font-family: "FrutigerLight";
+  src: url('../resources/fonts/Frutiger-Light.ttf') format('truetype');
+  font-weight: normal;
+}
+@font-face {
+	font-family: 'icon-font';
+	src:url('../../resources/fonts/icon-fonts/icon-font.eot?-y9gmqh');
+	src:url('../../resources/fonts/icon-fonts/icon-font.eot?#iefix-y9gmqh') format('embedded-opentype'),
+		url('../../resources/fonts/icon-fonts/icon-font.woff?-y9gmqh') format('woff'),
+		url('../../resources/fonts/icon-fonts/icon-font.ttf?-y9gmqh') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
+
+.icon {
+	font-family: 'icon-font';
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+
+	/* Better Font Rendering =========== */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.icon-signout:before {
+	content: "\e606";
+}
+.icon-affirmative:before {
+	content: "\e601";
+}
+.icon-camera:before {
+	content: "\e603";
+}
+.icon-alert:before {
+	content: "\e604";
+}
+.icon-check:before {
+	content: "\e605";
+}
+.icon-close:before {
+	content: "\e607";
+}
+.icon-sign-out:before {
+	content: "\e608";
+}
+.icon-edit:before {
+	content: "\e609";
+}
+.icon-profile:before {
+	content: "\e600";
+}
+.icon-search:before {
+	content: "\e5fd";
+}
+.icon-delete:before {
+	content: "\e60c";
+}
+.icon-plus:before {
+	content: "\e60b";
+}
+.icon-cross:before {
+	content: "\e602";
+}
+.icon-arrow-down:before {
+	content: "\e60e";
+}
+.icon-back-arrow:before {
+	content: "\e60d";
+}

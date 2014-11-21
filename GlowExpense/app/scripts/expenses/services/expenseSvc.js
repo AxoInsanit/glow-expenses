@@ -9,23 +9,22 @@ angular.module('Expenses')
         var self = this;
 
         self.expenseId = initData.expenseId || 0;
-        self.submiter = initData.submiter || null;
-        self.owner = initData.owner || null;
+        self.contableCodeId = initData.contableCodeId || 0;
         self.description = initData.description || null;
         self.invoiceNumber = initData.invoiceNumber || 0;
+        self.provider = initData.provider || '';
         self.date = initData.date || null;
+        self.originalAmount = parseFloat(initData.originalAmount) || 0;
+        self.exchangeRate = parseFloat(initData.exchangeRate) || 1;
+        self.type = initData.type || reportable;
+
+        self.submitter = initData.submitter || null;
+        self.owner = initData.owner || null;
         self.originalCurrencyId = initData.originalCurrencyId || 0;
         self.originalAmount = parseFloat(initData.originalAmount) || 0;
-        self.exchangeRate = initData.exchangeRate || 1;
-        self.expenseTypeName = initData.type || null;
         self.imageType = initData.imageType || 'void';
-        self.contableCodeId = initData.contableCodeId || 0;
-        self.provider = initData.provider || null;
-        self.type = initData.type || null;
-
         self.currency = null;
         self.contableCode = null;
-        self.expenseType = reportable;
         self.showDetails = false;
         self.selected = false;
         self.enabled = true;
@@ -66,9 +65,23 @@ angular.module('Expenses')
         initialize();
     }
 
+    Expense.prototype.getData = function () {
+      return {
+        expenseId: this.expenseId,
+        contableCodeId: this.contableCodeId,
+        description: this.description,
+        invoiceNumber: this.invoiceNumber,
+        provider: this.provider,
+        date: this.date,
+        originalAmount: this.originalAmount,
+        exchangeRate: this.exchangeRate,
+        type: this.type
+      };
+    };
+
     function create(initData){
-            return new Expense(initData);
-        }
+        return new Expense(initData);
+    }
 
     return {
         create: create

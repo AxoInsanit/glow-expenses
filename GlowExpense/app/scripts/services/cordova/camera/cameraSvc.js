@@ -22,10 +22,8 @@ angular.module('Services').factory('cameraSvc', ['$q', function($q){
         function takePhoto() {
             var deferred = $q.defer();
             function onSuccess(imageURI) {
-                var imagePrefix = 'data:image/jpeg;base64,';
-
                 if (confirm('Upload image to expense?')) {
-                    deferred.resolve(imagePrefix + imageURI);
+                    deferred.resolve(imageURI);
                 } else {
                     deferred.reject();
                 }
@@ -34,7 +32,12 @@ angular.module('Services').factory('cameraSvc', ['$q', function($q){
             function onFail() {
                 deferred.reject();
             }
-            navigator.camera.getPicture(onSuccess, onFail, { quality: 100, destinationType : Camera.DestinationType.DATA_URL, sourceType: source, saveToPhotoAlbum: false });
+            navigator.camera.getPicture(onSuccess, onFail, {
+              quality: 100,
+              destinationType: Camera.DestinationType.FILE_URI,
+              sourceType: source,
+              saveToPhotoAlbum: false
+            });
             return deferred.promise;
         }
         return {
