@@ -2,7 +2,7 @@
 
 angular.module('Login')
   .controller('LoginCtrl', function ($scope, $location, UserSvc, errorMsg, localStorageSvc, currenciesRepositorySvc,
-                                     currenciesSvc, contableCodesRepositorySvc, contableCodesSvc, sessionToken, 
+                                     currenciesSvc, contableCodesRepositorySvc, contableCodesSvc, sessionToken,
                                      userName, errorHandlerDefaultSvc, expenseSharingSvc, requestNotificationChannelSvc) {
 
       var savedToken = localStorageSvc.getItem('session-token');
@@ -16,24 +16,24 @@ angular.module('Login')
       }
 
       function getCurrencies(token) {
-        currenciesRepositorySvc.getCurrencies({
-            token: token
-          },
-          function (result){
-            currenciesSvc.set(result.currencies);
-          },
-          errorHandlerDefaultSvc.handleError
-        );
+          currenciesRepositorySvc.getCurrencies({
+                  token: token
+              },
+              function (result) {
+                  currenciesSvc.set(result.currencies);
+              },
+              errorHandlerDefaultSvc.handleError
+          );
       }
-      function getContableCodes(token){
-        contableCodesRepositorySvc.getContableCodes({
-            token: token
-          },
-          function (result){
-            contableCodesSvc.set(result.contableCodes);
-	  },
-	  errorHandlerDefaultSvc.handleError
-        );
+      function getContableCodes(token) {
+          contableCodesRepositorySvc.getContableCodes({
+                  token: token
+              },
+              function (result) {
+                  contableCodesSvc.set(result.contableCodes);
+              },
+              errorHandlerDefaultSvc.handleError
+          );
       }
       
       $scope.login = function() {
@@ -49,6 +49,7 @@ angular.module('Login')
 
                   getCurrencies(token);
                   getExpenses();
+                  getContableCodes(token);
 
               } else {
                   requestNotificationChannelSvc.requestEnded();
@@ -63,6 +64,7 @@ angular.module('Login')
       if (savedToken) {
           getCurrencies(savedToken);
           getExpenses();
+          getContableCodes(savedToken);
       }
 
   });
