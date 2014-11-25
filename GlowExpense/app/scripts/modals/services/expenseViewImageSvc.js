@@ -22,6 +22,19 @@ angular.module('Modals').factory('expenseViewImageSvc', ['$modal', '$location',
                         $location.path('/invoice-expense-image');
                         $modalInstance.dismiss();
                     };
+
+
+                    // handle device's back button, close modal
+                    function backButtonHandler() {
+                        $modalInstance.dismiss('canceled');
+                    }
+
+                    document.addEventListener('backbutton', backButtonHandler);
+
+                    // on modal close remove handler
+                    $scope.$on('$destroy', function () {
+                        document.removeEventListener('backbutton', backButtonHandler);
+                    });
                 }]
             });
 
