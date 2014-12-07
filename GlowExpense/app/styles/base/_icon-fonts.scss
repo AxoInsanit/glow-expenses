@@ -32,7 +32,8 @@
 }
 @font-face {
 	font-family: 'icon-font';
-	src:url('../../resources/fonts/icon-fonts/icon-font.woff?-y9gmqh') format('woff');
+	src:url('../resources/fonts/icon-fonts/icon-font.woff?-y9gmqh') format('woff'),
+		url('../resources/fonts/icon-fonts/icon-font.ttf?-y9gmqh') format('truetype');
 	font-weight: normal;
 	font-style: normal;
 }

@@ -7,11 +7,7 @@ angular.module('Reports')
         'infiniteScrollEnabled',
             function ($scope, $location, reportsSharingSvc, editModeNotificationChannelSvc,
                       reportsRepositorySvc, filterReportByStateSvc, entityName, confirmDeleteDialogSvc,
-                      reportDetailsPath, sessionToken, errorHandlerDefaultSvc, localStorageSvc, infiniteScrollEnabled)  {
-
-            $scope.sort = function(item) {
-                return new Date(item.creationDate);
-            };
+                      reportDetailsPath, sessionToken, errorHandlerDefaultSvc, localStorageSvc, infiniteScrollEnabled) {
 
             $scope.selectedExpenseIndex = reportsSharingSvc.selectedReport;
 

@@ -17,6 +17,19 @@ angular.module('Modals').factory('signOutDialogSvc', ['$modal', 'loginPath',
                     $scope.ok = function() {
                         $modalInstance.close(loginPath);
                     };
+
+
+                    // handle device's back button, close modal
+                    function backButtonHandler() {
+                        $modalInstance.dismiss('canceled');
+                    }
+
+                    document.addEventListener('backbutton', backButtonHandler);
+
+                    // on modal close remove handler
+                    $scope.$on('$destroy', function () {
+                        document.removeEventListener('backbutton', backButtonHandler);
+                    });
                 }]
             });
 

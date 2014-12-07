@@ -17,6 +17,19 @@ angular.module('Modals').factory('sendReportDialogSvc', ['$modal',
                     $scope.ok = function() {
                         $modalInstance.close('ok');
                     };
+
+
+                    // handle device's back button, close modal
+                    function backButtonHandler() {
+                        $modalInstance.dismiss('canceled');
+                    }
+
+                    document.addEventListener('backbutton', backButtonHandler);
+
+                    // on modal close remove handler
+                    $scope.$on('$destroy', function () {
+                        document.removeEventListener('backbutton', backButtonHandler);
+                    });
                 }]
             });
 

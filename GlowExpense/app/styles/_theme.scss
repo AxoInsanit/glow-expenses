@@ -405,17 +405,20 @@ ul.single {
 		height: 135px;
 		background:#e4e4e4;
 		border-top: 10px solid #c4c4c4;
+		a {
+			padding-bottom: 20px;
+		}
 		.left-part {
 			float: left;
 			width: 45%;
-			color:$text-grey;
-			font-size: $size-small;
+			color:$text-grey40;
+			font-size: 1.1em;
 		}
 		.right-part {
 			float: right;
 			width: 45%;
 			text-align: right;
-			color:$text-grey;
+			color:$text-grey-lighter;
 			font-size: $size-small;
 		}
 		.btn {

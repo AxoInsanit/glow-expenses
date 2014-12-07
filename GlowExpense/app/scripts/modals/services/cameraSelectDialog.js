@@ -1,9 +1,9 @@
 'use strict';
 
-angular.module('Modals').factory('cameraSelectDialog', ['$modal', 'cameraSvc',  function($modal,
-    cameraSvc){
+angular.module('Modals').factory('cameraSelectDialog', function($modal, cameraSvc){
 
-       
+
+
         function open() {
 
             var modalInstance = $modal.open({
@@ -20,10 +20,22 @@ angular.module('Modals').factory('cameraSelectDialog', ['$modal', 'cameraSvc',  
                         $modalInstance.close('true');
                     };
 
-                    $scope.galery = function() {
+                    $scope.gallery = function() {
                         cameraSvc.setSource('library');
                         $modalInstance.close('true');
                     };
+
+                    // handle device's back button, close modal
+                    function backButtonHandler() {
+                        $modalInstance.dismiss('canceled');
+                    }
+
+                    document.addEventListener('backbutton', backButtonHandler);
+
+                    // on modal close remove handler
+                    $scope.$on('$destroy', function () {
+                        document.removeEventListener('backbutton', backButtonHandler);
+                    });
                 }]
             });
 
@@ -36,4 +48,4 @@ angular.module('Modals').factory('cameraSelectDialog', ['$modal', 'cameraSvc',  
             open: open
         };
     }
-]);
+);
