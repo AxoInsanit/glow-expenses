@@ -47,24 +47,40 @@ angular.module('Reports')
 
             var result = null;
 
-            function reportsSuccess(response){
-                var responseArray = response.expenses;
-                responseArray.sort(function(a,b) {
+            function sortByDate(arr) {
+                if (!arr || (arr.length === 0)) {
+                    // console.warn('Cannot sort array, because array is empty.');
+                    return false;
+                }
+
+                arr.sort(function (a, b) {
                     return new Date(b.creationDate) - new Date(a.creationDate);
                 });
+            }
+
+            function reportsSuccess(response){
+                var responseArray = response.expenses,
+                    rejected      = [],
+                    otherReports  = [];
+
                 responseArray.forEach(function(item){
+
                     item.title = item.description;
-                    //check is it draft or rejected and if it is its locked. Else it is not.
-                    if((item.state.indexOf('Draft')>=0)||(item.state.indexOf('Reject')>=0))
-                    {
-                        item.locked = false;
+
+                    item.locked = (item.state.indexOf('Draft') >= 0 || item.state.indexOf('Reject') >= 0) ? false : true;
+
+                    if (item.state.indexOf('Rejected') >= 0) {
+                        rejected.push(item);
+                    } else {
+                        otherReports.push(item);
                     }
-                    else
-                    {
-                        item.locked = true;
-                    }
-                    reports.push(item);
+
                 });
+
+                sortByDate(rejected);
+                sortByDate(otherReports);
+
+                reports = rejected.concat(otherReports);
 
                 if (infiniteScrollEnabled){
                     if (lastShownReport !== 0){
@@ -80,6 +96,13 @@ angular.module('Reports')
                 else {
                     deferred.resolve(reports);
                 }
+
+                //
+                // Unset variables
+                //
+                rejected      = null;
+                otherReports  = null;
+                responseArray = null;
             }
 
             var deferred = $q.defer();
