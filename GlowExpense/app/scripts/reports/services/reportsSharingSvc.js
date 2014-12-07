@@ -49,7 +49,7 @@ angular.module('Reports')
 
             function sortByDate(arr) {
                 if (!arr || (arr.length === 0)) {
-                    console.warn('Cannot sort array, because array is empty.');
+                    // console.warn('Cannot sort array, because array is empty.');
                     return false;
                 }
 
@@ -67,12 +67,7 @@ angular.module('Reports')
 
                     item.title = item.description;
 
-                    //check is it draft or rejected and if it is its locked. Else it is not.
-                    if((item.state.indexOf('Draft')>=0)||(item.state.indexOf('Reject')>=0)) {
-                        item.locked = false;
-                    } else {
-                        item.locked = true;
-                    }
+                    item.locked = (item.state.indexOf('Draft') >= 0 || item.state.indexOf('Reject') >= 0) ? false : true;
 
                     if (item.state.indexOf('Rejected') >= 0) {
                         rejected.push(item);
@@ -82,15 +77,10 @@ angular.module('Reports')
 
                 });
 
-                if (rejected.length > 0) {
-                    sortByDate(rejected);
-                    sortByDate(otherReports);
+                sortByDate(rejected);
+                sortByDate(otherReports);
 
-                    reports = rejected.concat(otherReports);
-                } else {
-                    sortByDate(otherReports);
-                    reports = otherReports;
-                }
+                reports = rejected.concat(otherReports);
 
                 if (infiniteScrollEnabled){
                     if (lastShownReport !== 0){
