@@ -75,6 +75,11 @@ angular.module('Expenses')
                   }
                 }
 
+                function createExpenseError(errorResponse){
+                    errorHandlerDefaultSvc.handleError(errorResponse).then(function(){
+                    });
+                }
+
                 // TODO uncomment when tested with real services with working upload image
                 if(form.$valid && validateNumbersSvc.validate(expense))// && $scope.imageSelectedPath)
                 {
@@ -82,14 +87,9 @@ angular.module('Expenses')
                     newExpense.originalCurrency =  expense.currency.id;
                     newExpense.contableCodeId = expense.contableCode.id;
                     newExpense.owner = localStorageSvc.getItem('userName');
+                    var paramsObj = { 'token': localStorageSvc.getItem(sessionToken) };
 
-                    expensesRepositorySvc.createExpense(
-
-                        { 'token': localStorageSvc.getItem(sessionToken) },
-                        newExpense,
-                        createExpenseSuccess,
-                        errorHandlerDefaultSvc.handleError
-                    );
+                    expensesRepositorySvc.createExpense(paramsObj, newExpense.getData(), createExpenseSuccess, createExpenseError);
                 }
                 else
                 {
