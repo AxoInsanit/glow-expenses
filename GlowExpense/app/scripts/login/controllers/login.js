@@ -9,7 +9,7 @@ angular.module('Login')
 
       function getExpenses() {
         expenseSharingSvc.getExpenses().then(function() {
-          $location.path('/expenses');
+          $location.path('/expenses').replace();
         }).finally(function() {
           requestNotificationChannelSvc.requestEnded();
         });

@@ -2,6 +2,11 @@
  * Main scss file to be pre-compiled
  */
 
+//
+// Support
+//
+$supported-browsers: android, android-chrome, chrome, ios-safari;
+
 // global
 @import "mixins";
 @import "variables";

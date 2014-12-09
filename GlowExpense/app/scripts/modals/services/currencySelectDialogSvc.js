@@ -37,6 +37,18 @@ angular.module('Modals').factory('currencySelectDialogSvc', ['$modal',  function
                         currency.selected = true;
                         $modalInstance.close(currency);
                     };
+
+                    // handle device's back button, close modal
+                    function backButtonHandler() {
+                        $modalInstance.dismiss('canceled');
+                    }
+
+                    document.addEventListener('backbutton', backButtonHandler);
+
+                    // on modal close remove handler
+                    $scope.$on('$destroy', function () {
+                        document.removeEventListener('backbutton', backButtonHandler);
+                    });
                 }]
             });
 

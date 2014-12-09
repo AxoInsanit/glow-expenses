@@ -16,6 +16,19 @@ angular.module('Modals').factory('errorDialogSvc', ['$modal', function($modal){
                     $scope.ok = function() {
                         $modalInstance.close('ok');
                     };
+
+
+                    // handle device's back button, close modal
+                    function backButtonHandler() {
+                        $modalInstance.close('ok');
+                    }
+
+                    document.addEventListener('backbutton', backButtonHandler);
+
+                    // on modal close remove handler
+                    $scope.$on('$destroy', function () {
+                        document.removeEventListener('backbutton', backButtonHandler);
+                    });
                 }]
             });
 

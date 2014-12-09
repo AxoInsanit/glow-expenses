@@ -99,7 +99,7 @@ a {
   min-height:1000px;
 }
 
-.content-list {
+.reports-body .content-list {
   margin-bottom: 135px;
 }
 
@@ -126,18 +126,14 @@ a {
 
 .lig-background{
   background-color: black;
-  -moz-opacity: 0.7; /* makes the div transparent, so you have a cool overlay effect */
   opacity: .70;
-  filter: alpha(opacity=70);
   width: 101%;
   position: absolute;
 }
 
 .transparent-background .modal-content{
   background-color: black;
-  -moz-opacity: 0.7; /* makes the div transparent, so you have a cool overlay effect */
   opacity: .70;
-  filter: alpha(opacity=70);
   margin-top: -30%;
 }
 
