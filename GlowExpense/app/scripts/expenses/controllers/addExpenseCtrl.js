@@ -34,6 +34,12 @@ angular.module('Expenses')
 
             $scope.save = function(form, expense) {
                 var newExpense = expenseSvc.create(expense);
+
+                function getformatDate(date) {
+                    // 2013-05-10
+                    return '' + date.getFullYear() + '-' + (1 + date.getMonth()+ 1) + '-' + date.getDate();
+                }
+
                 function createExpenseSuccess(response, responseHeaders){
                     var headers = responseHeaders();
 
@@ -78,7 +84,7 @@ angular.module('Expenses')
                 // TODO uncomment when tested with real services with working upload image
                 if(form.$valid && validateNumbersSvc.validate(expense))// && $scope.imageSelectedPath)
                 {
-                    newExpense.date = new Date();
+                    newExpense.date = getformatDate(new Date());
                     newExpense.originalCurrency =  expense.currency.id;
                     newExpense.owner = localStorageSvc.getItem('userName');
 
