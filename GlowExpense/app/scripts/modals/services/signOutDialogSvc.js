@@ -1,20 +1,21 @@
 'use strict';
 
-angular.module('Modals').factory('signOutDialogSvc', ['$modal', 'loginPath',
-    function($modal, loginPath){
+angular.module('Modals').factory('signOutDialogSvc',
+    function($modal, loginPath, sessionToken, localStorageSvc){
 
         function open() {
             var modalInstance = $modal.open({
                 templateUrl: 'scripts/modals/views/sign-out-dialog.html',
                 controller: ['$scope', '$modalInstance', function($scope, $modalInstance) {
 
-                    $scope.$on('$locationChangeStart', function() {
-                        $modalInstance.close('true');
+                    $scope.$on('$locationChangeSuccess', function() {
+                        $modalInstance.dismiss('cancelled');
                     });
-                    
+
                     $scope.profileName = localStorage.getItem('userName');
 
                     $scope.ok = function() {
+                        localStorageSvc.removeItem(sessionToken);
                         $modalInstance.close(loginPath);
                     };
 
@@ -42,4 +43,4 @@ angular.module('Modals').factory('signOutDialogSvc', ['$modal', 'loginPath',
             open: open
         };
     }
-]);
+);

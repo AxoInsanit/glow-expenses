@@ -89,6 +89,14 @@ angular.module('app', _mainModules )
         });
 
         routes.push({
+            name: '/expense/:id/:imageModal',
+            params: {
+                templateUrl: 'scripts/expenses/views/add-edit-expense.html',
+                controller: 'EditExpenseCtrl'
+            }
+        });
+
+        routes.push({
             name: '/reports',
             params: {
                 templateUrl: 'scripts/reports/views/reports-list.html',
