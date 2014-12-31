@@ -7,7 +7,7 @@ angular.module('Expenses')
                                              itemsSelectionDialogSvc, reportExpensesRepositorySvc, localStorageSvc, sessionToken, reportDetailsPath,
                                              expensesPath, invoiceImageRepositorySvc, errorHandlerDefaultSvc, getIdFromLocationSvc, expenseSvc,
                                              baseUrlMockeyWeb, validateNumbersSvc, cameraSelectDialog, expenseIdShareSvc, cameraSelectDialogListenerSvc,
-                                             expensePostImageSvc, saveExpenseStateSvc, $routeParams, $timeout) {
+                                             expensePostImageSvc, saveExpenseStateSvc, $routeParams) {
 
         var imageSelected = false;
 
@@ -21,16 +21,13 @@ angular.module('Expenses')
 
         // this should be done with transitionend on the sliding ng-view
         if ($routeParams.imageModal) {
-            $timeout(function () {
-                cameraSelectDialog.open().then(function() {
+            cameraSelectDialog.open().then(function() {
 
-                    cameraSvc.takePhoto().then(function(result){
-                        imageSelected = true;
-                        $scope.imageSelectedPath = result;
-                    });
+                cameraSvc.takePhoto().then(function(result){
+                    imageSelected = true;
+                    $scope.imageSelectedPath = result;
                 });
-            }, 1200);
-
+            });
         }
 
         var expenseWithSavedState = saveExpenseStateSvc.get();
@@ -213,7 +210,7 @@ angular.module('Expenses')
         $scope.viewImage = function(){
             saveExpenseStateSvc.set($scope.expense);
             expenseIdShareSvc.setId($scope.expenseId);
-            expenseViewImageSvc.open().then(function(){
+            expenseViewImageSvc.open($scope.expenseId).then(function(){
                 $scope.takePhoto();
             },{});
         };

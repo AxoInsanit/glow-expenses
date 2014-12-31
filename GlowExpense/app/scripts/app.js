@@ -65,7 +65,7 @@ angular.module('app', _mainModules )
         });
 
         routes.push({
-            name: '/invoice-expense-image',
+            name: '/invoice-expense-image/:expenseId',
             params: {
                 templateUrl: 'scripts/invoice_expense_image/views/invoice-image-details.html',
                 controller: 'InvoiceImageCtrl'

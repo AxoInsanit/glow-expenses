@@ -3,7 +3,7 @@
 angular.module('Modals').factory('expenseViewImageSvc', ['$modal', '$location',
     function($modal, $location){
 
-        function open() {
+        function open(expenseId) {
             var modalInstance = $modal.open({
                 templateUrl: 'scripts/modals/views/expense-view-image.html',
                 controller: ['$scope', '$modalInstance', function($scope, $modalInstance) {
@@ -11,7 +11,7 @@ angular.module('Modals').factory('expenseViewImageSvc', ['$modal', '$location',
                     $scope.profileName = localStorage.getItem('userName');
 
                     $scope.$on('$locationChangeStart', function() {
-                        $modalInstance.close('true');
+                        $modalInstance.dismiss();
                     });
 
                     $scope.selectNew = function() {
@@ -19,7 +19,7 @@ angular.module('Modals').factory('expenseViewImageSvc', ['$modal', '$location',
                     };
 
                     $scope.view = function() {
-                        $location.path('/invoice-expense-image');
+                        $location.path('/invoice-expense-image/' + expenseId);
                         $modalInstance.dismiss();
                     };
 
