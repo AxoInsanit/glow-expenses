@@ -9,7 +9,9 @@ angular.module('Modals').factory('signOutDialogSvc',
                 controller: ['$scope', '$modalInstance', function($scope, $modalInstance) {
 
                     $scope.$on('$locationChangeSuccess', function() {
-                        $modalInstance.dismiss('cancelled');
+                        if ($modalInstance) {
+                            $modalInstance.dismiss('cancelled');
+                        }
                     });
 
                     $scope.profileName = localStorage.getItem('userName');
@@ -19,10 +21,9 @@ angular.module('Modals').factory('signOutDialogSvc',
                         $modalInstance.close(loginPath);
                     };
 
-
                     // handle device's back button, close modal
                     function backButtonHandler() {
-                        $modalInstance.dismiss('canceled');
+                        $modalInstance.dismiss('cancelled');
                     }
 
                     document.addEventListener('backbutton', backButtonHandler);
