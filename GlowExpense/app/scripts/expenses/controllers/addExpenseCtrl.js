@@ -5,12 +5,12 @@ angular.module('Expenses')
         'expensesRepositorySvc', 'editSaveExpenseDialogSvc', 'getIdFromLocationSvc', 'reportExpensesRepositorySvc',
         'errorDialogSvc', 'errorMessageSvc', 'errorHandlerDefaultSvc', 'localStorageSvc', 'sessionToken', 'expenseSvc', 'cameraSvc',
         'invoiceImageRepositorySvc', 'cameraSelectDialog', 'validateNumbersSvc', 'baseUrlMockeyWeb', 'expensesUrl', 'imagesUrl',
-        'expensePostImageSvc',
+        'expensePostImageSvc', '$filter',
         function ($scope, $location, addExpensesTitle, addExpensesButtonLabel, reportsSharingSvc,
           expensesRepositorySvc, editSaveExpenseDialogSvc, getIdFromLocationSvc, reportExpensesRepositorySvc,
           errorDialogSvc, errorMessageSvc, errorHandlerDefaultSvc, localStorageSvc, sessionToken, expenseSvc,
           cameraSvc, invoiceImageRepositorySvc, cameraSelectDialog, validateNumbersSvc, baseUrlMockeyWeb, expensesUrl, imagesUrl,
-          expensePostImageSvc) {
+          expensePostImageSvc, $filter) {
 
             $scope.title = addExpensesTitle;
             $scope.buttonLabel = addExpensesButtonLabel;
@@ -34,6 +34,7 @@ angular.module('Expenses')
 
             $scope.save = function(form, expense) {
                 var newExpense = expenseSvc.create(expense);
+
                 function createExpenseSuccess(response, responseHeaders){
                     var headers = responseHeaders();
 
@@ -78,7 +79,7 @@ angular.module('Expenses')
                 // TODO uncomment when tested with real services with working upload image
                 if(form.$valid && validateNumbersSvc.validate(expense))// && $scope.imageSelectedPath)
                 {
-                    newExpense.date = new Date();
+                    newExpense.date = $filter('date')(new Date(), 'yyyy-MM-dd');
                     newExpense.originalCurrency =  expense.currency.id;
                     newExpense.owner = localStorageSvc.getItem('userName');
 
