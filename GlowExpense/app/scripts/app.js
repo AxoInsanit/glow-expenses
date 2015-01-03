@@ -65,7 +65,7 @@ angular.module('app', _mainModules )
         });
 
         routes.push({
-            name: '/invoice-expense-image',
+            name: '/invoice-expense-image/:expenseId',
             params: {
                 templateUrl: 'scripts/invoice_expense_image/views/invoice-image-details.html',
                 controller: 'InvoiceImageCtrl'
@@ -82,6 +82,14 @@ angular.module('app', _mainModules )
 
         routes.push({
             name: '/expense/:id',
+            params: {
+                templateUrl: 'scripts/expenses/views/add-edit-expense.html',
+                controller: 'EditExpenseCtrl'
+            }
+        });
+
+        routes.push({
+            name: '/expense/:id/:imageModal',
             params: {
                 templateUrl: 'scripts/expenses/views/add-edit-expense.html',
                 controller: 'EditExpenseCtrl'

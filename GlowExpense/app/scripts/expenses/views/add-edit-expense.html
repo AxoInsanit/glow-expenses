@@ -13,14 +13,14 @@
 </header>
 <article class="expenses-body with-padding" ng-controller="AddEditExpenseCtrl">
     <section class="camera">
-        <div ng-hide="imageSelectedPath.length>1">
+        <div ng-hide="imageSelectedPath">
             <a class="icon icon-camera" ng-click="angular.isDefined(takePhoto()) && takePhoto()" >
             </a>
             <p class="text-info">Add Invoice Image </p>
         </div>
 
-        <div ng-show="imageSelectedPath.length>1" ng-click="viewImage()">
-            <a class="icon icon-camera expense-image">
+        <div ng-show="imageSelectedPath" ng-click="viewImage()">
+            <a class="icon expense-image">
                 <img ng-src="{{imageSelectedPath}}" />
             </a>
 
@@ -28,7 +28,7 @@
         </div>
 
     </section>
-    <form role="form" name="expenseForm" novalidate  ng-submit="enterCurrency()">
+    <form role="form" name="expenseForm" novalidate  ng-submit="enterCurrency()" class="pb50">
         <div ng-show="showErrorMessage" class="error-message">
             <div class="msg errorMsg">{{errorMessage}}
             </div>

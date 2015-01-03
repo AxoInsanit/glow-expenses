@@ -91,11 +91,11 @@
 }
 
 .mainContainer.ng-leave {
-  z-index: 9999;
+  z-index: 1000;
 }
 
 .mainContainer.ng-enter{
-  z-index: 8888;
+  z-index: 1000;
 }
 
 .mainContainer.ng-leave {

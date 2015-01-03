@@ -1,56 +1,57 @@
 'use strict';
 
 angular.module('Expenses')
-    .controller('ExpensesListCtrl', ['$scope', '$location', 'cameraSvc', 'expenseSvc', 'expenseSharingSvc',
-        'editModeNotificationChannelSvc', 'reportsSharingSvc', 'expensePath', 'reportsPath', 'cameraSelectDialogListenerSvc',
-        'infiniteScrollEnabled',
-        function ($scope, $location, cameraSvc, expenseSvc, expenseSharingSvc, editModeNotificationChannelSvc,
-            reportsSharingSvc, expensePath, reportsPath, cameraSelectDialogListenerSvc, infiniteScrollEnabled)  {
+    .controller('ExpensesListCtrl', function ($scope, $location, cameraSvc, expenseSvc, expenseSharingSvc,
+                                              editModeNotificationChannelSvc, reportsSharingSvc, expensePath,
+                                              reportsPath, cameraSelectDialogListenerSvc, infiniteScrollEnabled)  {
 
-            $scope.expenses = [];
+        $scope.expenses = [];
 
-            $scope.selectedExpenseIndex = expenseSharingSvc.selectedExpense;
+        $scope.selectedExpenseIndex = expenseSharingSvc.selectedExpense;
 
-            $scope.isEditMode = false;
+        $scope.isEditMode = false;
 
-            function toggleEditModeHandler(isEditMode){
-                $scope.isEditMode = isEditMode;
-            }
+        function toggleEditModeHandler(isEditMode){
+            $scope.isEditMode = isEditMode;
+        }
 
-            editModeNotificationChannelSvc.onEditModeToggled($scope, toggleEditModeHandler);
+        editModeNotificationChannelSvc.onEditModeToggled($scope, toggleEditModeHandler);
 
-            $scope.goToReports =  function(){
-                $location.path(reportsPath);
-            };
+        $scope.goToReports =  function(){
+            $location.path(reportsPath);
+        };
 
-            expenseSharingSvc.getExpenses().then(function(result) {
-                $scope.expenses = result;
-            });
+        expenseSharingSvc.getExpenses().then(function(result) {
+            $scope.expenses = result;
+        });
 
-            $scope.takePhoto = function(expense) {
+        $scope.takePhoto = function(expense) {
                 if(!$scope.isEditMode && !expense.amex){
+                $location.path(expensePath + '/' + expense.expenseId + '/open');
+            }
+        };
                     cameraSelectDialogListenerSvc.openCameraSelectDlg = true;
                     $location.path(expensePath + '/' + expense.expenseId);
                 }
             };
 
-            $scope.editExpense = function(expense, index) {
+        $scope.editExpense = function(expense, index) {
                 if(!$scope.isEditMode && !expense.amex)
-                {
-                    expenseSharingSvc.selectedExpense = index;
-                    $location.path(expensePath + '/' + expense.expenseId);
-                }
-            };
+            {
+                expenseSharingSvc.selectedExpense = index;
+                $location.path(expensePath + '/' + expense.expenseId);
+            }
+        };
 
-            $scope.getMoreExpenses = function(){
+        $scope.getMoreExpenses = function(){
 
-                if (!infiniteScrollEnabled){
-                    return;
-                }
-                var result = expenseSharingSvc.getNextFiveExpenses();
-                result.forEach(function(item){
-                    $scope.expenses.push(item);
-                });
-            };
-        }
-    ]);
+            if (!infiniteScrollEnabled){
+                return;
+            }
+            var result = expenseSharingSvc.getNextFiveExpenses();
+            result.forEach(function(item){
+                $scope.expenses.push(item);
+            });
+        };
+    }
+);
