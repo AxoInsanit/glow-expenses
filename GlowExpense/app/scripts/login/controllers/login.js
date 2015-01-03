@@ -63,8 +63,8 @@ angular.module('Login')
       // if token exists then proceed
       if (savedToken) {
           getCurrencies(savedToken);
-          getExpenses();
           getContableCodes(savedToken);
+          getExpenses();
       }
 
   });

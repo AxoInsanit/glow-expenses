@@ -42,7 +42,9 @@ angular.module('Expenses')
                     function addExpenseToReportSuccess() {
 
                         expense.expenseId = createdExpenseId;
-                        reportsSharingSvc.expenseSharingSvc.addExpense(newExpense, $scope.report.expenseReportId);
+                        newExpense.currency = expense.currency;
+                        newExpense.contableCode = expense.contableCode;
+                        reportsSharingSvc.expenseSharingSvc.addExpense(expense, $scope.report.expenseReportId);
 
                         editSaveExpenseDialogSvc.openSuccessSaveExpenseDialog().then(function (url) {
                             $location.path(url + '/' + $scope.report.expenseReportId);
@@ -86,7 +88,7 @@ angular.module('Expenses')
                 if(form.$valid && validateNumbersSvc.validate(expense))// && $scope.imageSelectedPath)
                 {
                     newExpense.date = new Date();
-                    newExpense.originalCurrency =  expense.currency.id;
+                    newExpense.originalCurrencyId =  expense.currency.id;
                     newExpense.contableCodeId = expense.contableCode.id;
                     newExpense.owner = localStorageSvc.getItem('userName');
                     var paramsObj = { 'token': localStorageSvc.getItem(sessionToken) };
