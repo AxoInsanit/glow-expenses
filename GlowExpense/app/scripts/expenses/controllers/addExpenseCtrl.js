@@ -42,10 +42,10 @@ angular.module('Expenses')
 
                     function addExpenseToReportSuccess() {
 
-                        expense.expenseId = createdExpenseId;
+                        newExpense.expenseId = createdExpenseId;
                         newExpense.currency = expense.currency;
                         newExpense.contableCode = expense.contableCode;
-                        reportsSharingSvc.expenseSharingSvc.addExpense(expense, $scope.report.expenseReportId);
+                        reportsSharingSvc.expenseSharingSvc.addExpense(newExpense, $scope.report.expenseReportId);
 
                         editSaveExpenseDialogSvc.openSuccessSaveExpenseDialog().then(function (url) {
                             $location.path(url + '/' + $scope.report.expenseReportId);

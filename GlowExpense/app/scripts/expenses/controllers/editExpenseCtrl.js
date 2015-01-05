@@ -2,7 +2,7 @@
 
 angular.module('Expenses')
     .controller('EditExpenseCtrl', function ($scope,  $location, editExpensesTitle, editExpensesButtonLabel, expenseSharingSvc, cameraSvc,
-                                             reportsRepositorySvc, currencySelectDialogSvc, contableCodeSelectDialogSvc, expensesRepositorySvc, 
+                                             reportsRepositorySvc, currencySelectDialogSvc, contableCodeSelectDialogSvc, expensesRepositorySvc,
                                              editSaveExpenseDialogSvc, expenseViewImageSvc, reportsSharingSvc, reportEntityName, filterReportByStateSvc,
                                              itemsSelectionDialogSvc, reportExpensesRepositorySvc, localStorageSvc, sessionToken, reportDetailsPath,
                                              expensesPath, invoiceImageRepositorySvc, errorHandlerDefaultSvc, getIdFromLocationSvc, expenseSvc,
@@ -14,7 +14,7 @@ angular.module('Expenses')
         $scope.title = editExpensesTitle;
         $scope.buttonLabel = editExpensesButtonLabel;
         $scope.showErrorMessage = false;
-        $scope.expenseId = parseInt($routeParams.id, 10);
+        $scope.expenseId = getIdFromLocationSvc.getLastIdFromLocation($location.path());
         $scope.token = localStorageSvc.getItem(sessionToken);
         $scope.path = baseUrlMockeyWeb;
 

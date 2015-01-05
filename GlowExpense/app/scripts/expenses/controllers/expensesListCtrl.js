@@ -27,20 +27,16 @@ angular.module('Expenses')
 
         $scope.takePhoto = function(expense) {
                 if(!$scope.isEditMode && !expense.amex){
-                $location.path(expensePath + '/' + expense.expenseId + '/open');
-            }
-        };
                     cameraSelectDialogListenerSvc.openCameraSelectDlg = true;
                     $location.path(expensePath + '/' + expense.expenseId);
                 }
             };
 
         $scope.editExpense = function(expense, index) {
-                if(!$scope.isEditMode && !expense.amex)
-            {
-                expenseSharingSvc.selectedExpense = index;
-                $location.path(expensePath + '/' + expense.expenseId);
-            }
+                if(!$scope.isEditMode && !expense.amex) {
+                    expenseSharingSvc.selectedExpense = index;
+                    $location.path(expensePath + '/' + expense.expenseId);
+                }
         };
 
         $scope.getMoreExpenses = function(){
