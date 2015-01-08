@@ -34,6 +34,7 @@ angular.module('Expenses')
 
             $scope.save = function(form, expense) {
                 var newExpense = expenseSvc.create(expense);
+
                 function createExpenseSuccess(response, responseHeaders) {
                     var headers = responseHeaders();
 
@@ -41,10 +42,10 @@ angular.module('Expenses')
 
                     function addExpenseToReportSuccess() {
 
-                        expense.expenseId = createdExpenseId;
+                        newExpense.expenseId = createdExpenseId;
                         newExpense.currency = expense.currency;
                         newExpense.contableCode = expense.contableCode;
-                        reportsSharingSvc.expenseSharingSvc.addExpense(expense, $scope.report.expenseReportId);
+                        reportsSharingSvc.expenseSharingSvc.addExpense(newExpense, $scope.report.expenseReportId);
 
                         editSaveExpenseDialogSvc.openSuccessSaveExpenseDialog().then(function (url) {
                             $location.path(url + '/' + $scope.report.expenseReportId);
@@ -87,7 +88,7 @@ angular.module('Expenses')
                 // TODO uncomment when tested with real services with working upload image
                 if(form.$valid && validateNumbersSvc.validate(expense))// && $scope.imageSelectedPath)
                 {
-                    newExpense.date = new Date();
+                    newExpense.date = $filter('date')(new Date(), 'yyyy-MM-dd');
                     newExpense.originalCurrencyId =  expense.currency.id;
                     newExpense.contableCodeId = expense.contableCode.id;
                     newExpense.owner = localStorageSvc.getItem('userName');

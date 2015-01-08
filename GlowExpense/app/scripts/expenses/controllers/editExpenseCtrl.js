@@ -1,36 +1,31 @@
 'use strict';
 
 angular.module('Expenses')
-    .controller('EditExpenseCtrl', ['$scope', '$location', 'editExpensesTitle', 'editExpensesButtonLabel', 'expenseSharingSvc',
-        'cameraSvc', 'reportsRepositorySvc', 'currencySelectDialogSvc', 'contableCodeSelectDialogSvc', 'expensesRepositorySvc', 'editSaveExpenseDialogSvc',
-        'expenseViewImageSvc', 'reportsSharingSvc', 'reportEntityName', 'filterReportByStateSvc',
-        'itemsSelectionDialogSvc', 'reportExpensesRepositorySvc', 'localStorageSvc', 'sessionToken', 'reportDetailsPath',
-        'expensesPath', 'invoiceImageRepositorySvc', 'errorHandlerDefaultSvc', 'getIdFromLocationSvc', 'expenseSvc',
-        'baseUrlMockeyWeb', 'validateNumbersSvc', 'cameraSelectDialog', 'expenseIdShareSvc', 'cameraSelectDialogListenerSvc',
-        'expensePostImageSvc', 'saveExpenseStateSvc',
-        function ($scope,  $location, editExpensesTitle, editExpensesButtonLabel, expenseSharingSvc, cameraSvc,
-                    reportsRepositorySvc, currencySelectDialogSvc, contableCodeSelectDialogSvc, expensesRepositorySvc, editSaveExpenseDialogSvc,
-                    expenseViewImageSvc, reportsSharingSvc, reportEntityName, filterReportByStateSvc,
-                    itemsSelectionDialogSvc, reportExpensesRepositorySvc, localStorageSvc, sessionToken, reportDetailsPath,
-                    expensesPath, invoiceImageRepositorySvc, errorHandlerDefaultSvc, getIdFromLocationSvc, expenseSvc,
-                    baseUrlMockeyWeb, validateNumbersSvc, cameraSelectDialog, expenseIdShareSvc, cameraSelectDialogListenerSvc,
-            expensePostImageSvc, saveExpenseStateSvc) {
+    .controller('EditExpenseCtrl', function ($scope,  $location, editExpensesTitle, editExpensesButtonLabel, expenseSharingSvc, cameraSvc,
+                                             reportsRepositorySvc, currencySelectDialogSvc, contableCodeSelectDialogSvc, expensesRepositorySvc,
+                                             editSaveExpenseDialogSvc, expenseViewImageSvc, reportsSharingSvc, reportEntityName, filterReportByStateSvc,
+                                             itemsSelectionDialogSvc, reportExpensesRepositorySvc, localStorageSvc, sessionToken, reportDetailsPath,
+                                             expensesPath, invoiceImageRepositorySvc, errorHandlerDefaultSvc, getIdFromLocationSvc, expenseSvc,
+                                             baseUrlMockeyWeb, validateNumbersSvc, cameraSelectDialog, expenseIdShareSvc, cameraSelectDialogListenerSvc,
+                                             expensePostImageSvc, saveExpenseStateSvc, $routeParams) {
 
-            $scope.title = editExpensesTitle;
-            $scope.buttonLabel = editExpensesButtonLabel;
-            $scope.showErrorMessage = false;
-            $scope.expenseId = getIdFromLocationSvc.getLastIdFromLocation($location.path());
-            $scope.token = localStorageSvc.getItem(sessionToken);
-            $scope.path = baseUrlMockeyWeb;
+        var imageSelected = false;
 
-            if (cameraSelectDialogListenerSvc.openCameraSelectDlg){
-                cameraSelectDialogListenerSvc.openCameraSelectDlg = false;
+        $scope.title = editExpensesTitle;
+        $scope.buttonLabel = editExpensesButtonLabel;
+        $scope.showErrorMessage = false;
+        $scope.expenseId = getIdFromLocationSvc.getLastIdFromLocation($location.path());
+        $scope.token = localStorageSvc.getItem(sessionToken);
+        $scope.path = baseUrlMockeyWeb;
 
-                cameraSelectDialog.open().then(function() {
 
-                    cameraSvc.takePhoto().then(function(result){
-                        $scope.imageSelectedPath = result;
-                    });
+        // this should be done with transitionend on the sliding ng-view
+        if ($routeParams.imageModal) {
+            cameraSelectDialog.open().then(function() {
+
+                cameraSvc.takePhoto().then(function(result){
+                    imageSelected = true;
+                    $scope.imageSelectedPath = result;
                 });
             });
         }
@@ -157,10 +152,9 @@ angular.module('Expenses')
 
             function saveExpense(){
                 var newExpense = expenseSvc.create(expense);
-                newExpense.date = new Date();
-                newExpense.originalCurrencyId = expense.currency.id;
-                newExpense.contableCodeId = expense.contableCode.id;
-
+                    newExpense.date = new Date();
+                    newExpense.originalCurrencyId = expense.currency.id;
+                    newExpense.contableCodeId = expense.contableCode.id;
                 var paramsObj = { 'token': localStorageSvc.getItem(sessionToken) };
                 expensesRepositorySvc.saveExpense(paramsObj, newExpense.getData(), saveExpenseSuccess, saveExpenseError);
             }
