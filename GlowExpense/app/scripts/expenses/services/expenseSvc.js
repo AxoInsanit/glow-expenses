@@ -46,7 +46,7 @@ angular.module('Expenses')
         function setContableCode(){
             var contableCodes = contableCodesSvc.get();
             contableCodes.some(function(contableCode){
-                if (contableCode.id === self.originalCurrencyId){
+                if (contableCode.id === self.contableCodeId){
                     self.contableCode = contableCode;
                     return true;
                 }
@@ -68,7 +68,6 @@ angular.module('Expenses')
     Expense.prototype.getData = function () {
       return {
         expenseId: this.expenseId,
-        contableCodeId: this.contableCodeId,
         description: this.description,
         invoiceNumber: this.invoiceNumber,
         provider: this.provider,

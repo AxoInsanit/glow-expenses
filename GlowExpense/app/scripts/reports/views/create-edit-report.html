@@ -53,12 +53,14 @@
                             </div>
                             <div ng-switch-when="false">
                                 <input type="text" placeholder="Project Name" class="form-control"
-                                       ng-model="report.project.name" required  disabled>
+                                       ng-model="report.project.name" required  >
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+        </form>
+    </article>
 </div>
 <div class="btn-fixed">
     <button class="btn" type="submit" ng-click="save(reportForm, report)">{{buttonLabel}}</button>
