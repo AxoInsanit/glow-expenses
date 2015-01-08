@@ -17,12 +17,13 @@ angular.module('Expenses')
         self.originalAmount = parseFloat(initData.originalAmount) || 0;
         self.exchangeRate = parseFloat(initData.exchangeRate) || 1;
         self.type = initData.type || reportable;
-
         self.submitter = initData.submitter || null;
         self.owner = initData.owner || null;
         self.originalCurrencyId = initData.originalCurrencyId || 0;
         self.originalAmount = parseFloat(initData.originalAmount) || 0;
         self.imageType = initData.imageType || 'void';
+        self.amex = initData.amex || false;
+
         self.currency = null;
         self.contableCode = null;
         self.showDetails = false;
@@ -69,13 +70,16 @@ angular.module('Expenses')
       return {
         expenseId: this.expenseId,
         contableCodeId: this.contableCodeId,
+        originalCurrencyId: this.originalCurrencyId,
         description: this.description,
         invoiceNumber: this.invoiceNumber,
         provider: this.provider,
         date: this.date,
         originalAmount: this.originalAmount,
         exchangeRate: this.exchangeRate,
-        type: this.type
+        type: this.type,
+        owner: this.owner,
+        amex: this.amex
       };
     };
 
