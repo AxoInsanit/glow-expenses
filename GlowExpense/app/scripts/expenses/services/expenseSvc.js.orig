@@ -21,10 +21,19 @@ angular.module('Expenses')
         self.submitter = initData.submitter || null;
         self.owner = initData.owner || null;
         self.originalCurrencyId = initData.originalCurrencyId || 0;
+<<<<<<< .merge_file_a09004
         self.originalAmount = parseFloat(initData.originalAmount) || 0;
+        self.exchangeRate = initData.exchangeRate || 1;
+        self.expenseTypeName = initData.type || null;
+=======
+>>>>>>> .merge_file_a08340
         self.imageType = initData.imageType || 'void';
         self.currency = null;
+<<<<<<< .merge_file_a09004
         self.contableCode = null;
+        self.expenseType = reportable;
+=======
+>>>>>>> .merge_file_a08340
         self.showDetails = false;
         self.selected = false;
         self.enabled = true;
