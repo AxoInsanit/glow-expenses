@@ -156,11 +156,12 @@ angular.module('Expenses')
             }
 
             function saveExpense(){
-                expense.date = $scope.expense.date;
-
                 var newExpense = expenseSvc.create(expense);
-                var paramsObj = { 'token': localStorageSvc.getItem(sessionToken) };
+                newExpense.date = new Date();
+                newExpense.originalCurrencyId = expense.currency.id;
+                newExpense.contableCodeId = expense.contableCode.id;
 
+                var paramsObj = { 'token': localStorageSvc.getItem(sessionToken) };
                 expensesRepositorySvc.saveExpense(paramsObj, newExpense.getData(), saveExpenseSuccess, saveExpenseError);
             }
 

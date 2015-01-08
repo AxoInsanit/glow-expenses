@@ -68,6 +68,7 @@ angular.module('Expenses')
     Expense.prototype.getData = function () {
       return {
         expenseId: this.expenseId,
+        contableCodeId: this.contableCodeId,
         description: this.description,
         invoiceNumber: this.invoiceNumber,
         provider: this.provider,
