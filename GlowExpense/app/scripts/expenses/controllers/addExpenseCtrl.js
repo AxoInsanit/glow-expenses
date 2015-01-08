@@ -81,6 +81,7 @@ angular.module('Expenses')
                 {
                     newExpense.date = $filter('date')(new Date(), 'yyyy-MM-dd');
                     newExpense.originalCurrency =  expense.currency.id;
+                    newExpense.contableCodeId = expense.contableCode.id;
                     newExpense.owner = localStorageSvc.getItem('userName');
 
                     expensesRepositorySvc.createExpense(
