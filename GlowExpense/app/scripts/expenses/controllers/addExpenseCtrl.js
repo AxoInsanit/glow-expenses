@@ -34,25 +34,23 @@ angular.module('Expenses')
 
             $scope.save = function(form, expense) {
                 var newExpense = expenseSvc.create(expense);
-
-                function createExpenseSuccess(response, responseHeaders){
+                function createExpenseSuccess(response, responseHeaders) {
                     var headers = responseHeaders();
 
                     var createdExpenseId = getIdFromLocationSvc.getLastIdFromLocation(headers.location);
 
-                    function addExpenseToReportSuccess(){
+                    function addExpenseToReportSuccess() {
 
                         expense.expenseId = createdExpenseId;
                         reportsSharingSvc.expenseSharingSvc.addExpense(newExpense, $scope.report.expenseReportId);
 
-                        editSaveExpenseDialogSvc.openSuccessSaveExpenseDialog().then(function(url){
+                        editSaveExpenseDialogSvc.openSuccessSaveExpenseDialog().then(function (url) {
                             $location.path(url + '/' + $scope.report.expenseReportId);
                         });
                     }
 
-                    function postImageSuccess(){
+                    function saveExpense() {
                         reportExpensesRepositorySvc.addExpensesToReport(
-
                             {
                                 'token': localStorageSvc.getItem(sessionToken)
                             },
@@ -65,15 +63,18 @@ angular.module('Expenses')
                         );
                     }
 
-                  // upload image
-                  if ($scope.imageSelectedPath) {
-                    expensePostImageSvc.postImages($scope.imageSelectedPath,
-                      localStorageSvc.getItem(sessionToken),
-                      createdExpenseId
-                    ).then(postImageSuccess, errorHandlerDefaultSvc.handleError, function (progress) {
-                        console.log('expenses-post-image', progress);
-                    });
-                  }
+                    // upload image
+                    if ($scope.imageSelectedPath) {
+                        expensePostImageSvc.postImages($scope.imageSelectedPath,
+                            localStorageSvc.getItem(sessionToken),
+                            createdExpenseId
+                        ).then(saveExpense, errorHandlerDefaultSvc.handleError, function (progress) {
+                                console.log('expenses-post-image', progress);
+                            });
+                    }
+                    else {
+                        saveExpense();
+                    }
                 }
 
                 function createExpenseError(errorResponse){
