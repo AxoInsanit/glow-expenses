@@ -12,51 +12,87 @@
 
         var f = function (modelValue, setdec) {
             setdec = setdec !== undefined ? setdec : true;
-            var decimalSplit = modelValue ? modelValue.toString().split('.') : ['1', '0'];
-            var intPart = decimalSplit[0];
-            var decPart = decimalSplit[1];
+            if (modelValue) {
+                var decimalSplit = modelValue.toString().split('.');
+                var intPart = decimalSplit[0];
+                var decPart = decimalSplit[1];
 
-            intPart = (intPart === '' && setdec) ? '0' : intPart;
-            intPart = intPart.replace(/[^\d]/g, '');
-            if (intPart.length > 3) {
-                var intDiv = Math.floor(intPart.length / 3);
-                while (intDiv > 0) {
-                    var lastComma = intPart.indexOf(',');
-                    if (lastComma < 0) {
-                        lastComma = intPart.length;
+                intPart = (intPart === '' && setdec) ? '0' : intPart;
+                intPart = intPart.replace(/[^\d]/g, '');
+                if (intPart.length > 3) {
+                    var intDiv = Math.floor(intPart.length / 3);
+                    while (intDiv > 0) {
+                        var lastComma = intPart.indexOf(',');
+                        if (lastComma < 0) {
+                            lastComma = intPart.length;
+                        }
+                        if (lastComma - 3 > 0) {
+                            intPart = intPart.splice(lastComma - 3, 0, ',');
+                        }
+                        intDiv--;
                     }
-
-                    if (lastComma - 3 > 0) {
-                        intPart = intPart.splice(lastComma - 3, 0, ',');
-                    }
-                    intDiv--;
                 }
+
+                if (decPart === undefined) {
+                    if (setdec) {
+                        decPart = '.00';
+                    }
+                    else {
+                        decPart = '';
+                    }
+                }
+                else {
+                    if (setdec) {
+                        if (decPart.length > 2) {
+                            decPart = decPart.slice(0, 2);
+                        }
+                        while (decPart.length < 2) {
+                            decPart = decPart + '0';
+                        }
+                    }
+                    decPart = '.' + decPart;
+                }
+
+                return [intPart, decPart].join('');
             }
 
-            if (decPart === undefined) {
-                if (setdec)
-                {
-                    decPart = '.00';
-                }
-                else
-                {
-                    decPart = '';
-                }
-            }
-            else {
-                if (setdec) {
-                    if (decPart.length > 2)
-                    {
-                        decPart = decPart.slice(0, 2);
+            return '';
+        };
+
+        var p = function (modelValue, setdec) {
+            if (modelValue) {
+                setdec = setdec !== undefined ? setdec : true;
+                var decimalSplit = modelValue.toString().split('.');
+                var intPart = decimalSplit[0];
+                var decPart = decimalSplit[1];
+
+                intPart = (intPart === '' && setdec) ? '0' : intPart;
+                intPart = intPart.replace(/[^\d]/g, '');
+
+                if (decPart === undefined) {
+                    if (setdec) {
+                        decPart = '.00';
                     }
-                    while (decPart.length < 2) {
-                        decPart = decPart + '0';
+                    else {
+                        decPart = '';
                     }
                 }
-                decPart = '.' + decPart;
+                else {
+                    if (setdec) {
+                        if (decPart.length > 2) {
+                            decPart = decPart.slice(0, 2);
+                        }
+                        while (decPart.length < 2) {
+                            decPart = decPart + '0';
+                        }
+                    }
+                    decPart = '.' + decPart;
+                }
+
+                return [intPart, decPart].join('');
             }
 
-            return [intPart, decPart].join('');
+            return '';
         };
 
         return {
@@ -123,7 +159,7 @@
                     element.val(f($(this).val(), false));
                 });
 
-                ctrl.$parsers.unshift(f);
+                ctrl.$parsers.unshift(p);
                 ctrl.$formatters.unshift(f);
                 ctrl.$parsers.push(minValidator);
                 ctrl.$formatters.push(minValidator);

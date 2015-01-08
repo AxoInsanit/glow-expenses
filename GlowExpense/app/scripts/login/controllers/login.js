@@ -1,57 +1,61 @@
 'use strict';
+angular.module('Login').controller('LoginCtrl', ['$scope', '$location', 'UserSvc', 'errorMsg', 'localStorageSvc',
+    'currenciesRepositorySvc', 'currenciesSvc', 'contableCodesRepositorySvc', 'contableCodesSvc', 'sessionToken',
+    'userName', 'errorHandlerDefaultSvc', 'expenseSharingSvc',
+    function ($scope, $location, UserSvc, errorMsg, localStorageSvc, currenciesRepositorySvc, currenciesSvc,
+              contableCodesRepositorySvc, contableCodesSvc, sessionToken, userName, errorHandlerDefaultSvc, expenseSharingSvc) {
 
-angular.module('Login')
-  .controller('LoginCtrl', function ($scope, $location, UserSvc, errorMsg, localStorageSvc, currenciesRepositorySvc,
-                                     currenciesSvc, sessionToken, userName, errorHandlerDefaultSvc, expenseSharingSvc,
-                                     requestNotificationChannelSvc) {
+        $scope.errorMessage = errorMsg;
+        $scope.showErrorMessage = false;
+        $scope.loginPage = true;
+        $scope.login = function(user){
 
-      var savedToken = localStorageSvc.getItem('session-token');
+            function getCurrenciesSuccess(result){
+                currenciesSvc.set(result.currencies);
+            }
 
-      function getExpenses() {
-        expenseSharingSvc.getExpenses().then(function() {
-          $location.path('/expenses').replace();
-        }).finally(function() {
-          requestNotificationChannelSvc.requestEnded();
-        });
-      }
+            function getContableCodesSuccess(result){
+                contableCodesSvc.set(result.contableCodes);
+            }
 
-      function getCurrencies(token) {
-        currenciesRepositorySvc.getCurrencies({
-            token: token
-          },
-          function (result){
-            currenciesSvc.set(result.currencies);
-          },
-          errorHandlerDefaultSvc.handleError
-        );
-      }
+            function loginSuccess(response) {
+                if( localStorageSvc.localStorageExists() ){
+                    $scope.showErrorMessage = false;
+                    localStorageSvc.setItem(sessionToken, response.session_token);
+                    localStorageSvc.setItem(userName, $scope.user.username);
 
-      $scope.login = function() {
-          // start loader
-          requestNotificationChannelSvc.requestStarted();
+                    currenciesRepositorySvc.getCurrencies(
+                        { 'token': localStorageSvc.getItem(sessionToken) },
+                        getCurrenciesSuccess,
+                        errorHandlerDefaultSvc.handleError
+                    );
 
-          // init login flow
-          UserSvc.login().then(function (token) {
-              if (localStorageSvc.localStorageExists()) {
-                  $scope.showErrorMessage = false;
-                  localStorageSvc.setItem(sessionToken, token);
+                    contableCodesRepositorySvc.getContableCodes(
+                        { 'token': localStorageSvc.getItem(sessionToken) },
+                        getContableCodesSuccess(),
+                        errorHandlerDefaultSvc.handleError
+                    );
 
-                  getCurrencies(token);
-                  getExpenses();
+                    expenseSharingSvc.getExpenses().then(function(){
+                        $location.path('/expenses');
+                    });
 
-              } else {
-                  requestNotificationChannelSvc.requestEnded();
-              }
-          }, function (){
-              errorHandlerDefaultSvc.handleError({});
-              requestNotificationChannelSvc.requestEnded();
-          });
-      };
+                } else {
+                    loginError();
+                }
+            }
 
-      // if token exists then proceed
-      if (savedToken) {
-          getCurrencies(savedToken);
-          getExpenses();
-      }
+            function loginError(errorResponse){
+                errorHandlerDefaultSvc.handleError(errorResponse).then(function(){
+                    $scope.showErrorMessage = true;
+                    $scope.user.password = '';
+                });
+            }
 
-  });
+            //We have to use the actions this way
+            UserSvc.login({
+                'username': user.username,
+                'password': user.password
+            }, loginSuccess, loginError);
+        };
+    }]);
