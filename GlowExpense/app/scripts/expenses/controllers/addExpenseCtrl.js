@@ -35,24 +35,25 @@ angular.module('Expenses')
             $scope.save = function(form, expense) {
                 var newExpense = expenseSvc.create(expense);
 
-                function createExpenseSuccess(response, responseHeaders){
+                function createExpenseSuccess(response, responseHeaders) {
                     var headers = responseHeaders();
 
                     var createdExpenseId = getIdFromLocationSvc.getLastIdFromLocation(headers.location);
 
-                    function addExpenseToReportSuccess(){
+                    function addExpenseToReportSuccess() {
 
-                        expense.expenseId = createdExpenseId;
+                        newExpense.expenseId = createdExpenseId;
+                        newExpense.currency = expense.currency;
+                        newExpense.contableCode = expense.contableCode;
                         reportsSharingSvc.expenseSharingSvc.addExpense(newExpense, $scope.report.expenseReportId);
 
-                        editSaveExpenseDialogSvc.openSuccessSaveExpenseDialog().then(function(url){
+                        editSaveExpenseDialogSvc.openSuccessSaveExpenseDialog().then(function (url) {
                             $location.path(url + '/' + $scope.report.expenseReportId);
                         });
                     }
 
-                    function postImageSuccess(){
+                    function saveExpense() {
                         reportExpensesRepositorySvc.addExpensesToReport(
-
                             {
                                 'token': localStorageSvc.getItem(sessionToken)
                             },
@@ -65,31 +66,35 @@ angular.module('Expenses')
                         );
                     }
 
-                  // upload image
-                  if ($scope.imageSelectedPath) {
-                    expensePostImageSvc.postImages($scope.imageSelectedPath,
-                      localStorageSvc.getItem(sessionToken),
-                      createdExpenseId
-                    ).then(postImageSuccess, errorHandlerDefaultSvc.handleError, function (progress) {
-                        console.log('expenses-post-image', progress);
+                    // upload image
+                    if ($scope.imageSelectedPath) {
+                        expensePostImageSvc.postImages($scope.imageSelectedPath,
+                            localStorageSvc.getItem(sessionToken),
+                            createdExpenseId
+                        ).then(saveExpense, errorHandlerDefaultSvc.handleError, function (progress) {
+                                console.log('expenses-post-image', progress);
+                            });
+                    }
+                    else {
+                        saveExpense();
+                    }
+                }
+
+                function createExpenseError(errorResponse){
+                    errorHandlerDefaultSvc.handleError(errorResponse).then(function(){
                     });
-                  }
                 }
 
                 // TODO uncomment when tested with real services with working upload image
                 if(form.$valid && validateNumbersSvc.validate(expense))// && $scope.imageSelectedPath)
                 {
                     newExpense.date = $filter('date')(new Date(), 'yyyy-MM-dd');
-                    newExpense.originalCurrency =  expense.currency.id;
+                    newExpense.originalCurrencyId =  expense.currency.id;
+                    newExpense.contableCodeId = expense.contableCode.id;
                     newExpense.owner = localStorageSvc.getItem('userName');
+                    var paramsObj = { 'token': localStorageSvc.getItem(sessionToken) };
 
-                    expensesRepositorySvc.createExpense(
-
-                        { 'token': localStorageSvc.getItem(sessionToken) },
-                        newExpense,
-                        createExpenseSuccess,
-                        errorHandlerDefaultSvc.handleError
-                    );
+                    expensesRepositorySvc.createExpense(paramsObj, newExpense.getData(), createExpenseSuccess, createExpenseError);
                 }
                 else
                 {

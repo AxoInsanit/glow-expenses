@@ -2,8 +2,8 @@
 
 angular.module('Expenses')
     .factory('expenseSvc',
-        ['currenciesSvc', 'reportable',
-            function(currenciesSvc, reportable) {
+        ['currenciesSvc', 'contableCodesSvc', 'reportable',
+            function(currenciesSvc, contableCodesSvc, reportable) {
 
     function Expense(initData){
         var self = this;
@@ -17,12 +17,15 @@ angular.module('Expenses')
         self.originalAmount = parseFloat(initData.originalAmount) || 0;
         self.exchangeRate = parseFloat(initData.exchangeRate) || 1;
         self.type = initData.type || reportable;
-
         self.submitter = initData.submitter || null;
         self.owner = initData.owner || null;
         self.originalCurrencyId = initData.originalCurrencyId || 0;
+        self.originalAmount = parseFloat(initData.originalAmount) || 0;
         self.imageType = initData.imageType || 'void';
+        self.amex = initData.amex || false;
+
         self.currency = null;
+        self.contableCode = null;
         self.showDetails = false;
         self.selected = false;
         self.enabled = true;
@@ -41,8 +44,23 @@ angular.module('Expenses')
             }
         }
 
+        function setContableCode(){
+            var contableCodes = contableCodesSvc.get();
+            contableCodes.some(function(contableCode){
+                if (contableCode.id === self.contableCodeId){
+                    self.contableCode = contableCode;
+                    return true;
+                }
+            });
+            if (!self.contableCode){
+                // TODO how we handle errors in the app
+                // throw exception
+            }
+        }
+
         function initialize(){
             setCurrency();
+            setContableCode();
         }
 
         initialize();
@@ -52,13 +70,16 @@ angular.module('Expenses')
       return {
         expenseId: this.expenseId,
         contableCodeId: this.contableCodeId,
+        originalCurrencyId: this.originalCurrencyId,
         description: this.description,
         invoiceNumber: this.invoiceNumber,
         provider: this.provider,
         date: this.date,
         originalAmount: this.originalAmount,
         exchangeRate: this.exchangeRate,
-        type: this.type
+        type: this.type,
+        owner: this.owner,
+        amex: this.amex
       };
     };
 

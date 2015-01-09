@@ -21,10 +21,11 @@ var setupEnvironment = function ( environment ) {
 
 angular.module('Api', [])
     .config(function () {})
-    .constant('baseUrlMockeyWeb', setupEnvironment('localhost'))
+    .constant('baseUrlMockeyWeb', setupEnvironment('production'))
     .constant('loginUrl', '/system/login')
     .constant('expensesUrl', '/expense')
     .constant('currenciesUrl', '/currency')
+    .constant('contableCodesUrl', '/contableCode')
     .constant('expenseTypesUrl', '/expenseTypes')
     .constant('reportsUrl', '/expense/report')
     .constant('projectsUrl', '/project')

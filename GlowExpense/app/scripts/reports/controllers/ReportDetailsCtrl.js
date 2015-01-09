@@ -4,11 +4,12 @@ angular.module('Reports')
     .controller('ReportDetailsCtrl', ['$scope', '$location', 'addReportErrorMsg', 'reportsSharingSvc',
         'expensesRepositorySvc', 'confirmDeleteDialogSvc', 'entityName', 'sendReportDialogSvc', 'expensePath',
         'expenseSvc', 'editModeNotificationChannelSvc', 'getIdFromLocationSvc', 'localStorageSvc', 'sessionToken',
-        'reportSendRepositorySvc', 'errorHandlerDefaultSvc', 'errorDialogSvc', 'emptyReportErrorMsg', 'infiniteScrollEnabled',
+        'reportSendRepositorySvc', 'errorHandlerDefaultSvc', 'errorDialogSvc', 'emptyReportErrorMsg',
+        'infiniteScrollEnabled', 'cameraSelectDialogListenerSvc',
         function ($scope, $location, addReportErrorMsg, reportsSharingSvc, expensesRepositorySvc, confirmDeleteDialogSvc,
                   entityName, sendReportDialogSvc, expensePath, expenseSvc, editModeNotificationChannelSvc, getIdFromLocationSvc,
                   localStorageSvc, sessionToken, reportSendRepositorySvc, errorHandlerDefaultSvc, errorDialogSvc,
-                  emptyReportErrorMsg, infiniteScrollEnabled)  {
+                  emptyReportErrorMsg, infiniteScrollEnabled, cameraSelectDialogListenerSvc)  {
 
             $scope.errorMessage = addReportErrorMsg;
             $scope.showErrorMessage = false;
@@ -35,7 +36,7 @@ angular.module('Reports')
             };
 
             $scope.editExpense = function(expense) {
-                if(!$scope.isEditMode)
+                if(!$scope.isEditMode && !expense.amex)
                 {
                     $scope.selectedExpenseIndex = reportsSharingSvc.expenseSharingSvc.selectedExpense;
                     $location.path('/report-details/' + $scope.report.expenseReportId + '/expense/' + expense.expenseId);
@@ -86,6 +87,13 @@ angular.module('Reports')
                 result.forEach(function(item){
                     $scope.expenses.push(item);
                 });
+            };
+
+            $scope.takePhoto = function(expense) {
+                if(!$scope.isEditMode && !expense.amex){
+                    cameraSelectDialogListenerSvc.openCameraSelectDlg = true;
+                    $location.path('/report-details/' + $scope.report.expenseReportId + '/expense/' + expense.expenseId);
+                }
             };
         }
     ]);

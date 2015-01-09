@@ -2,8 +2,8 @@
 
 angular.module('Expenses')
     .controller('EditExpenseCtrl', function ($scope,  $location, editExpensesTitle, editExpensesButtonLabel, expenseSharingSvc, cameraSvc,
-                                             reportsRepositorySvc, currencySelectDialogSvc, expensesRepositorySvc, editSaveExpenseDialogSvc,
-                                             expenseViewImageSvc, reportsSharingSvc, reportEntityName, filterReportByStateSvc,
+                                             reportsRepositorySvc, currencySelectDialogSvc, contableCodeSelectDialogSvc, expensesRepositorySvc,
+                                             editSaveExpenseDialogSvc, expenseViewImageSvc, reportsSharingSvc, reportEntityName, filterReportByStateSvc,
                                              itemsSelectionDialogSvc, reportExpensesRepositorySvc, localStorageSvc, sessionToken, reportDetailsPath,
                                              expensesPath, invoiceImageRepositorySvc, errorHandlerDefaultSvc, getIdFromLocationSvc, expenseSvc,
                                              baseUrlMockeyWeb, validateNumbersSvc, cameraSelectDialog, expenseIdShareSvc, cameraSelectDialogListenerSvc,
@@ -14,7 +14,7 @@ angular.module('Expenses')
         $scope.title = editExpensesTitle;
         $scope.buttonLabel = editExpensesButtonLabel;
         $scope.showErrorMessage = false;
-        $scope.expenseId = parseInt($routeParams.id, 10);
+        $scope.expenseId = getIdFromLocationSvc.getLastIdFromLocation($location.path());
         $scope.token = localStorageSvc.getItem(sessionToken);
         $scope.path = baseUrlMockeyWeb;
 
@@ -151,11 +151,11 @@ angular.module('Expenses')
             }
 
             function saveExpense(){
-                expense.date = $scope.expense.date;
-
                 var newExpense = expenseSvc.create(expense);
+                    newExpense.date = new Date();
+                    newExpense.originalCurrencyId = expense.currency.id;
+                    newExpense.contableCodeId = expense.contableCode.id;
                 var paramsObj = { 'token': localStorageSvc.getItem(sessionToken) };
-
                 expensesRepositorySvc.saveExpense(paramsObj, newExpense.getData(), saveExpenseSuccess, saveExpenseError);
             }
 

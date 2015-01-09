@@ -145,6 +145,7 @@ angular.module('Expenses').factory('expenseSharingSvc', ['$q', 'expensesReposito
                     item.expenseId = expense.expenseId;
                     item.originalAmount = expense.originalAmount;
                     item.expense = expense.expense;
+                    item.contableCode = expense.contableCode;
 
                     return true;
                 }

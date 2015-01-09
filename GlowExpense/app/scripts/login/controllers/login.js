@@ -1,34 +1,44 @@
 'use strict';
-
 angular.module('Login')
   .controller('LoginCtrl', function ($scope, $location, UserSvc, errorMsg, localStorageSvc, currenciesRepositorySvc,
-                                     currenciesSvc, sessionToken, userName, errorHandlerDefaultSvc, expenseSharingSvc,
-                                     requestNotificationChannelSvc) {
+                                     currenciesSvc, contableCodesRepositorySvc, contableCodesSvc, sessionToken,
+                                     userName, errorHandlerDefaultSvc, expenseSharingSvc, requestNotificationChannelSvc) {
 
       var savedToken = localStorageSvc.getItem('session-token');
 
       function getExpenses() {
         expenseSharingSvc.getExpenses().then(function() {
-          $location.path('/expenses').replace();
+          $location.path('/expenses');
         }).finally(function() {
           requestNotificationChannelSvc.requestEnded();
         });
       }
 
       function getCurrencies(token) {
-        currenciesRepositorySvc.getCurrencies({
-            token: token
-          },
-          function (result){
-            currenciesSvc.set(result.currencies);
-          },
-          errorHandlerDefaultSvc.handleError
-        );
+          currenciesRepositorySvc.getCurrencies({
+                  token: token
+              },
+              function (result) {
+                  currenciesSvc.set(result.currencies);
+              },
+              errorHandlerDefaultSvc.handleError
+          );
       }
-
+      function getContableCodes(token) {
+          contableCodesRepositorySvc.getContableCodes({
+                  token: token
+              },
+              function (result) {
+                  contableCodesSvc.set(result.contableCodes);
+              },
+              errorHandlerDefaultSvc.handleError
+          );
+      }
+      
       $scope.login = function() {
           // start loader
           requestNotificationChannelSvc.requestStarted();
+                   
 
           // init login flow
           UserSvc.login().then(function (token) {
@@ -38,6 +48,7 @@ angular.module('Login')
 
                   getCurrencies(token);
                   getExpenses();
+                  getContableCodes(token);
 
               } else {
                   requestNotificationChannelSvc.requestEnded();
@@ -51,6 +62,7 @@ angular.module('Login')
       // if token exists then proceed
       if (savedToken) {
           getCurrencies(savedToken);
+          getContableCodes(savedToken);
           getExpenses();
       }
 
