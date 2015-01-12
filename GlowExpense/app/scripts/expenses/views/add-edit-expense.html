@@ -68,22 +68,24 @@
                     </label>
                 </div>
                 <div class="form-item" ng-click="selectCurrency(expense.currency)">
-                    <div class="select-custom">
-                        <label for="currency">
-                            <input id="currency" placeholder="Currency" class="form-control"
-                                   ng-model="expense.currency.name" required>
+                    <div>
+                        <label>
+                            <span class="form-control">
+                                {{expense.currency.name || 'Currency'}}
+                            </span>
                         </label>
                     </div>
                 </div>
                 <div class="form-item" ng-click="selectContableCode(expense.contableCode)">
-                    <div class="select-custom">
-                        <label for="contableCode">
-                            <input id="contableCode" placeholder="ContableCode" class="form-control"
-                                   ng-model="expense.contableCode.name" required>
+                    <div>
+                        <label>
+                            <span class="form-control">
+                                {{expense.contableCode.name || 'Contable code'}}
+                            </span>
                         </label>
                     </div>
                 </div>
-                <div class="form-item" >
+                <div class="form-item">
                     <label for="exchangeRate">
                         <input type="text" id="exchangeRate" class="form-control"
                         ng-model="expense.exchangeRate" currency required number-focus>
@@ -91,7 +93,7 @@
                 </div>
             </div>
         </div>
-        <div class="btn-fixed">
+        <div>
             <button class="btn" type="submit" ng-click="save(expenseForm, expense)">{{buttonLabel}}</button>
         </div>
     </form>

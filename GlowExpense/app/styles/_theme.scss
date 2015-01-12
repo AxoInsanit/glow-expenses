@@ -517,6 +517,9 @@ form {
                 input[type="radio"]:checked ~ .icon {
                     display: block;
                 }
+                span {
+                    padding: 0 15px;
+                }
             }
             .select-custom {
                 width: 100%;

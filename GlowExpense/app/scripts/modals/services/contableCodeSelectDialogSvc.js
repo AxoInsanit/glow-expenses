@@ -40,6 +40,18 @@ angular.module('Modals').factory('contableCodeSelectDialogSvc', ['$modal',  func
                     contableCode.selected = true;
                     $modalInstance.close(contableCode);
                 };
+
+                // handle device's back button, close modal
+                function backButtonHandler() {
+                    $modalInstance.dismiss('canceled');
+                }
+
+                document.addEventListener('backbutton', backButtonHandler);
+
+                // on modal close remove handler
+                $scope.$on('$destroy', function () {
+                    document.removeEventListener('backbutton', backButtonHandler);
+                });
             }]
         });
 
