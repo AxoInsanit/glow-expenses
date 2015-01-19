@@ -1,12 +1,12 @@
 'use strict';
 
 var setupEnvironment = function ( environment ) {
-    
+
     var url = '';
-    
+
     switch( environment ) {
         case 'production':
-            url = 'http://esb.dev.corp.globant.com:8080';
+            url = 'https://esb.globant.com';
             break;
         case 'emulation':
             url = 'http://10.0.3.2:8080';
