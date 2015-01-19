@@ -1,13 +1,15 @@
-<header>
+<header ng-controller="HeaderCtrl">
     <nav>
-        <ul class="single">
-            <li class="btn-helper close">
-                <a class="icon icon-close"  back-button></a>
+        <ul>
+            <li class="btn-helper profile">
+                <a class="icon icon-signout" href="" ng-click="signOut()"></a>
             </li>
-            <li class="btn-main">
-                <a class="active"><span>Expenses</span></a>
+            <li class="btn-main expenses">
+                <a ng-class="{ active: isActive('/expenses')}" ng-click="viewExpenses()"><span>Expenses</span> </a>
             </li>
-            <div class="line"></div>
+            <li class="btn-main reports">
+                <a ng-class="{ active: isActive('/reports')}" ng-click="viewReports()"> <span>Reports</span> </a>
+            </li>
         </ul>
     </nav>
 </header>

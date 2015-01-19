@@ -10,7 +10,7 @@ function ($scope, $routeParams, addExpenseErrorMsg, currenciesSvc, contableCodes
     $scope.currencies = currenciesSvc.get();
 
     $scope.contableCodes = contableCodesSvc.get();
-    
+
     $scope.selectCurrency = function( currency ) {
         currencySelectDialogSvc.open(currency, $scope.currencies).then(function(selectedCurrency){
             $scope.expense.currency = selectedCurrency;

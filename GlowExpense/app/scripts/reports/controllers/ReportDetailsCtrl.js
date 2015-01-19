@@ -36,7 +36,7 @@ angular.module('Reports')
             };
 
             $scope.editExpense = function(expense) {
-                if(!$scope.isEditMode && !expense.amex)
+                if(!$scope.isEditMode)
                 {
                     $scope.selectedExpenseIndex = reportsSharingSvc.expenseSharingSvc.selectedExpense;
                     $location.path('/report-details/' + $scope.report.expenseReportId + '/expense/' + expense.expenseId);
@@ -90,7 +90,7 @@ angular.module('Reports')
             };
 
             $scope.takePhoto = function(expense) {
-                if(!$scope.isEditMode && !expense.amex){
+                if(!$scope.isEditMode){
                     cameraSelectDialogListenerSvc.openCameraSelectDlg = true;
                     $location.path('/report-details/' + $scope.report.expenseReportId + '/expense/' + expense.expenseId);
                 }

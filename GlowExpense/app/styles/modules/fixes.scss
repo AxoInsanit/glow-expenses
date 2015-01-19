@@ -1,5 +1,9 @@
 
 
+@mixin transform($transform) {
+    -webkit-transform: $transform;
+    transform: $transform;
+}
 
 
 /* ANIMATIONS
@@ -98,29 +102,75 @@
   z-index: 1000;
 }
 
-.mainContainer.ng-leave {
-  -webkit-animation: slideOutLeft 1s;
-  -moz-animation: slideOutLeft 1s;
-  animation: slideOutLeft 1s;
+.mainContainer.ng-animate {
+    transition: all .5s linear;
+    -webkit-transition: all .5s linear;
 }
+//.mainContainer.ng-leave {
+//  -webkit-animation: slideOutLeft 1s;
+//  -moz-animation: slideOutLeft 1s;
+//  animation: slideOutLeft 1s;
+//}
+//
+//.mainContainer.ng-enter {
+//  -webkit-animation: slideInLeft 1s;
+//  -moz-animation: slideInLeft 1s;
+//  animation: slideInLeft 1s;
+//}
+//
+//.backAnimation .mainContainer.ng-leave {
+//  -webkit-animation: slideOutRight 1s;
+//  -moz-animation: slideOutRight 1s;
+//  animation: slideOutRight 1s;
+//}
+//
+//.backAnimation .mainContainer.ng-enter {
+//  -webkit-animation: slideInRight 1s;
+//  -moz-animation: slideInRight 1s;
+//  animation: slideInRight 1s;
+//}
+
 
 .mainContainer.ng-enter {
-  -webkit-animation: slideInLeft 1s;
-  -moz-animation: slideInLeft 1s;
-  animation: slideInLeft 1s;
+    z-index: 101;
+    @include transform(translate3d(100%, 0, 0));
+}
+.mainContainer.ng-enter.ng-enter-active {
+    z-index: 101;
+    @include transform(translate3d(0, 0, 0));
 }
 
-.backAnimation .mainContainer.ng-leave {
-  -webkit-animation: slideOutRight 1s;
-  -moz-animation: slideOutRight 1s;
-  animation: slideOutRight 1s;
+.mainContainer.ng-leave {
+    z-index: 100;
+    @include transform(translate3d(0, 0, 0));
 }
 
-.backAnimation .mainContainer.ng-enter {
-  -webkit-animation: slideInRight 1s;
-  -moz-animation: slideInRight 1s;
-  animation: slideInRight 1s;
+.mainContainer.ng-leave.ng-leave-active {
+    z-index: 101;
+    @include transform(translate3d(-100%, 0, 0));
 }
+
+.backAnimation {
+    .mainContainer.ng-enter {
+        z-index: 101;
+        @include transform(translate3d(-100%, 0, 0));
+    }
+    .mainContainer.ng-enter.ng-enter-active {
+        z-index: 101;
+        @include transform(translate3d(0, 0, 0));
+    }
+
+    .mainContainer.ng-leave {
+        z-index: 100;
+        @include transform(translate3d(0, 0, 0));
+    }
+
+    .mainContainer.ng-leave.ng-leave-active {
+        z-index: 101;
+        @include transform(translate3d(100%, 0, 0));
+    }
+}
+
 
 /* END OF ANIMATIONS
 =============================================================================
