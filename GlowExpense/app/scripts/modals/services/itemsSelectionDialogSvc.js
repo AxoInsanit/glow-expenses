@@ -6,7 +6,6 @@ angular.module('Modals').factory('itemsSelectionDialogSvc', ['$modal', function(
             var modalInstance = $modal.open({
                 templateUrl: 'scripts/modals/views/items-selection-dialog.html',
                 controller: ['$scope', '$modalInstance', function($scope, $modalInstance) {
-
                     $scope.entities = entities;
                     $scope.searchedEntity = null;
                     $scope.selectedEntity = null;
