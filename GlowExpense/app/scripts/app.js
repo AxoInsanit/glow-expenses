@@ -200,13 +200,10 @@ angular.module('app', _mainModules )
         $compileProvider.imgSrcSanitizationWhitelist(/^\s*(https?|file|blob|cdvfile|content):|data:image\//);
     })
     .run(function ($rootScope, $window) {
-
         // Scroll to the top of the window, on every route change
         //  This fix the issue when changing the view, the next view, it's already scrolled
-        var w = angular.element($window);
-
         $rootScope.$on('$routeChangeStart', function() {
-            console.log('Change route!', w.scrollTop(0));
+            $window.scrollTo(0, 0);
         });
     })
     .constant('serverErrorMsg','Server error!')
