@@ -1,9 +1,9 @@
 'use strict';
 
-angular.module('Expenses').factory('expenseSharingSvc', ['$q', 'expensesRepositorySvc', 'errorHandlerDefaultSvc',
+angular.module('Expenses').factory('expenseSharingSvc', ['$q', 'reportsSharingSvc','expensesRepositorySvc', 'reportExpensesRepositorySvc', 'errorHandlerDefaultSvc',
     'localStorageSvc', 'sessionToken', 'expenseSvc', 'infiniteScrollEnabled',
 
-    function($q, expensesRepositorySvc, errorHandlerDefaultSvc, localStorageSvc, sessionToken, expenseSvc, infiniteScrollEnabled) {
+    function($q, reportsSharingSvc, expensesRepositorySvc, reportExpensesRepositorySvc, errorHandlerDefaultSvc, localStorageSvc, sessionToken, expenseSvc, infiniteScrollEnabled) {
 
         var expensesShownPerPage = 5;
 
@@ -133,6 +133,21 @@ angular.module('Expenses').factory('expenseSharingSvc', ['$q', 'expensesReposito
             return result;
         }
 
+        function existExpenseInReport(expenseId, reportId) {
+            var reportKey = reportId || 0;
+            var result = {
+                index: -1
+            };
+            reportExpensesMapper[reportKey].some(function(item, index){
+                if(item.expenseId === expenseId){
+                    result.index = index;
+                    result.item = item;
+                    return true;
+                }
+            });
+            return result;
+        }
+
         function updateExpense(expense, reportId){
             var reportKey = reportId || 0;
             
@@ -152,18 +167,38 @@ angular.module('Expenses').factory('expenseSharingSvc', ['$q', 'expensesReposito
             });
         }
 
-        function deleteExpense(expenseId, reportId){
-            var reportKey = reportId || 0;
-            var expenseToDeleteIndex = null;
-            reportExpensesMapper[reportKey].some(function(item, index){
-                if (item.expenseId === expenseId){
-                    expenseToDeleteIndex = index;
-                    return true;
-                }
-            });
+        function deleteExpense(expenseId, reportId) {
+            function deleteExpenseInReportSuccess() {
+                var amount = parseFloat(currentExpense.item.originalAmount) * parseFloat(currentExpense.item.exchangeRate) * -1;
+                reportsSharingSvc.updateReportTotal(reportKey, amount);
+                expensesRepositorySvc.deleteExpense(paramsObj, deleteExpenseSuccess, deleteExpenseError);
+            }
 
-            if (expenseToDeleteIndex !== null){
-                reportExpensesMapper[reportKey].splice(expenseToDeleteIndex, 1);
+            function deleteExpenseSuccess() {
+                reportExpensesMapper[reportKey].splice(currentExpense.index, 1);
+            }
+
+            function deleteExpenseError(errorResponse) {
+                errorHandlerDefaultSvc.handleError(errorResponse);
+            }
+
+            var reportKey = reportId || 0;
+            var paramsObj = {
+                'token': localStorageSvc.getItem(sessionToken),
+                'expenseId': expenseId
+            };
+            var currentExpense = existExpenseInReport(expenseId, reportKey);
+            if (currentExpense.index >= 0) {
+                if (reportKey !== 0) {
+                    reportExpensesRepositorySvc.deleteExpense(paramsObj, deleteExpenseInReportSuccess, deleteExpenseError);
+                }
+                else {
+                    expensesRepositorySvc.deleteExpense(paramsObj, deleteExpenseSuccess, deleteExpenseError);
+                }
+            }
+            else {
+                //TODO handle errors.
+                throw new Error('Expense not found');
             }
         }
 

@@ -5,12 +5,12 @@ angular.module('Expenses')
         'expensesRepositorySvc', 'editSaveExpenseDialogSvc', 'getIdFromLocationSvc', 'reportExpensesRepositorySvc',
         'errorDialogSvc', 'errorMessageSvc', 'errorHandlerDefaultSvc', 'localStorageSvc', 'sessionToken', 'expenseSvc', 'cameraSvc',
         'invoiceImageRepositorySvc', 'cameraSelectDialog', 'validateNumbersSvc', 'baseUrlMockeyWeb', 'expensesUrl', 'imagesUrl',
-        'expensePostImageSvc', '$filter',
+        'expensePostImageSvc', '$filter', 'expenseSharingSvc',
         function ($scope, $location, addExpensesTitle, addExpensesButtonLabel, reportsSharingSvc,
           expensesRepositorySvc, editSaveExpenseDialogSvc, getIdFromLocationSvc, reportExpensesRepositorySvc,
           errorDialogSvc, errorMessageSvc, errorHandlerDefaultSvc, localStorageSvc, sessionToken, expenseSvc,
           cameraSvc, invoiceImageRepositorySvc, cameraSelectDialog, validateNumbersSvc, baseUrlMockeyWeb, expensesUrl, imagesUrl,
-          expensePostImageSvc, $filter) {
+          expensePostImageSvc, $filter, expenseSharingSvc) {
 
             $scope.title = addExpensesTitle;
             $scope.buttonLabel = addExpensesButtonLabel;
@@ -45,7 +45,10 @@ angular.module('Expenses')
                         newExpense.expenseId = createdExpenseId;
                         newExpense.currency = expense.currency;
                         newExpense.contableCode = expense.contableCode;
-                        reportsSharingSvc.expenseSharingSvc.addExpense(newExpense, $scope.report.expenseReportId);
+                        expenseSharingSvc.addExpense(newExpense, $scope.report.expenseReportId);
+
+                        var amount = parseFloat(expense.originalAmount) * parseFloat(expense.exchangeRate);
+                        reportsSharingSvc.updateReportTotal($scope.report.expenseReportId, amount);
 
                         editSaveExpenseDialogSvc.openSuccessSaveExpenseDialog().then(function (url) {
                             $location.path(url + '/' + $scope.report.expenseReportId);

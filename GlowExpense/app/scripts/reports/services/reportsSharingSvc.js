@@ -2,8 +2,8 @@
 
 angular.module('Reports')
     .factory('reportsSharingSvc', ['$q', 'reportsRepositorySvc', 'localStorageSvc', 'sessionToken',
-        'errorHandlerDefaultSvc', 'expenseSharingSvc', 'infiniteScrollEnabled',
-        function($q, reportsRepositorySvc, localStorageSvc, sessionToken, errorHandlerDefaultSvc, expenseSharingSvc,
+        'errorHandlerDefaultSvc', 'infiniteScrollEnabled',
+        function($q, reportsRepositorySvc, localStorageSvc, sessionToken, errorHandlerDefaultSvc,
                  infiniteScrollEnabled) {
 
         var reports = [];
@@ -140,9 +140,8 @@ angular.module('Reports')
                 }
             });
 
-            if (reportToDeleteIndex !== null){
+            if (reportToDeleteIndex !== null) {
                reports.splice(reportToDeleteIndex, 1);
-               expenseSharingSvc.deleteReportMapping(reportId);
             }
         }
 
@@ -156,6 +155,10 @@ angular.module('Reports')
                     return true;
                 }
             });
+        }
+
+        function updateReportTotal(reportId, amount){
+            getReportById(reportId).total += amount;
         }
 
         function getReportById(reportId){
@@ -189,7 +192,7 @@ angular.module('Reports')
             getReports: getReports,
             deleteReport: deleteReport,
             updateReport: updateReport,
-            expenseSharingSvc: expenseSharingSvc,
+            updateReportTotal: updateReportTotal,
             getReportById: getReportById,
             addReport: addReport,
             resetReports: resetReports,
