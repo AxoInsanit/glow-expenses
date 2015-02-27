@@ -1,11 +1,11 @@
 'use strict';
 
 angular.module('Reports')
-    .controller('ReportsListCtrl', ['$scope', '$location', 'reportsSharingSvc',
+    .controller('ReportsListCtrl', ['$scope', '$location', 'reportsSharingSvc', 'expenseSharingSvc',
         'editModeNotificationChannelSvc', 'reportsRepositorySvc', 'filterReportByStateSvc', 'entityName',
         'confirmDeleteDialogSvc', 'reportDetailsPath', 'sessionToken', 'errorHandlerDefaultSvc', 'localStorageSvc',
         'infiniteScrollEnabled',
-            function ($scope, $location, reportsSharingSvc, editModeNotificationChannelSvc,
+            function ($scope, $location, reportsSharingSvc, expenseSharingSvc, editModeNotificationChannelSvc,
                       reportsRepositorySvc, filterReportByStateSvc, entityName, confirmDeleteDialogSvc,
                       reportDetailsPath, sessionToken, errorHandlerDefaultSvc, localStorageSvc, infiniteScrollEnabled) {
 
@@ -32,6 +32,7 @@ angular.module('Reports')
             $scope.deleteReport = function(reportId) {
                 function deleteReportSuccess(){
                     reportsSharingSvc.deleteReport(reportId);
+                    expenseSharingSvc.deleteReportMapping(reportId);
 
                     if (!infiniteScrollEnabled){
                         return;
