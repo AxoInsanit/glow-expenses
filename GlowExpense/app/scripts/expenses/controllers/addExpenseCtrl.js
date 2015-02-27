@@ -47,9 +47,6 @@ angular.module('Expenses')
                         newExpense.contableCode = expense.contableCode;
                         expenseSharingSvc.addExpense(newExpense, $scope.report.expenseReportId);
 
-                        var amount = parseFloat(expense.originalAmount) * parseFloat(expense.exchangeRate);
-                        reportsSharingSvc.updateReportTotal($scope.report.expenseReportId, amount);
-
                         editSaveExpenseDialogSvc.openSuccessSaveExpenseDialog().then(function (url) {
                             $location.path(url + '/' + $scope.report.expenseReportId);
                         });

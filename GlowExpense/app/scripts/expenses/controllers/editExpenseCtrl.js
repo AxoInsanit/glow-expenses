@@ -73,7 +73,6 @@ angular.module('Expenses')
         }
 
         function updateExpenseSuccess(){
-            expenseSharingSvc.updateExpense($scope.expense, $scope.report.expenseReportId);
             $location.path(reportDetailsPath + '/' + $scope.report.expenseReportId);
         }
 
@@ -90,16 +89,17 @@ angular.module('Expenses')
             };
 
             function saveExpenseSuccess(){
-                /*
-                var oldAmount = parseFloat(expense.originalAmount) * parseFloat(expense.exchangeRate);
-                var newAmount = parseFloat(expense.originalAmount) * parseFloat(expense.exchangeRate);
-                var amount = oldAmount - newAmount;
-                reportsSharingSvc.updateReportTotal($scope.report.expenseReportId, amount);
-                */
                 
+                var oldExpense = expenseSharingSvc.getExpenseById(expense.expenseId, reportId);
+                var oldAmount = parseFloat(oldExpense.originalAmount) * parseFloat(oldExpense.exchangeRate);
+                var newAmount = parseFloat(expense.originalAmount) * parseFloat(expense.exchangeRate);
+                var amount = newAmount - oldAmount;                
+                reportsSharingSvc.updateReportTotal($scope.report.expenseReportId, amount);
+                                
                 expenseSharingSvc.updateExpense(expense, reportId);
 
-                function deleteExpenseSuccess(){
+                // change assigned expense to another report
+                if (lastSelectedReport !== $scope.report.description){
                     expenseSharingSvc.deleteExpense($scope.expense.expenseId, reportId);
                     reportExpensesRepositorySvc.addExpensesToReport(
                         { 'token': localStorageSvc.getItem(sessionToken) },
@@ -108,48 +108,19 @@ angular.module('Expenses')
                         addExpenseFail
                     );
                 }
-
-                function deleteExpenseFail(errorResponse){
-                    errorHandlerDefaultSvc.handleError(errorResponse).then(function(){
-                        resetExpense();
-                    });
-                }
-
-                // expense was just assigned to a report
-                if (!lastSelectedReport && $scope.report.description){
-                    reportExpensesRepositorySvc.addExpensesToReport(
-                        { 'token': localStorageSvc.getItem(sessionToken) },
-                        reportObj,
-                        addExpenseSuccess,
-                        addExpenseFail
-                    );
-                }
-                else {
-                    // change assigned expense to another report
-                    if (lastSelectedReport !== $scope.report.description){
-                        reportExpensesRepositorySvc.deleteExpense(
-                            {
-                                'token': localStorageSvc.getItem(sessionToken),
-                                'expenseId': $scope.expense.expenseId
-                            },
-                            deleteExpenseSuccess,
-                            deleteExpenseFail
-                        );
+                // no change in the state of expense
+                else
+                {
+                    // it is assigned go to report details
+                    if ($scope.report.description){
+                        updateExpenseSuccess();
                     }
-                    // no change in the state of expense
-                    else
-                    {
-                        // it is assigned go to report details
-                        if ($scope.report.description){
-                            updateExpenseSuccess();
-                        }
-                        // it is unassigned go to expenses list
-                        else {
-                            $location.path(expensesPath);
-                        }
+                    // it is unassigned go to expenses list
+                    else {
+                        $location.path(expensesPath);
                     }
                 }
-            }
+            }            
 
             function saveExpenseError(errorResponse){
                 errorHandlerDefaultSvc.handleError(errorResponse).then(function(){

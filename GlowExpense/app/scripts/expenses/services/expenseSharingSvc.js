@@ -206,6 +206,11 @@ angular.module('Expenses').factory('expenseSharingSvc', ['$q', 'reportsSharingSv
             var reportKey = reportId || 0;
             reportExpensesMapper[reportKey] = reportExpensesMapper[reportKey] || [];
             reportExpensesMapper[reportKey].push(expense);
+
+            if (reportKey > 0) {
+                var amount = parseFloat(expense.originalAmount) * parseFloat(expense.exchangeRate);
+                reportsSharingSvc.updateReportTotal(reportKey, amount);
+            }
         }
 
         function addReport(){
