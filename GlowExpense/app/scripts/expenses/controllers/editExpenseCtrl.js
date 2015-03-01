@@ -67,17 +67,6 @@ angular.module('Expenses')
             $scope.imageSelectedPath = invoiceImageRepositorySvc.getImage(localStorageSvc.getItem(sessionToken), $scope.expenseId);
         }
 
-        function addExpenseSuccess(){
-            expenseSharingSvc.addExpense($scope.expense, $scope.report.expenseReportId);
-            $location.path(reportDetailsPath + '/' + $scope.report.expenseReportId);
-        }
-
-        function addExpenseFail(errorResponse){
-            errorHandlerDefaultSvc.handleError(errorResponse).then(function(){
-                resetExpense();
-            });
-        }
-
         $scope.save = function(form, expense) {
             var reportObj = {
                 'expenseReportId': $scope.report.expenseReportId,
@@ -86,7 +75,21 @@ angular.module('Expenses')
 
             function saveExpenseSuccess(){
 
-                function deleteExpenseSuccess(){
+                function addExpenseSuccess(){
+                    if (reportId === 0) {
+                         expenseSharingSvc.deleteExpense($scope.expense.expenseId, reportId, true);
+                    }
+                    expenseSharingSvc.addExpense($scope.expense, $scope.report.expenseReportId);
+                    $location.path(reportDetailsPath + '/' + $scope.report.expenseReportId);
+                }
+
+                function addExpenseFail(errorResponse){
+                    errorHandlerDefaultSvc.handleError(errorResponse).then(function(){
+                        resetExpense();
+                    });
+                }
+
+                function addExpense(){
                     reportExpensesRepositorySvc.addExpensesToReport(
                         { 'token': localStorageSvc.getItem(sessionToken) },
                         reportObj,
@@ -101,9 +104,14 @@ angular.module('Expenses')
                     });
                 }
 
-                // change assigned expense to another report
+                //expense assigned to another report
                 if (lastSelectedReport !== $scope.report.description){
-                    expenseSharingSvc.deleteExpense($scope.expense.expenseId, reportId, true).then(deleteExpenseSuccess, deleteExpenseFail);
+                    if (reportId > 0) {
+                        expenseSharingSvc.deleteExpense($scope.expense.expenseId, reportId, true).then(addExpense, deleteExpenseFail);
+                    }
+                    else {
+                        addExpense();
+                    }
                 }
                 // no change in the state of expense
                 else
