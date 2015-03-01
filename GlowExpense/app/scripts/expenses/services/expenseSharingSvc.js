@@ -150,6 +150,14 @@ angular.module('Expenses').factory('expenseSharingSvc', ['$q', 'reportsSharingSv
 
         function updateExpense(expense, reportId){
             var reportKey = reportId || 0;
+
+            if (reportKey > 0) {
+                var oldExpense = getExpenseById(expense.expenseId, reportKey);
+                var oldAmount = parseFloat(oldExpense.originalAmount) * parseFloat(oldExpense.exchangeRate);
+                var newAmount = parseFloat(expense.originalAmount) * parseFloat(expense.exchangeRate);
+                var amount = newAmount - oldAmount;
+                reportsSharingSvc.updateReportTotal(reportKey, amount);
+            }
             
             reportExpensesMapper[reportKey].some(function(item){
                 if(item.expenseId === expense.expenseId){
@@ -167,20 +175,30 @@ angular.module('Expenses').factory('expenseSharingSvc', ['$q', 'reportsSharingSv
             });
         }
 
-        function deleteExpense(expenseId, reportId) {
+        function deleteExpense(expenseId, reportId, assigningToAnotherReport) {
             function deleteExpenseInReportSuccess() {
                 var amount = parseFloat(currentExpense.item.originalAmount) * parseFloat(currentExpense.item.exchangeRate) * -1;
                 reportsSharingSvc.updateReportTotal(reportKey, amount);
-                expensesRepositorySvc.deleteExpense(paramsObj, deleteExpenseSuccess, deleteExpenseError);
+
+                if (!assigningToAnotherReport) {
+                    expensesRepositorySvc.deleteExpense(paramsObj, deleteExpenseSuccess, deleteExpenseError);
+                }
+                else {
+                    deleteExpenseSuccess();
+                }
             }
 
             function deleteExpenseSuccess() {
                 reportExpensesMapper[reportKey].splice(currentExpense.index, 1);
+                p.resolve();
             }
 
             function deleteExpenseError(errorResponse) {
                 errorHandlerDefaultSvc.handleError(errorResponse);
+                p.reject('Error deleting expense');
             }
+
+            var p = $q.defer();
 
             var reportKey = reportId || 0;
             var paramsObj = {
@@ -193,13 +211,19 @@ angular.module('Expenses').factory('expenseSharingSvc', ['$q', 'reportsSharingSv
                     reportExpensesRepositorySvc.deleteExpense(paramsObj, deleteExpenseInReportSuccess, deleteExpenseError);
                 }
                 else {
-                    expensesRepositorySvc.deleteExpense(paramsObj, deleteExpenseSuccess, deleteExpenseError);
+                    if (!assigningToAnotherReport) {
+                        expensesRepositorySvc.deleteExpense(paramsObj, deleteExpenseSuccess, deleteExpenseError);
+                    }
+                    else {
+                        deleteExpenseSuccess();
+                    }
                 }
             }
             else {
-                //TODO handle errors.
-                throw new Error('Expense not found');
+                p.reject('Expense not found');
             }
+
+            return p.promise;
         }
 
         function addExpense(expense, reportId){
