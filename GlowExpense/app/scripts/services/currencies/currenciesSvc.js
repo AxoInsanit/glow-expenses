@@ -1,11 +1,31 @@
 'use strict';
 
-angular.module('Services').factory('currenciesSvc', [function(){
+angular.module('Services').factory('currenciesSvc', function(currenciesRepositorySvc, localStorageSvc, sessionToken,
+                                                             errorHandlerDefaultSvc, $q){
 
-        var currencies = [];
+        var currencies,
+            deferred = $q.defer();
 
         function get(){
-            return currencies;
+            if (currencies) {
+                deferred.resolve(currencies);
+            } else {
+                currenciesRepositorySvc.getCurrencies({
+                        token: localStorageSvc.getItem(sessionToken)
+                    },
+                    function (result) {
+                        set(result.currencies);
+                        deferred.resolve(currencies);
+                    },
+                    function () {
+                        deferred.reject();
+                        errorHandlerDefaultSvc.handleError(arguments);
+                    }
+
+                );
+            }
+
+            return deferred.promise;
         }
 
         function set(currenciesData){
@@ -25,4 +45,4 @@ angular.module('Services').factory('currenciesSvc', [function(){
             set: set
         };
     }
-]);
+);

@@ -1,25 +1,24 @@
 'use strict';
 
 angular.module('Expenses')
-.controller('AddEditExpenseCtrl',
-['$scope', '$routeParams', 'addExpenseErrorMsg',  'currenciesSvc', 'contableCodesSvc', 'currencySelectDialogSvc', 'contableCodeSelectDialogSvc',
-function ($scope, $routeParams, addExpenseErrorMsg, currenciesSvc, contableCodesSvc, currencySelectDialogSvc, contableSelectDialogSvc) {
+.controller('AddEditExpenseCtrl', function ($scope, $routeParams, addExpenseErrorMsg, currenciesSvc, contableCodesSvc,
+                                            currencySelectDialogSvc, contableCodeSelectDialogSvc) {
 
     $scope.errorMessage = addExpenseErrorMsg;
 
-    $scope.currencies = currenciesSvc.get();
-
-    $scope.contableCodes = contableCodesSvc.get();
-
     $scope.selectCurrency = function( currency ) {
-        currencySelectDialogSvc.open(currency, $scope.currencies).then(function(selectedCurrency){
-            $scope.expense.currency = selectedCurrency;
+        currenciesSvc.get().then(function (currencies) {
+            currencySelectDialogSvc.open(currency, currencies).then(function(selectedCurrency){
+                $scope.expense.currency = selectedCurrency;
+            });
         });
     };
 
     $scope.selectContableCode = function( contableCode ) {
-        contableSelectDialogSvc.open(contableCode, $scope.contableCodes).then(function(selectedContableCode){
-            $scope.expense.contableCode = selectedContableCode;
+        contableCodesSvc.get().then(function (contableCodes) {
+            contableCodeSelectDialogSvc.open(contableCode, contableCodes).then(function(selectedContableCode){
+                $scope.expense.contableCode = selectedContableCode;
+            });
         });
     };
-}]);
+});

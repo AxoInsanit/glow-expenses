@@ -1,9 +1,9 @@
 'use strict';
 
 angular.module('Expenses')
-    .controller('ExpensesListCtrl', function ($scope, $location, cameraSvc, expenseSvc, expenseSharingSvc,
-                                              editModeNotificationChannelSvc, reportsSharingSvc, expensePath,
-                                              reportsPath, cameraSelectDialogListenerSvc, infiniteScrollEnabled)  {
+    .controller('ExpensesListCtrl', function ($scope, $location, expenseSharingSvc, cameraSelectDialogListenerSvc,
+                                              reportsPath, editModeNotificationChannelSvc, expensePath,
+                                              infiniteScrollEnabled)  {
 
         $scope.expenses = [];
 
@@ -18,25 +18,20 @@ angular.module('Expenses')
         editModeNotificationChannelSvc.onEditModeToggled($scope, toggleEditModeHandler);
 
         $scope.goToReports =  function(){
-            $location.path(reportsPath);
+            $location.path('/reports');
         };
 
-        expenseSharingSvc.getExpenses().then(function(result) {
-            $scope.expenses = result;
-        });
-
         $scope.takePhoto = function(expense) {
-                if(!$scope.isEditMode){
-                    cameraSelectDialogListenerSvc.openCameraSelectDlg = true;
-                    $location.path(expensePath + '/' + expense.expenseId);
-                }
-            };
+            if(!$scope.isEditMode){
+                cameraSelectDialogListenerSvc.openCameraSelectDlg = true;
+                $location.path('/expenses/' + expense.expenseId);
+            }
+        };
 
-        $scope.editExpense = function(expense, index) {
-                if(!$scope.isEditMode) {
-                    expenseSharingSvc.selectedExpense = index;
-                    $location.path(expensePath + '/' + expense.expenseId);
-                }
+        $scope.editExpense = function(expense) {
+            if(!$scope.isEditMode) {
+                $location.path('/expenses/' + expense.expenseId);
+            }
         };
 
         $scope.getMoreExpenses = function(){
@@ -49,5 +44,9 @@ angular.module('Expenses')
                 $scope.expenses.push(item);
             });
         };
+
+        expenseSharingSvc.getExpenses().then(function (expenses) {
+            $scope.expenses = expenses;
+        });
     }
 );

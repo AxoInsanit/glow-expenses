@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('Reports').factory('reportExpensesRepositorySvc', ['$resource', 'baseUrlMockeyWeb', 'reportExpensesUrl',
-    function($resource, baseUrlMockeyWeb, reportExpensesUrl) {
+angular.module('Reports').factory('reportExpensesRepositorySvc',
+    function($resource, baseUrlMockeyWeb, reportExpensesUrl, expensesDeleteUrl) {
 
         return $resource(baseUrlMockeyWeb + reportExpensesUrl + '?token=:token',
             {
@@ -12,7 +12,8 @@ angular.module('Reports').factory('reportExpensesRepositorySvc', ['$resource', '
                     'method': 'POST'
                 },
                 'deleteExpense': {
-                    'method': 'DELETE'
+                    'method': 'DELETE',
+                    'url': baseUrlMockeyWeb + expensesDeleteUrl + '?token=:token'
                 },
                 'saveExpensesToReport': {
                     'method': 'PUT'
@@ -20,4 +21,4 @@ angular.module('Reports').factory('reportExpensesRepositorySvc', ['$resource', '
             }
         );
     }
-]);
+);

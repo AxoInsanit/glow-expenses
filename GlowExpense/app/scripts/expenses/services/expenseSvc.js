@@ -31,31 +31,25 @@ angular.module('Expenses')
         self.enabled = true;
 
         function setCurrency(){
-            var currencies = currenciesSvc.get();
-            currencies.some(function(currency){
-                if (currency.id === self.originalCurrencyId){
-                    self.currency = currency;
-                    return true;
-                }
+            currenciesSvc.get().then(function (currencies) {
+                currencies.some(function(currency){
+                    if (currency.id === self.originalCurrencyId){
+                        self.currency = currency;
+                        return true;
+                    }
+                });
             });
-            if (!self.currency){
-                // TODO how we handle errors in the app
-                // throw exception
-            }
         }
 
         function setContableCode(){
-            var contableCodes = contableCodesSvc.get();
-            contableCodes.some(function(contableCode){
-                if (contableCode.id === self.contableCodeId){
-                    self.contableCode = contableCode;
-                    return true;
-                }
+            contableCodesSvc.get().then(function (contableCodes) {
+                contableCodes.some(function(contableCode){
+                    if (contableCode.id === self.contableCodeId){
+                        self.contableCode = contableCode;
+                        return true;
+                    }
+                });
             });
-            if (!self.contableCode){
-                // TODO how we handle errors in the app
-                // throw exception
-            }
         }
 
         function initialize(){

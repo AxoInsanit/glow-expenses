@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('Expenses').factory('expensesRepositorySvc', ['$resource', 'baseUrlMockeyWeb', 'expensesUrl',
+angular.module('Expenses').factory('expensesRepositorySvc',
 
     function($resource, baseUrlMockeyWeb, expensesUrl) {
 
@@ -26,4 +26,4 @@ angular.module('Expenses').factory('expensesRepositorySvc', ['$resource', 'baseU
             }
         );
     }
-]);
+);

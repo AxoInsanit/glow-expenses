@@ -19,15 +19,6 @@ angular.module('Reports')
 
             if (reports.length < condition){
                 reportsToShow = reports;
-//                var remainingReports = reports.length - lastShownReport;
-//
-//                var reportCopy = angular.copy(reports);
-//                reportsToShow = reportCopy.splice(lastShownReport, remainingReports);
-//
-//                for (var i = 0; i < reportsToShow; i++){
-//                    reportsToShow.push(reports[i]);
-//                }
-//
                 lastShownReport += reportsToShow.length;
 
             }
@@ -162,21 +153,22 @@ angular.module('Reports')
         }
 
         function getReportById(reportId){
-            var result = null;
-            reports.some(function(item){
-                if(item.expenseReportId === reportId){
-                    result = item;
-                    return true;
-                }
-            });
-
-            // TODO handler errors
-            if (!result){
-              //  throw new Error('Report not found');
-                result = {};
+            if (reportId !== undefined) {
+                reportId = parseInt(reportId, 10);
             }
 
-            return result;
+            return getReports().then(function () {
+                var result = false;
+
+                reports.some(function(item){
+                    if(item.expenseReportId === reportId){
+                        result = item;
+                        return true;
+                    }
+                });
+
+                return result;
+            });
         }
 
         function addReport(){

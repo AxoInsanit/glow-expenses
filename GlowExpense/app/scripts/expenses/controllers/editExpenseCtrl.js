@@ -5,67 +5,24 @@ angular.module('Expenses')
                                              reportsRepositorySvc, currencySelectDialogSvc, contableCodeSelectDialogSvc, expensesRepositorySvc,
                                              editSaveExpenseDialogSvc, expenseViewImageSvc, reportsSharingSvc, reportEntityName, filterReportByStateSvc,
                                              itemsSelectionDialogSvc, reportExpensesRepositorySvc, localStorageSvc, sessionToken, reportDetailsPath,
-                                             expensesPath, invoiceImageRepositorySvc, errorHandlerDefaultSvc, getIdFromLocationSvc, expenseSvc,
+                                             expensesPath, invoiceImageRepositorySvc, errorHandlerDefaultSvc, expenseSvc,
                                              baseUrlMockeyWeb, validateNumbersSvc, cameraSelectDialog, expenseIdShareSvc, cameraSelectDialogListenerSvc,
                                              expensePostImageSvc, saveExpenseStateSvc, $routeParams) {
 
-        var imageSelected = false;
+        var imageSelected = false,
+            originalExpense,
+            lastSelectedReport,
+            reportId = $routeParams.reportId;
 
         $scope.title = editExpensesTitle;
         $scope.buttonLabel = editExpensesButtonLabel;
         $scope.showErrorMessage = false;
-        $scope.expenseId = getIdFromLocationSvc.getLastIdFromLocation($location.path());
+        $scope.expenseId = $routeParams.expenseId;
+        $scope.reportId = reportId;
         $scope.token = localStorageSvc.getItem(sessionToken);
         $scope.path = baseUrlMockeyWeb;
 
 
-        // this should be done with transitionend on the sliding ng-view
-        if ($routeParams.imageModal) {
-            cameraSelectDialog.open().then(function() {
-
-                cameraSvc.takePhoto().then(function(result){
-                    imageSelected = true;
-                    $scope.imageSelectedPath = result;
-                });
-            });
-        }
-
-        var expenseWithSavedState = saveExpenseStateSvc.get();
-
-        if (!expenseWithSavedState){
-            $scope.expense = angular.copy(expenseSharingSvc.getExpenseById($scope.expenseId, $scope.reportId));
-        }
-        else {
-            $scope.expense = expenseWithSavedState;
-        }
-
-        var  originalExpense = angular.copy($scope.expense);
-
-        function isInReport(){
-            return $location.path().indexOf('report-details') > -1;
-        }
-
-        var reportId = 0;
-        if (isInReport()){
-            reportId = getIdFromLocationSvc.getFirstIdFromLocation($location.path());
-        }
-
-        $scope.report = reportsSharingSvc.getReportById(reportId);
-        var lastSelectedReport = $scope.report.expenseReportId;
-
-        var selectedImage = saveExpenseStateSvc.getImage();
-
-        if (selectedImage){
-            $scope.imageSelectedPath = selectedImage;
-        }
-        else {
-            $scope.imageSelectedPath = '';
-        }
-
-        if($scope.expense.imageType !== 'void')
-        {
-            $scope.imageSelectedPath = invoiceImageRepositorySvc.getImage(localStorageSvc.getItem(sessionToken), $scope.expenseId);
-        }
 
         $scope.save = function(form, expense) {
             var reportObj = {
@@ -75,17 +32,21 @@ angular.module('Expenses')
 
             function saveExpenseSuccess(){
 
+                disableResetExpenseHandler();
+
                 function addExpenseSuccess(){
                     if (reportId === 0) {
                         //delete expense from local list of unassigned expenses.
                         expenseSharingSvc.deleteExpense($scope.expense.expenseId, reportId, true);
                     }
                     expenseSharingSvc.addExpense($scope.expense, $scope.report.expenseReportId);
+                    expenseSharingSvc.resetExpenses();
                     $location.path(reportDetailsPath + '/' + $scope.report.expenseReportId);
                 }
 
                 function addExpenseFail(errorResponse){
                     errorHandlerDefaultSvc.handleError(errorResponse).then(function(){
+                        expenseSharingSvc.resetExpenses();
                         resetExpense();
                     });
                 }
@@ -107,7 +68,7 @@ angular.module('Expenses')
 
                 //expense assigned to another report
                 if (lastSelectedReport !== $scope.report.expenseReportId){
-                    if (reportId > 0) {
+                    if (reportId) {
                         //expense is already assigned to a report
                         expenseSharingSvc.deleteExpense($scope.expense.expenseId, reportId, true).then(addExpense, deleteExpenseFail);
                     }
@@ -120,12 +81,13 @@ angular.module('Expenses')
                 else
                 {
                     expenseSharingSvc.updateExpense(expense, reportId);
-                    if ($scope.report.expenseReportId){
+                    expenseSharingSvc.resetExpenses();
+
+                    if ($scope.report.expenseReportId) {
                         // it is assigned go to report details
                         $location.path(reportDetailsPath + '/' + $scope.report.expenseReportId);
-                    }
-                    else {
                         // it is unassigned go to expenses list
+                    } else {
                         $location.path(expensesPath);
                     }
                 }
@@ -139,9 +101,10 @@ angular.module('Expenses')
 
             function saveExpense(){
                 var newExpense = expenseSvc.create(expense);
-                    newExpense.date = new Date();
-                    newExpense.originalCurrencyId = expense.currency.id;
-                    newExpense.contableCodeId = expense.contableCodeId;
+
+                newExpense.date = new Date();
+                newExpense.originalCurrencyId = expense.currency.id;
+                newExpense.contableCodeId = expense.contableCode.id;
                 var paramsObj = { 'token': localStorageSvc.getItem(sessionToken) };
                 expensesRepositorySvc.saveExpense(paramsObj, newExpense.getData(), saveExpenseSuccess, saveExpenseError);
             }
@@ -177,7 +140,6 @@ angular.module('Expenses')
             });
         };
 
-        $scope.date = $scope.expense.date;
         $scope.isEdit = true;
 
         $scope.cancelPhoto = function() {
@@ -203,7 +165,48 @@ angular.module('Expenses')
         };
 
         function resetExpense(){
-            $scope.expense =  angular.copy(originalExpense);
+            $scope.expense = angular.copy(originalExpense);
         }
+
+
+        // this should be done with transitionend on the sliding ng-view
+        if ($routeParams.imageModal) {
+            cameraSelectDialog.open().then(function() {
+
+                cameraSvc.takePhoto().then(function(result){
+                    imageSelected = true;
+                    $scope.imageSelectedPath = result;
+                });
+            });
+        }
+
+
+        expenseSharingSvc.getExpenseById($routeParams.expenseId, $routeParams.reportId).then(function (expense) {
+            originalExpense = angular.copy(expense);
+            if ($routeParams.reportId) {
+                $scope.report = reportsSharingSvc.getReportById($routeParams.reportId);
+                lastSelectedReport = $scope.report.expenseReportId;
+            } else {
+                $scope.report = {};
+            }
+
+            if(expense.imageType !== 'void') {
+                $scope.imageSelectedPath = invoiceImageRepositorySvc.getImage(localStorageSvc.getItem(sessionToken), $routeParams.expenseId);
+            }
+
+            $scope.date = expense.date;
+            $scope.expense = expense;
+
+            if (cameraSelectDialogListenerSvc.openCameraSelectDlg) {
+                cameraSelectDialogListenerSvc.openCameraSelectDlg = false;
+                $scope.takePhoto();
+            }
+
+        });
+
+        var disableResetExpenseHandler = $scope.$on('$destroy', function () {
+            expenseSharingSvc.updateExpense(originalExpense, $routeParams.reportId);
+        });
+
     }
 );

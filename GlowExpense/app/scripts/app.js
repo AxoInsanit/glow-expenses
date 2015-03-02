@@ -17,16 +17,16 @@ if (isSafari) {
 
 var _mainModules = [
     'Services'
-  //  ,'Filters'
+    //  ,'Filters'
     ,'Directives'
     ,'ngRoute'
     ,'ngResource'
-  //  ,'ngSanitize'
-  //  ,'ngCookies'
+    //  ,'ngSanitize'
+    //  ,'ngCookies'
     ,'ngAnimate'
     ,'ngTouch'
-  //  ,'ngMock'
-  //  ,'ngLocale'
+    //  ,'ngMock'
+    //  ,'ngLocale'
     ,'Header'
     ,'Login'
     ,'Expenses'
@@ -81,7 +81,7 @@ angular.module('app', _mainModules )
         });
 
         routes.push({
-            name: '/expense/:id',
+            name: '/expenses/:expenseId',
             params: {
                 templateUrl: 'scripts/expenses/views/add-edit-expense.html',
                 controller: 'EditExpenseCtrl'
@@ -89,7 +89,7 @@ angular.module('app', _mainModules )
         });
 
         routes.push({
-            name: '/expense/:id/:imageModal',
+            name: '/expenses/:expenseId/:imageModal',
             params: {
                 templateUrl: 'scripts/expenses/views/add-edit-expense.html',
                 controller: 'EditExpenseCtrl'
@@ -113,7 +113,7 @@ angular.module('app', _mainModules )
         });
 
         routes.push({
-            name: '/report/:id',
+            name: '/report/:reportId',
             params: {
                 templateUrl: 'scripts/reports/views/create-edit-report.html',
                 controller: 'CreateEditReportCtrl'
@@ -121,7 +121,7 @@ angular.module('app', _mainModules )
         });
 
         routes.push({
-            name: '/report-details/:id',
+            name: '/report-details/:reportId',
             params: {
                 templateUrl: 'scripts/reports/views/report-details.html',
                 controller: 'ReportDetailsCtrl'
@@ -153,16 +153,29 @@ angular.module('app', _mainModules )
 
         var $http,
             notificationChannel,
-            localStorageSvc;
+            localStorageSvc,
+            requestCount = 0;
 
         $httpProvider.interceptors.push(['$q', '$injector', '$location', function($q, $injector, $location) {
             return {
+                'request': function (request) {
+                    // If no request ongoing, then broadcast start event
+                    if(!requestCount) {
+                        notificationChannel = notificationChannel || $injector.get('requestNotificationChannelSvc');
+                        notificationChannel.requestStarted();
+                    }
+
+                    requestCount += 1;
+
+                    return request;
+                },
                 'response': function(response) {
                     // get $http via $injector because of circular dependency problem
                     $http = $http || $injector.get('$http');
 
                     // don't send notification until all requests are complete
-                    if ($http.pendingRequests.length < 1) {
+                    requestCount -= 1;
+                    if (requestCount === 0) {
                         // get requestNotificationChannel via $injector because of circular dependency problem
                         notificationChannel = notificationChannel || $injector.get('requestNotificationChannelSvc');
                         // send a notification requests are complete
@@ -176,8 +189,9 @@ angular.module('app', _mainModules )
                     // get $http via $injector because of circular dependency problem
                     $http = $http || $injector.get('$http');
 
+                    requestCount -= 1;
                     // don't send notification until all requests are complete
-                    if ($http.pendingRequests.length < 1) {
+                    if (requestCount === 0) {
                         // get requestNotificationChannel via $injector because of circular dependency problem
                         notificationChannel = notificationChannel || $injector.get('requestNotificationChannelSvc');
                         // send a notification requests are complete
@@ -186,9 +200,9 @@ angular.module('app', _mainModules )
 
                     // check if token expired
                     if (response.status === 401) {
-                      localStorageSvc = localStorageSvc || $injector.get('localStorageSvc');
-                      localStorageSvc.removeItem(sessionToken);
-                      $location.path('/');
+                        localStorageSvc = localStorageSvc || $injector.get('localStorageSvc');
+                        localStorageSvc.removeItem(sessionToken);
+                        $location.path('/');
                     }
 
                     return $q.reject(response);

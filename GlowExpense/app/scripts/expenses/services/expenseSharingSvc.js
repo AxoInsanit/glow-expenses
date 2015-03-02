@@ -23,6 +23,9 @@ angular.module('Expenses').factory('expenseSharingSvc', ['$q', 'reportsSharingSv
 
         function getNextFiveExpenses(reportId){
 
+            if (reportId !== undefined) {
+                reportId = parseInt(reportId, 10);
+            }
             var reportKey = reportId || 0;
             reportLastShownExpenseMapper[reportKey] = reportLastShownExpenseMapper[reportKey] || 0;
 
@@ -50,6 +53,10 @@ angular.module('Expenses').factory('expenseSharingSvc', ['$q', 'reportsSharingSv
 
         // lazy load expenses on demand
         function getExpenses(reportId){
+
+            if (reportId !== undefined) {
+                reportId = parseInt(reportId, 10);
+            }
             var reportKey = reportId || 0;
             reportExpensesMapper[reportKey] = reportExpensesMapper[reportKey] || [];
 
@@ -116,21 +123,26 @@ angular.module('Expenses').factory('expenseSharingSvc', ['$q', 'reportsSharingSv
         }
 
         function getExpenseById(expenseId, reportId){
-            var reportKey = reportId || 0;
-            var result = null;
-            reportExpensesMapper[reportKey].some(function(item){
-                if(item.expenseId === expenseId){
-                    result = item;
-                    return true;
-                }
-            });
-
-            // TODO handler errors
-            if (!result){
-                throw new Error('Expense not found');
+            if (expenseId !== undefined) {
+                expenseId = parseInt(expenseId, 10);
             }
 
-            return result;
+            if (reportId !== undefined) {
+                reportId = parseInt(reportId, 10);
+            }
+
+            return getExpenses(reportId).then(function () {
+                var result = false,
+                    reportKey = reportId || 0;
+
+                reportExpensesMapper[reportKey].some(function(item){
+                    if(item.expenseId === expenseId){
+                        result = item;
+                        return true;
+                    }
+                });
+                return result;
+            });
         }
 
         function getReportExpenseMapperById(expenseId, reportId) {
@@ -149,6 +161,11 @@ angular.module('Expenses').factory('expenseSharingSvc', ['$q', 'reportsSharingSv
         }
 
         function updateExpense(expense, reportId){
+
+            if (reportId !== undefined) {
+                reportId = parseInt(reportId, 10);
+            }
+
             var reportKey = reportId || 0;
 
             if (reportKey > 0) {
@@ -158,7 +175,7 @@ angular.module('Expenses').factory('expenseSharingSvc', ['$q', 'reportsSharingSv
                 var amount = newAmount - oldAmount;
                 reportsSharingSvc.updateReportTotal(reportKey, amount);
             }
-            
+
             reportExpensesMapper[reportKey].some(function(item){
                 if(item.expenseId === expense.expenseId){
                     item.currency = expense.currency;
@@ -176,6 +193,14 @@ angular.module('Expenses').factory('expenseSharingSvc', ['$q', 'reportsSharingSv
         }
 
         function deleteExpense(expenseId, reportId, assigningToAnotherReport) {
+            if (expenseId !== undefined) {
+                expenseId = parseInt(expenseId, 10);
+            }
+
+            if (reportId !== undefined) {
+                reportId = parseInt(reportId, 10);
+            }
+
             function deleteExpenseInReportSuccess() {
                 var amount = parseFloat(currentExpense.item.originalAmount) * parseFloat(currentExpense.item.exchangeRate) * -1;
                 reportsSharingSvc.updateReportTotal(reportKey, amount);
@@ -231,6 +256,9 @@ angular.module('Expenses').factory('expenseSharingSvc', ['$q', 'reportsSharingSv
         }
 
         function addExpense(expense, reportId){
+            if (reportId !== undefined) {
+                reportId = parseInt(reportId, 10);
+            }
             var reportKey = reportId || 0;
             reportExpensesMapper[reportKey] = reportExpensesMapper[reportKey] || [];
             reportExpensesMapper[reportKey].push(expense);
@@ -253,6 +281,9 @@ angular.module('Expenses').factory('expenseSharingSvc', ['$q', 'reportsSharingSv
 
         function deleteReportMapping(reportId){
 
+            if (reportId !== undefined) {
+                reportId = parseInt(reportId, 10);
+            }
             var reportExpenses = [];
             if (reportExpensesMapper[reportId]){
                 reportExpenses = reportExpensesMapper[reportId];
@@ -270,8 +301,30 @@ angular.module('Expenses').factory('expenseSharingSvc', ['$q', 'reportsSharingSv
             reportExpensesMapper[reportId] = undefined;
         }
 
+        function resetExpenses() {
+
+            expensesShownPerPage = 5;
+
+            selectedExpenseIndex = 0;
+
+            reportExpensesMapper =
+            {
+                0: []
+            };
+
+            reportLastShownExpenseMapper =
+            {
+                0: 0
+            };
+
+            expenseIdsReadyToBeAssigned = [];
+        }
+
         function getAllExpensesForReport(reportId){
 
+            if (reportId !== undefined) {
+                reportId = parseInt(reportId, 10);
+            }
             var deferred = $q.defer();
 
             function expensesSuccess(response){
@@ -309,6 +362,7 @@ angular.module('Expenses').factory('expenseSharingSvc', ['$q', 'reportsSharingSv
             selectedExpense: selectedExpenseIndex,
             deleteReportMapping: deleteReportMapping,
             getAllExpensesForReport: getAllExpensesForReport,
+            resetExpenses: resetExpenses
         };
     }
 ]);

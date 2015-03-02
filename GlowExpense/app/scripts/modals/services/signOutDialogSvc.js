@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('Modals').factory('signOutDialogSvc',
-    function($modal, loginPath, sessionToken, localStorageSvc){
+    function($modal, loginPath, sessionToken, localStorageSvc, userName){
 
         function open() {
             var modalInstance = $modal.open({
@@ -14,10 +14,11 @@ angular.module('Modals').factory('signOutDialogSvc',
                         }
                     });
 
-                    $scope.profileName = localStorage.getItem('userName');
+                    $scope.profileName = localStorage.getItem(userName);
 
                     $scope.ok = function() {
                         localStorageSvc.removeItem(sessionToken);
+                        localStorageSvc.removeItem(userName);
                         $modalInstance.close(loginPath);
                     };
 

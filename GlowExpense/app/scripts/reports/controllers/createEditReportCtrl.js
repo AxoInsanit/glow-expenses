@@ -1,141 +1,136 @@
 'use strict';
 
 angular.module('Reports')
-    .controller('CreateEditReportCtrl', ['$scope', '$location', 'addReportErrorMsg', 'reportsSharingSvc',
-        'reportsRepositorySvc', 'itemsSelectionDialogSvc', 'projectsSharingSvc', 'projectEntityName', 'projectAssigned',
-        'allProjects','serverErrorMsg', 'editReportTitle', 'editReportBtnLabel', 'createReportTitle',
-        'createReportBtnLabel', 'reportsPath', 'expenseSharingSvc', 'errorHandlerDefaultSvc', 'getIdFromLocationSvc',
-        'localStorageSvc', 'sessionToken',
-        function ($scope, $location, addReportErrorMsg, reportsSharingSvc, reportsRepositorySvc,
-                   itemsSelectionDialogSvc,  projectsSharingSvc, projectEntityName, projectAssigned, allProjects,
-                   serverErrorMsg, editReportTitle, editReportBtnLabel, createReportTitle, createReportBtnLabel,
-                   reportsPath, expenseSharingSvc, errorHandlerDefaultSvc, getIdFromLocationSvc, localStorageSvc,
-                   sessionToken)  {
+    .controller('CreateEditReportCtrl', function ($scope, $location, addReportErrorMsg, reportsSharingSvc, reportsRepositorySvc,
+                                                  itemsSelectionDialogSvc,  projectsSharingSvc, projectEntityName, projectAssigned, allProjects,
+                                                  serverErrorMsg, editReportTitle, editReportBtnLabel, createReportTitle, createReportBtnLabel,
+                                                  reportsPath, expenseSharingSvc, errorHandlerDefaultSvc, $routeParams, localStorageSvc,
+                                                  sessionToken)  {
 
-            $scope.projectAssigned = projectAssigned;
-            $scope.allProjects = allProjects;
+        $scope.projectAssigned = projectAssigned;
+        $scope.allProjects = allProjects;
 
-            $scope.errorMessage = addReportErrorMsg;
-            $scope.showErrorMessage = false;
+        $scope.errorMessage = addReportErrorMsg;
+        $scope.showErrorMessage = false;
 
-            var expenseIds = [];
+        var expenseIds = [];
 
-            var reportId = getIdFromLocationSvc.getLastIdFromLocation($location.path());
-            var report = angular.copy(reportsSharingSvc.getReportById(reportId));
+        var reportId = $routeParams.reportId;
+        var report = angular.copy(reportsSharingSvc.getReportById(reportId));
 
-          //  var selectedProject = projectsSharingSvc.getProjectByEntityId(report.entityId);
+        //  var selectedProject = projectsSharingSvc.getProjectByEntityId(report.entityId);
 
-            if (reportId){
+        if (reportId){
 
-                $scope.report = report;
-                $scope.isProjectSelected = $scope.report.entityId > 0;
-                $scope.title = editReportTitle;
-                $scope.buttonLabel = editReportBtnLabel;
+            $scope.report = report;
+            $scope.isProjectSelected = $scope.report.entityId > 0;
+            $scope.title = editReportTitle;
+            $scope.buttonLabel = editReportBtnLabel;
 
-                expenseIds = $scope.report.expenseIds;
-            }
-            else {
-                $scope.report = {};
+            expenseIds = $scope.report.expenseIds;
+        }
+        else {
+            $scope.report = {};
 //                if ($scope.isProjectSelected){
 //                    $scope.report.project = selectedProject;
 //                }
-                $scope.title = createReportTitle;
-                $scope.buttonLabel = createReportBtnLabel;
+            $scope.title = createReportTitle;
+            $scope.buttonLabel = createReportBtnLabel;
+        }
+
+        $scope.select = function(choise){
+            if(choise==='allProjects')
+            {
+                $scope.isProjectSelected = false;
+                //  $scope.report.project = {};
+            }
+            else
+            {
+                $scope.isProjectSelected = true;
+                // $scope.report.project = selectedProject;
+            }
+        };
+
+        $scope.save = function(form, report){
+
+            function createReportSuccess(){
+                reportsSharingSvc.resetReports();
+                expenseSharingSvc.addReport();
+                $location.path(reportsPath);
             }
 
-            $scope.select = function(choise){
-                if(choise==='allProjects')
-                {
-                    $scope.isProjectSelected = false;
-                  //  $scope.report.project = {};
-                }
-                else
-                {
-                    $scope.isProjectSelected = true;
-                   // $scope.report.project = selectedProject;
-                }
-            };
+            function saveReportSuccess(){
 
-            $scope.save = function(form, report){
+                reportsSharingSvc.updateReport(report);
 
-                function createReportSuccess(){
-                    reportsSharingSvc.resetReports();
-                    expenseSharingSvc.addReport();
-                    $location.path(reportsPath);
+                $location.path(reportsPath);
+            }
+
+            if(form.$valid)
+            {
+                var projectId = 0;
+
+
+                if (report.project){
+                    projectId = projectsSharingSvc.getProjectIdByName(report.project.name);
+
                 }
 
-                function saveReportSuccess(){
-
-                    reportsSharingSvc.updateReport(report);
-
-                    $location.path(reportsPath);
-                }
-
-                if(form.$valid)
-                {
-                    var projectId = 0;
-
-
-                    if (report.project){
-                        projectId = projectsSharingSvc.getProjectIdByName(report.project.name);
-
-                    }
-
-                    expenseIds = expenseSharingSvc.getExpenseIdsForReportAssign();
+                expenseIds = expenseSharingSvc.getExpenseIdsForReportAssign();
 
 
 
-                    if (reportId) {
-                        var reportViewModel = {
-                            'expenseReportId': report.expenseReportId,
-                            'description': report.title,
-                            'applyTo': '',
-                            'entityId': projectId,
-                            'owner': localStorageSvc.getItem('userName'),
-                            'expenseIds': expenseIds
-                        };
+                if (reportId) {
+                    var reportViewModel = {
+                        'expenseReportId': report.expenseReportId,
+                        'description': report.title,
+                        'applyTo': '',
+                        'entityId': projectId,
+                        'owner': localStorageSvc.getItem('userName'),
+                        'expenseIds': expenseIds
+                    };
 
-                        reportsRepositorySvc.saveReport(
-                            {
-                                'token': localStorageSvc.getItem(sessionToken)
-                            },
-                            reportViewModel,
-                            saveReportSuccess,
-                            errorHandlerDefaultSvc.handleError
-                        );
-                    }
-                    else {
-
-                        var reportVM = {
-                            'description': report.title,
-                            'applyTo': 'PROJECT',
-                            'entityId': projectId,
-                            'owner': localStorageSvc.getItem('userName'),
-                            'expenseIds': expenseIds
-                        };
-                        reportsRepositorySvc.createReport(
-                            {
-                                'token': localStorageSvc.getItem(sessionToken)
-                            },
-                            reportVM,
-                            createReportSuccess,
-                            errorHandlerDefaultSvc.handleError
-                        );
-                    }
+                    reportsRepositorySvc.saveReport(
+                        {
+                            'token': localStorageSvc.getItem(sessionToken)
+                        },
+                        reportViewModel,
+                        saveReportSuccess,
+                        errorHandlerDefaultSvc.handleError
+                    );
                 }
                 else {
-                    $scope.showErrorMessage = true;
-                }
-            };
 
-            $scope.selectProject = function() {
-                projectsSharingSvc.getProjects().then(function(response){
-                    itemsSelectionDialogSvc.open(response, projectEntityName).then(function(selectedProject){
-                        if (selectedProject){
-                            $scope.report.project = selectedProject;
-                        }
-                    });
+                    var reportVM = {
+                        'description': report.title,
+                        'applyTo': 'PROJECT',
+                        'entityId': projectId,
+                        'owner': localStorageSvc.getItem('userName'),
+                        'expenseIds': expenseIds
+                    };
+                    reportsRepositorySvc.createReport(
+                        {
+                            'token': localStorageSvc.getItem(sessionToken)
+                        },
+                        reportVM,
+                        createReportSuccess,
+                        errorHandlerDefaultSvc.handleError
+                    );
+                }
+            }
+            else {
+                $scope.showErrorMessage = true;
+            }
+        };
+
+        $scope.selectProject = function() {
+            projectsSharingSvc.getProjects().then(function(response){
+                itemsSelectionDialogSvc.open(response, projectEntityName).then(function(selectedProject){
+                    if (selectedProject){
+                        $scope.report.project = selectedProject;
+                    }
                 });
-            };
-        }
-    ]);
+            });
+        };
+    }
+);

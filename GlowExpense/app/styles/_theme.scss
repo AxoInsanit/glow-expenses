@@ -222,8 +222,9 @@ ul.single {
 
 // MODAL DIALOG
 .modal-dialog {
-    color:$text-grey-dim;
-    margin-top: 75px;
+    color: $text-grey;
+    height: 95%;
+    overflow: auto;
     * {
         font-size: $size-global;
     }
@@ -235,6 +236,16 @@ ul.single {
         }
         &.darker {
             border-color:$text-grey;
+        }
+    }
+    .modal-content {
+        height: 100%;
+        background: transparent !important;
+        border: none !important;
+        > div {
+            background: white;
+            border: 1px solid rgba(0, 0, 0, 0.2);
+            border-radius: 6px;
         }
     }
     .modal-body {
@@ -334,6 +345,28 @@ ul.single {
     /* items selection */
 
     .items-selection-modal {
+        position: relative;
+        padding-top: 130px;
+        overflow: hidden;
+        height: 100%;
+        .header {
+            height: 65px;
+            position: absolute;;
+            width: 100%;
+            top: 0;
+            left: 0;
+            padding: 20px;
+        }
+
+        .filter {
+            height: 65px;
+            position: absolute;;
+            width: 100%;
+            top: 65px;
+            left: 0;
+        }
+
+
         .loop {
             display: block;
             width: 36px;
@@ -346,8 +379,6 @@ ul.single {
             font-size: 1.8em;
             color: $bg-black;
         }
-        height: 350px;
-        overflow: hidden;
         span{
             color:black;
         }
@@ -372,16 +403,10 @@ ul.single {
             right: 12px;
             color: $bg-black;
         }
-        .row {
-            padding:20px;
-            span {
-                line-height:25px;
-                display: inline-block;
-            }
-        }
+
         .item-container {
             border-color:$border-login;
-            max-height: 203px;
+            height: 100%;
             overflow: auto;
         }
         .green-hover:hover{
