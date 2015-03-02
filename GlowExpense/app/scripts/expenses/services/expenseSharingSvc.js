@@ -133,7 +133,7 @@ angular.module('Expenses').factory('expenseSharingSvc', ['$q', 'reportsSharingSv
             return result;
         }
 
-        function existExpenseInReport(expenseId, reportId) {
+        function getReportExpenseMapperById(expenseId, reportId) {
             var reportKey = reportId || 0;
             var result = {
                 index: -1
@@ -181,6 +181,7 @@ angular.module('Expenses').factory('expenseSharingSvc', ['$q', 'reportsSharingSv
                 reportsSharingSvc.updateReportTotal(reportKey, amount);
 
                 if (!assigningToAnotherReport) {
+                    //remove expense also from list of unassigned expenses from back-end
                     expensesRepositorySvc.deleteExpense(paramsObj, deleteExpenseSuccess, deleteExpenseError);
                 }
                 else {
@@ -205,16 +206,19 @@ angular.module('Expenses').factory('expenseSharingSvc', ['$q', 'reportsSharingSv
                 'token': localStorageSvc.getItem(sessionToken),
                 'expenseId': expenseId
             };
-            var currentExpense = existExpenseInReport(expenseId, reportKey);
+            var currentExpense = getReportExpenseMapperById(expenseId, reportKey);
             if (currentExpense.index >= 0) {
                 if (reportKey !== 0) {
+                    //expense is assigned to a report
                     reportExpensesRepositorySvc.deleteExpense(paramsObj, deleteExpenseInReportSuccess, deleteExpenseError);
                 }
                 else {
+                    //expense is not assigned to any report
                     if (!assigningToAnotherReport) {
                         expensesRepositorySvc.deleteExpense(paramsObj, deleteExpenseSuccess, deleteExpenseError);
                     }
                     else {
+                        //just remove expense locally, not need to call api from back-end!
                         deleteExpenseSuccess();
                     }
                 }

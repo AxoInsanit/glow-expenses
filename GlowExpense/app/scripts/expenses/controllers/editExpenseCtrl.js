@@ -77,7 +77,8 @@ angular.module('Expenses')
 
                 function addExpenseSuccess(){
                     if (reportId === 0) {
-                         expenseSharingSvc.deleteExpense($scope.expense.expenseId, reportId, true);
+                        //delete expense from local list of unassigned expenses.
+                        expenseSharingSvc.deleteExpense($scope.expense.expenseId, reportId, true);
                     }
                     expenseSharingSvc.addExpense($scope.expense, $scope.report.expenseReportId);
                     $location.path(reportDetailsPath + '/' + $scope.report.expenseReportId);
@@ -107,13 +108,15 @@ angular.module('Expenses')
                 //expense assigned to another report
                 if (lastSelectedReport !== $scope.report.description){
                     if (reportId > 0) {
+                        //expense is already assigned to a report
                         expenseSharingSvc.deleteExpense($scope.expense.expenseId, reportId, true).then(addExpense, deleteExpenseFail);
                     }
                     else {
+                        //expense is not assigned to any report yet
                         addExpense();
                     }
                 }
-                // no change in the state of expense
+                //no change in the state of expense
                 else
                 {
                     expenseSharingSvc.updateExpense(expense, reportId);
