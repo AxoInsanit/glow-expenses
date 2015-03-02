@@ -1,9 +1,9 @@
 'use strict';
 
-angular.module('Expenses').factory('expenseSharingSvc', ['$q', 'expensesRepositorySvc', 'errorHandlerDefaultSvc',
+angular.module('Expenses').factory('expenseSharingSvc', ['$q', 'reportsSharingSvc','expensesRepositorySvc', 'reportExpensesRepositorySvc', 'errorHandlerDefaultSvc',
     'localStorageSvc', 'sessionToken', 'expenseSvc', 'infiniteScrollEnabled',
 
-    function($q, expensesRepositorySvc, errorHandlerDefaultSvc, localStorageSvc, sessionToken, expenseSvc, infiniteScrollEnabled) {
+    function($q, reportsSharingSvc, expensesRepositorySvc, reportExpensesRepositorySvc, errorHandlerDefaultSvc, localStorageSvc, sessionToken, expenseSvc, infiniteScrollEnabled) {
 
         var expensesShownPerPage = 5;
 
@@ -133,8 +133,31 @@ angular.module('Expenses').factory('expenseSharingSvc', ['$q', 'expensesReposito
             return result;
         }
 
+        function getReportExpenseMapperById(expenseId, reportId) {
+            var reportKey = reportId || 0;
+            var result = {
+                index: -1
+            };
+            reportExpensesMapper[reportKey].some(function(item, index){
+                if(item.expenseId === expenseId){
+                    result.index = index;
+                    result.item = item;
+                    return true;
+                }
+            });
+            return result;
+        }
+
         function updateExpense(expense, reportId){
             var reportKey = reportId || 0;
+
+            if (reportKey > 0) {
+                var oldExpense = getExpenseById(expense.expenseId, reportKey);
+                var oldAmount = parseFloat(oldExpense.originalAmount) * parseFloat(oldExpense.exchangeRate);
+                var newAmount = parseFloat(expense.originalAmount) * parseFloat(expense.exchangeRate);
+                var amount = newAmount - oldAmount;
+                reportsSharingSvc.updateReportTotal(reportKey, amount);
+            }
             
             reportExpensesMapper[reportKey].some(function(item){
                 if(item.expenseId === expense.expenseId){
@@ -152,25 +175,70 @@ angular.module('Expenses').factory('expenseSharingSvc', ['$q', 'expensesReposito
             });
         }
 
-        function deleteExpense(expenseId, reportId){
-            var reportKey = reportId || 0;
-            var expenseToDeleteIndex = null;
-            reportExpensesMapper[reportKey].some(function(item, index){
-                if (item.expenseId === expenseId){
-                    expenseToDeleteIndex = index;
-                    return true;
-                }
-            });
+        function deleteExpense(expenseId, reportId, assigningToAnotherReport) {
+            function deleteExpenseInReportSuccess() {
+                var amount = parseFloat(currentExpense.item.originalAmount) * parseFloat(currentExpense.item.exchangeRate) * -1;
+                reportsSharingSvc.updateReportTotal(reportKey, amount);
 
-            if (expenseToDeleteIndex !== null){
-                reportExpensesMapper[reportKey].splice(expenseToDeleteIndex, 1);
+                if (!assigningToAnotherReport) {
+                    //remove expense also from list of unassigned expenses from back-end
+                    expensesRepositorySvc.deleteExpense(paramsObj, deleteExpenseSuccess, deleteExpenseError);
+                }
+                else {
+                    deleteExpenseSuccess();
+                }
             }
+
+            function deleteExpenseSuccess() {
+                reportExpensesMapper[reportKey].splice(currentExpense.index, 1);
+                p.resolve();
+            }
+
+            function deleteExpenseError(errorResponse) {
+                errorHandlerDefaultSvc.handleError(errorResponse);
+                p.reject('Error deleting expense');
+            }
+
+            var p = $q.defer();
+
+            var reportKey = reportId || 0;
+            var paramsObj = {
+                'token': localStorageSvc.getItem(sessionToken),
+                'expenseId': expenseId
+            };
+            var currentExpense = getReportExpenseMapperById(expenseId, reportKey);
+            if (currentExpense.index >= 0) {
+                if (reportKey !== 0) {
+                    //expense is assigned to a report
+                    reportExpensesRepositorySvc.deleteExpense(paramsObj, deleteExpenseInReportSuccess, deleteExpenseError);
+                }
+                else {
+                    //expense is not assigned to any report
+                    if (!assigningToAnotherReport) {
+                        expensesRepositorySvc.deleteExpense(paramsObj, deleteExpenseSuccess, deleteExpenseError);
+                    }
+                    else {
+                        //just remove expense locally, not need to call api from back-end!
+                        deleteExpenseSuccess();
+                    }
+                }
+            }
+            else {
+                p.reject('Expense not found');
+            }
+
+            return p.promise;
         }
 
         function addExpense(expense, reportId){
             var reportKey = reportId || 0;
             reportExpensesMapper[reportKey] = reportExpensesMapper[reportKey] || [];
             reportExpensesMapper[reportKey].push(expense);
+
+            if (reportKey > 0) {
+                var amount = parseFloat(expense.originalAmount) * parseFloat(expense.exchangeRate);
+                reportsSharingSvc.updateReportTotal(reportKey, amount);
+            }
         }
 
         function addReport(){

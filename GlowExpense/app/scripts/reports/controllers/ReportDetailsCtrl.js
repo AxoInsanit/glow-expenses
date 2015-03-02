@@ -5,23 +5,23 @@ angular.module('Reports')
         'expensesRepositorySvc', 'confirmDeleteDialogSvc', 'entityName', 'sendReportDialogSvc', 'expensePath',
         'expenseSvc', 'editModeNotificationChannelSvc', 'getIdFromLocationSvc', 'localStorageSvc', 'sessionToken',
         'reportSendRepositorySvc', 'errorHandlerDefaultSvc', 'errorDialogSvc', 'emptyReportErrorMsg',
-        'infiniteScrollEnabled', 'cameraSelectDialogListenerSvc',
+        'infiniteScrollEnabled', 'cameraSelectDialogListenerSvc', 'expenseSharingSvc',
         function ($scope, $location, addReportErrorMsg, reportsSharingSvc, expensesRepositorySvc, confirmDeleteDialogSvc,
                   entityName, sendReportDialogSvc, expensePath, expenseSvc, editModeNotificationChannelSvc, getIdFromLocationSvc,
                   localStorageSvc, sessionToken, reportSendRepositorySvc, errorHandlerDefaultSvc, errorDialogSvc,
-                  emptyReportErrorMsg, infiniteScrollEnabled, cameraSelectDialogListenerSvc)  {
+                  emptyReportErrorMsg, infiniteScrollEnabled, cameraSelectDialogListenerSvc, expenseSharingSvc)  {
 
             $scope.errorMessage = addReportErrorMsg;
             $scope.showErrorMessage = false;
             $scope.expenses = [];
             $scope.isEditMode = false;
 
-            $scope.selectedExpenseIndex = reportsSharingSvc.expenseSharingSvc.selectedExpense;
+            $scope.selectedExpenseIndex = expenseSharingSvc.selectedExpense;
 
             var reportId = getIdFromLocationSvc.getLastIdFromLocation($location.path());
             $scope.report =reportsSharingSvc.getReportById(reportId);
 
-            reportsSharingSvc.expenseSharingSvc.getExpenses($scope.report.expenseReportId).then(function(result) {
+            expenseSharingSvc.getExpenses($scope.report.expenseReportId).then(function(result) {
                 $scope.expenses = result;
             });
 
@@ -38,7 +38,7 @@ angular.module('Reports')
             $scope.editExpense = function(expense) {
                 if(!$scope.isEditMode)
                 {
-                    $scope.selectedExpenseIndex = reportsSharingSvc.expenseSharingSvc.selectedExpense;
+                    $scope.selectedExpenseIndex = expenseSharingSvc.selectedExpense;
                     $location.path('/report-details/' + $scope.report.expenseReportId + '/expense/' + expense.expenseId);
                 }
             };
@@ -83,7 +83,7 @@ angular.module('Reports')
                     return;
                 }
 
-                var result = reportsSharingSvc.expenseSharingSvc.getNextFiveExpenses(reportId);
+                var result = expenseSharingSvc.getNextFiveExpenses(reportId);
                 result.forEach(function(item){
                     $scope.expenses.push(item);
                 });
