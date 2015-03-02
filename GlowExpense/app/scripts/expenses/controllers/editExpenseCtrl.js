@@ -51,7 +51,7 @@ angular.module('Expenses')
         }
 
         $scope.report = reportsSharingSvc.getReportById(reportId);
-        var lastSelectedReport = $scope.report.description;
+        var lastSelectedReport = $scope.report.expenseReportId;
 
         var selectedImage = saveExpenseStateSvc.getImage();
 
@@ -106,7 +106,7 @@ angular.module('Expenses')
                 }
 
                 //expense assigned to another report
-                if (lastSelectedReport !== $scope.report.description){
+                if (lastSelectedReport !== $scope.report.expenseReportId){
                     if (reportId > 0) {
                         //expense is already assigned to a report
                         expenseSharingSvc.deleteExpense($scope.expense.expenseId, reportId, true).then(addExpense, deleteExpenseFail);
@@ -120,7 +120,7 @@ angular.module('Expenses')
                 else
                 {
                     expenseSharingSvc.updateExpense(expense, reportId);
-                    if ($scope.report.description){
+                    if ($scope.report.expenseReportId){
                         // it is assigned go to report details
                         $location.path(reportDetailsPath + '/' + $scope.report.expenseReportId);
                     }
