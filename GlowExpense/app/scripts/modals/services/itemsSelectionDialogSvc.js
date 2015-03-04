@@ -5,6 +5,7 @@ angular.module('Modals').factory('itemsSelectionDialogSvc', ['$modal', function(
         function open(entities, entityName, titleKey) {
             var modalInstance = $modal.open({
                 templateUrl: 'scripts/modals/views/items-selection-dialog.html',
+                windowClass: 'fullscreen',
                 controller: ['$scope', '$modalInstance', function($scope, $modalInstance) {
                     $scope.entities = entities;
                     $scope.titleKey = titleKey;

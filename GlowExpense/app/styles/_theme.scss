@@ -221,9 +221,16 @@ ul.single {
 
 
 // MODAL DIALOG
+.modal.fullscreen {
+    .modal-dialog {
+        height: 95%;
+        .modal-content {
+            height: 100%;
+        }
+    }
+}
 .modal-dialog {
     color: $text-grey;
-    height: 95%;
     overflow: auto;
     * {
         font-size: $size-global;
@@ -239,7 +246,6 @@ ul.single {
         }
     }
     .modal-content {
-        height: 100%;
         background: transparent !important;
         border: none !important;
         > div {
