@@ -1,0 +1,83 @@
+<article class="expenses-body with-padding">
+    <section class="camera">
+        <div ng-show="!expense.imagePath && !expense.localImagePath">
+            <a class="icon icon-camera" ng-click="takePhoto()" >
+            </a>
+            <p class="text-info">Add Invoice Image </p>
+        </div>
+
+        <div ng-show="expense.imagePath || expense.localImagePath" ng-click="viewImage(expense)">
+            <a class="icon expense-image">
+                <img ng-src="{{expense.imagePath || expense.localImagePath}}" />
+            </a>
+
+            <p class="text-info">Change Invoice Image </p>
+        </div>
+
+    </section>
+    <form role="form" name="expenseForm" novalidate class="pb50">
+        <div ng-show="showErrorMessage" class="error-message">
+            <div class="msg errorMsg">{{errorMessage}}
+            </div>
+            <a class="icon icon-close"></a>
+        </div>
+        <div>
+            <div class="form-group bottom20">
+                <div class="form-item head">
+                    Assign Expense to:
+                </div>
+                <div class="form-item" ng-click="selectReport()">
+                    <label class="assign-select" for="report">
+                        <input type="text" id="report" placeholder="Select a report" class="form-control"
+                               ng-model="report.description" disabled>
+                    </label>
+                </div>
+            </div>
+            <div class="form-group bottom20">
+                <div class="form-item" >
+                    <label for="description">
+                        <input type="text" id="description" placeholder="Description" class="form-control"
+                               ng-model="expense.description" required>
+                    </label>
+                </div>
+                <div class="form-item" >
+                    <label for="amount">
+                       <input type="text" class="form-control"
+                            ng-model="expense.originalAmount" id="amount" placeholder="Amount"
+                            ng-change="formatCurrency('originalAmount')"
+                            ng-model-options="{updateOn: 'default blur', debounce: {'default': 400, 'blur': 0} }" required>
+                    </label>
+                </div>
+                <div class="form-item" ng-click="selectCurrency(expense.currency)">
+                    <div>
+                        <label>
+                            <span class="form-control">
+                                {{expense.currency.name || 'Currency'}}
+                            </span>
+                        </label>
+                    </div>
+                </div>
+                <div class="form-item" ng-click="selectContableCode(expense.contableCode)">
+                    <div>
+                        <label>
+                            <span class="form-control">
+                                {{expense.contableCode.name || 'Contable code'}}
+                            </span>
+                        </label>
+                    </div>
+                </div>
+                <div class="form-item">
+                    <label for="exchangeRate">
+                        <input type="text" id="exchangeRate" class="form-control"
+                        ng-model="expense.exchangeRate"
+                        ng-change="formatCurrency('exchangeRate')"
+                        ng-model-options="{updateOn: 'default blur', debounce: {'default': 400, 'blur': 0} }" >
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div>
+            <button class="btn" type="submit" ng-disabled="form.$invalid" ng-click="save()">{{buttonLabel}}</button>
+        </div>
+    </form>
+</article>

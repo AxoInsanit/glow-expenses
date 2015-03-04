@@ -8,6 +8,7 @@ angular.module('Login', ['ngResource'])
     .constant('errorMsg', 'Please try again! Username or password is wrong!')
     .constant('glowKey', '98X773A4-5H32-8921-H29N-KEJ8S93V2314')
     .constant('glowRegisterPath', '/system/register/web')
+    .constant('globerStorageKey', 'glober')
     .constant('userName', 'userName');
 
 

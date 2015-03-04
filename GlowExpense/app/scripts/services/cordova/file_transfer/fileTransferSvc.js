@@ -5,7 +5,7 @@ angular.module('Services').factory('fileTransferSvc', function ($q, $window, $ti
         upload: function (uploadUrl, file, data) {
             var ft = ($window.FileTransfer) ? new $window.FileTransfer() : angular.noop,
                 deferred = $q.defer(),
-                options = new $window.FileUploadOptions(),
+                options = $window.FileUploadOptions ? new $window.FileUploadOptions() : {},
                 params = {},
                 defaultUploadTimeout = 40000,
                 progressTimeout;
@@ -15,6 +15,7 @@ angular.module('Services').factory('fileTransferSvc', function ($q, $window, $ti
             function onSuccess() {
                 $timeout.cancel(progressTimeout);
                 requestNotificationChannelSvc.requestEnded();
+                console.log('file-transfer success');
                 deferred.resolve();
             }
 
@@ -25,12 +26,15 @@ angular.module('Services').factory('fileTransferSvc', function ($q, $window, $ti
             }
 
             function requestTimeout() {
+                console.log('file-transfer - timeouted');
                 deferred.reject($window.FileTransferError.CONNECTION_ERR);
                 ft.abort();
             }
 
             if (!file) {
-                deferred.reject('No file to upload');
+                console.log('file-transfer - No file to upload');
+                deferred.resolve('No file to upload');
+                requestNotificationChannelSvc.requestEnded();
             } else {
                 // set JSON data
                 if (data) {

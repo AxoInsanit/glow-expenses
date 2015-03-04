@@ -22,7 +22,8 @@
 </head>
 <body ng-app="app">
     <!-- When it is login page we dont want to slow the load with an animation so we remove them for the login -->
-    <div class="container" ng-class="{ mainContainer:!loginPage,staticHeight:infScroll }" ng-view></div>
+    <!--<div class="container" ng-class="{ mainContainer:!loginPage,staticHeight:infScroll }" ng-view></div>-->
+    <div ui-view class="slide"></div>
     <!-- <div class="container" ng-view></div> -->
     <!-- used for dark background -->
     <div class="overlay hide"></div>
@@ -35,7 +36,7 @@
 
     <!-- bower:js -->
     <script src="bower_components/es5-shim/es5-shim.js"></script>
-    <script src="bower_components/jquery/jquery.js"></script>
+    <script src="bower_components/jquery/dist/jquery.js"></script>
     <script src="bower_components/json3/lib/json3.min.js"></script>
     <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/angular-route/angular-route.js"></script>
@@ -50,6 +51,8 @@
     <script src="bower_components/snapjs/snap.js"></script>
     <script src="bower_components/angular-snap/angular-snap.js"></script>
     <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script src="bower_components/hammerjs/hammer.js"></script>
+    <script src="bower_components/ui-router/release/angular-ui-router.js"></script>
     <!-- endbower -->
     <script src="bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>
     <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
@@ -57,117 +60,83 @@
 
     <!-- build:js(app) scripts/scripts.js -->
 
-
-
-    <script src="scripts/app.js"></script>
-
-    <script src="scripts/login/login.js"></script>
-    <script src="scripts/login/services/userSvc.js"></script>
-
-    <!-- yo:features -->
-    <script src="scripts/header/header.js"></script>
-    <script src="scripts/expenses/expenses.js"></script>
-    <script src="scripts/reports/reports.js"></script>
-    <script src="scripts/invoice_expense_image/invoiceExpenseImage.js"></script>
-    <script src="scripts/api/api.js"></script>
-    <script src="scripts/modals/Modals.js"></script>
-    <!-- yo:features -->
-
-    <script src="scripts/header/controllers/headerCtrl.js"></script>
-    <script src="scripts/login/controllers/login.js"></script>
-    <script src="scripts/expenses/controllers/addEditExpenseCtrl.js"></script>
-    <script src="scripts/expenses/controllers/expensesListCtrl.js"></script>
-    <script src="scripts/expenses/controllers/editExpenseCtrl.js"></script>
-    <script src="scripts/expenses/controllers/addExpenseCtrl.js"></script>
-    <script src="scripts/modals/services/editSaveExpenseDialogSvc.js"></script>
-    <script src="scripts/modals/services/expenseReportsDialogSvc.js"></script>
-    <script src="scripts/modals/services/sendReportDialogSvc.js"></script>
-
-    <script src="scripts/reports/controllers/reportsListCtrl.js"></script>
-    <script src="scripts/reports/controllers/ReportDetailsCtrl.js"></script>
-    <script src="scripts/reports/controllers/createEditReportCtrl.js"></script>
-    <script src="scripts/reports/controllers/editReportExpenseCtrl.js"></script>
-
-
-    <script src="scripts/invoice_expense_image/controllers/invoiceImageCtrl.js"></script>
-
-    <!-- yo:controllers -->
-
-    <script src="scripts/config.js"></script>
-
-    <script src="scripts/services/services.js"></script>
-    <script src="scripts/services/localStorageSvc.js"></script>
-    <script src="scripts/services/requestNotificationChannelSvc.js"></script>
-    <script src="scripts/services/editModeNotificationChannelSvc.js"></script>
-
-    <script src="scripts/modals/services/expenseViewImageSvc.js"></script>
-
-    <script src="scripts/modals/services/confirmDeleteDialogSvc.js"></script>
-    <script src="scripts/modals/services/currencySelectDialogSvc.js"></script>
-    <script src="scripts/modals/services/contableCodeSelectDialogSvc.js"></script>
-    <script src="scripts/services/filterReportByStateSvc.js"></script>
-    <script src="scripts/modals/services/signOutDialogSvc.js"></script>
-    <script src="scripts/modals/services/itemsSelectionDialogSvc.js"></script>
-    <script src="scripts/modals/services/errorDialogSvc.js"></script>
-    <script src="scripts/services/errorMessageSvc.js"></script>
-    <script src="scripts/services/errorHandlerDefaultSvc.js"></script>
-
-
-    <script src="scripts/services/expenseReportStatesSvc.js"></script>
-
-    <script src="scripts/services/currencies/currenciesRepositorySvc.js"></script>
-    <script src="scripts/services/currencies/currenciesSvc.js"></script>
-
-    <script src="scripts/services/contableCodes/contableCodesRepositorySvc.js"></script>
-    <script src="scripts/services/contableCodes/contableCodesSvc.js"></script>
-
-    <script src="scripts/services/expense_types/expenseTypesRepositorySvc.js"></script>
-    <script src="scripts/services/expense_types/expenseTypesSvc.js"></script>
-    <script src="scripts/services/cordova/camera/cameraSvc.js"></script>
-    <script src="scripts/services/cordova/file_transfer/fileTransferSvc.js"></script>
-    <script src="scripts/services/cordova/in_app_browser/oAuthInAppBrowser.js"></script>
-
-    <script src="scripts/services/projects/projectsRepositorySvc.js"></script>
-    <script src="scripts/services/projects/projectsSharingSvc.js"></script>
-    <script src="scripts/reports/services/reportsRepositorySvc.js"></script>
-    <script src="scripts/reports/services/reportsSharingSvc.js"></script>
-    <script src="scripts/services/projects/projectsRepositorySvc.js"></script>
-    <script src="scripts/reports/services/reportSendRepositorySvc.js"></script>
-    <script src="scripts/modals/services/cameraSelectDialog.js"></script>
-
-   <!--<script src="scripts/invoice_expense_image/services/invoiceImageSvc.js"></script>-->
-
-    <script src="scripts/expenses/services/expenseSvc.js"></script>
-    <script src="scripts/expenses/services/expensesRepositorySvc.js"></script>
-    <script src="scripts/expenses/services/expenseSharingSvc.js"></script>
-    <script src="scripts/expenses/services/expenseIdShareSvc.js"></script>
-    <script src="scripts/expenses/services/expensePostImageSvc.js"></script>
-    <script src="scripts/expenses/services/imageFileShareSvc.js"></script>
-    <script src="scripts/services/getIdFromLocationSvc.js"></script>
-    <script src="scripts/reports/services/reportExpensesRepositorySvc.js"></script>
-    <script src="scripts/invoice_expense_image/services/invoiceImageRepositorySvc.js"></script>
-    <script src="scripts/expenses/services/saveExpenseStateSvc.js"></script>
-
-    <script src="scripts/expenses/services/lastShownExpenseSvc.js"></script>
-    <script src="scripts/services/validateNumbersSvc.js"></script>
-    <script src="scripts/expenses/services/cameraSelectDialogListenerSvc.js"></script>
-
-    <!-- yo:services -->
-
-    <script src="scripts/filters/filters.js"></script>
-    <!-- yo:filters -->
-
+    <!-- directives -->
     <script src="scripts/directives/directives.js"></script>
-    <script src="scripts/directives/loading.js"></script>
     <script src="scripts/directives/stop-event.js"></script>
-    <script src="scripts/directives/back-button.js"></script>
-    <script src="scripts/directives/expenses-list.js"></script>
-    <script src="scripts/directives/currency.js"></script>
     <script src="scripts/directives/floating.js"></script>
     <script src="scripts/directives/get-focus.js"></script>
     <script src="scripts/directives/numberFocus.js"></script>
+    <script src="scripts/directives/swipeAndSnap.js"></script>
+    <script src="scripts/directives/back-button.js"></script>
+    <script src="scripts/directives/expenses-list.js"></script>
+    <script src="scripts/directives/loading.js"></script>
+    <script src="scripts/directives/currency.js"></script>
 
-    <!-- yo:directives -->
+    <!-- expenses -->
+    <script src="scripts/expenses/expenses.js"></script>
+    <script src="scripts/expenses/controllers/expensesListCtrl.js"></script>
+    <script src="scripts/expenses/controllers/expenseFormCtrl.js"></script>
+    <script src="scripts/expenses/controllers/viewExpenseImageCtrl.js"></script>
+    <script src="scripts/expenses/services/expenseModel.js"></script>
+    <script src="scripts/expenses/services/expenseResource.js"></script>
+
+    <!-- layouts -->
+    <script src="scripts/layouts/layouts.js"></script>
+    <script src="scripts/layouts/controllers/homeCtrl.js"></script>
+    <script src="scripts/layouts/controllers/editDetailsCtrl.js"></script>
+
+    <!-- login -->
+    <script src="scripts/login/login.js"></script>
+    <script src="scripts/login/controllers/login.js"></script>
+    <script src="scripts/login/services/userResource.js"></script>
+
+    <!-- modals -->
+    <script src="scripts/modals/Modals.js"></script>
+    <script src="scripts/modals/services/editSaveExpenseDialogSvc.js"></script>
+    <script src="scripts/modals/services/expenseReportsDialogSvc.js"></script>
+    <script src="scripts/modals/services/sendReportDialogSvc.js"></script>
+    <script src="scripts/modals/services/expenseViewImageSvc.js"></script>
+    <script src="scripts/modals/services/confirmDeleteDialogSvc.js"></script>
+    <script src="scripts/modals/services/currencySelectDialogSvc.js"></script>
+    <script src="scripts/modals/services/contableCodeSelectDialogSvc.js"></script>
+    <script src="scripts/modals/services/signOutDialogSvc.js"></script>
+    <script src="scripts/modals/services/itemsSelectionDialogSvc.js"></script>
+    <script src="scripts/modals/services/errorDialogSvc.js"></script>
+    <script src="scripts/modals/services/cameraSelectDialog.js"></script>
+
+    <!-- projects -->
+    <script src="scripts/projects/projects.js"></script>
+    <script src="scripts/projects/services/projectResource.js"></script>
+
+    <!-- reports -->
+    <script src="scripts/reports/reports.js"></script>
+    <script src="scripts/reports/controllers/reportsListCtrl.js"></script>
+    <script src="scripts/reports/controllers/viewReportCtrl.js"></script>
+    <script src="scripts/reports/controllers/reportFormCtrl.js"></script>
+    <script src="scripts/reports/services/reportResource.js"></script>
+    <script src="scripts/reports/services/reportModel.js"></script>
+
+    <!-- services -->
+    <script src="scripts/services/services.js"></script>
+    <script src="scripts/services/transitionService.js"></script>
+    <script src="scripts/services/localStorageSvc.js"></script>
+    <script src="scripts/services/requestNotificationChannelSvc.js"></script>
+    <script src="scripts/services/errorMessageSvc.js"></script>
+    <script src="scripts/services/errorHandlerDefaultSvc.js"></script>
+    <script src="scripts/services/validateNumbersSvc.js"></script>
+    <script src="scripts/services/currencies/currencyResource.js"></script>
+    <script src="scripts/services/contableCodes/contableCodeResource.js"></script>
+    <script src="scripts/services/cordova/camera/cameraSvc.js"></script>
+    <script src="scripts/services/cordova/file_transfer/fileTransferSvc.js"></script>
+    <script src="scripts/services/cordova/in_app_browser/oAuthInAppBrowser.js"></script>
+    <script src="scripts/services/filterReportByStateSvc.js"></script>
+    <!-- api -->
+    <script src="scripts/api/api.js"></script>
+
+    <!-- app -->
+    <script src="scripts/config.js"></script>
+    <script src="scripts/app.js"></script>
+
     <!-- endbuild -->
     <script type="text/javascript">
         // var onDeviceReady = function() {

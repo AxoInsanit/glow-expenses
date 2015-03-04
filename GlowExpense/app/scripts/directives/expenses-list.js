@@ -1,44 +1,64 @@
 'use strict';
 
-angular.module('Directives').directive('expensesList', ['expensesListTemplateUrl', function(expensesListTemplateUrl) {
+angular.module('Directives').directive('expensesList', function($stateParams, transitionService, confirmDeleteDialogSvc,
+                                                                expenseResource, reportResource, errorDialogSvc) {
     return {
         restrict: 'E',
         replace: true,
-        controller: function($scope, $location, expenseSvc, expensesRepositorySvc,  confirmDeleteDialogSvc, reportEntity,
-                             sessionToken, errorHandlerDefaultSvc, expenseSharingSvc, $routeParams, infiniteScrollEnabled,
-                             reportExpensesRepositorySvc) {
+        controller: function($scope) {
 
             $scope.sort = function(item) {
                 return new Date(item.date);
             };
 
-            $scope.deleteExpense = function(expenseId){
+            $scope.$on('editMode::expenses', function (e, editMode) {
+                $scope.editMode = editMode;
+            });
 
-                confirmDeleteDialogSvc.open(reportEntity).then(function(){
-                    if ($routeParams.reportId) {
-                        reportExpensesRepositorySvc.deleteExpense(
-                            {
-                                expenseId: expenseId,
-                                token: localStorage.getItem(sessionToken)
-                            },
-                            deleteSuccess,
-                            errorHandlerDefaultSvc.handleError
-                        );
+            $scope.deleteExpense = function (expense, event) {
+                event.stopPropagation();
+                event.preventDefault();
+                confirmDeleteDialogSvc.open('expense').then(function(){
+                    var promise;
+                    if ($stateParams.reportId) {
+                        promise = reportResource.removeExpense($stateParams.reportId, expense.expenseId);
                     } else {
-                        expensesRepositorySvc.deleteExpense(
-                            {
-                                expenseId: expenseId,
-                                token: localStorage.getItem(sessionToken)
-                            },
-                            deleteSuccess,
-                            errorHandlerDefaultSvc.handleError
-                        );
+                        promise = expenseResource.removeExpense(expense.expenseId);
                     }
-
+                    promise.catch(function () {
+                        errorDialogSvc('Couldn\'t remove expense');
+                    }).finally(function () {
+                        $stateParams.view = false;
+                        transitionService.reload();
+                    });
                 });
             };
+
+            $scope.takePhoto = function (expense, event) {
+                event.stopPropagation();
+                event.preventDefault();
+                if ($stateParams.reportId) {
+                    transitionService.go({
+                        name: 'editReportExpense',
+                        params: {
+                            reportId: $stateParams.reportId,
+                            expenseId: expense.expenseId,
+                            imageModal: 'open'
+                        },
+                        direction: 'forward'
+                    });
+                } else {
+                    transitionService.go({
+                        name: 'editExpense',
+                        params: {
+                            expenseId: expense.expenseId,
+                            imageModal: 'open'
+                        },
+                        direction: 'forward'
+                    });
+                }
+            };
         },
-        templateUrl: expensesListTemplateUrl
+        templateUrl: 'scripts/directives/views/expenses-list.html'
     };
-}
-]);
+});

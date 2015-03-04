@@ -1,38 +1,22 @@
 'use strict';
 
 angular.module('Modals').factory('signOutDialogSvc',
-    function($modal, loginPath, sessionToken, localStorageSvc, userName){
+    function($modal, $rootScope, userResource){
 
         function open() {
             var modalInstance = $modal.open({
                 templateUrl: 'scripts/modals/views/sign-out-dialog.html',
                 controller: ['$scope', '$modalInstance', function($scope, $modalInstance) {
 
-                    $scope.$on('$locationChangeSuccess', function() {
-                        if ($modalInstance) {
-                            $modalInstance.dismiss('cancelled');
-                        }
+                    userResource.getGlober().then(function (glober) {
+                        $scope.profileName = glober.firstname + ' ' + glober.lastname;
                     });
-
-                    $scope.profileName = localStorage.getItem(userName);
 
                     $scope.ok = function() {
-                        localStorageSvc.removeItem(sessionToken);
-                        localStorageSvc.removeItem(userName);
-                        $modalInstance.close(loginPath);
+                        $rootScope.$broadcast('global::signOut');
+                        $modalInstance.close();
                     };
 
-                    // handle device's back button, close modal
-                    function backButtonHandler() {
-                        $modalInstance.dismiss('cancelled');
-                    }
-
-                    document.addEventListener('backbutton', backButtonHandler);
-
-                    // on modal close remove handler
-                    $scope.$on('$destroy', function () {
-                        document.removeEventListener('backbutton', backButtonHandler);
-                    });
                 }]
             });
 

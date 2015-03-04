@@ -11,10 +11,6 @@ angular.module('Modals').factory('expenseReportsDialogSvc', ['$modal', 'reportsS
                     $scope.reports = [];
                     $scope.searchedReport = null;
 
-                    $scope.$on('$locationChangeStart', function() {
-                        $modalInstance.close('true');
-                    });
-
                     reportsSharingSvc.getReports().then(function(response){
                         $scope.reports = response.filter(filterReportByStateSvc.checkIfInState);
                     });
@@ -22,19 +18,6 @@ angular.module('Modals').factory('expenseReportsDialogSvc', ['$modal', 'reportsS
                     $scope.selectReport = function(report) {
                         $modalInstance.close(report);
                     };
-
-
-                    // handle device's back button, close modal
-                    function backButtonHandler() {
-                        $modalInstance.dismiss('canceled');
-                    }
-
-                    document.addEventListener('backbutton', backButtonHandler);
-
-                    // on modal close remove handler
-                    $scope.$on('$destroy', function () {
-                        document.removeEventListener('backbutton', backButtonHandler);
-                    });
                 }]
             });
 

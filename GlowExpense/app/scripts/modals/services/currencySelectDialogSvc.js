@@ -9,10 +9,6 @@ angular.module('Modals').factory('currencySelectDialogSvc', ['$modal',  function
 
                     $scope.currencies = currencies;
 
-                    $scope.$on('$locationChangeStart', function() {
-                        $modalInstance.close('true');
-                    });
-
                     if (lastSelectedCurrency) {
                         $scope.currencies.forEach(function(item){
                             if (lastSelectedCurrency.id === item.id){
@@ -37,18 +33,6 @@ angular.module('Modals').factory('currencySelectDialogSvc', ['$modal',  function
                         currency.selected = true;
                         $modalInstance.close(currency);
                     };
-
-                    // handle device's back button, close modal
-                    function backButtonHandler() {
-                        $modalInstance.dismiss('canceled');
-                    }
-
-                    document.addEventListener('backbutton', backButtonHandler);
-
-                    // on modal close remove handler
-                    $scope.$on('$destroy', function () {
-                        document.removeEventListener('backbutton', backButtonHandler);
-                    });
                 }]
             });
 

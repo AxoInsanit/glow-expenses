@@ -7,7 +7,7 @@ module.exports = function(grunt) {
             files: [{
                 expand: true,
                 cwd: '<%= grunt.config.app %>',
-                src: ['scripts/*/views/{,*/}*.html', 'index.html'],
+                src: ['scripts/*/views/{,*/}*.html', 'index.html', 'scripts/shared/layouts/{,*/}*.html'],
                 dest: '<%= grunt.config.dist %>'
             }]
         }

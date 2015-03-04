@@ -1,51 +1,42 @@
 'use strict';
 
 angular.module('Expenses')
-    .controller('ExpensesListCtrl', function ($scope, $location, expenseSharingSvc, cameraSelectDialogListenerSvc,
-                                              reportsPath, editModeNotificationChannelSvc, expensePath,
-                                              infiniteScrollEnabled)  {
+    .controller('ExpensesListCtrl', function ($scope, transitionService, expenseResource)  {
 
         $scope.expenses = [];
 
-        $scope.selectedExpenseIndex = expenseSharingSvc.selectedExpense;
-
-        $scope.isEditMode = false;
-
-        function toggleEditModeHandler(isEditMode){
-            $scope.isEditMode = isEditMode;
-        }
-
-        editModeNotificationChannelSvc.onEditModeToggled($scope, toggleEditModeHandler);
-
-        $scope.goToReports =  function(){
-            $location.path('/reports');
-        };
-
         $scope.takePhoto = function(expense) {
-            if(!$scope.isEditMode){
-                cameraSelectDialogListenerSvc.openCameraSelectDlg = true;
-                $location.path('/expenses/' + expense.expenseId);
-            }
+            transitionService.go({
+                name: 'editExpenseImageModal',
+                params: {
+                    expenseId: expense.expenseId
+                },
+                direction: 'forward'
+            });
         };
 
         $scope.editExpense = function(expense) {
-            if(!$scope.isEditMode) {
-                $location.path('/expenses/' + expense.expenseId);
-            }
+            transitionService.go({
+                name: 'editExpense',
+                params: {
+                    expenseId: expense.expenseId
+                },
+                direction: 'forward'
+            });
         };
 
         $scope.getMoreExpenses = function(){
 
-            if (!infiniteScrollEnabled){
-                return;
-            }
-            var result = expenseSharingSvc.getNextFiveExpenses();
-            result.forEach(function(item){
-                $scope.expenses.push(item);
-            });
+            //if (!infiniteScrollEnabled){
+            //    return;
+            //}
+            //var result = expenseSharingSvc.getNextFiveExpenses();
+            //result.forEach(function(item){
+            //    $scope.expenses.push(item);
+            //});
         };
 
-        expenseSharingSvc.getExpenses().then(function (expenses) {
+        expenseResource.getExpenses().then(function (expenses) {
             $scope.expenses = expenses;
         });
     }

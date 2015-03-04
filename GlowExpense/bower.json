@@ -16,7 +16,9 @@
     "underscore": "~1.7.0",
     "ngInfiniteScroll": "~1.1.2",
     "angular-snap": "~1.6.0",
-    "angular-bootstrap": "0.11.2"
+    "angular-bootstrap": "0.11.2",
+    "hammerjs": "~2.0.4",
+    "ui-router": "~0.2.13"
   },
   "devDependencies": {
     "angular-mocks": "~1.3.0"

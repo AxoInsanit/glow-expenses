@@ -9,10 +9,6 @@ angular.module('Modals').factory('confirmDeleteDialogSvc', ['$modal',  function(
 
                     $scope.entityName = entityName;
 
-                    $scope.$on('$locationChangeStart', function() {
-                        $modalInstance.close('true');
-                    });
-
                     $scope.ok = function() {
                         $modalInstance.close('true');
                     };
@@ -20,18 +16,6 @@ angular.module('Modals').factory('confirmDeleteDialogSvc', ['$modal',  function(
                     $scope.cancel = function() {
                         $modalInstance.dismiss('false');
                     };
-
-                    // handle device's back button, close modal
-                    function backButtonHandler() {
-                        $modalInstance.dismiss('canceled');
-                    }
-
-                    document.addEventListener('backbutton', backButtonHandler);
-
-                    // on modal close remove handler
-                    $scope.$on('$destroy', function () {
-                        document.removeEventListener('backbutton', backButtonHandler);
-                    });
                 }]
             });
 

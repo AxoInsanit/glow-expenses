@@ -17,139 +17,106 @@ if (isSafari) {
 
 var _mainModules = [
     'Services'
-    //  ,'Filters'
     ,'Directives'
-    ,'ngRoute'
-    ,'ngResource'
-    //  ,'ngSanitize'
-    //  ,'ngCookies'
+    ,'ui.router'
     ,'ngAnimate'
     ,'ngTouch'
-    //  ,'ngMock'
-    //  ,'ngLocale'
-    ,'Header'
+    ,'Layouts'
     ,'Login'
     ,'Expenses'
+    ,'Projects'
     ,'Reports'
     ,'infinite-scroll'
-    ,'InvoiceExpenseImage'
-    , 'Api'
-    , 'Modals'
-    // yo:ngMainModules
+    ,'Api'
+    ,'Modals'
     ,'ui.bootstrap'
 ];
 
 angular.module('app', _mainModules )
-    .config(function($routeProvider, $httpProvider, $compileProvider, sessionToken){
-        $routeProvider
-            .otherwise({
-                redirectTo: '/login'
+    .config(function($urlRouterProvider, $httpProvider, $compileProvider, sessionToken, $stateProvider){
+        $stateProvider
+            .state('emptyLayout', {
+                abstract: true,
+                templateUrl: 'scripts/layouts/views/empty.html'
+            })
+            .state('detailsLayout', {
+                abstract: true,
+                templateUrl: 'scripts/layouts/views/details.html'
+            })
+            .state('editDetailsLayout', {
+                abstract: true,
+                controller: 'EditDetailsCtrl',
+                templateUrl: 'scripts/layouts/views/editDetails.html'
+            })
+            .state('homeLayout', {
+                abstract: true,
+                controller: 'HomeCtrl',
+                templateUrl: 'scripts/layouts/views/home.html'
+            })
+            .state('login', {
+                parent: 'emptyLayout',
+                url: '/login',
+                templateUrl: 'scripts/login/views/login.html',
+                controller: 'LoginCtrl'
+            })
+            .state('home', {
+                parent: 'homeLayout',
+                url: '/home?view',
+                views: {
+                    expenses: {
+                        templateUrl: 'scripts/expenses/views/expensesList.html',
+                        controller: 'ExpensesListCtrl'
+                    },
+                    reports: {
+                        templateUrl: 'scripts/reports/views/reportsList.html',
+                        controller: 'ReportsListCtrl'
+                    }
+                }
+            })
+            .state('editExpense', {
+                parent: 'detailsLayout',
+                url: '/expenses/:expenseId?imageModal',
+                controller: 'ExpenseFormCtrl',
+                templateUrl: 'scripts/expenses/views/expenseForm.html'
+            })
+            .state('viewExpenseImage', {
+                parent: 'detailsLayout',
+                url: '/expense/:expenseId/image',
+                controller: 'ViewExpenseImageCtrl',
+                templateUrl: 'scripts/expenses/views/viewExpenseImage.html'
+            })
+            .state('addReportExpense', {
+                parent: 'detailsLayout',
+                url: '/reports/:reportId/expenses',
+                controller: 'ExpenseFormCtrl',
+                templateUrl: 'scripts/expenses/views/expenseForm.html'
+            })
+            .state('editReportExpense', {
+                parent: 'detailsLayout',
+                url: '/reports/:reportId/expenses/:expenseId?imageModal',
+                controller: 'ExpenseFormCtrl',
+                templateUrl: 'scripts/expenses/views/expenseForm.html'
+            })
+            .state('newReport', {
+                parent: 'detailsLayout',
+                url: '/reports/new',
+                controller: 'ReportFormCtrl',
+                templateUrl: 'scripts/reports/views/reportForm.html'
+            })
+            .state('viewReport', {
+                parent: 'editDetailsLayout',
+                url: '/reports/:reportId',
+                controller: 'ViewReportCtrl',
+                templateUrl: 'scripts/reports/views/viewReport.html'
+            })
+            .state('editReport', {
+                parent: 'detailsLayout',
+                url: '/reports/:reportId/edit',
+                controller: 'ReportFormCtrl',
+                templateUrl: 'scripts/reports/views/reportForm.html'
             });
 
-        var routes = [];
-
-        routes.push({
-            name: '/login',
-            params: {
-                templateUrl:  './scripts/login/views/login.html',
-                controller: 'LoginCtrl'
-            }
-        });
-
-        routes.push({
-            name: '/expenses',
-            params: {
-                templateUrl: 'scripts/expenses/views/expenses.html',
-                controller: 'ExpensesListCtrl'
-            }
-        });
-
-        routes.push({
-            name: '/invoice-expense-image/:expenseId',
-            params: {
-                templateUrl: 'scripts/invoice_expense_image/views/invoice-image-details.html',
-                controller: 'InvoiceImageCtrl'
-            }
-        });
-
-        routes.push({
-            name: '/report-details/:reportId/expense',
-            params: {
-                templateUrl: 'scripts/expenses/views/add-edit-expense.html',
-                controller: 'AddExpenseCtrl'
-            }
-        });
-
-        routes.push({
-            name: '/expenses/:expenseId',
-            params: {
-                templateUrl: 'scripts/expenses/views/add-edit-expense.html',
-                controller: 'EditExpenseCtrl'
-            }
-        });
-
-        routes.push({
-            name: '/expenses/:expenseId/:imageModal',
-            params: {
-                templateUrl: 'scripts/expenses/views/add-edit-expense.html',
-                controller: 'EditExpenseCtrl'
-            }
-        });
-
-        routes.push({
-            name: '/reports',
-            params: {
-                templateUrl: 'scripts/reports/views/reports-list.html',
-                controller: 'ReportsListCtrl'
-            }
-        });
-
-        routes.push({
-            name: '/report',
-            params: {
-                templateUrl: 'scripts/reports/views/create-edit-report.html',
-                controller: 'CreateEditReportCtrl'
-            }
-        });
-
-        routes.push({
-            name: '/report/:reportId',
-            params: {
-                templateUrl: 'scripts/reports/views/create-edit-report.html',
-                controller: 'CreateEditReportCtrl'
-            }
-        });
-
-        routes.push({
-            name: '/report-details/:reportId',
-            params: {
-                templateUrl: 'scripts/reports/views/report-details.html',
-                controller: 'ReportDetailsCtrl'
-            }
-        });
-
-        routes.push({
-            name: '/report-details/:reportId/expense/:expenseId',
-            params: {
-                templateUrl: 'scripts/reports/views/report-details-expense.html',
-                controller: 'EditReportExpenseCtrl'
-            }
-        });
-
-        routes.push({
-            name: '/settings',
-            params: {
-                templateUrl: 'scripts/expenses/views/settings.html',
-                controller: 'LoginCtrl'
-            }
-        });
-
-
-// yo:ngRoutes
-
-        routes.forEach(function(route){
-            $routeProvider.when(route.name, route.params);
-        });
+        $urlRouterProvider.otherwise('/login');
 
         var $http,
             notificationChannel,
@@ -216,9 +183,16 @@ angular.module('app', _mainModules )
     .run(function ($rootScope, $window) {
         // Scroll to the top of the window, on every route change
         //  This fix the issue when changing the view, the next view, it's already scrolled
-        $rootScope.$on('$routeChangeStart', function() {
+        $rootScope.$on('$stateChangeStart', function() {
             $window.scrollTo(0, 0);
         });
+
+        document.addEventListener('deviceready', function () {
+            if (window.plugins && window.plugins.orientationLock) {
+                window.plugins.orientationLock.lock('portrait');
+            }
+        });
+
     })
     .constant('serverErrorMsg','Server error!')
     .constant('sessionToken', 'session-token')

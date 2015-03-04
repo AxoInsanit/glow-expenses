@@ -1,0 +1,54 @@
+<div class="reports-body create">
+    <article class="expenses-body with-padding">
+        <form role="form" name="reportForm">
+            <div ng-show="showErrorMessage" class="error-message">
+                <div class="msg errorMsg">{{errorMessage}}
+                </div>
+                <a class="icon icon-close"></a>
+            </div>
+
+            <div class="form-group bottom20">
+                <div class="form-item">
+                    <input type="text" id="title" placeholder="Title"  class="form-control" ng-model="report.description" required>
+                </div>
+            </div>
+            <div class="form-group bottom20">
+                <div class="form-item head">
+                    Assign Report to:
+                </div>
+                <div class="form-item checked" ng-click="appliesTo('PROJECT')">
+                    <label class="inputless">
+                        Project
+                        <span class="display " ng-class="{'icon icon-check': report.applyTo === 'PROJECT'}"></span>
+                    </label>
+                </div>
+                <div class="form-item checked" ng-click="appliesTo('ORGANIZATIONAL_UNIT')">
+                    <label class="inputless">
+                        Organizational Unit
+                        <span class="display" ng-class="{'icon icon-check': report.applyTo === 'ORGANIZATIONAL_UNIT'}"></span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="form-group" ng-show="report.applyTo === 'PROJECT'">
+                <div class="form-item">
+                    <div class="select-custom" ng-click="selectProject()">
+                        <input type="text" placeholder="Project Name" class="form-control"
+                               ng-model="project.name" disabled>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group" ng-show="report.applyTo === 'ORGANIZATIONAL_UNIT'">
+                <div class="form-item">
+                    <div class="select-custom" ng-click="selectOrganizationalUnit()">
+                        <input type="text" placeholder="Organizational Unit Name" class="form-control"
+                               ng-model="organizationalUnit.name" disabled>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </article>
+</div>
+<div class="btn-fixed">
+    <button class="btn" type="submit" ng-click="save()">{{buttonLabel}}</button>
+</div>

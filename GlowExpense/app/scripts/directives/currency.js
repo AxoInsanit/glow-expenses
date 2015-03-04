@@ -5,7 +5,7 @@
         String.prototype.splice = function (idx, rem, s) {
             return (this.slice(0, idx) + s + this.slice(idx + Math.abs(rem)));
         };
-        
+
         function isEmpty(value) {
             return angular.isUndefined(value) || value === '' || value === null || value !== value;
         }

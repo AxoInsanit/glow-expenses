@@ -1,89 +1,54 @@
 'use strict';
 
 angular.module('Reports')
-    .controller('ReportsListCtrl', ['$scope', '$location', 'reportsSharingSvc', 'expenseSharingSvc',
-        'editModeNotificationChannelSvc', 'reportsRepositorySvc', 'filterReportByStateSvc', 'entityName',
-        'confirmDeleteDialogSvc', 'reportDetailsPath', 'sessionToken', 'errorHandlerDefaultSvc', 'localStorageSvc',
-        'infiniteScrollEnabled',
-            function ($scope, $location, reportsSharingSvc, expenseSharingSvc, editModeNotificationChannelSvc,
-                      reportsRepositorySvc, filterReportByStateSvc, entityName, confirmDeleteDialogSvc,
-                      reportDetailsPath, sessionToken, errorHandlerDefaultSvc, localStorageSvc, infiniteScrollEnabled) {
+    .controller('ReportsListCtrl', function ($scope, reportResource, $stateParams, transitionService, errorDialogSvc) {
 
-            $scope.selectedExpenseIndex = reportsSharingSvc.selectedReport;
+        $scope.$on('editMode::reports', function (e, editMode) {
+            $scope.editMode = editMode;
+        });
 
-            $scope.reports = [];
-
-            reportsSharingSvc.getReports().then(function(result){
-                $scope.reports = result;
+        $scope.viewReport = function(report) {
+            transitionService.go({
+                name: 'viewReport',
+                params: {
+                    reportId: report.expenseReportId
+                },
+                direction: 'forward'
             });
+        };
 
-            $scope.isEditMode = false;
+        $scope.createReport = function () {
+            transitionService.go({
+                name: 'newReport',
+                direction: 'forward'
+            });
+        };
 
-            function toggleEditModeHandler(isEditMode){
-                $scope.isEditMode = isEditMode;
-            }
+        $scope.deleteReport = function (report, event) {
+            event.stopPropagation();
+            event.preventDefault();
+            reportResource.removeReport(report.expenseReportId).then(function () {
+                transitionService.reload();
+            }, function () {
+                errorDialogSvc('Couldn\'t remove report');
+            });
+        };
 
-            editModeNotificationChannelSvc.onEditModeToggled($scope, toggleEditModeHandler);
-
-            $scope.createReport = function(){
-                $location.path('/report');
-            };
-
-            $scope.deleteReport = function(reportId) {
-                function deleteReportSuccess(){
-                    reportsSharingSvc.deleteReport(reportId);
-                    expenseSharingSvc.deleteReportMapping(reportId);
-
-                    if (!infiniteScrollEnabled){
-                        return;
-                    }
-
-                    var reportToDeleteIndex = 0;
-
-                    $scope.reports.some(function(item, index){
-                        if (item.expenseReportId === reportId){
-                            reportToDeleteIndex = index;
-                            return true;
-                        }
+        $scope.getMoreReports = function() {
+            if ($scope.reports) {
+                reportResource.getReports(true).then(function (reports) {
+                    reports.forEach(function (report) {
+                        $scope.reports.push(report);
                     });
-
-                    if (reportToDeleteIndex !== null){
-                        $scope.reports.splice(reportToDeleteIndex, 1);
-                    }
-                }
-
-                confirmDeleteDialogSvc.open(entityName).then(function(){
-                    reportsRepositorySvc.deleteReport(
-                        {
-                            'token': localStorageSvc.getItem(sessionToken),
-                            'expenseReportId': reportId
-                        },
-                        deleteReportSuccess,
-                        errorHandlerDefaultSvc.handleError
-                    );
                 });
-            };
+            }
+        };
 
-            $scope.viewReport = function(report, index) {
-                reportsSharingSvc.selectedReport = index;
-                if((!$scope.isEditMode) && (!report.locked) && (filterReportByStateSvc.checkIfInState(report)))
-                {
-                    $location.path(reportDetailsPath + '/' + report.expenseReportId);
-                }
-            };
+        reportResource.getReports().then(function (reports) {
+            console.log(reports);
+            $scope.reports = reports;
+        });
 
-            $scope.goToExpenses = function(){
-                $location.path('/expenses');
-            };
 
-            $scope.getMoreReports = function(){
-
-                if (!infiniteScrollEnabled){
-                    return;
-                }
-
-                var result = reportsSharingSvc.getNextFiveReports();
-                $scope.reports = result;
-            };
-        }
-    ]);
+    }
+);

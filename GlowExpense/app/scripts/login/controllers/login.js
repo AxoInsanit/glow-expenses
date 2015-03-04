@@ -1,53 +1,38 @@
 'use strict';
 angular.module('Login')
-    .controller('LoginCtrl', function ($scope, $location, requestNotificationChannelSvc, errorHandlerDefaultSvc, UserSvc,
-                                       errorMsg, sessionToken, localStorageSvc, $q, currenciesRepositorySvc,
-                                       contableCodesRepositorySvc, currenciesSvc, contableCodesSvc, userName) {
+    .controller('LoginCtrl', function ($scope, transitionService, requestNotificationChannelSvc, errorHandlerDefaultSvc,
+                                       userResource, errorMsg, sessionToken, localStorageSvc, $q, currencyResource,
+                                       contableCodeResource) {
 
-        function getCurrencies(token) {
-            return currenciesRepositorySvc.getCurrencies({
-                    token: token
-                },
-                function (result) {
-                    currenciesSvc.set(result.currencies);
-                },
-                errorHandlerDefaultSvc.handleError
-            );
+        function getCurrencies() {
+            return currencyResource.getCurrencies(true);
         }
-        function getContableCodes(token) {
-            return contableCodesRepositorySvc.getContableCodes({
-                    token: token
-                },
-                function (result) {
-                    contableCodesSvc.set(result.contableCodes);
-                },
-                errorHandlerDefaultSvc.handleError
-            );
+        function getContableCodes() {
+            return contableCodeResource.getContableCodes(true);
         }
 
-        function getGlober(token) {
-            return UserSvc.getGlober(token).then(function (glober) {
-                localStorageSvc.setItem(userName, glober.firstname + ' ' + glober.lastname);
-            });
+        function getGlober() {
+            return userResource.getGlober();
         }
 
-        function load(token) {
+        function load() {
             return $q.all([
-                getContableCodes(token).$promise,
-                getCurrencies(token).$promise,
-                getGlober(token)]);
+                getContableCodes(),
+                getCurrencies(),
+                getGlober()
+            ]);
         }
 
         $scope.login = function() {
             // start loader
             requestNotificationChannelSvc.requestStarted();
 
-            UserSvc.login().then(function (token) {
-                if (localStorageSvc.localStorageExists()) {
-                    localStorageSvc.setItem(sessionToken, token);
-                }
-                load(token).then(function () {
-                    $location.path('/expenses');
+            userResource.login().then(function () {
+                load().then(function () {
+                    transitionService.go({
+                        name: 'home',
+                        direction: 'down'
+                    });
                 });
 
             }, function () {
@@ -57,9 +42,12 @@ angular.module('Login')
             });
         };
 
-        if (localStorageSvc.getItem('session-token')) {
-            load(localStorageSvc.getItem('session-token')).then(function () {
-                $location.path('/expenses');
+        if (userResource.getToken()) {
+            load().then(function () {
+                transitionService.go({
+                    name: 'home',
+                    direction: 'down'
+                });
             });
         }
 

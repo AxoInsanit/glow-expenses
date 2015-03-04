@@ -1,11 +1,12 @@
 <div class="nav font15">
-    <div class="Infinity content-list" infinite-scroll="getMoreExpenses()">
-        <article class="ready expense-cont" ng-repeat="expense in expenses | orderBy:sort : true track by $index">
-            <section class="item" ng-click="editExpense(expense)" ng-class="{editMode: isEditMode}" >
+    <div class="content-list" infinite-scroll="getMoreExpenses()">
+        <article class="ready expense-cont"
+                 ng-repeat="expense in expenses | orderBy:sort : true track by $index">
+            <section class="item" ng-click="editExpense(expense)" ng-class="{'edit-mode': editMode}" >
                 <div class="left-part">
                     <div class="remove">
                         <a href="" class="icon icon-delete float-left"
-                           ng-show="isEditMode"  ng-click="deleteExpense(expense.expenseId)" >
+                           ng-show="editMode"  ng-click="deleteExpense(expense, $event)" >
                         </a>
                     </div>
                     <div class="desc">
@@ -19,7 +20,7 @@
                         <span>{{expense.originalAmount | currency }}</span>
                     </p>
                     <div class="float-right" ng-switch="expense.imageType === 'void'" stop-event="click">
-                        <a ng-switch-when="true" ng-click="takePhoto(expense)" class="icon icon-camera"></a>
+                        <a ng-switch-when="true" ng-click="takePhoto(expense, $event)" class="icon icon-camera"></a>
                         <a ng-switch-when="false" class="icon icon-affirmative"></a>
                     </div>
                 </div>

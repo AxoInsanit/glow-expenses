@@ -1,0 +1,20 @@
+<div class="reports-body">
+    <article>
+        <section class="item" ng-click="createExpense()">
+            <a class="btn-with-icon icon-back create-report" >
+                <span class="icon icon-plus"></span>
+                <span>Create Expense</span>
+            </a>
+        </section>
+    </article>
+
+    <expenses-list></expenses-list>
+
+    <article>
+        <div class="btn-fixed grey">
+            <a class="left-part underscored" ng-click="editReport()">Edit Report</a>
+            <p class="right-part">TOTAL {{report.societyCurrency}} {{report.total | currency}}</p>
+            <button class="btn ng-binding" type="submit" ng-click="sendReport()">Send Report</button>
+        </div>
+    </article>
+</div>

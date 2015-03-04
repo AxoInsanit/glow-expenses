@@ -22,7 +22,7 @@
         <div class="item green-hover" ng-repeat="entity in entities | filter:searchedEntity | limitTo:limitTo"
              ng-click="selectEntity(entity)">
 
-            <div ng-bind="entity.title"></div>
+            <div ng-bind="entity[titleKey]"></div>
         </div>
     </div>
 </div>

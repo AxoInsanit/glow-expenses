@@ -11,10 +11,6 @@ angular.module('Modals').factory('cameraSelectDialog', function($modal, cameraSv
                 size: 'sm',
                 controller: ['$scope', '$modalInstance', function($scope, $modalInstance) {
 
-                    $scope.$on('$locationChangeStart', function() {
-                        $modalInstance.close('true');
-                    });
-
                     $scope.camera = function() {
                         cameraSvc.setSource('camera');
                         $modalInstance.close('true');
@@ -24,18 +20,6 @@ angular.module('Modals').factory('cameraSelectDialog', function($modal, cameraSv
                         cameraSvc.setSource('library');
                         $modalInstance.close('true');
                     };
-
-                    // handle device's back button, close modal
-                    function backButtonHandler() {
-                        $modalInstance.dismiss('canceled');
-                    }
-
-                    document.addEventListener('backbutton', backButtonHandler);
-
-                    // on modal close remove handler
-                    $scope.$on('$destroy', function () {
-                        document.removeEventListener('backbutton', backButtonHandler);
-                    });
                 }]
             });
 

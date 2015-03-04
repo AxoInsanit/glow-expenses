@@ -6,5 +6,8 @@
 @import "modules/reports/_reports";
 @import "modules/send-expenses-report/_send-expenses-report";
 @import "modules/fixes";
+@import "modules/layouts/home";
+@import "modules/layouts/detailsLayout";
+@import "modules/directives/swipeAndSnap";
 @import "bootstrap-modal.css";
 // yo:includeSass

@@ -1,0 +1,33 @@
+<header class="home-header">
+    <nav>
+        <ul>
+            <li class="btn-helper profile">
+                <a class="icon icon-signout" href="" ng-click="signOut()"></a>
+            </li>
+            <li class="btn-main expenses">
+                <a ng-class="{ active: activeView === 0}" ng-click="goToView('expenses')">
+                    <span>Expenses</span>
+                </a>
+            </li>
+            <li class="btn-main reports">
+                <a ng-class="{ active: activeView === 1}" ng-click="goToView('reports')">
+                    <span>Reports</span>
+                </a>
+            </li>
+            <li class="btn-helper"
+                ng-class="{'edit': !editMode, 'done': editMode}"
+                ng-click="toggleEditMode()">
+                <a class="icon"
+                   ng-class="{'icon-edit': !editMode}">{{ editMode ? 'Done' : '' }}</a>
+            </li>
+            <div class="line"></div>
+        </ul>
+    </nav>
+</header>
+<section class="home-container">
+    <expenses-list></expenses-list>
+    <div class="view-container" swipe-and-snap="2" on-pan-end="viewChanged($activeView)" active-view="{{activeView}}">
+        <div class="view" ui-view="expenses"></div>
+        <div class="view" ui-view="reports"></div>
+    </div>
+</section>

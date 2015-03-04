@@ -86,6 +86,9 @@
         },
         "org.apache.cordova.inappbrowser": {
             "PACKAGE_NAME": "glow.expense.app"
+        },
+        "com.phonegap.plugins.OrientationLock": {
+            "PACKAGE_NAME": "glow.expense.app"
         }
     },
     "dependent_plugins": {

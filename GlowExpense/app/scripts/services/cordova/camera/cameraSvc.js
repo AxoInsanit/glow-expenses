@@ -1,7 +1,6 @@
 'use strict';
 
 /* global Camera: false */
-/* global confirm: false */
 
 angular.module('Services').factory('cameraSvc', ['$q', function($q){
 
@@ -9,12 +8,9 @@ angular.module('Services').factory('cameraSvc', ['$q', function($q){
 
         function setSource(type)
         {
-            if(type === 'camera')
-            {
+            if(type === 'camera') {
                 source = Camera.PictureSourceType.CAMERA;
-            }
-            else
-            {
+            } else {
                 source = Camera.PictureSourceType.PHOTOLIBRARY;
             }
         }
@@ -22,11 +18,7 @@ angular.module('Services').factory('cameraSvc', ['$q', function($q){
         function takePhoto() {
             var deferred = $q.defer();
             function onSuccess(imageURI) {
-                if (confirm('Upload image to expense?')) {
-                    deferred.resolve(imageURI);
-                } else {
-                    deferred.reject();
-                }
+                deferred.resolve(imageURI);
             }
 
             function onFail() {

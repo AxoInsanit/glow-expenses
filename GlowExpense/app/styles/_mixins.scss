@@ -47,3 +47,8 @@
 	background	: -webkit-linear-gradient(left,  $firstColor 0%,$secondColor 100%); /* Chrome 10+, Safari 5.1+ */
 	background	: -webkit-gradient(linear, left top, right top, color-stop(0%,$firstColor), color-stop(100%,$secondColor)); /* Chrome, Safari 4+ */
 }
+
+@mixin transform($transform) {
+    -webkit-transform: $transform;
+    transform: $transform;
+}
