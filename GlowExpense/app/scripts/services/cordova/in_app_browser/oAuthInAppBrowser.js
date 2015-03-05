@@ -38,7 +38,6 @@ angular.module('Services').service('oAuthInAppBrowser', function ($window) {
           }
         }
 
-        console.log(url);
         if (url.indexOf('access_token') > 0) {
           // find access_token
           queryParams = url.split('#')[1];

@@ -45,7 +45,6 @@ angular.module('Reports')
         };
 
         reportResource.getReports().then(function (reports) {
-            console.log(reports);
             $scope.reports = reports;
         });
 

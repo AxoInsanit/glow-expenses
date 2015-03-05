@@ -120,10 +120,9 @@ angular.module('app', _mainModules )
 
         var $http,
             notificationChannel,
-            localStorageSvc,
             requestCount = 0;
 
-        $httpProvider.interceptors.push(['$q', '$injector', '$location', function($q, $injector, $location) {
+        $httpProvider.interceptors.push(['$q', '$injector', '$rootScope', function($q, $injector, $rootScope) {
             return {
                 'request': function (request) {
                     // If no request ongoing, then broadcast start event
@@ -166,10 +165,8 @@ angular.module('app', _mainModules )
                     }
 
                     // check if token expired
-                    if (response.status === 401) {
-                        localStorageSvc = localStorageSvc || $injector.get('localStorageSvc');
-                        localStorageSvc.removeItem(sessionToken);
-                        $location.path('/');
+                    if (response.status === 401 && response.data === 'Invalid Token. Message payload is of type: String') {
+                        $rootScope.$broadcast('global::signOut');
                     }
 
                     return $q.reject(response);
