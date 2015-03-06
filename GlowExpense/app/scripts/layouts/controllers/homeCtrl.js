@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('Layouts').controller('HomeCtrl', function ($scope, $state, $timeout, signOutDialogSvc, transitionService) {
+angular.module('Layouts').controller('HomeCtrl', function ($scope, $state, $timeout, signOutDialogSvc) {
 
 
     var views = ['expenses', 'reports'],
@@ -25,20 +25,11 @@ angular.module('Layouts').controller('HomeCtrl', function ($scope, $state, $time
     };
 
     $scope.signOut = function () {
-        signOutDialogSvc.open().then(function () {
-            // wait for the global::signOut event to propagate properly
-            $timeout(function () {
-                transitionService.go({
-                    name: 'login',
-                    direction: 'up'
-                });
-            }, 0);
-        });
+        signOutDialogSvc.open();
     };
 
     $scope.toggleEditMode = function () {
         $scope.editMode = !$scope.editMode;
-        $scope.$broadcast('editMode::' + views[$scope.activeView], $scope.editMode);
     };
 
     if ($scope.activeView) {

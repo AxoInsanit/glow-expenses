@@ -9,42 +9,33 @@
         <div class="reports-list">
             <div class="draft" infinite-scroll="getMoreReports()">
                 <div class="SPAM" ng-repeat="report in reports track by $index">
-                    <section class="item " ng-class="{locked:report.locked, 'edit-mode':editMode}"
+                    <section class="report"
+                             ng-class="::{locked: report.locked, editable: !report.locked}"
                              ng-click="viewReport(report)">
-                        <div class="right-part">
-                            <p class="info-text text-right">
-                                <span>{{report.societyCurrency}}</span>
-                                <span>{{report.total | currency}}</span>
-                            </p>
+                        <div class="delete-action">
+                                <span class="icon icon-delete"
+                                      ng-click="deleteReport(report, $event)" ></span>
                         </div>
-                        <div class="left-part">
-                            <ng-switch on="report.locked">
-                                <div class="remove" ng-switch-default>
-                                    <a href="" class="icon icon-delete float-left" ng-switch="expense.selected"
-                                       ng-show="editMode"  ng-click="deleteReport(report, $event)" ></a>
+                        <div class="report-info">
+                            <div class="left-part">
+                                <div class="desc">
+                                    <h3>
+                                        {{::report.description}}
+                                    </h3>
+                                    <span class="state"
+                                       ng-class="::{
+                                       'red': report.state === 'Pending Approval',
+                                       'yellow': report.state === 'Preparing Payment',
+                                       'green-dark': report.state === 'Paid'}">
+                                        {{::report.state}}
+                                    </span>
                                 </div>
-                                <div ng-switch-when="true">
-
+                            </div>
+                            <div class="right-part">
+                                <div class="money">
+                                    <span>{{:: report.societyCurrency}}</span>
+                                    <span>{{:: report.total | currency}}</span>
                                 </div>
-                            </ng-switch>
-                            <div class="desc">
-                                <p class="main-text">
-                                    {{report.description}}
-                                </p>
-                                <ng-switch on="report.state">
-                                    <p class="info-text" ng-switch-default>
-                                        {{report.state}}
-                                    </p>
-                                    <p class="info-text red" ng-switch-when="Pending Approval">
-                                        {{report.state}}
-                                    </p>
-                                    <p class="info-text yellow" ng-switch-when="Preparing Payment">
-                                        {{report.state}}
-                                    </p>
-                                    <p class="info-text green-dark" ng-switch-when="Paid">
-                                        {{report.state}}
-                                    </p>
-                                </ng-switch>
                             </div>
                         </div>
                     </section>

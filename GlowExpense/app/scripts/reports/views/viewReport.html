@@ -10,10 +10,10 @@
 
     <expenses-list></expenses-list>
 
-    <article>
+    <article class="send-report">
         <div class="btn-fixed grey">
             <a class="left-part underscored" ng-click="editReport()">Edit Report</a>
-            <p class="right-part">TOTAL {{report.societyCurrency}} {{report.total | currency}}</p>
+            <p class="right-part">TOTAL {{:: report.societyCurrency}} {{:: report.total | currency}}</p>
             <button class="btn ng-binding" type="submit" ng-click="sendReport()">Send Report</button>
         </div>
     </article>

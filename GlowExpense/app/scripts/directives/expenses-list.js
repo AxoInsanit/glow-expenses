@@ -7,14 +7,6 @@ angular.module('Directives').directive('expensesList', function($stateParams, tr
         replace: true,
         controller: function($scope) {
 
-            $scope.sort = function(item) {
-                return new Date(item.date);
-            };
-
-            $scope.$on('editMode::expenses', function (e, editMode) {
-                $scope.editMode = editMode;
-            });
-
             $scope.deleteExpense = function (expense, event) {
                 event.stopPropagation();
                 event.preventDefault();
@@ -26,9 +18,9 @@ angular.module('Directives').directive('expensesList', function($stateParams, tr
                         promise = expenseResource.removeExpense(expense.expenseId);
                     }
                     promise.catch(function () {
-                        errorDialogSvc('Couldn\'t remove expense');
+                        return errorDialogSvc.open('Couldn\'t remove expense');
                     }).finally(function () {
-                        $stateParams.view = false;
+                        $stateParams.view = 'expense';
                         transitionService.reload();
                     });
                 });

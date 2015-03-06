@@ -11,7 +11,7 @@
                 <img ng-src="{{expense.imagePath || expense.localImagePath}}" />
             </a>
 
-            <p class="text-info">Change Invoice Image </p>
+            <p class="text-info">Change Invoice Image</p>
         </div>
 
     </section>
@@ -77,7 +77,7 @@
             </div>
         </div>
         <div>
-            <button class="btn" type="submit" ng-disabled="form.$invalid" ng-click="save()">{{buttonLabel}}</button>
+            <button class="btn" type="submit" ng-disabled="form.$invalid" ng-click="save()">{{::buttonLabel}}</button>
         </div>
     </form>
 </article>

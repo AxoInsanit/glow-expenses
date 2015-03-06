@@ -1,3 +1,6 @@
+body {
+    overflow-x: hidden;
+}
 // STYLES FOR GLOBAL ELEMENTS
 // HEADER
 header {
@@ -145,6 +148,95 @@ ul.single {
     max-width: 100%;
     max-height: 100%;
 }
+$expense-list-item-height: 5rem;
+
+.expense-list, .reports-list {
+    .expense, .report {
+        height: $expense-list-item-height;
+        border-bottom: 1px solid #CCC;
+        position: relative;
+    }
+    .delete-action {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 10;
+        padding-left: 2rem;
+        .icon {
+            font-size: 2.4em;
+            color: $bg-red;
+            line-height: $expense-list-item-height;
+        }
+    }
+    .expense-info, .report-info {
+        transition: all .3s ease-out;
+        height: 100%;
+        background: white;
+        z-index: 100;
+        box-shadow: -1px 0 15px #CCC;
+        padding: 1.5rem .5rem 1.5rem 1.5rem;
+        position: relative;
+        .left-part {
+            width: 60%;
+            float: left;
+            padding-right: 10px;
+            h3 {
+                font-size: $size-global;
+                color:$text-grey;
+                font-family: "HalvaticaNeueBold";
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+            span.date, span.state {
+                font-size: $size-small;
+                color: $text-grey-lighter;
+                &.red {
+                    color: $text-red;
+                }
+                &.yellow {
+                    color:$text-yellow;
+                }
+                &.green {
+                    color:$text-green;
+                }
+                &.green-dark {
+                    color:$text-green-dark;
+                }
+            }
+        }
+        .right-part {
+            width: 40%;
+            float: right;
+            font-size: 2.4em;
+            .money {
+                display: inline-block;
+                font-size: $size-small;
+                color: $text-grey-lighter;
+            }
+            .icon {
+                display: inline-block;
+            }
+            .icon-camera {
+                color:$text-green;
+            }
+            .icon-affirmative {
+                color: $text-grey-lighter;
+            }
+            a {
+                float: right;
+            }
+        }
+    }
+}
+.delete-mode {
+    .expense-info, .report.editable .report-info {
+        @include transform(translate3d(6rem, 0, 0));
+    }
+}
+
 .item {
     @include clearfix();
     border-bottom: 1px solid $border-grey-dark;

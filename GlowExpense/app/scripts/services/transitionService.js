@@ -2,7 +2,7 @@
 
 angular.module('Services')
     .service('transitionService', function transition($window, $state, $stateParams, $rootElement, $rootScope, $timeout,
-                                                      $modalStack) {
+                                                      $modalStack, requestNotificationChannelSvc) {
 
         var modifyRootElement = true,
             transitionService;
@@ -13,9 +13,11 @@ angular.module('Services')
 
         $rootScope.$on('$stateChangeSuccess', function () {
             modifyRootElement = true;
+            requestNotificationChannelSvc.requestEnded();
         });
 
         $rootScope.$on('$stateChangeStart', function () {
+            requestNotificationChannelSvc.requestStarted();
             if (!!$modalStack.getTop()) {
                 $modalStack.dismissAll();
             }

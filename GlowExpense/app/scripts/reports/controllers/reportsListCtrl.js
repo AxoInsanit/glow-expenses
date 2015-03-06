@@ -3,10 +3,6 @@
 angular.module('Reports')
     .controller('ReportsListCtrl', function ($scope, reportResource, $stateParams, transitionService, errorDialogSvc) {
 
-        $scope.$on('editMode::reports', function (e, editMode) {
-            $scope.editMode = editMode;
-        });
-
         $scope.viewReport = function(report) {
             transitionService.go({
                 name: 'viewReport',
@@ -30,7 +26,7 @@ angular.module('Reports')
             reportResource.removeReport(report.expenseReportId).then(function () {
                 transitionService.reload();
             }, function () {
-                errorDialogSvc('Couldn\'t remove report');
+                errorDialogSvc.open('Couldn\'t remove report');
             });
         };
 
