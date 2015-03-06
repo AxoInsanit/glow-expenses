@@ -88,7 +88,8 @@ angular.module('Expenses')
                 var promiseResult;
                 if (isNew && expense.expenseReportId) {
                     // add expense to report
-                    promiseResult = reportResource.addExpense(expense.expenseReportId, expenseId).then(function () {
+                    var amount = expense.originalAmount * expense.exchangeRate;
+                    promiseResult = reportResource.addExpense(expense.expenseReportId, expenseId, amount).then(function () {
                         return {
                             reportId: expense.expenseReportId,
                             expenseId: expenseId
