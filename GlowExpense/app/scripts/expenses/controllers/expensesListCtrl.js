@@ -13,6 +13,13 @@ angular.module('Expenses')
             });
         };
 
+        $scope.createExpense = function(expense) {
+            transitionService.go({
+                name: 'addReportExpense',
+                direction: 'forward'
+            });
+        };
+
         $scope.editExpense = function(expense) {
             transitionService.go({
                 name: 'editExpense',
