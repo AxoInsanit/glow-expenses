@@ -16,6 +16,23 @@ angular.module('Reports')
             $scope.$parent.title = reportId ? 'Edit report': 'Create report';
         }
 
+        $scope.validateForm = function() {
+            var value = ($scope.report.description && $scope.report.description.length > 0);
+            var value2 = $scope.project.name || $scope.organizationalUnit.name;
+            return value && value2;
+        };
+
+        $scope.titleSelected = function () {
+            return ($scope.report.description && $scope.report.description.length > 0);
+        };
+
+        $scope.removeWhiteSpaces = function() {
+            if ($scope.report.description && $scope.report.description.length > 0) {
+                $scope.report.description = $scope.report.description.replace(/\s+/g, " ");
+                $scope.report.description = $scope.report.description.trim();
+            }
+        };
+
         $scope.appliesTo = function (applyTo) {
             $scope.report.applyTo = applyTo;
         };
@@ -84,6 +101,7 @@ angular.module('Reports')
         } else {
             $scope.report = new ReportModel();
             $scope.report.expenseIds = [];
+            $scope.report.applyTo = 'PROJECT';
         }
     }
 );

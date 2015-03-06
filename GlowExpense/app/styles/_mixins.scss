@@ -18,6 +18,10 @@
 	width:100%;
 	display:block;
 	border:none;
+
+	&:disabled {
+		opacity: 0.6;
+	}
 }
 
 @mixin btn-with-icon () {
