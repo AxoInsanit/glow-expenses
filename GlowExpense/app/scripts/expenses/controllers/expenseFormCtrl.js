@@ -9,6 +9,9 @@ angular.module('Expenses')
         var expenseId = $stateParams.expenseId,
             reportId = $stateParams.reportId;
 
+        function parseCurrency(currency) {
+            return Number(currency.replace(/[^0-9\.]+/g,''));
+        }
 
         $scope.report = {};
         $scope.buttonLabel = expenseId ? 'Save' : 'Create';
@@ -103,7 +106,7 @@ angular.module('Expenses')
         };
 
         $scope.formatCurrency = function (valueKey) {
-            $scope.expense[valueKey] = $filter('currency')(parseInt($scope.expense[valueKey], 10), '', 2);
+            $scope.expense[valueKey] = $filter('currency')(parseCurrency($scope.expense[valueKey]), '', 2);
         };
 
         $scope.viewImage = function (expense) {

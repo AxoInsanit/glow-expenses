@@ -149,7 +149,11 @@ ul.single {
     max-height: 100%;
 }
 $expense-list-item-height: 5rem;
-
+.view-report {
+    .money {
+        width: 70%;
+    }
+}
 .expense-list, .reports-list {
     .expense, .report {
         height: $expense-list-item-height;

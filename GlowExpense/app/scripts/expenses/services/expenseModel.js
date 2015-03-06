@@ -28,7 +28,7 @@ angular.module('Expenses')
             self.originalCurrencyId = initData.originalCurrencyId || 0;
             self.imageType = initData.imageType || 'void';
             self.amex = initData.amex || false;
-
+            self.originalExpenseReportId = initData.originalExpenseReportId;
             self.currency = null;
             self.contableCode = null;
             self.showDetails = false;
@@ -105,9 +105,15 @@ angular.module('Expenses')
                         });
                     });
                 } else {
+
                     promiseResult = {
                         expenseId: expenseId
                     };
+                    if (expense.expenseReportId) {
+                        // this should be a temporary fix until the API is able to return a specific report by it's id
+                        reportResource.cleanCache(expense.expenseReportId);
+                        promiseResult.reportId = expense.expenseReportId;
+                    }
                 }
                 return promiseResult;
             });

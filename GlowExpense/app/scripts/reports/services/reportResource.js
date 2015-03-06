@@ -70,6 +70,8 @@ angular.module('Reports')
 
             },
             createReport: function (reportData) {
+                var reportResource = this;
+
                 return $http({
                     method: 'POST',
                     url: baseUrlMockeyWeb + reportsUrl,
@@ -83,14 +85,15 @@ angular.module('Reports')
 
                     if (createdReportLocation) {
                         createdReportId = createdReportLocation.substring(createdReportLocation.lastIndexOf('/') + 1);
-                        cachedReports = false;
-                        lastPageFetched = 0;
                     }
 
+                    reportResource.cleanCache(createdReportId);
                     return createdReportId;
                 });
             },
             updateReport: function (reportData) {
+                var reportResource = this;
+
                 return $http({
                     method: 'PUT',
                     url: baseUrlMockeyWeb + reportsUrl,
@@ -99,12 +102,13 @@ angular.module('Reports')
                         token: userResource.getToken()
                     }
                 }).then(function() {
-                    cachedReports = false;
-                    lastPageFetched = 0;
+                    reportResource.cleanCache(reportData.expenseReportId);
                     return reportData.expenseReportId;
                 });
             },
             removeReport: function (reportId) {
+                var reportResource = this;
+
                 return $http({
                     method: 'PUT',
                     url: baseUrlMockeyWeb + reportsUrl,
@@ -113,7 +117,7 @@ angular.module('Reports')
                         token: userResource.getToken()
                     }
                 }).then(function(response) {
-                    cachedReports = false;
+                    reportResource.cleanCache(reportId);
                     return response;
                 });
             },
@@ -121,7 +125,6 @@ angular.module('Reports')
                 return $http.get(baseUrlMockeyWeb + reportsSendUrl, {params: {token: userResource.getToken(), expenseReportId: reportId}}).then(function () {
                     cachedReports = false;
                     lastPageFetched = 0;
-                    return;
                 });
             },
             getExpense: function (expenseId, reportId) {
@@ -155,6 +158,8 @@ angular.module('Reports')
                 return promise;
             },
             addExpense: function (reportId, expenseId) {
+                var reportResource = this;
+
                 return $http({
                     method: 'POST',
                     url: baseUrlMockeyWeb + reportExpensesUrl,
@@ -166,11 +171,13 @@ angular.module('Reports')
                         token: userResource.getToken()
                     }
                 }).then(function(response) {
-                    delete cachedReportExpenses[reportId];
+                    reportResource.cleanCache(reportId);
                     return response;
                 });
             },
             updateExpenses: function (reportId, expenseIds) {
+                var reportResource = this;
+
                 return $http({
                     method: 'PUT',
                     url: baseUrlMockeyWeb + reportExpensesUrl,
@@ -182,11 +189,13 @@ angular.module('Reports')
                         token: userResource.getToken()
                     }
                 }).then(function(response) {
-                    delete cachedReportExpenses[reportId];
+                    reportResource.cleanCache(reportId);
                     return response;
                 });
             },
             removeExpense: function (reportId, expenseId) {
+                var reportResource = this;
+
                 return $http({
                     method: 'DELETE',
                     url: baseUrlMockeyWeb + reportExpensesUrl,
@@ -195,9 +204,16 @@ angular.module('Reports')
                         expenseId: expenseId
                     }
                 }).then(function(response) {
-                    delete cachedReportExpenses[reportId];
+                    reportResource.cleanCache(reportId);
                     return response;
                 });
+            },
+            cleanCache: function (reportId) {
+                if (cachedReportExpenses[reportId]) {
+                    delete cachedReportExpenses[reportId];
+                }
+                cachedReports = false;
+                lastPageFetched = 0;
             }
         };
     });
