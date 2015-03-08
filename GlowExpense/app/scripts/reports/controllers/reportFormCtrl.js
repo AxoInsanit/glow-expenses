@@ -17,18 +17,22 @@ angular.module('Reports')
         }
 
         $scope.validateForm = function() {
-            var value = ($scope.report.description && $scope.report.description.length > 0);
-            var value2 = $scope.project.name || $scope.organizationalUnit.name;
-            return value && value2;
+            return $scope.titleSelected() && $scope.reportAssigned();
         };
 
         $scope.titleSelected = function () {
-            return ($scope.report.description && $scope.report.description.length > 0);
+            return ($scope.report && $scope.report.description && $scope.report.description.length > 0);
+        };
+
+        $scope.reportAssigned = function () {
+            return  $scope.report &&
+                    (( ($scope.report.applyTo === 'PROJECT') && ($scope.project.name) ) ||
+                    ( ($scope.report.applyTo === 'ORGANIZATIONAL_UNIT') && ($scope.organizationalUnit.name) ) );
         };
 
         $scope.removeWhiteSpaces = function() {
             if ($scope.report.description && $scope.report.description.length > 0) {
-                $scope.report.description = $scope.report.description.replace(/\s+/g, " ");
+                $scope.report.description = $scope.report.description.replace(/\s+/g, ' ');
                 $scope.report.description = $scope.report.description.trim();
             }
         };

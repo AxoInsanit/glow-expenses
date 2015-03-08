@@ -570,6 +570,10 @@ form {
         font-weight: normal;
     }
 
+    .form-item-req {
+        background-color: #EEE !important;
+    }
+
     .form-group {
         @include border-radius(5px);
         border:1px solid $text-grey-lighter;
