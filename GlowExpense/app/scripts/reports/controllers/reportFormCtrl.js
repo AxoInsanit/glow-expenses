@@ -30,13 +30,6 @@ angular.module('Reports')
                     ( ($scope.report.applyTo === 'ORGANIZATIONAL_UNIT') && ($scope.organizationalUnit.name) ) );
         };
 
-        $scope.removeWhiteSpaces = function() {
-            if ($scope.report.description && $scope.report.description.length > 0) {
-                $scope.report.description = $scope.report.description.replace(/\s+/g, ' ');
-                $scope.report.description = $scope.report.description.trim();
-            }
-        };
-
         $scope.appliesTo = function (applyTo) {
             $scope.report.applyTo = applyTo;
         };
