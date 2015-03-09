@@ -156,6 +156,7 @@
                     element.val(f($(this).val()));
                 });
 
+                //comment keyup so currency is formatted on blur
                 /*$(element).bind('keyup', function () {
                     element.val(f($(this).val(), false));
                 });*/
