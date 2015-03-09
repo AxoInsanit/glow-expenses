@@ -19,6 +19,7 @@
 
                 intPart = (intPart === '' && setdec) ? '0' : intPart;
                 intPart = intPart.replace(/[^\d]/g, '');
+                intPart = Number(intPart).toString();//removes leading zeros
                 if (intPart.length > 3) {
                     var intDiv = Math.floor(intPart.length / 3);
                     while (intDiv > 0) {
@@ -68,7 +69,7 @@
 
                 intPart = (intPart === '' && setdec) ? '0' : intPart;
                 intPart = intPart.replace(/[^\d]/g, '');
-
+                intPart = Number(intPart).toString();//removes leading zeros
                 if (decPart === undefined) {
                     if (setdec) {
                         decPart = '.00';
@@ -155,9 +156,9 @@
                     element.val(f($(this).val()));
                 });
 
-                $(element).bind('keyup', function () {
+                /*$(element).bind('keyup', function () {
                     element.val(f($(this).val(), false));
-                });
+                });*/
 
                 ctrl.$parsers.unshift(p);
                 ctrl.$formatters.unshift(f);
