@@ -16,10 +16,6 @@ angular.module('Reports')
             $scope.$parent.title = reportId ? 'Edit report': 'Create report';
         }
 
-        $scope.validateForm = function() {
-            return $scope.titleSelected() && $scope.reportAssigned();
-        };
-
         $scope.titleSelected = function () {
             return ($scope.report && $scope.report.description && $scope.report.description.length > 0);
         };

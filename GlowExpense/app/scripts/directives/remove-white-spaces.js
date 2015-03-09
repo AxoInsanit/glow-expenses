@@ -1,7 +1,7 @@
 'use strict';
 angular.module('Directives').directive('removeWhiteSpaces', function () {
 
-    function link(scope) {
+    function link(scope, el, attrs) {
 
       var removeSpaces = function() {
           if (scope.ngModel) {
@@ -17,6 +17,7 @@ angular.module('Directives').directive('removeWhiteSpaces', function () {
           }
       };
 
+      attrs.$set('ngTrim', 'false');
       scope.$watch('ngModel', removeSpaces);
     }
 

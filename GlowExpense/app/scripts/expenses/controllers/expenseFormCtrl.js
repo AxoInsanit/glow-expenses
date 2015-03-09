@@ -9,6 +9,26 @@ angular.module('Expenses')
         var expenseId = $stateParams.expenseId,
             reportId = $stateParams.reportId;
 
+        $scope.descriptionSelected = function() {
+            return ($scope.expense && $scope.expense.description && ($scope.expense.description.length > 0) );
+        };
+
+        $scope.amountSelected = function() {
+            return $scope.expense && $scope.expense.originalAmount && ($scope.expense.originalAmount.length > 0);
+        };
+
+        $scope.currencySelected = function() {
+            return $scope.expense && $scope.expense.currency && $scope.expense.currency.name;
+        };
+
+        $scope.contableCodeSelected = function() {
+            return $scope.expense && $scope.expense.contableCode && $scope.expense.contableCode.name;
+        };
+
+        $scope.exchangeRateSelected = function() {
+            return $scope.expense && $scope.expense.exchangeRate && ($scope.expense.exchangeRate.length > 0);
+        };
+
         function parseCurrency(currency) {
             return Number(currency.replace(/[^0-9\.]+/g,''));
         }
