@@ -29,10 +29,6 @@ angular.module('Expenses')
             return $scope.expense && $scope.expense.exchangeRate && ($scope.expense.exchangeRate.length > 0);
         };
 
-        function parseCurrency(currency) {
-            return Number(currency.replace(/[^0-9\.]+/g,''));
-        }
-
         $scope.report = {};
         $scope.buttonLabel = expenseId ? 'Save' : 'Create';
         $scope.showErrorMessage = false;
@@ -123,10 +119,6 @@ angular.module('Expenses')
                     $scope.expense.contableCode = selectedContableCode;
                 });
             });
-        };
-
-        $scope.formatCurrency = function (valueKey) {
-            $scope.expense[valueKey] = $filter('currency')(parseCurrency($scope.expense[valueKey]), '', 2);
         };
 
         $scope.viewImage = function (expense) {
