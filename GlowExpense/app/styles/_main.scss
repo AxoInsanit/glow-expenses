@@ -30,7 +30,14 @@
 .btn {
   @include btn();
   @include border-radius(5px);
+  &:focus {
+    border-color: transparent;
+    outline: 0;
+    -webkit-box-shadow: 0 0 0 transparent;
+    box-shadow: 0 0 0 transparent;
+  }
 }
+
 .btn-with-icon {
   height: 36px;
   @include btn-with-icon();
@@ -155,14 +162,16 @@ a {
 // MODALS
 
 #photo-control {
-
+  background-color: $bg-green;
+  border-radius: 6px;
   .btn {
     float: none;
     width: 100%;
+    color: $text-white;
 
     &:first-child {
-      border-right: none;
-      border-bottom: 1px solid $border-grey-dark;
+      border-bottom: 2px solid $border-modal;
+      border-width: 0.09em 0;
     }
   }
 }

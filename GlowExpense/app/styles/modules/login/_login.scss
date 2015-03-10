@@ -21,19 +21,19 @@
   :-moz-placeholder { /* Firefox 18- */
     color: $text-white;
     line-height: 0.6;
-    font-weight: normal;  
+    font-weight: normal;
   }
 
   ::-moz-placeholder {  /* Firefox 19+ */
     color: $text-white;
     line-height: 0.6;
-    font-weight: normal;  
+    font-weight: normal;
   }
 
-  :-ms-input-placeholder {  
+  :-ms-input-placeholder {
     color: $text-white;
     line-height: 0.6;
-    font-weight: normal;  
+    font-weight: normal;
   }
   .top-part {
     background: $bg-green;
@@ -70,8 +70,8 @@
     display: block;
     position:relative;
     .logo {
-      position:absolute;
-      bottom:20px;
+      position: absolute;
+      bottom: 35px;
       width: 100%;
       a {
         display: block;

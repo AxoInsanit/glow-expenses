@@ -15,7 +15,7 @@
                     <div class="right-part">
                         <div class="money">
                             <span>{{:: expense.currency.code }}</span>
-                            <span>{{:: expense.originalAmount | currency }}</span>
+                            <span class="amount">{{:: expense.originalAmount | currency }}</span>
                         </div>
                         <a ng-hide="::expense.imagePath" ng-click="takePhoto(expense, $event)" class="icon icon-camera"></a>
                         <a ng-show="::expense.imagePath" class="icon icon-affirmative"></a>
