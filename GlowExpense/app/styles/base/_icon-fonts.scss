@@ -185,8 +185,13 @@
 .icon-cross:before {
 	content: "\e602";
 }
-.icon-arrow-down:before {
+.icon-arrow-down:after {
 	content: "\e60e";
+  content: "\e60e";
+  position: absolute;
+  top: 0;
+  line-height: 40px;
+  right: 20px;
 }
 .icon-back-arrow:before {
 	content: "\e60d";

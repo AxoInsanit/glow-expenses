@@ -23,23 +23,25 @@
         </div>
         <div>
             <div class="form-group bottom20">
-                <div class="form-item head">
-                    Assign Expense to:
-                </div>
+                <div class="form-item head">Assign Expense to</div>
                 <div class="form-item" ng-click="selectReport()">
-                    <label class="assign-select" for="report">
+                    <label class="icon icon-arrow-down assign-select" for="report">
                         <input type="text" id="report" placeholder="Select a report" class="form-control"
                                ng-model="report.description" disabled>
                     </label>
                 </div>
             </div>
-            <div class="form-group bottom20">
+            <div class="form-group label">
+                <div class="form-item head">Description</div>
                 <div class="form-item" >
                     <label for="description">
                         <input type="text" id="description" placeholder="Description" class="form-control"
                                ng-model="expense.description" required>
                     </label>
                 </div>
+            </div>
+            <div class="form-group label">
+                <div class="form-item head">Original Amount</div>
                 <div class="form-item" >
                     <label for="amount">
                        <input type="text" class="form-control"
@@ -48,24 +50,33 @@
                             ng-model-options="{updateOn: 'default blur', debounce: {'default': 400, 'blur': 0} }" required>
                     </label>
                 </div>
+            </div>
+            <div class="form-group label">
+            <div class="form-item head">Original Currency</div>
                 <div class="form-item" ng-click="selectCurrency(expense.currency)">
                     <div>
-                        <label>
+                        <label class="icon icon-arrow-down assign-select">
                             <span class="form-control">
                                 {{expense.currency.name || 'Currency'}}
                             </span>
                         </label>
                     </div>
                 </div>
+            </div>
+            <div class="form-group label">
+                <div class="form-item head">Contable Code</div>
                 <div class="form-item" ng-click="selectContableCode(expense.contableCode)">
                     <div>
-                        <label>
+                        <label class="icon icon-arrow-down">
                             <span class="form-control">
                                 {{expense.contableCode.name || 'Contable code'}}
                             </span>
                         </label>
                     </div>
                 </div>
+            </div>
+            <div class="form-group label">
+                <div class="form-item head">Exchange Rate</div>
                 <div class="form-item">
                     <label for="exchangeRate">
                         <input type="text" id="exchangeRate" class="form-control"

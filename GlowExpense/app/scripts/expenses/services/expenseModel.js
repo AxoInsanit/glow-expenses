@@ -21,7 +21,7 @@ angular.module('Expenses')
             self.provider = initData.provider || '';
             self.date = initData.date || Date.now();
             self.originalAmount = initData.originalAmount ? $filter('currency')(initData.originalAmount, '') : '';
-            self.exchangeRate = initData.exchangeRate ? $filter('currency')(initData.exchangeRate, '') : '';
+            self.exchangeRate = initData.exchangeRate ? $filter('currency')(initData.exchangeRate, '') : '1.00';
             self.type = initData.type || reportable;
             self.submitter = initData.submitter || null;
             self.owner = initData.owner || null;

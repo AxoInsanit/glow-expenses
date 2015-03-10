@@ -7,7 +7,7 @@ module.exports = function(grunt){
                 sassDir: ['<%= grunt.config.app %>/styles'],
                 cssDir: '<%= grunt.config.app %>/styles',
                 outputStyle: 'expanded', //nested, expanded, compact, compressed.
-                noLineComments: true,
+                noLineComments: false,
 				force: true
             }
         },

@@ -29,4 +29,23 @@
 			}
 		}
 	}
+
+	.label {
+		margin-bottom: 5px;
+		&.form-group {
+			.form-item {
+				&.head {
+					font-size: 12px;
+		  			height: 20px;
+		  			line-height: 20px;
+		  			padding: 0 12px;
+				}
+			}
+		}
+
+		span.form-control {
+			display: block;
+			line-height: 3em;
+		}
+	}
 }

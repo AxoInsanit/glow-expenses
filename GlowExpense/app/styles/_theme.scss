@@ -579,7 +579,7 @@ form {
         .form-item {
             @include clearfix();
             border-top: 1px solid $text-grey-lighter;
-            height: 50px;
+            height: 40px;
             width: 100%;
             position:relative;
             &.head {
