@@ -565,13 +565,9 @@ $expense-list-item-height: 5rem;
 form {
     @include clearfix();
     ::-webkit-input-placeholder {
-        color: $text-select;
+        color: #777;
         line-height: 0.6;
         font-weight: normal;
-    }
-
-    .form-item-req {
-        background-color: #EEE !important;
     }
 
     .form-group {
@@ -671,10 +667,11 @@ form {
                 width: 100%;
                 height: 100%;
                 overflow: hidden;
+                position: relative;
                 .icon-arrow-down {
                     position: absolute;
-                    right: 22px;
-                    top: 13px;
+                    right: 0px;
+                    top: 2px;
                     font-size: 1.7em;
                     color: $bg-grey-dark;
                 }
@@ -701,6 +698,19 @@ form {
                     border-bottom-left-radius: 5px;
                     border-bottom-right-radius: 5px;
                 }
+            }
+            .form-item-req {
+                background-color: #ffffca;
+            }
+
+            .form-item-max-text {
+                color: #DE0000;
+                font-size: $size-extra-small;
+            }
+
+            .form-item-max {
+                background-color: #ff585f;
+                color: white;
             }
         }
     }

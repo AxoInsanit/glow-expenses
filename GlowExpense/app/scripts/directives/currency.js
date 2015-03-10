@@ -157,9 +157,9 @@
                 });
 
                 //comment keyup so currency is formatted on blur
-                /*$(element).bind('keyup', function () {
+                $(element).bind('keyup', function () {
                     element.val(f($(this).val(), false));
-                });*/
+                });
 
                 ctrl.$parsers.unshift(p);
                 ctrl.$formatters.unshift(f);

@@ -16,14 +16,16 @@ angular.module('Reports')
             $scope.$parent.title = reportId ? 'Edit report': 'Create report';
         }
 
-        $scope.titleSelected = function () {
-            return ($scope.report && $scope.report.description && $scope.report.description.length > 0);
-        };
+        $scope.removeWhiteSpaces = function () {
+            if ($scope.report && $scope.report.description) {
+                //remove consecutive spaces
+                $scope.report.description = $scope.report.description.replace(/\s+/g, ' ');
 
-        $scope.reportAssigned = function () {
-            return  $scope.report &&
-                    (( ($scope.report.applyTo === 'PROJECT') && ($scope.project.name) ) ||
-                    ( ($scope.report.applyTo === 'ORGANIZATIONAL_UNIT') && ($scope.organizationalUnit.name) ) );
+                //remove whitespace from start of string
+                if ($scope.report.description.charAt(0) === ' ') {
+                  $scope.report.description = $scope.report.description.slice(1);
+                }
+            }
         };
 
         $scope.appliesTo = function (applyTo) {

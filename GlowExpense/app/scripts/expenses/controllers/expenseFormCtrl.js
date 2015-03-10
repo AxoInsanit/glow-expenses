@@ -9,25 +9,21 @@ angular.module('Expenses')
         var expenseId = $stateParams.expenseId,
             reportId = $stateParams.reportId;
 
-        $scope.descriptionSelected = function() {
-            return ($scope.expense && $scope.expense.description && ($scope.expense.description.length > 0) );
+        $scope.removeWhiteSpaces = function () {
+            if ($scope.expense && $scope.expense.description) {
+                //remove consecutive spaces
+                $scope.expense.description = $scope.expense.description.replace(/\s+/g, ' ');
+
+                //remove whitespace from start of string
+                if ($scope.expense.description.charAt(0) === ' ') {
+                  $scope.expense.description = $scope.expense.description.slice(1);
+                }
+            }
         };
 
-        $scope.amountSelected = function() {
-            return $scope.expense && $scope.expense.originalAmount && ($scope.expense.originalAmount.length > 0);
-        };
-
-        $scope.currencySelected = function() {
-            return $scope.expense && $scope.expense.currency && $scope.expense.currency.name;
-        };
-
-        $scope.contableCodeSelected = function() {
-            return $scope.expense && $scope.expense.contableCode && $scope.expense.contableCode.name;
-        };
-
-        $scope.exchangeRateSelected = function() {
-            return $scope.expense && $scope.expense.exchangeRate && ($scope.expense.exchangeRate.length > 0);
-        };
+        function parseCurrency(currency) {
+            return currency && Number(currency.replace(/[^0-9\.]+/g,''));
+        }
 
         $scope.report = {};
         $scope.buttonLabel = expenseId ? 'Save' : 'Create';
@@ -119,6 +115,14 @@ angular.module('Expenses')
                     $scope.expense.contableCode = selectedContableCode;
                 });
             });
+        };
+
+        $scope.formatCurrency = function (valueKey) {
+            var value = $filter('currency')(parseCurrency($scope.expense[valueKey]), '', 2);
+            if (value && value.indexOf('NaN') !== -1) {
+                value = $filter('currency')(parseCurrency($scope.expense[valueKey].slice(0,$scope.expense[valueKey].length - 3)), '', 2);
+            }
+            $scope.expense[valueKey] = value;
         };
 
         $scope.viewImage = function (expense) {

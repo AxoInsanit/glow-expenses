@@ -1,6 +1,6 @@
-<div class="reports-body create">
-    <article class="expenses-body with-padding">
-        <form role="form" name="reportForm">
+<form name="reportForm">
+    <div class="reports-body create">
+        <article class="expenses-body with-padding">
             <div ng-show="showErrorMessage" class="error-message">
                 <div class="msg errorMsg">{{errorMessage}}
                 </div>
@@ -9,7 +9,7 @@
 
             <div class="form-group bottom20">
                 <div class="form-item">
-                    <input type="text" id="title" placeholder="Title"  class="form-control" ng-model="report.description" required>
+                    <input type="text" id="title" placeholder="Enter title..."  class="form-control" ng-model="report.description" name="description" maxlength="100" ng-change="removeWhiteSpaces()" ng-trim="false" ng-class="{'form-item-req': reportForm.description.$error.required}" required>
                 </div>
             </div>
             <div class="form-group bottom20">
@@ -30,27 +30,23 @@
                 </div>
             </div>
 
-            <div class="form-group" ng-show="report.applyTo === 'PROJECT'">
+            <div class="form-group" ng-if="report.applyTo === 'PROJECT'" >
                 <div class="form-item">
                     <div class="select-custom" ng-click="selectProject()">
-                        <input type="text" placeholder="Project Name" class="form-control"
-                               ng-model="project.name" disabled>
-                        <span class="icon icon-arrow-down"></span>
+                        <input readonly type="text" placeholder="Select Project" class="form-control" ng-model="project.name" name="projectName" ng-class="{'form-item-req': reportForm.projectName.$error.required}" required><span class="icon icon-arrow-down"></span>
                     </div>
                 </div>
             </div>
-            <div class="form-group" ng-show="report.applyTo === 'ORGANIZATIONAL_UNIT'">
+            <div class="form-group" ng-if="report.applyTo === 'ORGANIZATIONAL_UNIT'">
                 <div class="form-item">
                     <div class="select-custom" ng-click="selectOrganizationalUnit()">
-                        <input type="text" placeholder="Organizational Unit Name" class="form-control"
-                               ng-model="organizationalUnit.name" disabled>
-                        <span class="icon icon-arrow-down"></span>
+                        <input readonly type="text" placeholder="Select Organizational Unit" class="form-control" ng-model="organizationalUnit.name" name="organizationalUnitName" ng-class="{'form-item-req': reportForm.organizationalUnitName.$error.required}" required><span class="icon icon-arrow-down"></span>
                     </div>
                 </div>
             </div>
-        </form>
-    </article>
-</div>
-<div class="btn-fixed">
-    <button class="btn" type="submit" ng-click="save()">{{:: buttonLabel}}</button>
-</div>
+        </article>
+    </div>
+    <div class="btn-fixed">
+        <button class="btn" ng-disabled="reportForm.$invalid" ng-click="save()">{{:: buttonLabel}}</button>
+    </div>
+</form>
