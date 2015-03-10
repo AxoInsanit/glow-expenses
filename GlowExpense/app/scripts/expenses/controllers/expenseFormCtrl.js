@@ -9,8 +9,20 @@ angular.module('Expenses')
         var expenseId = $stateParams.expenseId,
             reportId = $stateParams.reportId;
 
+        $scope.removeWhiteSpaces = function () {
+            if ($scope.expense && $scope.expense.description) {
+                //remove consecutive spaces
+                $scope.expense.description = $scope.expense.description.replace(/\s+/g, ' ');
+
+                //remove whitespace from start of string
+                if ($scope.expense.description.charAt(0) === ' ') {
+                  $scope.expense.description = $scope.expense.description.slice(1);
+                }
+            }
+        };
+
         function parseCurrency(currency) {
-            return Number(currency.replace(/[^0-9\.]+/g,''));
+            return currency && Number(currency.replace(/[^0-9\.]+/g,''));
         }
 
         $scope.report = {};
@@ -130,7 +142,11 @@ angular.module('Expenses')
         };
 
         $scope.formatCurrency = function (valueKey) {
-            $scope.expense[valueKey] = $filter('currency')(parseCurrency($scope.expense[valueKey]), '', 2);
+            var value = $filter('currency')(parseCurrency($scope.expense[valueKey]), '', 2);
+            if (value && value.indexOf('NaN') !== -1) {
+                value = $filter('currency')(parseCurrency($scope.expense[valueKey].slice(0,$scope.expense[valueKey].length - 3)), '', 2);
+            }
+            $scope.expense[valueKey] = value;
         };
 
         $scope.viewImage = function (expense) {

@@ -38,6 +38,100 @@
 	font-style: normal;
 }
 
+@font-face {
+  font-family: 'icon-font-loading';
+  src: url('../resources/fonts/loading-font.woff?epbsei') format('woff'),
+        url('../resources/fonts/loading-font.ttf?epbsei') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* Font Loading Animation */
+.icon-loading {
+    font-family: 'icon-font-loading';
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    font-size: 4.5em;
+    color: $bg-white;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-spinner:before {
+    content: "\e97a";
+}
+
+.icon-spinner2:before {
+    content: "\e97b";
+}
+
+.icon-spinner3:before {
+    content: "\e97c";
+}
+
+.icon-spinner4:before {
+    content: "\e97d";
+}
+
+.icon-spinner5:before {
+    content: "\e97e";
+}
+
+.icon-spinner6:before {
+    content: "\e97f";
+}
+
+.icon-spinner7:before {
+    content: "\e980";
+}
+
+.icon-spinner8:before {
+    content: "\e981";
+}
+
+.icon-spinner9:before {
+    content: "\e982";
+}
+
+.icon-spinner10:before {
+    content: "\e983";
+}
+
+.icon-spinner11:before {
+    content: "\e984";
+}
+
+.loading-spin {
+  -webkit-animation: loading-spin 1.7s infinite linear;
+  animation: loading-spin 1.7s infinite linear;
+}
+
+@-webkit-keyframes loading-spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(359deg);
+    transform: rotate(359deg);
+  }
+}
+@keyframes loading-spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(359deg);
+    transform: rotate(359deg);
+  }
+}
+
+/* Icomoon: https://icomoon.io */
 .icon {
 	font-family: 'icon-font';
 	speak: none;
@@ -91,8 +185,13 @@
 .icon-cross:before {
 	content: "\e602";
 }
-.icon-arrow-down:before {
+.icon-arrow-down:after {
 	content: "\e60e";
+  content: "\e60e";
+  position: absolute;
+  top: 0;
+  line-height: 40px;
+  right: 20px;
 }
 .icon-back-arrow:before {
 	content: "\e60d";

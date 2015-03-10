@@ -16,6 +16,18 @@ angular.module('Reports')
             $scope.$parent.title = reportId ? 'Edit report': 'Create report';
         }
 
+        $scope.removeWhiteSpaces = function () {
+            if ($scope.report && $scope.report.description) {
+                //remove consecutive spaces
+                $scope.report.description = $scope.report.description.replace(/\s+/g, ' ');
+
+                //remove whitespace from start of string
+                if ($scope.report.description.charAt(0) === ' ') {
+                  $scope.report.description = $scope.report.description.slice(1);
+                }
+            }
+        };
+
         $scope.appliesTo = function (applyTo) {
             $scope.report.applyTo = applyTo;
         };
@@ -84,6 +96,7 @@ angular.module('Reports')
         } else {
             $scope.report = new ReportModel();
             $scope.report.expenseIds = [];
+            $scope.report.applyTo = 'PROJECT';
         }
     }
 );

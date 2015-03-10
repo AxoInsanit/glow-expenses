@@ -1,5 +1,5 @@
 <div class="modal-body modal-select" ng-repeat="contableCode in contableCodes">
-    <div class="item checked" ng-click="select(contableCode)" data-code="{{contableCode.code}}">{{contableCode.name}}
+    <div class="item " ng-class="{'checked': contableCode.selected}" ng-click="select(contableCode)" data-code="{{contableCode.code}}">{{contableCode.name}}
         <ng-switch on="contableCode.selected">
             <span class="" ng-switch-default></span>
             <span class="icon icon-check" ng-switch-when="true"></span>

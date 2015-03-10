@@ -5,7 +5,7 @@ angular.module('Directives').directive('loading', ['requestNotificationChannelSv
         return {
             restrict: 'E',
             replace:true,
-            template: '<div class="loader"><div class="loader-content"><img class="centered" src="resources/images/loader-globant.gif"/></div></div>',
+            template: '<div class="loader"><div class="loader-content"><div class="centered"><span class="icon-loading icon-spinner10 loading-spin"></span></div></div></div>',
             link: function (scope, element) {
 
                 element.hide();
