@@ -41,6 +41,14 @@
                     </label>
                 </div>
                 <div class="form-item" >
+                    <div>
+                    <label>
+                        <input type="text" class="form-control" data-provide="datepicker" ng-model="expense.date"
+                               ng-required="true" ng-disabled="expense.amex" data-date-format="mm/dd/yyyy" id="datetimepicker"/>
+                    </label>
+                    </div>
+                </div>
+                <div class="form-item" >
                     <label for="amount">
                        <input type="text" class="form-control"
                             ng-model="expense.originalAmount" id="amount" placeholder="Amount"
@@ -81,3 +89,8 @@
         </div>
     </form>
 </article>
+<script type="text/javascript">
+    $(function () {
+        $('#datetimepicker').datetimepicker();
+    });
+</script>

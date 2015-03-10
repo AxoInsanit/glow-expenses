@@ -19,6 +19,30 @@ angular.module('Expenses')
         $scope.expenseId = $stateParams.expenseId;
         $scope.reportId = reportId;
 
+        //bootstrap datepicker
+        $scope.open = function($event) {
+            $event.preventDefault();
+            $event.stopPropagation();
+
+            $scope.opened = true;
+        };
+
+        $scope.dateOptions = {
+            formatYear: 'yy',
+            startingDay: 1
+        };
+
+        $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
+        $scope.format = $scope.formats[0];
+
+
+
+
+//----------------------------------------------------------------
+
+
+
+
         if ($scope.$parent) {
             $scope.$parent.title = expenseId ? 'Edit expense': 'Create expense';
 
