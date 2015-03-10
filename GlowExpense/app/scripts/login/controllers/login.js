@@ -31,6 +31,9 @@ angular.module('Login')
                 load().then(function () {
                     transitionService.go({
                         name: 'home',
+                        params: {
+                            view: 'expenses'
+                        },
                         direction: 'down'
                     });
                 });
@@ -46,6 +49,9 @@ angular.module('Login')
             load().then(function () {
                 transitionService.go({
                     name: 'home',
+                    params: {
+                            view: 'expenses'
+                        },
                     direction: 'down'
                 });
             });
