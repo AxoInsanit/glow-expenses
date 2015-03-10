@@ -9,10 +9,6 @@ angular.module('Expenses')
             $scope.$parent.title = 'Invoice image';
         }
 
-        $scope.tabImage = function(){
-            $scope.viewImage = !$scope.viewImage;
-        };
-
         expenseResource.getExpense(expenseId).then(function (expense) {
             $scope.expense = new ExpenseModel(expense);
         });
