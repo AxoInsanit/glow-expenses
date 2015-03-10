@@ -31,7 +31,8 @@ angular.module('Reports')
         };
 
         $scope.getMoreReports = function() {
-            if ($scope.reports) {
+            // Avoid issue with ngInfiniteScroll
+            if ($scope.reports && $scope.reports.length > 5) {
                 reportResource.getReports(true).then(function (reports) {
                     reports.forEach(function (report) {
                         $scope.reports.push(report);
@@ -43,7 +44,6 @@ angular.module('Reports')
         reportResource.getReports().then(function (reports) {
             $scope.reports = reports;
         });
-
 
     }
 );

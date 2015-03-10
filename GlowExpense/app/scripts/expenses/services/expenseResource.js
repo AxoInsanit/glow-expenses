@@ -4,10 +4,19 @@ angular.module('Expenses')
     .factory('expenseResource', function ($http, userResource, expensesUrl, baseUrlMockeyWeb, imagesUrl,
                                           fileTransferSvc, $q, $rootScope) {
 
-        var cachedExpenses = false;
+        var cachedExpenses = false,
+            unregisterExp;
 
         $rootScope.$on('global::signOut', function () {
             cachedExpenses = false;
+        });
+
+        unregisterExp = $rootScope.$on('global::expenseRemoved', function () {
+            cachedExpenses = false;
+        });
+
+        $rootScope.$on('$destroy', function() {
+            unregisterExp();
         });
 
         return {

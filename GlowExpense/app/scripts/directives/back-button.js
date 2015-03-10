@@ -10,7 +10,7 @@ angular.module('Directives')
                         transitionService.go({
                             name: scope.backStateName,
                             params: scope.backStateParams || {},
-                            replate: true,
+                            replace: true,
                             direction: 'backward'
                         });
                     } else {

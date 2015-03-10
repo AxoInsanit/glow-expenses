@@ -1,7 +1,6 @@
 'use strict';
 
-angular.module('Layouts').controller('HomeCtrl', function ($scope, $state, $timeout, signOutDialogSvc) {
-
+angular.module('Layouts').controller('HomeCtrl', function ($scope, $state, $timeout, signOutDialogSvc, transitionService) {
 
     var views = ['expenses', 'reports'],
         stateParams = $state.$current.locals.globals.$stateParams;
@@ -22,6 +21,12 @@ angular.module('Layouts').controller('HomeCtrl', function ($scope, $state, $time
         if ($scope.editMode) {
             $scope.toggleEditMode();
         }
+        transitionService.go({
+                name: 'home',
+                params: {
+                    view: view
+                }
+            });
     };
 
     $scope.signOut = function () {
@@ -37,9 +42,9 @@ angular.module('Layouts').controller('HomeCtrl', function ($scope, $state, $time
     }
 
     if (stateParams.view === 'expenses') {
-        $scope.activeView = views.indexOf('expenses');
+        $scope.goToView('expenses');
     } else if (stateParams.view === 'reports') {
-        $scope.activeView = views.indexOf('reports');
+        $scope.goToView('reports');
     } else {
         $scope.activeView = 0;
     }

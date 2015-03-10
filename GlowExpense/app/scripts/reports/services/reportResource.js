@@ -205,6 +205,7 @@ angular.module('Reports')
                     }
                 }).then(function(response) {
                     reportResource.cleanCache(reportId);
+                    $rootScope.$broadcast('global::expenseRemoved');
                     return response;
                 });
             },
