@@ -81,7 +81,7 @@ angular.module('app', _mainModules )
             })
             .state('viewExpenseImage', {
                 parent: 'detailsLayout',
-                url: '/expense/:expenseId/image',
+                url: '/expense/:expenseId/:reportId/image',
                 controller: 'ViewExpenseImageCtrl',
                 templateUrl: 'scripts/expenses/views/viewExpenseImage.html'
             })
