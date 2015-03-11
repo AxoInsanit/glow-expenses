@@ -30,6 +30,8 @@ angular.module('Expenses')
         $scope.showErrorMessage = false;
         $scope.expenseId = $stateParams.expenseId;
         $scope.reportId = reportId;
+        $scope.minDate = '2001-01-01';
+        $scope.maxDate = new Date().toISOString().substring(0, 10);
 
         if ($scope.$parent) {
             $scope.$parent.title = expenseId ? 'Edit expense': 'Create expense';
@@ -143,6 +145,7 @@ angular.module('Expenses')
                 $scope.takePhoto();
             }
         };
+
 
         // this should be done with transitionend on the sliding ng-view
         if ($stateParams.imageModal) {
