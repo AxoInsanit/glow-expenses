@@ -31,25 +31,25 @@
             <div class="form-group label">
                 <div class="form-item head">Description</div>
                 <div class="form-item" >
-                    <input type="text" id="description" placeholder="Enter Description..." class="form-control" ng-model="expense.description" name="expenseDescription" maxlength="100"  ng-change="removeWhiteSpaces()" ng-trim="false" ng-class="{'form-item-req': expenseForm.expenseDescription.$error.required}" required>
+                    <input ng-disabled="expense.amex" type="text" id="description" placeholder="Enter Description..." class="form-control" ng-model="expense.description" name="expenseDescription" maxlength="100"  ng-change="removeWhiteSpaces()" ng-trim="false" ng-class="{'form-item-req': expenseForm.expenseDescription.$error.required}" required>
                 </div>
             </div>
             <div class="form-group label">
                 <div class="form-item head">Original Amount <span class="form-item-max-text" ng-if="expenseForm.amount.$error.maxlength"> - Max Value Exceeded -</span></div>
                 <div class="form-item" >
-                    <input type="text" class="form-control" ng-model="expense.originalAmount" name="amount" id="amount" placeholder="Specify Amount..." ng-blur="formatCurrency('originalAmount')" maxlength="20" ng-class="{'form-item-req': expenseForm.amount.$error.required,'form-item-max': expenseForm.amount.$error.maxlength}" required>
+                    <input ng-disabled="expense.amex" type="text" class="form-control" ng-model="expense.originalAmount" name="amount" id="amount" placeholder="Specify Amount..." ng-blur="formatCurrency('originalAmount')" maxlength="20" ng-class="{'form-item-req': expenseForm.amount.$error.required,'form-item-max': expenseForm.amount.$error.maxlength}" required>
                 </div>
             </div>
             <div class="form-group label">
             <div class="form-item head">Original Currency</div>
-                <div class="form-item select-custom" ng-click="selectCurrency(expense.currency)">
-                    <input readonly type="text" class="form-control" ng-model="expense.currency.name" name="currency" placeholder="Select Currency" ng-class="{'form-item-req': expenseForm.currency.$error.required}" required><span class="icon icon-arrow-down"></span>
+                <div class="form-item select-custom">
+                    <input readonly ng-disabled="expense.amex" ng-click="selectCurrency(expense.currency)" type="text" class="form-control" ng-model="expense.currency.name" name="currency" placeholder="Select Currency" ng-class="{'form-item-req': expenseForm.currency.$error.required}" required><span class="icon icon-arrow-down"></span>
                 </div>
             </div>
             <div class="form-group label">
                 <div class="form-item head">Contable Code</div>
-                <div class="form-item select-custom" ng-click="selectContableCode(expense.contableCode)">
-                    <input readonly type="text" id="exchangeRate" class="form-control" ng-model="expense.contableCode.name" name="contableCode" placeholder="Select Contable Code" ng-class="{'form-item-req': expenseForm.contableCode.$error.required}" required><span class="icon icon-arrow-down"></span>
+                <div class="form-item select-custom">
+                    <input readonly ng-disabled="expense.amex" ng-click="selectContableCode(expense.contableCode)" type="text" id="exchangeRate" class="form-control" ng-model="expense.contableCode.name" name="contableCode" placeholder="Select Contable Code" ng-class="{'form-item-req': expenseForm.contableCode.$error.required}" required><span class="icon icon-arrow-down"></span>
                 </div>
             </div>
             <div class="form-group label">
