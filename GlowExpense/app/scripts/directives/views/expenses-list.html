@@ -17,8 +17,8 @@
                             <span>{{:: expense.currency.code }}</span>
                             <span class="amount">{{:: expense.originalAmount | currency }}</span>
                         </div>
-                        <a ng-hide="::expense.imagePath" ng-click="takePhoto(expense, $event)" class="icon icon-camera"></a>
-                        <a ng-show="::expense.imagePath" class="icon icon-affirmative"></a>
+                        <a ng-hide="::expense.imageType !== 'void'" ng-click="takePhoto(expense, $event)" class="icon icon-camera"></a>
+                        <a ng-show="::expense.imageType !== 'void'" class="icon icon-affirmative"></a>
                     </div>
                 </div>
             </section>

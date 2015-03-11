@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('Expenses', [])
+angular.module('Expenses', ['Reports'])
     .config(function () {})
     .constant('addExpenseErrorMsg','Please complete all fields!')
     .constant('addExpensesTitle','Create Expense')

@@ -132,7 +132,8 @@ angular.module('Expenses')
                 transitionService.go({
                     name: 'viewExpenseImage',
                     params: {
-                        expenseId: expense.expenseId
+                        expenseId: expense.expenseId,
+                        reportId: $scope.reportId
                     },
                     direction: 'forward'
                 });
