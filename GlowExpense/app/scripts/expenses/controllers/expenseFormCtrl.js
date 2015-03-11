@@ -103,20 +103,24 @@ angular.module('Expenses')
 
         // fetch currencies and popup modal
         $scope.selectCurrency = function( currency ) {
-            currencyResource.getCurrencies().then(function (currencies) {
-                currencySelectDialogSvc.open(currency, currencies).then(function(selectedCurrency){
-                    $scope.expense.currency = selectedCurrency;
+            if (!$scope.expense.amex) {
+                currencyResource.getCurrencies().then(function (currencies) {
+                    currencySelectDialogSvc.open(currency, currencies).then(function(selectedCurrency){
+                        $scope.expense.currency = selectedCurrency;
+                    });
                 });
-            });
+            }
         };
 
         // fetch contable codes and popup modal
         $scope.selectContableCode = function( contableCode ) {
-            contableCodeResource.getContableCodes().then(function (contableCodes) {
-                contableCodeSelectDialogSvc.open(contableCode, contableCodes).then(function(selectedContableCode){
-                    $scope.expense.contableCode = selectedContableCode;
+            if (!$scope.expense.amex) {
+                contableCodeResource.getContableCodes().then(function (contableCodes) {
+                    contableCodeSelectDialogSvc.open(contableCode, contableCodes).then(function(selectedContableCode){
+                        $scope.expense.contableCode = selectedContableCode;
+                    });
                 });
-            });
+            }
         };
 
         $scope.formatCurrency = function (valueKey) {
