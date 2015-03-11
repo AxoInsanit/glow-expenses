@@ -11,7 +11,7 @@ angular.module('Expenses')
             cachedExpenses = false;
         });
 
-        unregisterExp = $rootScope.$on('global::expenseRemoved', function () {
+        unregisterExp = $rootScope.$on('global::expensesRemoved', function () {
             cachedExpenses = false;
         });
 
