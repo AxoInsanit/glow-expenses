@@ -38,21 +38,26 @@
                 <div class="form-item head">Original Amount <span class="form-item-max-text" ng-if="expenseForm.amount.$error.maxlength"> - Max Value Exceeded -</span></div>
                 <div class="form-item" >
                     <input type="text" class="form-control" ng-model="expense.originalAmount" name="amount" id="amount" placeholder="Specify Amount..." ng-blur="formatCurrency('originalAmount')" maxlength="20" ng-class="{'form-item-req': expenseForm.amount.$error.required,'form-item-max': expenseForm.amount.$error.maxlength}" required>
-                    <div>
-                    <label>
-                        <input type="text" class="form-control" data-provide="datepicker" ng-model="expense.date"
-                               ng-required="true" ng-disabled="expense.amex" data-date-format="mm/dd/yyyy" id="datetimepicker"/>
-                    </label>
-                    </div>
-                </div>
-                <div class="form-item" >
                 </div>
             </div>
             <div class="form-group label">
-            <div class="form-item head">Original Currency</div>
-                <div class="form-item select-custom" ng-click="selectCurrency(expense.currency)">
-                    <input readonly type="text" class="form-control" ng-model="expense.currency.name" name="currency" placeholder="Select Currency" ng-class="{'form-item-req': expenseForm.currency.$error.required}" required><span class="icon icon-arrow-down"></span>
+                <div class="form-item head">Date
+                    <span class="form-item-max-text" ng-if="expenseForm.date.$error.date"> - Not a valid date! -</span>
                 </div>
+                <div class="form-item ">
+                    <input type="date" ng-model="expense.date"  placeholder="yyyy-MM-dd" name="date" required
+                           ng-disabled="expense.amex" ng-class="{'form-item-req': expenseForm.date.$error.required}"
+                            min="{{ minDate }}" max="{{ maxDate }}"/>
+                </div>
+            </div>
+            <div class="form-group label">
+                <div class="form-item head">Original Currency</div>
+                    <div class="form-item select-custom" ng-click="selectCurrency(expense.currency)">
+                        <input readonly type="text" class="form-control" ng-model="expense.currency.name" name="currency"
+                               placeholder="Select Currency" ng-class="{'form-item-req': expenseForm.currency.$error.required}"
+                               required>
+                        <span class="icon icon-arrow-down"></span>
+                    </div>
             </div>
             <div class="form-group label">
                 <div class="form-item head">Contable Code</div>
@@ -72,8 +77,3 @@
         </div>
     </form>
 </article>
-<script type="text/javascript">
-    $(function () {
-        $('#datetimepicker').datetimepicker();
-    });
-</script>

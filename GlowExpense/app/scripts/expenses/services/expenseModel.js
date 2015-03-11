@@ -19,7 +19,7 @@ angular.module('Expenses')
             self.description = initData.description || null;
             self.invoiceNumber = initData.invoiceNumber || 0;
             self.provider = initData.provider || '';
-            self.date = initData.date;
+            self.date = new Date(initData.date);
             self.originalAmount = initData.originalAmount ? $filter('currency')(initData.originalAmount, '') : '';
             self.exchangeRate = initData.exchangeRate ? $filter('currency')(initData.exchangeRate, '') : '1.00';
             self.type = initData.type || reportable;
