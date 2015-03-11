@@ -110,7 +110,7 @@ angular.module('Reports')
                 var reportResource = this;
 
                 return $http({
-                    method: 'PUT',
+                    method: 'DELETE',
                     url: baseUrlMockeyWeb + reportsUrl,
                     params: {
                         expenseReportId: reportId,
@@ -118,6 +118,7 @@ angular.module('Reports')
                     }
                 }).then(function(response) {
                     reportResource.cleanCache(reportId);
+                    $rootScope.$broadcast('global::expensesRemoved');
                     return response;
                 });
             },
@@ -205,7 +206,7 @@ angular.module('Reports')
                     }
                 }).then(function(response) {
                     reportResource.cleanCache(reportId);
-                    $rootScope.$broadcast('global::expenseRemoved');
+                    $rootScope.$broadcast('global::expensesRemoved');
                     return response;
                 });
             },
