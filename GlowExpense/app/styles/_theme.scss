@@ -81,8 +81,8 @@ header {
                         bottom:0.5em;
                         a {
                             color:$text-grey-dark;
-                            font-size: 1em;
-                            line-height: 2.3;
+                            font-size: $size-text;
+                            line-height: 2.6;
                             font-family: "HalvaticaNeue";                        }
                     }
                 }
@@ -158,96 +158,243 @@ $expense-list-item-height: 5rem;
 }
 .expense-list,
 .reports-list {
-    .expense, .report {
-        height: $expense-list-item-height;
-        border-bottom: 1px solid #CCC;
-        position: relative;
-    }
-    .delete-action {
-        position: absolute;
-        top: 0;
-        left: 0;
+    .expense {
         width: 100%;
         height: 100%;
-        z-index: 10;
-        padding-left: 11px;
-        .icon {
-            font-size: 2.4em;
-            color: $bg-red;
-            line-height: 4.5rem;
-        }
-    }
-    .expense-info,
-    .report-info {
-        transition: all .3s ease-out;
-        height: 100%;
-        background: $bg-white;
-        z-index: 100;
-        padding: 1.1rem 1rem 1rem 1rem;
+        float: left;
+        border-bottom: 1px solid #CCC;
         position: relative;
-        .left-part {
-            width: 65%;
-            float: left;
-            padding-right: 15px;
-            h3 {
-                font-size: $size-text;
-                color:$text-grey;
-                font-family: "HalvaticaNeueBold";
-                white-space: nowrap;
-                overflow: hidden;
-                text-overflow: ellipsis;
-                padding-bottom: 5px;
+        .delete-action {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 10;
+            padding-left: 11px;
+            .content-delete {
+                line-height: $height-expense;
+                .icon {
+                    font-size: $size-icon;
+                    color: $bg-red;
+                    line-height: 4.5rem;
+                    vertical-align: middle;
+                }
             }
-            span.date, span.state {
-                font-size: $size-small;
-                color: $text-grey-lighter;
-                &.red {
-                    color: $text-red;
+        }
+        .expense-info {
+            width: 100%;
+            float: left;
+            transition: all .3s ease-out;
+            height: 100%;
+            background: $bg-white;
+            z-index: 100;
+            position: relative;
+            .content-expense-info {
+                width: 85%;
+                float: left;
+            }
+            .content-report-info {
+                width: 100%;
+                float: left;
+            }
+            .content-expense-info,
+            .content-report-info {
+                padding: 16px;
+                div {
+                    width: 100%;
+                    float: left;
+                    padding-bottom: 3px;
                 }
-                &.yellow {
-                    color:$text-yellow;
+                .content-description {
+                    h3 {
+                        font-size: $size-text;
+                        color:$text-grey;
+                        font-family: "HalvaticaNeueBold";
+                        white-space: nowrap;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                    }
                 }
-                &.green {
+                .content-data,
+                .content-details {
+                    & > div {
+                        width: 50%;
+                        float: left;
+                        padding: 0;
+                        margin: 0;
+                    }
+                    .state,
+                    .date {
+                        font-size: $size-small;
+                        color: $text-grey-lighter;
+                        span {
+                            &.red {
+                                color: $text-red;
+                            }
+                            &.yellow {
+                                color:$text-yellow;
+                            }
+                            &.green {
+                                color:$text-green;
+                            }
+                            &.green-dark {
+                                color:$text-green-dark;
+                            }
+                        }
+                    }
+                    .extend-data {
+                        display: block;
+                        text-align: right;
+                        font-size: $size-small;
+                        color: $text-grey-lighter;
+                    }
+                    .money {
+                        @extend .extend-data;
+                    }
+                    .exchange {
+                        width: 35%;
+                        @extend .extend-data;
+                    }
+                    .amount {
+                        width: 65%;
+                        font-size: $size-small;
+                        color: $text-grey-lighter;
+                    }
+                }
+            }
+            .image-action {
+                width: 15%;
+                float: left;
+                display: block;
+                line-height: $height-expense;
+                text-align: center;
+                a {
+                    vertical-align: middle;
+                    font-size: $size-icon;
+                }
+                .icon-camera {
                     color:$text-green;
                 }
-                &.green-dark {
-                    color:$text-green-dark;
+                .icon-affirmative {
+                    font-size: $size-icon - 2;
+                    color: $text-grey-lighter;
                 }
             }
         }
-        .right-part {
-            width: 35%;
-            float: right;
-            font-size: 2.4em;
-            .money {
-                padding-top: 2px;
-                font-size: $size-small;
-                color: $text-grey-lighter;
-                span {
-                    position: relative;
-                    bottom: -22px;
+    }
+    .report {
+        width: 100%;
+        height: 100%;
+        float: left;
+        border-bottom: 1px solid #CCC;
+        position: relative;
+        .delete-action {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 10;
+            padding-left: 11px;
+            .content-delete {
+                line-height: $height-report;
+                .icon {
+                    font-size: $size-icon;
+                    color: $bg-red;
+                    line-height: 4.5rem;
+                    vertical-align: middle;
                 }
             }
-            .icon {
-                display: inline-block;
+        }
+        .report-info {
+            width: 100%;
+            float: left;
+            transition: all .3s ease-out;
+            height: 100%;
+            background: $bg-white;
+            z-index: 100;
+            position: relative;
+            .content-expense-info {
+                width: 85%;
+                float: left;
             }
-            .icon-camera {
-                color:$text-green;
+            .content-report-info {
+                width: 100%;
+                float: left;
             }
-            .icon-affirmative {
-                color: $text-grey-lighter;
-            }
-            a {
-                float: right;
-                line-height: 0.3;
+            .content-report-info {
+                padding: 16px;
+                div {
+                    width: 100%;
+                    float: left;
+                    padding-bottom: 3px;
+                }
+                .content-description {
+                    h3 {
+                        font-size: $size-text;
+                        color:$text-grey;
+                        font-family: "HalvaticaNeueBold";
+                        white-space: nowrap;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                    }
+                }
+                .content-data,
+                .content-details {
+                    & > div {
+                        width: 50%;
+                        float: left;
+                        padding: 0;
+                        margin: 0;
+                    }
+                    .state {
+                        font-size: $size-small;
+                        color: $text-grey-lighter;
+                        span {
+                            &.red {
+                                color: $text-red;
+                            }
+                            &.yellow {
+                                color:$text-yellow;
+                            }
+                            &.green {
+                                color:$text-green;
+                            }
+                            &.green-dark {
+                                color:$text-green-dark;
+                            }
+                        }
+                    }
+                    .money {
+                        display: block;
+                        text-align: right;
+                        font-size: $size-small;
+                        color: $text-grey-lighter;
+                    }
+                }
             }
         }
     }
 }
 .delete-mode {
-    .expense-info, .report.editable .report-info {
-        @include transform(translate(2.7rem, 0));
-        background: transparent;
+    .expense-list .expense {
+        .expense-info {
+            @include transform(translate(37px, 0));
+            background: transparent;
+            .image-action {
+                display: none;
+            }
+        }
+    }
+    .reports-list .report {
+        .report-info {
+            @include transform(translate(37px, 0));
+            background: transparent;
+            .content-report-info .content-data .money {
+                display: none;
+            }
+        }
     }
 }
 

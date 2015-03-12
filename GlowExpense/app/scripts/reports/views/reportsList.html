@@ -13,28 +13,30 @@
                              ng-class="::{locked: report.locked, editable: !report.locked}"
                              ng-click="viewReport(report)">
                         <div class="delete-action">
-                                <span class="icon icon-delete"
-                                      ng-click="deleteReport(report, $event)" ></span>
+                            <div class="content-delete">
+                                <span class="icon icon-delete" ng-click="deleteReport(report, $event)" ></span>
+                            </div>
                         </div>
                         <div class="report-info">
-                            <div class="left-part">
-                                <div class="desc">
+                            <div class="content-report-info">
+                                <div class="content-description">
                                     <h3>
                                         {{::report.description}}
                                     </h3>
-                                    <span class="state"
-                                       ng-class="::{
-                                       'red': report.state === 'Pending Approval',
-                                       'yellow': report.state === 'Preparing Payment',
-                                       'green-dark': report.state === 'Paid'}">
-                                        {{::report.state}}
-                                    </span>
                                 </div>
-                            </div>
-                            <div class="right-part">
-                                <div class="money">
-                                    <span>{{:: report.societyCurrency}}</span>
-                                    <span>{{:: report.total | currency}}</span>
+                                <div class="content-data">
+                                    <div class="state">
+                                        <span ng-class="::{
+                                           'red': report.state === 'Pending Approval',
+                                           'yellow': report.state === 'Preparing Payment',
+                                           'green-dark': report.state === 'Paid'}">
+                                            {{::report.state}}
+                                        </span>
+                                    </div>
+                                    <div class="money">
+                                        <span>{{:: report.societyCurrency}}</span>
+                                        <span>{{:: report.total | currency}}</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>

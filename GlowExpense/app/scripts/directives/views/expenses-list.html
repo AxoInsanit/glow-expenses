@@ -4,19 +4,34 @@
              ng-repeat="expense in ::expenses track by $index">
             <section class="expense" ng-click="editExpense(expense)">
                 <div class="delete-action">
-                    <span class="icon icon-delete float-left"
-                          ng-click="deleteExpense(expense, $event)"></span>
+                    <div class="content-delete">
+                        <span class="icon icon-delete float-left" ng-click="deleteExpense(expense, $event)"></span>
+                    </div>
                 </div>
                 <div class="expense-info">
-                    <div class="left-part">
-                        <h3>{{:: expense.description }}</h3>
-                        <span class="date">{{:: expense.date | date:'dd MMMM yyyy' }}</span>
-                    </div>
-                    <div class="right-part">
-                        <div class="money">
-                            <span>{{:: expense.currency.code }}</span>
-                            <span class="amount">{{:: expense.originalAmount | currency }}</span>
+                    <div class="content-expense-info">
+                        <div class="content-description">
+                            <h3>{{:: expense.description }}</h3>
                         </div>
+                        <div class="content-data">
+                            <div class="date">
+                                <span>{{:: expense.date | date:'dd MMMM yyyy' }}</span>
+                            </div>
+                            <div class="money">
+                                <span>{{:: expense.currency.code }}</span>
+                                <span class="amount">{{:: expense.originalAmount | currency }}</span>
+                            </div>
+                        </div>
+                        <div class="content-details">
+                            <div class="amount">
+                                <span>Total ARG {{:: expense.originalAmount | currency }}</span>
+                            </div>
+                            <div class="exchange">
+                                <span>ER {{:: expense.exchangeRate }}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="image-action">
                         <a ng-hide="::expense.imageType !== 'void'" ng-click="takePhoto(expense, $event)" class="icon icon-camera"></a>
                         <a ng-show="::expense.imageType !== 'void'" class="icon icon-affirmative"></a>
                     </div>
