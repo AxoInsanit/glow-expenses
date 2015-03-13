@@ -15,6 +15,8 @@ angular.module('Expenses')
 	            $scope.expense = new ExpenseModel(expense);
 	        });
         } else {
+            $scope.$parent.backStateName = 'editExpense';
+            $scope.$parent.backStateParams = {expenseId: expenseId};
             expenseResource.getExpense(expenseId).then(function (expense) {
                 $scope.expense = new ExpenseModel(expense);
             });

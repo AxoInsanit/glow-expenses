@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('Reports')
-    .controller('ReportsListCtrl', function ($scope, reportResource, $stateParams, transitionService, errorDialogSvc) {
+    .controller('ReportsListCtrl', function ($scope, reportResource, BrowserSrv, $stateParams, transitionService, errorDialogSvc) {
 
         $scope.viewReport = function(report) {
             transitionService.go({
@@ -31,18 +31,23 @@ angular.module('Reports')
         };
 
         $scope.getMoreReports = function() {
-            // Avoid issue with ngInfiniteScroll
-            if ($scope.reports && $scope.reports.length > 5) {
+            if ($scope.reports) {
                 reportResource.getReports(true).then(function (reports) {
-                    reports.forEach(function (report) {
-                        $scope.reports.push(report);
-                    });
+                    $scope.reports = reports;
                 });
             }
         };
 
-        reportResource.getReports().then(function (reports) {
-            $scope.reports = reports;
+        // Initializing the browser position.
+        BrowserSrv.getScrollPos($scope);
+
+        /*
+            This listener is catching changes in the scroll position.
+        */
+        $scope.$on('scroll-change', function(event, data) {
+            if(data.scroll>90){
+                $scope.getMoreReports();
+            }
         });
 
     }

@@ -28,7 +28,7 @@ angular.module('Reports')
                     return foundReport;
                 });
             },
-            getReports: function (more) {
+            getReports: function (getMoreReports) {
                 var promise,
                     params = {
                         limit: limit,
@@ -36,34 +36,45 @@ angular.module('Reports')
                     },
                     notCache = false;
 
-                if (more) {
+                if (getMoreReports) {
                     if (maxPage !== lastPageFetched) {
                         lastPageFetched += 1;
-                        params.page = lastPageFetched * limit;
+                        params.page = (lastPageFetched * limit);
                         notCache = true;
                     }
                 }
 
+                // !notCache is true if I called the function without getMoreReports parameter
+                // cachedReports is true if I have cached reports :P
                 if (cachedReports && !notCache) {
-                    if (maxPage !== lastPageFetched) {
+                    // Empty response?
+                    if (maxPage === lastPageFetched) {
                         promise = $q.when(angular.copy(cachedReports));
-                    } else {
-                        promise = $q.when([]);
                     }
 
                 } else {
+                    // I want more reports or is the first call
+                    // In the first case, params: {limit = 8}
+                    // In the second case, params: {limit = 8, page = limit*lastPageFectched}
                     promise = $http.get(baseUrlMockeyWeb + reportsUrl, {params: params}).then(function (response) {
                         if (!cachedReports) {
+                            // The first call
                             cachedReports = response.data.expenses;
                         } else {
-                            cachedReports = cachedReports.concat(response.data.expenses);
+                            // Push all the reports in the cached reports
+                            $.each(response.data.expenses, function(index, report) {
+                                if(!(_.findWhere(cachedReports,{'expenseReportId':report.expenseReportId}))){
+                                    cachedReports.push(report);
+                                }
+                            });
                         }
 
+                        // If empty response
                         if (response.data.expenses.length === 0) {
                             maxPage = lastPageFetched;
                         }
 
-                        return response.data.expenses;
+                        return cachedReports;
                     });
                 }
                 return promise;

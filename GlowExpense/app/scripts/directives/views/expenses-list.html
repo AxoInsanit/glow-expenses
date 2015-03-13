@@ -19,15 +19,15 @@
                             </div>
                             <div class="money">
                                 <span>{{:: expense.currency.code }}</span>
-                                <span class="amount">{{:: expense.originalAmount | currency }}</span>
+                                <span class="amount">{{getCurrencyCode(expense.originalCurrencyId)}} {{:: expense.originalAmount | currency }}</span>
                             </div>
                         </div>
                         <div class="content-details">
                             <div class="amount">
-                                <span>Total ARG {{:: expense.originalAmount | currency }}</span>
+                                <span>Total {{getCurrencyCode(expense.societyCurrencyId)}} {{:: expense.originalAmount * expense.exchangeRate| currency }}</span>
                             </div>
                             <div class="exchange">
-                                <span>ER {{:: expense.exchangeRate }}</span>
+                                <span>ER: {{:: expense.exchangeRate | number:2}}</span>
                             </div>
                         </div>
                     </div>
