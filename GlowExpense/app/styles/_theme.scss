@@ -379,18 +379,24 @@ $expense-list-item-height: 5rem;
 }
 .delete-mode {
     .expense-list .expense {
+        .delete-action {
+            transition: all .3s ease-out;
+            z-index: 101;
+        }
         .expense-info {
             @include transform(translate(37px, 0));
-            background: transparent;
             .image-action {
                 display: none;
             }
         }
     }
     .reports-list .report {
+        .delete-action {
+            transition: all .3s ease-out;
+            z-index: 101;
+        }
         .report-info {
             @include transform(translate(37px, 0));
-            background: transparent;
             .content-report-info .content-data .money {
                 display: none;
             }
