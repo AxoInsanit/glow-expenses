@@ -27,6 +27,8 @@
 <section class="home-container" ng-class="{'edit-mode': editMode}">
     <div class="view-container" swipe-and-snap="2" on-pan-end="viewChanged($activeView)" active-view="{{activeView}}">
         <div class="view" ui-view="expenses"></div>
-        <div class="view" ui-view="reports"></div>
+        <scroller element=".scroll-view" position="scrollPosition">
+            <div class="view scroll-view" ui-view="reports"></div>
+        </scroller>
     </div>
 </section>
