@@ -163,10 +163,9 @@ angular.module('app', _mainModules )
                         // send a notification requests are complete
                         notificationChannel.requestEnded();
                     }
-
                     // check if token expired
                     if (response.status === 401 && response.data === 'Invalid Token. Message payload is of type: String') {
-                        $rootScope.$broadcast('global::signOut');
+                        $rootScope.$broadcast('global::signOutExpired');
                     }
 
                     return $q.reject(response);
@@ -185,6 +184,12 @@ angular.module('app', _mainModules )
         });
 
         $rootScope.$on('global::signOut', function () {
+            transitionService.go({
+                name: 'login',
+                direction: 'up'
+            });
+        });
+        $rootScope.$on('global::signOutExpired', function () {
             transitionService.go({
                 name: 'login',
                 direction: 'up'

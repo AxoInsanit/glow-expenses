@@ -7,7 +7,7 @@
             </a>
         </section>
         <div class="reports-list">
-            <div class="draft" infinite-scroll="getMoreReports()">
+            <div class="draft">
                 <div class="SPAM" ng-repeat="report in reports track by $index">
                     <section class="report"
                              ng-class="::{locked: report.locked, editable: !report.locked}"

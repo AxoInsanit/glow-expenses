@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('Directives').directive('expensesList', function($stateParams, transitionService, confirmDeleteDialogSvc,
-                                                                expenseResource, reportResource, errorDialogSvc) {
+                                                                expenseResource, reportResource, errorDialogSvc, localStorageSvc) {
     return {
         restrict: 'E',
         replace: true,
@@ -49,6 +49,13 @@ angular.module('Directives').directive('expensesList', function($stateParams, tr
                         direction: 'forward'
                     });
                 }
+            };
+
+            $scope.getCurrencyCode = function(currencyId){
+                var currencies = JSON.parse(localStorageSvc.getItem('currencies')),
+                    currency = _.findWhere(currencies,{'id':currencyId});
+                return currency.code;
+
             };
         },
         templateUrl: 'scripts/directives/views/expenses-list.html'
