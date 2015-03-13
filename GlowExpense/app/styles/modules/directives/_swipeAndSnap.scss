@@ -10,6 +10,9 @@
 .swipe-animate {
     -webkit-transition: -webkit-transform 0.2s ease-in;
     transition: transform 0.2s;
+    .view .fixed-half-width {
+		width: 50%
+	}
 }
 .overflow-disable {
     .view {
