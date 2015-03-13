@@ -1,11 +1,15 @@
-<div class="view-content expenses-body">
-    <article>
-        <section class="item" ng-click="createExpense()">
-            <a class="btn-with-icon icon-back create-report" >
-                <span class="icon icon-plus"></span>
-                <span>Create Expense</span>
-            </a>
-        </section>
-    </article>
+<div class="view-content expenses-body" ng-class="{'edit-mode': editMode}">
+    <div ng-if="!reportId" class="item" ng-click="createExpense()">
+        <a class="btn-with-icon icon-back create-report" >
+            <span class="icon icon-plus"></span>
+            <span>Create Expense</span>
+        </a>
+    </div>
     <expenses-list></expenses-list>
+    <div ng-if="reportId && editMode" class="edit-options-fixed fixed-full-width">
+        <button class="edit-options-btn btn-add" ng-disabled="unselected()" ng-click="addExpenses($event)">Add</button>
+    </div>
+    <div ng-if="!reportId && editMode" class="edit-options-fixed fixed-half-width">
+        <button class="edit-options-btn btn-rem" ng-disabled="unselected()" ng-click="deleteExpenses($event)">Remove</button>
+    </div>
 </div>

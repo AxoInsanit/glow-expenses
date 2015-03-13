@@ -147,52 +147,52 @@
 }
 
 .icon-signout:before {
-	content: "\e606";
-}
-.icon-affirmative:before {
-	content: "\e601";
-}
-.icon-camera:before {
-	content: "\e603";
-}
-.icon-alert:before {
-	content: "\e604";
-}
-.icon-check:before {
-	content: "\e605";
-}
-.icon-close:before {
-	content: "\e607";
-}
-.icon-sign-out:before {
-	content: "\e608";
-}
-.icon-edit:before {
 	content: "\e609";
 }
+.icon-affirmative:before {
+	content: "\e604";
+}
+.icon-camera:before {
+	content: "\e606";
+}
+.icon-alert:before {
+	content: "\e607";
+}
+.icon-check:before {
+	content: "\e608";
+}
+.icon-close:before {
+	content: "\e60a";
+}
+.icon-sign-out:before {
+	content: "\e60b";
+}
+.icon-edit:before {
+	content: "\e60c";
+}
 .icon-profile:before {
-	content: "\e600";
+	content: "\e603";
 }
 .icon-search:before {
 	content: "\e5fd";
 }
 .icon-delete:before {
-	content: "\e60c";
+	content: "\e60e";
+  color: $bg-red;
 }
 .icon-plus:before {
-	content: "\e60b";
+	content: "\e60d";
 }
 .icon-cross:before {
-	content: "\e602";
+	content: "\e605";
 }
 .icon-arrow-down:after {
-	content: "\e60e";
-  content: "\e60e";
+	content: "\e610";
   position: absolute;
   top: 0;
   line-height: 40px;
   right: 20px;
 }
 .icon-back-arrow:before {
-	content: "\e60d";
+	content: "\e60f";
 }

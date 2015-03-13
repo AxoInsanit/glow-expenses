@@ -1,14 +1,13 @@
 <div class="nav font15">
     <div class="content-list" infinite-scroll="getMoreExpenses()">
-        <div class="ready expense-list"
-             ng-repeat="expense in ::expenses track by $index">
-            <section class="expense" ng-click="editExpense(expense)">
-                <div class="delete-action">
-                    <div class="content-delete">
-                        <span class="icon icon-delete float-left" ng-click="deleteExpense(expense, $event)"></span>
+        <div class="ready expense-list" ng-repeat="expense in ::expenses track by $index">
+            <section class="expense" ng-class="{'margin-last': $last && editMode}">
+                <div class="edit-action">
+                    <div class="content-check">
+                         <input id="box{{$index}}" type="checkbox" ng-model="value" ng-change="itemChecked(value, $index, expense.expenseId)" /><label for="box{{$index}}"></label>
                     </div>
                 </div>
-                <div class="expense-info">
+                <div class="expense-info" ng-click="editExpense(expense)">
                     <div class="content-expense-info">
                         <div class="content-description">
                             <h3>{{:: expense.description }}</h3>

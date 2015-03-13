@@ -24,7 +24,7 @@
         </ul>
     </nav>
 </header>
-<section class="home-container" ng-class="{'delete-mode': editMode}">
+<section class="home-container" ng-class="{'edit-mode': editMode}">
     <div class="view-container" swipe-and-snap="2" on-pan-end="viewChanged($activeView)" active-view="{{activeView}}">
         <div class="view" ui-view="expenses"></div>
         <div class="view" ui-view="reports"></div>

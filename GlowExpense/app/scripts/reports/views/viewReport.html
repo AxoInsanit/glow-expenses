@@ -1,20 +1,27 @@
 <div class="reports-body view-report">
-    <article>
-        <section class="item" ng-click="createExpense()">
+    <div>
+        <div class="item item-floated" ng-click="createExpense()">
             <a class="btn-with-icon icon-back create-report" >
                 <span class="icon icon-plus"></span>
                 <span>Create Expense</span>
             </a>
-        </section>
-    </article>
-
-    <expenses-list></expenses-list>
-
-    <article class="send-report">
-        <div class="btn-fixed grey">
-            <a class="left-part underscored" ng-click="editReport()">Edit Report</a>
-            <p class="right-part">TOTAL {{:: report.societyCurrency}} {{:: report.total | currency}}</p>
-            <button class="btn ng-binding" type="submit" ng-click="sendReport()">Send Report</button>
         </div>
-    </article>
+        <div class="item item-floated item-floated-rigth" ng-click="addExpenses()">
+            <a class="btn-with-icon icon-back create-report" >
+                <span class="icon icon-plus"></span>
+                <span>Add Expenses</span>
+            </a>
+        </div>
+    </div>
+    <div class="content-edit-list">
+        <expenses-list></expenses-list>
+
+        <article class="send-report">
+            <div class="btn-fixed grey">
+                <a class="left-part underscored" ng-click="editReport()">Edit Report</a>
+                <p class="right-part">TOTAL {{:: report.societyCurrency}} {{:: report.total | currency}}</p>
+                <button class="btn ng-binding" type="submit" ng-click="sendReport()">Send Report</button>
+            </div>
+        </article>
+    </div>
 </div>
