@@ -7,6 +7,10 @@
     top: 0;
     left: 0;
 }
+.swipe-animate {
+    -webkit-transition: -webkit-transform 0.2s ease-in;
+    transition: transform 0.2s;
+}
 .overflow-disable {
     .view {
         overflow: hidden;
