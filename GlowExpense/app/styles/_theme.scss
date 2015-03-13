@@ -32,7 +32,7 @@ input[type=checkbox]:checked + label:before { /* checked */
     position: fixed;
     bottom: 0;
     left: 0;
-    background: #eee;
+    background: #e4e4e4;
     z-index: 1000;
     text-align: center;
     padding: 10px 0px;
@@ -42,24 +42,27 @@ input[type=checkbox]:checked + label:before { /* checked */
         color: #ffffff;
         border-radius : 5px;
         border: none;
-        padding: 10px;
-    }
-
-    .half-width{
-        width: 50% !important;
+        font-size: medium;
     }
 
     .btn-add {
         background-color: #97BD00;
-
+        padding: 10px 50px;
         &:disabled {
             opacity: .55;
         }
     }
-
     .btn-rem {
         background-color: $bg-red;
-
+        padding: 10px 50px;
+        &:disabled {
+            opacity: .55;
+        }
+    }
+    .btn-exrate {
+        background-color: $bg-grey-dark;
+        padding: 10px 8px;
+        margin-right: 10px;
         &:disabled {
             opacity: .55;
         }
@@ -71,15 +74,11 @@ input[type=checkbox]:checked + label:before { /* checked */
 }
 
 .fixed-half-width {
-    white-space: normal;
-      display: inline-block;
-      width: 100%;
-      overflow-x: hidden;
-      overflow-y: auto;
+    width: 50% !important;
 }
 
 .margin-last{
-    margin-bottom: 60px;
+    margin-bottom: 65px;
 }
 
 
@@ -162,7 +161,7 @@ header {
                         right:25px;
                         bottom:0.5em;
                         a {
-                            color:$text-grey-dark;
+                            color:$text-red;
                             font-size: $size-text;
                             line-height: 2.6;
                             font-family: "HalvaticaNeue";                        }
@@ -245,6 +244,7 @@ $expense-list-item-height: 5rem;
 }
 .expense-list,
 .reports-list {
+    height: 100%;
     .expense {
         width: 100%;
         height: 100%;
@@ -259,6 +259,7 @@ $expense-list-item-height: 5rem;
             height: 100%;
             z-index: 10;
             padding-left: 11px;
+
             .content-check {
                 line-height: $height-expense;
                 font-size: 25px;
@@ -379,6 +380,7 @@ $expense-list-item-height: 5rem;
             height: 100%;
             z-index: 10;
             padding-left: 11px;
+
             .content-check {
                 line-height: $height-report;
                 font-size: 25px;
@@ -456,15 +458,20 @@ $expense-list-item-height: 5rem;
 }
 .edit-mode {
     .expense-list .expense {
+        .edit-action {
+            transition: all .3s ease-out;
+        }
         .expense-info {
             @include transform(translate(37px, 0));
-            
             .image-action {
                 display: none;
             }
         }
     }
     .reports-list .report {
+        .edit-action {
+            transition: all .3s ease-out;
+        }
         .report-info {
             @include transform(translate(37px, 0));
             .content-report-info .content-data .money {
@@ -644,7 +651,7 @@ $expense-list-item-height: 5rem;
         padding: 0;
         margin: 0;
         &:first-child {
-            border-right: 1px solid $text-grey-dim;
+            border-right: 1px solid $text-white;
             @include border-radius(0px);
         }
         &:last-child {
