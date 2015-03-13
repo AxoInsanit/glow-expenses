@@ -78,6 +78,7 @@ angular.module('Directives', [])
                 Hammer(element[0]).on('panstart', function() {
                     // We dont want an animation delay when dragging.
                     element.removeClass('swipe-animate');
+                    element.addClass('overflow-disable');
                 });
 
                 /**
@@ -99,6 +100,7 @@ angular.module('Directives', [])
                 Hammer(element[0]).on('panend pancancel', function() {
                     dragging = false;
                     element.addClass('swipe-animate');
+                    element.removeClass('overflow-disable');
 
                     // Work out where we should "snap" to.
                     restPosition = calculate_snap_location(positionX);
@@ -110,6 +112,7 @@ angular.module('Directives', [])
                     var previous = activeView - 1;
                     dragging = false;
                     element.removeClass('swipe-animate');
+                    element.addClass('overflow-disable');
 
                     if (previous >= 0) {
                         activeView = previous;
@@ -122,6 +125,7 @@ angular.module('Directives', [])
                     var next = activeView + 1;
                     dragging = false;
                     element.removeClass('swipe-animate');
+                    element.addClass('overflow-disable');
 
                     if (next < snapLocations.length) {
                         activeView = next;
@@ -139,6 +143,7 @@ angular.module('Directives', [])
                 scope.$on('swipeAndSnap::changeView', function (e, viewIndex) {
                     activeView = viewIndex;
                     element.addClass('swipe-animate');
+                    element.removeClass('overflow-disable');
                     translateView(snapLocations[viewIndex]);
                 });
             }

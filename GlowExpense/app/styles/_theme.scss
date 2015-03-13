@@ -158,6 +158,7 @@ $expense-list-item-height: 5rem;
 }
 .expense-list,
 .reports-list {
+    height: 100%;
     .expense {
         width: 100%;
         height: 100%;
@@ -173,11 +174,11 @@ $expense-list-item-height: 5rem;
             z-index: 10;
             padding-left: 11px;
             .content-delete {
-                line-height: $height-expense;
+                height: 100%;
                 .icon {
                     font-size: $size-icon;
                     color: $bg-red;
-                    line-height: 4.5rem;
+                    line-height: $height-expense;
                     vertical-align: middle;
                 }
             }
@@ -298,11 +299,11 @@ $expense-list-item-height: 5rem;
             z-index: 10;
             padding-left: 11px;
             .content-delete {
-                line-height: $height-report;
+                height: 100%;
                 .icon {
                     font-size: $size-icon;
                     color: $bg-red;
-                    line-height: 4.5rem;
+                    line-height: $height-report;
                     vertical-align: middle;
                 }
             }
