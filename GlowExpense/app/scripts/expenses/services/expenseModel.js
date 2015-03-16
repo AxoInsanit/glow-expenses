@@ -85,10 +85,13 @@ angular.module('Expenses')
             }
 
             return expensePromise.then(function (expenseId) {
-                var promiseResult;
+                var promiseResult,
+                    expenseIds;
+
+                expenseIds = [parseInt(expenseId,10)];
                 if (isNew && expense.expenseReportId) {
                     // add expense to report
-                    promiseResult = reportResource.addExpense(expense.expenseReportId, expenseId).then(function () {
+                    promiseResult = reportResource.addExpense(expense.expenseReportId, expenseIds).then(function () {
                         return {
                             reportId: expense.expenseReportId,
                             expenseId: expenseId
@@ -97,7 +100,7 @@ angular.module('Expenses')
                 } else if (!isNew && expense.expenseReportId !== expense.originalExpenseReportId) {
                     // remove from original expense and add to new one
                     promiseResult = reportResource.removeExpense(expense.originalExpenseReportId, expenseId).then(function () {
-                        return reportResource.addExpense(expense.expenseReportId, expenseId).then(function () {
+                        return reportResource.addExpense(expense.expenseReportId, expenseIds).then(function () {
                             return {
                                 reportId: expense.originalExpenseReportId,
                                 expenseId: expenseId

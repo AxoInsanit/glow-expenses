@@ -1,0 +1,16 @@
+<div>
+	<form name="exchangeRateForm">
+    	<div class="modal-body">    	
+            <div class="form-group label">
+                <div class="form-item head">Exchange Rate <span class="form-item-max-text" ng-if="exchangeRateForm.exchangeRate.$error.maxlength"> - Max Value Exceeded -</span></div>
+                <div class="form-item">
+                    <input type="text" id="exchangeRate" class="form-control" placeholder="Specify Exchange Rate..." ng-model="expense.exchangeRate" name="exchangeRate" maxlength="20" ng-blur="formatCurrency('exchangeRate')" ng-class="{'form-item-req': exchangeRateForm.exchangeRate.$error.required,'form-item-max' : exchangeRateForm.exchangeRate.$error.maxlength}" required>
+                </div>
+            </div>        
+	    </div>
+	    <div class="modal-footer">
+	        <button class="btn" ng-click="cancel()">Cancel</button>
+	        <button class="btn" ng-click="ok()" ng-disabled="exchangeRateForm.$invalid">OK</button>
+	    </div>
+    </form>
+</div>

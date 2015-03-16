@@ -166,7 +166,7 @@ angular.module('Reports')
 
                 return promise;
             },
-            addExpense: function (reportId, expenseId) {
+            addExpense: function (reportId, expenseIds) {
                 var reportResource = this;
 
                 return $http({
@@ -174,13 +174,14 @@ angular.module('Reports')
                     url: baseUrlMockeyWeb + reportExpensesUrl,
                     data: {
                         expenseReportId: reportId,
-                        expenseIds: [parseInt(expenseId, 10)]
+                        expenseIds: expenseIds
                     },
                     params: {
                         token: userResource.getToken()
                     }
                 }).then(function(response) {
                     reportResource.cleanCache(reportId);
+                    $rootScope.$broadcast('global::expensesRemoved');
                     return response;
                 });
             },

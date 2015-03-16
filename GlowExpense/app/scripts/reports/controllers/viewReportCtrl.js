@@ -26,6 +26,16 @@ angular.module('Reports')
             });
         };
 
+        $scope.addExpensesToReport = function() {
+            transitionService.go({
+                name: 'addExpensesToReport',
+                params: {
+                    reportId: reportId
+                },
+                direction: 'forward'
+            });
+        };
+
         $scope.createExpense = function(){
             transitionService.go({
                 name: 'addReportExpense',

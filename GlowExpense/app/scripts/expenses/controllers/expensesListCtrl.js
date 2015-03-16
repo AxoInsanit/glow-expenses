@@ -1,7 +1,16 @@
 'use strict';
 
 angular.module('Expenses')
-    .controller('ExpensesListCtrl', function ($scope, transitionService, expenseResource)  {
+    .controller('ExpensesListCtrl', function ($scope, transitionService,  expenseResource, reportResource, $stateParams)  {
+
+        $scope.reportId = $stateParams.reportId;
+
+        if ($scope.$parent && $scope.reportId) {
+            $scope.editMode = true;
+            reportResource.getReport($scope.reportId).then( function(report){
+                $scope.$parent.title = 'Add to ' + report.description;
+            });
+        }
 
         $scope.takePhoto = function(expense) {
             transitionService.go({

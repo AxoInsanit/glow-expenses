@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('Reports')
-    .controller('ReportsListCtrl', function ($scope, reportResource, BrowserSrv, $stateParams, transitionService, errorDialogSvc) {
+    .controller('ReportsListCtrl', function ($scope, reportResource, BrowserSrv, $stateParams, transitionService, confirmDeleteDialogSvc, errorDialogSvc) {
 
         $scope.viewReport = function(report) {
             transitionService.go({
@@ -23,10 +23,13 @@ angular.module('Reports')
         $scope.deleteReport = function (report, event) {
             event.stopPropagation();
             event.preventDefault();
-            reportResource.removeReport(report.expenseReportId).then(function () {
-                transitionService.reload();
-            }, function () {
-                errorDialogSvc.open('Couldn\'t remove report');
+
+            confirmDeleteDialogSvc.open('report').then(function(){
+                reportResource.removeReport(report.expenseReportId).then(function () {
+                    transitionService.reload();
+                }, function () {
+                    errorDialogSvc.open('Couldn\'t remove report');
+                });
             });
         };
 

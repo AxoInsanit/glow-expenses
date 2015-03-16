@@ -1,6 +1,87 @@
 body {
     overflow-x: hidden;
 }
+
+// CUSTOM CHECKBOX
+input[type=checkbox] { /* hide default checkbox */
+    display:none;
+}
+input[type=checkbox] + label:before {
+  font-family: 'icon-font';
+  display: inline-block;
+}
+input[type=checkbox] + label:before { /* unchecked */
+    content: "\f096";
+    letter-spacing: 10px;
+    color: #808080;
+}
+input[type=checkbox]:checked + label:before { /* checked */
+    content: "\f046";
+    color: #97BD00;
+    letter-spacing: 5px;
+}
+
+.hide-text-overflow {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    display: block !important;
+    overflow: hidden;
+}
+
+.edit-options-fixed {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    background: #e4e4e4;
+    z-index: 1000;
+    text-align: center;
+    padding: 10px 0px;
+    border-top: 2px solid #97BD00;
+
+    .edit-options-btn {
+        color: #ffffff;
+        border-radius : 5px;
+        border: none;
+        font-size: medium;
+    }
+
+    .btn-add {
+        background-color: #97BD00;
+        padding: 10px 50px;
+        &:disabled {
+            opacity: .55;
+        }
+    }
+    .btn-rem {
+        background-color: $bg-red;
+        padding: 10px 50px;
+        &:disabled {
+            opacity: .55;
+        }
+    }
+    .btn-exrate {
+        background-color: $bg-grey-dark;
+        padding: 10px 8px;
+        margin-right: 10px;
+        &:disabled {
+            opacity: .55;
+        }
+    }
+}
+
+.fixed-full-width {
+    width: 100%;
+}
+
+.fixed-half-width {
+    width: 50% !important;
+}
+
+.margin-last{
+    margin-bottom: 65px;
+}
+
+
 // STYLES FOR GLOBAL ELEMENTS
 // HEADER
 header {
@@ -80,7 +161,7 @@ header {
                         right:25px;
                         bottom:0.5em;
                         a {
-                            color:$text-grey-dark;
+                            color:$text-red;
                             font-size: $size-text;
                             line-height: 2.6;
                             font-family: "HalvaticaNeue";                        }
@@ -152,6 +233,11 @@ ul.single {
 
 $expense-list-item-height: 5rem;
 .view-report {
+    .content-edit-list {
+        clear: both;
+    }
+    width: 100%;
+    display: inline-block;
     .money {
         width: 70%;
     }
@@ -165,7 +251,7 @@ $expense-list-item-height: 5rem;
         float: left;
         border-bottom: 1px solid #CCC;
         position: relative;
-        .delete-action {
+        .edit-action {
             position: absolute;
             top: 0;
             left: 0;
@@ -173,14 +259,10 @@ $expense-list-item-height: 5rem;
             height: 100%;
             z-index: 10;
             padding-left: 11px;
-            .content-delete {
-                height: 100%;
-                .icon {
-                    font-size: $size-icon;
-                    color: $bg-red;
-                    line-height: $height-expense;
-                    vertical-align: middle;
-                }
+
+            .content-check {
+                line-height: $height-expense;
+                font-size: 25px;
             }
         }
         .expense-info {
@@ -290,7 +372,7 @@ $expense-list-item-height: 5rem;
         float: left;
         border-bottom: 1px solid #CCC;
         position: relative;
-        .delete-action {
+        .edit-action {
             position: absolute;
             top: 0;
             left: 0;
@@ -298,14 +380,10 @@ $expense-list-item-height: 5rem;
             height: 100%;
             z-index: 10;
             padding-left: 11px;
-            .content-delete {
-                height: 100%;
-                .icon {
-                    font-size: $size-icon;
-                    color: $bg-red;
-                    line-height: $height-report;
-                    vertical-align: middle;
-                }
+
+            .content-check {
+                line-height: $height-report;
+                font-size: 25px;
             }
         }
         .report-info {
@@ -378,11 +456,10 @@ $expense-list-item-height: 5rem;
         }
     }
 }
-.delete-mode {
+.edit-mode {
     .expense-list .expense {
-        .delete-action {
+        .edit-action {
             transition: all .3s ease-out;
-            z-index: 101;
         }
         .expense-info {
             @include transform(translate(37px, 0));
@@ -392,9 +469,8 @@ $expense-list-item-height: 5rem;
         }
     }
     .reports-list .report {
-        .delete-action {
+        .edit-action {
             transition: all .3s ease-out;
-            z-index: 101;
         }
         .report-info {
             @include transform(translate(37px, 0));
@@ -403,6 +479,21 @@ $expense-list-item-height: 5rem;
             }
         }
     }
+}
+
+.item-floated {
+    float: left;
+    width: 50%;
+}
+
+@media (max-width : 355px) {
+    .item-floated {
+        width: 100%;
+    }
+}
+
+.item-floated-rigth {
+    border-left: 2px solid #E5E5E5 !important;
 }
 
 .item {
@@ -560,7 +651,7 @@ $expense-list-item-height: 5rem;
         padding: 0;
         margin: 0;
         &:first-child {
-            border-right: 1px solid $text-grey-dim;
+            border-right: 1px solid $text-white;
             @include border-radius(0px);
         }
         &:last-child {

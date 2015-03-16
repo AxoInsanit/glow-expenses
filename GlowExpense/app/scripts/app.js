@@ -114,6 +114,12 @@ angular.module('app', _mainModules )
                 url: '/reports/:reportId/edit',
                 controller: 'ReportFormCtrl',
                 templateUrl: 'scripts/reports/views/reportForm.html'
+            })
+            .state('addExpensesToReport', {
+                parent: 'detailsLayout',
+                url: '/reports/:reportId/addExpenses',
+                controller: 'ExpensesListCtrl',
+                templateUrl: 'scripts/expenses/views/expensesList.html'
             });
 
         $urlRouterProvider.otherwise('/login');

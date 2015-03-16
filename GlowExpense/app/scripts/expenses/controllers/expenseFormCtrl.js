@@ -35,12 +35,6 @@ angular.module('Expenses')
 
         if ($scope.$parent) {
             $scope.$parent.title = expenseId ? 'Edit expense': 'Create expense';
-
-            if (!reportId) {
-                // override layout back path
-                $scope.$parent.backStateName = 'home';
-                $scope.$parent.backStateParams = {view: 'expenses'};
-            }
         }
 
         $scope.save = function () {

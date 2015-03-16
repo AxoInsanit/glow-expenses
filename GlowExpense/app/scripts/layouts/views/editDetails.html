@@ -5,7 +5,7 @@
                 <a class="icon icon-back-arrow" back-button></a>
             </li>
             <li class="btn-main">
-                <a class="active"><span> {{title}} </span></a>
+                <a class="active"><span class="hide-text-overflow"> {{title}} </span></a>
             </li>
             <li class="btn-helper"
                 ng-class="{'edit': !editMode, 'done': editMode}"
@@ -17,6 +17,6 @@
         </ul>
     </nav>
 </header>
-<section class="details-container" ng-class="{'delete-mode': editMode}">
+<section class="details-container" ng-class="{'edit-mode': editMode}">
     <div ui-view></div>
 </section>
