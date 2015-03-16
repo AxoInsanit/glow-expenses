@@ -1,8 +1,13 @@
 <div class="modal-body modal-select" ng-repeat="currency in currencies">
-    <div class="item" ng-class="{'checked': currency.selected}" ng-click="select(currency)" data-code="{{currency.code}}">{{currency.name}}
-        <ng-switch on="currency.selected">
-            <span class="" ng-switch-default></span>
-            <span class="icon icon-check" ng-switch-when="true"></span>
-        </ng-switch>
-    </div>
+	<div ng-if="currency.important">
+	    <div class="item" ng-class="{'checked': currency.selected}" ng-click="select(currency)" data-code="{{currency.code}}">{{currency.name}}
+	        <ng-switch on="currency.selected">
+	            <span class="" ng-switch-default></span>
+	            <span class="icon icon-check" ng-switch-when="true"></span>
+	        </ng-switch>
+	    </div>
+	</div>
+</div>
+<div class="item" ng-if="showOption" ng-click="showAllCurrencies()">
+    <span>Show all currencies</span>
 </div>

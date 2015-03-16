@@ -1,7 +1,20 @@
 'use strict';
 
 angular.module('Reports')
-    .controller('ReportsListCtrl', function ($scope, reportResource, BrowserSrv, $stateParams, transitionService, confirmDeleteDialogSvc, errorDialogSvc) {
+    .controller('ReportsListCtrl', function ($scope, reportResource, BrowserSrv, $stateParams, transitionService, confirmDeleteDialogSvc, errorDialogSvc, localStorageSvc) {
+
+        var email = JSON.parse(localStorageSvc.getItem('glober')).email,
+            configuration = JSON.parse(localStorageSvc.getItem(email));
+        $scope.hidePaidReports = configuration.hidePaid ? configuration.hidePaid : false;
+
+        $scope.scrollPosition = 0;
+
+        $scope.saveConfiguration = function(){
+            var newConfig = JSON.parse(localStorageSvc.getItem(email));
+
+            newConfig.hidePaid = $scope.hidePaidReports;
+            localStorageSvc.setItem(email,JSON.stringify(newConfig));
+        };
 
         $scope.viewReport = function(report) {
             transitionService.go({
