@@ -1,6 +1,5 @@
 'use strict';
 
-
 angular.module('Directives').directive('expensesList', function($stateParams, expenseResource, reportResource, transitionService, localStorageSvc, confirmDeleteDialogSvc, editExRateDialogSvc, errorDialogSvc, $q) {
     return {
         restrict: 'E',
