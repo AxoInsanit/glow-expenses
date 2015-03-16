@@ -7,9 +7,10 @@
     </div>
     <expenses-list></expenses-list>
     <div ng-if="reportId && editMode" class="edit-options-fixed fixed-full-width">
-        <button class="edit-options-btn btn-add" ng-disabled="unselected()" ng-click="addExpenses($event)">Add</button>
+        <button class="edit-options-btn btn-add" ng-disabled="unselected()" ng-click="addExpenses($event)">Add Expenses</button>
     </div>
-    <div ng-if="!reportId && editMode" class="edit-options-fixed fixed-half-width">
+    <div ng-if="!reportId && editMode" class="edit-options-fixed fixed-full-width" ng-class="{'fixed-half-width': homeViewChanged()}">
+        <button class="edit-options-btn btn-exrate" ng-disabled="unselected()" ng-click="editExRate($event)">Exchange rate</button>
         <button class="edit-options-btn btn-rem" ng-disabled="unselected()" ng-click="deleteExpenses($event)">Remove</button>
     </div>
 </div>

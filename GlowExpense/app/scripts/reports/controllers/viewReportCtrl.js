@@ -26,7 +26,7 @@ angular.module('Reports')
             });
         };
 
-        $scope.addExpenses = function() {
+        $scope.addExpensesToReport = function() {
             transitionService.go({
                 name: 'addExpensesToReport',
                 params: {

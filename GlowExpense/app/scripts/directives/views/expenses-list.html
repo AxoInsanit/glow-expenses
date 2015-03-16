@@ -4,7 +4,7 @@
             <section class="expense" ng-class="{'margin-last': $last && editMode}">
                 <div class="edit-action">
                     <div class="content-check">
-                         <input id="box{{$index}}" type="checkbox" ng-model="value" ng-change="itemChecked(value, $index, expense.expenseId)" /><label for="box{{$index}}"></label>
+                         <input id="box{{$index}}" type="checkbox" ng-model="value" ng-change="itemChecked(value, $index, expense)" /><label for="box{{$index}}"></label>
                     </div>
                 </div>
                 <div class="expense-info" ng-click="editExpense(expense)">
