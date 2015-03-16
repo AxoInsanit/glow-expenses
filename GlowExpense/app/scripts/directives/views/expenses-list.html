@@ -1,7 +1,7 @@
 <div class="nav font15">
-    <div class="content-list" infinite-scroll="getMoreExpenses()">
+    <div class="content-list" infinite-scroll="getMoreExpenses()" ng-class="{'margin-last': editMode}">
         <div class="ready expense-list" ng-repeat="expense in ::expenses track by $index">
-            <section class="expense" ng-class="{'margin-last': $last && editMode}">
+            <section class="expense">
                 <div class="edit-action">
                     <div class="content-check">
                          <input id="box{{$index}}" type="checkbox" ng-model="value" ng-change="itemChecked(value, $index, expense)" /><label for="box{{$index}}"></label>
