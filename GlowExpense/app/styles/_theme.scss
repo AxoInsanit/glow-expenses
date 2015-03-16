@@ -78,6 +78,7 @@ input[type=checkbox]:checked + label:before { /* checked */
 }
 
 .margin-last{
+    overflow: hidden;
     margin-bottom: 65px;
 }
 
