@@ -47,11 +47,8 @@ angular.module('Reports')
                 // !notCache is true if I called the function without getMoreReports parameter
                 // cachedReports is true if I have cached reports :P
                 if (cachedReports && !notCache) {
-                    // Empty response?
-                    if (maxPage === lastPageFetched) {
-                        promise = $q.when(angular.copy(cachedReports));
-                    }
-
+                    // Don't reload, just returns the cached reports
+                    promise = $q.when(angular.copy(cachedReports));
                 } else {
                     // I want more reports or is the first call
                     // In the first case, params: {limit = 8}
