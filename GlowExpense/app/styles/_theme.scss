@@ -479,6 +479,11 @@ $expense-list-item-height: 5rem;
             }
         }
     }
+    .item {
+        &.checkbox-paid-reports {
+            display: block;
+        }
+    }
 }
 
 .item-floated {
@@ -520,6 +525,9 @@ $expense-list-item-height: 5rem;
         .icon-photo {
             float: right;
         }
+    }
+    &.checkbox-paid-reports {
+        display: none;
     }
     .main-text {
         font-family: "HalvaticaNeueBold";

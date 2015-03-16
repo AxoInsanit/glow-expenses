@@ -65,6 +65,9 @@ angular.module('Login').factory('userResource', function($q, $http, baseUrlMocke
                     promise = $q.when(JSON.parse(storedUser));
                 } else {
                     promise = $http.get(baseUrlMockeyWeb + globerUrl, {params: {token: this.getToken()}}).then(function (response) {
+                        if (localStorageSvc.getItem(response.data.glober.email) === null) {
+                            localStorageSvc.setItem(response.data.glober.email, JSON.stringify({}));
+                        }
                         localStorageSvc.setItem(globerStorageKey, JSON.stringify(response.data.glober));
                         return response.data.glober;
                     });
