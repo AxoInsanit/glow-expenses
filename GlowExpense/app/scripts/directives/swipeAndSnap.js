@@ -13,43 +13,60 @@ angular.module('Directives', [])
                     dragging = false,
                     Hammer = window.Hammer,
                     activeView = parseInt(attr.activeView, 10),
-                    snapLocations = []; // The current position.
+                    snapLocations = [], // The current position.
+                    tolerance = 100, //pixels measure
+                    minExp,
+                    minRep;
 
                 for (var i = 0; i < snapCount; i += 1) {
                     snapLocations.push((-1) * i * window.innerWidth);
                 }
 
+                minExp = snapLocations[0] - tolerance;
+                minRep = snapLocations[1] + tolerance;
+
                 element.css('width', (snapCount * 100) + '%');
 
                 var calculate_snap_location = function (position) {
 
-                    // Used to store each difference between current position and each snap point.
-                    var currentDiff;
-
-                    // Used to store the current best difference.
-                    var minimumDiff;
-
-                    // User to store the best snap position.
-                    var bestSnap = snapLocations[0];
-
-                    // We're going to cycle through each snap location
-                    // and work out which is closest to the current position.
-
-
-                    for (var i=0; i < snapLocations.length; i++) {
-
-                        // Calculate the difference.
-                        currentDiff = Math.abs(position - snapLocations[i]);
-
-                        // Works out if this difference is the closest yet.
-                        if(minimumDiff === undefined || currentDiff < minimumDiff) {
-                            minimumDiff = currentDiff;
-                            bestSnap = snapLocations[i];
-                            activeView = i;
+                    if (activeView === 1 && (position > minExp )) {//current view reports
+                        activeView = 0;
+                    }
+                    else {
+                        if (activeView === 0 && (position < minRep )) {//current view expenses
+                        activeView = 1;
                         }
                     }
+                    return snapLocations[activeView];
+                /*
+                // Used to store each difference between current position and each snap point.
+                var currentDiff;
 
-                    return bestSnap;
+                // Used to store the current best difference.
+                var minimumDiff;
+
+                // User to store the best snap position.
+                var bestSnap = snapLocations[0];
+
+                // We're going to cycle through each snap location
+                // and work out which is closest to the current position.
+
+
+                for (var i=0; i < snapLocations.length; i++) {
+
+                    // Calculate the difference.
+                    currentDiff = Math.abs(position - snapLocations[i]);
+
+                    // Works out if this difference is the closest yet.
+                    if(minimumDiff === undefined || currentDiff < minimumDiff) {
+                        minimumDiff = currentDiff;
+                        bestSnap = snapLocations[i];
+                        activeView = i;
+                    }
+                }
+
+                return bestSnap;
+                */
                 };
 
 
@@ -107,33 +124,6 @@ angular.module('Directives', [])
                     translateView(restPosition);
                     notifyViewChange();
                 });
-
-                Hammer(element[0]).on('swiperight', function () {
-                    var previous = activeView - 1;
-                    dragging = false;
-                    element.removeClass('swipe-animate');
-                    element.addClass('overflow-disable');
-
-                    if (previous >= 0) {
-                        activeView = previous;
-                        translateView(snapLocations[activeView]);
-                        notifyViewChange();
-                    }
-                });
-
-                Hammer(element[0]).on('swipeleft', function () {
-                    var next = activeView + 1;
-                    dragging = false;
-                    element.removeClass('swipe-animate');
-                    element.addClass('overflow-disable');
-
-                    if (next < snapLocations.length) {
-                        activeView = next;
-                        translateView(snapLocations[activeView]);
-                        notifyViewChange();
-                    }
-                });
-
 
                 if (activeView) {
                     translateView(snapLocations[activeView]);
