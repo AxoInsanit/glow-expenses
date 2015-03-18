@@ -36,4 +36,5 @@ angular.module('Api', [])
     .constant('globerUrl', '/glober')
     .constant('expensesPath', '/expenses')
     .constant('reportsPath', '/reports')
-    .constant('expensePath', '/expense');
+    .constant('expensePath', '/expense')
+    .constant('getAssignmentsUrl', '/glober/assignments');

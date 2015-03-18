@@ -4,13 +4,17 @@ angular.module('Reports')
     .controller('ReportFormCtrl', function ($scope, $stateParams, reportResource, projectResource, ReportModel,
                                             itemsSelectionDialogSvc, transitionService, errorDialogSvc)  {
 
-        var reportId = $stateParams.reportId;
+        var reportId = $stateParams.reportId,
+            onGetAssignmentsFail;
 
         $scope.buttonLabel = reportId ? 'Save' : 'Create';
         $scope.showErrorMessage = false;
         $scope.expenseId = $stateParams.expenseId;
         $scope.project = {};
         $scope.organizationalUnit = {};
+        $scope.showAllProjects = false;
+        $scope.globerAssignments = [];
+        $scope.assignedProjects = true;
 
         if ($scope.$parent) {
             $scope.$parent.title = reportId ? 'Edit report': 'Create report';
@@ -33,14 +37,23 @@ angular.module('Reports')
         };
 
         $scope.selectProject = function() {
-            projectResource.getProjects().then(function(projects){
-                itemsSelectionDialogSvc.open(projects, 'projects', 'name').then(function(selectedProject){
-                    if (selectedProject) {
-                        $scope.project = selectedProject;
-                        $scope.report.entityId = selectedProject.id;
-                    }
+            if ($scope.showAllProjects) {
+                projectResource.getProjects().then(function(projects){
+                    itemsSelectionDialogSvc.open(projects, 'projects', 'name').then(function(selectedProject){
+                        if (selectedProject) {
+                            $scope.project = selectedProject;
+                            $scope.report.entityId = selectedProject.id;
+                        }
+                    });
                 });
-            });
+            } else {
+                itemsSelectionDialogSvc.open($scope.globerAssignments, 'projects', 'name').then(function(selectedProject){
+                        if (selectedProject) {
+                            $scope.project = selectedProject;
+                            $scope.report.entityId = selectedProject.id;
+                        }
+                    });
+            }
         };
 
         $scope.selectOrganizationalUnit = function() {
@@ -74,6 +87,33 @@ angular.module('Reports')
 
         };
 
+        $scope.removeAssignments = function() {
+            $scope.showAllProjects = true;
+            $scope.globerAssignments = [];
+            $scope.project = {};
+            $scope.report.entityId = '';
+        };
+
+        $scope.getGloberAssignments = function() {
+            projectResource.getGloberAssignments().then(function (assignments) {
+                if (assignments && assignments.length > 0) {
+                    $scope.showAllProjects = false;
+                    $scope.project = assignments[0].project;
+                    $scope.report.entityId = assignments[0].project.id;
+                    $.each(assignments, function(index, assignment){
+                        $scope.globerAssignments.push(assignment.project);
+                    });
+                } else {
+                    $scope.showAllProjects = true;
+                    $scope.assignedProjects = false;
+                }
+            }, onGetAssignmentsFail);
+        };
+
+        onGetAssignmentsFail = function(){
+            errorDialogSvc.open('Can\'t load assignments!');
+        };
+
         if (reportId){
             reportResource.getReport(reportId).then(function (report) {
                 $scope.report = new ReportModel(report);
@@ -98,5 +138,8 @@ angular.module('Reports')
             $scope.report.expenseIds = [];
             $scope.report.applyTo = 'PROJECT';
         }
+
+        $scope.getGloberAssignments();
+
     }
 );

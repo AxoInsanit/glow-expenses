@@ -2,13 +2,15 @@
 
 angular.module('Projects')
     .factory('projectResource', function ($http, $q, baseUrlMockeyWeb, projectsUrl, userResource, $rootScope,
-                                          organizationalUnitsUrl) {
+                                          organizationalUnitsUrl, getAssignmentsUrl, errorDialogSvc) {
         var cachedProjects = false,
-            cachedOrganizationalUnits = false;
+            cachedOrganizationalUnits = false,
+            cachedGloberAssignments = false;
 
         $rootScope.$on('global::signOut', function () {
             cachedProjects = false;
             cachedOrganizationalUnits = false;
+            cachedGloberAssignments = false;
         });
 
         return {
@@ -56,6 +58,21 @@ angular.module('Projects')
                     promise = $http.get(baseUrlMockeyWeb + organizationalUnitsUrl, {params: {token: userResource.getToken()}}).then(function (response) {
                         cachedOrganizationalUnits = response.data.organizationalUnits;
                         return response.data.organizationalUnits;
+                    });
+                }
+                return promise;
+            },
+            getGloberAssignments: function() {
+                var promise;
+                if (cachedGloberAssignments) {
+                    promise = $q.when(cachedGloberAssignments);
+                } else {
+                    promise = $http.get(baseUrlMockeyWeb + getAssignmentsUrl, {params: {token: userResource.getToken()}}).then(function (response) {
+                        if (response.status === 204) {
+                            return errorDialogSvc.open('There are not assignments!');
+                        }
+                        cachedGloberAssignments = response.data.assignments;
+                        return response.data.assignments;
                     });
                 }
                 return promise;
