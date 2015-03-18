@@ -19,14 +19,23 @@
                 <div class="form-item checked" ng-click="appliesTo('PROJECT')">
                     <label class="inputless">
                         Project
-                        <span class="display " ng-class="{'icon icon-check': report.applyTo === 'PROJECT'}"></span>
+                        <span ng-class="{'display icon icon-check': report.applyTo === 'PROJECT'}"></span>
                     </label>
                 </div>
                 <div class="form-item checked" ng-click="appliesTo('ORGANIZATIONAL_UNIT')">
                     <label class="inputless">
                         Organizational Unit
-                        <span class="display" ng-class="{'icon icon-check': report.applyTo === 'ORGANIZATIONAL_UNIT'}"></span>
+                        <span ng-class="{'display icon icon-check': report.applyTo === 'ORGANIZATIONAL_UNIT'}"></span>
                     </label>
+                </div>
+            </div>
+
+            <div ng-if="report.applyTo === 'PROJECT'">
+                <div class="bottom20">
+                  <span ng-if="assignedProjects">
+                    <input type="radio" ng-model="showAllProjects" ng-value="false" ng-change="getGloberAssignments()"> Projects Assigned
+                  </span>
+                  <input type="radio" ng-model="showAllProjects" ng-value="true" ng-change="removeAssignments()"> All projects
                 </div>
             </div>
 
