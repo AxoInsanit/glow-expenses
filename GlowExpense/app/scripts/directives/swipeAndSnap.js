@@ -10,48 +10,36 @@ angular.module('Directives', [])
                 var snapCount = parseInt(attr.swipeAndSnap, 10),
                     restPosition = 0, // Define the location to end.
                     positionX = 0,
-                    dragging = false,
                     Hammer = window.Hammer,
                     activeView = parseInt(attr.activeView, 10),
-                    snapLocations = []; // The current position.
+                    snapLocations = [], // The current position.
+                    tolerance = 120, //pixels measure
+                    viewChanged = false;
 
                 for (var i = 0; i < snapCount; i += 1) {
-                    snapLocations.push((-1) * i * window.innerWidth);
+                    var value = (-1) * i * window.innerWidth;
+                    snapLocations.push({
+                        value: value,
+                        boundary: -Math.abs(value + tolerance)
+                    });
                 }
 
                 element.css('width', (snapCount * 100) + '%');
 
                 var calculate_snap_location = function (position) {
 
-                    // Used to store each difference between current position and each snap point.
-                    var currentDiff;
-
-                    // Used to store the current best difference.
-                    var minimumDiff;
-
-                    // User to store the best snap position.
-                    var bestSnap = snapLocations[0];
-
-                    // We're going to cycle through each snap location
-                    // and work out which is closest to the current position.
-
-
-                    for (var i=0; i < snapLocations.length; i++) {
-
-                        // Calculate the difference.
-                        currentDiff = Math.abs(position - snapLocations[i]);
-
-                        // Works out if this difference is the closest yet.
-                        if(minimumDiff === undefined || currentDiff < minimumDiff) {
-                            minimumDiff = currentDiff;
-                            bestSnap = snapLocations[i];
-                            activeView = i;
+                    if (activeView === 1 && (position > snapLocations[0].boundary )) {//current view reports
+                        activeView = 0;
+                        viewChanged = true;
+                    }
+                    else {
+                        if (activeView === 0 && (position < snapLocations[1].boundary )) {//current view expenses
+                            activeView = 1;
+                            viewChanged = true;
                         }
                     }
-
-                    return bestSnap;
+                    return snapLocations[activeView].value;
                 };
-
 
                 function translateView(x) {
                     element.css('-webkit-transform', 'translate3d(' + x + 'px,0px,0px)');
@@ -59,17 +47,21 @@ angular.module('Directives', [])
                 }
 
                 function swipeLocation(ev) {
-                    if (dragging) {
-                        positionX = restPosition + parseInt(ev.deltaX, 10);
-                        translateView(positionX);
-                        dragging = false;
-                    }
+                    positionX = restPosition + parseInt(ev.deltaX, 10);
+                    translateView(positionX);
                 }
 
                 function notifyViewChange() {
                     if (attr.onPanEnd) {
                         scope.$parent.$eval(attr.onPanEnd, {$activeView: activeView});
                     }
+                }
+
+                function notifyWidthViewPort(value) {
+                    if (!value) {
+                        value = (activeView === 0) ? 100 : 50;
+                    }
+                    scope.$parent.widthOfFixedElement(value);
                 }
 
                 /**
@@ -79,72 +71,46 @@ angular.module('Directives', [])
                     // We dont want an animation delay when dragging.
                     element.removeClass('swipe-animate');
                     element.addClass('overflow-disable');
+                    viewChanged = false;
                 });
 
                 /**
                  * Follow the drag position when the user is interacting.
                  */
                 Hammer(element[0]).on('panmove', function(ev) {
-                    if (!dragging) {
-                        dragging = true;
-                        window.requestAnimationFrame(function () {
-                           swipeLocation(ev);
-                        });
-                    }
-
+                    swipeLocation(ev);
                 });
 
                 /**
                  * The drag is finishing so we'll animate to a snap point.
                  */
                 Hammer(element[0]).on('panend pancancel', function() {
-                    dragging = false;
                     element.addClass('swipe-animate');
                     element.removeClass('overflow-disable');
 
                     // Work out where we should "snap" to.
                     restPosition = calculate_snap_location(positionX);
                     translateView(restPosition);
-                    notifyViewChange();
-                });
-
-                Hammer(element[0]).on('swiperight', function () {
-                    var previous = activeView - 1;
-                    dragging = false;
-                    element.removeClass('swipe-animate');
-                    element.addClass('overflow-disable');
-
-                    if (previous >= 0) {
-                        activeView = previous;
-                        translateView(snapLocations[activeView]);
+                    if (viewChanged) {
                         notifyViewChange();
                     }
+                    notifyWidthViewPort(50);
                 });
-
-                Hammer(element[0]).on('swipeleft', function () {
-                    var next = activeView + 1;
-                    dragging = false;
-                    element.removeClass('swipe-animate');
-                    element.addClass('overflow-disable');
-
-                    if (next < snapLocations.length) {
-                        activeView = next;
-                        translateView(snapLocations[activeView]);
-                        notifyViewChange();
-                    }
-                });
-
 
                 if (activeView) {
-                    translateView(snapLocations[activeView]);
+                    translateView(snapLocations[activeView].value);
+                    restPosition = snapLocations[activeView].value;
                 }
 
+                notifyWidthViewPort();
 
                 scope.$on('swipeAndSnap::changeView', function (e, viewIndex) {
                     activeView = viewIndex;
                     element.addClass('swipe-animate');
                     element.removeClass('overflow-disable');
-                    translateView(snapLocations[viewIndex]);
+                    translateView(snapLocations[activeView].value);
+                    restPosition = snapLocations[activeView].value;
+                    notifyWidthViewPort(50);
                 });
             }
         };

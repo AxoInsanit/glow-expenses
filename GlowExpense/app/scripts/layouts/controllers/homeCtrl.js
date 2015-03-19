@@ -5,10 +5,30 @@ angular.module('Layouts').controller('HomeCtrl', function ($scope, $state, $time
     var views = ['expenses', 'reports'],
         stateParams = $state.$current.locals.globals.$stateParams;
 
+    var viewTransition = function (view){
+        transitionService.go({
+                name: 'home',
+                params: {
+                    view: view
+                }
+        });
+    };
+
+    $scope.widthOfFixedElement = function(value){
+        $scope.$broadcast('width-fixed-element', value);
+    };
 
     $scope.viewChanged = function (activeView) {
         $timeout(function () {
             $scope.activeView = activeView;
+            if (activeView === 0){
+                viewTransition('expenses');
+            }
+            else {
+                if (activeView === 1) {
+                    viewTransition('reports');
+                }
+            }
             if ($scope.editMode) {
                 $scope.toggleEditMode();
             }
@@ -21,12 +41,7 @@ angular.module('Layouts').controller('HomeCtrl', function ($scope, $state, $time
         if ($scope.editMode) {
             $scope.toggleEditMode();
         }
-        transitionService.go({
-                name: 'home',
-                params: {
-                    view: view
-                }
-            });
+        viewTransition(view);
     };
 
     $scope.signOut = function () {

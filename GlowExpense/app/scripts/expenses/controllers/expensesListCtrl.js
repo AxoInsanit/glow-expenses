@@ -4,6 +4,7 @@ angular.module('Expenses')
     .controller('ExpensesListCtrl', function ($scope, transitionService,  expenseResource, reportResource, $stateParams)  {
 
         $scope.reportId = $stateParams.reportId;
+        $scope.expensesViewActive = $stateParams.view === 'expenses';
 
         if ($scope.$parent && $scope.reportId) {
             $scope.editMode = true;
@@ -11,6 +12,14 @@ angular.module('Expenses')
                 $scope.$parent.title = 'Add to ' + report.description;
             });
         }
+
+        $scope.$on('width-fixed-element',function(e, value){
+            transitionService.setWidthToHalf((value === 50));
+        });
+
+        $scope.widthToHalf = function(){
+            return transitionService.getWidthToHalf();
+        };
 
         $scope.takePhoto = function(expense) {
             transitionService.go({
