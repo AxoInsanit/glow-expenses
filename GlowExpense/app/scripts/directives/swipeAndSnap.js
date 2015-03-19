@@ -14,59 +14,32 @@ angular.module('Directives', [])
                     Hammer = window.Hammer,
                     activeView = parseInt(attr.activeView, 10),
                     snapLocations = [], // The current position.
-                    tolerance = 100, //pixels measure
-                    minExp,
-                    minRep;
+                    tolerance = 120, //pixels measure
+                    viewChanged = false;
 
                 for (var i = 0; i < snapCount; i += 1) {
-                    snapLocations.push((-1) * i * window.innerWidth);
+                    var value = (-1) * i * window.innerWidth;
+                    snapLocations.push({
+                        value: value,
+                        boundary: -Math.abs(value + tolerance)
+                    });
                 }
-
-                minExp = snapLocations[0] - tolerance;
-                minRep = snapLocations[1] + tolerance;
 
                 element.css('width', (snapCount * 100) + '%');
 
                 var calculate_snap_location = function (position) {
 
-                    if (activeView === 1 && (position > minExp )) {//current view reports
+                    if (activeView === 1 && (position > snapLocations[0].boundary )) {//current view reports
                         activeView = 0;
+                        viewChanged = true;
                     }
                     else {
-                        if (activeView === 0 && (position < minRep )) {//current view expenses
-                        activeView = 1;
+                        if (activeView === 0 && (position < snapLocations[1].boundary )) {//current view expenses
+                            activeView = 1;
+                            viewChanged = true;
                         }
                     }
-                    return snapLocations[activeView];
-                /*
-                // Used to store each difference between current position and each snap point.
-                var currentDiff;
-
-                // Used to store the current best difference.
-                var minimumDiff;
-
-                // User to store the best snap position.
-                var bestSnap = snapLocations[0];
-
-                // We're going to cycle through each snap location
-                // and work out which is closest to the current position.
-
-
-                for (var i=0; i < snapLocations.length; i++) {
-
-                    // Calculate the difference.
-                    currentDiff = Math.abs(position - snapLocations[i]);
-
-                    // Works out if this difference is the closest yet.
-                    if(minimumDiff === undefined || currentDiff < minimumDiff) {
-                        minimumDiff = currentDiff;
-                        bestSnap = snapLocations[i];
-                        activeView = i;
-                    }
-                }
-
-                return bestSnap;
-                */
+                    return snapLocations[activeView].value;
                 };
 
 
@@ -89,6 +62,13 @@ angular.module('Directives', [])
                     }
                 }
 
+                function notifyWidthViewPort(value) {
+                    if (!value) {
+                        value = (activeView === 0) ? 100 : 50;
+                    }
+                    scope.$parent.widthOfFixedElement(value);
+                }
+
                 /**
                  * Perform any setup for the drag actions.
                  */
@@ -96,6 +76,7 @@ angular.module('Directives', [])
                     // We dont want an animation delay when dragging.
                     element.removeClass('swipe-animate');
                     element.addClass('overflow-disable');
+                    viewChanged = false;
                 });
 
                 /**
@@ -122,19 +103,24 @@ angular.module('Directives', [])
                     // Work out where we should "snap" to.
                     restPosition = calculate_snap_location(positionX);
                     translateView(restPosition);
-                    notifyViewChange();
+                    if (viewChanged) {
+                        notifyViewChange();
+                    }
+                    notifyWidthViewPort(50);
                 });
 
                 if (activeView) {
-                    translateView(snapLocations[activeView]);
+                    translateView(snapLocations[activeView].value);
                 }
 
+                notifyWidthViewPort();
 
                 scope.$on('swipeAndSnap::changeView', function (e, viewIndex) {
                     activeView = viewIndex;
                     element.addClass('swipe-animate');
                     element.removeClass('overflow-disable');
-                    translateView(snapLocations[viewIndex]);
+                    translateView(snapLocations[viewIndex].value);
+                    notifyWidthViewPort(50);
                 });
             }
         };

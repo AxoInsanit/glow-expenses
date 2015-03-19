@@ -6,8 +6,7 @@ angular.module('Services')
 
         var modifyRootElement = true,
             transitionService,
-            cameFromReportsView = false,//condition required to hide expenses edit fixed element when on reports view.
-            lastPage;
+            widthToHalf = false;
 
         function cleanRootElement() {
             return $rootElement.removeClass('slide-left').removeClass('slide-right').removeClass('slide-up').removeClass('slide-down');
@@ -30,8 +29,6 @@ angular.module('Services')
                 cleanRootElement();
                 var params = angular.copy($stateParams);
 
-                cameFromReportsView = false;
-
                 $state.go($state.current, params, {
                     inherit: false,
                     notify: true,
@@ -51,9 +48,6 @@ angular.module('Services')
                     stateParams = params.params || {},
                     stateOptions = {},
                     direction = params.direction;
-
-                cameFromReportsView = (lastPage === 'reports') || (stateParams.view === 'reports');
-                lastPage = stateParams.view;
 
                 if (params.replace === true) {
                     stateOptions.location = 'replace';
@@ -88,8 +82,11 @@ angular.module('Services')
                     $state.go(stateName, stateParams, stateOptions);
                 }, 0);
             },
-            cameFromReports: function () {
-                return cameFromReportsView;
+            setWidthToHalf: function(value) {
+                widthToHalf = value;
+            },
+            getWidthToHalf: function() {
+                return widthToHalf;
             }
         };
 

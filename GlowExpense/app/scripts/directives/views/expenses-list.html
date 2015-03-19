@@ -4,7 +4,7 @@
             <section class="expense">
                 <div class="edit-action">
                     <div class="content-check">
-                         <input id="box{{$index}}" type="checkbox" ng-model="value" ng-change="itemChecked(value, $index, expense)" /><label for="box{{$index}}"></label>
+                         <input type="checkbox" ng-model="value" ng-change="itemChecked(value, $index, expense)"/>
                     </div>
                 </div>
                 <div class="expense-info" ng-click="editExpense(expense)">

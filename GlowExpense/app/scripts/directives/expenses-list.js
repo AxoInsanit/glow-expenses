@@ -26,10 +26,6 @@ angular.module('Directives').directive('expensesList', function($stateParams, ex
                return _.isEmpty(expensesSelected);
             };
 
-            $scope.homeViewChanged = function(){
-                return transitionService.cameFromReports();
-            };
-
             $scope.addExpenses = function(event) {
                 event.stopPropagation();
                 event.preventDefault();

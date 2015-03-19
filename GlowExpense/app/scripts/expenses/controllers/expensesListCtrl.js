@@ -12,6 +12,14 @@ angular.module('Expenses')
             });
         }
 
+        $scope.$on('width-fixed-element',function(e, value){
+            transitionService.setWidthToHalf((value === 50));
+        });
+
+        $scope.widthToHalf = function(){
+            return transitionService.getWidthToHalf();
+        };
+
         $scope.takePhoto = function(expense) {
             transitionService.go({
                 name: 'editExpenseImageModal',
