@@ -10,7 +10,6 @@ angular.module('Directives', [])
                 var snapCount = parseInt(attr.swipeAndSnap, 10),
                     restPosition = 0, // Define the location to end.
                     positionX = 0,
-                    dragging = false,
                     Hammer = window.Hammer,
                     activeView = parseInt(attr.activeView, 10),
                     snapLocations = [], // The current position.
@@ -42,18 +41,14 @@ angular.module('Directives', [])
                     return snapLocations[activeView].value;
                 };
 
-
                 function translateView(x) {
                     element.css('-webkit-transform', 'translate3d(' + x + 'px,0px,0px)');
                     element.css('transform', 'translate3d(' + x + 'px,0px,0px)');
                 }
 
                 function swipeLocation(ev) {
-                    if (dragging) {
-                        positionX = restPosition + parseInt(ev.deltaX, 10);
-                        translateView(positionX);
-                        dragging = false;
-                    }
+                    positionX = restPosition + parseInt(ev.deltaX, 10);
+                    translateView(positionX);
                 }
 
                 function notifyViewChange() {
@@ -83,20 +78,13 @@ angular.module('Directives', [])
                  * Follow the drag position when the user is interacting.
                  */
                 Hammer(element[0]).on('panmove', function(ev) {
-                    if (!dragging) {
-                        dragging = true;
-                        window.requestAnimationFrame(function () {
-                           swipeLocation(ev);
-                        });
-                    }
-
+                    swipeLocation(ev);
                 });
 
                 /**
                  * The drag is finishing so we'll animate to a snap point.
                  */
                 Hammer(element[0]).on('panend pancancel', function() {
-                    dragging = false;
                     element.addClass('swipe-animate');
                     element.removeClass('overflow-disable');
 
@@ -111,6 +99,7 @@ angular.module('Directives', [])
 
                 if (activeView) {
                     translateView(snapLocations[activeView].value);
+                    restPosition = snapLocations[activeView].value;
                 }
 
                 notifyWidthViewPort();
@@ -119,7 +108,8 @@ angular.module('Directives', [])
                     activeView = viewIndex;
                     element.addClass('swipe-animate');
                     element.removeClass('overflow-disable');
-                    translateView(snapLocations[viewIndex].value);
+                    translateView(snapLocations[activeView].value);
+                    restPosition = snapLocations[activeView].value;
                     notifyWidthViewPort(50);
                 });
             }

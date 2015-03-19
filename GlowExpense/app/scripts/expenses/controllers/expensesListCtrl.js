@@ -4,6 +4,7 @@ angular.module('Expenses')
     .controller('ExpensesListCtrl', function ($scope, transitionService,  expenseResource, reportResource, $stateParams)  {
 
         $scope.reportId = $stateParams.reportId;
+        $scope.expensesViewActive = $stateParams.view === 'expenses';
 
         if ($scope.$parent && $scope.reportId) {
             $scope.editMode = true;

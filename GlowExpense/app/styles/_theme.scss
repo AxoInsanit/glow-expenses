@@ -259,6 +259,7 @@ $expense-list-item-height: 5rem;
             width: 100%;
             float: left;
             transition: all .3s ease-out;
+            -webkit-transition: all .3s ease-out;
             height: 100%;
             background: $bg-white;
             z-index: 100;
@@ -380,6 +381,7 @@ $expense-list-item-height: 5rem;
             width: 100%;
             float: left;
             transition: all .3s ease-out;
+            -webkit-transition: all .3s ease-out;
             height: 100%;
             background: $bg-white;
             z-index: 100;
@@ -448,9 +450,6 @@ $expense-list-item-height: 5rem;
 }
 .edit-mode {
     .expense-list .expense {
-        .edit-action {
-            transition: all .3s ease-out;
-        }
         .expense-info {
             @include transform(translate(37px, 0));
             .image-action {
@@ -459,9 +458,6 @@ $expense-list-item-height: 5rem;
         }
     }
     .reports-list .report {
-        .edit-action {
-            transition: all .3s ease-out;
-        }
         .report-info {
             @include transform(translate(37px, 0));
             .content-report-info .content-data .money {
@@ -472,6 +468,8 @@ $expense-list-item-height: 5rem;
     .item {
         &.checkbox-paid-reports {
             display: block;
+            float:left;
+            width: 100%;
         }
     }
 }
@@ -495,7 +493,8 @@ $expense-list-item-height: 5rem;
     @include clearfix();
     border-bottom: 2px solid $border-modal;
     border-width: 0.09em 0;
-    padding: 1.1rem 1rem 1rem .8rem;
+    padding: 1.1rem 1rem 1rem .8rem;    
+    overflow:hidden;  
     .left-part {
         width: 60%;
         float: left;
@@ -518,6 +517,7 @@ $expense-list-item-height: 5rem;
     }
     &.checkbox-paid-reports {
         display: none;
+        float:left;
     }
     .main-text {
         font-family: "HalvaticaNeueBold";
