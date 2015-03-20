@@ -6,6 +6,12 @@ angular.module('Expenses')
         $scope.reportId = $stateParams.reportId;
         $scope.expensesViewActive = $stateParams.view === 'expenses';
 
+        if($scope.reportId) {
+            expenseResource.getExpenses().then(function (expenses) {
+                $scope.expenses = expenses;
+            });
+        }
+
         if ($scope.$parent && $scope.reportId) {
             $scope.editMode = true;
             reportResource.getReport($scope.reportId).then( function(report){
@@ -48,8 +54,5 @@ angular.module('Expenses')
             });
         };
 
-        expenseResource.getExpenses().then(function (expenses) {
-            $scope.expenses = expenses;
-        });
     }
 );
