@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('Layouts').controller('HomeCtrl', function ($scope, $state, $timeout, signOutDialogSvc, transitionService, reportResource) {
+angular.module('Layouts').controller('HomeCtrl', function ($scope, $state, $timeout, signOutDialogSvc, transitionService, reportResource, expenseResource) {
 
     var views = ['expenses', 'reports'],
         stateParams = $state.$current.locals.globals.$stateParams;
@@ -66,6 +66,10 @@ angular.module('Layouts').controller('HomeCtrl', function ($scope, $state, $time
 
     reportResource.getReports().then(function (reports) {
         $scope.reports = reports;
+    });
+
+    expenseResource.getExpenses().then(function (expenses) {
+        $scope.expenses = expenses;
     });
 
 });

@@ -1,13 +1,40 @@
 'use strict';
 
 angular.module('Expenses')
-    .controller('ExpenseFormCtrl', function ($scope, $stateParams, expenseResource, reportResource, currencyResource,
+    .controller('ExpenseFormCtrl', function ($scope, $rootScope, $state, $stateParams, expenseResource, reportResource, currencyResource,
                                              cameraSelectDialog, cameraSvc, currencySelectDialogSvc, $filter, $timeout,
-                                             contableCodeSelectDialogSvc, ExpenseModel, itemsSelectionDialogSvc,
+                                             contableCodeSelectDialogSvc, ExpenseModel, itemsSelectionDialogSvc, localStorageSvc,
                                              filterReportByStateSvc, transitionService, contableCodeResource, errorDialogSvc) {
 
         var expenseId = $stateParams.expenseId,
-            reportId = $stateParams.reportId;
+            reportId = $stateParams.reportId,
+            localImagePath = localStorageSvc.getItem('localImagePath'),
+            expenseObject = JSON.parse(localStorageSvc.getItem('expenseObject')),
+            reportObject = JSON.parse(localStorageSvc.getItem('reportObject')),
+            dateObject = localStorageSvc.getItem('dateObject'),
+            setExpense;
+
+        $scope.$on('$destroy', function () {
+            var expenseObject,
+                reportObject,
+                dateFormat;
+            if ($state.current.name !== 'viewExpenseImage' && $state.current.name !== 'viewExpenseLocalImage') {
+                localStorageSvc.removeItem('localImagePath');
+                localStorageSvc.removeItem('expenseObject');
+                localStorageSvc.removeItem('reportObject');
+                localStorageSvc.removeItem('dateObject');
+            } else {
+                if ($scope.expense.date) {
+                    dateFormat = $scope.expense.date;
+                    localStorageSvc.setItem('dateObject', dateFormat);
+                    $scope.expense.date = null;
+                }
+                expenseObject = JSON.stringify($scope.expense);
+                reportObject = JSON.stringify($scope.report);
+                localStorageSvc.setItem('expenseObject', expenseObject);
+                localStorageSvc.setItem('reportObject', reportObject);
+            }
+        });
 
         $scope.removeWhiteSpaces = function () {
             if ($scope.expense && $scope.expense.description) {
@@ -25,7 +52,7 @@ angular.module('Expenses')
             return currency && Number(currency.replace(/[^0-9\.]+/g,''));
         }
 
-        $scope.report = {};
+        $scope.report = reportObject ? reportObject : {};
         $scope.buttonLabel = expenseId ? 'Save' : 'Create';
         $scope.showErrorMessage = false;
         $scope.expenseId = $stateParams.expenseId;
@@ -45,8 +72,10 @@ angular.module('Expenses')
             // save the expense
             $scope.expense.save().then(function (expenseSaveResults) {
                 // upload the image to the expense
-                expenseResource.uploadImage($scope.expense.localImagePath, expenseId).then(function () {
+                expenseResource.uploadImage($scope.expense.localImagePath, expenseSaveResults.expenseId).then(function () {
                     // if there was any associated report involved in the transaction then go to it
+                    localStorageSvc.removeItem('localImagePath');
+                    $rootScope.$broadcast('global::updateExpenses');
                     if (expenseSaveResults.reportId) {
                         transitionService.go({
                             name: 'viewReport',
@@ -66,7 +95,14 @@ angular.module('Expenses')
                         });
                     }
                 }, function () {
-                    errorDialogSvc.open('Image upload failed');
+                    transitionService.go({
+                        name: 'home',
+                        params: {
+                            views: 'expenses'
+                        },
+                        replace: true
+                    });
+                    errorDialogSvc.open('Expense created but image upload failed!');
                 });
 
             }, function () {
@@ -90,6 +126,7 @@ angular.module('Expenses')
                 cameraSvc.takePhoto().then(function(result){
                     $timeout(function () {
                         $scope.expense.localImagePath = result;
+                        localStorageSvc.setItem('localImagePath', result);
                     }, 0);
                 });
             });
@@ -136,10 +173,36 @@ angular.module('Expenses')
                     direction: 'forward'
                 });
             } else {
-                $scope.takePhoto();
+                // View local image
+                $scope.viewLocalImage();
             }
         };
 
+        $scope.viewLocalImage = function (expense) {
+            transitionService.go({
+                name: 'viewExpenseLocalImage',
+                params: {
+                    expenseId: expense.expenseId,
+                    reportId: $scope.reportId,
+                    localImagePath: $scope.expense.localImagePath
+                },
+                direction: 'forward'
+            });
+        };
+
+        setExpense = function(expense) {
+            $scope.expense.amex = expense.amex;
+            $scope.expense.contableCode = expense.contableCode;
+            $scope.expense.contableCodeId = expense.contableCodeId;
+            $scope.expense.date = dateObject ? new Date(dateObject) : null;
+            $scope.expense.currency = expense.currency;
+            $scope.expense.description = expense.description;
+            $scope.expense.exchangeRate = expense.exchangeRate;
+            $scope.expense.localImagePath = expense.localImagePath;
+            $scope.expense.imageType = expense.imageType;
+            $scope.expense.originalAmount = expense.originalAmount;
+            $scope.expense.originalCurrencyId = expense.originalCurrencyId;
+        };
 
         // this should be done with transitionend on the sliding ng-view
         if ($stateParams.imageModal) {
@@ -155,18 +218,36 @@ angular.module('Expenses')
                 reportResource.getExpense(expenseId, reportId).then(function (expense) {
                     expense.originalExpenseReportId = parseInt(reportId, 10);
                     $scope.expense = new ExpenseModel(expense);
+                    if (expenseObject) {
+                        setExpense(expenseObject);
+                    }
+                    $scope.expense.localImagePath = localImagePath ? localImagePath : $scope.expense.localImagePath;
                 });
             } else {
                 $scope.expense = new ExpenseModel();
+                if (expenseObject) {
+                    setExpense(expenseObject);
+                }
+                $scope.expense.localImagePath = localImagePath ? localImagePath : $scope.expense.localImagePath;
             }
             // if not attached to any report then fetch through expense resource manager
         } else if (expenseId) {
+            $scope.$parent.backStateName = 'home';
+            $scope.$parent.backStateParams = {view: 'expenses'};
             expenseResource.getExpense(expenseId).then(function (expense) {
                 $scope.expense = new ExpenseModel(expense);
+                if (expenseObject) {
+                    setExpense(expenseObject);
+                }
+                $scope.expense.localImagePath = localImagePath ? localImagePath : $scope.expense.localImagePath;
             });
             // if none of the above matches (reportId nor expenseId exist) then create new expense
         } else {
             $scope.expense = new ExpenseModel();
+            if (expenseObject) {
+                setExpense(expenseObject);
+            }
+            $scope.expense.localImagePath = localImagePath ? localImagePath : $scope.expense.localImagePath;
         }
     }
 );

@@ -85,6 +85,12 @@ angular.module('app', _mainModules )
                 controller: 'ViewExpenseImageCtrl',
                 templateUrl: 'scripts/expenses/views/viewExpenseImage.html'
             })
+            .state('viewExpenseLocalImage', {
+                parent: 'detailsLayout',
+                url: '/expense/:expenseId/:reportId/:localImagePath',
+                controller: 'ViewExpenseImageCtrl',
+                templateUrl: 'scripts/expenses/views/viewExpenseImage.html'
+            })
             .state('addReportExpense', {
                 parent: 'detailsLayout',
                 url: '/reports/:reportId/expenses',
@@ -182,7 +188,7 @@ angular.module('app', _mainModules )
         // avoid unsafe prefix on device image's sources
         $compileProvider.imgSrcSanitizationWhitelist(/^\s*(https?|file|blob|cdvfile|content):|data:image\//);
     })
-    .run(function ($rootScope, $window, transitionService, errorDialogSvc) {
+    .run(function ($rootScope, $window, $state, transitionService, errorDialogSvc, confirmExitDialogSvc) {
         // Scroll to the top of the window, on every route change
         //  This fix the issue when changing the view, the next view, it's already scrolled
         $rootScope.$on('$stateChangeStart', function() {
@@ -206,6 +212,14 @@ angular.module('app', _mainModules )
             if (window.plugins && window.plugins.orientationLock) {
                 window.plugins.orientationLock.lock('portrait');
             }
+
+            document.addEventListener('backbutton', function () {
+                var modalIsOpen = !!document.getElementById('modalSignOut') || !!document.getElementById('modalExitDialog');
+                if (($state.current.name === 'home' || $state.current.name === 'login') && !modalIsOpen) {
+                    confirmExitDialogSvc.open('exit');
+                }
+            }, false);
+
         });
 
     })

@@ -1,3 +1,3 @@
 'use strict';
 
-angular.module('Layouts', ['Reports']);
+angular.module('Layouts', ['Reports','Expenses']);
