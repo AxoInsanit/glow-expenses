@@ -6,12 +6,17 @@
             <p class="text-info">Add Invoice Image </p>
         </div>
 
-        <div ng-show="expense.imagePath || expense.localImagePath" ng-click="viewImage(expense)">
+        <div ng-show="expense.imagePath || expense.localImagePath">
             <a class="icon expense-image">
-                <img ng-src="{{expense.imagePath || expense.localImagePath}}" />
+                <div ng-if="!expense.imagePath || (expense.localImagePath && expense.imagePath !== expense.localImagePath)" ng-click="viewLocalImage(expense)">
+                    <img ng-src="{{expense.localImagePath}}" />
+                </div>
+                <div ng-if="!expense.localImagePath || expense.imagePath === expense.localImagePath" ng-click="viewImage(expense)">
+                    <img ng-src="{{expense.imagePath}}" />
+                </div>
             </a>
 
-            <p class="text-info">Change Invoice Image</p>
+            <p class="text-info" ng-click="takePhoto()">Change Invoice Image</p>
         </div>
 
     </section>
@@ -45,7 +50,7 @@
                     <span class="form-item-max-text" ng-if="expenseForm.date.$error.date"> - Not a valid date! -</span>
                 </div>
                 <div class="form-item ">
-                    <input type="date" ng-model="expense.date"  placeholder="yyyy-MM-dd" name="date" required
+                    <input type="date" class="form-control" ng-model="expense.date"  placeholder="yyyy-MM-dd" name="date" required
                            ng-disabled="expense.amex" ng-class="{'form-item-req': expenseForm.date.$error.required}"
                             min="{{ minDate }}" max="{{ maxDate }}"/>
                 </div>

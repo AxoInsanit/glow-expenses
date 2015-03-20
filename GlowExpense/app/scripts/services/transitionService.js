@@ -41,7 +41,9 @@ angular.module('Services')
                     cleanRootElement().addClass('slide-right');
                     modifyRootElement = false;
                 }
-                $window.history.back();
+                if ($state.current.name !== 'home' && $state.current.name !== 'login') {
+                    $window.history.back();
+                }
             },
             go: function (params) {
                 var stateName = params.name,

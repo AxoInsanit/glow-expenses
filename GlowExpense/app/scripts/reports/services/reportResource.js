@@ -126,7 +126,7 @@ angular.module('Reports')
                     }
                 }).then(function(response) {
                     reportResource.cleanCache(reportId);
-                    $rootScope.$broadcast('global::expensesRemoved');
+                    $rootScope.$broadcast('global::updateExpenses');
                     return response;
                 });
             },
@@ -181,7 +181,7 @@ angular.module('Reports')
                     }
                 }).then(function(response) {
                     reportResource.cleanCache(reportId);
-                    $rootScope.$broadcast('global::expensesRemoved');
+                    $rootScope.$broadcast('global::updateExpenses');
                     return response;
                 });
             },
@@ -215,7 +215,7 @@ angular.module('Reports')
                     }
                 }).then(function(response) {
                     reportResource.cleanCache(reportId);
-                    $rootScope.$broadcast('global::expensesRemoved');
+                    $rootScope.$broadcast('global::updateExpenses');
                     return response;
                 });
             },
