@@ -8,7 +8,7 @@
     left: 0;
 }
 .swipe-animate {
-    -webkit-transition: all 0.2s ease-out;
+    -webkit-transition: -webkit-transform 0.2s ease;
     transition: transform 0.2s;
 }
 .overflow-disable {

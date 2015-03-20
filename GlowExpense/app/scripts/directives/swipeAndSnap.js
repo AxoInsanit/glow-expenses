@@ -2,7 +2,7 @@
 
 // Define the angular module.
 angular.module('Directives', [])
-    .directive('swipeAndSnap', function () {
+    .directive('swipeAndSnap', function ($timeout) {
         return {
             scope: {},
             link: function (scope, element, attr) {
@@ -13,8 +13,9 @@ angular.module('Directives', [])
                     Hammer = window.Hammer,
                     activeView = parseInt(attr.activeView, 10),
                     snapLocations = [], // The current position.
-                    tolerance = 120, //pixels measure
-                    viewChanged = false;
+                    tolerance = window.innerWidth * 0.5, //pixels measure
+                    viewChanged = false,
+                    timeToWait;
 
                 for (var i = 0; i < snapCount; i += 1) {
                     var value = (-1) * i * window.innerWidth;
@@ -48,7 +49,9 @@ angular.module('Directives', [])
 
                 function swipeLocation(ev) {
                     positionX = restPosition + parseInt(ev.deltaX, 10);
-                    translateView(positionX);
+                    if ((positionX < snapLocations[0].value) && (positionX > snapLocations[1].value)) {
+                        translateView(positionX);
+                    }
                 }
 
                 function notifyViewChange() {
@@ -72,13 +75,36 @@ angular.module('Directives', [])
                     element.removeClass('swipe-animate');
                     element.addClass('overflow-disable');
                     viewChanged = false;
+                    $timeout.cancel(timeToWait);
                 });
 
                 /**
                  * Follow the drag position when the user is interacting.
                  */
                 Hammer(element[0]).on('panmove', function(ev) {
-                    swipeLocation(ev);
+                    var requestAnimFrame = window.requestAnimationFrame ||
+                            window.webkitRequestAnimationFrame ||
+                            window.mozRequestAnimationFrame ||
+                            window.oRequestAnimationFrame ||
+                            window.msRequestAnimationFrame ||
+                            function(callback){
+                                window.setTimeout(callback, 1000 / 60);
+                            };
+                    var cancelAnimFrame = window.cancelAnimationFrame ||
+                            window.webkitCancelRequestAnimationFrame ||
+                            window.webkitCancelAnimationFrame ||
+                            window.mozCancelRequestAnimationFrame || window.mozCancelAnimationFrame ||
+                            window.oCancelRequestAnimationFrame || window.oCancelAnimationFrame ||
+                            window.msCancelRequestAnimationFrame || window.msCancelAnimationFrame ||
+                            clearTimeout;
+                    var requestAnimId;
+
+
+                    (function animate() {
+                        requestAnimId = requestAnimFrame(animate);
+                        swipeLocation(ev);
+                        cancelAnimFrame(requestAnimId);
+                    }());
                 });
 
                 /**
@@ -92,7 +118,11 @@ angular.module('Directives', [])
                     restPosition = calculate_snap_location(positionX);
                     translateView(restPosition);
                     if (viewChanged) {
-                        notifyViewChange();
+                        //Change title border instantly but wait for animation to finish before changing route.
+                        scope.$parent.setActiveview(activeView);
+                        timeToWait = $timeout(function () {
+                            notifyViewChange();
+                        }, 300); //wait animation to finish
                     }
                     notifyWidthViewPort(50);
                 });
