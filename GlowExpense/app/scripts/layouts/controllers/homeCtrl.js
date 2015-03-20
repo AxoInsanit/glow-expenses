@@ -18,6 +18,12 @@ angular.module('Layouts').controller('HomeCtrl', function ($scope, $state, $time
         $scope.$broadcast('width-fixed-element', value);
     };
 
+    $scope.setActiveview = function(view) {
+        $scope.$apply(function(){
+            $scope.activeView = view;
+        });
+    };
+
     $scope.viewChanged = function (activeView) {
         $timeout(function () {
             $scope.activeView = activeView;

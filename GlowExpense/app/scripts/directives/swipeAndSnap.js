@@ -118,6 +118,8 @@ angular.module('Directives', [])
                     restPosition = calculate_snap_location(positionX);
                     translateView(restPosition);
                     if (viewChanged) {
+                        //Change title border instantly but wait for animation to finish before changing route.
+                        scope.$parent.setActiveview(activeView);
                         timeToWait = $timeout(function () {
                             notifyViewChange();
                         }, 300); //wait animation to finish
