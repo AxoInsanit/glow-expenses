@@ -14,10 +14,6 @@ angular.module('Layouts').controller('HomeCtrl', function ($scope, $state, $time
         });
     };
 
-    $scope.widthOfFixedElement = function(value){
-        $scope.$broadcast('width-fixed-element', value);
-    };
-
     $scope.setActiveview = function(view) {
         $scope.$apply(function(){
             $scope.activeView = view;
