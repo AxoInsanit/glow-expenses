@@ -26,7 +26,8 @@ angular.module('Directives', [])
                 element.css('width', (snapCount * 100) + '%');
 
                 var calculate_snap_location = function (position) {
-                    var moveToView = Math.floor(Math.abs(position) / tolerance);
+                    //extend to n views
+                    var moveToView = (Math.abs(position) < tolerance) ? 0 : Math.floor( (Math.abs(position) + tolerance) / (tolerance * 2));
                     if (moveToView !== activeView){
                         activeView = moveToView;
                         viewChanged = true;
