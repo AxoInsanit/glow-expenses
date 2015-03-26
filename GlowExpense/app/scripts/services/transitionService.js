@@ -5,8 +5,7 @@ angular.module('Services')
                                                       $modalStack, requestNotificationChannelSvc) {
 
         var modifyRootElement = true,
-            transitionService,
-            widthToHalf = false;
+            transitionService;
 
         function cleanRootElement() {
             return $rootElement.removeClass('slide-left').removeClass('slide-right').removeClass('slide-up').removeClass('slide-down');
@@ -83,12 +82,6 @@ angular.module('Services')
                 $timeout(function () {
                     $state.go(stateName, stateParams, stateOptions);
                 }, 0);
-            },
-            setWidthToHalf: function(value) {
-                widthToHalf = value;
-            },
-            getWidthToHalf: function() {
-                return widthToHalf;
             }
         };
 
