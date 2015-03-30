@@ -1,3 +1,8 @@
+/*------------------------------------*\
+    $LAYOUTS
+\*------------------------------------*/
+
+
 .details-container {
     height: auto;
     width: 100%;
@@ -12,10 +17,4 @@
     transition: all 250ms ease;
     padding-top: 70px;
     background: white;
-}
-.details-header {
-    position: fixed;
-    width: 100%;
-    background: white;
-    z-index: 1000;
 }
