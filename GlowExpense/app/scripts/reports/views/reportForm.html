@@ -33,9 +33,9 @@
             <div ng-if="report.applyTo === 'PROJECT'">
                 <div class="bottom20">
                   <span ng-if="assignedProjects">
-                    <input type="radio" ng-model="showAllProjects" ng-value="false" ng-change="getGloberAssignments()"> Projects Assigned
+                    <input type="radio" name="projects" ng-model="showAllProjects" ng-value="false" ng-click="getGloberAssignments()"> Projects Assigned
                   </span>
-                  <input type="radio" ng-model="showAllProjects" ng-value="true" ng-change="removeAssignments()"> All projects
+                  <input type="radio" name="projects" ng-model="showAllProjects" ng-value="true" ng-click="removeAssignments()"> All projects
                 </div>
                 <div class="form-group">
                     <div class="form-item">
