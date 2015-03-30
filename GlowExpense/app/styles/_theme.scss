@@ -71,142 +71,6 @@ input[type=checkbox] {
     margin-bottom: 65px;
 }
 
-
-// STYLES FOR GLOBAL ELEMENTS
-// HEADER
-header {
-    border-top: 10px solid $bg-green;
-    @include clearfix();
-    nav {
-        ul {
-            width: 100%;
-            display: block;
-            float: left;
-            position: relative;
-            @include clearfix();
-            li {
-                float: left;
-                display: block;
-                &.btn-main {
-                    z-index: 5;
-                    width: 50%;
-                    text-align: left;
-                    position: relative;
-                    &.expenses {
-                        text-align: right;
-                        padding-right: 10px;
-                        a {
-                            span {
-                                float: right;
-                            }
-                        }
-                    }
-                    &.reports {
-                        padding-left: 10px;
-                        a {
-                            span {
-                                float: left;
-                            }
-                        }
-                    }
-                    a {
-                        color:$text-grey-dim;
-                        font-weight: bold;
-                        line-height: 22px;
-                        display: block;
-                        height: 100%;
-                        width: 100%;
-                        font-size: $size-global;
-                        padding-top: 20px;
-                        min-height: 60px;
-                        &.active {
-                            color:$text-grey-dark;
-                            span {
-                                border-bottom: 6px solid $bg-green;
-                                padding-bottom: 10px;
-                                display: table;
-                            }
-                        }
-                    }
-                }
-                &.btn-helper {
-                    position:absolute;
-                    z-index: 10;
-                    top:10px;
-                    &.profile {
-                        a {
-                            color: $bg-black;
-                            font-size: 2em;
-                        }
-                    }
-                    &.edit {
-                        right: 1rem;
-                        a {
-                            position: relative;
-                            color: $bg-black;
-                            font-size: 1.9em;
-                        }
-                    }
-                    &.done {
-                        right:25px;
-                        bottom:0.5em;
-                        a {
-                            color:$text-red;
-                            font-size: $size-text;
-                            line-height: 2.6;
-                            font-family: "HalvaticaNeue";                        }
-                    }
-                }
-            }
-            // single link header
-            &.single {
-                .btn-main {
-                    width: 100%;
-                    text-align: center;
-                    span {
-                        display: table;
-                        margin: 0 auto;
-                        max-width: 70%;
-                    }
-                }
-            }
-        }
-    }
-    // header line
-    .line {
-        height: 2px;
-        position:absolute;
-        width: 100%;
-        bottom: 0;
-        background: -webkit-gradient(linear, left top, right top, color-stop(0%,rgba(255,255,255,0)), color-stop(20%,rgba(153,191,0,1)), color-stop(40%,rgba(153,191,0,1)), color-stop(60%,rgba(153,191,0,0.45)), color-stop(100%,rgba(255,255,255,0.01))); /* Chrome,Safari4+ */
-        background: -webkit-linear-gradient(left, rgba(255,255,255,0) 0%,rgba(153,191,0,1) 20%,rgba(153,191,0,1) 40%,rgba(153,191,0,0.45) 60%,rgba(255,255,255,0.01) 100%); /* Chrome10+,Safari5.1+ */
-        background: linear-gradient(to right, rgba(255,255,255,0) 0%,rgba(153,191,0,1) 20%,rgba(153,191,0,1) 40%,rgba(153,191,0,0.45) 60%,rgba(255,255,255,0.01) 100%); /* W3C */
-    }
-}
-
-// header line reports
-.reports-head {
-    .line {
-        transform:rotate(180deg);
-    }
-}
-ul.single {
-    .line {
-        background: -webkit-gradient(linear, left top, right top, color-stop(0%,rgba(153,191,0,0)), color-stop(40%,rgba(153,191,0,1)), color-stop(60%,rgba(153,191,0,1)), color-stop(100%,rgba(153,191,0,0))); /* Chrome,Safari4+ */
-        background: -webkit-linear-gradient(left, rgba(153,191,0,0) 0%,rgba(153,191,0,1) 40%,rgba(153,191,0,1) 60%,rgba(153,191,0,0) 100%); /* Chrome10+,Safari5.1+ */
-        background: linear-gradient(to right, rgba(153,191,0,0) 0%,rgba(153,191,0,1) 40%,rgba(153,191,0,1) 60%,rgba(153,191,0,0) 100%); /* W3C */
-    }
-    .btn-helper {
-        top: 15px;
-        &.close {
-            left: 6px;
-            a {
-                font-size: 2em;
-                color: $bg-black;
-            }
-        }
-    }
-}
 // expense&reports item
 .expense-image{
     background-image: none!important;
@@ -493,8 +357,8 @@ $expense-list-item-height: 5rem;
     @include clearfix();
     border-bottom: 2px solid $border-modal;
     border-width: 0.09em 0;
-    padding: 1.1rem 1rem 1rem .8rem;    
-    overflow:hidden;  
+    padding: 1.1rem 1rem 1rem .8rem;
+    overflow:hidden;
     .left-part {
         width: 60%;
         float: left;
