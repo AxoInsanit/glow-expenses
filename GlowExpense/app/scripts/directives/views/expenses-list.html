@@ -14,16 +14,15 @@
                         </div>
                         <div class="content-data">
                             <div class="date">
-                                <span>{{:: expense.date | date:'dd MMMM yyyy' }}</span>
+                                <span>{{:: expense.dateFilter }}</span>
                             </div>
                             <div class="money">
-                                <span>{{:: expense.currency.code }}</span>
-                                <span class="amount">{{getCurrencyCode(expense.originalCurrencyId)}} {{:: expense.originalAmount | currency }}</span>
+                                <span class="amount">{{::expense.currencyCode}} {{:: expense.originalAmountFormatted}}</span>
                             </div>
                         </div>
                         <div class="content-details">
                             <div class="amount">
-                                <span>Total {{getCurrencyCode(expense.societyCurrencyId)}} {{:: expense.originalAmount * expense.exchangeRate| currency }}</span>
+                                <span>Total {{::expense.currencySocCode}} {{:: expense.originalAmount * expense.exchangeRate| currency }}</span>
                             </div>
                             <div class="exchange">
                                 <span>ER: {{:: expense.exchangeRate | number:2}}</span>

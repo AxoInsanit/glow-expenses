@@ -16,8 +16,7 @@ angular.module('Directives', [])
                     tolerance = window.innerWidth * 0.5, //pixels measure
                     viewChanged = false,
                     orientation, //user is scrolling vertically or horizontally
-                    swipeLocked, //lock swipe left-rigth if user is scrolling horizontally
-                    timeToWait;
+                    swipeLocked; //lock swipe left-rigth if user is scrolling horizontally
 
                 for (var i = 0; i < snapCount; i += 1) {
                     snapLocations.push((-1) * i * window.innerWidth);
@@ -44,12 +43,6 @@ angular.module('Directives', [])
                     positionX = restPosition + parseInt(ev.deltaX, 10);
                     if ((positionX < snapLocations[0]) && (positionX > snapLocations[snapLocations.length - 1])) {
                         translateView(positionX);
-                    }
-                }
-
-                function notifyViewChange() {
-                    if (attr.onPanEnd) {
-                        scope.$parent.$eval(attr.onPanEnd, {$activeView: activeView});
                     }
                 }
 
@@ -114,11 +107,7 @@ angular.module('Directives', [])
                     }
                     translateView(restPosition);
                     if (viewChanged) {
-                        //Change title border instantly but wait for animation to finish before changing route.
                         scope.$parent.setActiveview(activeView);
-                        timeToWait = $timeout(function () {
-                            notifyViewChange();
-                        }, 300); //wait animation to finish
                     }
                 });
 

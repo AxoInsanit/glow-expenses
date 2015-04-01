@@ -131,13 +131,6 @@ angular.module('Directives').directive('expensesList', function($stateParams, ex
                     });
                 }
             };
-
-            $scope.getCurrencyCode = function(currencyId){
-                var currencies = JSON.parse(localStorageSvc.getItem('currencies')),
-                    currency = _.findWhere(currencies,{'id':currencyId});
-                return currency.code;
-
-            };
         },
         templateUrl: 'scripts/directives/views/expenses-list.html'
     };

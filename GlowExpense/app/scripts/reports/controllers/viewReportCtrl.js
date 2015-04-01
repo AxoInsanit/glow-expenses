@@ -2,7 +2,7 @@
 
 angular.module('Reports')
     .controller('ViewReportCtrl', function ($scope, $stateParams, transitionService, reportResource, ReportModel,
-                                            errorDialogSvc, sendReportDialogSvc)  {
+                                            errorDialogSvc, sendReportDialogSvc, localStorageSvc, $filter)  {
 
         var reportId = $stateParams.reportId;
 
@@ -76,8 +76,21 @@ angular.module('Reports')
 
         };
 
+        var getCurrencyCode = function(currencyId){
+            var currencies = JSON.parse(localStorageSvc.getItem('currencies')),
+                currency = _.findWhere(currencies,{'id':currencyId});
+            return currency.code;
+        };
+
         reportResource.getReport(reportId).then(function (report) {
             reportResource.getExpenses(reportId).then(function (expenses) {
+                _.each(expenses, function(expense){
+                    //for performance improvement this data should be computed here
+                    expense.currencyCode = getCurrencyCode(expense.originalCurrencyId);
+                    expense.currencySocCode = getCurrencyCode(expense.societyCurrencyId);
+                    expense.dateFilter = $filter('date')(expense.date, 'dd MMMM yyyy');
+                    expense.originalAmountFormatted = $filter('currency')(expense.originalAmount);
+                });
                 $scope.expenses = expenses;
             });
             $scope.$parent.title = report.description;

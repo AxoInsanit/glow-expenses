@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('Layouts').controller('HomeCtrl', function ($scope, $state, $timeout, signOutDialogSvc, transitionService, reportResource, expenseResource) {
+angular.module('Layouts').controller('HomeCtrl', function ($scope, $state, $timeout, signOutDialogSvc, transitionService, reportResource, expenseResource, localStorageSvc, $filter) {
 
     var views = ['expenses', 'reports'],
         stateParams = $state.$current.locals.globals.$stateParams;
@@ -43,7 +43,7 @@ angular.module('Layouts').controller('HomeCtrl', function ($scope, $state, $time
         if ($scope.editMode) {
             $scope.toggleEditMode();
         }
-        viewTransition(view);
+        //viewTransition(view);
     };
 
     $scope.signOut = function () {
@@ -52,6 +52,12 @@ angular.module('Layouts').controller('HomeCtrl', function ($scope, $state, $time
 
     $scope.toggleEditMode = function () {
         $scope.editMode = !$scope.editMode;
+    };
+
+    var getCurrencyCode = function(currencyId){
+        var currencies = JSON.parse(localStorageSvc.getItem('currencies')),
+            currency = _.findWhere(currencies,{'id':currencyId});
+        return currency.code;
     };
 
     if ($scope.activeView) {
@@ -71,6 +77,12 @@ angular.module('Layouts').controller('HomeCtrl', function ($scope, $state, $time
     });
 
     expenseResource.getExpenses().then(function (expenses) {
+        _.each(expenses, function(expense){
+            expense.currencyCode = getCurrencyCode(expense.originalCurrencyId);
+            expense.currencySocCode = getCurrencyCode(expense.societyCurrencyId);
+            expense.dateFilter = $filter('date')(expense.date, 'dd MMMM yyyy');
+            expense.originalAmountFormatted = $filter('currency')(expense.originalAmount);
+        });
         $scope.expenses = expenses;
     });
 
