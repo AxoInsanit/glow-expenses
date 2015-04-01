@@ -2,7 +2,7 @@
 
 // Define the angular module.
 angular.module('Directives', [])
-    .directive('swipeAndSnap', function ($timeout) {
+    .directive('swipeAndSnap', function () {
         return {
             scope: {},
             link: function (scope, element, attr) {
@@ -55,7 +55,6 @@ angular.module('Directives', [])
                     element.addClass('overflow-disable');
                     viewChanged = false;
                     orientation = false;
-                    $timeout.cancel(timeToWait);
                 });
 
                 /**
