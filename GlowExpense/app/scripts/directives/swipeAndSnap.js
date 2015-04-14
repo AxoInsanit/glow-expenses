@@ -2,7 +2,7 @@
 
 // Define the angular module.
 angular.module('Directives', [])
-    .directive('swipeAndSnap', function ($timeout) {
+    .directive('swipeAndSnap', function () {
         return {
             scope: {},
             link: function (scope, element, attr) {
@@ -16,8 +16,8 @@ angular.module('Directives', [])
                     tolerance = window.innerWidth * 0.5, //pixels measure
                     viewChanged = false,
                     orientation, //user is scrolling vertically or horizontally
-                    swipeLocked, //lock swipe left-rigth if user is scrolling horizontally
-                    timeToWait;
+                    swipeLocked; //lock swipe left-rigth if user is scrolling horizontally
+                    //timeToWait;
 
                 for (var i = 0; i < snapCount; i += 1) {
                     snapLocations.push((-1) * i * window.innerWidth);
@@ -47,11 +47,11 @@ angular.module('Directives', [])
                     }
                 }
 
-                function notifyViewChange() {
+                /*function notifyViewChange() {
                     if (attr.onPanEnd) {
                         scope.$parent.$eval(attr.onPanEnd, {$activeView: activeView});
                     }
-                }
+                }*/
 
                 /**
                  * Perform any setup for the drag actions.
@@ -61,7 +61,7 @@ angular.module('Directives', [])
                     element.removeClass('swipe-animate');
                     viewChanged = false;
                     orientation = false;
-                    $timeout.cancel(timeToWait);
+                    //$timeout.cancel(timeToWait);
                 });
 
                 /**
@@ -118,9 +118,9 @@ angular.module('Directives', [])
                         if (viewChanged) {
                             //Change title border instantly but wait for animation to finish before changing route.
                             scope.$parent.setActiveview(activeView);
-                            timeToWait = $timeout(function () {
+                            /* timeToWait = $timeout(function () {
                                 notifyViewChange();
-                            }, 300); //wait animation to finish
+                            }, 600); //wait animation to finish*/
                         }
                     }
                 });
