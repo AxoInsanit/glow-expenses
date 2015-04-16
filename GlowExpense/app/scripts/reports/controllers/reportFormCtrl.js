@@ -18,6 +18,12 @@ angular.module('Reports')
 
         if ($scope.$parent) {
             $scope.$parent.title = reportId ? 'Edit report': 'Create report';
+
+            if(!reportId) {
+                // override layout back path
+                $scope.$parent.backStateName = 'home';
+                $scope.$parent.backStateParams = {view: 'reports'};
+            }
         }
 
         $scope.removeWhiteSpaces = function () {
