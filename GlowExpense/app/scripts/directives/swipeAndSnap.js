@@ -125,6 +125,30 @@ angular.module('Directives', [])
                     }
                 });
 
+                Hammer(element[0]).on('swiperight', function () {
+                    if(!swipeLocked){
+                        var previous = activeView - 1;
+
+                        if (previous >= 0) {
+                            activeView = previous;
+                            scope.$parent.setActiveview(activeView);
+                            translateView(snapLocations[activeView]);
+                        }
+                    }
+                });
+
+                Hammer(element[0]).on('swipeleft', function () {
+                    if(!swipeLocked){
+                        var next = activeView + 1;
+
+                        if (next < snapLocations.length) {
+                            activeView = next;
+                            scope.$parent.setActiveview(activeView);
+                            translateView(snapLocations[activeView]);
+                        }
+                    }
+                });
+
                 translateView(snapLocations[activeView]);
                 restPosition = snapLocations[activeView];
 
