@@ -7,7 +7,8 @@ angular.module('Directives').directive('expensesList', function($stateParams, ex
         controller: function($scope) {
 
             $scope.reportId = $stateParams.reportId;
-            var expensesSelected = {};
+            var expensesSelected = {},
+                originalExpenses = [];
 
             function selectedToArray(onlyId){
                 var expenseIds = [];
@@ -45,8 +46,8 @@ angular.module('Directives').directive('expensesList', function($stateParams, ex
                 });
             };
 
-            $scope.itemChecked = function (value, index, expense) {
-                return (value) ? expensesSelected[index] = expense : delete expensesSelected[index];
+            $scope.itemChecked = function (value, index) {
+                return (value) ? expensesSelected[index] = originalExpenses[index] : delete expensesSelected[index];
             };
 
             $scope.deleteExpenses = function (event) {
@@ -83,7 +84,7 @@ angular.module('Directives').directive('expensesList', function($stateParams, ex
                         promises = [];
 
                     _.each(expenses, function(expense){
-                    //temporary solution until api new release allows updating multiple expenses at once
+                        //temporary solution until api new release allows updating multiple expenses at once
                         if ($stateParams.reportId) {
                             expense.exchangeRate = value;
                             promises.push(expenseResource.updateExpense(expense));
@@ -134,6 +135,7 @@ angular.module('Directives').directive('expensesList', function($stateParams, ex
 
             var unregister = $scope.$watch('expenses', function(){
                 if ($scope.expenses) {
+                    originalExpenses = angular.copy($scope.expenses);
                     _.each($scope.expenses, function(expense){
                         expense.currencyCode = getCurrencyCode(expense.originalCurrencyId);
                         expense.currencySocCode = getCurrencyCode(expense.societyCurrencyId);
