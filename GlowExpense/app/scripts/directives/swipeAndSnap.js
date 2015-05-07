@@ -16,13 +16,13 @@ angular.module('Directives', [])
                     tolerance = window.innerWidth * 0.5, //pixels measure
                     viewChanged = false,
                     orientation, //user is scrolling vertically or horizontally
-                    swipeLocked; //lock swipe left-rigth if user is scrolling horizontally
+                    swipeLocked, //lock swipe left-rigth if user is scrolling horizontally
+                    swipeEvent;
                     //timeToWait;
 
                 for (var i = 0; i < snapCount; i += 1) {
                     snapLocations.push((-1) * i * window.innerWidth);
                 }
-
                 element.css('width', (snapCount * 100) + '%');
 
                 var calculate_snap_location = function (position) {
@@ -41,8 +41,8 @@ angular.module('Directives', [])
                 }
 
                 function swipeLocation(ev) {
-                    positionX = restPosition + parseInt(ev.deltaX, 10);
-                    if ((positionX < snapLocations[0]) && (positionX > snapLocations[snapLocations.length - 1])) {
+                    positionX = restPosition + parseInt(ev.deltaX || 0, 10);
+                    if ((positionX <= snapLocations[0]) && (positionX >= snapLocations[snapLocations.length - 1])) {
                         translateView(positionX);
                     }
                 }
@@ -53,6 +53,36 @@ angular.module('Directives', [])
                     }
                 }*/
 
+                Hammer(element[0]).on('swiperight', function () {
+                    element.addClass('swipe-animate');
+                    element.removeClass('overflow-disable');
+                    swipeEvent = true;
+
+                    var previous = activeView - 1;
+                    if (previous >= 0) {
+                        activeView = previous;
+                        scope.$parent.setActiveview(activeView);
+                        restPosition = snapLocations[activeView];
+                        translateView(snapLocations[activeView]);
+                    }
+
+                });
+
+                Hammer(element[0]).on('swipeleft', function () {
+                    element.addClass('swipe-animate');
+                    element.removeClass('overflow-disable');
+                    swipeEvent = true;
+
+                    var next = activeView + 1;
+                    if (next < snapLocations.length) {
+                        activeView = next;
+                        scope.$parent.setActiveview(activeView);
+                        restPosition = snapLocations[activeView];
+                        translateView(snapLocations[activeView]);
+                    }
+
+                });
+
                 /**
                  * Perform any setup for the drag actions.
                  */
@@ -61,6 +91,7 @@ angular.module('Directives', [])
                     element.removeClass('swipe-animate');
                     viewChanged = false;
                     orientation = false;
+                    swipeEvent = false;
                     //$timeout.cancel(timeToWait);
                 });
 
@@ -107,13 +138,13 @@ angular.module('Directives', [])
                  * The drag is finishing so we'll animate to a snap point.
                  */
                 Hammer(element[0]).on('panend pancancel', function() {
-                    element.addClass('swipe-animate');
-                    if(!swipeLocked){
+                    if(!swipeLocked && !swipeEvent){
+                        element.addClass('swipe-animate');
                         element.removeClass('overflow-disable');
                         // Work out where we should "snap" to.
-                        if ((positionX < snapLocations[0]) && (positionX > snapLocations[snapLocations.length - 1])) {
-                            restPosition = calculate_snap_location(positionX);
-                        }
+                        positionX = (positionX > snapLocations[0]) ? snapLocations[0] : positionX;
+                        positionX = (positionX < snapLocations[snapLocations.length - 1]) ? snapLocations[snapLocations.length - 1] : positionX;
+                        restPosition = calculate_snap_location(positionX);
                         translateView(restPosition);
                         if (viewChanged) {
                             //Change title border instantly but wait for animation to finish before changing route.
@@ -121,30 +152,6 @@ angular.module('Directives', [])
                             /* timeToWait = $timeout(function () {
                                 notifyViewChange();
                             }, 600); //wait animation to finish*/
-                        }
-                    }
-                });
-
-                Hammer(element[0]).on('swiperight', function () {
-                    if(!swipeLocked){
-                        var previous = activeView - 1;
-
-                        if (previous >= 0) {
-                            activeView = previous;
-                            scope.$parent.setActiveview(activeView);
-                            translateView(snapLocations[activeView]);
-                        }
-                    }
-                });
-
-                Hammer(element[0]).on('swipeleft', function () {
-                    if(!swipeLocked){
-                        var next = activeView + 1;
-
-                        if (next < snapLocations.length) {
-                            activeView = next;
-                            scope.$parent.setActiveview(activeView);
-                            translateView(snapLocations[activeView]);
                         }
                     }
                 });
