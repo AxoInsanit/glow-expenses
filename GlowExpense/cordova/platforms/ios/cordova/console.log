@@ -1300,3 +1300,28 @@ https://developer.apple.com/icloud/documentation/data-storage/
 2014-11-14 17:01:36.828 GlowExpenses[12959:70b] [CDVTimer][TotalPluginStartup] 2.661943ms
 2014-11-14 17:01:37.003 GlowExpenses[12959:70b] Resetting plugins due to page load.
 2014-11-14 17:01:37.752 GlowExpenses[12959:70b] Finished load of: file:///Users/matiassanguinetti/Library/Developer/CoreSimulator/Devices/1D1438E9-9CE2-447E-98FD-C427AD1F7462/data/Applications/CE50E3CF-379B-4073-B076-66DA412E91E2/GlowExpenses.app/www/index.html#/login
+2015-05-11 11:14:56.082 GlowExpenses[7379:70b] Apache Cordova native platform version 3.6.3 is starting.
+2015-05-11 11:14:56.106 GlowExpenses[7379:70b] Multi-tasking -> Device: YES, App: YES
+2015-05-11 11:14:56.378 GlowExpenses[7379:70b] Unlimited access to network resources
+2015-05-11 11:14:56.397 GlowExpenses[7379:70b] 
+
+Started backup to iCloud! Please be careful.
+Your application might be rejected by Apple if you store too much data.
+For more information please read "iOS Data Storage Guidelines" at:
+https://developer.apple.com/icloud/documentation/data-storage/
+
+2015-05-11 11:14:57.402 GlowExpenses[7379:70b] [CDVTimer][file] 15.124977ms
+2015-05-11 11:14:57.402 GlowExpenses[7379:70b] [CDVTimer][TotalPluginStartup] 15.695035ms
+2015-05-11 11:14:58.109 GlowExpenses[7379:70b] Resetting plugins due to page load.
+2015-05-11 11:14:58.970 GlowExpenses[7379:70b] Finished load of: file:///Users/m.rubinsztein/Library/Developer/CoreSimulator/Devices/028B5FAD-31A6-4CD9-B9BA-9298869E61E5/data/Applications/ABE01111-D29D-4475-8148-5F0F3AA37CB8/GlowExpenses.app/www/index.html#/login
+2015-05-11 11:14:59.124 GlowExpenses[7379:70b] ERROR: Plugin 'OrientationLock' not found, or is not a CDVPlugin. Check your plugin mapping in config.xml.
+2015-05-11 11:14:59.125 GlowExpenses[7379:70b] -[CDVCommandQueue executePending] [Line 158] FAILED pluginJSON = [
+  "INVALID",
+  "OrientationLock",
+  "lock",
+  [
+    "portrait"
+  ]
+]
+2015-05-11 11:15:05.605 GlowExpenses[7379:70b] Setting the WebView's frame to {{0, 0}, {320, 436}}
+2015-05-11 11:15:05.611 GlowExpenses[7379:70b] THREAD WARNING: ['InAppBrowser'] took '228.130859' ms. Plugin should use a background thread.
