@@ -15,6 +15,7 @@ mockeyDebugFile*.*
 /cordova/platforms/android/CordovaLib/ant-build
 /cordova/platforms/android/CordovaLib/ant-gen
 
+/cordova/platforms/ios/
 
 #coverage
 #README.html

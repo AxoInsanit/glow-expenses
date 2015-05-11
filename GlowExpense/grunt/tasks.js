@@ -60,6 +60,9 @@ module.exports = function(grunt) {
 		'shell:jarsigner',
 		'copy:apk'
 	]);
+    
+    //runs on iOS device (connected)
+    grunt.registerTask('i', ['build','shell:ios-run']);
 
     grunt.registerTask('build', [
        'jshint',
