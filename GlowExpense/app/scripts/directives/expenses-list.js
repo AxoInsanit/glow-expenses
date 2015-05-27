@@ -1,13 +1,14 @@
 'use strict';
 
-angular.module('Directives').directive('expensesList', function($stateParams, expenseResource, reportResource, transitionService, localStorageSvc, confirmDeleteDialogSvc, editExRateDialogSvc, errorDialogSvc, $q) {
+angular.module('Directives').directive('expensesList', function($stateParams, expenseResource, reportResource, transitionService, localStorageSvc, confirmDeleteDialogSvc, editExRateDialogSvc, errorDialogSvc, $q, $filter) {
     return {
         restrict: 'E',
         replace: true,
         controller: function($scope) {
 
             $scope.reportId = $stateParams.reportId;
-            var expensesSelected = {};
+            var expensesSelected = {},
+                originalExpenses = [];
 
             function selectedToArray(onlyId){
                 var expenseIds = [];
@@ -45,8 +46,8 @@ angular.module('Directives').directive('expensesList', function($stateParams, ex
                 });
             };
 
-            $scope.itemChecked = function (value, index, expense) {
-                return (value) ? expensesSelected[index] = expense : delete expensesSelected[index];
+            $scope.itemChecked = function (value, index) {
+                return (value) ? expensesSelected[index] = originalExpenses[index] : delete expensesSelected[index];
             };
 
             $scope.deleteExpenses = function (event) {
@@ -83,7 +84,7 @@ angular.module('Directives').directive('expensesList', function($stateParams, ex
                         promises = [];
 
                     _.each(expenses, function(expense){
-                    //temporary solution until api new release allows updating multiple expenses at once
+                        //temporary solution until api new release allows updating multiple expenses at once
                         if ($stateParams.reportId) {
                             expense.exchangeRate = value;
                             promises.push(expenseResource.updateExpense(expense));
@@ -132,11 +133,23 @@ angular.module('Directives').directive('expensesList', function($stateParams, ex
                 }
             };
 
-            $scope.getCurrencyCode = function(currencyId){
+            var unregister = $scope.$watch('expenses', function(){
+                if ($scope.expenses) {
+                    originalExpenses = angular.copy($scope.expenses);
+                    _.each($scope.expenses, function(expense){
+                        expense.currencyCode = getCurrencyCode(expense.originalCurrencyId);
+                        expense.currencySocCode = getCurrencyCode(expense.societyCurrencyId);
+                        expense.dateFilter = $filter('date')(expense.date, 'dd MMMM yyyy');
+                        expense.originalAmountFormatted = $filter('currency')(expense.originalAmount);
+                    });
+                    unregister();
+                }
+            }, true);
+
+            var getCurrencyCode = function(currencyId){
                 var currencies = JSON.parse(localStorageSvc.getItem('currencies')),
                     currency = _.findWhere(currencies,{'id':currencyId});
                 return currency.code;
-
             };
         },
         templateUrl: 'scripts/directives/views/expenses-list.html'

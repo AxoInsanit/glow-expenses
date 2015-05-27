@@ -43,7 +43,7 @@ angular.module('Layouts').controller('HomeCtrl', function ($scope, $state, $time
         if ($scope.editMode) {
             $scope.toggleEditMode();
         }
-        viewTransition(view);
+        //viewTransition(view);
     };
 
     $scope.signOut = function () {

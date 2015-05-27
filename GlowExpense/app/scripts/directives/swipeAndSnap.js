@@ -2,7 +2,7 @@
 
 // Define the angular module.
 angular.module('Directives', [])
-    .directive('swipeAndSnap', function ($timeout) {
+    .directive('swipeAndSnap', function () {
         return {
             scope: {},
             link: function (scope, element, attr) {
@@ -17,12 +17,12 @@ angular.module('Directives', [])
                     viewChanged = false,
                     orientation, //user is scrolling vertically or horizontally
                     swipeLocked, //lock swipe left-rigth if user is scrolling horizontally
-                    timeToWait;
+                    swipeEvent;
+                    //timeToWait;
 
                 for (var i = 0; i < snapCount; i += 1) {
                     snapLocations.push((-1) * i * window.innerWidth);
                 }
-
                 element.css('width', (snapCount * 100) + '%');
 
                 var calculate_snap_location = function (position) {
@@ -41,17 +41,47 @@ angular.module('Directives', [])
                 }
 
                 function swipeLocation(ev) {
-                    positionX = restPosition + parseInt(ev.deltaX, 10);
-                    if ((positionX < snapLocations[0]) && (positionX > snapLocations[snapLocations.length - 1])) {
+                    positionX = restPosition + parseInt(ev.deltaX || 0, 10);
+                    if ((positionX <= snapLocations[0]) && (positionX >= snapLocations[snapLocations.length - 1])) {
                         translateView(positionX);
                     }
                 }
 
-                function notifyViewChange() {
+                /*function notifyViewChange() {
                     if (attr.onPanEnd) {
                         scope.$parent.$eval(attr.onPanEnd, {$activeView: activeView});
                     }
-                }
+                }*/
+
+                Hammer(element[0]).on('swiperight', function () {
+                    element.addClass('swipe-animate');
+                    element.removeClass('overflow-disable');
+                    swipeEvent = true;
+
+                    var previous = activeView - 1;
+                    if (previous >= 0) {
+                        activeView = previous;
+                        scope.$parent.setActiveview(activeView);
+                        restPosition = snapLocations[activeView];
+                        translateView(snapLocations[activeView]);
+                    }
+
+                });
+
+                Hammer(element[0]).on('swipeleft', function () {
+                    element.addClass('swipe-animate');
+                    element.removeClass('overflow-disable');
+                    swipeEvent = true;
+
+                    var next = activeView + 1;
+                    if (next < snapLocations.length) {
+                        activeView = next;
+                        scope.$parent.setActiveview(activeView);
+                        restPosition = snapLocations[activeView];
+                        translateView(snapLocations[activeView]);
+                    }
+
+                });
 
                 /**
                  * Perform any setup for the drag actions.
@@ -59,10 +89,10 @@ angular.module('Directives', [])
                 Hammer(element[0]).on('panstart', function() {
                     // We dont want an animation delay when dragging.
                     element.removeClass('swipe-animate');
-                    element.addClass('overflow-disable');
                     viewChanged = false;
                     orientation = false;
-                    $timeout.cancel(timeToWait);
+                    swipeEvent = false;
+                    //$timeout.cancel(timeToWait);
                 });
 
                 /**
@@ -74,6 +104,9 @@ angular.module('Directives', [])
                             result = (angle < 90) ? angle : 180 - angle;
                         swipeLocked = (result > 20);
                         orientation = true;
+                        if (!swipeLocked){
+                            element.addClass('overflow-disable');
+                        }
                     }
                     if (!swipeLocked) {
                         var requestAnimFrame = window.requestAnimationFrame ||
@@ -105,20 +138,21 @@ angular.module('Directives', [])
                  * The drag is finishing so we'll animate to a snap point.
                  */
                 Hammer(element[0]).on('panend pancancel', function() {
-                    element.addClass('swipe-animate');
-                    element.removeClass('overflow-disable');
-
-                    // Work out where we should "snap" to.
-                    if ((positionX < snapLocations[0]) && (positionX > snapLocations[snapLocations.length - 1])) {
+                    if(!swipeLocked && !swipeEvent){
+                        element.addClass('swipe-animate');
+                        element.removeClass('overflow-disable');
+                        // Work out where we should "snap" to.
+                        positionX = (positionX > snapLocations[0]) ? snapLocations[0] : positionX;
+                        positionX = (positionX < snapLocations[snapLocations.length - 1]) ? snapLocations[snapLocations.length - 1] : positionX;
                         restPosition = calculate_snap_location(positionX);
-                    }
-                    translateView(restPosition);
-                    if (viewChanged) {
-                        //Change title border instantly but wait for animation to finish before changing route.
-                        scope.$parent.setActiveview(activeView);
-                        timeToWait = $timeout(function () {
-                            notifyViewChange();
-                        }, 300); //wait animation to finish
+                        translateView(restPosition);
+                        if (viewChanged) {
+                            //Change title border instantly but wait for animation to finish before changing route.
+                            scope.$parent.setActiveview(activeView);
+                            /* timeToWait = $timeout(function () {
+                                notifyViewChange();
+                            }, 600); //wait animation to finish*/
+                        }
                     }
                 });
 

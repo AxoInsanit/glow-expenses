@@ -62,6 +62,12 @@ angular.module('Expenses')
 
         if ($scope.$parent) {
             $scope.$parent.title = expenseId ? 'Edit expense': 'Create expense';
+
+            if(!reportId) {
+                // override layout back path
+                $scope.$parent.backStateName = 'home';
+                $scope.$parent.backStateParams = {view: 'expenses'};
+            }
         }
 
         $scope.save = function () {
@@ -232,8 +238,6 @@ angular.module('Expenses')
             }
             // if not attached to any report then fetch through expense resource manager
         } else if (expenseId) {
-            $scope.$parent.backStateName = 'home';
-            $scope.$parent.backStateParams = {view: 'expenses'};
             expenseResource.getExpense(expenseId).then(function (expense) {
                 $scope.expense = new ExpenseModel(expense);
                 if (expenseObject) {
