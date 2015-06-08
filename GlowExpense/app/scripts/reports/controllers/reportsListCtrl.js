@@ -26,13 +26,6 @@ angular.module('Reports')
             });
         };
 
-        $scope.createReport = function () {
-            transitionService.go({
-                name: 'newReport',
-                direction: 'forward'
-            });
-        };
-
         $scope.deleteReport = function (report, event) {
             event.stopPropagation();
             event.preventDefault();

@@ -68,7 +68,7 @@ input[type=checkbox] {
 
 .margin-last{
     overflow: hidden;
-    margin-bottom: 65px;
+    margin-bottom: 65px !important;
 }
 
 // expense&reports item
@@ -336,21 +336,6 @@ $expense-list-item-height: 5rem;
             width: 100%;
         }
     }
-}
-
-.item-floated {
-    float: left;
-    width: 50%;
-}
-
-@media (max-width : 355px) {
-    .item-floated {
-        width: 100%;
-    }
-}
-
-.item-floated-rigth {
-    border-left: 2px solid #E5E5E5 !important;
 }
 
 .item {

@@ -1,30 +1,41 @@
 <header class="home-header">
-    <nav>
-        <ul>
-            <li class="btn-helper profile">
-                <a class="icon icon-signout" href="" ng-click="signOut()"></a>
+    <nav class="header-options-section">
+        <ul class="header-options-section">
+            <li class="to-left">
+                <a class="new-icons plus-icon header-more-icon" ng-class="{'more-active': moreMode}" ng-click="toggleMoreMode()"></a>
             </li>
-            <li class="btn-main expenses">
-                <a ng-class="{ active: activeView === 0}" ng-click="goToView('expenses')">
-                    <span>Expenses</span>
-                </a>
+            <li class="to-center glow-logo">
+                <span class="top-part">GLOW</span>
+                <span class="bottom-part">EXPENSES REPORT</span>
             </li>
-            <li class="btn-main reports">
-                <a ng-class="{ active: activeView === 1}" ng-click="goToView('reports')">
-                    <span>Reports</span>
-                </a>
+            <li class="to-right">
+                <a class="new-icons signout-icon header-signout-icon" ng-click="signOut()"></a>
             </li>
-            <li class="btn-helper"
-                ng-class="{'edit': !editMode, 'done': editMode}"
-                ng-click="toggleEditMode()">
-                <a class="icon"
-                   ng-class="{'icon-edit': !editMode}">{{ editMode ? 'Done' : '' }}</a>
-            </li>
-            <div class="line"></div>
+            <div class="line" ng-show="moreMode"></div>
         </ul>
     </nav>
+    <div class="header-options-section header-options-section-margin green-bg" ng-show="moreMode">
+        <div class="item-floated green-bg" ng-click="createExpense()">
+            Create Expense
+        </div>
+        <div class="item-floated green-bg item-floated-rigth" ng-click="createReport()">
+            Create Report
+        </div>
+    </div>
+    <div class="header-options-section blue-bg">
+        <div class="item-floated blue-bg" ng-class="{ 'item-active': activeView === 0}">
+            <a ng-click="goToView('expenses')">
+                <span>Expenses</span>
+            </a>
+        </div>
+        <div class="item-floated blue-bg" ng-class="{ 'item-active': activeView === 1}">
+            <a ng-click="goToView('reports')">
+                <span>Reports</span>
+            </a>
+        </div>
+    </div>
 </header>
-<section class="home-container" ng-class="{'edit-mode': editMode}">
+<section class="home-container" ng-class="{'edit-mode': editMode, 'padding-to-top': moreMode}">
     <div class="view-container" swipe-and-snap="2" on-pan-end="viewChanged($activeView)" active-view="{{activeView}}">
         <div class="view" ui-view="expenses"></div>
         <scroller element=".scroll-view" position="scrollPosition">

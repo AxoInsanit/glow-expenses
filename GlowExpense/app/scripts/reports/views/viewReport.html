@@ -1,26 +1,24 @@
 <div class="reports-body view-report">
-    <div>
-        <div class="item item-floated" ng-click="createExpense()">
-            <a class="btn-with-icon icon-back create-report" >
-                <span class="icon icon-plus"></span>
-                <span>Create Expense</span>
-            </a>
+    <div class="header-options-section green-bg">
+        <div class="item-floated green-bg" ng-click="createExpense()">
+            Create Expense
         </div>
-        <div class="item item-floated item-floated-rigth" ng-click="addExpensesToReport()">
-            <a class="btn-with-icon icon-back create-report" >
-                <span class="icon icon-plus"></span>
-                <span>Add Expenses</span>
-            </a>
+        <div class="item-floated item-floated-rigth green-bg" ng-click="addExpensesToReport()">
+            Add Expense
         </div>
+    </div>
+    <div class="edit-report">
+        <span>Report assigned to: </span><span class="report-assigned">{{report.applyTo}}</span><a class="new-icons edit-icon-blue report-edit-icon" ng-click="editReport()"></a>
     </div>
     <div class="content-edit-list">
         <expenses-list></expenses-list>
-
         <article ng-if="!editMode" class="send-report">
-            <div class="btn-fixed grey">
-                <a class="left-part underscored" ng-click="editReport()">Edit Report</a>
-                <p class="right-part">TOTAL {{:: report.societyCurrency}} {{:: report.total | currency}}</p>
-                <button class="btn ng-binding" type="submit" ng-click="sendReport()">Send Report</button>
+            <div class="fixed-section">
+                <div class="total-report">TOTAL {{:: report.societyCurrency}} {{:: report.total | currency}}</div>
+
+                <button class="btn blue-btn ng-binding" type="submit" ng-click="sendReport()">Send Report</button>
+
+                <button class="btn white-btn ng-binding" type="submit" ng-click="removeReport()">Remove Report</button>
             </div>
         </article>
         <div ng-if="editMode" class="edit-options-fixed fixed-full-width">
