@@ -1,17 +1,11 @@
 <header class="details-header">
-    <nav>
+    <nav class="header-options-section">
         <ul class="single">
             <li class="btn-helper close">
-                <a class="icon icon-back-arrow" back-button></a>
+                <a class="new-icons right-icon header-back-icon" back-button></a>
             </li>
             <li class="btn-main">
                 <a class="active"><span class="hide-text-overflow"> {{title}} </span></a>
-            </li>
-            <li class="btn-helper"
-                ng-class="{'edit': !editMode, 'done': editMode}"
-                ng-click="toggleEditMode()">
-                <a class="icon"
-                   ng-class="{'icon-edit': !editMode}">{{ editMode ? 'Done' : '' }}</a>
             </li>
             <div class="line"></div>
         </ul>

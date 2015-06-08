@@ -2,7 +2,7 @@
 
 angular.module('Reports')
     .controller('ViewReportCtrl', function ($scope, $stateParams, transitionService, reportResource, ReportModel,
-                                            errorDialogSvc, sendReportDialogSvc)  {
+                                            errorDialogSvc, sendReportDialogSvc, confirmDeleteDialogSvc)  {
 
         var reportId = $stateParams.reportId;
 
@@ -69,6 +69,22 @@ angular.module('Reports')
                 });
             }, function () {
                 errorDialogSvc.open('Review your expenses!');
+            });
+        };
+
+        $scope.removeReport = function () {
+            confirmDeleteDialogSvc.open('report').then(function(){
+                reportResource.removeReport(reportId).then(function () {
+                    transitionService.go({
+                        name: 'home',
+                        params: {
+                            view: 'reports'
+                        },
+                        direction: 'backward'
+                    });
+                }, function () {
+                    errorDialogSvc.open('Couldn\'t remove report');
+                });
             });
         };
 

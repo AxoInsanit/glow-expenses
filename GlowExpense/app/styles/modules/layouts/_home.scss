@@ -14,7 +14,7 @@
     -ms-transition: all 250ms ease;
     -o-transition: all 250ms ease;
     transition: all 250ms ease;
-    padding-top: 70px;
+    padding-top: 120px;
     overflow: hidden;
     .view-container {
         height: 100%;
@@ -29,4 +29,8 @@
         overflow-x: hidden;
         overflow-y: auto;
     }
+}
+
+.padding-to-top{
+    padding-top: 190px !important;
 }

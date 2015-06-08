@@ -50,8 +50,26 @@ angular.module('Layouts').controller('HomeCtrl', function ($scope, $state, $time
         signOutDialogSvc.open();
     };
 
+    $scope.createExpense = function() {
+        transitionService.go({
+            name: 'addReportExpense',
+            direction: 'forward'
+        });
+    };
+
+    $scope.createReport = function () {
+        transitionService.go({
+            name: 'newReport',
+            direction: 'forward'
+        });
+    };
+
     $scope.toggleEditMode = function () {
         $scope.editMode = !$scope.editMode;
+    };
+
+    $scope.toggleMoreMode = function () {
+        $scope.moreMode = !$scope.moreMode;
     };
 
     if ($scope.activeView) {
