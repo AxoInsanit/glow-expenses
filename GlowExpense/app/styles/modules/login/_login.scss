@@ -5,6 +5,9 @@
   width:100%;
   display:block;
   float:left;
+  background-image: url('../../resources/images/login-bg-small.jpg');
+  background-repeat: no-repeat;
+  background-size: 100%;
   @include clearfix();
   * {
     font-size: $size-global;
@@ -36,11 +39,9 @@
     font-weight: normal;
   }
   .top-part {
-    background: $bg-green;
     height: 50%;
     width: 100%;
     display: block;
-    border-bottom:10px solid $bg-grey-dark;
     position:relative;
     .logo {
       margin:0 auto;
@@ -52,7 +53,7 @@
       width: 100%;
       h1 {
         font-family: 'FrutigerBlack';
-        color: $text-logo-top;
+        color: $text-white;
         font-size: 3em;
       }
       h2 {
@@ -64,7 +65,6 @@
   }
   .bottom-part {
     @include clearfix();
-    background: $bg-grey;
     height: 50%;
     width: 100%;
     display: block;
@@ -85,6 +85,7 @@
       }
     }
     .btn {
+      background: $blue-bg;
       position: relative;
       top: 30%;
       width: 95%;
