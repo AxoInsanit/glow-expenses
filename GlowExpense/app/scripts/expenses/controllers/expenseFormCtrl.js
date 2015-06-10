@@ -83,24 +83,6 @@ angular.module('Expenses')
                     localStorageSvc.removeItem('localImagePath');
                     $rootScope.$broadcast('global::updateExpenses');
                     expenseCreatedDialog.open(expenseSaveResults.reportId, $scope.report.description);
-                    // if (expenseSaveResults.reportId) {
-                    //     transitionService.go({
-                    //         name: 'viewReport',
-                    //         params: {
-                    //             reportId: expenseSaveResults.reportId
-                    //         },
-                    //         replace: true
-                    //     });
-                    //     // if no report associated then go to the home
-                    // } else {
-                    //     transitionService.go({
-                    //         name: 'home',
-                    //         params: {
-                    //             views: 'expenses'
-                    //         },
-                    //         replace: true
-                    //     });
-                    // }
                 }, function () {
                     transitionService.go({
                         name: 'home',
