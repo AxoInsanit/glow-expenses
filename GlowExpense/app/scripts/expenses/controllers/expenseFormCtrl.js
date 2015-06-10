@@ -4,7 +4,7 @@ angular.module('Expenses')
     .controller('ExpenseFormCtrl', function ($scope, $rootScope, $state, $stateParams, expenseResource, reportResource, currencyResource,
                                              cameraSelectDialog, cameraSvc, currencySelectDialogSvc, $filter, $timeout,
                                              contableCodeSelectDialogSvc, ExpenseModel, itemsSelectionDialogSvc, localStorageSvc,
-                                             filterReportByStateSvc, transitionService, contableCodeResource, errorDialogSvc) {
+                                             filterReportByStateSvc, transitionService, contableCodeResource, errorDialogSvc, expenseCreatedDialog) {
 
         var expenseId = $stateParams.expenseId,
             reportId = $stateParams.reportId,
@@ -82,24 +82,7 @@ angular.module('Expenses')
                     // if there was any associated report involved in the transaction then go to it
                     localStorageSvc.removeItem('localImagePath');
                     $rootScope.$broadcast('global::updateExpenses');
-                    if (expenseSaveResults.reportId) {
-                        transitionService.go({
-                            name: 'viewReport',
-                            params: {
-                                reportId: expenseSaveResults.reportId
-                            },
-                            replace: true
-                        });
-                        // if no report associated then go to the home
-                    } else {
-                        transitionService.go({
-                            name: 'home',
-                            params: {
-                                views: 'expenses'
-                            },
-                            replace: true
-                        });
-                    }
+                    expenseCreatedDialog.open(expenseSaveResults.reportId, $scope.report.description);
                 }, function () {
                     transitionService.go({
                         name: 'home',
