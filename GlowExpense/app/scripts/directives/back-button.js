@@ -11,7 +11,7 @@ angular.module('Directives')
                             name: scope.backStateName,
                             params: scope.backStateParams || {},
                             replace: true,
-                            direction: 'backward'
+                            direction: 'fade-center'
                         });
                     } else {
                         transitionService.back();
