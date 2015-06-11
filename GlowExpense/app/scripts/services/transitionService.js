@@ -8,7 +8,11 @@ angular.module('Services')
             transitionService;
 
         function cleanRootElement() {
-            return $rootElement.removeClass('slide-left').removeClass('slide-right').removeClass('slide-up').removeClass('slide-down');
+            return $rootElement.removeClass('slide-left')
+                .removeClass('slide-right')
+                .removeClass('slide-up')
+                .removeClass('slide-down')
+                .removeClass('bring-up');
         }
 
         $rootScope.$on('$stateChangeSuccess', function () {
@@ -45,6 +49,7 @@ angular.module('Services')
                 }
             },
             go: function (params) {
+                console.log(params);
                 var stateName = params.name,
                     stateParams = params.params || {},
                     stateOptions = {},
@@ -71,6 +76,9 @@ angular.module('Services')
                             break;
                         case 'down':
                             cleanRootElement().addClass('slide-down');
+                            break;
+                        case 'fade-center':
+                            cleanRootElement().addClass('fade-center');
                             break;
                         default:
                             cleanRootElement();

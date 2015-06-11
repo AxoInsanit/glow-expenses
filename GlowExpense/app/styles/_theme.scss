@@ -1,3 +1,5 @@
+@import "compass/css3";
+
 body {
     overflow-x: hidden;
 }
@@ -1046,5 +1048,72 @@ form {
     > [ui-view].ng-leave.ng-leave-active {
         z-index: 101;
         @include transform(translate3d(0, 100%, 0));
+    }
+}
+
+//slide view
+.fade-center {
+    .slide[ui-view], > [ui-view] {
+        &.ng-animate {
+            position: absolute;
+            top: 0; right: 0; bottom: 0; left: 0;
+            background: $bg-white;
+            transition: all .5s ease-in-out;
+        }
+    }
+}
+
+.fade-center {
+    .slide[ui-view].ng-enter {
+        z-index: 99;
+        /*@include transform(translate3d(0, -100%, 0));*/
+        @include transform(scale(0.3));
+        @include opacity(0.5);
+    }
+
+    .slide[ui-view].ng-enter.ng-enter-active {
+        z-index: 100;
+        /*@include transform(translate3d(0, 0, 0));*/
+        @include transform(scale(1));
+        @include opacity(1.0);
+    }
+
+    .slide[ui-view].ng-leave {
+        z-index: 101;
+        /*@include transform(translate3d(0, 0, 0));*/
+        @include transform(scale(1));
+        @include opacity(1.0);
+    }
+
+    .slide[ui-view].ng-leave.ng-leave-active {
+        z-index: 99;
+        /*@include transform(translate3d(0, 100%, 0));*/
+        @include transform(scale(0.3));
+        @include opacity(0.5);
+    }
+
+    > [ui-view].ng-enter {
+        z-index: 100;
+        /*@include transform(translate3d(0, -100%, 0));*/
+        @include transform(scale(0.3));
+        @include opacity(0.5);
+    }
+    > [ui-view].ng-enter.ng-enter-active {
+        z-index: 101;
+        /*@include transform(translate3d(0, 0, 0));*/
+        @include transform(scale(1));
+        @include opacity(0.1);
+    }
+    > [ui-view].ng-leave {
+        z-index: 101;
+        /*@include transform(translate3d(0, 0, 0));*/
+        @include transform(scale(1));
+        @include opacity(1.0);
+    }
+    > [ui-view].ng-leave.ng-leave-active {
+        z-index: 99;
+        /*@include transform(translate3d(0, 100%, 0));*/
+        @include transform(scale(0.3));
+        @include opacity(0.5);
     }
 }
