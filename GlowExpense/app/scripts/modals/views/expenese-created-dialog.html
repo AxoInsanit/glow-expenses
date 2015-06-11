@@ -1,0 +1,17 @@
+<div class="expense-created-dialog">
+	<div class="success-sprite"></div>
+	<div class="success-message" ng-show="addedToReport">
+		Your<span> Expense </span>has benn successfully<span> added </span>to<span> {{reportDescription}}</span>
+	</div>
+	<div class="success-message" ng-hide="addedToReport">
+			Your<span> Expense </span>has benn successfully<span> created </span>.It hasn't been added to a report yet</span>
+	</div>
+	<div class="go-to" ng-click="goToReport()" ng-show="addedToReport">
+		<span class="text">Go to Report</span>
+		<div class="right-arrow"></div>
+	</div>
+	<div class="go-to" ng-click="goToExpensesList()">
+		<span class="text">Go to Expenses List</span>
+		<div class="right-arrow"></div>
+	</div>
+</div>

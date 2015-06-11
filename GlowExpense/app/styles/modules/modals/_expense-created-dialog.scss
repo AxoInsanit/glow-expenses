@@ -1,0 +1,41 @@
+.expense-created-dialog {
+	background: $bg-green;
+	padding-top: 10px;
+  	border-radius: 5px;
+  	color: $text-white;
+  	font-size: 18px;
+	.success-sprite {
+		background: url('../../resources/images/icons.png') no-repeat -12px -100px;
+		width: 64px;
+		height: 63px;
+		zoom: 65%;
+		margin: 20px auto;
+	}
+	.success-message {
+		position: relative;
+		width: 60%;
+  		margin: 0 auto;
+  		margin-bottom: 20px;
+		color: $text-white;
+		text-align: center;
+		line-height: 18px;
+		span {
+			font-style: bold;
+		}
+	}
+	.go-to {
+		padding: 20px 0;
+		text-align: center;
+		border-top: solid 2px $white-bg;
+		.right-arrow {
+			position: relative;
+			float: right;
+			background: url('../../resources/images/icons.png') no-repeat -124px -113px;
+			width: 23px;
+			height: 42px;
+			right: 142px;
+			top: -3px;
+			zoom: 46%;
+		}
+	}
+}
