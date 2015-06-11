@@ -196,3 +196,13 @@
 .icon-back-arrow:before {
 	content: "\e60f";
 }
+.icon-checkbox-unchecked:before{
+    content: "\f096";
+    letter-spacing: 10px;
+    color: $blue-bg;
+}
+.icon-checkbox-checked:before{
+    content: "\f046";
+    color: $blue-bg;
+    letter-spacing: 5px;
+}

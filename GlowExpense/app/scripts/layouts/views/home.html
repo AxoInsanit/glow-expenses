@@ -35,7 +35,7 @@
         </div>
     </div>
 </header>
-<section class="home-container" ng-class="{'edit-mode': editMode, 'padding-to-top': moreMode}">
+<section class="home-container" ng-class="{'padding-to-top': moreMode}">
     <div class="swiper-container" swipe-and-snap on-pan-end="setActiveview($activeView)" active-view="{{activeView}}">
         <div class="swiper-wrapper">
             <div class="swiper-slide" ui-view="expenses"></div>

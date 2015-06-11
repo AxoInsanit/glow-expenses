@@ -4,7 +4,8 @@
             <section class="expense">
                 <div class="edit-action">
                     <div class="content-check">
-                         <input type="checkbox" ng-model="value" ng-change="itemChecked(value, $index)"/>
+                         <span ng-click="itemChecked($index)" class="icon" ng-class="{'icon-checkbox-checked': checked($index), 'icon-checkbox-unchecked': !checked($index) }"></span>
+                         <!--<input id="box{{$index}}" type="checkbox" ng-model="value" ng-change="itemChecked(value, $index)"/><label for="box{{$index}}"></label>-->
                     </div>
                 </div>
                 <div class="expense-info" ng-click="editExpense(expense)">
@@ -16,12 +17,12 @@
                             <div class="date">
                                 <span>{{:: expense.dateFilter }}</span>
                             </div>
-                            <div class="money">
+                            <div class="money hide-text-overflow">
                                 <span class="amount">{{::expense.currencyCode}} {{:: expense.originalAmountFormatted}}</span>
                             </div>
                         </div>
                         <div class="content-details">
-                            <div class="amount">
+                            <div class="amount hide-text-overflow">
                                 <span>Total {{::expense.currencySocCode}} {{:: expense.originalAmount * expense.exchangeRate| currency }}</span>
                             </div>
                             <div class="exchange">

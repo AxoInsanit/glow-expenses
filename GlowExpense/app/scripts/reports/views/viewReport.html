@@ -21,9 +21,15 @@
                 <button class="btn white-btn ng-binding" type="submit" ng-click="removeReport()">Remove Report</button>
             </div>
         </article>
-        <div ng-if="editMode" class="edit-options-fixed fixed-full-width">
-            <button class="edit-options-btn btn-exrate" ng-disabled="unselected()" ng-click="editExRate($event)">Exchange rate</button>
-            <button class="edit-options-btn btn-rem" ng-disabled="unselected()" ng-click="deleteExpenses($event)">Remove</button>
+        <div ng-if="editMode" class="edit-options-fixed">
+            <div class="exrate-section" ng-click="editExRate($event)">
+                <a class="new-icons edit-icon-size"></a>
+                <span class="text-section">Exchange rate</span>
+            </div>
+            <div class="rem-section" ng-click="deleteExpenses($event)">
+                <a class="new-icons trash-icon-size"></a>
+                <span class="text-section">Remove</span>
+            </div>
         </div>
     </div>
 </div>
