@@ -8,7 +8,8 @@ angular.module('Directives').directive('expensesList', function($stateParams, ex
 
             $scope.reportId = $stateParams.reportId;
             var expensesSelected = {},
-                originalExpenses = [];
+                originalExpenses = [],
+                checkboxsList = {};
 
             function selectedToArray(onlyId){
                 var expenseIds = [];
@@ -46,8 +47,19 @@ angular.module('Directives').directive('expensesList', function($stateParams, ex
                 });
             };
 
-            $scope.itemChecked = function (value, index) {
-                return (value) ? expensesSelected[index] = originalExpenses[index] : delete expensesSelected[index];
+            $scope.itemChecked = function (index) {
+                checkboxsList[index] = !checkboxsList[index];
+                if (checkboxsList[index]) {
+                    expensesSelected[index] = originalExpenses[index];
+                }
+                else {
+                    delete expensesSelected[index];
+                }
+                $scope.editMode = !$scope.unselected();
+            };
+
+            $scope.checked = function (index) {
+                return checkboxsList[index];
             };
 
             $scope.deleteExpenses = function (event) {

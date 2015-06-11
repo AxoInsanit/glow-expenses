@@ -2,12 +2,23 @@ body {
     overflow-x: hidden;
 }
 
-input[type=checkbox] {
-  /* All browsers except webkit*/
-  transform: scale(1.2);
-
-  /* Webkit browsers*/
-  -webkit-transform: scale(1.2);
+// CUSTOM CHECKBOX
+input[type=checkbox] { /* hide default checkbox */
+    display:none;
+}
+input[type=checkbox] + label:before {
+  font-family: 'icon-font';
+  display: inline-block;
+}
+input[type=checkbox] + label:before { /* unchecked */
+    content: "\f096";
+    letter-spacing: 10px;
+    color: $blue-bg;
+}
+input[type=checkbox]:checked + label:before { /* checked */
+    content: "\f046";
+    color: $blue-bg;
+    letter-spacing: 5px;
 }
 
 .hide-text-overflow {
@@ -17,22 +28,21 @@ input[type=checkbox] {
     overflow: hidden;
 }
 
+.pos-abs {
+    position: absolute !important;
+}
+
 .edit-options-fixed {
     position: fixed;
+    width: 100%;
     bottom: 0;
     left: 0;
-    background: #e4e4e4;
+    background: $blue-bg;
+    color: $white-bg;
     z-index: 1000;
-    text-align: center;
     padding: 10px 0px;
-    border-top: 2px solid #97BD00;
-
-    .edit-options-btn {
-        color: #ffffff;
-        border-radius : 5px;
-        border: none;
-        font-size: medium;
-    }
+    text-align: center;
+    font-size: 90%;
 
     .btn-add {
         background-color: #97BD00;
@@ -41,29 +51,31 @@ input[type=checkbox] {
             opacity: .55;
         }
     }
-    .btn-rem {
-        background-color: $bg-red;
-        padding: 10px 50px;
-        &:disabled {
-            opacity: .55;
+    .rem-section {
+        line-height: 40px;
+        width: 50%;
+        float: left;
+        border-left: 2px solid $sky-blue-bg;
+        .trash-icon-size{
+            height: 35px;
+            width: 35px;
+            background-position: -112px -192px;
+            zoom: .65;
+            -moz-transform: scale(0.65);
         }
     }
-    .btn-exrate {
-        background-color: $bg-grey-dark;
-        padding: 10px 8px;
-        margin-right: 10px;
-        &:disabled {
-            opacity: .55;
+    .exrate-section {
+        line-height: 40px;
+        width: 50%;
+        float: left;
+        .edit-icon-size{
+            height: 35px;
+            width: 35px;
+            background-position: -15px -193px;
+            zoom: .65;
+            -moz-transform: scale(0.65);
         }
     }
-}
-
-.fixed-full-width {
-    width: 100%;
-}
-
-.fixed-half-width {
-    width: 50%;
 }
 
 .margin-last{
@@ -103,33 +115,28 @@ $expense-list-item-height: 5rem;
         width: 100%;
         height: 100%;
         float: left;
-        border-bottom: 1px solid #CCC;
+        border-bottom: 2px solid $lighter-blue-bg;
         position: relative;
         .edit-action {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
+            width: 40px;
+            float: left;
             height: 100%;
-            z-index: 10;
-            padding-left: 11px;
-
             .content-check {
+                margin-left: 10px;
                 line-height: $height-expense;
                 font-size: 25px;
             }
         }
         .expense-info {
+            padding-left: 40px;
             width: 100%;
-            float: left;
-            transition: all .3s ease-out;
-            -webkit-transition: all .3s ease-out;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
             height: 100%;
             background: $bg-white;
             z-index: 100;
-            position: relative;
             .content-expense-info {
-                width: 85%;
+                width: 80%;
                 float: left;
             }
             .content-report-info {
@@ -138,7 +145,7 @@ $expense-list-item-height: 5rem;
             }
             .content-expense-info,
             .content-report-info {
-                padding: 16px;
+                padding: 16px 5px;
                 div {
                     width: 100%;
                     float: left;
@@ -146,8 +153,9 @@ $expense-list-item-height: 5rem;
                 }
                 .content-description {
                     h3 {
+                        line-height: 20px;
                         font-size: $size-text;
-                        color:$text-grey;
+                        color:$green-bg;
                         font-family: "HalvaticaNeueBold";
                         white-space: nowrap;
                         overflow: hidden;
@@ -202,9 +210,8 @@ $expense-list-item-height: 5rem;
                 }
             }
             .image-action {
-                width: 15%;
+                width: 20%;
                 float: left;
-                display: block;
                 line-height: $height-expense;
                 text-align: center;
                 a {
@@ -212,7 +219,7 @@ $expense-list-item-height: 5rem;
                     font-size: $size-icon;
                 }
                 .icon-camera {
-                    color:$text-green;
+                    color:$blue-bg;
                 }
                 .icon-affirmative {
                     font-size: $size-icon - 2;
@@ -312,6 +319,7 @@ $expense-list-item-height: 5rem;
         }
     }
 }
+/*
 .edit-mode {
     .expense-list .expense {
         .expense-info {
@@ -336,7 +344,7 @@ $expense-list-item-height: 5rem;
             width: 100%;
         }
     }
-}
+}*/
 
 .item {
     @include clearfix();
