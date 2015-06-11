@@ -12,7 +12,6 @@ angular.module('Expenses')
         }
 
         if ($scope.$parent && $scope.reportId) {
-            $scope.editMode = true;
             reportResource.getReport($scope.reportId).then( function(report){
                 $scope.$parent.title = 'Add to ' + report.description;
             });
