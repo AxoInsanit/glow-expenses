@@ -1,7 +1,10 @@
 <div class="view-content expenses-body">
     <expenses-list></expenses-list>
     <div ng-if="reportId && editMode" class="edit-options-fixed">
-        <button class="edit-options-btn btn-add" ng-click="addExpenses($event)">Add Expenses</button>
+        <div class="addexp-section" ng-click="addExpenses($event)">
+            <a class="new-icons plus-icon-size"></a>
+            <span class="text-section">Add Expenses</span>
+        </div>
     </div>
     <div ng-if="!reportId && editMode && (activeView === 0)" class="edit-options-fixed pos-abs">
         <div class="exrate-section" ng-click="editExRate($event)">

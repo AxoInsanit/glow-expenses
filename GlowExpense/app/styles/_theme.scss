@@ -44,11 +44,16 @@ input[type=checkbox]:checked + label:before { /* checked */
     text-align: center;
     font-size: 90%;
 
-    .btn-add {
-        background-color: #97BD00;
-        padding: 10px 50px;
-        &:disabled {
-            opacity: .55;
+    .addexp-section {
+        line-height: 40px;
+        display: inline-block;
+        .plus-icon-size{
+            height: 45px;
+            width: 45px;
+            background-position: -105px -9px;
+            vertical-align: text-bottom;
+            zoom: .5;
+            -moz-transform: scale(0.5);
         }
     }
     .rem-section {
