@@ -27,6 +27,13 @@ angular.module('Expenses')
             });
         };
 
+        $scope.createExpense = function() {
+            transitionService.go({
+                name: 'addReportExpense',
+                direction: 'fade-center'
+            });
+        };
+
         $scope.editExpense = function(expense) {
             transitionService.go({
                 name: 'editExpense',
