@@ -6,7 +6,7 @@
             <span class="text-section">Add Expenses</span>
         </div>
     </div>
-    <div ng-if="!reportId && editMode && (activeView === 0)" class="edit-options-fixed pos-abs">
+    <div ng-show="!reportId && editMode && (activeView === 0)" id="edit-opt" class="edit-options-fixed">
         <div class="exrate-section" ng-click="editExRate($event)">
             <a class="new-icons edit-icon-size"></a>
             <span class="text-section">Exchange rate</span>
