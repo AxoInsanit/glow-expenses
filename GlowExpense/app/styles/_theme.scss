@@ -679,22 +679,22 @@ form {
 
     .form-group {
         @include border-radius(5px);
-        border:1px solid $text-grey-lighter;
+        border:1px solid $blue-bg;
         &.form-search {
             background: $bg-gray98;
             border: transparent;
-            border-top: 0.099em solid rgba(0, 0, 0, 0.1);
-            border-bottom: 0.099em solid rgba(0, 0, 0, 0.1);
+            border-top: 0.099em solid $blue-bg;
+            border-bottom: 0.099em solid $blue-bg;
         }
         .form-item {
             @include clearfix();
-            border-top: 1px solid $text-grey-lighter;
+            border-top: 1px solid $blue-bg;
             height: 40px;
             width: 100%;
             position:relative;
             &.head {
                 font-size: $size-small;
-                color:$text-grey;
+                color:$text-green;
                 font-weight: bold;
                 height: 40px;
                 line-height: 40px;
@@ -720,7 +720,7 @@ form {
                     right: 10px;
                     top: 15px;
                     font-size: 1.1em;
-                    color: $bg-green;
+                    color: $blue-bg;
                 }
                 input {
                     padding-right: 50px;
@@ -780,7 +780,7 @@ form {
                     right: 0px;
                     top: 2px;
                     font-size: 1.7em;
-                    color: $bg-grey-dark;
+                    color: $blue-bg;
                 }
                 .selected {
                     width: 100%;

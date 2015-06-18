@@ -43,6 +43,9 @@ angular.module('Reports')
         };
 
         $scope.selectProject = function() {
+            if($scope.report.applyTo === 'PROJECT') {
+                return;
+            }
             if ($scope.showAllProjects) {
                 projectResource.getProjects().then(function(projects){
                     itemsSelectionDialogSvc.open(projects, 'projects', 'name').then(function(selectedProject){
@@ -94,6 +97,7 @@ angular.module('Reports')
         };
 
         $scope.removeAssignments = function() {
+            $scope.report.applyTo = 'ALL_PROJECTS';
             $scope.showAllProjects = true;
             $scope.globerAssignments = [];
             $scope.project = {};
@@ -103,6 +107,7 @@ angular.module('Reports')
         $scope.getGloberAssignments = function() {
             projectResource.getGloberAssignments().then(function (assignments) {
                 if (assignments && assignments.length > 0) {
+                    $scope.report.applyTo = 'PROJECT';
                     $scope.showAllProjects = false;
                     $scope.project = assignments[0].project;
                     $scope.report.entityId = assignments[0].project.id;
