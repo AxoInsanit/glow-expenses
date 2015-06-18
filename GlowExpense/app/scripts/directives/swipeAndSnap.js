@@ -63,7 +63,9 @@ angular.module('Directives', [])
                 });
 
                 setSlidesStyle();
+                translateStart = true;
                 mySwiper.slideTo(activeView, 0 /*transition duration*/, false /*callback*/);
+                translateStart = false;
             }
         };
     });

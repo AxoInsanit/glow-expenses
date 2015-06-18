@@ -12,6 +12,7 @@ angular.module('Reports')
         $scope.saveConfiguration = function(){
             var newConfig = JSON.parse(localStorageSvc.getItem(email));
 
+            $scope.hidePaidReports = !$scope.hidePaidReports;
             newConfig.hidePaid = $scope.hidePaidReports;
             localStorageSvc.setItem(email,JSON.stringify(newConfig));
         };

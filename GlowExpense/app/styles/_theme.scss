@@ -141,7 +141,6 @@ $expense-list-item-height: 5rem;
             box-sizing: border-box;
             height: 100%;
             background: $bg-white;
-            z-index: 100;
             .content-expense-info {
                 width: 80%;
                 float: left;
@@ -229,8 +228,8 @@ $expense-list-item-height: 5rem;
                     color:$blue-bg;
                 }
                 .icon-affirmative {
-                    font-size: $size-icon - 2;
-                    color: $text-grey-lighter;
+                    font-size: 27px;
+                    color: $blue-bg;
                 }
             }
         }
@@ -239,31 +238,30 @@ $expense-list-item-height: 5rem;
         width: 100%;
         height: 100%;
         float: left;
-        border-bottom: 1px solid #CCC;
+        border-bottom: 2px solid $lighter-blue-bg;
         position: relative;
         .edit-action {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
+            width: 40px;
+            float: left;
             height: 100%;
-            z-index: 10;
-            padding-left: 11px;
-
             .content-check {
+                margin-left: 10px;
                 line-height: $height-report;
                 font-size: 25px;
+                .trash-icon-size{
+                    zoom: 0.6;
+                    -moz-transform: scale(0.6);
+                    vertical-align: sub;
+                }
             }
         }
         .report-info {
+            padding-left: 40px;
             width: 100%;
-            float: left;
-            transition: all .3s ease-out;
-            -webkit-transition: all .3s ease-out;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
             height: 100%;
             background: $bg-white;
-            z-index: 100;
-            position: relative;
             .content-expense-info {
                 width: 85%;
                 float: left;
@@ -281,8 +279,9 @@ $expense-list-item-height: 5rem;
                 }
                 .content-description {
                     h3 {
+                        line-height: 20px;
                         font-size: $size-text;
-                        color:$text-grey;
+                        color:$green-bg;
                         font-family: "HalvaticaNeueBold";
                         white-space: nowrap;
                         overflow: hidden;
@@ -305,13 +304,22 @@ $expense-list-item-height: 5rem;
                                 color: $text-red;
                             }
                             &.yellow {
-                                color:$text-yellow;
+                                color: #e7bc40;
+                            }
+                            &.orange {
+                                color: #eaa966;
+                            }
+                            &.blue {
+                                color:$blue-bg;
+                            }
+                            &.blue-light {
+                                color: $lighter-blue-bg;
                             }
                             &.green {
-                                color:$text-green;
+                                color: $green-bg;
                             }
                             &.green-dark {
-                                color:$text-green-dark;
+                                color: #85b76e;
                             }
                         }
                     }
@@ -326,32 +334,6 @@ $expense-list-item-height: 5rem;
         }
     }
 }
-/*
-.edit-mode {
-    .expense-list .expense {
-        .expense-info {
-            @include transform(translate(37px, 0));
-            .image-action {
-                display: none;
-            }
-        }
-    }
-    .reports-list .report {
-        .report-info {
-            @include transform(translate(37px, 0));
-            .content-report-info .content-data .money {
-                display: none;
-            }
-        }
-    }
-    .item {
-        &.checkbox-paid-reports {
-            display: block;
-            float:left;
-            width: 100%;
-        }
-    }
-}*/
 
 .item {
     @include clearfix();
@@ -378,10 +360,6 @@ $expense-list-item-height: 5rem;
         .icon-photo {
             float: right;
         }
-    }
-    &.checkbox-paid-reports {
-        display: none;
-        float:left;
     }
     .main-text {
         font-family: "HalvaticaNeueBold";
@@ -881,6 +859,30 @@ form {
 
 .pb50 {
     padding-bottom: 50px;
+}
+
+.align-middle {
+    vertical-align: middle;
+}
+
+.checkbox-paid-reports {
+    padding: 0 10px;
+    line-height: 40px;
+    border-bottom: 1px solid $sky-blue-bg;
+    .checkbox-reports {
+        text-align: center;
+        font-size: 20px;
+        width: 40px;
+        float: left;
+        height: 100%;
+    }
+    .checkbox-text {
+        color: $blue-bg;
+        padding-left: 40px;
+        width: 100%;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+    }
 }
 
 
