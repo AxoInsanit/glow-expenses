@@ -1,22 +1,23 @@
 <div class="view-content reports-body">
     <article>
-        <section class="item checkbox-paid-reports">
-            <input id="box" type="checkbox" ng-model="hidePaidReports" ng-click="saveConfiguration()">
-            <label for="box"> Hide paid reports</label>
+        <section class="checkbox-paid-reports">
+            <div class="checkbox-reports">
+                <span ng-click="saveConfiguration()" class="icon align-middle" ng-class="{'icon-checkbox-checked': hidePaidReports, 'icon-checkbox-unchecked': !hidePaidReports }"></span>
+            </div>
+            <div class="checkbox-text">Hide Paid Reports</div>
+            <!--<input id="box" type="checkbox" ng-model="hidePaidReports" ng-click="saveConfiguration()"><label for="box"> Hide paid reports</label>-->
         </section>
         <div class="reports-list">
             <div class="draft">
                 <div class="SPAM" ng-repeat="report in reports track by $index">
                     <div ng-if="!(report.state == 'Paid' && hidePaidReports)">
-                        <section class="report"
-                                 ng-class="::{locked: report.locked, editable: !report.locked}"
-                                 ng-click="viewReport(report)">
+                        <section class="report">
                             <div class="edit-action">
                                 <div class="content-check">
-                                    <span class="icon icon-delete" ng-click="deleteReport(report, $event)" ></span>
+                                    <a class="new-icons trash-icon-red trash-icon-size" ng-click="deleteReport(report, $event)"></a>
                                 </div>
                             </div>
-                            <div class="report-info">
+                            <div class="report-info" ng-click="viewReport(report)">
                                 <div class="content-report-info">
                                     <div class="content-description">
                                         <h3>
@@ -24,15 +25,18 @@
                                         </h3>
                                     </div>
                                     <div class="content-data">
-                                        <div class="state">
+                                        <div class="state hide-text-overflow">
                                             <span ng-class="::{
                                                'red': report.state === 'Pending Approval',
                                                'yellow': report.state === 'Preparing Payment',
-                                               'green-dark': report.state === 'Paid'}">
+                                               'green-dark': report.state === 'Paid',
+                                               'blue': report.state === 'Approved by Manager',
+                                               'orange': report.state === 'Approved by Finance',
+                                               'blue-light': report.state === 'Draft Expense'}">
                                                 {{::report.state}}
                                             </span>
                                         </div>
-                                        <div class="money">
+                                        <div class="money hide-text-overflow">
                                             <span>{{:: report.societyCurrency}}</span>
                                             <span>{{:: report.total | currency}}</span>
                                         </div>
